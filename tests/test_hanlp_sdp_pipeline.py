@@ -430,6 +430,80 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertTrue(all(edge.provenance for edge in substitution_edges))
         self.assert_path_union_graph(compiled)
 
+    def test_bare_wh_candidate_substitution_born_later(self) -> None:
+        result = self._born_later_result()
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "candidate_path_cover")
+        self.assertEqual(compiled.answer_anchor, "born")
+        self.assertEqual([path.node_ids for path in compiled.paths], [["6", "3", "4"], ["8", "3", "4"]])
+        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "born", "later"], ["ENTITYB", "born", "later"]])
+        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
+        self.assertTrue(all(len(path.node_ids) > 1 for path in compiled.paths))
+        self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
+        self.assert_path_union_graph(compiled)
+
+        substitution_edges = [edge for edge in compiled.edges if "candidate_bare_wh_substitution" in edge.rule]
+        self.assertEqual(len(substitution_edges), 2)
+        self.assertTrue(all(edge.derived and edge.provenance for edge in substitution_edges))
+        for edge in substitution_edges:
+            provenance = edge.provenance[0]
+            self.assertEqual(provenance["rule"], "candidate_bare_wh_substitution")
+            self.assertEqual(provenance["bare_wh_slot_id"], "1")
+            self.assertEqual(provenance["query_predicate_id"], "3")
+            self.assertEqual(provenance["schema_path_ids"], ["1", "3", "4"])
+            self.assertTrue(provenance["candidate_set_evidence"])
+
+    def test_bare_wh_candidate_substitution_is_structural_not_lexical(self) -> None:
+        result = _hanlp_result(
+            "Whom did pivot afterward, ENTITYA or ENTITYB?",
+            ["Whom", "did", "pivot", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "pivot", 3),
+                _dm("pivot", "ARG2", "Whom", 3, 1),
+                _pas("pivot", "verb_ARG2", "Whom", 3, 1),
+                _psd("pivot", "PAT-arg", "Whom", 3, 1),
+                _dm("pivot", "TWHEN", "afterward", 3, 4),
+                _psd("afterward", "adj_ARG1", "pivot", 4, 3),
+                _pas("or", "coord_ARG1", "ENTITYA", 7, 6),
+                _pas("or", "coord_ARG2", "ENTITYB", 7, 8),
+                _psd("or", "DISJ.member", "ENTITYA", 7, 6),
+                _psd("or", "DISJ.member", "ENTITYB", 7, 8),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "candidate_path_cover")
+        self.assertEqual(compiled.answer_anchor, "pivot")
+        self.assertEqual([path.node_ids for path in compiled.paths], [["6", "3", "4"], ["8", "3", "4"]])
+        self.assertTrue(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
+        self.assert_path_union_graph(compiled)
+
+    def test_bare_wh_candidate_substitution_requires_direct_wh_core_argument(self) -> None:
+        result = _hanlp_result(
+            "Who did marker shift afterward, ENTITYA or ENTITYB?",
+            ["Who", "did", "marker", "shift", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "shift", 4),
+                _dm("marker", "ARG1", "Who", 3, 1),
+                _dm("shift", "ARG2", "marker", 4, 3),
+                _dm("shift", "TWHEN", "afterward", 4, 5),
+                _pas("or", "coord_ARG1", "ENTITYA", 8, 7),
+                _pas("or", "coord_ARG2", "ENTITYB", 8, 9),
+                _psd("or", "DISJ.member", "ENTITYA", 8, 7),
+                _psd("or", "DISJ.member", "ENTITYB", 8, 9),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertNotEqual(compiled.debug_payload["selection_mode"], "candidate_bare_wh_substitution")
+        self.assertFalse(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
+        self.assertFalse(any("candidate_bare_wh_substitution" in str(edge) for edge in compiled.debug_payload["virtual_edges"]))
+
     def test_simple_main_chain_and_answer_anchor_regressions(self) -> None:
         director_born = self._director_born_result()
 
@@ -444,6 +518,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(compile_token_reasoning_structure(director_born, ["ENTITYA"]).answer_anchor, "born")
         self.assertEqual(compile_token_reasoning_structure(self._typed_year_result(), ["ENTITYA"]).answer_anchor, "year")
         self.assertEqual(compile_token_reasoning_structure(self._nationality_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "nationality")
+        self.assertEqual(compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "born")
 
     def test_broadcaster_headquarters_remains_single_main_path(self) -> None:
         result = self._broadcaster_result()
@@ -517,6 +592,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             (self._johnny_result(), ["ENTITYA", "ENTITYB"]),
             (self._nationality_result(), ["ENTITYA", "ENTITYB"]),
             (self._film_director_died_result(), ["ENTITYA", "ENTITYB"]),
+            (self._born_later_result(), ["ENTITYA", "ENTITYB"]),
             (self._director_born_result(), ["ENTITYA"]),
         ]
         for result, entities in cases:
@@ -681,6 +757,25 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _dm("older", "ARG1", "Who", 3, 1),
                 _dm("older", "ARG2", "ENTITYA", 3, 5),
                 _psd("older", "ACT-arg", "ENTITYB", 3, 7),
+            ],
+        )
+
+    def _born_later_result(self) -> HanLPSDPResult:
+        return _hanlp_result(
+            "Who was born later, ENTITYA or ENTITYB?",
+            ["Who", "was", "born", "later", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "born", 3),
+                _dm("born", "ARG2", "Who", 3, 1),
+                _pas("born", "verb_ARG2", "Who", 3, 1),
+                _psd("born", "PAT-arg", "Who", 3, 1),
+                _dm("later", "loc", "born", 4, 3),
+                _psd("later", "adj_ARG1", "born", 4, 3),
+                _dm("born", "TWHEN", "later", 3, 4),
+                _pas("or", "coord_ARG1", "ENTITYA", 7, 6),
+                _pas("or", "coord_ARG2", "ENTITYB", 7, 8),
+                _psd("or", "DISJ.member", "ENTITYA", 7, 6),
+                _psd("or", "DISJ.member", "ENTITYB", 7, 8),
             ],
         )
 

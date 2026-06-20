@@ -32,6 +32,7 @@ DERIVED_PENALTIES = {
     "descriptor_lifting": 0.35,
     "candidate_expansion": 0.10,
     "candidate_slot_substitution": 0.10,
+    "candidate_bare_wh_substitution": 0.10,
     "function_backbone_contraction": 0.20,
 }
 
@@ -438,6 +439,13 @@ def detect_answer_anchor(
 
     query_root = _find_query_root(nodes, raw_edges)
     if query_root:
+        if (
+            not typed_wh
+            and _bare_wh_direct_argument_ids(nodes, raw_edges, query_root)
+            and _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, query_root)
+        ):
+            warnings.append("answer anchor selected by bare-wh query root")
+            return query_root
         projection = _collect_root_projection_candidates(nodes, raw_edges, query_root)
         if projection:
             warnings.append("answer anchor selected by root projection")
@@ -1170,6 +1178,130 @@ def _find_bare_wh_root_argument(
     return wh_id, projection_id
 
 
+def _bare_wh_direct_argument_ids(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> list[str]:
+    if query_root_id not in nodes or _find_typed_wh_slot(nodes, raw_edges):
+        return []
+    root_idx = nodes[query_root_id].index
+    wh_ids = {
+        node.id
+        for node in nodes.values()
+        if node.text.lower() in WH_WORDS and node.id != query_root_id
+    }
+    candidates: dict[str, dict[str, Any]] = {}
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            if head_idx != root_idx or str(dep_idx) not in wh_ids:
+                continue
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            if not _is_direct_wh_core_argument_relation(relation):
+                continue
+            wh_id = str(dep_idx)
+            support = _coerce_float_value(item.get("support"), edge.support)
+            formalism = str(item.get("formalism") or "")
+            entry = candidates.setdefault(wh_id, {"support": 0.0, "formalisms": set()})
+            entry["support"] += support
+            if formalism:
+                entry["formalisms"].add(formalism)
+    return sorted(
+        candidates,
+        key=lambda node_id: (
+            -float(candidates[node_id]["support"]),
+            -len(candidates[node_id]["formalisms"]),
+            _node_sort_key(nodes[node_id]),
+        ),
+    )
+
+
+def _is_direct_wh_core_argument_relation(relation: str) -> bool:
+    key = _normalized_relation_key(relation)
+    return (
+        key == "arg"
+        or key.startswith("arg")
+        or key.startswith("verb_arg")
+        or key in {"pat_arg", "act_arg", "eff_arg"}
+    )
+
+
+def _bare_wh_temporal_or_modifier_suffix_id(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> str | None:
+    if query_root_id not in nodes:
+        return None
+    root_idx = nodes[query_root_id].index
+    candidates: dict[str, dict[str, Any]] = {}
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            other_idx: int | None = None
+            if head_idx == root_idx:
+                other_idx = dep_idx
+            elif dep_idx == root_idx:
+                other_idx = head_idx
+            if other_idx is None:
+                continue
+            other_id = str(other_idx)
+            if not _is_bare_wh_suffix_candidate_node(nodes, other_id, query_root_id):
+                continue
+            score = _bare_wh_suffix_relation_score(item, edge.support)
+            if score <= 0.0:
+                continue
+            formalism = str(item.get("formalism") or "")
+            entry = candidates.setdefault(other_id, {"score": 0.0, "formalisms": set()})
+            entry["score"] += score
+            if formalism:
+                entry["formalisms"].add(formalism)
+    return sorted(
+        candidates,
+        key=lambda node_id: (
+            -float(candidates[node_id]["score"]),
+            -len(candidates[node_id]["formalisms"]),
+            _node_sort_key(nodes[node_id]),
+        ),
+    )[0] if candidates else None
+
+
+def _is_bare_wh_suffix_candidate_node(
+    nodes: dict[str, TokenReasoningNode],
+    node_id: str,
+    query_root_id: str,
+) -> bool:
+    if node_id not in nodes or node_id == query_root_id:
+        return False
+    node = nodes[node_id]
+    if node.kind in {"entity", "function"}:
+        return False
+    if node.text.lower() in WH_WORDS:
+        return False
+    return node.kind in {"content", "constraint", "answer"}
+
+
+def _bare_wh_suffix_relation_score(item: dict[str, Any], default_support: float) -> float:
+    relation = str(item.get("normalized_relation") or item.get("relation") or "")
+    key = _normalized_relation_key(relation)
+    label_class = str(item.get("label_class") or classify_label(relation))
+    support = _coerce_float_value(item.get("support"), default_support)
+    if key in {"twhen", "tmp", "tloc", "loc"} or "time" in key or "temporal" in key:
+        return support * 2.0
+    if label_class == "MODIFIER" or key.startswith("adj_arg") or key.startswith("noun_arg"):
+        return support * 1.5
+    if label_class == "RESTRICT":
+        return support
+    return 0.0
+
+
 def _select_query_focused_paths(
     *,
     state: _WorkingState,
@@ -1202,6 +1334,16 @@ def _select_query_focused_paths(
         candidate_records.extend(selected_records)
         return paths, "candidate_path_cover", candidate_records, "candidate_slot_substitution"
 
+    bare_wh_paths = _extract_bare_wh_candidate_path_cover(
+        state,
+        query_focus,
+        direct_candidate_sets,
+    )
+    if bare_wh_paths:
+        paths, selected_records = bare_wh_paths
+        candidate_records.extend(selected_records)
+        return paths, "candidate_path_cover", candidate_records, "candidate_bare_wh_substitution"
+
     single_path, path_type, selected_record, all_records = _select_single_main_path(
         state,
         explicit_entity_ids,
@@ -1229,7 +1371,7 @@ def _extract_typed_slot_candidate_path_cover(
     constraints: list[dict[str, Any]],
     direct_candidate_sets: list[list[str]],
 ) -> tuple[list[TokenReasoningPath], list[_CandidatePath]] | None:
-    if not query_focus.slot_id or not direct_candidate_sets:
+    if query_focus.mode != "typed_wh_slot" or not query_focus.slot_id or not direct_candidate_sets:
         return None
     candidate_ids = _candidate_text_set_to_ids(state.nodes, direct_candidate_sets[0])
     if len(candidate_ids) < 2:
@@ -1265,6 +1407,58 @@ def _extract_typed_slot_candidate_path_cover(
     if len(paths) != len(candidate_ids):
         return None
     return paths, selected_records
+
+
+def _extract_bare_wh_candidate_path_cover(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    direct_candidate_sets: list[list[str]],
+) -> tuple[list[TokenReasoningPath], list[_CandidatePath]] | None:
+    if not direct_candidate_sets or _find_typed_wh_slot(state.nodes, state.raw_edges):
+        return None
+
+    schema = _bare_wh_candidate_schema(state, query_focus)
+    if schema is None:
+        return None
+    wh_id = schema["wh_id"]
+    query_root_id = schema["query_root_id"]
+    schema_path = list(schema["schema_path"])
+    if len(schema_path) < 2 or schema_path[0] != wh_id or query_root_id not in schema_path:
+        return None
+
+    for candidate_set in direct_candidate_sets:
+        candidate_ids = _candidate_text_set_to_ids(state.nodes, candidate_set)
+        if len(candidate_ids) < 2:
+            continue
+        paths: list[TokenReasoningPath] = []
+        selected_records: list[_CandidatePath] = []
+        for path_index, candidate_id in enumerate(candidate_ids, start=1):
+            branch = _dedupe_adjacent([candidate_id, *schema_path[1:]])
+            if len(branch) != len(set(branch)) or len(branch) < 2:
+                break
+            _ensure_candidate_bare_wh_edge(
+                state,
+                candidate_id,
+                branch[1],
+                wh_id,
+                query_root_id,
+                candidate_set,
+                schema_path,
+            )
+            record = _rank_candidate_path(
+                state.nodes,
+                state.edges,
+                branch,
+                query_focus,
+                candidate_id,
+                "candidate_bare_wh_substitution",
+                required_ids=schema_path[1:],
+            ).with_selection(selected=True)
+            selected_records.append(record)
+            paths.append(_path_from_ids(f"P{path_index}", state.nodes, branch))
+        if len(paths) == len(candidate_ids):
+            return paths, selected_records
+    return None
 
 
 def _extract_actual_parallel_path_cover(
@@ -1482,7 +1676,11 @@ def _edge_allowed_for_path(
         return False
     if "COORD" in _edge_label_classes_deep(edge):
         return False
-    if "candidate_expansion" in edge.rule or "candidate_slot_substitution" in edge.rule:
+    if (
+        "candidate_expansion" in edge.rule
+        or "candidate_slot_substitution" in edge.rule
+        or "candidate_bare_wh_substitution" in edge.rule
+    ):
         return False
     if not allow_weak and "descriptor_lifting" in edge.rule:
         return False
@@ -1924,6 +2122,48 @@ def _best_schema_path(state: _WorkingState, slot_id: str, focus_id: str) -> list
     return list(sorted(ranked, key=lambda record: record.rank)[0].node_ids)
 
 
+def _bare_wh_candidate_schema(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+) -> dict[str, Any] | None:
+    query_root_id = query_focus.query_root_id or _find_query_root(state.nodes, state.raw_edges)
+    if not query_root_id or query_root_id not in state.nodes:
+        return None
+    wh_ids = _bare_wh_direct_argument_ids(state.nodes, state.raw_edges, query_root_id)
+    if not wh_ids:
+        return None
+    wh_id = wh_ids[0]
+    suffix_id = _bare_wh_temporal_or_modifier_suffix_id(state.nodes, state.raw_edges, query_root_id)
+    focus_id = suffix_id or query_root_id
+    schema_path = _schema_path_through_query_root(state, wh_id, query_root_id, focus_id)
+    if len(schema_path) < 2:
+        return None
+    return {
+        "wh_id": wh_id,
+        "query_root_id": query_root_id,
+        "focus_id": focus_id,
+        "schema_path": schema_path,
+    }
+
+
+def _schema_path_through_query_root(
+    state: _WorkingState,
+    wh_id: str,
+    query_root_id: str,
+    focus_id: str,
+) -> list[str]:
+    prefix = _best_schema_path(state, wh_id, query_root_id)
+    if not prefix or query_root_id not in prefix:
+        return []
+    if focus_id == query_root_id:
+        return prefix
+    suffix = _best_schema_path(state, query_root_id, focus_id)
+    if not suffix or suffix[0] != query_root_id:
+        return []
+    path = _dedupe_adjacent([*prefix, *suffix[1:]])
+    return path if len(path) == len(set(path)) else []
+
+
 def _ensure_candidate_slot_edge(
     state: _WorkingState,
     candidate_id: str,
@@ -1957,6 +2197,67 @@ def _ensure_candidate_slot_edge(
         provenance=[provenance],
     )
     state.virtual_edges.append(virtual.to_dict())
+
+
+def _ensure_candidate_bare_wh_edge(
+    state: _WorkingState,
+    candidate_id: str,
+    successor_id: str,
+    wh_id: str,
+    query_root_id: str,
+    candidate_set: list[str],
+    schema_path: list[str],
+) -> None:
+    if _edge_key(candidate_id, successor_id) in state.edges:
+        return
+    schema_edge = state.edges.get(_edge_key(wh_id, successor_id))
+    wh_predicate_edge = state.raw_edges.get(_edge_key(wh_id, query_root_id))
+    support = max(0.05, min((schema_edge.support if schema_edge else 0.80), 0.80))
+    provenance = {
+        "rule": "candidate_bare_wh_substitution",
+        "candidate_id": candidate_id,
+        "candidate": state.nodes[candidate_id].text,
+        "bare_wh_slot_id": wh_id,
+        "bare_wh_slot": state.nodes[wh_id].text,
+        "query_predicate_id": query_root_id,
+        "query_predicate": state.nodes[query_root_id].text,
+        "candidate_set": list(candidate_set),
+        "candidate_set_entity_ids": _candidate_text_set_to_ids(state.nodes, candidate_set),
+        "candidate_set_evidence": _candidate_set_coordination_evidence(state, candidate_set),
+        "schema_path_ids": list(schema_path),
+        "schema_path": [state.nodes[node_id].text for node_id in schema_path if node_id in state.nodes],
+        "schema_edge": schema_edge.to_dict() if schema_edge else None,
+        "wh_predicate_edge": wh_predicate_edge.to_dict() if wh_predicate_edge else None,
+        "support": support,
+    }
+    virtual = _merge_edge(
+        state.edges,
+        state.nodes,
+        candidate_id,
+        successor_id,
+        support=support,
+        derived=True,
+        rule="candidate_bare_wh_substitution",
+        provenance=[provenance],
+    )
+    state.virtual_edges.append(virtual.to_dict())
+
+
+def _candidate_set_coordination_evidence(
+    state: _WorkingState,
+    candidate_set: list[str],
+) -> list[dict[str, Any]]:
+    candidate_ids = set(_candidate_text_set_to_ids(state.nodes, candidate_set))
+    evidence: list[dict[str, Any]] = []
+    for key in _sorted_edge_keys(state.raw_edges, state.nodes):
+        edge = state.raw_edges[key]
+        source, target = key
+        classes = _edge_label_classes(edge)
+        if "COORD" not in classes and not (_is_scope_node(state.nodes[source]) or _is_scope_node(state.nodes[target])):
+            continue
+        if source in candidate_ids or target in candidate_ids:
+            evidence.append(edge.to_dict())
+    return evidence
 
 
 def _graph_from_selected_paths(paths: list[TokenReasoningPath]) -> tuple[set[str], set[tuple[str, str]]]:
