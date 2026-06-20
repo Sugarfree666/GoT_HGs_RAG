@@ -245,8 +245,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     print("[1. Explicit Entities]")
     if explicit_entities.entities:
         for entity in explicit_entities.entities:
-            semantic_type = entity.semantic_type_hint or "Entity"
-            print(f" - {entity.text} [{semantic_type}]")
+            print(f" - {entity.text}")
     else:
         print(" (none)")
     print()
@@ -331,8 +330,7 @@ def print_corenlp_dependency_result(index: int, record: QuestionRecord, result: 
     print("[1. Explicit Entities]")
     if explicit_entities.entities:
         for entity in explicit_entities.entities:
-            semantic_type = entity.semantic_type_hint or "Entity"
-            print(f" - {entity.text} [{semantic_type}]")
+            print(f" - {entity.text}")
     else:
         print(" (none)")
     print()

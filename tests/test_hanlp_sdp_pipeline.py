@@ -56,7 +56,8 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         self.assertIn("[Original Question]", output)
         self.assertIn("[1. Explicit Entities]", output)
-        self.assertIn(" - Ryan Tubridy [Person]", output)
+        self.assertIn(" - Ryan Tubridy", output)
+        self.assertNotIn(" - Ryan Tubridy [Person]", output)
         self.assertIn("[2. Entity Masking]", output)
         self.assertIn(" - ENTITYA -> Ryan Tubridy", output)
         self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
@@ -123,7 +124,8 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         self.assertIn("[Original Question]", output)
         self.assertIn("[1. Explicit Entities]", output)
-        self.assertIn(" - Ryan Tubridy [Person]", output)
+        self.assertIn(" - Ryan Tubridy", output)
+        self.assertNotIn(" - Ryan Tubridy [Person]", output)
         self.assertIn("[2. Entity Masking]", output)
         self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
         self.assertNotIn("SDP input sentence:", output)
@@ -217,6 +219,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "The Search for Everything: Wave One")])
         self.assertNotIn("attend", result.explicit_entities.entities[0].text)
         self.assertIn("DEPO Step 2: topic entity extraction", llm.system_prompt)
+        self.assertNotIn("semantic_type_hint", llm.user_prompt)
 
     def test_preprocessor_ignores_legacy_mask_fields_but_accepts_legacy_entities(self) -> None:
         question = "Who is the spouse of Young Man Luther's author?"
@@ -357,6 +360,57 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
         self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assert_path_union_graph(compiled)
+
+    def test_lifted_coordination_parallel_cover_is_structural_not_lexical(self) -> None:
+        result = _hanlp_result(
+            "Do alpha near ENTITYA and beta near ENTITYB align the common omega?",
+            ["Do", "alpha", "near", "ENTITYA", "and", "beta", "near", "ENTITYB", "align", "the", "common", "omega", "?"],
+            [
+                _root("sdp/dm", "align", 9),
+                _psd("and", "CONJ.member", "alpha", 5, 2),
+                _psd("and", "CONJ.member", "beta", 5, 6),
+                _psd("alpha", "PAT-arg", "ENTITYA", 2, 4),
+                _psd("beta", "PAT-arg", "ENTITYB", 6, 8),
+                _psd("align", "ACT-arg", "alpha", 9, 2),
+                _psd("align", "ACT-arg", "beta", 9, 6),
+                _psd("align", "PAT-arg", "omega", 9, 12),
+                _dm("common", "RSTR", "omega", 11, 12),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.answer_anchor, "omega")
+        self.assertEqual(compiled.path_type, "candidate_path_cover")
+        self.assertEqual([path.node_ids for path in compiled.paths], [["4", "2", "9", "12"], ["8", "6", "9", "12"]])
+        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
+        self.assert_path_union_graph(compiled)
+
+    def test_lifted_coordination_same_bound_entity_is_not_parallel(self) -> None:
+        result = _hanlp_result(
+            "Do left and right merge target near ENTITYA beside ENTITYB?",
+            ["Do", "left", "and", "right", "merge", "target", "near", "ENTITYA", "beside", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "merge", 5),
+                _psd("and", "CONJ.member", "left", 3, 2),
+                _psd("and", "CONJ.member", "right", 3, 4),
+                _psd("left", "PAT-arg", "ENTITYA", 2, 8),
+                _psd("right", "PAT-arg", "ENTITYA", 4, 8),
+                _psd("merge", "ACT-arg", "left", 5, 2),
+                _psd("merge", "ACT-arg", "right", 5, 4),
+                _psd("merge", "PAT-arg", "target", 5, 6),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertNotEqual(compiled.path_type, "candidate_path_cover")
+        self.assertEqual(compiled.path_type, "single_main_path")
+        self.assertEqual(compiled.entity_anchors, ["ENTITYA"])
+        self.assertEqual(len(compiled.paths), 1)
+        self.assertNotIn("ENTITYB", {node.text for node in compiled.nodes})
         self.assert_path_union_graph(compiled)
 
     def test_candidate_comparison_uses_typed_slot_substitution(self) -> None:
@@ -571,13 +625,10 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             ["Do", "director", "of", "film", "ENTITYA", "and", "director", "of", "film", "ENTITYB", "share", "the", "same", "nationality", "?"],
             [
                 _root("sdp/dm", "share", 11),
-                _dm("share", "ARG1", "director", 11, 2),
-                _dm("director", "ARG1", "ENTITYA", 2, 5),
-                _dm("director", "_and_c", "director", 2, 7),
-                _pas("and", "coord_ARG1", "director", 6, 2),
-                _pas("and", "coord_ARG2", "director", 6, 7),
-                _dm("share", "ARG1", "director", 11, 7),
-                _dm("director", "ARG1", "ENTITYB", 7, 10),
+                _psd("and", "CONJ.member", "director", 6, 2),
+                _psd("and", "CONJ.member", "director", 6, 7),
+                _psd("director", "PAT-arg", "ENTITYA", 2, 5),
+                _psd("director", "PAT-arg", "ENTITYB", 7, 10),
                 _dm("share", "ARG2", "nationality", 11, 14),
                 _dm("same", "RSTR", "nationality", 13, 14),
                 _pas("share", "verb_ARG1", "director", 11, 2),

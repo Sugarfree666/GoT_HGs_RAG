@@ -446,7 +446,6 @@ def _entity_candidate_payloads(candidates: list[ExplicitEntity]) -> list[dict[st
                 "text": candidate.text,
                 "start_char": candidate.start_char,
                 "end_char": candidate.end_char,
-                "semantic_type_hint": candidate.semantic_type_hint or "Entity",
                 "reason": candidate.reason,
             }
         )

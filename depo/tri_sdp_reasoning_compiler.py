@@ -251,12 +251,12 @@ def compile_token_reasoning_structure(
 
     constraints = detect_constraints(state.nodes, state.raw_edges, answer_anchor_id)
     direct_candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
+    parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets, query_focus)
 
     add_bridge_contraction_edges(state)
     add_restriction_closure_edges(state)
     add_descriptor_lifting_edges(state, explicit_entity_ids, answer_anchor_id)
 
-    parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets)
     paths, path_type, candidate_path_records, selection_mode = _select_query_focused_paths(
         state=state,
         explicit_entity_ids=explicit_entity_ids,
@@ -1181,6 +1181,16 @@ def _select_query_focused_paths(
 ) -> tuple[list[TokenReasoningPath], str, list[_CandidatePath], str]:
     candidate_records: list[_CandidatePath] = []
 
+    parallel_paths = _extract_actual_parallel_path_cover(
+        state,
+        query_focus,
+        parallel_entity_sets,
+    )
+    if parallel_paths:
+        paths, selected_records, all_records = parallel_paths
+        candidate_records.extend(all_records)
+        return paths, "candidate_path_cover", candidate_records, "parallel_entity_paths"
+
     typed_paths = _extract_typed_slot_candidate_path_cover(
         state,
         query_focus,
@@ -1191,16 +1201,6 @@ def _select_query_focused_paths(
         paths, selected_records = typed_paths
         candidate_records.extend(selected_records)
         return paths, "candidate_path_cover", candidate_records, "candidate_slot_substitution"
-
-    parallel_paths = _extract_actual_parallel_path_cover(
-        state,
-        query_focus,
-        parallel_entity_sets,
-    )
-    if parallel_paths:
-        paths, selected_records, all_records = parallel_paths
-        candidate_records.extend(all_records)
-        return paths, "candidate_path_cover", candidate_records, "parallel_entity_paths"
 
     single_path, path_type, selected_record, all_records = _select_single_main_path(
         state,
@@ -1301,6 +1301,11 @@ def _extract_actual_parallel_path_cover(
             if not candidates:
                 viable = False
                 break
+            if entity_id in branch_heads:
+                candidates = [candidate for candidate in candidates if branch_heads[entity_id] in candidate.node_ids]
+                if not candidates:
+                    viable = False
+                    break
             selected.append(candidates[0].with_selection(selected=True))
         if not viable or len(selected) != len(entity_ids):
             continue
@@ -1619,6 +1624,7 @@ def _detect_parallel_entity_sets(
     state: _WorkingState,
     explicit_entity_ids: list[str],
     direct_candidate_sets: list[list[str]],
+    query_focus: _QueryFocus,
 ) -> list[dict[str, Any]]:
     parallel_sets: list[dict[str, Any]] = []
     seen: set[tuple[str, ...]] = set()
@@ -1639,38 +1645,58 @@ def _detect_parallel_entity_sets(
             }
         )
 
-    for left_id, right_id, evidence in _content_coordination_pairs(state):
-        left_entity = _unique_bound_entity_for_branch(state, left_id, explicit_entity_ids)
-        right_entity = _unique_bound_entity_for_branch(state, right_id, explicit_entity_ids)
-        if not left_entity or not right_entity or left_entity == right_entity:
+    for group in _content_coordination_groups(state):
+        branch_heads = _sort_node_ids(group["member_ids"], state.nodes)
+        member_set = set(branch_heads)
+        entity_to_branch: dict[str, str] = {}
+        for branch_head_id in branch_heads:
+            bound_entity = _unique_bound_entity_for_branch(
+                state,
+                branch_head_id,
+                explicit_entity_ids,
+                query_focus=query_focus,
+                coordination_member_ids=member_set,
+            )
+            if not bound_entity or bound_entity in entity_to_branch:
+                continue
+            if not _raw_branch_reaches_query_focus(
+                state,
+                branch_head_id,
+                query_focus,
+                blocked_ids=(member_set - {branch_head_id}) | (set(explicit_entity_ids) - {bound_entity}),
+            ):
+                continue
+            entity_to_branch[bound_entity] = branch_head_id
+        if len(entity_to_branch) < 2:
             continue
-        entity_ids = _sort_node_ids([left_entity, right_entity], state.nodes)
+        entity_ids = _sort_node_ids(entity_to_branch, state.nodes)
         key = tuple(entity_ids)
         if key in seen:
             continue
         seen.add(key)
-        branch_heads = {
-            left_entity: left_id,
-            right_entity: right_id,
-        }
         parallel_sets.append(
             {
                 "kind": "lifted_coordination",
                 "entity_ids": entity_ids,
-                "branch_heads": branch_heads,
-                "evidence": evidence,
+                "branch_heads": {entity_id: entity_to_branch[entity_id] for entity_id in entity_ids},
+                "evidence": group["evidence"],
             }
         )
     return parallel_sets
 
 
-def _content_coordination_pairs(state: _WorkingState) -> list[tuple[str, str, dict[str, Any]]]:
-    pairs: list[tuple[str, str, dict[str, Any]]] = []
+def _content_coordination_groups(state: _WorkingState) -> list[dict[str, Any]]:
+    groups: list[dict[str, Any]] = []
     for key in _sorted_edge_keys(state.raw_edges, state.nodes):
         edge = state.raw_edges[key]
         source, target = key
-        if "COORD" in _edge_label_classes(edge) and state.nodes[source].kind == "content" and state.nodes[target].kind == "content":
-            pairs.append((source, target, {"rule": "content_coordination_edge", "edge": edge.to_dict()}))
+        if "COORD" in _edge_label_classes(edge) and _is_content_branch_head(state.nodes[source]) and _is_content_branch_head(state.nodes[target]):
+            groups.append(
+                {
+                    "member_ids": [source, target],
+                    "evidence": {"rule": "content_coordination_edge", "edge": edge.to_dict()},
+                }
+            )
 
     adjacency = _adjacency(state.raw_edges)
     for connector in _sorted_nodes(state.nodes.values()):
@@ -1683,38 +1709,75 @@ def _content_coordination_pairs(state: _WorkingState) -> list[tuple[str, str, di
         for neighbor_id, edge in _neighbor_edges(connector.id, adjacency, state.raw_edges):
             if "COORD" not in _edge_label_classes(edge):
                 continue
-            if state.nodes[neighbor_id].kind != "content":
+            if not _is_content_branch_head(state.nodes[neighbor_id]):
                 continue
             member_ids.append(neighbor_id)
             source_edges.append(edge.to_dict())
         ordered = _sort_node_ids(member_ids, state.nodes)
+        if len(ordered) >= 2:
+            groups.append(
+                {
+                    "member_ids": ordered,
+                    "evidence": {
+                        "rule": "content_coordination_connector",
+                        "connector_id": connector.id,
+                        "connector": connector.text,
+                        "source_edges": source_edges,
+                    },
+                }
+            )
+    unique: dict[tuple[str, ...], dict[str, Any]] = {}
+    for group in groups:
+        ordered = tuple(_sort_node_ids(group["member_ids"], state.nodes))
+        if len(ordered) < 2:
+            continue
+        unique.setdefault(ordered, {"member_ids": list(ordered), "evidence": group["evidence"]})
+    return [
+        unique[key]
+        for key in sorted(unique, key=lambda item: tuple(_node_sort_key(state.nodes[node_id]) for node_id in item))
+    ]
+
+
+def _content_coordination_pairs(state: _WorkingState) -> list[tuple[str, str, dict[str, Any]]]:
+    pairs: list[tuple[str, str, dict[str, Any]]] = []
+    for group in _content_coordination_groups(state):
+        ordered = _sort_node_ids(group["member_ids"], state.nodes)
         for index, left_id in enumerate(ordered):
             for right_id in ordered[index + 1 :]:
-                pairs.append(
-                    (
-                        left_id,
-                        right_id,
-                        {
-                            "rule": "content_coordination_connector",
-                            "connector_id": connector.id,
-                            "connector": connector.text,
-                            "source_edges": source_edges,
-                        },
-                    )
-                )
-    unique: dict[tuple[str, str], tuple[str, str, dict[str, Any]]] = {}
-    for left_id, right_id, evidence in pairs:
-        unique.setdefault(_edge_key(left_id, right_id), (left_id, right_id, evidence))
-    return [unique[key] for key in sorted(unique, key=lambda item: (_node_sort_key(state.nodes[item[0]]), _node_sort_key(state.nodes[item[1]])))]
+                pairs.append((left_id, right_id, group["evidence"]))
+    return pairs
 
 
 def _unique_bound_entity_for_branch(
     state: _WorkingState,
     branch_head_id: str,
     explicit_entity_ids: list[str],
+    *,
+    query_focus: _QueryFocus,
+    coordination_member_ids: set[str],
 ) -> str | None:
+    if branch_head_id not in state.nodes:
+        return None
     explicit = set(explicit_entity_ids)
-    adjacency = _adjacency(state.edges)
+    adjacency = _adjacency(state.raw_edges)
+    blocked_ids = {
+        node_id
+        for node_id in (query_focus.query_root_id, query_focus.answer_anchor_id, query_focus.terminal_id)
+        if node_id and node_id != branch_head_id
+    }
+    blocked_ids.update(coordination_member_ids - {branch_head_id})
+
+    direct_matches = {
+        neighbor_id
+        for neighbor_id, edge in _neighbor_edges(branch_head_id, adjacency, state.raw_edges)
+        if neighbor_id in explicit and _raw_binding_edge_allowed(edge)
+    }
+    ordered_direct = _sort_node_ids(direct_matches, state.nodes)
+    if len(ordered_direct) == 1:
+        return ordered_direct[0]
+    if len(ordered_direct) > 1:
+        return None
+
     queue: list[list[str]] = [[branch_head_id]]
     matches: set[str] = set()
     while queue:
@@ -1722,25 +1785,85 @@ def _unique_bound_entity_for_branch(
         current = path[-1]
         if len(path) > 3:
             continue
+        if current != branch_head_id and current in blocked_ids:
+            continue
         if current in explicit and current != branch_head_id:
             matches.add(current)
             continue
         if len(path) == 3:
             continue
-        for neighbor_id, edge in _search_neighbor_edges(state.nodes, state.edges, adjacency, current):
+        for neighbor_id, edge in _raw_neighbor_edges(state.nodes, state.raw_edges, adjacency, current):
             if neighbor_id in path:
                 continue
-            if "COORD" in _edge_label_classes_deep(edge):
+            if neighbor_id in blocked_ids:
+                continue
+            if "COORD" in _edge_label_classes(edge):
                 continue
             if _is_scope_node(state.nodes[neighbor_id]):
                 continue
-            if not (_edge_label_classes_deep(edge) & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "BRIDGE", "UNKNOWN"}):
+            if not _raw_binding_edge_allowed(edge):
                 continue
-            if state.nodes[neighbor_id].kind == "function":
+            if state.nodes[neighbor_id].kind == "function" and neighbor_id not in explicit:
                 continue
             queue.append([*path, neighbor_id])
     ordered = _sort_node_ids(matches, state.nodes)
     return ordered[0] if len(ordered) == 1 else None
+
+
+def _is_content_branch_head(node: TokenReasoningNode) -> bool:
+    return node.kind in {"content", "constraint", "answer"}
+
+
+def _raw_binding_edge_allowed(edge: TokenReasoningEdge) -> bool:
+    return bool(_edge_label_classes(edge) & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "BRIDGE"})
+
+
+def _raw_neighbor_edges(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    adjacency: dict[str, dict[str, tuple[str, str]]],
+    node_id: str,
+) -> list[tuple[str, TokenReasoningEdge]]:
+    neighbors = [(neighbor_id, edges[key]) for neighbor_id, key in adjacency.get(node_id, {}).items()]
+    neighbors.sort(key=lambda item: (-item[1].support, _node_sort_key(nodes[item[0]]), item[0]))
+    return neighbors
+
+
+def _raw_branch_reaches_query_focus(
+    state: _WorkingState,
+    branch_head_id: str,
+    query_focus: _QueryFocus,
+    *,
+    blocked_ids: set[str],
+) -> bool:
+    targets = [node_id for node_id in (query_focus.terminal_id, query_focus.answer_anchor_id) if node_id in state.nodes]
+    if not targets:
+        return False
+    target_set = set(targets)
+    adjacency = _adjacency(state.raw_edges)
+    queue: list[list[str]] = [[branch_head_id]]
+    while queue:
+        path = queue.pop(0)
+        current = path[-1]
+        if len(path) > 7:
+            continue
+        if current in target_set and current != branch_head_id:
+            return True
+        if len(path) == 7:
+            continue
+        for neighbor_id, edge in _raw_neighbor_edges(state.nodes, state.raw_edges, adjacency, current):
+            if neighbor_id in path or neighbor_id in blocked_ids:
+                continue
+            if "COORD" in _edge_label_classes(edge):
+                continue
+            if _is_scope_node(state.nodes[neighbor_id]):
+                continue
+            if state.nodes[neighbor_id].kind == "function":
+                continue
+            if not (_edge_label_classes(edge) & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "BRIDGE", "UNKNOWN"}):
+                continue
+            queue.append([*path, neighbor_id])
+    return False
 
 
 def _schema_focus_id(

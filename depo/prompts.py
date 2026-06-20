@@ -533,19 +533,12 @@ def build_explicit_entity_extraction_prompt(
     question: str,
     entity_candidates: list[dict[str, object]] | None = None,
 ) -> str:
-    semantic_type_hint = (
-        "Person | Work | Film | Song | Book | Album | Series | Game | "
-        "Organization | Company | Institution | University | "
-        "Location | City | Country | Region | Event | Product | Entity"
-    )
-
     if entity_candidates:
         schema = {
             "verified_entities": [
                 {
                     "candidate_id": "candidate id from input",
                     "is_entity": True,
-                    "semantic_type_hint": semantic_type_hint,
                     "confidence": 0.95,
                     "reason": "brief reason",
                 }
@@ -573,7 +566,6 @@ Rules:
 7. Years or numbers inside complete official names may be true, e.g. "Sabotage (1936 Film)" or "War of 1812".
 8. If candidate spans overlap, prefer the complete official-looking named mention over its substrings.
 9. Internal punctuation in titles, especially colon/subtitle forms, is not a split boundary. A complete title like "Wrong Turn 5: Bloodlines" should be true as one Work/Film/Album/Book/etc.; subtitle fragments alone should be false unless independently named in the question.
-10. Prefer the most specific natural semantic_type_hint from the allowed type list.
 
 Example:
 Question: The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?
@@ -591,7 +583,6 @@ Output JSON with exactly this shape:
                 "text": "exact topic entity span copied from the question",
                 "start_char": 0,
                 "end_char": 15,
-                "semantic_type_hint": semantic_type_hint,
                 "confidence": 0.95,
                 "reason": "brief reason",
             }
