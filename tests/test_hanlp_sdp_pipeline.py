@@ -432,6 +432,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
     def test_bare_wh_candidate_substitution_born_later(self) -> None:
         result = self._born_later_result()
+        self.assertFalse(any(edge.head_idx == 0 for edge in result.edges))
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
@@ -461,7 +462,6 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             "Whom did pivot afterward, ENTITYA or ENTITYB?",
             ["Whom", "did", "pivot", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
             [
-                _root("sdp/dm", "pivot", 3),
                 _dm("pivot", "ARG2", "Whom", 3, 1),
                 _pas("pivot", "verb_ARG2", "Whom", 3, 1),
                 _psd("pivot", "PAT-arg", "Whom", 3, 1),
@@ -487,7 +487,6 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             "Who did marker shift afterward, ENTITYA or ENTITYB?",
             ["Who", "did", "marker", "shift", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
             [
-                _root("sdp/dm", "shift", 4),
                 _dm("marker", "ARG1", "Who", 3, 1),
                 _dm("shift", "ARG2", "marker", 4, 3),
                 _dm("shift", "TWHEN", "afterward", 4, 5),
@@ -765,7 +764,6 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             "Who was born later, ENTITYA or ENTITYB?",
             ["Who", "was", "born", "later", ",", "ENTITYA", "or", "ENTITYB", "?"],
             [
-                _root("sdp/dm", "born", 3),
                 _dm("born", "ARG2", "Who", 3, 1),
                 _pas("born", "verb_ARG2", "Who", 3, 1),
                 _psd("born", "PAT-arg", "Who", 3, 1),

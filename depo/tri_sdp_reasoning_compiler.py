@@ -1198,12 +1198,16 @@ def _bare_wh_direct_argument_ids(
             dep_idx = _coerce_provenance_index(item.get("dep_idx"))
             if head_idx is None or dep_idx is None:
                 continue
-            if head_idx != root_idx or str(dep_idx) not in wh_ids:
+            wh_id: str | None = None
+            if head_idx == root_idx and str(dep_idx) in wh_ids:
+                wh_id = str(dep_idx)
+            elif dep_idx == root_idx and str(head_idx) in wh_ids:
+                wh_id = str(head_idx)
+            if wh_id is None:
                 continue
             relation = str(item.get("normalized_relation") or item.get("relation") or "")
             if not _is_direct_wh_core_argument_relation(relation):
                 continue
-            wh_id = str(dep_idx)
             support = _coerce_float_value(item.get("support"), edge.support)
             formalism = str(item.get("formalism") or "")
             entry = candidates.setdefault(wh_id, {"support": 0.0, "formalisms": set()})
@@ -1218,6 +1222,81 @@ def _bare_wh_direct_argument_ids(
             _node_sort_key(nodes[node_id]),
         ),
     )
+
+
+def _infer_bare_wh_query_predicate(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> tuple[str, str] | None:
+    """Infer a bare-WH query predicate when HanLP omits an SDP root edge."""
+
+    if _find_typed_wh_slot(nodes, raw_edges):
+        return None
+    wh_ids = {
+        node.id
+        for node in nodes.values()
+        if node.text.lower() in WH_WORDS
+    }
+    if not wh_ids:
+        return None
+
+    candidates: dict[tuple[str, str], dict[str, Any]] = {}
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            if not _is_direct_wh_core_argument_relation(relation):
+                continue
+
+            head_id = str(head_idx)
+            dep_id = str(dep_idx)
+            if head_id in wh_ids and _is_bare_wh_predicate_candidate(nodes, dep_id):
+                wh_id = head_id
+                predicate_id = dep_id
+            elif dep_id in wh_ids and _is_bare_wh_predicate_candidate(nodes, head_id):
+                wh_id = dep_id
+                predicate_id = head_id
+            else:
+                continue
+
+            suffix_id = _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, predicate_id)
+            if not suffix_id:
+                continue
+
+            support = _coerce_float_value(item.get("support"), edge.support)
+            formalism = str(item.get("formalism") or "")
+            suffix_edge = raw_edges.get(_edge_key(predicate_id, suffix_id))
+            suffix_support = suffix_edge.support if suffix_edge else 0.0
+            key = (predicate_id, wh_id)
+            entry = candidates.setdefault(
+                key,
+                {"support": 0.0, "formalisms": set(), "suffix_id": suffix_id, "suffix_support": 0.0},
+            )
+            entry["support"] += support
+            entry["suffix_support"] = max(float(entry["suffix_support"]), suffix_support)
+            if formalism:
+                entry["formalisms"].add(formalism)
+
+    if not candidates:
+        return None
+    predicate_id, wh_id = sorted(
+        candidates,
+        key=lambda key: (
+            -float(candidates[key]["support"]),
+            -float(candidates[key]["suffix_support"]),
+            -len(candidates[key]["formalisms"]),
+            _node_sort_key(nodes[key[0]]),
+            _node_sort_key(nodes[key[1]]),
+        ),
+    )[0]
+    return predicate_id, wh_id
+
+
+def _is_bare_wh_predicate_candidate(nodes: dict[str, TokenReasoningNode], node_id: str) -> bool:
+    return node_id in nodes and nodes[node_id].kind == "content" and nodes[node_id].text.lower() not in WH_WORDS
 
 
 def _is_direct_wh_core_argument_relation(relation: str) -> bool:
@@ -2127,12 +2206,19 @@ def _bare_wh_candidate_schema(
     query_focus: _QueryFocus,
 ) -> dict[str, Any] | None:
     query_root_id = query_focus.query_root_id or _find_query_root(state.nodes, state.raw_edges)
-    if not query_root_id or query_root_id not in state.nodes:
+    wh_id: str | None = None
+    if query_root_id and query_root_id in state.nodes:
+        wh_ids = _bare_wh_direct_argument_ids(state.nodes, state.raw_edges, query_root_id)
+        if not wh_ids:
+            return None
+        wh_id = wh_ids[0]
+    else:
+        inferred = _infer_bare_wh_query_predicate(state.nodes, state.raw_edges)
+        if inferred is None:
+            return None
+        query_root_id, wh_id = inferred
+    if not query_root_id or not wh_id or query_root_id not in state.nodes or wh_id not in state.nodes:
         return None
-    wh_ids = _bare_wh_direct_argument_ids(state.nodes, state.raw_edges, query_root_id)
-    if not wh_ids:
-        return None
-    wh_id = wh_ids[0]
     suffix_id = _bare_wh_temporal_or_modifier_suffix_id(state.nodes, state.raw_edges, query_root_id)
     focus_id = suffix_id or query_root_id
     schema_path = _schema_path_through_query_root(state, wh_id, query_root_id, focus_id)
