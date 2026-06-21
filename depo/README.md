@@ -7,17 +7,18 @@ original question
 -> explicit entity detection
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
--> query-focused token reasoning structure
+-> deterministic joint anchor/path-cover candidate generation and global reasoning-structure selection
 -> complete atomic question DAG
 ```
 
 The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
 question DAG generation. Placeholder assignment, overlap removal, and
 `masked_question` construction are deterministic Python logic. Step 4 consumes
-all three HanLP SDP views and emits a compact token graph plus a selected main
-path or parallel path cover. Step 5 sees only the original question and the
-Step 4 paths after entity placeholders have been deterministically restored to
-their original text.
+all three HanLP SDP views, generates joint answer-anchor/entity-set/path-cover
+candidates, and globally selects a compact token graph plus a selected main path
+or parallel path cover. Step 4 is pure deterministic Python and does not call an
+LLM. Step 5 sees only the original question and the Step 4 paths after entity
+placeholders have been deterministically restored to their original text.
 
 ## Output Shape
 
@@ -30,11 +31,12 @@ The CLI prints:
 5. Token Reasoning Structure
 6. Atomic Question DAG
 
-Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure. Step 5 converts those selected paths into a complete atomic question
-DAG. Evidence lookup nodes should be supported by a contiguous path span, while
-final comparison, selection, equality, or aggregation nodes may use
-`support: null`.
+Step 4 is query-focused and now performs deterministic joint anchor/path-cover
+candidate generation and global reasoning-structure selection. It stops at the
+token reasoning graph/path-cover structure. Step 5 converts those selected paths
+into a complete atomic question DAG. Evidence lookup nodes should be supported
+by a contiguous path span, while final comparison, selection, equality, or
+aggregation nodes may use `support: null`.
 
 Step 5 does not receive `masked_question`, entity maps, `answer_anchor`,
 constraints, candidate sets, path type, Step 4 graph/debug metadata, or raw SDP
