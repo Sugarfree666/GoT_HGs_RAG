@@ -17,7 +17,6 @@ A number or year is allowed only when it is part of a complete official name, su
 Short titles in a typed comparison list may begin with a number; keep the full branch when the surrounding question supplies the type, such as film, album, song, book, game, or series.
 
 Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Treat the full official-looking title as one entity when the punctuation connects title parts; do not split the subtitle into a separate person/place/entity.
-Creative work titles may begin with words that are usually wh-words, such as "Who", "What", "When", or "Where", when the local context explicitly supplies a work type like song, film, album, book, game, or series. In that context, keep the full title instead of dropping the leading title word.
 
 Return JSON only.
 """.strip()
@@ -61,7 +60,6 @@ Rules:
 8. If candidate spans overlap, prefer the complete official-looking named mention over its substrings.
 9. Internal punctuation in titles, especially colon/subtitle forms, is not a split boundary. A complete title like "Wrong Turn 5: Bloodlines" should be true as one Work/Film/Album/Book/etc.; subtitle fragments alone should be false unless independently named in the question.
 10. In typed comparison or choice lists, such as "Which film ..., A or B?", verify each branch that looks like a title as its own entity. A branch may start with a number when the number is part of the title; do not reduce it to the alphabetic substring.
-11. If a candidate is a creative-work title following an explicit type cue such as song, film, album, book, game, or series, it may legitimately start with a wh-looking word like "When" or "What"; do not drop that leading word.
 
 Example:
 Question: The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?
@@ -105,7 +103,6 @@ Rules:
 9. Years or numbers inside complete official names may be included, e.g. "Sabotage (1936 Film)" or "War of 1812".
 10. Internal punctuation in official-looking titles, especially colon/subtitle forms, is part of the same entity; do not split the subtitle into a separate entity.
 11. In typed comparison or choice lists, such as "Which film ..., A or B?", extract each title-like branch as its own entity. A branch may start with a number when the number is part of the title; do not drop the numeric token or return only the alphabetic substring.
-12. Creative-work titles can begin with wh-looking words when introduced by a type cue, e.g. "song When ...", "film What ...", or "book Who ..."; include that leading title word in the entity.
 
 Return JSON only.
 Output JSON with exactly this shape:

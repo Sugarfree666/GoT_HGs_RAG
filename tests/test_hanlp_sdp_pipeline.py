@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import io
-import inspect
 import json
 import sys
 import tempfile
@@ -17,8 +16,6 @@ if str(DEPO_ROOT) not in sys.path:
 
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from main import (  # noqa: E402
-    _pipeline_debug_record,
-    _write_run_debug_json,
     print_hanlp_sdp_result,
     run_hanlp_sdp_pipeline,
 )
@@ -48,8 +45,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
-        self.assertEqual(llm.step2_calls, 1)
-        self.assertEqual(llm.step5_calls, 1)
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -94,69 +89,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("[Kept / Derived Edges]", output)
         self.assertNotIn("older --ARG2--> ENTITYA", output)
         self.assertNotIn("older --ARG1--> ANSWER\n", output)
-
-    def test_pipeline_llm_call_budget_and_skip_step5(self) -> None:
-        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
-
-        llm = FakePreprocessLLM()
-        result = run_hanlp_sdp_pipeline(
-            record=record,
-            index=1,
-            preprocessor=EntityMaskingPreprocessor(llm),
-            parser=FakeHanLPSDPParser(),
-        )
-        self.assertIsNotNone(result["atomic_question_dag"])
-        self.assertEqual(llm.step2_calls, 1)
-        self.assertEqual(llm.step5_calls, 1)
-        self.assertEqual(llm.calls, 2)
-
-        skip_llm = FakePreprocessLLM()
-        skipped = run_hanlp_sdp_pipeline(
-            record=record,
-            index=1,
-            preprocessor=EntityMaskingPreprocessor(skip_llm),
-            parser=FakeHanLPSDPParser(),
-            skip_step5=True,
-        )
-        self.assertIsNone(skipped["atomic_question_dag"])
-        self.assertEqual(skip_llm.step2_calls, 1)
-        self.assertEqual(skip_llm.step5_calls, 0)
-        self.assertEqual(skip_llm.calls, 1)
-
-        signature = inspect.signature(compile_token_reasoning_structure)
-        self.assertNotIn("llm_client", signature.parameters)
-        self.assertNotIn("llm", signature.parameters)
-
-    def test_cli_debug_file_overwrites_and_contains_scored_candidate_paths(self) -> None:
-        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
-        result = run_hanlp_sdp_pipeline(
-            record=record,
-            index=1,
-            preprocessor=EntityMaskingPreprocessor(FakePreprocessLLM()),
-            parser=FakeHanLPSDPParser(),
-        )
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            debug_path = Path(tmpdir) / "depo_debug.json"
-            debug_path.write_text("old debug content", encoding="utf-8")
-
-            written = _write_run_debug_json([_pipeline_debug_record(1, record, result)], debug_dir=tmpdir)
-            payload = json.loads(Path(written).read_text(encoding="utf-8"))
-
-        self.assertEqual(Path(written).name, "depo_debug.json")
-        self.assertEqual(payload["records"][0]["original_question"], record.question)
-        serialized = json.dumps(payload, ensure_ascii=False)
-        self.assertNotIn("old debug content", serialized)
-        step4_debug = payload["records"][0]["step4"]["debug_payload"]
-        self.assertIn("reasoning_candidates", step4_debug)
-        self.assertTrue(any(candidate.get("candidate_paths") for candidate in step4_debug["reasoning_candidates"]))
-        self.assertTrue(
-            any(
-                "rank_components" in path_record
-                for candidate in step4_debug["reasoning_candidates"]
-                for path_record in candidate.get("candidate_paths", [])
-            )
-        )
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [
@@ -349,112 +281,6 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual([path.node_ids for path in compiled.paths], [["4", "2", "9", "12"], ["8", "6", "9", "12"]])
         self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assert_path_union_graph(compiled)
-
-    def test_global_anchor_selection_handles_both_directors_same_nationality(self) -> None:
-        result = _hanlp_result(
-            "Do both directors of films ENTITYA and ENTITYB have the same nationality?",
-            ["Do", "both", "directors", "of", "films", "ENTITYA", "and", "ENTITYB", "have", "the", "same", "nationality", "?"],
-            [
-                _dm("both", "BV", "directors", 2, 3),
-                _dm("have", "ARG1", "directors", 9, 3),
-                _dm("ENTITYA", "_and_c", "ENTITYB", 6, 8),
-                _dm("have", "ARG2", "nationality", 9, 12),
-                _dm("the", "BV", "nationality", 10, 12),
-                _dm("same", "ARG1", "nationality", 11, 12),
-                _pas("Do", "aux_ARG1", "directors", 1, 3),
-                _pas("both", "det_ARG1", "directors", 2, 3),
-                _pas("of", "prep_ARG1", "directors", 4, 3),
-                _pas("have", "verb_ARG1", "directors", 9, 3),
-                _pas("films", "noun_ARG1", "ENTITYA", 5, 6),
-                _pas("and", "coord_ARG1", "ENTITYA", 7, 6),
-                _pas("of", "prep_ARG2", "and", 4, 7),
-                _pas("films", "noun_ARG1", "and", 5, 7),
-                _pas("and", "coord_ARG2", "ENTITYB", 7, 8),
-                _root("sdp/pas", "have", 9),
-                _pas("Do", "aux_ARG2", "have", 1, 9),
-                _pas("have", "verb_ARG2", "nationality", 9, 12),
-                _pas("the", "det_ARG1", "nationality", 10, 12),
-                _pas("same", "adj_ARG1", "nationality", 11, 12),
-                _psd("directors", "RSTR", "both", 3, 2),
-                _psd("have", "ACT-arg", "directors", 9, 3),
-                _psd("and", "CONJ.member", "ENTITYA", 7, 6),
-                _psd("and", "CONJ.member", "ENTITYB", 7, 8),
-                _root("sdp/psd", "have", 9),
-                _psd("nationality", "RSTR", "same", 12, 11),
-                _psd("have", "PAT-arg", "nationality", 9, 12),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.answer_anchor, "nationality")
-        self.assertNotEqual(compiled.answer_anchor, "both")
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertEqual(len(compiled.paths), 2)
-        for path, entity in zip(compiled.paths, ["ENTITYA", "ENTITYB"]):
-            self.assertEqual(path.nodes[0], entity)
-            self.assertIn("directors", path.nodes)
-            self.assertEqual(path.nodes[-1], "nationality")
-            self.assertGreater(len(path.node_ids), 1)
-            self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-        self.assert_path_union_graph(compiled)
-
-    def test_global_anchor_selection_is_structural_not_lexical_for_quantified_attribute(self) -> None:
-        result = _hanlp_result(
-            "Do quantifier_token role_token of container_token ENTITYA and ENTITYB predicate_token modifier_token attribute_token?",
-            [
-                "Do",
-                "quantifier_token",
-                "role_token",
-                "of",
-                "container_token",
-                "ENTITYA",
-                "and",
-                "ENTITYB",
-                "predicate_token",
-                "modifier_token",
-                "attribute_token",
-                "?",
-            ],
-            [
-                _dm("quantifier_token", "BV", "role_token", 2, 3),
-                _dm("predicate_token", "ARG1", "role_token", 9, 3),
-                _dm("ENTITYA", "_and_c", "ENTITYB", 6, 8),
-                _dm("predicate_token", "ARG2", "attribute_token", 9, 11),
-                _dm("modifier_token", "ARG1", "attribute_token", 10, 11),
-                _pas("of", "prep_ARG1", "role_token", 4, 3),
-                _pas("predicate_token", "verb_ARG1", "role_token", 9, 3),
-                _pas("container_token", "noun_ARG1", "ENTITYA", 5, 6),
-                _pas("and", "coord_ARG1", "ENTITYA", 7, 6),
-                _pas("of", "prep_ARG2", "and", 4, 7),
-                _pas("container_token", "noun_ARG1", "and", 5, 7),
-                _pas("and", "coord_ARG2", "ENTITYB", 7, 8),
-                _root("sdp/pas", "predicate_token", 9),
-                _pas("predicate_token", "verb_ARG2", "attribute_token", 9, 11),
-                _pas("modifier_token", "adj_ARG1", "attribute_token", 10, 11),
-                _psd("role_token", "RSTR", "quantifier_token", 3, 2),
-                _psd("predicate_token", "ACT-arg", "role_token", 9, 3),
-                _psd("and", "CONJ.member", "ENTITYA", 7, 6),
-                _psd("and", "CONJ.member", "ENTITYB", 7, 8),
-                _root("sdp/psd", "predicate_token", 9),
-                _psd("attribute_token", "RSTR", "modifier_token", 11, 10),
-                _psd("predicate_token", "PAT-arg", "attribute_token", 9, 11),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.answer_anchor, "attribute_token")
-        self.assertNotEqual(compiled.answer_anchor, "quantifier_token")
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertEqual(len(compiled.paths), 2)
-        self.assertTrue(all(path.nodes[-1] == "attribute_token" for path in compiled.paths))
-        self.assertTrue(all("role_token" in path.nodes for path in compiled.paths))
         self.assert_path_union_graph(compiled)
 
     def test_lifted_coordination_same_bound_entity_is_not_parallel(self) -> None:
@@ -999,14 +825,11 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 class FakePreprocessLLM:
     def __init__(self) -> None:
         self.calls = 0
-        self.step2_calls = 0
-        self.step5_calls = 0
         self.step5_user_prompt = ""
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
         if "DEPO Step 5" in system_prompt:
-            self.step5_calls += 1
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
             assert set(payload) == {"original_question", "paths"}
@@ -1032,7 +855,6 @@ class FakePreprocessLLM:
                 ]
             }
         assert "DEPO Step 2: topic entity extraction" in system_prompt
-        self.step2_calls += 1
         assert "Deterministic entity candidates" in user_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
         return {

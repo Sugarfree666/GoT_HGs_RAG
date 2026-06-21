@@ -501,7 +501,6 @@ def _with_structural_explicit_entities(
     warnings: list[str],
 ) -> list[ExplicitEntity]:
     entities = _with_coordinated_designation_entities(question, entities, warnings)
-    entities = _with_typed_context_title_entities(question, entities, warnings)
     return _with_typed_coordinate_title_entities(question, entities, warnings)
 
 
@@ -537,38 +536,6 @@ def _with_typed_coordinate_title_entities(
         entities.append(entity)
         existing_spans.add((entity.start_char, entity.end_char))
     return entities
-
-
-def _with_typed_context_title_entities(
-    question: str,
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> list[ExplicitEntity]:
-    additions = _typed_context_title_entities(question)
-    if not additions:
-        return entities
-    existing_spans = {(entity.start_char, entity.end_char) for entity in entities}
-    for entity in additions:
-        if (entity.start_char, entity.end_char) in existing_spans:
-            continue
-        warnings.append(f"Added typed-context title candidate entity text={entity.text!r}.")
-        entities.append(entity)
-        existing_spans.add((entity.start_char, entity.end_char))
-    return entities
-
-
-def _typed_context_title_entities(question: str) -> list[ExplicitEntity]:
-    return [
-        ExplicitEntity(
-            text=span.text,
-            start_char=span.start_char,
-            end_char=span.end_char,
-            semantic_type_hint=span.semantic_type_hint,
-            confidence=0.84,
-            reason=span.reason,
-        )
-        for span in _title_spans_after_type_heads(question)
-    ]
 
 
 def _typed_coordinate_title_entities(question: str) -> list[ExplicitEntity]:
@@ -1011,18 +978,8 @@ def _title_spans_after_type_heads(question: str) -> list[MaskSpan]:
         trailing_ws = len(question[start:end]) - len(question[start:end].rstrip())
         start += leading_ws
         end -= trailing_ws
-        start, end = _trim_explicit_entity_boundary(question, start, end)
-        if end <= start:
-            continue
         text = question[start:end]
-        if _is_mask_worthy(
-            text,
-            kind_hint="entity",
-            semantic_type_hint=TITLE_HEADS.get(head, "Entity"),
-            question=question,
-            start=start,
-            end=end,
-        ):
+        if _is_mask_worthy(text):
             spans.append(
                 MaskSpan(
                     text=text,
@@ -1434,9 +1391,7 @@ def _is_llm_mask_span_allowed(
     stripped = text.strip()
     if not stripped:
         return False
-    if _starts_with_wh_span_word(stripped) and not (
-        _has_named_entity_semantic_type(semantic_type_hint) and _looks_like_official_title(stripped)
-    ):
+    if _starts_with_wh_span_word(stripped):
         return False
     if _token_count(stripped) < 2:
         return False
@@ -1482,11 +1437,12 @@ def _is_mask_worthy(
     start: int | None = None,
     end: int | None = None,
 ) -> bool:
+    del question, start, end
     stripped = text.strip()
     if _is_simple_type_variable(stripped):
         return False
     token_count = _token_count(stripped)
-    if _starts_with_wh_span_word(stripped) and not _is_typed_title_context(question, start, end):
+    if _starts_with_wh_span_word(stripped):
         return False
     if token_count < 2:
         return False
@@ -1495,15 +1451,6 @@ def _is_mask_worthy(
         content_text = _drop_leading_type_span_words(stripped)
         return _token_count(content_text) >= 2 and not _is_simple_type_variable(content_text)
     return True
-
-
-def _is_typed_title_context(question: str, start: int | None, end: int | None) -> bool:
-    del end
-    if not question or start is None:
-        return False
-    left = question[max(0, start - 40) : start]
-    match = re.search(r"(?P<head>\b(?:film|movie|book|album|song|novel|play|series|work|game)\b)\s*$", left, flags=re.IGNORECASE)
-    return bool(match)
 
 
 def _is_simple_type_variable(text: str) -> bool:

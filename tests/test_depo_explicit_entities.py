@@ -141,28 +141,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         self.assertNotIn("The Search for Everything", [entity.text for entity in result.entities])
         self.assertNotIn("Wave One", [entity.text for entity in result.entities])
 
-    def test_title_after_type_head_can_begin_with_wh_word(self) -> None:
-        question = "What nationality is the performer of song When The Stars Go Blue?"
-        title = "When The Stars Go Blue"
-        llm = CandidateSelectingLLM({title: "Song"})
-
-        result = ExplicitEntityExtractor(llm).extract(question)
-
-        self.assertIn(title, llm.prompt)
-        self.assertIn("wh-looking word", llm.prompt)
-        self.assertEqual([entity.text for entity in result.entities], [title])
-        self.assertNotIn("The Stars Go Blue", [entity.text for entity in result.entities])
-
-    def test_truncated_title_after_type_head_is_structurally_completed(self) -> None:
-        question = "What nationality is the performer of song When The Stars Go Blue?"
-
-        result = ExplicitEntityExtractor(
-            StaticEntityLLM([_entity(question, "The Stars Go Blue", "Song")])
-        ).extract(question)
-
-        self.assertEqual([entity.text for entity in result.entities], ["When The Stars Go Blue"])
-        self.assertTrue(any("typed-context title" in warning for warning in result.warnings))
-
     def test_free_span_possessive_boundary_is_repaired(self) -> None:
         question = "When did Lothair II's mother die?"
         result = ExplicitEntityExtractor(
