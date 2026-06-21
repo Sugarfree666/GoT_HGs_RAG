@@ -330,6 +330,7 @@ class _ReasoningCandidate:
             "path_type": self.path_type,
             "rank": list(self.rank),
             "rank_components": dict(self.rank_components),
+            "candidate_paths": [record.to_debug(nodes) for record in self.candidate_paths],
             "selection_mode": self.selection_mode,
             "selected": self.selected,
         }

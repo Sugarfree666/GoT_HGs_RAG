@@ -17,6 +17,8 @@ if str(DEPO_ROOT) not in sys.path:
 
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from main import (  # noqa: E402
+    _pipeline_debug_record,
+    _write_run_debug_json,
     print_hanlp_sdp_result,
     run_hanlp_sdp_pipeline,
 )
@@ -124,6 +126,37 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         signature = inspect.signature(compile_token_reasoning_structure)
         self.assertNotIn("llm_client", signature.parameters)
         self.assertNotIn("llm", signature.parameters)
+
+    def test_cli_debug_file_overwrites_and_contains_scored_candidate_paths(self) -> None:
+        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
+        result = run_hanlp_sdp_pipeline(
+            record=record,
+            index=1,
+            preprocessor=EntityMaskingPreprocessor(FakePreprocessLLM()),
+            parser=FakeHanLPSDPParser(),
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            debug_path = Path(tmpdir) / "depo_debug.json"
+            debug_path.write_text("old debug content", encoding="utf-8")
+
+            written = _write_run_debug_json([_pipeline_debug_record(1, record, result)], debug_dir=tmpdir)
+            payload = json.loads(Path(written).read_text(encoding="utf-8"))
+
+        self.assertEqual(Path(written).name, "depo_debug.json")
+        self.assertEqual(payload["records"][0]["original_question"], record.question)
+        serialized = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn("old debug content", serialized)
+        step4_debug = payload["records"][0]["step4"]["debug_payload"]
+        self.assertIn("reasoning_candidates", step4_debug)
+        self.assertTrue(any(candidate.get("candidate_paths") for candidate in step4_debug["reasoning_candidates"]))
+        self.assertTrue(
+            any(
+                "rank_components" in path_record
+                for candidate in step4_debug["reasoning_candidates"]
+                for path_record in candidate.get("candidate_paths", [])
+            )
+        )
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [

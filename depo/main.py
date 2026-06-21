@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict, is_dataclass
 import json
 import os
 import sys
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from io_utils import read_questions
@@ -17,6 +19,10 @@ from models import (
 if TYPE_CHECKING:
     from hanlp_sdp_parser import HanLPSDPParser
     from entity_masking_preprocessor import EntityMaskingPreprocessor
+
+
+DEFAULT_DEBUG_DIR = "runs/debug"
+DEFAULT_RUN_DEBUG_FILENAME = "depo_debug.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -34,8 +40,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--debug", action="store_true", help="Print detailed intermediate structures.")
     parser.add_argument(
         "--debug-dir",
-        default="debug/hanlp_sdp",
-        help="Directory for HanLP Tri-SDP debug JSON files when --debug is enabled.",
+        default=DEFAULT_DEBUG_DIR,
+        help="Directory for DEPO debug JSON files. The main run debug file is overwritten on every CLI run.",
     )
     parser.add_argument("--skip-step5", action="store_true", help="Run only entity masking, HanLP SDP parsing, and Step4.")
     return parser.parse_args()
@@ -71,6 +77,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
         print("You can set HANLP_HOME to control the cache directory.")
         print()
 
+        debug_records: list[dict[str, Any]] = []
         for index, record in enumerate(records, start=1):
             result = run_hanlp_sdp_pipeline(
                 record=record,
@@ -82,7 +89,10 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
                 llm_client=llm_client,
                 skip_step5=args.skip_step5,
             )
+            debug_records.append(_pipeline_debug_record(index, record, result))
             print_hanlp_sdp_result(index, record, result, debug=args.debug)
+        debug_file = _write_run_debug_json(debug_records, debug_dir=args.debug_dir)
+        print(f"Detailed debug file: {debug_file}")
     except ModuleNotFoundError as exc:
         if "hanlp" in str(exc).lower() or getattr(exc, "name", "") == "hanlp":
             print("Missing dependency: hanlp", file=sys.stderr)
@@ -159,6 +169,78 @@ def run_hanlp_sdp_pipeline(
 
 def run_pipeline(*args: Any, **kwargs: Any) -> dict[str, Any]:
     return run_hanlp_sdp_pipeline(*args, **kwargs)
+
+
+def _write_run_debug_json(debug_records: list[dict[str, Any]], debug_dir: str | None = None) -> str:
+    directory = Path(debug_dir or DEFAULT_DEBUG_DIR)
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / DEFAULT_RUN_DEBUG_FILENAME
+    payload = {
+        "records": debug_records,
+    }
+    path.write_text(json.dumps(_json_safe(payload), ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+    return str(path)
+
+
+def _pipeline_debug_record(index: int, record: QuestionRecord, result: dict[str, Any]) -> dict[str, Any]:
+    preprocess_result: HanLPSDPPreprocessResult = result["preprocess_result"]
+    hanlp_result: HanLPSDPResult = result["hanlp_sdp_result"]
+    token_reasoning_structure = result["token_reasoning_structure"]
+    atomic_question_dag = result.get("atomic_question_dag")
+    return {
+        "index": index,
+        "question_id": record.qid,
+        "original_question": record.question,
+        "explicit_entities": [entity.to_dict() for entity in preprocess_result.explicit_entities.entities],
+        "entity_extraction_raw_payload": preprocess_result.explicit_entities.raw_payload,
+        "entity_masking": {
+            "masked_question": preprocess_result.masked_question,
+            "mask_mappings": [mapping.to_dict() for mapping in preprocess_result.mask_mappings],
+            "warnings": list(preprocess_result.warnings),
+        },
+        "hanlp": {
+            "model": hanlp_result.model,
+            "input_sentence": result.get("hanlp_input_sentence") or preprocess_result.masked_question,
+            "tokens": list(hanlp_result.tokens),
+            "available_keys": list(hanlp_result.available_keys),
+            "mask_token_checks": dict(hanlp_result.mask_token_checks),
+            "raw_sdp_edges": [
+                {
+                    "formalism": edge.formalism,
+                    "head_idx": edge.head_idx,
+                    "head": edge.head,
+                    "relation": edge.relation,
+                    "dep_idx": edge.dep_idx,
+                    "dep": edge.dep,
+                }
+                for edge in hanlp_result.edges
+            ],
+            "raw": hanlp_result.raw,
+            "warnings": list(hanlp_result.warnings),
+        },
+        "step4": {
+            "result": token_reasoning_structure.to_dict(),
+            "debug_payload": token_reasoning_structure.debug_payload,
+            "debug_file": token_reasoning_structure.debug_file,
+        },
+        "step5": atomic_question_dag.to_dict() if atomic_question_dag is not None else None,
+    }
+
+
+def _json_safe(value: Any) -> Any:
+    if hasattr(value, "to_dict") and callable(value.to_dict):
+        return _json_safe(value.to_dict())
+    if is_dataclass(value):
+        return _json_safe(asdict(value))
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [_json_safe(item) for item in value]
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    return str(value)
 
 
 def _llm_client_from_preprocessor(preprocessor: "EntityMaskingPreprocessor") -> Any | None:
