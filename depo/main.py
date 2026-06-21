@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 from typing import TYPE_CHECKING, Any
@@ -260,13 +261,19 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         print("(invalid)")
         for error in atomic_question_dag.validation_errors:
             print(f" - {error}")
+        if atomic_question_dag.raw_payload is not None:
+            print("raw_payload:")
+            print(json.dumps(atomic_question_dag.raw_payload, ensure_ascii=False, indent=2))
         print()
         return
     for node in atomic_question_dag.nodes:
         print(f"{node.id}: {node.question}")
         print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
-        print(f"  support: {node.support.path_id}[{node.support.start_index}:{node.support.end_index}]")
-        print(f"  path: {' ---- '.join(node.support.nodes)}")
+        if node.support is None:
+            print("  support: null")
+        else:
+            print(f"  support: {node.support.path_id}[{node.support.start_index}:{node.support.end_index}]")
+            print(f"  path: {' ---- '.join(node.support.nodes)}")
         print()
 
 

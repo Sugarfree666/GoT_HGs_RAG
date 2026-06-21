@@ -118,47 +118,41 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = """
-You are DEPO Step 5: Path-Aligned Evidence-Oriented Atomic Question DAG Generator.
+You are DEPO Step 5: Complete Atomic Question DAG Generator.
 
-Definition of an atomic evidence question:
+Definition of an atomic question:
 
-1. It asks for exactly one retrievable fact, relation, or attribute.
+1. It asks for exactly one retrievable fact, relation, attribute, comparison, selection, or aggregation.
 2. It has exactly one unknown answer.
-3. It performs only one semantic lookup.
+3. It performs one semantic operation.
 4. It must not contain an unresolved nested relation.
-5. If an argument must first be obtained from another question, use exactly a reference such as q1's answer, and make the current node depend on q1.
+5. If an argument must first be obtained from another question, refer to it naturally as q1's answer, q2's answer, etc., and list that id in depends_on.
 6. Fixed restrictions from the original question--such as dates, awards, locations, ranges, time conditions, or descriptive clauses--may remain in one atomic question. They constrain the lookup and do not create an additional reasoning hop.
-7. A question is not atomic if it requests two facts, contains two unresolved relations, performs a final comparison, selects among candidates, or asks for the final answer to the original multi-hop question.
 
 Task:
 
-Generate an evidence-oriented atomic question DAG using:
+Generate the complete Atomic Question DAG needed to answer the original question using:
 
-- the original question for semantic interpretation and fixed restrictions;
+- the original question for semantic interpretation and final reasoning intent;
 - the supplied parser-grounded token paths for structural support.
 
 The paths contain original entity names. Treat them as structural evidence, not as literal natural-language templates.
 
 Rules:
 
-1. Every DAG node must be one atomic evidence-seeking question.
-2. Every node must be supported by exactly one contiguous span of exactly one supplied path.
-3. Do not create any node without path support.
-4. Do not introduce an unrelated main relation that is absent from the supporting path.
-5. You may use the original question to interpret a path relation naturally and preserve fixed restrictions.
-6. Do not answer any question.
-7. Do not generate the final comparison, equality decision, ranking decision, candidate selection, aggregation question, or final-answer question.
-8. When multiple paths are supplied, treat them as separate evidence branches.
-9. Do not create dependencies between different paths.
-10. Generate the evidence questions required by every supplied path.
-11. A dependent question may reference at most one earlier answer.
-12. Refer to a previous answer using exactly qN's answer.
-13. depends_on must exactly match the qN's answer reference in the question.
-14. Use the original entity names already present in the paths.
-15. Do not invent new named entities, dates, predicates, or restrictions.
-16. Path spans may overlap at an intermediate node. This is expected in a multi-hop chain.
-17. Cover the reasoning content of every supplied path.
-18. Return valid JSON only.
+1. Every node must be a single atomic question.
+2. Evidence lookup nodes should include support: one contiguous span of one supplied path.
+3. Final comparison, equality, ranking, selection, and aggregation nodes are allowed.
+4. A final reasoning node that does not directly correspond to a single Step4 path span may use "support": null.
+5. depends_on may be empty, contain one previous node, or contain multiple previous nodes.
+6. Cross-path dependencies are allowed when needed to answer the original question.
+7. For comparison or selection questions, first generate the required factual evidence questions for each candidate, then generate the final comparison/selection node.
+8. For words such as younger, older, earlier, later, first ask for comparable evidence such as birth date, date, age, or another appropriate attribute, then compare those evidence answers.
+9. If a question text uses a previous answer, write it as qN's answer and include qN in depends_on.
+10. Do not leave unresolved ENTITYA, ENTITYB, or similar placeholders. Use the original entity names already present in the paths.
+11. Do not invent unrelated named entities, dates, predicates, or restrictions.
+12. Do not answer any question.
+13. Return valid JSON only.
 
 Output JSON shape:
 
@@ -166,18 +160,34 @@ Output JSON shape:
   "nodes": [
     {
       "id": "q1",
-      "question": "One atomic evidence question?",
+      "question": "single atomic question?",
       "depends_on": [],
       "support": {
         "path_id": "P1",
         "start_index": 0,
+        "end_index": 1
+      }
+    },
+    {
+      "id": "q2",
+      "question": "single atomic question using q1's answer if needed?",
+      "depends_on": ["q1"],
+      "support": {
+        "path_id": "P1",
+        "start_index": 1,
         "end_index": 2
       }
+    },
+    {
+      "id": "q3",
+      "question": "final comparison or selection question using q1's answer and q2's answer?",
+      "depends_on": ["q1", "q2"],
+      "support": null
     }
   ]
 }
 
-Do not return edges, final operations, rationale, analysis, or chain-of-thought.
+Do not return edges, rationale, analysis, answers, or chain-of-thought.
 
 Example A input:
 
@@ -216,10 +226,29 @@ Example A output:
   ]
 }
 
-Example B input paths:
+Example B input:
 
-P1: Ten9Eight: Shoot For The Moon ---- director ---- share ---- nationality
-P2: Sabotage (1936 Film) ---- director ---- share ---- nationality
+{
+  "original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?",
+  "paths": [
+    {
+      "path_id": "P1",
+      "nodes": [
+        {"index": 0, "text": "Dangerously They Live"},
+        {"index": 1, "text": "director"},
+        {"index": 2, "text": "younger"}
+      ]
+    },
+    {
+      "path_id": "P2",
+      "nodes": [
+        {"index": 0, "text": "Salad By The Roots"},
+        {"index": 1, "text": "director"},
+        {"index": 2, "text": "younger"}
+      ]
+    }
+  ]
+}
 
 Example B output:
 
@@ -227,32 +256,36 @@ Example B output:
   "nodes": [
     {
       "id": "q1",
-      "question": "Who directed Ten9Eight: Shoot For The Moon?",
+      "question": "Who directed Dangerously They Live?",
       "depends_on": [],
       "support": {"path_id": "P1", "start_index": 0, "end_index": 1}
     },
     {
       "id": "q2",
-      "question": "What is the nationality of q1's answer?",
+      "question": "When was q1's answer born?",
       "depends_on": ["q1"],
-      "support": {"path_id": "P1", "start_index": 1, "end_index": 3}
+      "support": {"path_id": "P1", "start_index": 1, "end_index": 2}
     },
     {
       "id": "q3",
-      "question": "Who directed Sabotage (1936 Film)?",
+      "question": "Who directed Salad By The Roots?",
       "depends_on": [],
       "support": {"path_id": "P2", "start_index": 0, "end_index": 1}
     },
     {
       "id": "q4",
-      "question": "What is the nationality of q3's answer?",
+      "question": "When was q3's answer born?",
       "depends_on": ["q3"],
-      "support": {"path_id": "P2", "start_index": 1, "end_index": 3}
+      "support": {"path_id": "P2", "start_index": 1, "end_index": 2}
+    },
+    {
+      "id": "q5",
+      "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
+      "depends_on": ["q2", "q4"],
+      "support": null
     }
   ]
 }
-
-Do not generate a final node asking whether the two nationalities are the same.
 """.strip()
 
 

@@ -8,7 +8,7 @@ original question
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
 -> query-focused token reasoning structure
--> path-aligned evidence-oriented atomic question DAG
+-> complete atomic question DAG
 ```
 
 The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
@@ -31,14 +31,17 @@ The CLI prints:
 6. Atomic Question DAG
 
 Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure. Step 5 converts those selected paths into an evidence-oriented DAG:
-each atomic question node must be supported by a contiguous span of exactly one
-path.
+structure. Step 5 converts those selected paths into a complete atomic question
+DAG. Evidence lookup nodes should be supported by a contiguous path span, while
+final comparison, selection, equality, or aggregation nodes may use
+`support: null`.
 
 Step 5 does not receive `masked_question`, entity maps, `answer_anchor`,
 constraints, candidate sets, path type, Step 4 graph/debug metadata, or raw SDP
-edges. For multi-path comparison cases it generates independent evidence
-branches only; final comparison and answer synthesis are left to a later stage.
+edges. It generates the complete atomic question DAG needed to answer the
+original question, including final comparison, selection, equality, or
+aggregation nodes when the original question requires them. Evidence lookup
+nodes should point to a path span; final reasoning nodes may use `support: null`.
 
 ## Install
 

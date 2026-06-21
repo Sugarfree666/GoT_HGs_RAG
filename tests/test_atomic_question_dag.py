@@ -101,7 +101,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.nodes[0].support.nodes, ("Johnny Majors", "defeated", "player"))
         self.assertEqual(result.nodes[1].support.nodes, ("player", "born", "year"))
 
-    def test_parallel_nationality_paths_generate_independent_evidence_branches(self) -> None:
+    def test_parallel_nationality_paths_can_feed_final_comparison(self) -> None:
         paths = [
             RestoredTokenPath("P1", ("Ten9Eight: Shoot For The Moon", "director", "share", "nationality")),
             RestoredTokenPath("P2", ("Sabotage (1936 Film)", "director", "share", "nationality")),
@@ -115,12 +115,20 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}, {"source": "q3", "target": "q4"}])
-        self.assertEqual(result.leaf_node_ids, ["q2", "q4"])
-        self.assertFalse(any("same" in node.question.lower() for node in result.nodes))
-        self.assertFalse(any(len(node.depends_on) > 1 for node in result.nodes))
+        self.assertEqual(
+            [edge.to_dict() for edge in result.edges],
+            [
+                {"source": "q1", "target": "q2"},
+                {"source": "q3", "target": "q4"},
+                {"source": "q2", "target": "q5"},
+                {"source": "q4", "target": "q5"},
+            ],
+        )
+        self.assertEqual(result.leaf_node_ids, ["q5"])
+        self.assertIsNone(result.nodes[-1].support)
+        self.assertIn("same nationality", result.nodes[-1].question)
 
-    def test_born_later_paths_generate_date_evidence_not_final_selection(self) -> None:
+    def test_born_later_paths_generate_complete_selection_dag(self) -> None:
         paths = [
             RestoredTokenPath("P1", ("Gideon Johnson Pillow", "born", "later")),
             RestoredTokenPath("P2", ("Holm Jølsen", "born", "later")),
@@ -131,11 +139,18 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([node.question for node in result.nodes], ["When was Gideon Johnson Pillow born?", "When was Holm Jølsen born?"])
-        self.assertFalse(any("who was born later" in node.question.lower() for node in result.nodes))
-        self.assertEqual(result.edges, [])
+        self.assertEqual(
+            [node.question for node in result.nodes],
+            [
+                "When was Gideon Johnson Pillow born?",
+                "When was Holm Jølsen born?",
+                "Who was born later, Gideon Johnson Pillow or Holm Jølsen, based on q1's answer and q2's answer?",
+            ],
+        )
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q3"}, {"source": "q2", "target": "q3"}])
+        self.assertIsNone(result.nodes[-1].support)
 
-    def test_younger_director_paths_generate_evidence_not_candidate_selection(self) -> None:
+    def test_comparison_dag_allows_final_multi_parent_node(self) -> None:
         paths = [
             RestoredTokenPath("P1", ("Dangerously They Live", "director", "younger")),
             RestoredTokenPath("P2", ("Salad By The Roots", "director", "younger")),
@@ -146,8 +161,21 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}, {"source": "q3", "target": "q4"}])
-        self.assertFalse(any("which film" in node.question.lower() for node in result.nodes))
+        self.assertEqual(
+            [edge.to_dict() for edge in result.edges],
+            [
+                {"source": "q1", "target": "q2"},
+                {"source": "q3", "target": "q4"},
+                {"source": "q2", "target": "q5"},
+                {"source": "q4", "target": "q5"},
+            ],
+        )
+        self.assertEqual(result.leaf_node_ids, ["q5"])
+        self.assertIsNone(result.nodes[-1].support)
+        self.assertEqual(result.nodes[-1].depends_on, ("q2", "q4"))
+        self.assertNotIn("at most one previous node", "; ".join(result.validation_errors))
+        self.assertNotIn("crosses paths", "; ".join(result.validation_errors))
+        self.assertNotIn("uncovered adjacent edge", "; ".join(result.validation_errors))
         self.assertEqual(result.nodes[1].support.nodes, ("director", "younger"))
 
     def test_dell_long_path_requires_contiguous_support_cover(self) -> None:
@@ -187,11 +215,40 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertFalse(result.valid)
         self.assertIn("start_index must be <= end_index", "; ".join(result.validation_errors))
 
-    def test_depends_on_must_match_question_reference(self) -> None:
+    def test_future_dependency_is_rejected(self) -> None:
+        payload = {
+            "nodes": [
+                {"id": "q1", "question": "What follows q2's answer?", "depends_on": ["q2"], "support": None},
+                {"id": "q2", "question": "What is B?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
+            ]
+        }
+        result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
+            original_question="Question?",
+            paths=[RestoredTokenPath("P1", ("A", "B"))],
+        )
+
+        self.assertFalse(result.valid)
+        self.assertIn("depends_on references non-previous node 'q2'", "; ".join(result.validation_errors))
+
+    def test_unresolved_entity_placeholder_in_question_is_rejected(self) -> None:
+        payload = {
+            "nodes": [
+                {"id": "q1", "question": "Who directed ENTITYA?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
+            ]
+        }
+        result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
+            original_question="Question?",
+            paths=[RestoredTokenPath("P1", ("A", "director"))],
+        )
+
+        self.assertFalse(result.valid)
+        self.assertIn("question contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+
+    def test_question_reference_must_be_declared_in_depends_on(self) -> None:
         payload = {
             "nodes": [
                 {"id": "q1", "question": "Who directed A?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
-                {"id": "q2", "question": "What is the nationality?", "depends_on": ["q1"], "support": {"path_id": "P1", "start_index": 1, "end_index": 2}},
+                {"id": "q2", "question": "What is the nationality of q1's answer?", "depends_on": [], "support": {"path_id": "P1", "start_index": 1, "end_index": 2}},
             ]
         }
         result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
@@ -200,7 +257,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertFalse(result.valid)
-        self.assertIn("question references [] but depends_on is ['q1']", "; ".join(result.validation_errors))
+        self.assertIn("question references ['q1'] but depends_on is []", "; ".join(result.validation_errors))
 
     def test_braced_question_reference_is_rejected(self) -> None:
         payload = {
@@ -215,9 +272,9 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertFalse(result.valid)
-        self.assertIn("question references [] but depends_on is ['q1']", "; ".join(result.validation_errors))
+        self.assertIn("must use qN's answer references", "; ".join(result.validation_errors))
 
-    def test_cross_path_dependency_fails_validation(self) -> None:
+    def test_cross_path_dependency_is_allowed_when_declared(self) -> None:
         payload = {
             "nodes": [
                 {"id": "q1", "question": "Who directed A?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
@@ -229,15 +286,15 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             paths=[RestoredTokenPath("P1", ("A", "director")), RestoredTokenPath("P2", ("B", "nationality"))],
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("crosses paths", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
 
-    def test_node_depends_on_two_branches_fails_validation(self) -> None:
+    def test_multi_parent_final_node_with_null_support_is_allowed(self) -> None:
         payload = {
             "nodes": [
                 {"id": "q1", "question": "When was A born?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
                 {"id": "q2", "question": "When was B born?", "depends_on": [], "support": {"path_id": "P2", "start_index": 0, "end_index": 1}},
-                {"id": "q3", "question": "Compare q1's answer and q2's answer?", "depends_on": ["q1", "q2"], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
+                {"id": "q3", "question": "Which one is later based on q1's answer and q2's answer?", "depends_on": ["q1", "q2"], "support": None},
             ]
         }
         result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
@@ -245,17 +302,17 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             paths=[RestoredTokenPath("P1", ("A", "born")), RestoredTokenPath("P2", ("B", "born"))],
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("at most one previous node", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q3"}, {"source": "q2", "target": "q3"}])
+        self.assertIsNone(result.nodes[-1].support)
 
-    def test_path_edge_not_covered_fails_validation(self) -> None:
+    def test_unused_path_edges_do_not_invalidate_complete_dag(self) -> None:
         result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(_payload_with_support("P1", 0, 1))).generate(
             original_question="Question?",
             paths=[RestoredTokenPath("P1", ("A", "B", "C"))],
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("uncovered adjacent edge", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
 
     def test_deterministic_output_for_same_payload(self) -> None:
         paths = [RestoredTokenPath("P1", ("Johnny Majors", "defeated", "player", "born", "year"))]
@@ -384,6 +441,12 @@ def _parallel_nationality_payload() -> dict[str, Any]:
             {"id": "q2", "question": "What is the nationality of q1's answer?", "depends_on": ["q1"], "support": {"path_id": "P1", "start_index": 1, "end_index": 3}},
             {"id": "q3", "question": "Who directed Sabotage (1936 Film)?", "depends_on": [], "support": {"path_id": "P2", "start_index": 0, "end_index": 1}},
             {"id": "q4", "question": "What is the nationality of q3's answer?", "depends_on": ["q3"], "support": {"path_id": "P2", "start_index": 1, "end_index": 3}},
+            {
+                "id": "q5",
+                "question": "Do the directors have the same nationality based on q2's answer and q4's answer?",
+                "depends_on": ["q2", "q4"],
+                "support": None,
+            },
         ]
     }
 
@@ -393,6 +456,12 @@ def _born_later_payload() -> dict[str, Any]:
         "nodes": [
             {"id": "q1", "question": "When was Gideon Johnson Pillow born?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 2}},
             {"id": "q2", "question": "When was Holm Jølsen born?", "depends_on": [], "support": {"path_id": "P2", "start_index": 0, "end_index": 2}},
+            {
+                "id": "q3",
+                "question": "Who was born later, Gideon Johnson Pillow or Holm Jølsen, based on q1's answer and q2's answer?",
+                "depends_on": ["q1", "q2"],
+                "support": None,
+            },
         ]
     }
 
@@ -404,6 +473,12 @@ def _younger_director_payload() -> dict[str, Any]:
             {"id": "q2", "question": "When was q1's answer born?", "depends_on": ["q1"], "support": {"path_id": "P1", "start_index": 1, "end_index": 2}},
             {"id": "q3", "question": "Who directed Salad By The Roots?", "depends_on": [], "support": {"path_id": "P2", "start_index": 0, "end_index": 1}},
             {"id": "q4", "question": "When was q3's answer born?", "depends_on": ["q3"], "support": {"path_id": "P2", "start_index": 1, "end_index": 2}},
+            {
+                "id": "q5",
+                "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
+                "depends_on": ["q2", "q4"],
+                "support": None,
+            },
         ]
     }
 

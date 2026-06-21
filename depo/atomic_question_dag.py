@@ -45,14 +45,14 @@ class AtomicQuestionNode:
     id: str
     question: str
     depends_on: tuple[str, ...]
-    support: PathSpanSupport
+    support: PathSpanSupport | None
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "id": self.id,
             "question": self.question,
             "depends_on": list(self.depends_on),
-            "support": self.support.to_dict(),
+            "support": self.support.to_dict() if self.support is not None else None,
         }
 
 
@@ -86,7 +86,7 @@ class AtomicQuestionDAGResult:
 
 
 class PathAlignedAtomicDAGGenerator:
-    """Generate and validate a path-aligned evidence-oriented atomic DAG."""
+    """Generate and validate a complete atomic question DAG for answering the original question."""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
@@ -143,8 +143,6 @@ def validate_atomic_question_dag(
 
     parsed_nodes: list[AtomicQuestionNode] = []
     seen_ids: set[str] = set()
-    support_path_by_node: dict[str, str] = {}
-    covered_edges_by_path: dict[str, set[tuple[int, int]]] = {path.path_id: set() for path in paths}
 
     for index, raw_node in enumerate(raw_nodes, start=1):
         if not isinstance(raw_node, dict):
@@ -161,6 +159,8 @@ def validate_atomic_question_dag(
         question = str(raw_node.get("question") or "").strip()
         if not _is_single_question(question):
             errors.append(f"{node_id or expected_id}: question must be a non-empty single question.")
+        if re.search(r"\{\{q[1-9][0-9]*\}\}", question):
+            errors.append(f"{node_id or expected_id}: question must use qN's answer references, not braced references.")
         if _contains_placeholder(question):
             errors.append(f"{node_id or expected_id}: question contains unresolved ENTITY placeholder.")
 
@@ -169,27 +169,21 @@ def validate_atomic_question_dag(
         if depends_on is None:
             errors.append(f"{node_id or expected_id}: depends_on must be a list of node ids.")
             depends_on = []
-        if len(depends_on) > 1:
-            errors.append(f"{node_id or expected_id}: a node may depend on at most one previous node.")
+        if len(set(depends_on)) != len(depends_on):
+            errors.append(f"{node_id or expected_id}: depends_on contains duplicate node ids.")
         for dependency in depends_on:
             if dependency not in seen_ids or dependency == node_id:
                 errors.append(f"{node_id or expected_id}: depends_on references non-previous node {dependency!r}.")
 
         question_refs = _question_refs(question)
-        if sorted(question_refs) != sorted(depends_on):
+        missing_dependencies = [ref for ref in question_refs if ref not in depends_on]
+        if missing_dependencies:
             errors.append(f"{node_id or expected_id}: question references {sorted(question_refs)} but depends_on is {sorted(depends_on)}.")
 
-        support_raw = raw_node.get("support")
+        support_raw = raw_node.get("support") if "support" in raw_node else None
         support = _parse_support(support_raw, path_by_id, node_id or expected_id, errors)
-        if support is None:
-            continue
-        support_path_by_node[node_id] = support.path_id
-        if len(support.nodes) < 2:
-            errors.append(f"{node_id or expected_id}: support span must contain at least two path nodes.")
-        if any(_contains_placeholder(node) for node in support.nodes):
+        if support is not None and any(_contains_placeholder(node) for node in support.nodes):
             errors.append(f"{node_id or expected_id}: support contains unresolved ENTITY placeholder.")
-        for edge_index in range(support.start_index, support.end_index):
-            covered_edges_by_path.setdefault(support.path_id, set()).add((edge_index, edge_index + 1))
 
         parsed_nodes.append(
             AtomicQuestionNode(
@@ -199,22 +193,6 @@ def validate_atomic_question_dag(
                 support=support,
             )
         )
-
-    for node in parsed_nodes:
-        for parent_id in node.depends_on:
-            parent_path = support_path_by_node.get(parent_id)
-            child_path = support_path_by_node.get(node.id)
-            if parent_path and child_path and parent_path != child_path:
-                errors.append(f"{node.id}: dependency {parent_id} crosses paths {parent_path} -> {child_path}.")
-
-    supported_path_ids = {node.support.path_id for node in parsed_nodes}
-    for path in paths:
-        if len(path.nodes) >= 2 and path.path_id not in supported_path_ids:
-            errors.append(f"path {path.path_id} has no DAG node support.")
-        expected_edges = {(index, index + 1) for index in range(len(path.nodes) - 1)}
-        missing = sorted(expected_edges - covered_edges_by_path.get(path.path_id, set()))
-        if missing:
-            errors.append(f"path {path.path_id} has uncovered adjacent edge(s): {missing}.")
 
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
@@ -264,6 +242,8 @@ def _parse_support(
     node_id: str,
     errors: list[str],
 ) -> PathSpanSupport | None:
+    if raw is None:
+        return None
     if not isinstance(raw, dict):
         errors.append(f"{node_id}: support must be an object.")
         return None
