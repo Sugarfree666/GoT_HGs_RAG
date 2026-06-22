@@ -220,9 +220,9 @@ def invalid_atomic_question_dag(errors: list[str]) -> AtomicQuestionDAGResult:
 
 
 def _preflight_errors(paths: list[RestoredTokenPath]) -> list[str]:
-    if not any(len(path.nodes) >= 2 for path in paths):
-        return ["Step5 requires at least one restored path with at least two nodes."]
     errors: list[str] = []
+    if not paths:
+        errors.append("Step5 requires at least one restored path.")
     seen: set[str] = set()
     for path in paths:
         if not path.path_id:
@@ -230,6 +230,9 @@ def _preflight_errors(paths: list[RestoredTokenPath]) -> list[str]:
         if path.path_id in seen:
             errors.append(f"Duplicate restored path_id: {path.path_id}.")
         seen.add(path.path_id)
+        if not path.nodes:
+            label = path.path_id or "(missing)"
+            errors.append(f"Restored path {label} has no nodes.")
         for node in path.nodes:
             if _contains_placeholder(node):
                 errors.append(f"Restored path {path.path_id} contains unresolved ENTITY placeholder: {node}.")

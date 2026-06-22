@@ -101,6 +101,31 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.nodes[0].support.nodes, ("Johnny Majors", "defeated", "player"))
         self.assertEqual(result.nodes[1].support.nodes, ("player", "born", "year"))
 
+    def test_single_node_path_is_sent_to_llm_and_can_support_node(self) -> None:
+        llm = RecordingStep5LLM(_payload_with_support("P1", 0, 0))
+        result = PathAlignedAtomicDAGGenerator(llm).generate(
+            original_question="What is the nationality of Some Entity?",
+            paths=[RestoredTokenPath("P1", ("Some Entity",))],
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(len(llm.user_prompts), 1)
+        payload = json.loads(llm.user_prompts[0])
+        self.assertEqual(payload["paths"][0]["nodes"], [{"index": 0, "text": "Some Entity"}])
+        self.assertIsNotNone(result.nodes[0].support)
+        self.assertEqual(result.nodes[0].support.nodes, ("Some Entity",))
+
+    def test_empty_paths_still_fail_before_llm_call(self) -> None:
+        llm = RecordingStep5LLM(_payload_with_support("P1", 0, 0))
+        result = PathAlignedAtomicDAGGenerator(llm).generate(
+            original_question="Question?",
+            paths=[],
+        )
+
+        self.assertFalse(result.valid)
+        self.assertEqual(llm.user_prompts, [])
+        self.assertIn("Step5 requires at least one restored path.", result.validation_errors)
+
     def test_parallel_nationality_paths_can_feed_final_comparison(self) -> None:
         paths = [
             RestoredTokenPath("P1", ("Ten9Eight: Shoot For The Moon", "director", "share", "nationality")),

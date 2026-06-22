@@ -141,6 +141,22 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         self.assertNotIn("The Search for Everything", [entity.text for entity in result.entities])
         self.assertNotIn("Wave One", [entity.text for entity in result.entities])
 
+    def test_wh_leading_work_title_keeps_question_like_first_word(self) -> None:
+        title = "When The Stars Go Blue"
+        questions = [
+            "What nationality is the performer of song When The Stars Go Blue?",
+            "What nationality is the performer of the When The Stars Go Blue?",
+        ]
+        for question in questions:
+            with self.subTest(question=question):
+                llm = CandidateSelectingLLM({title: "Song"})
+
+                result = ExplicitEntityExtractor(llm).extract(question)
+
+                self.assertIn("question-like word", llm.prompt)
+                self.assertEqual([entity.text for entity in result.entities], [title])
+                self.assertNotIn("The Stars Go Blue", [entity.text for entity in result.entities])
+
     def test_free_span_possessive_boundary_is_repaired(self) -> None:
         question = "When did Lothair II's mother die?"
         result = ExplicitEntityExtractor(

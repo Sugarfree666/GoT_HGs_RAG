@@ -1045,7 +1045,9 @@ def _or_coordinate_parts(question: str, start: int, end: int) -> list[tuple[int,
 
 def _looks_like_typed_coordinate_title_candidate(text: str) -> bool:
     stripped = text.strip()
-    if _is_forbidden_explicit_entity(stripped) or _starts_with_wh_span_word(stripped):
+    if _is_forbidden_explicit_entity(stripped):
+        return False
+    if _starts_with_wh_span_word(stripped) and not _looks_like_official_title(stripped):
         return False
     if _token_count(stripped) < 2:
         return False
@@ -1391,7 +1393,7 @@ def _is_llm_mask_span_allowed(
     stripped = text.strip()
     if not stripped:
         return False
-    if _starts_with_wh_span_word(stripped):
+    if _starts_with_wh_span_word(stripped) and not _looks_like_official_title(stripped):
         return False
     if _token_count(stripped) < 2:
         return False
@@ -1437,12 +1439,11 @@ def _is_mask_worthy(
     start: int | None = None,
     end: int | None = None,
 ) -> bool:
-    del question, start, end
     stripped = text.strip()
     if _is_simple_type_variable(stripped):
         return False
     token_count = _token_count(stripped)
-    if _starts_with_wh_span_word(stripped):
+    if _starts_with_wh_span_word(stripped) and not _is_wh_leading_title_candidate(stripped, question, start):
         return False
     if token_count < 2:
         return False
@@ -1450,6 +1451,14 @@ def _is_mask_worthy(
     if kind_hint == "type_variable":
         content_text = _drop_leading_type_span_words(stripped)
         return _token_count(content_text) >= 2 and not _is_simple_type_variable(content_text)
+    return True
+
+
+def _is_wh_leading_title_candidate(text: str, question: str = "", start: int | None = None) -> bool:
+    if not _looks_like_official_title(text):
+        return False
+    if question and start is not None and _starts_sentence_only(question, start, text):
+        return False
     return True
 
 
