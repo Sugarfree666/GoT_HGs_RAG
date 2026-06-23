@@ -20,7 +20,7 @@ from main import (  # noqa: E402
     run_hanlp_sdp_pipeline,
 )
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
-from tri_sdp_reasoning_compiler import compile_token_reasoning_structure  # noqa: E402
+from tri_sdp_reasoning_compiler import build_evidence_graph, compile_token_reasoning_structure  # noqa: E402
 
 
 class HanLPSDPMainlineTest(unittest.TestCase):
@@ -474,6 +474,75 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(compile_token_reasoning_structure(self._nationality_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "nationality")
         self.assertEqual(compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "born")
         self.assertEqual(compile_token_reasoning_structure(self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "film")
+
+    def test_possessive_clitic_marker_is_contracted_from_entity_mother_path(self) -> None:
+        result = _hanlp_result(
+            "When did ENTITYA's mother die?",
+            ["When", "did", "ENTITYA", "'", "s", "mother", "die", "?"],
+            [
+                _root("sdp/dm", "die", 7),
+                _pas("s", "poss_ARG2", "ENTITYA", 5, 3),
+                _pas("s", "poss_ARG1", "mother", 5, 6),
+                _dm("die", "ARG1", "mother", 7, 6),
+                _pas("die", "verb_ARG1", "mother", 7, 6),
+                _dm("When", "TWHEN", "die", 1, 7),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+
+        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "mother", "die"])
+        self.assertNotIn("s", compiled.paths[0].nodes)
+        self.assertNotIn("s", {node.text for node in compiled.nodes})
+        self.assertEqual(
+            _edge_text_pairs(compiled),
+            {frozenset(("ENTITYA", "mother")), frozenset(("mother", "die"))},
+        )
+        possessive_edges = [
+            edge for edge in compiled.edges
+            if {edge.source_text, edge.target_text} == {"ENTITYA", "mother"}
+        ]
+        self.assertTrue(any("possessive_marker_contraction" in edge.rule for edge in possessive_edges))
+
+    def test_possessive_clitic_with_adj_possessed_edge_is_contracted(self) -> None:
+        result = _hanlp_result(
+            "What is the ENTITYA dom ensamma performer's birth date?",
+            ["What", "is", "the", "ENTITYA", "dom", "ensamma", "performer", "'", "s", "birth", "date", "?"],
+            [
+                _root("sdp/dm", "date", 11),
+                _dm("What", "BV", "date", 1, 11),
+                _pas("performer", "noun_ARG1", "ENTITYA", 7, 4),
+                _pas("s", "poss_ARG2", "performer", 9, 7),
+                _pas("s", "adj_ARG1", "date", 9, 11),
+                _dm("birth", "compound", "date", 10, 11),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+
+        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "performer", "date"])
+        self.assertNotIn("s", compiled.paths[0].nodes)
+        self.assertNotIn("s", {node.text for node in compiled.nodes})
+        self.assertEqual(
+            _edge_text_pairs(compiled),
+            {frozenset(("ENTITYA", "performer")), frozenset(("performer", "date"))},
+        )
+
+    def test_non_possessive_s_is_not_globally_treated_as_function(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA s target?",
+            ["ENTITYA", "s", "target", "?"],
+            [
+                _root("sdp/dm", "s", 2),
+                _dm("s", "ARG1", "ENTITYA", 2, 1),
+                _dm("s", "ARG2", "target", 2, 3),
+            ],
+        )
+
+        state = build_evidence_graph(result)
+
+        self.assertEqual(state.nodes["2"].text, "s")
+        self.assertEqual(state.nodes["2"].kind, "content")
 
     def test_broadcaster_headquarters_remains_single_main_path(self) -> None:
         result = self._broadcaster_result()

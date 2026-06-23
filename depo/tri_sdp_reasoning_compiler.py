@@ -28,6 +28,7 @@ CLASS_WEIGHTS = {
 
 DERIVED_PENALTIES = {
     "bridge_contraction": 0.15,
+    "possessive_marker_contraction": 0.15,
     "restriction_closure": 0.25,
     "descriptor_lifting": 0.35,
     "candidate_expansion": 0.10,
@@ -81,6 +82,9 @@ PREPOSITIONS = {
 }
 SCOPE_WORDS = {"and", "or", "among", "between", "than"}
 FUNCTION_WORDS = DETERMINERS | WH_WORDS | RELATIVE_PRONOUNS | LIGHT_VERBS | PREPOSITIONS | SCOPE_WORDS
+POSSESSIVE_MARKER_TOKENS = {"'", "’", "'s", "’s", "s"}
+POSSESSIVE_OWNER_RELATIONS = {"poss_arg2"}
+POSSESSIVE_POSSESSED_RELATIONS = {"poss_arg1", "adj_arg1", "noun_arg1", "modifier"}
 ORDER_CUES = {"first", "earliest", "latest", "last", "older", "oldest", "younger", "youngest"}
 APPROX_CUES = {"approximately", "about", "around", "roughly"}
 
@@ -254,6 +258,7 @@ def compile_token_reasoning_structure(
     direct_candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
     parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets, query_focus)
 
+    add_possessive_marker_contraction_edges(state)
     add_bridge_contraction_edges(state)
     add_restriction_closure_edges(state)
     add_descriptor_lifting_edges(state, explicit_entity_ids, answer_anchor_id)
@@ -416,6 +421,7 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
             provenance=[provenance],
         )
 
+    _mark_possessive_marker_nodes(nodes, raw_edges)
     edges = {key: _copy_edge(edge) for key, edge in raw_edges.items()}
     return _WorkingState(
         nodes=nodes,
@@ -818,6 +824,8 @@ def add_bridge_contraction_edges(state: _WorkingState) -> None:
     for bridge in _sorted_nodes(state.nodes.values()):
         if not _is_bridge_node(bridge):
             continue
+        if _is_contextual_possessive_marker(bridge.id, state.nodes, state.raw_edges):
+            continue
         neighbors = [
             neighbor_id
             for neighbor_id in adjacency.get(bridge.id, {})
@@ -849,6 +857,47 @@ def add_bridge_contraction_edges(state: _WorkingState) -> None:
                     support=support,
                     derived=True,
                     rule="bridge_contraction",
+                    provenance=[provenance],
+                )
+                state.virtual_edges.append(virtual.to_dict())
+
+
+def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
+    """Collapse parser-introduced possessive clitics without treating all "s" as function words."""
+
+    for marker in _sorted_nodes(state.nodes.values()):
+        if not _is_contextual_possessive_marker(marker.id, state.nodes, state.raw_edges):
+            continue
+        owners, possessed = _possessive_marker_role_edges(marker.id, state)
+        for owner_id, owner_edge in owners:
+            if not _is_high_salience_node(state.nodes[owner_id], include_order_constraints=False):
+                continue
+            for possessed_id, possessed_edge in possessed:
+                if owner_id == possessed_id:
+                    continue
+                if not _is_high_salience_node(state.nodes[possessed_id], include_order_constraints=False):
+                    continue
+                support = max(0.05, min(owner_edge.support, possessed_edge.support) * 0.90)
+                provenance = {
+                    "rule": "possessive_marker_contraction",
+                    "marker": marker.text,
+                    "marker_id": marker.id,
+                    "collapsed_path": [
+                        state.nodes[owner_id].text,
+                        marker.text,
+                        state.nodes[possessed_id].text,
+                    ],
+                    "source_edges": [owner_edge.to_dict(), possessed_edge.to_dict()],
+                    "support": support,
+                }
+                virtual = _merge_edge(
+                    state.edges,
+                    state.nodes,
+                    owner_id,
+                    possessed_id,
+                    support=support,
+                    derived=True,
+                    rule="possessive_marker_contraction",
                     provenance=[provenance],
                 )
                 state.virtual_edges.append(virtual.to_dict())
@@ -2772,6 +2821,15 @@ def _build_token_nodes(hanlp_sdp_result: HanLPSDPResult) -> dict[str, TokenReaso
     return nodes
 
 
+def _mark_possessive_marker_nodes(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> None:
+    for node in nodes.values():
+        if _is_contextual_possessive_marker(node.id, nodes, raw_edges):
+            node.kind = "function"
+
+
 def _ensure_edge_nodes(nodes: dict[str, TokenReasoningNode], edge: HanLPSDPEdge) -> None:
     for index, text in ((edge.head_idx, edge.head), (edge.dep_idx, edge.dep)):
         node_id = str(index)
@@ -2902,6 +2960,74 @@ def _projection_relation_polarity(relation: str) -> str | None:
 
 def _raw_provenance(edge: TokenReasoningEdge) -> list[dict[str, Any]]:
     return [item for item in edge.provenance if isinstance(item, dict) and "head_idx" in item and "dep_idx" in item]
+
+
+def _is_contextual_possessive_marker(
+    node_id: str,
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> bool:
+    node = nodes.get(node_id)
+    if node is None or not _is_possessive_marker_surface(node.text):
+        return False
+    incident = _incident_raw_provenance(node_id, raw_edges)
+    if not incident:
+        return False
+    return any(_is_possessive_relation(item.get("normalized_relation") or item.get("relation")) for item in incident)
+
+
+def _possessive_marker_role_edges(
+    marker_id: str,
+    state: _WorkingState,
+) -> tuple[list[tuple[str, TokenReasoningEdge]], list[tuple[str, TokenReasoningEdge]]]:
+    owners: dict[str, TokenReasoningEdge] = {}
+    possessed: dict[str, TokenReasoningEdge] = {}
+    for key, edge in state.raw_edges.items():
+        if marker_id not in key:
+            continue
+        for item in _raw_provenance(edge):
+            relation = _normalized_relation_key(str(item.get("normalized_relation") or item.get("relation") or ""))
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if str(head_idx) == marker_id:
+                related_id = str(dep_idx)
+            elif str(dep_idx) == marker_id:
+                related_id = str(head_idx)
+            else:
+                continue
+            if related_id not in state.nodes:
+                continue
+            if relation in POSSESSIVE_OWNER_RELATIONS:
+                owners[related_id] = edge
+            elif (
+                relation in POSSESSIVE_POSSESSED_RELATIONS
+                and state.nodes[related_id].index > state.nodes[marker_id].index
+            ):
+                possessed[related_id] = edge
+    owner_items = sorted(owners.items(), key=lambda item: _node_sort_key(state.nodes[item[0]]))
+    possessed_items = sorted(possessed.items(), key=lambda item: _node_sort_key(state.nodes[item[0]]))
+    return owner_items, possessed_items
+
+
+def _incident_raw_provenance(
+    node_id: str,
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> list[dict[str, Any]]:
+    incident: list[dict[str, Any]] = []
+    for key, edge in raw_edges.items():
+        if node_id not in key:
+            continue
+        incident.extend(_raw_provenance(edge))
+    return incident
+
+
+def _is_possessive_marker_surface(text: str) -> bool:
+    return str(text or "").strip().lower() in POSSESSIVE_MARKER_TOKENS
+
+
+def _is_possessive_relation(relation: object) -> bool:
+    key = _normalized_relation_key(str(relation or ""))
+    return key == "poss" or key.startswith("poss_") or key.endswith("_poss")
 
 
 def _coerce_provenance_index(value: Any) -> int | None:
