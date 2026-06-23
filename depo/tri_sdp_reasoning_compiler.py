@@ -88,6 +88,16 @@ POSSESSIVE_POSSESSED_RELATIONS = {"poss_arg1", "adj_arg1", "noun_arg1", "modifie
 ORDER_CUES = {"first", "earliest", "latest", "last", "older", "oldest", "younger", "youngest"}
 APPROX_CUES = {"approximately", "about", "around", "roughly"}
 
+ANSWER_ANCHOR_SOURCE_ORDER = {
+    "typed_wh_slot": 0,
+    "root_projection": 1,
+    "modifier_projection": 2,
+    "comparative_focus": 3,
+    "bare_wh_predicate_root": 4,
+    "explicit_entity": 5,
+    "clause_predicate": 6,
+}
+
 
 @dataclass
 class TokenReasoningNode:
@@ -132,6 +142,7 @@ class TokenReasoningStructureResult:
     edges: list[TokenReasoningEdge]
     paths: list[TokenReasoningPath]
     path_type: str
+    anchor_path_results: list[dict[str, Any]] = field(default_factory=list)
     answer_anchor: str | None = None
     answer_anchor_id: str | None = None
     entity_anchors: list[str] = field(default_factory=list)
@@ -147,6 +158,7 @@ class TokenReasoningStructureResult:
             "edges": [edge.to_dict() for edge in self.edges],
             "paths": [path.to_dict() for path in self.paths],
             "path_type": self.path_type,
+            "anchor_path_results": list(self.anchor_path_results),
             "answer_anchor": self.answer_anchor,
             "answer_anchor_id": self.answer_anchor_id,
             "entity_anchors": list(self.entity_anchors),
@@ -166,6 +178,24 @@ class _WorkingState:
     normalized_edges: list[dict[str, Any]]
     virtual_edges: list[dict[str, Any]]
     warnings: list[str]
+
+
+@dataclass
+class _AnswerAnchorCandidate:
+    node_id: str
+    text: str
+    source_types: list[str]
+    score: float
+    evidence: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_debug(self) -> dict[str, Any]:
+        return {
+            "node_id": self.node_id,
+            "text": self.text,
+            "source_types": list(self.source_types),
+            "score": self.score,
+            "evidence": list(self.evidence),
+        }
 
 
 @dataclass(frozen=True)
@@ -249,55 +279,118 @@ def compile_token_reasoning_structure(
 
     state = build_evidence_graph(hanlp_sdp_result)
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
-
-    answer_anchor_id = detect_answer_anchor(state.nodes, state.raw_edges, state.warnings)
-    constraints = detect_constraints(state.nodes, state.raw_edges, answer_anchor_id)
-    query_focus = _build_query_focus(state.nodes, state.raw_edges, answer_anchor_id, constraints)
-    _mark_anchors(state.nodes, explicit_entity_ids, answer_anchor_id)
-
-    direct_candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
-    parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets, query_focus)
+    answer_anchor_candidates = collect_answer_anchor_candidates(
+        state.nodes,
+        state.raw_edges,
+        state.warnings,
+        explicit_entity_ids=explicit_entity_ids,
+    )
 
     add_possessive_marker_contraction_edges(state)
     add_bridge_contraction_edges(state)
     add_restriction_closure_edges(state)
-    add_descriptor_lifting_edges(state, explicit_entity_ids, answer_anchor_id)
 
-    paths, path_type, candidate_path_records, selection_mode = _select_query_focused_paths(
-        state=state,
-        explicit_entity_ids=explicit_entity_ids,
-        query_focus=query_focus,
-        constraints=constraints,
-        direct_candidate_sets=direct_candidate_sets,
-        parallel_entity_sets=parallel_entity_sets,
-    )
+    per_anchor_results: list[dict[str, Any]] = []
+    paths: list[TokenReasoningPath] = []
+    result_edge_map: dict[tuple[str, str], TokenReasoningEdge] = {}
+    aggregated_constraints: list[dict[str, Any]] = []
+    aggregated_candidate_sets: list[list[str]] = []
+
+    for anchor_index, anchor in enumerate(answer_anchor_candidates, start=1):
+        anchor_state = _copy_working_state(state)
+        _mark_anchors(anchor_state.nodes, explicit_entity_ids, anchor.node_id)
+
+        constraints = detect_constraints(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id)
+        query_focus = _build_query_focus(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id, constraints)
+        direct_candidate_sets = detect_candidate_sets(anchor_state.nodes, anchor_state.raw_edges, explicit_entity_ids)
+        parallel_entity_sets = _detect_parallel_entity_sets(
+            anchor_state,
+            explicit_entity_ids,
+            direct_candidate_sets,
+            query_focus,
+        )
+
+        add_descriptor_lifting_edges(anchor_state, explicit_entity_ids, anchor.node_id)
+
+        anchor_paths, path_type, candidate_path_records, selection_mode = _select_query_focused_paths(
+            state=anchor_state,
+            explicit_entity_ids=explicit_entity_ids,
+            query_focus=query_focus,
+            constraints=constraints,
+            direct_candidate_sets=direct_candidate_sets,
+            parallel_entity_sets=parallel_entity_sets,
+        )
+
+        final_node_ids, final_pairs = _graph_from_selected_paths(anchor_paths)
+        active_entity_ids = _active_entity_ids(anchor_state.nodes, anchor_paths)
+        final_edges = _final_edges(
+            anchor_state.nodes,
+            anchor_state.edges,
+            final_pairs,
+            anchor_paths,
+            active_entity_ids,
+            anchor.node_id,
+        )
+        for edge in final_edges:
+            result_edge_map.setdefault(_edge_key(edge.source, edge.target), edge)
+
+        for path_index, path in enumerate(anchor_paths, start=1):
+            paths.append(
+                TokenReasoningPath(
+                    path_id=f"A{anchor_index}.P{path_index}",
+                    nodes=list(path.nodes),
+                    node_ids=list(path.node_ids),
+                )
+            )
+
+        candidate_sets = _candidate_sets_for_result(anchor_state.nodes, direct_candidate_sets, parallel_entity_sets)
+        aggregated_constraints = _merge_constraint_debug_lists(aggregated_constraints, constraints)
+        aggregated_candidate_sets = _merge_candidate_set_lists(aggregated_candidate_sets, candidate_sets)
+
+        per_anchor_results.append(
+            {
+                "anchor_id": anchor.node_id,
+                "anchor_text": anchor.text,
+                "source_types": list(anchor.source_types),
+                "score": anchor.score,
+                "evidence": list(anchor.evidence),
+                "query_focus": query_focus.to_dict(anchor_state.nodes),
+                "constraints": constraints,
+                "path_type": path_type,
+                "paths": [path.to_dict() for path in anchor_paths],
+                "selection_mode": selection_mode,
+                "candidate_paths": [record.to_debug(anchor_state.nodes) for record in candidate_path_records],
+                "candidate_sets": candidate_sets,
+                "parallel_entity_sets": list(parallel_entity_sets),
+                "virtual_edges": list(anchor_state.virtual_edges),
+            }
+        )
+
+    result_nodes = _copy_node_map(state.nodes)
+    for anchor in answer_anchor_candidates:
+        _mark_anchors(result_nodes, explicit_entity_ids, anchor.node_id)
+
     final_node_ids, final_pairs = _graph_from_selected_paths(paths)
-    backbone_before = _graph_snapshot(final_node_ids, final_pairs, state.nodes, state.edges)
+    result_state = _copy_working_state(state)
+    result_state.nodes = result_nodes
+    result_state.edges = {**result_state.edges, **result_edge_map}
+    backbone_before = _graph_snapshot(final_node_ids, final_pairs, result_nodes, result_state.edges)
     backbone_after = backbone_before
+    final_nodes = _final_nodes(result_nodes, final_node_ids)
+    active_entity_ids = _active_entity_ids(result_nodes, paths)
+    final_edges = _final_edges(result_nodes, result_state.edges, final_pairs, paths, active_entity_ids, None)
 
-    final_nodes = _final_nodes(state.nodes, final_node_ids)
-    active_entity_ids = _active_entity_ids(state.nodes, paths)
-    final_edges = _final_edges(state.nodes, state.edges, final_pairs, paths, active_entity_ids, answer_anchor_id)
-
-    if not final_nodes and explicit_entity_ids:
-        fallback_id = explicit_entity_ids[0]
-        final_nodes = _final_nodes(state.nodes, [fallback_id])
-        paths = [TokenReasoningPath(path_id="P1", nodes=[state.nodes[fallback_id].text], node_ids=[fallback_id])]
-        path_type = "empty"
-        active_entity_ids = [fallback_id]
-
-    answer_anchor = state.nodes[answer_anchor_id].text if answer_anchor_id in state.nodes else None
-    entity_anchors = [state.nodes[node_id].text for node_id in active_entity_ids if node_id in state.nodes]
-    candidate_sets = _candidate_sets_for_result(state.nodes, direct_candidate_sets, parallel_entity_sets)
+    candidate_sets = aggregated_candidate_sets
+    entity_anchors = [result_nodes[node_id].text for node_id in active_entity_ids if node_id in result_nodes]
     debug_payload = _build_debug_payload(
         question_id=question_id,
         masked_question=masked_question or hanlp_sdp_result.text,
         hanlp_sdp_result=hanlp_sdp_result,
         explicit_entities=explicit_entities,
-        state=state,
-        answer_anchor_id=answer_anchor_id,
+        state=result_state,
+        answer_anchor_id=None,
         entity_ids=explicit_entity_ids,
-        constraints=constraints,
+        constraints=aggregated_constraints,
         candidate_sets=candidate_sets,
         terminals=[],
         backbone_before=backbone_before,
@@ -305,14 +398,16 @@ def compile_token_reasoning_structure(
         final_nodes=final_nodes,
         final_edges=final_edges,
         paths=paths,
-        query_focus=query_focus,
+        query_focus=None,
         entity_candidates=explicit_entity_ids,
         active_entity_ids=active_entity_ids,
-        parallel_entity_sets=parallel_entity_sets,
-        candidate_paths=candidate_path_records,
+        parallel_entity_sets=[],
+        candidate_paths=[],
         selected_paths=paths,
-        selection_mode=selection_mode,
+        selection_mode="multi_anchor_candidates",
     )
+    debug_payload["answer_anchor_candidates"] = [candidate.to_debug() for candidate in answer_anchor_candidates]
+    debug_payload["per_anchor_results"] = list(per_anchor_results)
     debug_file = None
     if debug:
         debug_file = write_debug_json(debug_payload, question_id=question_id, debug_dir=debug_dir)
@@ -321,11 +416,12 @@ def compile_token_reasoning_structure(
         nodes=final_nodes,
         edges=final_edges,
         paths=paths,
-        path_type=path_type,
-        answer_anchor=answer_anchor,
-        answer_anchor_id=answer_anchor_id,
+        path_type="multi_anchor_candidates",
+        anchor_path_results=per_anchor_results,
+        answer_anchor=None,
+        answer_anchor_id=None,
         entity_anchors=entity_anchors,
-        constraints=constraints,
+        constraints=aggregated_constraints,
         candidate_sets=candidate_sets,
         warnings=list(state.warnings),
         debug_payload=debug_payload,
@@ -438,40 +534,112 @@ def detect_answer_anchor(
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     warnings: list[str],
 ) -> str | None:
-    typed_wh = _find_typed_wh_slot(nodes, raw_edges)
-    if typed_wh:
-        warnings.append("answer anchor selected by typed-wh slot")
-        return typed_wh
-
-    query_root = _find_query_root(nodes, raw_edges)
-    if query_root:
-        if (
-            not typed_wh
-            and _bare_wh_direct_argument_ids(nodes, raw_edges, query_root)
-            and _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, query_root)
-        ):
-            warnings.append("answer anchor selected by bare-wh query root")
-            return query_root
-        projection = _collect_root_projection_candidates(nodes, raw_edges, query_root)
-        if projection:
-            warnings.append("answer anchor selected by root projection")
-            return projection
-        modifier_projection = _find_modifier_projection_candidate(nodes, raw_edges, query_root)
-        if modifier_projection:
-            warnings.append("answer anchor selected by modifier projection")
-            return modifier_projection
-
-    wh_focus = _find_wh_fallback_anchor(nodes, raw_edges)
-    if wh_focus:
-        warnings.append("answer anchor selected by wh fallback")
-        return wh_focus
-
-    root_candidate = _root_candidate(nodes, raw_edges)
-    if root_candidate:
-        warnings.append("answer anchor fallback: root/high-salience content token")
-        return root_candidate
+    candidates = collect_answer_anchor_candidates(nodes, raw_edges, explicit_entity_ids=[])
+    if candidates:
+        warnings.append(f"answer anchor selected by {','.join(candidates[0].source_types)}")
+        return candidates[0].node_id
     warnings.append("answer anchor fallback failed")
     return None
+
+
+def collect_answer_anchor_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    warnings: list[str] | None = None,
+    *,
+    explicit_entity_ids: list[str] | None = None,
+) -> list[_AnswerAnchorCandidate]:
+    """Recall answer-anchor candidates without committing to a final global anchor."""
+
+    explicit_entity_ids = explicit_entity_ids or []
+    query_root = _find_query_root(nodes, raw_edges)
+    candidates: list[_AnswerAnchorCandidate] = []
+
+    candidates.extend(_find_typed_wh_slot_candidates(nodes, raw_edges))
+    if query_root:
+        candidates.extend(_collect_root_projection_candidates(nodes, raw_edges, query_root))
+        candidates.extend(_find_modifier_projection_candidates(nodes, raw_edges, query_root))
+    candidates.extend(_find_comparative_focus_candidates(nodes, raw_edges, query_root))
+    candidates.extend(_find_bare_wh_predicate_root_candidates(nodes, raw_edges, query_root))
+    candidates.extend(_collect_explicit_entity_anchor_candidates(nodes, raw_edges, explicit_entity_ids))
+    candidates.extend(_collect_clause_predicate_anchor_candidates(nodes, raw_edges, explicit_entity_ids, query_root))
+
+    merged = _merge_answer_anchor_candidates(nodes, candidates)
+    if warnings is not None:
+        if merged:
+            rendered = ", ".join(
+                f"{candidate.text}[{candidate.node_id}]/{'+'.join(candidate.source_types)}"
+                for candidate in merged
+            )
+            warnings.append(f"answer anchor candidates collected: {rendered}")
+        else:
+            warnings.append("answer anchor candidates collection found no candidates")
+    return merged
+
+
+def _find_typed_wh_slot_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> list[_AnswerAnchorCandidate]:
+    wh_ids = [node.id for node in _sorted_nodes(nodes.values()) if node.text.lower() in WH_WORDS]
+    adjacency = _adjacency(raw_edges)
+    candidates: list[_AnswerAnchorCandidate] = []
+
+    for wh_id in wh_ids:
+        wh_text = nodes[wh_id].text.lower()
+        neighbors = _neighbor_edges(wh_id, adjacency, raw_edges)
+        if wh_text not in {"what", "which"}:
+            continue
+        for neighbor_id, edge in neighbors:
+            neighbor = nodes[neighbor_id]
+            if neighbor.kind != "content":
+                continue
+            classes = _edge_label_classes(edge)
+            relations = _edge_relations(edge)
+            class_match = bool(classes & {"BRIDGE", "RESTRICT", "IDENTITY", "MODIFIER"})
+            relation_match = any(
+                fragment in relation
+                for relation in relations
+                for fragment in {"bv", "det", "rstr", "adj", "noun", "compound", "id", "flat", "app"}
+            )
+            if not class_match and not relation_match:
+                continue
+            candidates.append(
+                _answer_anchor_candidate(
+                    nodes,
+                    neighbor_id,
+                    "typed_wh_slot",
+                    {
+                        "rule": "typed_wh_neighbor",
+                        "wh_id": wh_id,
+                        "wh": nodes[wh_id].text,
+                        "edge": edge.to_dict(),
+                        "support": edge.support,
+                    },
+                    edge.support,
+                )
+            )
+
+    adjacent = _surface_adjacent_typed_wh_slot(nodes)
+    if adjacent:
+        previous = next((node for node in nodes.values() if node.index == nodes[adjacent].index - 1), None)
+        candidates.append(
+            _answer_anchor_candidate(
+                nodes,
+                adjacent,
+                "typed_wh_slot",
+                {
+                    "rule": "surface_typed_wh_adjacency",
+                    "wh_id": previous.id if previous else None,
+                    "wh": previous.text if previous else None,
+                    "slot_id": adjacent,
+                    "slot": nodes[adjacent].text,
+                    "support": 0.75,
+                },
+                0.75,
+            )
+        )
+    return _merge_answer_anchor_candidates(nodes, candidates)
 
 
 def _find_typed_wh_slot(
@@ -583,9 +751,9 @@ def _collect_root_projection_candidates(
     nodes: dict[str, TokenReasoningNode],
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     query_root_id: str,
-) -> str | None:
+) -> list[_AnswerAnchorCandidate]:
     if query_root_id not in nodes:
-        return None
+        return []
     root_idx = nodes[query_root_id].index
     candidates: dict[str, dict[str, Any]] = {}
     for edge in raw_edges.values():
@@ -606,17 +774,28 @@ def _collect_root_projection_candidates(
             formalism = str(item.get("formalism") or "")
             candidate = candidates.setdefault(
                 candidate_id,
-                {"positive": 0.0, "negative": 0.0, "formalisms": set(), "positive_count": 0},
+                {"positive": 0.0, "negative": 0.0, "formalisms": set(), "positive_count": 0, "evidence": []},
             )
             if polarity == "forward":
                 candidate["positive"] += support
                 candidate["positive_count"] += 1
                 if formalism:
                     candidate["formalisms"].add(formalism)
+                candidate["evidence"].append(
+                    {
+                        "rule": "root_projection",
+                        "query_root_id": query_root_id,
+                        "query_root": nodes[query_root_id].text,
+                        "candidate_id": candidate_id,
+                        "candidate": nodes[candidate_id].text,
+                        "provenance": dict(item),
+                        "support": support,
+                    }
+                )
             elif polarity == "subject":
                 candidate["negative"] += support
 
-    scored: list[tuple[float, int, int, str]] = []
+    scored: list[tuple[float, int, int, str, list[dict[str, Any]]]] = []
     for candidate_id, data in candidates.items():
         positive = float(data["positive"])
         if positive <= 0.0 or int(data["positive_count"]) <= 0:
@@ -626,8 +805,11 @@ def _collect_root_projection_candidates(
             continue
         formalisms = data["formalisms"]
         node = nodes[candidate_id]
-        scored.append((-total, -len(formalisms), node.index, candidate_id))
-    return sorted(scored)[0][3] if scored else None
+        scored.append((-total, -len(formalisms), node.index, candidate_id, list(data["evidence"])))
+    return [
+        _answer_anchor_candidate(nodes, candidate_id, "root_projection", {"evidence": evidence, "support": -score}, -score)
+        for score, _formalism_count, _node_index, candidate_id, evidence in sorted(scored)
+    ]
 
 
 def _find_modifier_projection_candidate(
@@ -635,8 +817,17 @@ def _find_modifier_projection_candidate(
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     query_root_id: str,
 ) -> str | None:
+    candidates = _find_modifier_projection_candidates(nodes, raw_edges, query_root_id)
+    return candidates[0].node_id if candidates else None
+
+
+def _find_modifier_projection_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> list[_AnswerAnchorCandidate]:
     if query_root_id not in nodes:
-        return None
+        return []
     adjacency = _adjacency(raw_edges)
     queue: list[tuple[str, list[str]]] = [(query_root_id, [query_root_id])]
     best_by_candidate: dict[str, dict[str, Any]] = {}
@@ -649,7 +840,7 @@ def _find_modifier_projection_candidate(
             if score > 0.0:
                 existing = best_by_candidate.get(node_id)
                 if existing is None or (score, len(formalisms)) > (float(existing["score"]), len(existing["formalisms"])):
-                    best_by_candidate[node_id] = {"score": score, "formalisms": formalisms}
+                    best_by_candidate[node_id] = {"score": score, "formalisms": formalisms, "path": list(path)}
         if len(path) == 3:
             continue
         for neighbor_id in sorted(adjacency.get(node_id, {}), key=lambda item: _node_sort_key(nodes[item])):
@@ -661,7 +852,28 @@ def _find_modifier_projection_candidate(
     for candidate_id, data in best_by_candidate.items():
         node = nodes[candidate_id]
         scored.append((-float(data["score"]), -len(data["formalisms"]), node.index, candidate_id))
-    return sorted(scored)[0][3] if scored else None
+    result: list[_AnswerAnchorCandidate] = []
+    for score, _formalism_count, _node_index, candidate_id in sorted(scored):
+        data = best_by_candidate[candidate_id]
+        path = list(data.get("path") or [])
+        result.append(
+            _answer_anchor_candidate(
+                nodes,
+                candidate_id,
+                "modifier_projection",
+                {
+                    "rule": "modifier_projection_path",
+                    "query_root_id": query_root_id,
+                    "query_root": nodes[query_root_id].text,
+                    "path_ids": path,
+                    "path": [nodes[node_id].text for node_id in path if node_id in nodes],
+                    "formalisms": sorted(data.get("formalisms") or []),
+                    "support": -score,
+                },
+                -score,
+            )
+        )
+    return result
 
 
 def _score_modifier_projection_path(
@@ -691,6 +903,298 @@ def _score_modifier_projection_path(
             if formalism:
                 formalisms.add(formalism)
     return score, formalisms
+
+
+def _find_comparative_focus_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str | None,
+) -> list[_AnswerAnchorCandidate]:
+    candidates: list[_AnswerAnchorCandidate] = []
+    for node in _sorted_nodes(nodes.values()):
+        if node.text.lower() not in ORDER_CUES:
+            continue
+        incident = _anchor_incident_evidence(raw_edges, node.id, rule="comparative_focus")
+        support = sum(float(item.get("support") or 0.0) for item in incident)
+        if node.id == query_root_id:
+            support += 1.0
+        candidates.append(
+            _answer_anchor_candidate(
+                nodes,
+                node.id,
+                "comparative_focus",
+                {
+                    "rule": "comparative_focus",
+                    "query_root_id": query_root_id,
+                    "incident_evidence": incident,
+                    "support": support,
+                },
+                support,
+            )
+        )
+    return candidates
+
+
+def _find_bare_wh_predicate_root_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str | None,
+) -> list[_AnswerAnchorCandidate]:
+    candidates: list[_AnswerAnchorCandidate] = []
+    typed_wh = _find_typed_wh_slot(nodes, raw_edges)
+    if query_root_id and not typed_wh:
+        direct_wh_ids = _bare_wh_direct_argument_ids(nodes, raw_edges, query_root_id)
+        suffix_id = _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, query_root_id)
+        if direct_wh_ids and suffix_id:
+            candidates.append(
+                _answer_anchor_candidate(
+                    nodes,
+                    query_root_id,
+                    "bare_wh_predicate_root",
+                    {
+                        "rule": "bare_wh_query_root",
+                        "direct_wh_ids": direct_wh_ids,
+                        "direct_wh": [nodes[node_id].text for node_id in direct_wh_ids if node_id in nodes],
+                        "suffix_id": suffix_id,
+                        "suffix": nodes[suffix_id].text if suffix_id in nodes else None,
+                        "support": 1.0,
+                    },
+                    1.0,
+                )
+            )
+
+    inferred = _infer_bare_wh_query_predicate(nodes, raw_edges)
+    if inferred is not None:
+        predicate_id, wh_id = inferred
+        suffix_id = _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, predicate_id)
+        candidates.append(
+            _answer_anchor_candidate(
+                nodes,
+                predicate_id,
+                "bare_wh_predicate_root",
+                {
+                    "rule": "inferred_bare_wh_predicate_root",
+                    "wh_id": wh_id,
+                    "wh": nodes[wh_id].text if wh_id in nodes else None,
+                    "suffix_id": suffix_id,
+                    "suffix": nodes[suffix_id].text if suffix_id in nodes else None,
+                    "support": 0.75,
+                },
+                0.75,
+            )
+        )
+    return _merge_answer_anchor_candidates(nodes, candidates)
+
+
+def _collect_explicit_entity_anchor_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    explicit_entity_ids: list[str],
+) -> list[_AnswerAnchorCandidate]:
+    candidates: list[_AnswerAnchorCandidate] = []
+    for entity_id in _sort_node_ids([node_id for node_id in explicit_entity_ids if node_id in nodes], nodes):
+        incident = _anchor_incident_evidence(raw_edges, entity_id, rule="explicit_entity")
+        support = sum(float(item.get("support") or 0.0) for item in incident)
+        candidates.append(
+            _answer_anchor_candidate(
+                nodes,
+                entity_id,
+                "explicit_entity",
+                {
+                    "rule": "explicit_entity",
+                    "incident_evidence": incident,
+                    "support": support,
+                },
+                support,
+            )
+        )
+    return candidates
+
+
+def _collect_clause_predicate_anchor_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    explicit_entity_ids: list[str],
+    query_root_id: str | None,
+) -> list[_AnswerAnchorCandidate]:
+    explicit = set(explicit_entity_ids)
+    scored: dict[str, dict[str, Any]] = {}
+
+    if query_root_id and _is_clause_predicate_anchor_node(nodes, query_root_id):
+        entry = scored.setdefault(query_root_id, {"support": 0.0, "evidence": []})
+        entry["support"] += 1.0
+        entry["evidence"].append(
+            {
+                "rule": "clause_query_root",
+                "query_root_id": query_root_id,
+                "query_root": nodes[query_root_id].text,
+                "support": 1.0,
+            }
+        )
+
+    for key in _sorted_edge_keys(raw_edges, nodes):
+        edge = raw_edges[key]
+        source_id, target_id = key
+        classes = _edge_label_classes(edge)
+        if not (classes & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "UNKNOWN"}):
+            continue
+        for node_id, other_id in ((source_id, target_id), (target_id, source_id)):
+            if not _is_clause_predicate_anchor_node(nodes, node_id):
+                continue
+            support = edge.support
+            if other_id in explicit:
+                support += 0.50
+            if node_id == query_root_id:
+                support += 0.50
+            entry = scored.setdefault(node_id, {"support": 0.0, "evidence": []})
+            entry["support"] += support
+            entry["evidence"].append(
+                {
+                    "rule": "clause_predicate_edge",
+                    "other_id": other_id,
+                    "other": nodes[other_id].text if other_id in nodes else None,
+                    "edge": edge.to_dict(),
+                    "support": support,
+                }
+            )
+
+    return [
+        _answer_anchor_candidate(
+            nodes,
+            node_id,
+            "clause_predicate",
+            {"rule": "clause_predicate", "evidence": list(data["evidence"]), "support": float(data["support"])},
+            float(data["support"]),
+        )
+        for node_id, data in sorted(
+            scored.items(),
+            key=lambda item: (-float(item[1]["support"]), _node_sort_key(nodes[item[0]])),
+        )
+    ]
+
+
+def _is_clause_predicate_anchor_node(nodes: dict[str, TokenReasoningNode], node_id: str) -> bool:
+    if node_id not in nodes or node_id == "0":
+        return False
+    node = nodes[node_id]
+    if node.text.lower() in WH_WORDS:
+        return False
+    return node.kind in {"content", "answer", "constraint"}
+
+
+def _answer_anchor_candidate(
+    nodes: dict[str, TokenReasoningNode],
+    node_id: str,
+    source_type: str,
+    evidence: dict[str, Any],
+    score: float,
+) -> _AnswerAnchorCandidate:
+    return _AnswerAnchorCandidate(
+        node_id=node_id,
+        text=nodes[node_id].text if node_id in nodes else "",
+        source_types=[source_type],
+        score=score,
+        evidence=[evidence],
+    )
+
+
+def _merge_answer_anchor_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    candidates: list[_AnswerAnchorCandidate],
+) -> list[_AnswerAnchorCandidate]:
+    by_id: dict[str, _AnswerAnchorCandidate] = {}
+    for candidate in candidates:
+        if candidate.node_id not in nodes:
+            continue
+        existing = by_id.get(candidate.node_id)
+        if existing is None:
+            by_id[candidate.node_id] = _AnswerAnchorCandidate(
+                node_id=candidate.node_id,
+                text=nodes[candidate.node_id].text,
+                source_types=[],
+                score=0.0,
+                evidence=[],
+            )
+            existing = by_id[candidate.node_id]
+        for source_type in candidate.source_types:
+            if source_type not in existing.source_types:
+                existing.source_types.append(source_type)
+        _append_unique_evidence(existing.evidence, candidate.evidence)
+
+    for candidate in by_id.values():
+        candidate.source_types.sort(key=lambda source: ANSWER_ANCHOR_SOURCE_ORDER.get(source, 99))
+        candidate.score = _score_answer_anchor_candidate(nodes[candidate.node_id], candidate.source_types, candidate.evidence)
+
+    return sorted(
+        by_id.values(),
+        key=lambda candidate: (
+            -candidate.score,
+            min((ANSWER_ANCHOR_SOURCE_ORDER.get(source, 99) for source in candidate.source_types), default=99),
+            _node_sort_key(nodes[candidate.node_id]),
+        ),
+    )
+
+
+def _score_answer_anchor_candidate(
+    node: TokenReasoningNode,
+    source_types: list[str],
+    evidence: list[dict[str, Any]],
+) -> float:
+    kind_bonus = {
+        "content": 4.0,
+        "entity": 3.0,
+        "answer": 4.0,
+        "constraint": 3.0,
+        "function": 0.0,
+    }.get(node.kind, 1.0)
+    source_weights = {
+        "typed_wh_slot": 16.0,
+        "root_projection": 14.0,
+        "modifier_projection": 12.0,
+        "comparative_focus": 10.0,
+        "bare_wh_predicate_root": 10.0,
+        "clause_predicate": 8.0,
+        "explicit_entity": 2.0,
+    }
+    source_bonus = sum(source_weights.get(source_type, 1.0) for source_type in set(source_types))
+    support_bonus = min(2.0, sum(_anchor_evidence_support(item) for item in evidence))
+    return round(source_bonus + kind_bonus + support_bonus, 6)
+
+
+def _anchor_evidence_support(item: Any) -> float:
+    if isinstance(item, dict):
+        total = _coerce_float_value(item.get("support"), 0.0)
+        for value in item.values():
+            if isinstance(value, (dict, list)):
+                total += _anchor_evidence_support(value)
+        return total
+    if isinstance(item, list):
+        return sum(_anchor_evidence_support(value) for value in item)
+    return 0.0
+
+
+def _append_unique_evidence(target: list[dict[str, Any]], items: list[dict[str, Any]]) -> None:
+    seen = {json.dumps(item, ensure_ascii=False, sort_keys=True, default=str) for item in target}
+    for item in items:
+        key = json.dumps(item, ensure_ascii=False, sort_keys=True, default=str)
+        if key in seen:
+            continue
+        seen.add(key)
+        target.append(item)
+
+
+def _anchor_incident_evidence(
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    node_id: str,
+    *,
+    rule: str,
+) -> list[dict[str, Any]]:
+    evidence: list[dict[str, Any]] = []
+    for edge in raw_edges.values():
+        if node_id not in (edge.source, edge.target):
+            continue
+        evidence.append({"rule": rule, "edge": edge.to_dict(), "support": edge.support})
+    return evidence
 
 
 def detect_candidate_sets(
@@ -1158,15 +1662,17 @@ def _build_query_focus(
         bare_wh = _find_bare_wh_root_argument(nodes, raw_edges, query_root_id)
         if bare_wh:
             wh_id, projection_slot_id = bare_wh
-            required = _unique_node_ids([projection_slot_id, query_root_id, wh_id], nodes)
-            return _QueryFocus(
-                answer_anchor_id=answer_anchor_id,
-                query_root_id=query_root_id,
-                slot_id=projection_slot_id,
-                terminal_id=wh_id,
-                required_ids=tuple(required),
-                mode="bare_wh_root_argument",
-            )
+            suffix_id = _bare_wh_temporal_or_modifier_suffix_id(nodes, raw_edges, query_root_id)
+            if nodes[wh_id].text.lower() in {"what", "which"} or suffix_id:
+                required = _unique_node_ids([projection_slot_id, query_root_id, wh_id], nodes)
+                return _QueryFocus(
+                    answer_anchor_id=answer_anchor_id,
+                    query_root_id=query_root_id,
+                    slot_id=projection_slot_id,
+                    terminal_id=wh_id,
+                    required_ids=tuple(required),
+                    mode="bare_wh_root_argument",
+                )
 
     required_ids: list[str] = []
     mode = "answer_anchor"
@@ -2864,6 +3370,60 @@ def _mark_anchors(nodes: dict[str, TokenReasoningNode], entity_ids: list[str], a
         nodes[answer_anchor_id].is_anchor = True
         if nodes[answer_anchor_id].kind == "function" and nodes[answer_anchor_id].text.lower() in WH_WORDS:
             nodes[answer_anchor_id].kind = "answer"
+
+
+def _copy_node_map(nodes: dict[str, TokenReasoningNode]) -> dict[str, TokenReasoningNode]:
+    return {
+        node_id: TokenReasoningNode(
+            id=node.id,
+            text=node.text,
+            index=node.index,
+            kind=node.kind,
+            is_anchor=node.is_anchor,
+        )
+        for node_id, node in nodes.items()
+    }
+
+
+def _copy_working_state(state: _WorkingState) -> _WorkingState:
+    return _WorkingState(
+        nodes=_copy_node_map(state.nodes),
+        raw_edges={key: _copy_edge(edge) for key, edge in state.raw_edges.items()},
+        edges={key: _copy_edge(edge) for key, edge in state.edges.items()},
+        normalized_edges=[dict(item) for item in state.normalized_edges],
+        virtual_edges=[dict(item) for item in state.virtual_edges],
+        warnings=list(state.warnings),
+    )
+
+
+def _merge_constraint_debug_lists(
+    existing: list[dict[str, Any]],
+    incoming: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    result = [dict(item) for item in existing]
+    seen = {json.dumps(item, ensure_ascii=False, sort_keys=True, default=str) for item in result}
+    for item in incoming:
+        key = json.dumps(item, ensure_ascii=False, sort_keys=True, default=str)
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(dict(item))
+    return result
+
+
+def _merge_candidate_set_lists(
+    existing: list[list[str]],
+    incoming: list[list[str]],
+) -> list[list[str]]:
+    result = [list(item) for item in existing]
+    seen = {tuple(item) for item in result}
+    for item in incoming:
+        key = tuple(item)
+        if len(key) < 2 or key in seen:
+            continue
+        seen.add(key)
+        result.append(list(item))
+    return result
 
 
 def _merge_edge(

@@ -1,0 +1,3964 @@
+{
+  "active_entity_anchors": [
+    {
+      "id": "10",
+      "text": "ENTITYA"
+    }
+  ],
+  "aggregated_edges": [
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.35,
+          "dep": "is",
+          "dep_idx": 2,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "ROOT",
+          "head_idx": 0,
+          "label_class": "BRIDGE",
+          "normalized_relation": "root",
+          "relation": "root",
+          "source_weight": 0.85,
+          "support": 0.2975
+        },
+        {
+          "class_weight": 0.35,
+          "dep": "is",
+          "dep_idx": 2,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "ROOT",
+          "head_idx": 0,
+          "label_class": "BRIDGE",
+          "normalized_relation": "root",
+          "relation": "root",
+          "source_weight": 0.9,
+          "support": 0.315
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "0",
+      "source_text": "ROOT",
+      "support": 0.6125,
+      "target": "2",
+      "target_text": "is"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "Who",
+          "dep_idx": 1,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg2",
+          "relation": "ARG2",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "class_weight": 1.0,
+          "dep": "Who",
+          "dep_idx": 1,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "source_weight": 0.85,
+          "support": 0.85
+        },
+        {
+          "class_weight": 1.0,
+          "dep": "Who",
+          "dep_idx": 1,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "act-arg",
+          "relation": "ACT-arg",
+          "source_weight": 0.9,
+          "support": 0.9
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "1",
+      "source_text": "Who",
+      "support": 2.75,
+      "target": "2",
+      "target_text": "is"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg2",
+          "relation": "ARG2",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "class_weight": 1.0,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "source_weight": 0.85,
+          "support": 0.85
+        },
+        {
+          "class_weight": 1.0,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "is",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "act-arg",
+          "relation": "ACT-arg",
+          "source_weight": 0.9,
+          "support": 0.9
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "is",
+      "support": 2.75,
+      "target": "4",
+      "target_text": "spouse"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.35,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "the",
+          "head_idx": 3,
+          "label_class": "BRIDGE",
+          "normalized_relation": "bv",
+          "relation": "BV",
+          "source_weight": 1.0,
+          "support": 0.35
+        },
+        {
+          "class_weight": 0.35,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "the",
+          "head_idx": 3,
+          "label_class": "BRIDGE",
+          "normalized_relation": "det_arg1",
+          "relation": "det_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "3",
+      "source_text": "the",
+      "support": 0.6475,
+      "target": "4",
+      "target_text": "spouse"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "of",
+          "head_idx": 5,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "class_weight": 0.35,
+          "dep": "spouse",
+          "dep_idx": 4,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "of",
+          "head_idx": 5,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg1",
+          "relation": "prep_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "spouse",
+      "support": 1.2974999999999999,
+      "target": "5",
+      "target_text": "of"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.85,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "spouse",
+          "head_idx": 4,
+          "label_class": "IDENTITY",
+          "normalized_relation": "app",
+          "relation": "APP",
+          "source_weight": 0.9,
+          "support": 0.765
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "spouse",
+      "support": 0.765,
+      "target": "7",
+      "target_text": "director"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "of",
+          "head_idx": 5,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg2",
+          "relation": "ARG2",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "class_weight": 0.35,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "of",
+          "head_idx": 5,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg2",
+          "relation": "prep_ARG2",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "5",
+      "source_text": "of",
+      "support": 1.2974999999999999,
+      "target": "7",
+      "target_text": "director"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.35,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "the",
+          "head_idx": 6,
+          "label_class": "BRIDGE",
+          "normalized_relation": "bv",
+          "relation": "BV",
+          "source_weight": 1.0,
+          "support": 0.35
+        },
+        {
+          "class_weight": 0.35,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "the",
+          "head_idx": 6,
+          "label_class": "BRIDGE",
+          "normalized_relation": "det_arg1",
+          "relation": "det_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "the",
+      "support": 0.6475,
+      "target": "7",
+      "target_text": "director"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.35,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "of",
+          "head_idx": 8,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg1",
+          "relation": "prep_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "director",
+      "support": 0.2975,
+      "target": "8",
+      "target_text": "of"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "director",
+          "head_idx": 7,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "source_weight": 1.0,
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "director",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "ENTITYA"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.35,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "of",
+          "head_idx": 8,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg2",
+          "relation": "prep_ARG2",
+          "source_weight": 0.85,
+          "support": 0.2975
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "8",
+      "source_text": "of",
+      "support": 0.2975,
+      "target": "10",
+      "target_text": "ENTITYA"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.25,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "film",
+          "head_idx": 9,
+          "label_class": "MODIFIER",
+          "normalized_relation": "noun_arg1",
+          "relation": "noun_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2125
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "9",
+      "source_text": "film",
+      "support": 0.2125,
+      "target": "10",
+      "target_text": "ENTITYA"
+    }
+  ],
+  "anchors": {
+    "answer_anchor": null,
+    "answer_anchor_id": null,
+    "constraints": [],
+    "entities": [
+      "ENTITYA"
+    ]
+  },
+  "answer_anchor_candidates": [
+    {
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "verb_arg2",
+                    "relation": "verb_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.85
+                  },
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "act-arg",
+                    "relation": "ACT-arg",
+                    "source_weight": 0.9,
+                    "support": 0.9
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "2",
+                "source_text": "is",
+                "support": 2.75,
+                "target": "4",
+                "target_text": "spouse"
+              },
+              "other": "is",
+              "other_id": "2",
+              "rule": "clause_predicate_edge",
+              "support": 2.75
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 1.2974999999999999,
+                "target": "5",
+                "target_text": "of"
+              },
+              "other": "of",
+              "other_id": "5",
+              "rule": "clause_predicate_edge",
+              "support": 1.2974999999999999
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.85,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "spouse",
+                    "head_idx": 4,
+                    "label_class": "IDENTITY",
+                    "normalized_relation": "app",
+                    "relation": "APP",
+                    "source_weight": 0.9,
+                    "support": 0.765
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 0.765,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "director",
+              "other_id": "7",
+              "rule": "clause_predicate_edge",
+              "support": 0.765
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 4.812499999999999
+        }
+      ],
+      "node_id": "4",
+      "score": 14.0,
+      "source_types": [
+        "clause_predicate"
+      ],
+      "text": "spouse"
+    },
+    {
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.85,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "spouse",
+                    "head_idx": 4,
+                    "label_class": "IDENTITY",
+                    "normalized_relation": "app",
+                    "relation": "APP",
+                    "source_weight": 0.9,
+                    "support": 0.765
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 0.765,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "spouse",
+              "other_id": "4",
+              "rule": "clause_predicate_edge",
+              "support": 0.765
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "of",
+                "support": 1.2974999999999999,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "of",
+              "other_id": "5",
+              "rule": "clause_predicate_edge",
+              "support": 1.2974999999999999
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "director",
+                    "head_idx": 7,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 1.0,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "other": "ENTITYA",
+              "other_id": "10",
+              "rule": "clause_predicate_edge",
+              "support": 1.5
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 3.5625
+        }
+      ],
+      "node_id": "7",
+      "score": 14.0,
+      "source_types": [
+        "clause_predicate"
+      ],
+      "text": "director"
+    },
+    {
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.25,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "film",
+                    "head_idx": 9,
+                    "label_class": "MODIFIER",
+                    "normalized_relation": "noun_arg1",
+                    "relation": "noun_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2125
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "9",
+                "source_text": "film",
+                "support": 0.2125,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "other": "ENTITYA",
+              "other_id": "10",
+              "rule": "clause_predicate_edge",
+              "support": 0.7125
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 0.7125
+        }
+      ],
+      "node_id": "9",
+      "score": 13.85,
+      "source_types": [
+        "clause_predicate"
+      ],
+      "text": "film"
+    },
+    {
+      "evidence": [
+        {
+          "incident_evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "director",
+                    "head_idx": 7,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 1.0,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 1.0
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "8",
+                "source_text": "of",
+                "support": 0.2975,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 0.2975
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.25,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "film",
+                    "head_idx": 9,
+                    "label_class": "MODIFIER",
+                    "normalized_relation": "noun_arg1",
+                    "relation": "noun_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2125
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "9",
+                "source_text": "film",
+                "support": 0.2125,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 0.2125
+            }
+          ],
+          "rule": "explicit_entity",
+          "support": 1.5099999999999998
+        }
+      ],
+      "node_id": "10",
+      "score": 7.0,
+      "source_types": [
+        "explicit_entity"
+      ],
+      "text": "ENTITYA"
+    }
+  ],
+  "backbone_after_pruning": {
+    "edges": [
+      {
+        "derived": true,
+        "provenance": [
+          {
+            "class_weight": 0.85,
+            "dep": "director",
+            "dep_idx": 7,
+            "direction": "head_to_dep",
+            "formalism": "sdp/psd",
+            "head": "spouse",
+            "head_idx": 4,
+            "label_class": "IDENTITY",
+            "normalized_relation": "app",
+            "relation": "APP",
+            "source_weight": 0.9,
+            "support": 0.765
+          },
+          {
+            "bridge": "of",
+            "bridge_id": "5",
+            "collapsed_path": [
+              "spouse",
+              "of",
+              "director"
+            ],
+            "rule": "bridge_contraction",
+            "source_edges": [
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 1.2974999999999999,
+                "target": "5",
+                "target_text": "of"
+              },
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "of",
+                "support": 1.2974999999999999,
+                "target": "7",
+                "target_text": "director"
+              }
+            ],
+            "support": 1.038
+          }
+        ],
+        "rule": "bridge_contraction",
+        "source": "7",
+        "source_text": "director",
+        "support": 1.803,
+        "target": "4",
+        "target_text": "spouse"
+      },
+      {
+        "derived": true,
+        "provenance": [
+          {
+            "class_weight": 1.0,
+            "dep": "ENTITYA",
+            "dep_idx": 10,
+            "direction": "head_to_dep",
+            "formalism": "sdp/dm",
+            "head": "director",
+            "head_idx": 7,
+            "label_class": "CORE_ARG",
+            "normalized_relation": "arg1",
+            "relation": "ARG1",
+            "source_weight": 1.0,
+            "support": 1.0
+          },
+          {
+            "bridge": "of",
+            "bridge_id": "8",
+            "collapsed_path": [
+              "director",
+              "of",
+              "ENTITYA"
+            ],
+            "rule": "bridge_contraction",
+            "source_edges": [
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 0.2975,
+                "target": "8",
+                "target_text": "of"
+              },
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "8",
+                "source_text": "of",
+                "support": 0.2975,
+                "target": "10",
+                "target_text": "ENTITYA"
+              }
+            ],
+            "support": 0.238
+          }
+        ],
+        "rule": "bridge_contraction",
+        "source": "10",
+        "source_text": "ENTITYA",
+        "support": 1.238,
+        "target": "7",
+        "target_text": "director"
+      },
+      {
+        "derived": false,
+        "provenance": [
+          {
+            "class_weight": 0.25,
+            "dep": "ENTITYA",
+            "dep_idx": 10,
+            "direction": "head_to_dep",
+            "formalism": "sdp/pas",
+            "head": "film",
+            "head_idx": 9,
+            "label_class": "MODIFIER",
+            "normalized_relation": "noun_arg1",
+            "relation": "noun_ARG1",
+            "source_weight": 0.85,
+            "support": 0.2125
+          }
+        ],
+        "rule": "raw_evidence",
+        "source": "10",
+        "source_text": "ENTITYA",
+        "support": 0.2125,
+        "target": "9",
+        "target_text": "film"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "4",
+        "index": 4,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "spouse"
+      },
+      {
+        "id": "7",
+        "index": 7,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "director"
+      },
+      {
+        "id": "9",
+        "index": 9,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "film"
+      },
+      {
+        "id": "10",
+        "index": 10,
+        "is_anchor": true,
+        "kind": "entity",
+        "text": "ENTITYA"
+      }
+    ]
+  },
+  "backbone_before_pruning": {
+    "edges": [
+      {
+        "derived": true,
+        "provenance": [
+          {
+            "class_weight": 0.85,
+            "dep": "director",
+            "dep_idx": 7,
+            "direction": "head_to_dep",
+            "formalism": "sdp/psd",
+            "head": "spouse",
+            "head_idx": 4,
+            "label_class": "IDENTITY",
+            "normalized_relation": "app",
+            "relation": "APP",
+            "source_weight": 0.9,
+            "support": 0.765
+          },
+          {
+            "bridge": "of",
+            "bridge_id": "5",
+            "collapsed_path": [
+              "spouse",
+              "of",
+              "director"
+            ],
+            "rule": "bridge_contraction",
+            "source_edges": [
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 1.2974999999999999,
+                "target": "5",
+                "target_text": "of"
+              },
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "of",
+                "support": 1.2974999999999999,
+                "target": "7",
+                "target_text": "director"
+              }
+            ],
+            "support": 1.038
+          }
+        ],
+        "rule": "bridge_contraction",
+        "source": "7",
+        "source_text": "director",
+        "support": 1.803,
+        "target": "4",
+        "target_text": "spouse"
+      },
+      {
+        "derived": true,
+        "provenance": [
+          {
+            "class_weight": 1.0,
+            "dep": "ENTITYA",
+            "dep_idx": 10,
+            "direction": "head_to_dep",
+            "formalism": "sdp/dm",
+            "head": "director",
+            "head_idx": 7,
+            "label_class": "CORE_ARG",
+            "normalized_relation": "arg1",
+            "relation": "ARG1",
+            "source_weight": 1.0,
+            "support": 1.0
+          },
+          {
+            "bridge": "of",
+            "bridge_id": "8",
+            "collapsed_path": [
+              "director",
+              "of",
+              "ENTITYA"
+            ],
+            "rule": "bridge_contraction",
+            "source_edges": [
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 0.2975,
+                "target": "8",
+                "target_text": "of"
+              },
+              {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "8",
+                "source_text": "of",
+                "support": 0.2975,
+                "target": "10",
+                "target_text": "ENTITYA"
+              }
+            ],
+            "support": 0.238
+          }
+        ],
+        "rule": "bridge_contraction",
+        "source": "10",
+        "source_text": "ENTITYA",
+        "support": 1.238,
+        "target": "7",
+        "target_text": "director"
+      },
+      {
+        "derived": false,
+        "provenance": [
+          {
+            "class_weight": 0.25,
+            "dep": "ENTITYA",
+            "dep_idx": 10,
+            "direction": "head_to_dep",
+            "formalism": "sdp/pas",
+            "head": "film",
+            "head_idx": 9,
+            "label_class": "MODIFIER",
+            "normalized_relation": "noun_arg1",
+            "relation": "noun_ARG1",
+            "source_weight": 0.85,
+            "support": 0.2125
+          }
+        ],
+        "rule": "raw_evidence",
+        "source": "10",
+        "source_text": "ENTITYA",
+        "support": 0.2125,
+        "target": "9",
+        "target_text": "film"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "4",
+        "index": 4,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "spouse"
+      },
+      {
+        "id": "7",
+        "index": 7,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "director"
+      },
+      {
+        "id": "9",
+        "index": 9,
+        "is_anchor": true,
+        "kind": "content",
+        "text": "film"
+      },
+      {
+        "id": "10",
+        "index": 10,
+        "is_anchor": true,
+        "kind": "entity",
+        "text": "ENTITYA"
+      }
+    ]
+  },
+  "candidate_paths": [],
+  "candidate_sets": [],
+  "entity_candidates": [
+    {
+      "id": "10",
+      "text": "ENTITYA"
+    }
+  ],
+  "explicit_entities": [
+    "ENTITYA"
+  ],
+  "final_edges": [
+    {
+      "derived": true,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "director",
+          "head_idx": 7,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "bridge": "of",
+          "bridge_id": "8",
+          "collapsed_path": [
+            "director",
+            "of",
+            "ENTITYA"
+          ],
+          "rule": "bridge_contraction",
+          "source_edges": [
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 0.35,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 8,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg1",
+                  "relation": "prep_ARG1",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "7",
+              "source_text": "director",
+              "support": 0.2975,
+              "target": "8",
+              "target_text": "of"
+            },
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 0.35,
+                  "dep": "ENTITYA",
+                  "dep_idx": 10,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 8,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg2",
+                  "relation": "prep_ARG2",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "8",
+              "source_text": "of",
+              "support": 0.2975,
+              "target": "10",
+              "target_text": "ENTITYA"
+            }
+          ],
+          "support": 0.238
+        }
+      ],
+      "rule": "bridge_contraction",
+      "source": "10",
+      "source_text": "ENTITYA",
+      "support": 1.238,
+      "target": "7",
+      "target_text": "director"
+    },
+    {
+      "derived": false,
+      "provenance": [
+        {
+          "class_weight": 0.25,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/pas",
+          "head": "film",
+          "head_idx": 9,
+          "label_class": "MODIFIER",
+          "normalized_relation": "noun_arg1",
+          "relation": "noun_ARG1",
+          "source_weight": 0.85,
+          "support": 0.2125
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "10",
+      "source_text": "ENTITYA",
+      "support": 0.2125,
+      "target": "9",
+      "target_text": "film"
+    },
+    {
+      "derived": true,
+      "provenance": [
+        {
+          "class_weight": 0.85,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "spouse",
+          "head_idx": 4,
+          "label_class": "IDENTITY",
+          "normalized_relation": "app",
+          "relation": "APP",
+          "source_weight": 0.9,
+          "support": 0.765
+        },
+        {
+          "bridge": "of",
+          "bridge_id": "5",
+          "collapsed_path": [
+            "spouse",
+            "of",
+            "director"
+          ],
+          "rule": "bridge_contraction",
+          "source_edges": [
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 1.0,
+                  "dep": "spouse",
+                  "dep_idx": 4,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/dm",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg1",
+                  "relation": "ARG1",
+                  "source_weight": 1.0,
+                  "support": 1.0
+                },
+                {
+                  "class_weight": 0.35,
+                  "dep": "spouse",
+                  "dep_idx": 4,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg1",
+                  "relation": "prep_ARG1",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "4",
+              "source_text": "spouse",
+              "support": 1.2974999999999999,
+              "target": "5",
+              "target_text": "of"
+            },
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 1.0,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/dm",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg2",
+                  "relation": "ARG2",
+                  "source_weight": 1.0,
+                  "support": 1.0
+                },
+                {
+                  "class_weight": 0.35,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg2",
+                  "relation": "prep_ARG2",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "5",
+              "source_text": "of",
+              "support": 1.2974999999999999,
+              "target": "7",
+              "target_text": "director"
+            }
+          ],
+          "support": 1.038
+        }
+      ],
+      "rule": "bridge_contraction",
+      "source": "7",
+      "source_text": "director",
+      "support": 1.803,
+      "target": "4",
+      "target_text": "spouse"
+    }
+  ],
+  "final_nodes": [
+    {
+      "id": "4",
+      "index": 4,
+      "is_anchor": true,
+      "kind": "content",
+      "text": "spouse"
+    },
+    {
+      "id": "7",
+      "index": 7,
+      "is_anchor": true,
+      "kind": "content",
+      "text": "director"
+    },
+    {
+      "id": "9",
+      "index": 9,
+      "is_anchor": true,
+      "kind": "content",
+      "text": "film"
+    },
+    {
+      "id": "10",
+      "index": 10,
+      "is_anchor": true,
+      "kind": "entity",
+      "text": "ENTITYA"
+    }
+  ],
+  "masked_question": "Who is the spouse of the director of film ENTITYA?",
+  "normalized_evidence_edges": [
+    {
+      "class_weight": 1.0,
+      "dep": "Who",
+      "dep_idx": 1,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg2",
+      "relation": "ARG2",
+      "source_weight": 1.0,
+      "support": 1.0
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg2",
+      "relation": "ARG2",
+      "source_weight": 1.0,
+      "support": 1.0
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 3,
+      "label_class": "BRIDGE",
+      "normalized_relation": "bv",
+      "relation": "BV",
+      "source_weight": 1.0,
+      "support": 0.35
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 5,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg1",
+      "relation": "ARG1",
+      "source_weight": 1.0,
+      "support": 1.0
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 5,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg2",
+      "relation": "ARG2",
+      "source_weight": 1.0,
+      "support": 1.0
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 6,
+      "label_class": "BRIDGE",
+      "normalized_relation": "bv",
+      "relation": "BV",
+      "source_weight": 1.0,
+      "support": 0.35
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "direction": "head_to_dep",
+      "formalism": "sdp/dm",
+      "head": "director",
+      "head_idx": 7,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg1",
+      "relation": "ARG1",
+      "source_weight": 1.0,
+      "support": 1.0
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "Who",
+      "dep_idx": 1,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "source_weight": 0.85,
+      "support": 0.85
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "is",
+      "dep_idx": 2,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "label_class": "BRIDGE",
+      "normalized_relation": "root",
+      "relation": "root",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg2",
+      "relation": "verb_ARG2",
+      "source_weight": 0.85,
+      "support": 0.85
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 3,
+      "label_class": "BRIDGE",
+      "normalized_relation": "det_arg1",
+      "relation": "det_ARG1",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 5,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg1",
+      "relation": "prep_ARG1",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 5,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg2",
+      "relation": "prep_ARG2",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 6,
+      "label_class": "BRIDGE",
+      "normalized_relation": "det_arg1",
+      "relation": "det_ARG1",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 8,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg1",
+      "relation": "prep_ARG1",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 8,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg2",
+      "relation": "prep_ARG2",
+      "source_weight": 0.85,
+      "support": 0.2975
+    },
+    {
+      "class_weight": 0.25,
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "direction": "head_to_dep",
+      "formalism": "sdp/pas",
+      "head": "film",
+      "head_idx": 9,
+      "label_class": "MODIFIER",
+      "normalized_relation": "noun_arg1",
+      "relation": "noun_ARG1",
+      "source_weight": 0.85,
+      "support": 0.2125
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "Who",
+      "dep_idx": 1,
+      "direction": "head_to_dep",
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "act-arg",
+      "relation": "ACT-arg",
+      "source_weight": 0.9,
+      "support": 0.9
+    },
+    {
+      "class_weight": 0.35,
+      "dep": "is",
+      "dep_idx": 2,
+      "direction": "head_to_dep",
+      "formalism": "sdp/psd",
+      "head": "ROOT",
+      "head_idx": 0,
+      "label_class": "BRIDGE",
+      "normalized_relation": "root",
+      "relation": "root",
+      "source_weight": 0.9,
+      "support": 0.315
+    },
+    {
+      "class_weight": 1.0,
+      "dep": "spouse",
+      "dep_idx": 4,
+      "direction": "head_to_dep",
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "act-arg",
+      "relation": "ACT-arg",
+      "source_weight": 0.9,
+      "support": 0.9
+    },
+    {
+      "class_weight": 0.85,
+      "dep": "director",
+      "dep_idx": 7,
+      "direction": "head_to_dep",
+      "formalism": "sdp/psd",
+      "head": "spouse",
+      "head_idx": 4,
+      "label_class": "IDENTITY",
+      "normalized_relation": "app",
+      "relation": "APP",
+      "source_weight": 0.9,
+      "support": 0.765
+    }
+  ],
+  "parallel_entity_sets": [],
+  "paths": [
+    {
+      "node_ids": [
+        "10",
+        "7",
+        "4"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "director",
+        "spouse"
+      ],
+      "path_id": "A1.P1"
+    },
+    {
+      "node_ids": [
+        "10",
+        "7"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "director"
+      ],
+      "path_id": "A2.P1"
+    },
+    {
+      "node_ids": [
+        "10",
+        "9"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "film"
+      ],
+      "path_id": "A3.P1"
+    },
+    {
+      "node_ids": [
+        "10"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A4.P1"
+    }
+  ],
+  "per_anchor_results": [
+    {
+      "anchor_id": "4",
+      "anchor_text": "spouse",
+      "candidate_paths": [
+        {
+          "node_ids": [
+            "10",
+            "7",
+            "4"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "director",
+            "spouse"
+          ],
+          "rank_components": {
+            "descriptor_lifting_count": 0,
+            "evidence_cost": 1.662386,
+            "function_node_count": 0,
+            "low_salience_prefix_length": 0,
+            "missing_required_focus_count": 0,
+            "path_length": 3,
+            "source_entry_tier": 0,
+            "token_index_tuple": [
+              10,
+              7,
+              4
+            ],
+            "total_derived_penalty": 0.3
+          },
+          "search_pass": "strong",
+          "selected": true,
+          "source_entity": "ENTITYA",
+          "source_entity_id": "10"
+        }
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "verb_arg2",
+                    "relation": "verb_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.85
+                  },
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 2,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "act-arg",
+                    "relation": "ACT-arg",
+                    "source_weight": 0.9,
+                    "support": 0.9
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "2",
+                "source_text": "is",
+                "support": 2.75,
+                "target": "4",
+                "target_text": "spouse"
+              },
+              "other": "is",
+              "other_id": "2",
+              "rule": "clause_predicate_edge",
+              "support": 2.75
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "spouse",
+                    "dep_idx": 4,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 1.2974999999999999,
+                "target": "5",
+                "target_text": "of"
+              },
+              "other": "of",
+              "other_id": "5",
+              "rule": "clause_predicate_edge",
+              "support": 1.2974999999999999
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.85,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "spouse",
+                    "head_idx": 4,
+                    "label_class": "IDENTITY",
+                    "normalized_relation": "app",
+                    "relation": "APP",
+                    "source_weight": 0.9,
+                    "support": 0.765
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 0.765,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "director",
+              "other_id": "7",
+              "rule": "clause_predicate_edge",
+              "support": 0.765
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 4.812499999999999
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "single_main_path",
+      "paths": [
+        {
+          "node_ids": [
+            "10",
+            "7",
+            "4"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "director",
+            "spouse"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "spouse",
+        "answer_anchor_id": "4",
+        "mode": "answer_anchor",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "spouse"
+        ],
+        "required_ids": [
+          "4"
+        ],
+        "slot": null,
+        "slot_id": null,
+        "terminal": "spouse",
+        "terminal_id": "4"
+      },
+      "score": 14.0,
+      "selection_mode": "single_main_path",
+      "source_types": [
+        "clause_predicate"
+      ],
+      "virtual_edges": [
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 0.85,
+              "dep": "director",
+              "dep_idx": 7,
+              "direction": "head_to_dep",
+              "formalism": "sdp/psd",
+              "head": "spouse",
+              "head_idx": 4,
+              "label_class": "IDENTITY",
+              "normalized_relation": "app",
+              "relation": "APP",
+              "source_weight": 0.9,
+              "support": 0.765
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "5",
+              "collapsed_path": [
+                "spouse",
+                "of",
+                "director"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "4",
+                  "source_text": "spouse",
+                  "support": 1.2974999999999999,
+                  "target": "5",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg2",
+                      "relation": "ARG2",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "5",
+                  "source_text": "of",
+                  "support": 1.2974999999999999,
+                  "target": "7",
+                  "target_text": "director"
+                }
+              ],
+              "support": 1.038
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "4",
+          "source_text": "spouse",
+          "support": 1.803,
+          "target": "7",
+          "target_text": "director"
+        },
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 1.0,
+              "dep": "ENTITYA",
+              "dep_idx": 10,
+              "direction": "head_to_dep",
+              "formalism": "sdp/dm",
+              "head": "director",
+              "head_idx": 7,
+              "label_class": "CORE_ARG",
+              "normalized_relation": "arg1",
+              "relation": "ARG1",
+              "source_weight": 1.0,
+              "support": 1.0
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "8",
+              "collapsed_path": [
+                "director",
+                "of",
+                "ENTITYA"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "7",
+                  "source_text": "director",
+                  "support": 0.2975,
+                  "target": "8",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "ENTITYA",
+                      "dep_idx": 10,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "8",
+                  "source_text": "of",
+                  "support": 0.2975,
+                  "target": "10",
+                  "target_text": "ENTITYA"
+                }
+              ],
+              "support": 0.238
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "7",
+          "source_text": "director",
+          "support": 1.238,
+          "target": "10",
+          "target_text": "ENTITYA"
+        }
+      ]
+    },
+    {
+      "anchor_id": "7",
+      "anchor_text": "director",
+      "candidate_paths": [
+        {
+          "node_ids": [
+            "10",
+            "7"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "director"
+          ],
+          "rank_components": {
+            "descriptor_lifting_count": 0,
+            "evidence_cost": 0.957754,
+            "function_node_count": 0,
+            "low_salience_prefix_length": 0,
+            "missing_required_focus_count": 0,
+            "path_length": 2,
+            "source_entry_tier": 0,
+            "token_index_tuple": [
+              10,
+              7
+            ],
+            "total_derived_penalty": 0.15
+          },
+          "search_pass": "strong",
+          "selected": true,
+          "source_entity": "ENTITYA",
+          "source_entity_id": "10"
+        }
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.85,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/psd",
+                    "head": "spouse",
+                    "head_idx": 4,
+                    "label_class": "IDENTITY",
+                    "normalized_relation": "app",
+                    "relation": "APP",
+                    "source_weight": 0.9,
+                    "support": 0.765
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "4",
+                "source_text": "spouse",
+                "support": 0.765,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "spouse",
+              "other_id": "4",
+              "rule": "clause_predicate_edge",
+              "support": 0.765
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg2",
+                    "relation": "ARG2",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  },
+                  {
+                    "class_weight": 0.35,
+                    "dep": "director",
+                    "dep_idx": 7,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 5,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "of",
+                "support": 1.2974999999999999,
+                "target": "7",
+                "target_text": "director"
+              },
+              "other": "of",
+              "other_id": "5",
+              "rule": "clause_predicate_edge",
+              "support": 1.2974999999999999
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "director",
+                    "head_idx": 7,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 1.0,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "other": "ENTITYA",
+              "other_id": "10",
+              "rule": "clause_predicate_edge",
+              "support": 1.5
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 3.5625
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "single_main_path",
+      "paths": [
+        {
+          "node_ids": [
+            "10",
+            "7"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "director"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "director",
+        "answer_anchor_id": "7",
+        "mode": "answer_anchor",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "director"
+        ],
+        "required_ids": [
+          "7"
+        ],
+        "slot": null,
+        "slot_id": null,
+        "terminal": "director",
+        "terminal_id": "7"
+      },
+      "score": 14.0,
+      "selection_mode": "single_main_path",
+      "source_types": [
+        "clause_predicate"
+      ],
+      "virtual_edges": [
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 0.85,
+              "dep": "director",
+              "dep_idx": 7,
+              "direction": "head_to_dep",
+              "formalism": "sdp/psd",
+              "head": "spouse",
+              "head_idx": 4,
+              "label_class": "IDENTITY",
+              "normalized_relation": "app",
+              "relation": "APP",
+              "source_weight": 0.9,
+              "support": 0.765
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "5",
+              "collapsed_path": [
+                "spouse",
+                "of",
+                "director"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "4",
+                  "source_text": "spouse",
+                  "support": 1.2974999999999999,
+                  "target": "5",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg2",
+                      "relation": "ARG2",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "5",
+                  "source_text": "of",
+                  "support": 1.2974999999999999,
+                  "target": "7",
+                  "target_text": "director"
+                }
+              ],
+              "support": 1.038
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "4",
+          "source_text": "spouse",
+          "support": 1.803,
+          "target": "7",
+          "target_text": "director"
+        },
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 1.0,
+              "dep": "ENTITYA",
+              "dep_idx": 10,
+              "direction": "head_to_dep",
+              "formalism": "sdp/dm",
+              "head": "director",
+              "head_idx": 7,
+              "label_class": "CORE_ARG",
+              "normalized_relation": "arg1",
+              "relation": "ARG1",
+              "source_weight": 1.0,
+              "support": 1.0
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "8",
+              "collapsed_path": [
+                "director",
+                "of",
+                "ENTITYA"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "7",
+                  "source_text": "director",
+                  "support": 0.2975,
+                  "target": "8",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "ENTITYA",
+                      "dep_idx": 10,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "8",
+                  "source_text": "of",
+                  "support": 0.2975,
+                  "target": "10",
+                  "target_text": "ENTITYA"
+                }
+              ],
+              "support": 0.238
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "7",
+          "source_text": "director",
+          "support": 1.238,
+          "target": "10",
+          "target_text": "ENTITYA"
+        }
+      ]
+    },
+    {
+      "anchor_id": "9",
+      "anchor_text": "film",
+      "candidate_paths": [
+        {
+          "node_ids": [
+            "10",
+            "9"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "film"
+          ],
+          "rank_components": {
+            "descriptor_lifting_count": 0,
+            "evidence_cost": 4.705882,
+            "function_node_count": 0,
+            "low_salience_prefix_length": 1,
+            "missing_required_focus_count": 0,
+            "path_length": 2,
+            "source_entry_tier": 2,
+            "token_index_tuple": [
+              10,
+              9
+            ],
+            "total_derived_penalty": 0.0
+          },
+          "search_pass": "strong",
+          "selected": true,
+          "source_entity": "ENTITYA",
+          "source_entity_id": "10"
+        }
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.25,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "film",
+                    "head_idx": 9,
+                    "label_class": "MODIFIER",
+                    "normalized_relation": "noun_arg1",
+                    "relation": "noun_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2125
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "9",
+                "source_text": "film",
+                "support": 0.2125,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "other": "ENTITYA",
+              "other_id": "10",
+              "rule": "clause_predicate_edge",
+              "support": 0.7125
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 0.7125
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "single_main_path",
+      "paths": [
+        {
+          "node_ids": [
+            "10",
+            "9"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "film"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "film",
+        "answer_anchor_id": "9",
+        "mode": "answer_anchor",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "film"
+        ],
+        "required_ids": [
+          "9"
+        ],
+        "slot": null,
+        "slot_id": null,
+        "terminal": "film",
+        "terminal_id": "9"
+      },
+      "score": 13.85,
+      "selection_mode": "single_main_path",
+      "source_types": [
+        "clause_predicate"
+      ],
+      "virtual_edges": [
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 0.85,
+              "dep": "director",
+              "dep_idx": 7,
+              "direction": "head_to_dep",
+              "formalism": "sdp/psd",
+              "head": "spouse",
+              "head_idx": 4,
+              "label_class": "IDENTITY",
+              "normalized_relation": "app",
+              "relation": "APP",
+              "source_weight": 0.9,
+              "support": 0.765
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "5",
+              "collapsed_path": [
+                "spouse",
+                "of",
+                "director"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "4",
+                  "source_text": "spouse",
+                  "support": 1.2974999999999999,
+                  "target": "5",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg2",
+                      "relation": "ARG2",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "5",
+                  "source_text": "of",
+                  "support": 1.2974999999999999,
+                  "target": "7",
+                  "target_text": "director"
+                }
+              ],
+              "support": 1.038
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "4",
+          "source_text": "spouse",
+          "support": 1.803,
+          "target": "7",
+          "target_text": "director"
+        },
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 1.0,
+              "dep": "ENTITYA",
+              "dep_idx": 10,
+              "direction": "head_to_dep",
+              "formalism": "sdp/dm",
+              "head": "director",
+              "head_idx": 7,
+              "label_class": "CORE_ARG",
+              "normalized_relation": "arg1",
+              "relation": "ARG1",
+              "source_weight": 1.0,
+              "support": 1.0
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "8",
+              "collapsed_path": [
+                "director",
+                "of",
+                "ENTITYA"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "7",
+                  "source_text": "director",
+                  "support": 0.2975,
+                  "target": "8",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "ENTITYA",
+                      "dep_idx": 10,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "8",
+                  "source_text": "of",
+                  "support": 0.2975,
+                  "target": "10",
+                  "target_text": "ENTITYA"
+                }
+              ],
+              "support": 0.238
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "7",
+          "source_text": "director",
+          "support": 1.238,
+          "target": "10",
+          "target_text": "ENTITYA"
+        }
+      ]
+    },
+    {
+      "anchor_id": "10",
+      "anchor_text": "ENTITYA",
+      "candidate_paths": [
+        {
+          "node_ids": [
+            "10"
+          ],
+          "nodes": [
+            "ENTITYA"
+          ],
+          "rank_components": {
+            "descriptor_lifting_count": 0,
+            "evidence_cost": 0.0,
+            "function_node_count": 0,
+            "low_salience_prefix_length": 0,
+            "missing_required_focus_count": 0,
+            "path_length": 1,
+            "source_entry_tier": 3,
+            "token_index_tuple": [
+              10
+            ],
+            "total_derived_penalty": 0.0
+          },
+          "search_pass": "strong",
+          "selected": true,
+          "source_entity": "ENTITYA",
+          "source_entity_id": "10"
+        }
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "incident_evidence": [
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 1.0,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/dm",
+                    "head": "director",
+                    "head_idx": 7,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "source_weight": 1.0,
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "7",
+                "source_text": "director",
+                "support": 1.0,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 1.0
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.35,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 8,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg2",
+                    "relation": "prep_ARG2",
+                    "source_weight": 0.85,
+                    "support": 0.2975
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "8",
+                "source_text": "of",
+                "support": 0.2975,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 0.2975
+            },
+            {
+              "edge": {
+                "derived": false,
+                "provenance": [
+                  {
+                    "class_weight": 0.25,
+                    "dep": "ENTITYA",
+                    "dep_idx": 10,
+                    "direction": "head_to_dep",
+                    "formalism": "sdp/pas",
+                    "head": "film",
+                    "head_idx": 9,
+                    "label_class": "MODIFIER",
+                    "normalized_relation": "noun_arg1",
+                    "relation": "noun_ARG1",
+                    "source_weight": 0.85,
+                    "support": 0.2125
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "9",
+                "source_text": "film",
+                "support": 0.2125,
+                "target": "10",
+                "target_text": "ENTITYA"
+              },
+              "rule": "explicit_entity",
+              "support": 0.2125
+            }
+          ],
+          "rule": "explicit_entity",
+          "support": 1.5099999999999998
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "single_main_path",
+      "paths": [
+        {
+          "node_ids": [
+            "10"
+          ],
+          "nodes": [
+            "ENTITYA"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "ENTITYA",
+        "answer_anchor_id": "10",
+        "mode": "answer_anchor",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "ENTITYA"
+        ],
+        "required_ids": [
+          "10"
+        ],
+        "slot": null,
+        "slot_id": null,
+        "terminal": "ENTITYA",
+        "terminal_id": "10"
+      },
+      "score": 7.0,
+      "selection_mode": "single_main_path",
+      "source_types": [
+        "explicit_entity"
+      ],
+      "virtual_edges": [
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 0.85,
+              "dep": "director",
+              "dep_idx": 7,
+              "direction": "head_to_dep",
+              "formalism": "sdp/psd",
+              "head": "spouse",
+              "head_idx": 4,
+              "label_class": "IDENTITY",
+              "normalized_relation": "app",
+              "relation": "APP",
+              "source_weight": 0.9,
+              "support": 0.765
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "5",
+              "collapsed_path": [
+                "spouse",
+                "of",
+                "director"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "spouse",
+                      "dep_idx": 4,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "4",
+                  "source_text": "spouse",
+                  "support": 1.2974999999999999,
+                  "target": "5",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 1.0,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/dm",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg2",
+                      "relation": "ARG2",
+                      "source_weight": 1.0,
+                      "support": 1.0
+                    },
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 5,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "5",
+                  "source_text": "of",
+                  "support": 1.2974999999999999,
+                  "target": "7",
+                  "target_text": "director"
+                }
+              ],
+              "support": 1.038
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "4",
+          "source_text": "spouse",
+          "support": 1.803,
+          "target": "7",
+          "target_text": "director"
+        },
+        {
+          "derived": true,
+          "provenance": [
+            {
+              "class_weight": 1.0,
+              "dep": "ENTITYA",
+              "dep_idx": 10,
+              "direction": "head_to_dep",
+              "formalism": "sdp/dm",
+              "head": "director",
+              "head_idx": 7,
+              "label_class": "CORE_ARG",
+              "normalized_relation": "arg1",
+              "relation": "ARG1",
+              "source_weight": 1.0,
+              "support": 1.0
+            },
+            {
+              "bridge": "of",
+              "bridge_id": "8",
+              "collapsed_path": [
+                "director",
+                "of",
+                "ENTITYA"
+              ],
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "director",
+                      "dep_idx": 7,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg1",
+                      "relation": "prep_ARG1",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "7",
+                  "source_text": "director",
+                  "support": 0.2975,
+                  "target": "8",
+                  "target_text": "of"
+                },
+                {
+                  "derived": false,
+                  "provenance": [
+                    {
+                      "class_weight": 0.35,
+                      "dep": "ENTITYA",
+                      "dep_idx": 10,
+                      "direction": "head_to_dep",
+                      "formalism": "sdp/pas",
+                      "head": "of",
+                      "head_idx": 8,
+                      "label_class": "BRIDGE",
+                      "normalized_relation": "prep_arg2",
+                      "relation": "prep_ARG2",
+                      "source_weight": 0.85,
+                      "support": 0.2975
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "8",
+                  "source_text": "of",
+                  "support": 0.2975,
+                  "target": "10",
+                  "target_text": "ENTITYA"
+                }
+              ],
+              "support": 0.238
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "7",
+          "source_text": "director",
+          "support": 1.238,
+          "target": "10",
+          "target_text": "ENTITYA"
+        }
+      ]
+    }
+  ],
+  "query_focus": null,
+  "question_id": "q1",
+  "raw_sdp_edges": [
+    {
+      "dep": "Who",
+      "dep_idx": 1,
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "ARG2"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "ARG2"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 3,
+      "relation": "BV"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 5,
+      "relation": "ARG1"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 5,
+      "relation": "ARG2"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 6,
+      "relation": "BV"
+    },
+    {
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "formalism": "sdp/dm",
+      "head": "director",
+      "head_idx": 7,
+      "relation": "ARG1"
+    },
+    {
+      "dep": "Who",
+      "dep_idx": 1,
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "is",
+      "dep_idx": 2,
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "relation": "root"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "verb_ARG2"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 3,
+      "relation": "det_ARG1"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 5,
+      "relation": "prep_ARG1"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 5,
+      "relation": "prep_ARG2"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 6,
+      "relation": "det_ARG1"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 8,
+      "relation": "prep_ARG1"
+    },
+    {
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 8,
+      "relation": "prep_ARG2"
+    },
+    {
+      "dep": "ENTITYA",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "film",
+      "head_idx": 9,
+      "relation": "noun_ARG1"
+    },
+    {
+      "dep": "Who",
+      "dep_idx": 1,
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "ACT-arg"
+    },
+    {
+      "dep": "is",
+      "dep_idx": 2,
+      "formalism": "sdp/psd",
+      "head": "ROOT",
+      "head_idx": 0,
+      "relation": "root"
+    },
+    {
+      "dep": "spouse",
+      "dep_idx": 4,
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 2,
+      "relation": "ACT-arg"
+    },
+    {
+      "dep": "director",
+      "dep_idx": 7,
+      "formalism": "sdp/psd",
+      "head": "spouse",
+      "head_idx": 4,
+      "relation": "APP"
+    }
+  ],
+  "selected_paths": [
+    {
+      "node_ids": [
+        "10",
+        "7",
+        "4"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "director",
+        "spouse"
+      ],
+      "path_id": "A1.P1"
+    },
+    {
+      "node_ids": [
+        "10",
+        "7"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "director"
+      ],
+      "path_id": "A2.P1"
+    },
+    {
+      "node_ids": [
+        "10",
+        "9"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "film"
+      ],
+      "path_id": "A3.P1"
+    },
+    {
+      "node_ids": [
+        "10"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A4.P1"
+    }
+  ],
+  "selection_mode": "multi_anchor_candidates",
+  "terminals": [],
+  "tokens": [
+    "Who",
+    "is",
+    "the",
+    "spouse",
+    "of",
+    "the",
+    "director",
+    "of",
+    "film",
+    "ENTITYA",
+    "?"
+  ],
+  "virtual_edges": [
+    {
+      "derived": true,
+      "provenance": [
+        {
+          "class_weight": 0.85,
+          "dep": "director",
+          "dep_idx": 7,
+          "direction": "head_to_dep",
+          "formalism": "sdp/psd",
+          "head": "spouse",
+          "head_idx": 4,
+          "label_class": "IDENTITY",
+          "normalized_relation": "app",
+          "relation": "APP",
+          "source_weight": 0.9,
+          "support": 0.765
+        },
+        {
+          "bridge": "of",
+          "bridge_id": "5",
+          "collapsed_path": [
+            "spouse",
+            "of",
+            "director"
+          ],
+          "rule": "bridge_contraction",
+          "source_edges": [
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 1.0,
+                  "dep": "spouse",
+                  "dep_idx": 4,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/dm",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg1",
+                  "relation": "ARG1",
+                  "source_weight": 1.0,
+                  "support": 1.0
+                },
+                {
+                  "class_weight": 0.35,
+                  "dep": "spouse",
+                  "dep_idx": 4,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg1",
+                  "relation": "prep_ARG1",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "4",
+              "source_text": "spouse",
+              "support": 1.2974999999999999,
+              "target": "5",
+              "target_text": "of"
+            },
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 1.0,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/dm",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg2",
+                  "relation": "ARG2",
+                  "source_weight": 1.0,
+                  "support": 1.0
+                },
+                {
+                  "class_weight": 0.35,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 5,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg2",
+                  "relation": "prep_ARG2",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "5",
+              "source_text": "of",
+              "support": 1.2974999999999999,
+              "target": "7",
+              "target_text": "director"
+            }
+          ],
+          "support": 1.038
+        }
+      ],
+      "rule": "bridge_contraction",
+      "source": "4",
+      "source_text": "spouse",
+      "support": 1.803,
+      "target": "7",
+      "target_text": "director"
+    },
+    {
+      "derived": true,
+      "provenance": [
+        {
+          "class_weight": 1.0,
+          "dep": "ENTITYA",
+          "dep_idx": 10,
+          "direction": "head_to_dep",
+          "formalism": "sdp/dm",
+          "head": "director",
+          "head_idx": 7,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "source_weight": 1.0,
+          "support": 1.0
+        },
+        {
+          "bridge": "of",
+          "bridge_id": "8",
+          "collapsed_path": [
+            "director",
+            "of",
+            "ENTITYA"
+          ],
+          "rule": "bridge_contraction",
+          "source_edges": [
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 0.35,
+                  "dep": "director",
+                  "dep_idx": 7,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 8,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg1",
+                  "relation": "prep_ARG1",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "7",
+              "source_text": "director",
+              "support": 0.2975,
+              "target": "8",
+              "target_text": "of"
+            },
+            {
+              "derived": false,
+              "provenance": [
+                {
+                  "class_weight": 0.35,
+                  "dep": "ENTITYA",
+                  "dep_idx": 10,
+                  "direction": "head_to_dep",
+                  "formalism": "sdp/pas",
+                  "head": "of",
+                  "head_idx": 8,
+                  "label_class": "BRIDGE",
+                  "normalized_relation": "prep_arg2",
+                  "relation": "prep_ARG2",
+                  "source_weight": 0.85,
+                  "support": 0.2975
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "8",
+              "source_text": "of",
+              "support": 0.2975,
+              "target": "10",
+              "target_text": "ENTITYA"
+            }
+          ],
+          "support": 0.238
+        }
+      ],
+      "rule": "bridge_contraction",
+      "source": "7",
+      "source_text": "director",
+      "support": 1.238,
+      "target": "10",
+      "target_text": "ENTITYA"
+    }
+  ],
+  "warnings": [
+    "answer anchor candidates collected: spouse[4]/clause_predicate, director[7]/clause_predicate, film[9]/clause_predicate, ENTITYA[10]/explicit_entity"
+  ]
+}

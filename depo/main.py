@@ -37,7 +37,8 @@ def parse_args() -> argparse.Namespace:
         default="debug/hanlp_sdp",
         help="Directory for HanLP Tri-SDP debug JSON files when --debug is enabled.",
     )
-    parser.add_argument("--skip-step5", action="store_true", help="Run only entity masking, HanLP SDP parsing, and Step4.")
+    parser.add_argument("--skip-step5", action="store_true", help="Compatibility flag; Step5 is skipped by default.")
+    parser.add_argument("--run-step5", action="store_true", help="Run Step5 DAG generation after Step4.")
     return parser.parse_args()
 
 
@@ -55,7 +56,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
             "This HanLP SDP branch requires LLM calls for explicit entity masking and Step5 DAG generation.",
             file=sys.stderr,
         )
-        print("Set OPENAI_API_KEY or pass --api-key. --skip-step5 only disables the Step5 LLM call.", file=sys.stderr)
+        print("Set OPENAI_API_KEY or pass --api-key. Step5 is disabled by default while debugging Step4.", file=sys.stderr)
         return 2
 
     try:
@@ -81,6 +82,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
                 debug_dir=args.debug_dir,
                 llm_client=llm_client,
                 skip_step5=args.skip_step5,
+                run_step5=args.run_step5,
             )
             print_hanlp_sdp_result(index, record, result, debug=args.debug)
     except ModuleNotFoundError as exc:
@@ -106,8 +108,8 @@ def run_hanlp_sdp_pipeline(
     debug_dir: str | None = None,
     llm_client: Any | None = None,
     skip_step5: bool = False,
+    run_step5: bool = False,
 ) -> dict[str, Any]:
-    from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_entity_paths
     from tri_sdp_reasoning_compiler import compile_token_reasoning_structure
 
     preprocess_result = preprocessor.preprocess(record.question)
@@ -126,7 +128,9 @@ def run_hanlp_sdp_pipeline(
         debug_dir=debug_dir,
     )
     atomic_question_dag = None
-    if not skip_step5:
+    if run_step5 and not skip_step5:
+        from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_entity_paths
+
         step5_llm = llm_client or _llm_client_from_preprocessor(preprocessor)
         if step5_llm is None:
             atomic_question_dag = invalid_atomic_question_dag(["Step5 requires an LLM client."])
@@ -220,29 +224,23 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     print()
 
     print("[4. Token Reasoning Structure]")
-    print("[Graph]")
-    if token_reasoning_structure.edges:
-        for edge in token_reasoning_structure.edges:
-            print(f"{edge.source_text} ---- {edge.target_text}")
+    print("[Anchor Paths]")
+    anchor_path_results = getattr(token_reasoning_structure, "anchor_path_results", [])
+    if anchor_path_results:
+        for anchor_index, anchor_result in enumerate(anchor_path_results, start=1):
+            anchor_id = anchor_result.get("anchor_id")
+            anchor_text = anchor_result.get("anchor_text") or "(unknown)"
+            source_types = ",".join(anchor_result.get("source_types") or [])
+            print(f"Anchor A{anchor_index}: {anchor_text}[{anchor_id}] sources={source_types}")
+            paths = anchor_result.get("paths") or []
+            if paths:
+                for path_index, path in enumerate(paths, start=1):
+                    nodes = path.get("nodes") if isinstance(path, dict) else getattr(path, "nodes", [])
+                    print(f"  P{path_index}: {' ---- '.join(nodes)}")
+            else:
+                print("  (no path selected)")
     else:
         print("(none)")
-    print()
-    print("[Paths]")
-    if token_reasoning_structure.paths:
-        for path in token_reasoning_structure.paths:
-            print(f"{path.path_id}: {' ---- '.join(path.nodes)}")
-    else:
-        print("(none)")
-    if token_reasoning_structure.answer_anchor:
-        print(f"answer_anchor: {token_reasoning_structure.answer_anchor}")
-    if token_reasoning_structure.entity_anchors:
-        print(f"entity_anchors: {', '.join(token_reasoning_structure.entity_anchors)}")
-    if token_reasoning_structure.constraints:
-        print(f"constraints: {_format_token_reasoning_constraints(token_reasoning_structure.constraints)}")
-    if token_reasoning_structure.candidate_sets:
-        print(f"candidate_sets: {_format_candidate_sets(token_reasoning_structure.candidate_sets)}")
-    if getattr(token_reasoning_structure, "debug_file", None):
-        print(f"Debug file: {token_reasoning_structure.debug_file}")
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
     if debug and combined_warnings:
         print()
@@ -254,7 +252,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     print("[5. Atomic Question DAG]")
     atomic_question_dag = result.get("atomic_question_dag")
     if atomic_question_dag is None:
-        print("(skipped)")
+        print("(skipped: Step5 disabled while debugging Step4)")
         print()
         return
     if not atomic_question_dag.valid:

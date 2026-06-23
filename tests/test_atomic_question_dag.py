@@ -359,6 +359,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=FakeOlderParser(),
+            run_step5=True,
         )
 
         dag = result["atomic_question_dag"]
@@ -409,8 +410,8 @@ class FullPipelineLLM:
             self.step5_user_prompt = user_prompt
             return {
                 "nodes": [
-                    {"id": "q1", "question": "When was Ryan Tubridy born?", "depends_on": [], "support": {"path_id": "P1", "start_index": 0, "end_index": 1}},
-                    {"id": "q2", "question": "When was Mauro Massironi born?", "depends_on": [], "support": {"path_id": "P2", "start_index": 0, "end_index": 1}},
+                    {"id": "q1", "question": "When was Ryan Tubridy born?", "depends_on": [], "support": {"path_id": "A1.P1", "start_index": 0, "end_index": 1}},
+                    {"id": "q2", "question": "When was Mauro Massironi born?", "depends_on": [], "support": {"path_id": "A3.P1", "start_index": 0, "end_index": 0}},
                 ]
             }
         raise AssertionError(f"Unexpected system prompt: {system_prompt}")

@@ -44,7 +44,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.placeholders, ["ENTITYA", "ENTITYB"])
         self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(llm.calls, 2)
+        self.assertEqual(llm.calls, 1)
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -71,19 +71,18 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("older[3] --ARG1--> ENTITYA[5]", output)
         self.assertIn("older[3] --ACT-arg--> ENTITYB[7]", output)
         self.assertIn("[4. Token Reasoning Structure]", output)
-        self.assertIn("[Graph]", output)
-        self.assertIn("ENTITYA ---- older", output)
-        self.assertIn("ENTITYB ---- older", output)
-        self.assertIn("[Paths]", output)
-        self.assertIn("P1: ENTITYA ---- older", output)
-        self.assertIn("P2: ENTITYB ---- older", output)
-        self.assertIn("answer_anchor: older", output)
-        self.assertIn("entity_anchors: ENTITYA, ENTITYB", output)
+        self.assertNotIn("[Graph]", output)
+        self.assertIn("[Anchor Paths]", output)
+        self.assertIn("Anchor A1: older[3] sources=comparative_focus,clause_predicate", output)
+        self.assertIn("  P1: ENTITYA ---- older", output)
+        self.assertIn("Anchor A2: ENTITYA[5] sources=explicit_entity", output)
+        self.assertIn("Anchor A3: ENTITYB[7] sources=explicit_entity", output)
+        self.assertNotIn("answer_anchor:", output)
+        self.assertNotIn("entity_anchors:", output)
         self.assertIn("[5. Atomic Question DAG]", output)
-        self.assertIn("q1: When was Ryan Tubridy born?", output)
-        self.assertIn("q2: When was Mauro Massironi born?", output)
-        self.assertIn("support: P1[0:1]", output)
-        self.assertIn("support: P2[0:1]", output)
+        self.assertIn("(skipped: Step5 disabled while debugging Step4)", output)
+        self.assertNotIn("q1: When was Ryan Tubridy born?", output)
+        self.assertNotIn("q2: When was Mauro Massironi born?", output)
         self.assertNotIn("[4. Content Reasoning Chains]", output)
         self.assertNotIn("[4. Simplified SDP/DM Graph]", output)
         self.assertNotIn("[Kept / Derived Edges]", output)
@@ -215,15 +214,14 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.path_type, "single_main_path")
-        self.assertEqual(len(compiled.paths), 1)
-        path = compiled.paths[0]
-        self.assertEqual(path.nodes[0], "ENTITYA")
-        self.assert_ordered_subsequence(path.nodes, ["ENTITYA", "replacing", "interface", "letting", "feature", "call", "What"])
-        self.assertNotIn("ENTITYB", path.nodes)
-        self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA"])
-        self.assertNotIn("ENTITYB", {node.text for node in compiled.nodes})
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "feature")
+        self.assertEqual(anchor["path_type"], "single_main_path")
+        path = anchor["paths"][0]  # type: ignore[index]
+        self.assertEqual(path["nodes"][0], "ENTITYA")
+        self.assert_ordered_subsequence(path["nodes"], ["ENTITYA", "replacing", "interface", "letting", "feature", "call", "What"])
+        self.assertNotIn("ENTITYB", path["nodes"])
+        self.assertEqual(len(path["node_ids"]), len(set(path["node_ids"])))
         self.assert_path_union_graph(compiled)
 
     def test_johnny_majors_main_path_excludes_constraint_entity(self) -> None:
@@ -231,15 +229,14 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.path_type, "single_main_path")
-        self.assertEqual(len(compiled.paths), 1)
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "defeated", "player", "born", "year"])
-        self.assertNotIn("ENTITYB", compiled.paths[0].nodes)
-        self.assertNotIn("1956", compiled.paths[0].nodes)
-        self.assertNotIn("ENTITYB", {node.text for node in compiled.nodes})
-        self.assertNotIn("1956", {node.text for node in compiled.nodes})
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA"])
-        self.assertEqual(len(compiled.paths[0].node_ids), len(set(compiled.paths[0].node_ids)))
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "year")
+        self.assertEqual(anchor["path_type"], "single_main_path")
+        path = anchor["paths"][0]  # type: ignore[index]
+        self.assertEqual(path["nodes"], ["ENTITYA", "defeated", "player", "born", "year"])
+        self.assertNotIn("ENTITYB", path["nodes"])
+        self.assertNotIn("1956", path["nodes"])
+        self.assertEqual(len(path["node_ids"]), len(set(path["node_ids"])))
         self.assert_path_union_graph(compiled)
 
     def test_role_coordinated_nationality_parallel_cover(self) -> None:
@@ -247,14 +244,14 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.answer_anchor, "nationality")
-        self.assertEqual(compiled.answer_anchor_id, "14")
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual([path.node_ids for path in compiled.paths], [["5", "2", "11", "14"], ["10", "7", "11", "14"]])
-        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "director", "share", "nationality"], ["ENTITYB", "director", "share", "nationality"]])
-        self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "nationality")
+        self.assertEqual(anchor["anchor_id"], "14")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_ids(compiled, "nationality"), [["5", "2", "11", "14"], ["10", "7", "11", "14"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "nationality"), [["ENTITYA", "director", "share", "nationality"], ["ENTITYB", "director", "share", "nationality"]])
+        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
         self.assert_path_union_graph(compiled)
 
     def test_lifted_coordination_parallel_cover_is_structural_not_lexical(self) -> None:
@@ -276,10 +273,10 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.answer_anchor, "omega")
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual([path.node_ids for path in compiled.paths], [["4", "2", "9", "12"], ["8", "6", "9", "12"]])
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "omega")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_ids(compiled, "omega"), [["4", "2", "9", "12"], ["8", "6", "9", "12"]])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
         self.assert_path_union_graph(compiled)
 
@@ -301,11 +298,11 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertNotEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual(compiled.path_type, "single_main_path")
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA"])
-        self.assertEqual(len(compiled.paths), 1)
-        self.assertNotIn("ENTITYB", {node.text for node in compiled.nodes})
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "target")
+        self.assertEqual(anchor["path_type"], "single_main_path")
+        self.assertEqual(len(anchor["paths"]), 1)
+        self.assertNotIn("ENTITYB", anchor["paths"][0]["nodes"])  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
     def test_candidate_comparison_uses_typed_slot_substitution(self) -> None:
@@ -313,12 +310,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "director", "died"], ["ENTITYB", "director", "died"]])
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "film")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "director", "died"], ["ENTITYB", "director", "died"]])
         self.assertTrue(any(item["text"] == "first" for item in compiled.constraints))
-        rendered = "\n".join(" ---- ".join(path.nodes) for path in compiled.paths)
+        rendered = "\n".join(" ---- ".join(path) for path in self.anchor_path_nodes(compiled, "film"))
         self.assertNotIn(" or ", rendered)
-        self.assertNotIn("film", {node.text for node in compiled.nodes})
         derived_rules = {edge.rule for edge in compiled.edges if edge.derived}
         self.assertTrue(any("candidate_slot_substitution" in rule for rule in derived_rules))
         substitution_edges = [edge for edge in compiled.edges if "candidate_slot_substitution" in edge.rule]
@@ -331,13 +329,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.answer_anchor, "film")
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual([path.node_ids for path in compiled.paths], [["8", "4", "6"], ["10", "4", "6"]])
-        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "director", "younger"], ["ENTITYB", "director", "younger"]])
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "film")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_ids(compiled, "film"), [["8", "4", "6"], ["10", "4", "6"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "director", "younger"], ["ENTITYB", "director", "younger"]])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
+        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
         substitution_edges = [edge for edge in compiled.edges if "candidate_slot_substitution" in edge.rule]
@@ -359,7 +357,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _dm("born", "TWHEN", "year", 5, 2),
             ],
         )
-        self.assertEqual(compile_token_reasoning_structure(what_year, ["ENTITYA"]).answer_anchor, "year")
+        self.assertTrue(self.anchor_result(compile_token_reasoning_structure(what_year, ["ENTITYA"]), "year"))
 
         what_does = _hanlp_result(
             "What does ENTITYA call target?",
@@ -371,7 +369,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _dm("call", "ARG1", "ENTITYA", 4, 3),
             ],
         )
-        self.assertNotEqual(compile_token_reasoning_structure(what_does, ["ENTITYA"]).answer_anchor, "does")
+        self.assertFalse(
+            [
+                result
+                for result in compile_token_reasoning_structure(what_does, ["ENTITYA"]).anchor_path_results
+                if result.get("anchor_text") == "does"
+            ]
+        )
 
         which_of = _hanlp_result(
             "Which of ENTITYA is older?",
@@ -382,8 +386,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             ],
         )
         compiled_which_of = compile_token_reasoning_structure(which_of, ["ENTITYA"])
-        self.assertNotEqual(compiled_which_of.answer_anchor, "of")
-        self.assertNotEqual(compiled_which_of.answer_anchor, "ENTITYA")
+        self.assertFalse([result for result in compiled_which_of.anchor_path_results if result.get("anchor_text") == "of"])
 
     def test_bare_wh_candidate_substitution_born_later(self) -> None:
         result = self._born_later_result()
@@ -391,14 +394,14 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual(compiled.answer_anchor, "born")
-        self.assertEqual([path.node_ids for path in compiled.paths], [["6", "3", "4"], ["8", "3", "4"]])
-        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "born", "later"], ["ENTITYB", "born", "later"]])
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "born")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_ids(compiled, "born"), [["6", "3", "4"], ["8", "3", "4"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "born"), [["ENTITYA", "born", "later"], ["ENTITYB", "born", "later"]])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertTrue(all(len(path.node_ids) > 1 for path in compiled.paths))
-        self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
+        self.assertTrue(all(len(path["node_ids"]) > 1 for path in anchor["paths"]))  # type: ignore[index]
+        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
         substitution_edges = [edge for edge in compiled.edges if "candidate_bare_wh_substitution" in edge.rule]
@@ -431,9 +434,10 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.path_type, "candidate_path_cover")
-        self.assertEqual(compiled.answer_anchor, "pivot")
-        self.assertEqual([path.node_ids for path in compiled.paths], [["6", "3", "4"], ["8", "3", "4"]])
+        self.assert_multi_anchor_result(compiled)
+        anchor = self.anchor_result(compiled, "pivot")
+        self.assertEqual(anchor["path_type"], "candidate_path_cover")
+        self.assertEqual(self.anchor_path_ids(compiled, "pivot"), [["6", "3", "4"], ["8", "3", "4"]])
         self.assertTrue(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
         self.assert_path_union_graph(compiled)
 
@@ -454,7 +458,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertNotEqual(compiled.debug_payload["selection_mode"], "candidate_bare_wh_substitution")
+        self.assertEqual(compiled.debug_payload["selection_mode"], "multi_anchor_candidates")
+        self.assertFalse(
+            any(
+                result.get("selection_mode") == "candidate_bare_wh_substitution"
+                for result in compiled.debug_payload["per_anchor_results"]
+            )
+        )
         self.assertFalse(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
         self.assertFalse(any("candidate_bare_wh_substitution" in str(edge) for edge in compiled.debug_payload["virtual_edges"]))
 
@@ -463,17 +473,21 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(director_born, ["ENTITYA"])
 
-        self.assertEqual(compiled.path_type, "single_main_path")
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "director", "born"])
-        self.assertEqual(_edge_text_pairs(compiled), {frozenset(("ENTITYA", "director")), frozenset(("director", "born"))})
+        self.assert_multi_anchor_result(compiled)
+        born_anchor = self.anchor_result(compiled, "born")
+        self.assertEqual(born_anchor["path_type"], "single_main_path")
+        self.assertEqual(self.anchor_path_nodes(compiled, "born")[0], ["ENTITYA", "director", "born"])
         self.assert_path_union_graph(compiled)
 
-        self.assertEqual(compile_token_reasoning_structure(self._older_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "older")
-        self.assertEqual(compile_token_reasoning_structure(director_born, ["ENTITYA"]).answer_anchor, "born")
-        self.assertEqual(compile_token_reasoning_structure(self._typed_year_result(), ["ENTITYA"]).answer_anchor, "year")
-        self.assertEqual(compile_token_reasoning_structure(self._nationality_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "nationality")
-        self.assertEqual(compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "born")
-        self.assertEqual(compile_token_reasoning_structure(self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "film")
+        for result, entities, anchor_text in [
+            (self._older_result(), ["ENTITYA", "ENTITYB"], "older"),
+            (director_born, ["ENTITYA"], "born"),
+            (self._typed_year_result(), ["ENTITYA"], "year"),
+            (self._nationality_result(), ["ENTITYA", "ENTITYB"], "nationality"),
+            (self._born_later_result(), ["ENTITYA", "ENTITYB"], "born"),
+            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"], "film"),
+        ]:
+            self.assertTrue(self.anchor_result(compile_token_reasoning_structure(result, entities), anchor_text))
 
     def test_possessive_clitic_marker_is_contracted_from_entity_mother_path(self) -> None:
         result = _hanlp_result(
@@ -491,13 +505,11 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
 
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "mother", "die"])
-        self.assertNotIn("s", compiled.paths[0].nodes)
+        self.assertEqual(self.anchor_path_nodes(compiled, "die")[0], ["ENTITYA", "mother", "die"])
+        self.assertNotIn("s", self.anchor_path_nodes(compiled, "die")[0])
         self.assertNotIn("s", {node.text for node in compiled.nodes})
-        self.assertEqual(
-            _edge_text_pairs(compiled),
-            {frozenset(("ENTITYA", "mother")), frozenset(("mother", "die"))},
-        )
+        self.assertIn(frozenset(("ENTITYA", "mother")), _edge_text_pairs(compiled))
+        self.assertIn(frozenset(("mother", "die")), _edge_text_pairs(compiled))
         possessive_edges = [
             edge for edge in compiled.edges
             if {edge.source_text, edge.target_text} == {"ENTITYA", "mother"}
@@ -520,13 +532,11 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
 
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "performer", "date"])
-        self.assertNotIn("s", compiled.paths[0].nodes)
+        self.assertEqual(self.anchor_path_nodes(compiled, "date")[0], ["ENTITYA", "performer", "date"])
+        self.assertNotIn("s", self.anchor_path_nodes(compiled, "date")[0])
         self.assertNotIn("s", {node.text for node in compiled.nodes})
-        self.assertEqual(
-            _edge_text_pairs(compiled),
-            {frozenset(("ENTITYA", "performer")), frozenset(("performer", "date"))},
-        )
+        self.assertIn(frozenset(("ENTITYA", "performer")), _edge_text_pairs(compiled))
+        self.assertIn(frozenset(("performer", "date")), _edge_text_pairs(compiled))
 
     def test_non_possessive_s_is_not_globally_treated_as_function(self) -> None:
         result = _hanlp_result(
@@ -549,7 +559,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
 
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "show", "broadcaster", "headquarters"])
+        self.assertEqual(self.anchor_path_nodes(compiled, "headquarters")[0], ["ENTITYA", "show", "broadcaster", "headquarters"])
         self.assert_path_union_graph(compiled)
 
     def test_role_descriptor_lifting_is_debug_evidence_not_forced_terminal_cover(self) -> None:
@@ -558,11 +568,17 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB", "ENTITYC"])
 
         json.dumps(compiled.to_dict())
-        self.assertEqual(len(compiled.paths), 1)
-        self.assertEqual(len(compiled.paths[0].node_ids), len(set(compiled.paths[0].node_ids)))
+        self.assert_multi_anchor_result(compiled)
+        series_paths = self.anchor_result(compiled, "series")["paths"]  # type: ignore[index]
+        self.assertEqual(len(series_paths), 1)
+        self.assertEqual(len(series_paths[0]["node_ids"]), len(set(series_paths[0]["node_ids"])))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
         self.assertTrue(
-            any("descriptor_lifting" in str(edge.get("rule", "")) for edge in compiled.debug_payload["virtual_edges"])
+            any(
+                "descriptor_lifting" in str(edge.get("rule", ""))
+                for result in compiled.debug_payload["per_anchor_results"]
+                for edge in result.get("virtual_edges", [])
+            )
         )
 
     def test_works_collection_museum_houses_main_path_and_debug(self) -> None:
@@ -580,9 +596,8 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             self.assertTrue(Path(compiled.debug_file or "").exists())
             json.dumps(compiled.to_dict())
 
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "Works", "part", "collection", "museum", "houses", "what"])
+        self.assertEqual(self.anchor_path_nodes(compiled, "houses")[0], ["ENTITYA", "Works", "part", "collection", "museum", "houses"])
         self.assertTrue(any(item["text"] == "65,000" for item in compiled.constraints))
-        self.assertNotIn("65,000", {node.text for node in compiled.nodes})
         final_texts = {node.text for node in compiled.nodes}
         self.assertNotIn("ROOT", final_texts)
         self.assertNotIn("a", final_texts)
@@ -604,10 +619,9 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.answer_anchor, "target")
-        self.assertEqual(compiled.paths[0].nodes, ["ENTITYA", "links", "target"])
-        self.assertEqual(compiled.entity_anchors, ["ENTITYA"])
-        self.assertNotIn("ENTITYB", {node.text for node in compiled.nodes})
+        self.assert_multi_anchor_result(compiled)
+        self.assertEqual(self.anchor_path_nodes(compiled, "target")[0], ["ENTITYA", "links", "target"])
+        self.assertNotIn("ENTITYB", self.anchor_path_nodes(compiled, "target")[0])
         self.assert_path_union_graph(compiled)
 
     def test_global_path_union_invariants_and_determinism(self) -> None:
@@ -630,9 +644,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 self.assertEqual(len(edge_pairs), len(set(frozenset(pair) for pair in edge_pairs)))
                 for path in first.paths:
                     self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-                if first.path_type == "single_main_path":
-                    unselected = set(entities) - set(first.entity_anchors)
-                    self.assertFalse(unselected & {node.text for node in first.nodes})
+                self.assertEqual(first.path_type, "multi_anchor_candidates")
 
     def assert_ordered_subsequence(self, values: list[str], expected: list[str]) -> None:
         cursor = 0
@@ -652,6 +664,27 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         final_pairs = {frozenset((edge.source, edge.target)) for edge in compiled.edges}  # type: ignore[attr-defined]
         self.assertEqual(final_node_ids, path_node_ids)
         self.assertEqual(final_pairs, path_pairs)
+
+    def assert_multi_anchor_result(self, compiled: object) -> None:
+        self.assertEqual(compiled.path_type, "multi_anchor_candidates")  # type: ignore[attr-defined]
+        self.assertIsNone(compiled.answer_anchor)  # type: ignore[attr-defined]
+        self.assertIsNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
+        self.assertTrue(compiled.anchor_path_results)  # type: ignore[attr-defined]
+
+    def anchor_result(self, compiled: object, anchor_text: str) -> dict[str, object]:
+        matches = [
+            result
+            for result in compiled.anchor_path_results  # type: ignore[attr-defined]
+            if result.get("anchor_text") == anchor_text
+        ]
+        self.assertTrue(matches, f"missing anchor {anchor_text!r}")
+        return matches[0]
+
+    def anchor_path_nodes(self, compiled: object, anchor_text: str) -> list[list[str]]:
+        return [list(path["nodes"]) for path in self.anchor_result(compiled, anchor_text).get("paths", [])]  # type: ignore[index,union-attr]
+
+    def anchor_path_ids(self, compiled: object, anchor_text: str) -> list[list[str]]:
+        return [list(path["node_ids"]) for path in self.anchor_result(compiled, anchor_text).get("paths", [])]  # type: ignore[index,union-attr]
 
     def _dell_result(self) -> HanLPSDPResult:
         return _hanlp_result(
