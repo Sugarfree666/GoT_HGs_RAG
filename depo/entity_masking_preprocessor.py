@@ -23,38 +23,103 @@ class EntityMaskingPreprocessor:
 
     def preprocess(self, question: str) -> HanLPSDPPreprocessResult:
         explicit_entities = self.explicit_extractor.extract(question)
-        masked_question = _masked_question_from_entities(question, explicit_entities.entities)
+        warnings = list(explicit_entities.warnings)
+        normalized_question = _normalized_question_from_entities(question, explicit_entities)
+        if normalized_question != question and any(entity.text not in normalized_question for entity in explicit_entities.entities):
+            warnings.append("Normalized question did not preserve every explicit entity surface; using original question.")
+            normalized_question = question
+        normalization_changed = explicit_entities.normalization_changed or normalized_question != question
+        if normalized_question == question:
+            normalization_changed = False
+        normalization_note = explicit_entities.normalization_note if normalization_changed else ""
+        masked_question = _masked_question_from_entities(
+            normalized_question,
+            explicit_entities.entities,
+            warnings=warnings,
+        )
         mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities)
         _validate_preprocess_result(
             question=question,
             masked_question=masked_question,
             mask_mappings=mask_mappings,
-            warnings=explicit_entities.warnings,
+            warnings=warnings,
         )
         return HanLPSDPPreprocessResult(
             original_question=question,
             explicit_entities=ExplicitEntityResult(
                 entities=list(explicit_entities.entities),
-                warnings=list(explicit_entities.warnings),
+                warnings=list(warnings),
                 raw_payload=explicit_entities.raw_payload,
+                normalized_question=normalized_question,
+                normalization_changed=normalization_changed,
+                normalization_note=normalization_note,
             ),
             masked_question=masked_question,
             sdp_input_sentence=masked_question,
             mask_mappings=mask_mappings,
-            warnings=list(explicit_entities.warnings),
+            warnings=list(warnings),
             raw_payload=explicit_entities.raw_payload,
+            normalized_question=normalized_question,
+            normalization_changed=normalization_changed,
+            normalization_note=normalization_note,
         )
 
 
-def _masked_question_from_entities(question: str, entities: list[ExplicitEntity]) -> str:
+def _normalized_question_from_entities(question: str, explicit_entities: ExplicitEntityResult) -> str:
+    normalized_question = explicit_entities.normalized_question
+    if isinstance(normalized_question, str) and normalized_question.strip():
+        return normalized_question.strip()
+    return question
+
+
+def _masked_question_from_entities(
+    question: str,
+    entities: list[ExplicitEntity],
+    *,
+    warnings: list[str] | None = None,
+) -> str:
     masked = question
-    replacements = [
-        (entity.start_char, entity.end_char, f"ENTITY{_letter_suffix(index)}")
-        for index, entity in enumerate(sorted(entities, key=lambda item: (item.start_char, item.end_char)))
-    ]
+    occupied_spans: list[tuple[int, int]] = []
+    replacements: list[tuple[int, int, str]] = []
+    for index, entity in enumerate(sorted(entities, key=lambda item: (item.start_char, item.end_char))):
+        span = _resolve_entity_span_for_masking(question, entity, occupied_spans)
+        if span is None:
+            if warnings is not None:
+                warnings.append(
+                    f"Could not find explicit entity surface in normalized question; left unmasked: {entity.text!r}."
+                )
+            continue
+        occupied_spans.append(span)
+        replacements.append((span[0], span[1], f"ENTITY{_letter_suffix(index)}"))
     for start, end, placeholder in sorted(replacements, key=lambda item: item[0], reverse=True):
         masked = masked[:start] + placeholder + masked[end:]
     return masked
+
+
+def _resolve_entity_span_for_masking(
+    question: str,
+    entity: ExplicitEntity,
+    occupied_spans: list[tuple[int, int]],
+) -> tuple[int, int] | None:
+    if (
+        0 <= entity.start_char <= entity.end_char <= len(question)
+        and question[entity.start_char : entity.end_char] == entity.text
+        and _span_is_available(entity.start_char, entity.end_char, occupied_spans)
+    ):
+        return entity.start_char, entity.end_char
+
+    matches = [
+        (match.start(), match.end())
+        for match in re.finditer(re.escape(entity.text), question)
+        if _span_is_available(match.start(), match.end(), occupied_spans)
+    ]
+    if not matches:
+        return None
+    return min(matches, key=lambda span: (abs(span[0] - entity.start_char), span[0]))
+
+
+def _span_is_available(start: int, end: int, occupied_spans: list[tuple[int, int]]) -> bool:
+    return all(end <= occupied_start or start >= occupied_end for occupied_start, occupied_end in occupied_spans)
 
 
 def _mask_mappings_from_entities(masked_question: str, entities: list[ExplicitEntity]) -> list[MaskMapping]:

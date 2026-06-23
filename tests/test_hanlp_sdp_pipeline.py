@@ -57,6 +57,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn(" - Ryan Tubridy [Person]", output)
         self.assertIn("[2. Entity Masking]", output)
         self.assertIn(" - ENTITYA -> Ryan Tubridy", output)
+        self.assertIn("Normalized question: unchanged", output)
         self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
         self.assertNotIn("SDP input sentence:", output)
         self.assertIn("[3. HanLP SDP Parsing]", output)
@@ -88,6 +89,68 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("[Kept / Derived Edges]", output)
         self.assertNotIn("older --ARG2--> ENTITYA", output)
         self.assertNotIn("older --ARG1--> ANSWER\n", output)
+
+    def test_pipeline_normalizes_wh_order_before_masking_and_parsing(self) -> None:
+        question = "Which country the composer of film Thunder On The Hill is from?"
+        normalized = "Which country is the composer of film Thunder On The Hill from?"
+        masked = "Which country is the composer of film ENTITYA from?"
+        llm = StaticPreprocessLLM(
+            {
+                "explicit_entities": [
+                    {
+                        "surface": "Thunder On The Hill",
+                        "type": "Work",
+                    }
+                ],
+                "normalized_question": normalized,
+                "normalization_changed": True,
+                "normalization_note": "Inserted auxiliary is for wh-question order.",
+                "warnings": [],
+            }
+        )
+        parser = RecordingHanLPSDPParser()
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            result = run_hanlp_sdp_pipeline(
+                record=QuestionRecord(question=question),
+                index=1,
+                preprocessor=EntityMaskingPreprocessor(llm),
+                parser=parser,
+                debug=True,
+                debug_dir=tmpdir,
+            )
+            debug_file = Path(result["token_reasoning_structure"].debug_file or "")
+            self.assertTrue(debug_file.exists())
+            debug_payload = json.loads(debug_file.read_text(encoding="utf-8"))
+
+        preprocess_result = result["preprocess_result"]
+        self.assertEqual(llm.calls, 1)
+        self.assertEqual(preprocess_result.normalized_question, normalized)
+        self.assertTrue(preprocess_result.normalization_changed)
+        self.assertEqual(preprocess_result.normalization_note, "Inserted auxiliary is for wh-question order.")
+        self.assertEqual([entity.text for entity in preprocess_result.explicit_entities.entities], ["Thunder On The Hill"])
+        self.assertEqual(
+            [
+                (
+                    entity.start_char,
+                    entity.end_char,
+                    question[entity.start_char : entity.end_char],
+                )
+                for entity in preprocess_result.explicit_entities.entities
+            ],
+            [(35, 54, "Thunder On The Hill")],
+        )
+        self.assertEqual(preprocess_result.masked_question, masked)
+        self.assertEqual(preprocess_result.sdp_input_sentence, masked)
+        self.assertEqual(result["hanlp_input_sentence"], masked)
+        self.assertEqual(parser.text, masked)
+        self.assertEqual(parser.placeholders, ["ENTITYA"])
+
+        self.assertEqual(debug_payload["original_question"], question)
+        self.assertEqual(debug_payload["normalized_question"], normalized)
+        self.assertTrue(debug_payload["normalization_changed"])
+        self.assertEqual(debug_payload["normalization_note"], "Inserted auxiliary is for wh-question order.")
+        self.assertEqual(debug_payload["masked_question"], masked)
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [
@@ -216,12 +279,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "feature")
-        self.assertEqual(anchor["path_type"], "single_main_path")
+        self.assertEqual(anchor["path_type"], "fallback_main_path")
         path = anchor["paths"][0]  # type: ignore[index]
-        self.assertEqual(path["nodes"][0], "ENTITYA")
-        self.assert_ordered_subsequence(path["nodes"], ["ENTITYA", "replacing", "interface", "letting", "feature", "call", "What"])
-        self.assertNotIn("ENTITYB", path["nodes"])
+        self.assertEqual(path["nodes"][0], "ENTITYB")
+        self.assert_ordered_subsequence(path["nodes"], ["ENTITYB", "drives", "iterations", "interface", "replacing", "letting", "feature", "call", "What"])
         self.assertEqual(len(path["node_ids"]), len(set(path["node_ids"])))
+        selected = [record for record in anchor["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
+        self.assertIn("missing_semantic_nodes_count", selected["rank_components"])
         self.assert_path_union_graph(compiled)
 
     def test_johnny_majors_main_path_excludes_constraint_entity(self) -> None:
@@ -231,7 +295,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "year")
-        self.assertEqual(anchor["path_type"], "single_main_path")
+        self.assertEqual(anchor["path_type"], "fallback_main_path")
         path = anchor["paths"][0]  # type: ignore[index]
         self.assertEqual(path["nodes"], ["ENTITYA", "defeated", "player", "born", "year"])
         self.assertNotIn("ENTITYB", path["nodes"])
@@ -248,8 +312,8 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         anchor = self.anchor_result(compiled, "nationality")
         self.assertEqual(anchor["anchor_id"], "14")
         self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "nationality"), [["5", "2", "11", "14"], ["10", "7", "11", "14"]])
-        self.assertEqual(self.anchor_path_nodes(compiled, "nationality"), [["ENTITYA", "director", "share", "nationality"], ["ENTITYB", "director", "share", "nationality"]])
+        self.assertEqual(self.anchor_path_ids(compiled, "nationality"), [["5", "2", "11", "13", "14"], ["10", "7", "11", "13", "14"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "nationality"), [["ENTITYA", "director", "share", "same", "nationality"], ["ENTITYB", "director", "share", "same", "nationality"]])
         self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
         self.assert_path_union_graph(compiled)
@@ -276,7 +340,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "omega")
         self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "omega"), [["4", "2", "9", "12"], ["8", "6", "9", "12"]])
+        self.assertEqual(self.anchor_path_ids(compiled, "omega"), [["4", "2", "9", "11", "12"], ["8", "6", "9", "11", "12"]])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
         self.assert_path_union_graph(compiled)
 
@@ -300,7 +364,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "target")
-        self.assertEqual(anchor["path_type"], "single_main_path")
+        self.assertEqual(anchor["path_type"], "fallback_main_path")
         self.assertEqual(len(anchor["paths"]), 1)
         self.assertNotIn("ENTITYB", anchor["paths"][0]["nodes"])  # type: ignore[index]
         self.assert_path_union_graph(compiled)
@@ -387,6 +451,100 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         )
         compiled_which_of = compile_token_reasoning_structure(which_of, ["ENTITYA"])
         self.assertFalse([result for result in compiled_which_of.anchor_path_results if result.get("anchor_text") == "of"])
+
+    def test_bridge_contraction_edges_are_strong_and_semantic(self) -> None:
+        result = _hanlp_result(
+            "Who is the spouse of the director of film ENTITYA?",
+            ["Who", "is", "the", "spouse", "of", "the", "director", "of", "film", "ENTITYA", "?"],
+            [
+                _root("sdp/dm", "is", 2),
+                _dm("is", "ARG2", "Who", 2, 1),
+                _dm("is", "ARG2", "spouse", 2, 4),
+                _dm("of", "ARG1", "spouse", 5, 4),
+                _dm("of", "ARG2", "director", 5, 7),
+                _pas("of", "prep_ARG1", "director", 8, 7),
+                _pas("of", "prep_ARG2", "ENTITYA", 8, 10),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+
+        self.assertEqual(self.anchor_path_nodes(compiled, "spouse")[0], ["ENTITYA", "director", "spouse"])
+        selected = [record for record in self.anchor_result(compiled, "spouse")["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
+        components = selected["rank_components"]
+        self.assertEqual(components["semantic_nodes"], ["spouse", "director", "ENTITYA"])
+        self.assertEqual(components["missing_semantic_nodes_count"], 0)
+        self.assertEqual(components["weak_edge_count"], 0)
+        edges = {
+            frozenset((edge.source_text, edge.target_text)): edge
+            for edge in compiled.edges
+        }
+        self.assertEqual(edges[frozenset(("ENTITYA", "director"))].edge_quality, "STRONG")
+        self.assertEqual(edges[frozenset(("director", "spouse"))].edge_quality, "STRONG")
+        self.assertTrue(edges[frozenset(("ENTITYA", "director"))].derived)
+        self.assertTrue(edges[frozenset(("director", "spouse"))].derived)
+
+    def test_local_rank_prefers_semantic_coverage_over_short_entity_path(self) -> None:
+        result = _hanlp_result(
+            "When was ENTITYA constructed in the city where ENTITYB from the region where ENTITYC is located died?",
+            [
+                "When",
+                "was",
+                "ENTITYA",
+                "constructed",
+                "in",
+                "the",
+                "city",
+                "where",
+                "ENTITYB",
+                "from",
+                "the",
+                "region",
+                "where",
+                "ENTITYC",
+                "is",
+                "located",
+                "died",
+                "?",
+            ],
+            [
+                _root("sdp/dm", "constructed", 4),
+                _dm("constructed", "ARG1", "ENTITYA", 4, 3),
+                _dm("constructed", "loc", "city", 4, 7),
+                _dm("died", "loc", "city", 17, 7),
+                _dm("died", "ARG1", "ENTITYB", 17, 9),
+                _dm("from", "ARG1", "ENTITYB", 10, 9),
+                _dm("from", "ARG2", "region", 10, 12),
+                _dm("located", "ARG1", "ENTITYC", 16, 14),
+                _dm("located", "loc", "region", 16, 12),
+                _pas("from", "prep_ARG1", "ENTITYB", 10, 9),
+                _pas("from", "prep_ARG2", "region", 10, 12),
+                _psd("located", "ACT-arg", "ENTITYC", 16, 14),
+                _psd("located", "LOC", "region", 16, 12),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB", "ENTITYC"])
+
+        self.assertEqual(
+            self.anchor_path_nodes(compiled, "ENTITYC")[0],
+            ["ENTITYA", "constructed", "city", "died", "ENTITYB", "region", "located", "ENTITYC"],
+        )
+        anchor = self.anchor_result(compiled, "ENTITYC")
+        selected = [record for record in anchor["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
+        self.assertEqual(selected["rank_components"]["missing_semantic_nodes_count"], 0)
+        short_entity = [
+            record
+            for record in anchor["candidate_paths"]  # type: ignore[index]
+            if record["nodes"] == ["ENTITYC"]
+        ][0]
+        partial = [
+            record
+            for record in anchor["candidate_paths"]  # type: ignore[index]
+            if record["nodes"] == ["ENTITYB", "region", "located", "ENTITYC"]
+        ][0]
+        self.assertGreater(short_entity["rank_components"]["missing_semantic_nodes_count"], selected["rank_components"]["missing_semantic_nodes_count"])
+        self.assertGreater(partial["rank_components"]["missing_semantic_nodes_count"], selected["rank_components"]["missing_semantic_nodes_count"])
 
     def test_bare_wh_candidate_substitution_born_later(self) -> None:
         result = self._born_later_result()
@@ -620,8 +778,11 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
         self.assert_multi_anchor_result(compiled)
-        self.assertEqual(self.anchor_path_nodes(compiled, "target")[0], ["ENTITYA", "links", "target"])
-        self.assertNotIn("ENTITYB", self.anchor_path_nodes(compiled, "target")[0])
+        self.assertEqual(self.anchor_path_nodes(compiled, "target")[0], ["ENTITYB", "label", "links", "target"])
+        selected = [record for record in self.anchor_result(compiled, "target")["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
+        self.assertEqual(selected["rank_components"]["missing_semantic_nodes_count"], 1)
+        self.assertIn("ENTITYB", selected["rank_components"]["covered_semantic_nodes"])
+        self.assertIn("label", selected["rank_components"]["covered_semantic_nodes"])
         self.assert_path_union_graph(compiled)
 
     def test_global_path_union_invariants_and_determinism(self) -> None:
@@ -994,6 +1155,30 @@ class StaticPreprocessLLM:
         self.user_prompt = user_prompt
         self.calls += 1
         return self.payload
+
+
+class RecordingHanLPSDPParser:
+    def __init__(self) -> None:
+        self.placeholders: list[str] = []
+        self.text = ""
+
+    def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
+        self.placeholders = list(placeholders or [])
+        self.text = text
+        tokens = ["Which", "country", "is", "the", "composer", "of", "film", "ENTITYA", "from", "?"]
+        return HanLPSDPResult(
+            text=text,
+            tokens=tokens,
+            available_keys=["tok", "sdp/dm"],
+            sdp_graphs={"sdp/dm": []},
+            edges=[
+                HanLPSDPEdge("sdp/dm", 0, "ROOT", "root", 2, "country"),
+                HanLPSDPEdge("sdp/dm", 5, "composer", "ARG1", 8, "ENTITYA"),
+                HanLPSDPEdge("sdp/dm", 2, "country", "ARG1", 5, "composer"),
+            ],
+            raw={"tok": tokens, "sdp/dm": []},
+            model="fake",
+        )
 
 
 class FakeHanLPSDPParser:

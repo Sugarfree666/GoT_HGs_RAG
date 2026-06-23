@@ -123,6 +123,9 @@ class ExplicitEntityResult:
     entities: list[ExplicitEntity] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     raw_payload: dict[str, Any] | None = None
+    normalized_question: str | None = None
+    normalization_changed: bool = False
+    normalization_note: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -191,6 +194,9 @@ class HanLPSDPPreprocessResult:
     mask_mappings: list[MaskMapping]
     warnings: list[str] = field(default_factory=list)
     raw_payload: dict[str, Any] | None = None
+    normalized_question: str = ""
+    normalization_changed: bool = False
+    normalization_note: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

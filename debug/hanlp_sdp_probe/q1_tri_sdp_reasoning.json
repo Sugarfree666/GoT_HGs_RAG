@@ -1,0 +1,1841 @@
+{
+  "active_entity_anchors": [
+    {
+      "id": "8",
+      "text": "ENTITYA"
+    }
+  ],
+  "aggregated_edges": [
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "is",
+          "dep_idx": 3,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "ROOT",
+          "head_idx": 0,
+          "label_class": "BRIDGE",
+          "normalized_relation": "root",
+          "relation": "root",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "0",
+      "source_text": "ROOT",
+      "support": 0.33,
+      "target": "3",
+      "target_text": "is"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "nationality",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/dm",
+          "head": "What",
+          "head_idx": 1,
+          "label_class": "BRIDGE",
+          "normalized_relation": "bv",
+          "relation": "BV",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "1",
+      "source_text": "What",
+      "support": 0.33,
+      "target": "2",
+      "target_text": "nationality"
+    },
+    {
+      "consensus_count": 2,
+      "derived": false,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "nationality",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/dm",
+          "head": "is",
+          "head_idx": 3,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "nationality",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/psd",
+          "head": "is",
+          "head_idx": 3,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "pat-arg",
+          "relation": "PAT-arg",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "nationality",
+      "support": 1.0,
+      "target": "3",
+      "target_text": "is"
+    },
+    {
+      "consensus_count": 3,
+      "derived": false,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/dm",
+          "head": "is",
+          "head_idx": 3,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "is",
+          "head_idx": 3,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/psd",
+          "head": "is",
+          "head_idx": 3,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "pat-arg",
+          "relation": "PAT-arg",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "3",
+      "source_text": "is",
+      "support": 1.0,
+      "target": "5",
+      "target_text": "performer"
+    },
+    {
+      "consensus_count": 2,
+      "derived": false,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/dm",
+          "head": "the",
+          "head_idx": 4,
+          "label_class": "BRIDGE",
+          "normalized_relation": "bv",
+          "relation": "BV",
+          "rule": "raw_evidence",
+          "support": 0.33
+        },
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "the",
+          "head_idx": 4,
+          "label_class": "BRIDGE",
+          "normalized_relation": "det_arg1",
+          "relation": "det_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "the",
+      "support": 0.33,
+      "target": "5",
+      "target_text": "performer"
+    },
+    {
+      "consensus_count": 2,
+      "derived": false,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/dm",
+          "head": "of",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "arg1",
+          "relation": "ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "performer",
+          "dep_idx": 5,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "of",
+          "head_idx": 6,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg1",
+          "relation": "prep_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "5",
+      "source_text": "performer",
+      "support": 1.0,
+      "target": "6",
+      "target_text": "of"
+    }
+  ],
+  "anchors": {
+    "answer_anchor": null,
+    "answer_anchor_id": null,
+    "constraints": [],
+    "entities": [
+      "ENTITYA"
+    ]
+  },
+  "answer_anchor_candidates": [
+    {
+      "evidence": [
+        {
+          "edge": {
+            "consensus_count": 1,
+            "derived": false,
+            "edge_quality": "WEAK",
+            "provenance": [
+              {
+                "consensus_count": 1,
+                "dep": "nationality",
+                "dep_idx": 2,
+                "derived": false,
+                "direction": "head_to_dep",
+                "edge_quality": "WEAK",
+                "formalism": "sdp/dm",
+                "head": "What",
+                "head_idx": 1,
+                "label_class": "BRIDGE",
+                "normalized_relation": "bv",
+                "relation": "BV",
+                "rule": "raw_evidence",
+                "support": 0.33
+              }
+            ],
+            "rule": "raw_evidence",
+            "source": "1",
+            "source_text": "What",
+            "support": 0.33,
+            "target": "2",
+            "target_text": "nationality"
+          },
+          "rule": "typed_wh_neighbor",
+          "support": 0.33,
+          "wh": "What",
+          "wh_id": "1"
+        },
+        {
+          "rule": "surface_typed_wh_adjacency",
+          "slot": "nationality",
+          "slot_id": "2",
+          "support": 0.75,
+          "wh": "What",
+          "wh_id": "1"
+        },
+        {
+          "evidence": [
+            {
+              "edge": {
+                "consensus_count": 2,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "nationality",
+                    "dep_idx": 2,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "nationality",
+                    "dep_idx": 2,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "pat-arg",
+                    "relation": "PAT-arg",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "2",
+                "source_text": "nationality",
+                "support": 1.0,
+                "target": "3",
+                "target_text": "is"
+              },
+              "other": "is",
+              "other_id": "3",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 1.0
+        }
+      ],
+      "node_id": "2",
+      "score": 30.0,
+      "source_types": [
+        "typed_wh_slot",
+        "clause_predicate"
+      ],
+      "text": "nationality"
+    },
+    {
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "consensus_count": 3,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/pas",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "verb_arg1",
+                    "relation": "verb_ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "pat-arg",
+                    "relation": "PAT-arg",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "3",
+                "source_text": "is",
+                "support": 1.0,
+                "target": "5",
+                "target_text": "performer"
+              },
+              "other": "is",
+              "other_id": "3",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            },
+            {
+              "edge": {
+                "consensus_count": 2,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 6,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "WEAK",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 6,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "rule": "raw_evidence",
+                    "support": 0.33
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "performer",
+                "support": 1.0,
+                "target": "6",
+                "target_text": "of"
+              },
+              "other": "of",
+              "other_id": "6",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 2.0
+        }
+      ],
+      "node_id": "5",
+      "score": 14.0,
+      "source_types": [
+        "clause_predicate"
+      ],
+      "text": "performer"
+    },
+    {
+      "evidence": [
+        {
+          "incident_evidence": [],
+          "rule": "explicit_entity",
+          "support": 0
+        }
+      ],
+      "node_id": "8",
+      "score": 5.0,
+      "source_types": [
+        "explicit_entity"
+      ],
+      "text": "ENTITYA"
+    }
+  ],
+  "backbone_after_pruning": {
+    "edges": [],
+    "nodes": [
+      {
+        "id": "8",
+        "index": 8,
+        "is_anchor": true,
+        "kind": "entity",
+        "text": "ENTITYA"
+      }
+    ]
+  },
+  "backbone_before_pruning": {
+    "edges": [],
+    "nodes": [
+      {
+        "id": "8",
+        "index": 8,
+        "is_anchor": true,
+        "kind": "entity",
+        "text": "ENTITYA"
+      }
+    ]
+  },
+  "candidate_paths": [],
+  "candidate_sets": [],
+  "entity_candidates": [
+    {
+      "id": "8",
+      "text": "ENTITYA"
+    }
+  ],
+  "explicit_entities": [
+    "ENTITYA"
+  ],
+  "final_edges": [],
+  "final_nodes": [
+    {
+      "id": "8",
+      "index": 8,
+      "is_anchor": true,
+      "kind": "entity",
+      "text": "ENTITYA"
+    }
+  ],
+  "masked_question": "What nationality is the performer of song ENTITYA?",
+  "normalization_changed": false,
+  "normalization_note": "",
+  "normalized_evidence_edges": [
+    {
+      "consensus_count": 1,
+      "dep": "nationality",
+      "dep_idx": 2,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/dm",
+      "head": "What",
+      "head_idx": 1,
+      "label_class": "BRIDGE",
+      "normalized_relation": "bv",
+      "relation": "BV",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "nationality",
+      "dep_idx": 2,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 3,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg1",
+      "relation": "ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 3,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg1",
+      "relation": "ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 4,
+      "label_class": "BRIDGE",
+      "normalized_relation": "bv",
+      "relation": "BV",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 6,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "arg1",
+      "relation": "ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "is",
+      "dep_idx": 3,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "label_class": "BRIDGE",
+      "normalized_relation": "root",
+      "relation": "root",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 3,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 4,
+      "label_class": "BRIDGE",
+      "normalized_relation": "det_arg1",
+      "relation": "det_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 6,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg1",
+      "relation": "prep_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "nationality",
+      "dep_idx": 2,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 3,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "pat-arg",
+      "relation": "PAT-arg",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "performer",
+      "dep_idx": 5,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 3,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "pat-arg",
+      "relation": "PAT-arg",
+      "rule": "raw_evidence",
+      "support": 1.0
+    }
+  ],
+  "normalized_question": "What nationality is the performer of song When The Stars Go Blue?",
+  "original_question": "What nationality is the performer of song When The Stars Go Blue?",
+  "parallel_entity_sets": [],
+  "paths": [
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A1.P1"
+    },
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A2.P1"
+    },
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A3.P1"
+    }
+  ],
+  "per_anchor_results": [
+    {
+      "anchor_id": "2",
+      "anchor_text": "nationality",
+      "candidate_paths": [],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "edge": {
+            "consensus_count": 1,
+            "derived": false,
+            "edge_quality": "WEAK",
+            "provenance": [
+              {
+                "consensus_count": 1,
+                "dep": "nationality",
+                "dep_idx": 2,
+                "derived": false,
+                "direction": "head_to_dep",
+                "edge_quality": "WEAK",
+                "formalism": "sdp/dm",
+                "head": "What",
+                "head_idx": 1,
+                "label_class": "BRIDGE",
+                "normalized_relation": "bv",
+                "relation": "BV",
+                "rule": "raw_evidence",
+                "support": 0.33
+              }
+            ],
+            "rule": "raw_evidence",
+            "source": "1",
+            "source_text": "What",
+            "support": 0.33,
+            "target": "2",
+            "target_text": "nationality"
+          },
+          "rule": "typed_wh_neighbor",
+          "support": 0.33,
+          "wh": "What",
+          "wh_id": "1"
+        },
+        {
+          "rule": "surface_typed_wh_adjacency",
+          "slot": "nationality",
+          "slot_id": "2",
+          "support": 0.75,
+          "wh": "What",
+          "wh_id": "1"
+        },
+        {
+          "evidence": [
+            {
+              "edge": {
+                "consensus_count": 2,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "nationality",
+                    "dep_idx": 2,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "nationality",
+                    "dep_idx": 2,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "pat-arg",
+                    "relation": "PAT-arg",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "2",
+                "source_text": "nationality",
+                "support": 1.0,
+                "target": "3",
+                "target_text": "is"
+              },
+              "other": "is",
+              "other_id": "3",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 1.0
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "empty",
+      "paths": [
+        {
+          "node_ids": [
+            "8"
+          ],
+          "nodes": [
+            "ENTITYA"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "nationality",
+        "answer_anchor_id": "2",
+        "mode": "typed_wh_slot",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "nationality"
+        ],
+        "required_ids": [
+          "2"
+        ],
+        "slot": "nationality",
+        "slot_id": "2",
+        "terminal": "nationality",
+        "terminal_id": "2"
+      },
+      "score": 30.0,
+      "selection_mode": "single_node_fallback",
+      "source_types": [
+        "typed_wh_slot",
+        "clause_predicate"
+      ],
+      "virtual_edges": [
+        {
+          "consensus_count": 3,
+          "derived": true,
+          "edge_quality": "MEDIUM",
+          "provenance": [
+            {
+              "bridge": "is",
+              "bridge_id": "3",
+              "collapsed_path": [
+                "nationality",
+                "is",
+                "performer"
+              ],
+              "consensus_count": 3,
+              "derived": true,
+              "edge_quality": "MEDIUM",
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "consensus_count": 2,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "2",
+                  "source_text": "nationality",
+                  "support": 1.0,
+                  "target": "3",
+                  "target_text": "is"
+                },
+                {
+                  "consensus_count": 3,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/pas",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "verb_arg1",
+                      "relation": "verb_ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "3",
+                  "source_text": "is",
+                  "support": 1.0,
+                  "target": "5",
+                  "target_text": "performer"
+                }
+              ],
+              "support": 0.67
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "2",
+          "source_text": "nationality",
+          "support": 0.67,
+          "target": "5",
+          "target_text": "performer"
+        }
+      ]
+    },
+    {
+      "anchor_id": "5",
+      "anchor_text": "performer",
+      "candidate_paths": [],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "evidence": [
+            {
+              "edge": {
+                "consensus_count": 3,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/pas",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "verb_arg1",
+                    "relation": "verb_ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/psd",
+                    "head": "is",
+                    "head_idx": 3,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "pat-arg",
+                    "relation": "PAT-arg",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "3",
+                "source_text": "is",
+                "support": 1.0,
+                "target": "5",
+                "target_text": "performer"
+              },
+              "other": "is",
+              "other_id": "3",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            },
+            {
+              "edge": {
+                "consensus_count": 2,
+                "derived": false,
+                "edge_quality": "STRONG",
+                "provenance": [
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "STRONG",
+                    "formalism": "sdp/dm",
+                    "head": "of",
+                    "head_idx": 6,
+                    "label_class": "CORE_ARG",
+                    "normalized_relation": "arg1",
+                    "relation": "ARG1",
+                    "rule": "raw_evidence",
+                    "support": 1.0
+                  },
+                  {
+                    "consensus_count": 1,
+                    "dep": "performer",
+                    "dep_idx": 5,
+                    "derived": false,
+                    "direction": "head_to_dep",
+                    "edge_quality": "WEAK",
+                    "formalism": "sdp/pas",
+                    "head": "of",
+                    "head_idx": 6,
+                    "label_class": "BRIDGE",
+                    "normalized_relation": "prep_arg1",
+                    "relation": "prep_ARG1",
+                    "rule": "raw_evidence",
+                    "support": 0.33
+                  }
+                ],
+                "rule": "raw_evidence",
+                "source": "5",
+                "source_text": "performer",
+                "support": 1.0,
+                "target": "6",
+                "target_text": "of"
+              },
+              "other": "of",
+              "other_id": "6",
+              "rule": "clause_predicate_edge",
+              "support": 1.0
+            }
+          ],
+          "rule": "clause_predicate",
+          "support": 2.0
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "empty",
+      "paths": [
+        {
+          "node_ids": [
+            "8"
+          ],
+          "nodes": [
+            "ENTITYA"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "performer",
+        "answer_anchor_id": "5",
+        "mode": "typed_wh_slot",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "nationality"
+        ],
+        "required_ids": [
+          "2"
+        ],
+        "slot": "nationality",
+        "slot_id": "2",
+        "terminal": "nationality",
+        "terminal_id": "2"
+      },
+      "score": 14.0,
+      "selection_mode": "single_node_fallback",
+      "source_types": [
+        "clause_predicate"
+      ],
+      "virtual_edges": [
+        {
+          "consensus_count": 3,
+          "derived": true,
+          "edge_quality": "MEDIUM",
+          "provenance": [
+            {
+              "bridge": "is",
+              "bridge_id": "3",
+              "collapsed_path": [
+                "nationality",
+                "is",
+                "performer"
+              ],
+              "consensus_count": 3,
+              "derived": true,
+              "edge_quality": "MEDIUM",
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "consensus_count": 2,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "2",
+                  "source_text": "nationality",
+                  "support": 1.0,
+                  "target": "3",
+                  "target_text": "is"
+                },
+                {
+                  "consensus_count": 3,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/pas",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "verb_arg1",
+                      "relation": "verb_ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "3",
+                  "source_text": "is",
+                  "support": 1.0,
+                  "target": "5",
+                  "target_text": "performer"
+                }
+              ],
+              "support": 0.67
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "2",
+          "source_text": "nationality",
+          "support": 0.67,
+          "target": "5",
+          "target_text": "performer"
+        }
+      ]
+    },
+    {
+      "anchor_id": "8",
+      "anchor_text": "ENTITYA",
+      "candidate_paths": [],
+      "candidate_sets": [],
+      "constraints": [],
+      "evidence": [
+        {
+          "incident_evidence": [],
+          "rule": "explicit_entity",
+          "support": 0
+        }
+      ],
+      "parallel_entity_sets": [],
+      "path_type": "empty",
+      "paths": [
+        {
+          "node_ids": [
+            "8"
+          ],
+          "nodes": [
+            "ENTITYA"
+          ],
+          "path_id": "P1"
+        }
+      ],
+      "query_focus": {
+        "answer_anchor": "ENTITYA",
+        "answer_anchor_id": "8",
+        "mode": "typed_wh_slot",
+        "query_root": null,
+        "query_root_id": null,
+        "required": [
+          "nationality"
+        ],
+        "required_ids": [
+          "2"
+        ],
+        "slot": "nationality",
+        "slot_id": "2",
+        "terminal": "nationality",
+        "terminal_id": "2"
+      },
+      "score": 5.0,
+      "selection_mode": "single_node_fallback",
+      "source_types": [
+        "explicit_entity"
+      ],
+      "virtual_edges": [
+        {
+          "consensus_count": 3,
+          "derived": true,
+          "edge_quality": "MEDIUM",
+          "provenance": [
+            {
+              "bridge": "is",
+              "bridge_id": "3",
+              "collapsed_path": [
+                "nationality",
+                "is",
+                "performer"
+              ],
+              "consensus_count": 3,
+              "derived": true,
+              "edge_quality": "MEDIUM",
+              "rule": "bridge_contraction",
+              "source_edges": [
+                {
+                  "consensus_count": 2,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "nationality",
+                      "dep_idx": 2,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "2",
+                  "source_text": "nationality",
+                  "support": 1.0,
+                  "target": "3",
+                  "target_text": "is"
+                },
+                {
+                  "consensus_count": 3,
+                  "derived": false,
+                  "edge_quality": "STRONG",
+                  "provenance": [
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/dm",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "arg1",
+                      "relation": "ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/pas",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "verb_arg1",
+                      "relation": "verb_ARG1",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    },
+                    {
+                      "consensus_count": 1,
+                      "dep": "performer",
+                      "dep_idx": 5,
+                      "derived": false,
+                      "direction": "head_to_dep",
+                      "edge_quality": "STRONG",
+                      "formalism": "sdp/psd",
+                      "head": "is",
+                      "head_idx": 3,
+                      "label_class": "CORE_ARG",
+                      "normalized_relation": "pat-arg",
+                      "relation": "PAT-arg",
+                      "rule": "raw_evidence",
+                      "support": 1.0
+                    }
+                  ],
+                  "rule": "raw_evidence",
+                  "source": "3",
+                  "source_text": "is",
+                  "support": 1.0,
+                  "target": "5",
+                  "target_text": "performer"
+                }
+              ],
+              "support": 0.67
+            }
+          ],
+          "rule": "bridge_contraction",
+          "source": "2",
+          "source_text": "nationality",
+          "support": 0.67,
+          "target": "5",
+          "target_text": "performer"
+        }
+      ]
+    }
+  ],
+  "query_focus": null,
+  "question_id": "q1",
+  "raw_sdp_edges": [
+    {
+      "dep": "nationality",
+      "dep_idx": 2,
+      "formalism": "sdp/dm",
+      "head": "What",
+      "head_idx": 1,
+      "relation": "BV"
+    },
+    {
+      "dep": "nationality",
+      "dep_idx": 2,
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 3,
+      "relation": "ARG1"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/dm",
+      "head": "is",
+      "head_idx": 3,
+      "relation": "ARG1"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/dm",
+      "head": "the",
+      "head_idx": 4,
+      "relation": "BV"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/dm",
+      "head": "of",
+      "head_idx": 6,
+      "relation": "ARG1"
+    },
+    {
+      "dep": "is",
+      "dep_idx": 3,
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "relation": "root"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/pas",
+      "head": "is",
+      "head_idx": 3,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 4,
+      "relation": "det_ARG1"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/pas",
+      "head": "of",
+      "head_idx": 6,
+      "relation": "prep_ARG1"
+    },
+    {
+      "dep": "nationality",
+      "dep_idx": 2,
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 3,
+      "relation": "PAT-arg"
+    },
+    {
+      "dep": "performer",
+      "dep_idx": 5,
+      "formalism": "sdp/psd",
+      "head": "is",
+      "head_idx": 3,
+      "relation": "PAT-arg"
+    }
+  ],
+  "selected_paths": [
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A1.P1"
+    },
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A2.P1"
+    },
+    {
+      "node_ids": [
+        "8"
+      ],
+      "nodes": [
+        "ENTITYA"
+      ],
+      "path_id": "A3.P1"
+    }
+  ],
+  "selection_mode": "multi_anchor_candidates",
+  "terminals": [],
+  "tokens": [
+    "What",
+    "nationality",
+    "is",
+    "the",
+    "performer",
+    "of",
+    "song",
+    "ENTITYA",
+    "?"
+  ],
+  "virtual_edges": [
+    {
+      "consensus_count": 3,
+      "derived": true,
+      "edge_quality": "MEDIUM",
+      "provenance": [
+        {
+          "bridge": "is",
+          "bridge_id": "3",
+          "collapsed_path": [
+            "nationality",
+            "is",
+            "performer"
+          ],
+          "consensus_count": 3,
+          "derived": true,
+          "edge_quality": "MEDIUM",
+          "rule": "bridge_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 2,
+              "derived": false,
+              "edge_quality": "STRONG",
+              "provenance": [
+                {
+                  "consensus_count": 1,
+                  "dep": "nationality",
+                  "dep_idx": 2,
+                  "derived": false,
+                  "direction": "head_to_dep",
+                  "edge_quality": "STRONG",
+                  "formalism": "sdp/dm",
+                  "head": "is",
+                  "head_idx": 3,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg1",
+                  "relation": "ARG1",
+                  "rule": "raw_evidence",
+                  "support": 1.0
+                },
+                {
+                  "consensus_count": 1,
+                  "dep": "nationality",
+                  "dep_idx": 2,
+                  "derived": false,
+                  "direction": "head_to_dep",
+                  "edge_quality": "STRONG",
+                  "formalism": "sdp/psd",
+                  "head": "is",
+                  "head_idx": 3,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "pat-arg",
+                  "relation": "PAT-arg",
+                  "rule": "raw_evidence",
+                  "support": 1.0
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "2",
+              "source_text": "nationality",
+              "support": 1.0,
+              "target": "3",
+              "target_text": "is"
+            },
+            {
+              "consensus_count": 3,
+              "derived": false,
+              "edge_quality": "STRONG",
+              "provenance": [
+                {
+                  "consensus_count": 1,
+                  "dep": "performer",
+                  "dep_idx": 5,
+                  "derived": false,
+                  "direction": "head_to_dep",
+                  "edge_quality": "STRONG",
+                  "formalism": "sdp/dm",
+                  "head": "is",
+                  "head_idx": 3,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "arg1",
+                  "relation": "ARG1",
+                  "rule": "raw_evidence",
+                  "support": 1.0
+                },
+                {
+                  "consensus_count": 1,
+                  "dep": "performer",
+                  "dep_idx": 5,
+                  "derived": false,
+                  "direction": "head_to_dep",
+                  "edge_quality": "STRONG",
+                  "formalism": "sdp/pas",
+                  "head": "is",
+                  "head_idx": 3,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "verb_arg1",
+                  "relation": "verb_ARG1",
+                  "rule": "raw_evidence",
+                  "support": 1.0
+                },
+                {
+                  "consensus_count": 1,
+                  "dep": "performer",
+                  "dep_idx": 5,
+                  "derived": false,
+                  "direction": "head_to_dep",
+                  "edge_quality": "STRONG",
+                  "formalism": "sdp/psd",
+                  "head": "is",
+                  "head_idx": 3,
+                  "label_class": "CORE_ARG",
+                  "normalized_relation": "pat-arg",
+                  "relation": "PAT-arg",
+                  "rule": "raw_evidence",
+                  "support": 1.0
+                }
+              ],
+              "rule": "raw_evidence",
+              "source": "3",
+              "source_text": "is",
+              "support": 1.0,
+              "target": "5",
+              "target_text": "performer"
+            }
+          ],
+          "support": 0.67
+        }
+      ],
+      "rule": "bridge_contraction",
+      "source": "2",
+      "source_text": "nationality",
+      "support": 0.67,
+      "target": "5",
+      "target_text": "performer"
+    }
+  ],
+  "warnings": [
+    "answer anchor candidates collected: nationality[2]/typed_wh_slot+clause_predicate, performer[5]/clause_predicate, ENTITYA[8]/explicit_entity"
+  ]
+}

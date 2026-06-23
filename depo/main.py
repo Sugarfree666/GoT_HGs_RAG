@@ -113,7 +113,7 @@ def run_hanlp_sdp_pipeline(
     from tri_sdp_reasoning_compiler import compile_token_reasoning_structure
 
     preprocess_result = preprocessor.preprocess(record.question)
-    hanlp_input_sentence = preprocess_result.masked_question
+    hanlp_input_sentence = preprocess_result.sdp_input_sentence
     explicit_entities = [mapping.placeholder for mapping in preprocess_result.mask_mappings]
     hanlp_sdp_result = parser.parse(
         hanlp_input_sentence,
@@ -123,6 +123,10 @@ def run_hanlp_sdp_pipeline(
         hanlp_sdp_result,
         explicit_entities=explicit_entities,
         masked_question=preprocess_result.masked_question,
+        original_question=preprocess_result.original_question,
+        normalized_question=preprocess_result.normalized_question or preprocess_result.original_question,
+        normalization_changed=preprocess_result.normalization_changed,
+        normalization_note=preprocess_result.normalization_note,
         question_id=record.qid or f"q{index}",
         debug=debug,
         debug_dir=debug_dir,
@@ -151,6 +155,10 @@ def run_hanlp_sdp_pipeline(
         "preprocess_result": preprocess_result,
         "explicit_entities": preprocess_result.explicit_entities,
         "explicit_entity_payload": preprocess_result.explicit_entities.raw_payload,
+        "original_question": preprocess_result.original_question,
+        "normalized_question": preprocess_result.normalized_question,
+        "normalization_changed": preprocess_result.normalization_changed,
+        "normalization_note": preprocess_result.normalization_note,
         "masked_question": preprocess_result.masked_question,
         "sdp_input_sentence": preprocess_result.sdp_input_sentence,
         "hanlp_input_sentence": hanlp_input_sentence,
@@ -203,6 +211,10 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
             print(f" - {mapping.placeholder} -> {mapping.original_text}")
     else:
         print(" (none)")
+    if preprocess_result.normalized_question and preprocess_result.normalized_question != record.question:
+        print(f"Normalized question: {preprocess_result.normalized_question}")
+    else:
+        print("Normalized question: unchanged")
     print(f"Masked question: {preprocess_result.masked_question}")
     print()
 

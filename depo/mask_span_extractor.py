@@ -232,6 +232,11 @@ class ExplicitEntityExtractor:
                 )
                 raw_payload = raw if isinstance(raw, dict) else {}
                 raw_payload.setdefault("deterministic_candidates", candidate_payloads)
+                normalized_question, normalization_changed, normalization_note = self._parse_normalization_payload(
+                    question,
+                    raw_payload,
+                    warnings,
+                )
                 llm_entities = self._parse_payload(
                     question,
                     raw_payload,
@@ -257,6 +262,9 @@ class ExplicitEntityExtractor:
                     ),
                     warnings=warnings,
                     raw_payload=raw_payload,
+                    normalized_question=normalized_question,
+                    normalization_changed=normalization_changed,
+                    normalization_note=normalization_note,
                 )
             except Exception as exc:
                 warnings.append(f"Explicit entity LLM failed; using heuristic fallback: {exc}")
@@ -272,7 +280,36 @@ class ExplicitEntityExtractor:
             ),
             warnings=warnings,
             raw_payload=raw_payload,
+            normalized_question=question,
+            normalization_changed=False,
+            normalization_note="",
         )
+
+    @staticmethod
+    def _parse_normalization_payload(
+        question: str,
+        payload: dict[str, Any],
+        warnings: list[str],
+    ) -> tuple[str, bool, str]:
+        raw_normalized = payload.get("normalized_question")
+        if isinstance(raw_normalized, str) and raw_normalized.strip():
+            normalized_question = raw_normalized.strip()
+        else:
+            normalized_question = question
+            if "normalized_question" in payload and raw_normalized not in (None, ""):
+                warnings.append("Ignored invalid normalized_question from explicit entity payload.")
+
+        changed = _coerce_bool(
+            payload.get("normalization_changed"),
+            default=normalized_question != question,
+        )
+        if normalized_question == question:
+            changed = False
+        elif "normalization_changed" not in payload:
+            changed = True
+
+        note = str(payload.get("normalization_note") or "").strip()
+        return normalized_question, changed, note
 
     @staticmethod
     def _parse_payload(
@@ -307,7 +344,7 @@ class ExplicitEntityExtractor:
                     continue
                 candidate = candidates_by_id[candidate_id]
                 semantic_type_hint = _normalize_entity_type(
-                    raw.get("semantic_type_hint", raw.get("semantic_type", candidate.semantic_type_hint))
+                    raw.get("type", raw.get("semantic_type_hint", raw.get("semantic_type", candidate.semantic_type_hint)))
                 )
                 confidence = _clamp_float(raw.get("confidence", candidate.confidence), 0.0, 1.0)
                 entities.append(
@@ -324,7 +361,7 @@ class ExplicitEntityExtractor:
             if _normalize_kind_hint(raw.get("kind_hint", raw.get("kind", "entity"))) != "entity":
                 warnings.append(f"Dropped non-entity explicit entity item: {raw!r}.")
                 continue
-            text = str(raw.get("text", "")).strip()
+            text = str(raw.get("surface", raw.get("text", ""))).strip()
             start = _coerce_int(raw.get("start_char", raw.get("start")))
             end = _coerce_int(raw.get("end_char", raw.get("end")))
             if not text:
@@ -337,7 +374,7 @@ class ExplicitEntityExtractor:
             if _is_forbidden_explicit_entity(entity_text):
                 warnings.append(f"Dropped forbidden non-entity span text={entity_text!r}.")
                 continue
-            semantic_type_hint = _normalize_entity_type(raw.get("semantic_type_hint", raw.get("semantic_type", "")))
+            semantic_type_hint = _normalize_entity_type(raw.get("type", raw.get("semantic_type_hint", raw.get("semantic_type", ""))))
             entities.append(
                 ExplicitEntity(
                     text=question[start:end],

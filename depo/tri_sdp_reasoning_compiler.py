@@ -10,32 +10,29 @@ from typing import Any, Iterable
 from models import HanLPSDPEdge, HanLPSDPResult
 
 
-SOURCE_WEIGHTS = {
-    "sdp/dm": 1.00,
-    "sdp/psd": 0.90,
-    "sdp/pas": 0.85,
+EDGE_QUALITY_SCORES = {
+    "STRONG": 1.0,
+    "MEDIUM": 0.67,
+    "WEAK": 0.33,
 }
 
-CLASS_WEIGHTS = {
-    "CORE_ARG": 1.00,
-    "RESTRICT": 0.85,
-    "IDENTITY": 0.85,
-    "COORD": 0.70,
-    "BRIDGE": 0.35,
-    "MODIFIER": 0.25,
-    "UNKNOWN": 0.45,
+EDGE_QUALITY_RANK = {
+    "WEAK": 0,
+    "MEDIUM": 1,
+    "STRONG": 2,
 }
 
-DERIVED_PENALTIES = {
-    "bridge_contraction": 0.15,
-    "possessive_marker_contraction": 0.15,
-    "restriction_closure": 0.25,
-    "descriptor_lifting": 0.35,
-    "candidate_expansion": 0.10,
-    "candidate_slot_substitution": 0.10,
-    "candidate_bare_wh_substitution": 0.10,
-    "function_backbone_contraction": 0.20,
+LABEL_CLASS_EDGE_QUALITY = {
+    "CORE_ARG": "STRONG",
+    "RESTRICT": "STRONG",
+    "IDENTITY": "STRONG",
+    "COORD": "MEDIUM",
+    "MODIFIER": "MEDIUM",
+    "BRIDGE": "WEAK",
+    "UNKNOWN": "WEAK",
 }
+
+STRONG_BRIDGE_TOKENS = {"of", "in", "from", "by", "at", "on", "to", "with", "for", "as"}
 
 ENTITY_RE = re.compile(r"^ENTITY[A-Z0-9]*$")
 NUMERIC_RE = re.compile(r"^[+-]?(?:\d[\d,]*(?:\.\d+)?|\d{1,4}(?:[-/]\d{1,2}){1,2})%?$")
@@ -118,6 +115,8 @@ class TokenReasoningEdge:
     source_text: str
     target_text: str
     support: float = 0.0
+    edge_quality: str = "WEAK"
+    consensus_count: int = 0
     derived: bool = False
     rule: str = ""
     provenance: list[dict[str, Any]] = field(default_factory=list)
@@ -264,6 +263,10 @@ def compile_token_reasoning_structure(
     explicit_entities: list[str],
     *,
     masked_question: str | None = None,
+    original_question: str | None = None,
+    normalized_question: str | None = None,
+    normalization_changed: bool | None = None,
+    normalization_note: str | None = None,
     question_id: str | None = None,
     debug: bool = False,
     debug_dir: str | Path | None = None,
@@ -385,6 +388,10 @@ def compile_token_reasoning_structure(
     debug_payload = _build_debug_payload(
         question_id=question_id,
         masked_question=masked_question or hanlp_sdp_result.text,
+        original_question=original_question or hanlp_sdp_result.text,
+        normalized_question=normalized_question or masked_question or hanlp_sdp_result.text,
+        normalization_changed=bool(normalization_changed),
+        normalization_note=normalization_note or "",
         hanlp_sdp_result=hanlp_sdp_result,
         explicit_entities=explicit_entities,
         state=result_state,
@@ -488,9 +495,8 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
         source_id = str(raw_edge.head_idx)
         target_id = str(raw_edge.dep_idx)
         label_class = classify_label(raw_edge.relation)
-        source_weight = SOURCE_WEIGHTS.get(raw_edge.formalism, 0.75)
-        class_weight = CLASS_WEIGHTS[label_class]
-        support = source_weight * class_weight
+        edge_quality = LABEL_CLASS_EDGE_QUALITY[label_class]
+        support = EDGE_QUALITY_SCORES[edge_quality]
         provenance = {
             "formalism": raw_edge.formalism,
             "head_idx": raw_edge.head_idx,
@@ -501,8 +507,10 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
             "direction": "head_to_dep",
             "normalized_relation": _normalize_relation(raw_edge.relation),
             "label_class": label_class,
-            "source_weight": source_weight,
-            "class_weight": class_weight,
+            "edge_quality": edge_quality,
+            "consensus_count": 1,
+            "derived": False,
+            "rule": "raw_evidence",
             "support": support,
         }
         normalized_edges.append(provenance)
@@ -512,6 +520,7 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
             source_id,
             target_id,
             support=support,
+            edge_quality=edge_quality,
             derived=False,
             rule="raw_evidence",
             provenance=[provenance],
@@ -1147,7 +1156,7 @@ def _score_answer_anchor_candidate(
         "constraint": 3.0,
         "function": 0.0,
     }.get(node.kind, 1.0)
-    source_weights = {
+    anchor_source_weights = {
         "typed_wh_slot": 16.0,
         "root_projection": 14.0,
         "modifier_projection": 12.0,
@@ -1156,7 +1165,7 @@ def _score_answer_anchor_candidate(
         "clause_predicate": 8.0,
         "explicit_entity": 2.0,
     }
-    source_bonus = sum(source_weights.get(source_type, 1.0) for source_type in set(source_types))
+    source_bonus = sum(anchor_source_weights.get(source_type, 1.0) for source_type in set(source_types))
     support_bonus = min(2.0, sum(_anchor_evidence_support(item) for item in evidence))
     return round(source_bonus + kind_bonus + support_bonus, 6)
 
@@ -1340,7 +1349,6 @@ def add_bridge_contraction_edges(state: _WorkingState) -> None:
             for right_id in neighbors[left_index + 1 :]:
                 left_edge = state.edges[_edge_key(left_id, bridge.id)]
                 right_edge = state.edges[_edge_key(bridge.id, right_id)]
-                support = max(0.05, min(left_edge.support, right_edge.support) * 0.80)
                 provenance = {
                     "rule": "bridge_contraction",
                     "bridge": bridge.text,
@@ -1351,14 +1359,19 @@ def add_bridge_contraction_edges(state: _WorkingState) -> None:
                         state.nodes[right_id].text,
                     ],
                     "source_edges": [left_edge.to_dict(), right_edge.to_dict()],
-                    "support": support,
                 }
+                edge_quality = _infer_edge_quality(state.nodes, left_id, right_id, "bridge_contraction", [provenance])
+                support = EDGE_QUALITY_SCORES[edge_quality]
+                provenance["edge_quality"] = edge_quality
+                provenance["derived"] = True
+                provenance["support"] = support
                 virtual = _merge_edge(
                     state.edges,
                     state.nodes,
                     left_id,
                     right_id,
                     support=support,
+                    edge_quality=edge_quality,
                     derived=True,
                     rule="bridge_contraction",
                     provenance=[provenance],
@@ -1381,9 +1394,12 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                     continue
                 if not _is_high_salience_node(state.nodes[possessed_id], include_order_constraints=False):
                     continue
-                support = max(0.05, min(owner_edge.support, possessed_edge.support) * 0.90)
+                edge_quality = "STRONG"
+                support = EDGE_QUALITY_SCORES[edge_quality]
                 provenance = {
                     "rule": "possessive_marker_contraction",
+                    "edge_quality": edge_quality,
+                    "derived": True,
                     "marker": marker.text,
                     "marker_id": marker.id,
                     "collapsed_path": [
@@ -1400,6 +1416,7 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                     owner_id,
                     possessed_id,
                     support=support,
+                    edge_quality=edge_quality,
                     derived=True,
                     rule="possessive_marker_contraction",
                     provenance=[provenance],
@@ -1431,9 +1448,12 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
                 neighbor_edge = state.edges[neighbor_key]
                 if not (_edge_label_classes(neighbor_edge) & {"CORE_ARG", "IDENTITY", "RESTRICT", "UNKNOWN"}):
                     continue
-                support = max(0.05, min(restrict_edge.support, neighbor_edge.support) * 0.70)
+                edge_quality = "STRONG"
+                support = EDGE_QUALITY_SCORES[edge_quality]
                 provenance = {
                     "rule": "restriction_closure",
+                    "edge_quality": edge_quality,
+                    "derived": True,
                     "collapsed_path": [
                         state.nodes[candidate_head_id].text,
                         state.nodes[predicate].text,
@@ -1448,6 +1468,7 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
                     candidate_head_id,
                     neighbor_id,
                     support=support,
+                    edge_quality=edge_quality,
                     derived=True,
                     rule="restriction_closure",
                     provenance=[provenance],
@@ -1467,9 +1488,12 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
             for right_id in ordered_heads[left_index + 1 :]:
                 left_edge = state.edges[_edge_key(left_id, predicate_id)]
                 right_edge = state.edges[_edge_key(right_id, predicate_id)]
-                support = max(0.05, min(left_edge.support, right_edge.support) * 0.65)
+                edge_quality = "STRONG"
+                support = EDGE_QUALITY_SCORES[edge_quality]
                 provenance = {
                     "rule": "restriction_closure",
+                    "edge_quality": edge_quality,
+                    "derived": True,
                     "shared_predicate": state.nodes[predicate_id].text,
                     "collapsed_path": [
                         state.nodes[left_id].text,
@@ -1485,6 +1509,7 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
                     left_id,
                     right_id,
                     support=support,
+                    edge_quality=edge_quality,
                     derived=True,
                     rule="restriction_closure",
                     provenance=[provenance],
@@ -1522,9 +1547,12 @@ def add_descriptor_lifting_edges(
             ]
             if not source_edges:
                 continue
-            support = max(0.05, min(float(edge["support"]) for edge in source_edges) * 0.60)
+            edge_quality = "MEDIUM"
+            support = EDGE_QUALITY_SCORES[edge_quality]
             provenance = {
                 "rule": "descriptor_lifting",
+                "edge_quality": edge_quality,
+                "derived": True,
                 "collapsed_path": [state.nodes[node_id].text for node_id in path],
                 "source_edges": source_edges,
                 "support": support,
@@ -1535,6 +1563,7 @@ def add_descriptor_lifting_edges(
                 entity_id,
                 target_id,
                 support=support,
+                edge_quality=edge_quality,
                 derived=True,
                 rule="descriptor_lifting",
                 provenance=[provenance],
@@ -2020,6 +2049,77 @@ def _select_query_focused_paths(
     return [], "empty", candidate_records, "empty"
 
 
+def _collect_question_semantic_nodes(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    query_focus: _QueryFocus,
+    answer_anchor_id: str | None,
+) -> set[str]:
+    semantic_nodes: set[str] = set()
+
+    def add(node_id: str | None, *, force: bool = False) -> None:
+        if not node_id or node_id not in state.nodes:
+            return
+        if force or _is_semantic_node_candidate(state.nodes[node_id]):
+            semantic_nodes.add(node_id)
+
+    for entity_id in explicit_entity_ids:
+        add(entity_id, force=True)
+    for node_id in (
+        query_focus.answer_anchor_id,
+        query_focus.query_root_id,
+        query_focus.slot_id,
+        query_focus.terminal_id,
+        answer_anchor_id,
+    ):
+        add(node_id)
+    for node_id in query_focus.required_ids:
+        add(node_id)
+
+    for edge in state.edges.values():
+        if _normalize_edge_quality(edge.edge_quality) != "STRONG":
+            continue
+        if not _edge_has_core_semantic_evidence(edge):
+            continue
+        add(edge.source)
+        add(edge.target)
+
+    if not semantic_nodes:
+        for node in _sorted_nodes(state.nodes.values()):
+            if node.id != "0" and node.kind != "function":
+                semantic_nodes.add(node.id)
+                break
+    if not semantic_nodes:
+        for node in _sorted_nodes(state.nodes.values()):
+            if node.id != "0":
+                semantic_nodes.add(node.id)
+                break
+    return semantic_nodes
+
+
+def _is_semantic_node_candidate(node: TokenReasoningNode) -> bool:
+    if node.id == "0" or node.kind == "function":
+        return False
+    lower = node.text.lower()
+    if lower in WH_WORDS or lower in LIGHT_VERBS or lower in PREPOSITIONS or lower in DETERMINERS:
+        return False
+    if _is_punctuation(node.text):
+        return False
+    return node.kind in {"entity", "content", "constraint", "answer"}
+
+
+def _edge_has_core_semantic_evidence(edge: TokenReasoningEdge) -> bool:
+    if edge.derived and (
+        "bridge_contraction" in edge.rule
+        or "possessive_marker_contraction" in edge.rule
+        or "restriction_closure" in edge.rule
+        or "function_backbone_contraction" in edge.rule
+    ):
+        return True
+    classes = _edge_label_classes_deep(edge)
+    return bool(classes & {"CORE_ARG", "RESTRICT", "IDENTITY"})
+
+
 def _extract_typed_slot_candidate_path_cover(
     state: _WorkingState,
     query_focus: _QueryFocus,
@@ -2040,6 +2140,7 @@ def _extract_typed_slot_candidate_path_cover(
     if len(schema_path) < 2:
         return None
 
+    semantic_nodes = _collect_question_semantic_nodes(state, candidate_ids, query_focus, query_focus.answer_anchor_id)
     paths: list[TokenReasoningPath] = []
     selected_records: list[_CandidatePath] = []
     for path_index, candidate_id in enumerate(candidate_ids, start=1):
@@ -2056,6 +2157,7 @@ def _extract_typed_slot_candidate_path_cover(
             candidate_id,
             "candidate_slot_substitution",
             required_ids=schema_path[1:],
+            semantic_nodes=semantic_nodes,
         ).with_selection(selected=True)
         selected_records.append(record)
         paths.append(_path_from_ids(f"P{path_index}", state.nodes, branch))
@@ -2085,6 +2187,7 @@ def _extract_bare_wh_candidate_path_cover(
         candidate_ids = _candidate_text_set_to_ids(state.nodes, candidate_set)
         if len(candidate_ids) < 2:
             continue
+        semantic_nodes = _collect_question_semantic_nodes(state, candidate_ids, query_focus, query_focus.answer_anchor_id)
         paths: list[TokenReasoningPath] = []
         selected_records: list[_CandidatePath] = []
         for path_index, candidate_id in enumerate(candidate_ids, start=1):
@@ -2108,6 +2211,7 @@ def _extract_bare_wh_candidate_path_cover(
                 candidate_id,
                 "candidate_bare_wh_substitution",
                 required_ids=schema_path[1:],
+                semantic_nodes=semantic_nodes,
             ).with_selection(selected=True)
             selected_records.append(record)
             paths.append(_path_from_ids(f"P{path_index}", state.nodes, branch))
@@ -2133,6 +2237,7 @@ def _extract_actual_parallel_path_cover(
             for entity_id, head_id in dict(parallel_set.get("branch_heads") or {}).items()
             if str(head_id) in state.nodes
         }
+        semantic_nodes = _collect_question_semantic_nodes(state, entity_ids, query_focus, query_focus.answer_anchor_id)
         selected: list[_CandidatePath] = []
         viable = True
         for entity_id in entity_ids:
@@ -2145,6 +2250,7 @@ def _extract_actual_parallel_path_cover(
                 query_focus,
                 forbidden_entity_ids=set(entity_ids) - {entity_id},
                 required_ids=_unique_node_ids(required_ids, state.nodes),
+                semantic_nodes=semantic_nodes,
             )
             all_records.extend(candidates)
             if not candidates:
@@ -2178,6 +2284,7 @@ def _select_single_main_path(
 ) -> tuple[TokenReasoningPath | None, str, _CandidatePath | None, list[_CandidatePath]]:
     all_records: list[_CandidatePath] = []
     entity_best: list[_CandidatePath] = []
+    semantic_nodes = _collect_question_semantic_nodes(state, explicit_entity_ids, query_focus, query_focus.answer_anchor_id)
     for entity_id in explicit_entity_ids:
         candidates = _enumerate_entity_focus_paths(
             state,
@@ -2185,6 +2292,7 @@ def _select_single_main_path(
             query_focus,
             forbidden_entity_ids=set(explicit_entity_ids) - {entity_id},
             required_ids=list(query_focus.required_ids),
+            semantic_nodes=semantic_nodes,
         )
         all_records.extend(candidates)
         if candidates:
@@ -2195,7 +2303,7 @@ def _select_single_main_path(
 
     selected = sorted(entity_best, key=lambda record: record.rank)[0]
     path_type = "single_main_path"
-    if selected.rank_components.get("missing_required_focus_count", 0) or selected.search_pass != "strong":
+    if selected.rank_components.get("missing_semantic_nodes_count", 0) or selected.search_pass != "strong":
         path_type = "fallback_main_path"
     return _path_from_ids("P1", state.nodes, list(selected.node_ids)), path_type, selected, all_records
 
@@ -2207,6 +2315,7 @@ def _enumerate_entity_focus_paths(
     *,
     forbidden_entity_ids: set[str],
     required_ids: list[str],
+    semantic_nodes: set[str],
 ) -> list[_CandidatePath]:
     if entity_id not in state.nodes:
         return []
@@ -2214,19 +2323,25 @@ def _enumerate_entity_focus_paths(
     if not target_id or target_id not in state.nodes:
         return []
     candidates: list[_CandidatePath] = []
+    seen_paths: set[tuple[str, ...]] = set()
+    effective_forbidden = set(forbidden_entity_ids) - set(semantic_nodes)
     for search_pass, allow_weak in (("strong", False), ("weak", True)):
         raw_paths = _bounded_k_simple_paths(
             state.nodes,
             state.edges,
             source_id=entity_id,
             target_id=target_id,
-            forbidden_nodes=forbidden_entity_ids,
+            forbidden_nodes=effective_forbidden,
             required_ids=set(required_ids),
             allow_weak=allow_weak,
             max_nodes=12,
             top_k=12,
         )
         for path in raw_paths:
+            key = tuple(path)
+            if key in seen_paths:
+                continue
+            seen_paths.add(key)
             candidates.append(
                 _rank_candidate_path(
                     state.nodes,
@@ -2236,10 +2351,9 @@ def _enumerate_entity_focus_paths(
                     entity_id,
                     search_pass,
                     required_ids=required_ids,
+                    semantic_nodes=semantic_nodes,
                 )
             )
-        if candidates:
-            break
     candidates.sort(key=lambda record: record.rank)
     return candidates[:12]
 
@@ -2292,18 +2406,28 @@ def _path_search_sort_key(
     nodes: dict[str, TokenReasoningNode],
     edges: dict[tuple[str, str], TokenReasoningEdge],
     path: list[str],
-) -> tuple[float, int, int, tuple[int, ...]]:
-    total_derived_penalty = 0.0
-    descriptor_lifting_count = 0
+) -> tuple[Any, ...]:
+    weak_edge_count = 0
+    medium_edge_count = 0
+    derived_edge_count = 0
+    strong_edge_count = 0
+    consensus_count = 0
     for left, right in zip(path, path[1:]):
         edge = edges.get(_edge_key(left, right))
         if edge is None:
-            total_derived_penalty += 1_000_000.0
+            weak_edge_count += 1_000_000
             continue
-        total_derived_penalty += _edge_rule_penalty(edge)
-        if "descriptor_lifting" in edge.rule:
-            descriptor_lifting_count += 1
-    return (total_derived_penalty, descriptor_lifting_count, len(path), _path_index_tuple(path, nodes))
+        quality = _normalize_edge_quality(edge.edge_quality)
+        if quality == "WEAK":
+            weak_edge_count += 1
+        elif quality == "MEDIUM":
+            medium_edge_count += 1
+        elif quality == "STRONG":
+            strong_edge_count += 1
+        if edge.derived:
+            derived_edge_count += 1
+        consensus_count += edge.consensus_count
+    return (weak_edge_count, medium_edge_count, derived_edge_count, len(path) - 1, -strong_edge_count, -consensus_count, _path_index_tuple(path, nodes))
 
 
 def _search_neighbor_edges(
@@ -2356,51 +2480,66 @@ def _rank_candidate_path(
     search_pass: str,
     *,
     required_ids: Iterable[str],
+    semantic_nodes: set[str],
 ) -> _CandidatePath:
-    required = [node_id for node_id in _unique_node_ids(required_ids, nodes) if node_id in nodes]
+    del required_ids
     path_set = set(path_ids)
-    missing_required_count = len([node_id for node_id in required if node_id not in path_set])
-    descriptor_lifting_count = 0
-    total_derived_penalty = 0.0
-    evidence_cost = 0.0
+    ordered_semantic_nodes = _sort_node_ids([node_id for node_id in semantic_nodes if node_id in nodes], nodes)
+    covered_semantic_nodes = [node_id for node_id in ordered_semantic_nodes if node_id in path_set]
+    missing_semantic_nodes = [node_id for node_id in ordered_semantic_nodes if node_id not in path_set]
+    strong_edge_count = 0
+    medium_edge_count = 0
+    weak_edge_count = 0
+    derived_edge_count = 0
+    consensus_count = 0
     for left, right in zip(path_ids, path_ids[1:]):
         edge = edges.get(_edge_key(left, right))
         if edge is None:
-            evidence_cost += 1_000_000.0
+            weak_edge_count += 1
             continue
-        if "descriptor_lifting" in edge.rule:
-            descriptor_lifting_count += 1
-        penalty = _edge_rule_penalty(edge)
-        total_derived_penalty += penalty
-        evidence_cost += 1.0 / max(edge.support, 1e-6) + penalty
+        quality = _normalize_edge_quality(edge.edge_quality)
+        if quality == "STRONG":
+            strong_edge_count += 1
+        elif quality == "MEDIUM":
+            medium_edge_count += 1
+        else:
+            weak_edge_count += 1
+        if edge.derived:
+            derived_edge_count += 1
+        consensus_count += edge.consensus_count
 
     function_node_count = sum(
         1
         for node_id in path_ids
-        if nodes[node_id].kind == "function" and node_id != query_focus.terminal_id
+        if nodes[node_id].kind == "function"
+    )
+    rank = (
+        len(missing_semantic_nodes),
+        weak_edge_count,
+        medium_edge_count,
+        function_node_count,
+        derived_edge_count,
+        max(len(path_ids) - 1, 0),
+        -strong_edge_count,
+        -consensus_count,
     )
     components = {
-        "missing_required_focus_count": missing_required_count,
-        "source_entry_tier": _source_entry_tier(edges, path_ids),
-        "low_salience_prefix_length": _low_salience_prefix_length(edges, path_ids),
-        "descriptor_lifting_count": descriptor_lifting_count,
-        "total_derived_penalty": round(total_derived_penalty, 6),
+        "missing_semantic_nodes_count": len(missing_semantic_nodes),
+        "semantic_nodes": [nodes[node_id].text for node_id in ordered_semantic_nodes],
+        "semantic_node_ids": ordered_semantic_nodes,
+        "covered_semantic_nodes": [nodes[node_id].text for node_id in covered_semantic_nodes],
+        "covered_semantic_node_ids": covered_semantic_nodes,
+        "missing_semantic_nodes": [nodes[node_id].text for node_id in missing_semantic_nodes],
+        "missing_semantic_node_ids": missing_semantic_nodes,
+        "strong_edge_count": strong_edge_count,
+        "medium_edge_count": medium_edge_count,
+        "weak_edge_count": weak_edge_count,
         "function_node_count": function_node_count,
-        "evidence_cost": round(evidence_cost, 6),
-        "path_length": len(path_ids),
-        "token_index_tuple": list(_path_index_tuple(path_ids, nodes)),
+        "derived_edge_count": derived_edge_count,
+        "path_length": max(len(path_ids) - 1, 0),
+        "consensus_count": consensus_count,
+        "rank": list(rank),
     }
-    rank = (
-        components["missing_required_focus_count"],
-        components["source_entry_tier"],
-        components["low_salience_prefix_length"],
-        components["descriptor_lifting_count"],
-        components["total_derived_penalty"],
-        components["function_node_count"],
-        components["evidence_cost"],
-        components["path_length"],
-        tuple(components["token_index_tuple"]),
-    )
     return _CandidatePath(
         source_entity_id=source_entity_id,
         node_ids=tuple(path_ids),
@@ -2445,11 +2584,8 @@ def _low_salience_prefix_length(edges: dict[tuple[str, str], TokenReasoningEdge]
 
 
 def _edge_rule_penalty(edge: TokenReasoningEdge) -> float:
-    total = 0.0
-    for rule, penalty in DERIVED_PENALTIES.items():
-        if rule in edge.rule:
-            total += penalty
-    return total
+    del edge
+    return 0.0
 
 
 def _edge_label_classes_deep(edge: TokenReasoningEdge) -> set[str]:
@@ -2850,6 +2986,7 @@ def _best_schema_path(state: _WorkingState, slot_id: str, focus_id: str) -> list
             source_entity_id=None,
             search_pass="schema",
             required_ids=[focus_id],
+            semantic_nodes={focus_id},
         )
         for path in paths
     ]
@@ -2916,8 +3053,12 @@ def _ensure_candidate_slot_edge(
     if _edge_key(candidate_id, successor_id) in state.edges:
         return
     schema_edge = state.edges.get(_edge_key(slot_id, successor_id))
+    edge_quality = "MEDIUM"
+    support = EDGE_QUALITY_SCORES[edge_quality]
     provenance = {
         "rule": "candidate_slot_substitution",
+        "edge_quality": edge_quality,
+        "derived": True,
         "typed_wh_slot_id": slot_id,
         "typed_wh_slot": state.nodes[slot_id].text,
         "typed_wh_evidence": _typed_wh_slot_evidence(state, slot_id),
@@ -2935,7 +3076,8 @@ def _ensure_candidate_slot_edge(
         state.nodes,
         candidate_id,
         successor_id,
-        support=0.80,
+        support=support,
+        edge_quality=edge_quality,
         derived=True,
         rule="candidate_slot_substitution",
         provenance=[provenance],
@@ -2989,9 +3131,12 @@ def _ensure_candidate_bare_wh_edge(
         return
     schema_edge = state.edges.get(_edge_key(wh_id, successor_id))
     wh_predicate_edge = state.raw_edges.get(_edge_key(wh_id, query_root_id))
-    support = max(0.05, min((schema_edge.support if schema_edge else 0.80), 0.80))
+    edge_quality = "MEDIUM"
+    support = EDGE_QUALITY_SCORES[edge_quality]
     provenance = {
         "rule": "candidate_bare_wh_substitution",
+        "edge_quality": edge_quality,
+        "derived": True,
         "candidate_id": candidate_id,
         "candidate": state.nodes[candidate_id].text,
         "bare_wh_slot_id": wh_id,
@@ -3013,6 +3158,7 @@ def _ensure_candidate_bare_wh_edge(
         candidate_id,
         successor_id,
         support=support,
+        edge_quality=edge_quality,
         derived=True,
         rule="candidate_bare_wh_substitution",
         provenance=[provenance],
@@ -3175,6 +3321,8 @@ def _extract_candidate_path_cover(
             if first_pair not in state.edges:
                 provenance = {
                     "rule": "candidate_expansion",
+                    "edge_quality": "MEDIUM",
+                    "derived": True,
                     "candidate": state.nodes[candidate_id].text,
                     "schema_path": [state.nodes[node_id].text for node_id in schema_path],
                 }
@@ -3183,7 +3331,8 @@ def _extract_candidate_path_cover(
                     state.nodes,
                     branch[0],
                     branch[1],
-                    support=0.80,
+                    support=EDGE_QUALITY_SCORES["MEDIUM"],
+                    edge_quality="MEDIUM",
                     derived=True,
                     rule="candidate_expansion",
                     provenance=[provenance],
@@ -3253,6 +3402,10 @@ def _build_debug_payload(
     *,
     question_id: str | None,
     masked_question: str,
+    original_question: str,
+    normalized_question: str,
+    normalization_changed: bool,
+    normalization_note: str,
     hanlp_sdp_result: HanLPSDPResult,
     explicit_entities: list[str],
     state: _WorkingState,
@@ -3276,6 +3429,10 @@ def _build_debug_payload(
 ) -> dict[str, Any]:
     return {
         "question_id": question_id,
+        "original_question": original_question,
+        "normalized_question": normalized_question,
+        "normalization_changed": normalization_changed,
+        "normalization_note": normalization_note,
         "masked_question": masked_question,
         "tokens": list(hanlp_sdp_result.tokens),
         "explicit_entities": list(explicit_entities),
@@ -3426,6 +3583,130 @@ def _merge_candidate_set_lists(
     return result
 
 
+def _normalize_edge_quality(edge_quality: str | None) -> str:
+    value = str(edge_quality or "WEAK").upper()
+    return value if value in EDGE_QUALITY_SCORES else "WEAK"
+
+
+def _infer_edge_quality(
+    nodes: dict[str, TokenReasoningNode],
+    source_id: str,
+    target_id: str,
+    rule: str,
+    provenance: list[dict[str, Any]],
+) -> str:
+    explicit = _highest_quality(
+        str(item.get("edge_quality"))
+        for item in provenance
+        if isinstance(item, dict) and item.get("edge_quality")
+    )
+    if explicit:
+        return explicit
+    if "descriptor_lifting" in rule:
+        return "MEDIUM"
+    if "candidate_expansion" in rule or "candidate_slot_substitution" in rule or "candidate_bare_wh_substitution" in rule:
+        return "MEDIUM"
+    if "bridge_contraction" in rule:
+        if _is_high_salience_node(nodes[source_id], include_order_constraints=True) and _is_high_salience_node(nodes[target_id], include_order_constraints=True):
+            return "STRONG" if _bridge_contraction_has_strong_evidence(provenance) else "MEDIUM"
+        return "WEAK"
+    if "possessive_marker_contraction" in rule or "restriction_closure" in rule:
+        return "STRONG"
+    if "function_backbone_contraction" in rule:
+        return "MEDIUM"
+    labels = _label_class_values_from_payload(provenance)
+    if labels:
+        return _highest_quality(LABEL_CLASS_EDGE_QUALITY.get(label, "WEAK") for label in labels) or "WEAK"
+    return "WEAK"
+
+
+def _highest_quality(values: Iterable[str | None]) -> str | None:
+    best: str | None = None
+    for value in values:
+        quality = _normalize_edge_quality(value)
+        if best is None or EDGE_QUALITY_RANK[quality] > EDGE_QUALITY_RANK[best]:
+            best = quality
+    return best
+
+
+def _label_class_values_from_payload(payload: Any) -> list[str]:
+    values: list[str] = []
+
+    def visit(item: Any) -> None:
+        if isinstance(item, dict):
+            label_class = item.get("label_class")
+            if label_class:
+                values.append(str(label_class))
+            for source_edge in item.get("source_edges") or []:
+                visit(source_edge)
+            for provenance in item.get("provenance") or []:
+                visit(provenance)
+        elif isinstance(item, list):
+            for nested in item:
+                visit(nested)
+
+    visit(payload)
+    return values
+
+
+def _bridge_contraction_has_strong_evidence(provenance: list[dict[str, Any]]) -> bool:
+    for item in provenance:
+        bridge = str(item.get("bridge") or "").lower()
+        if bridge in STRONG_BRIDGE_TOKENS:
+            return True
+        source_edges = item.get("source_edges") or []
+        relation_keys: set[str] = set()
+        for source_edge in source_edges:
+            relation_keys.update(_relation_keys_from_payload(source_edge))
+        if any(key.startswith("prep_arg") for key in relation_keys):
+            return True
+        if {"arg1", "arg2"} <= relation_keys:
+            return True
+    return False
+
+
+def _relation_keys_from_payload(payload: Any) -> set[str]:
+    relations: set[str] = set()
+
+    def visit(item: Any) -> None:
+        if isinstance(item, dict):
+            relation = item.get("normalized_relation") or item.get("relation")
+            if relation:
+                relations.add(_normalized_relation_key(str(relation)))
+            for source_edge in item.get("source_edges") or []:
+                visit(source_edge)
+            for provenance in item.get("provenance") or []:
+                visit(provenance)
+        elif isinstance(item, list):
+            for nested in item:
+                visit(nested)
+
+    visit(payload)
+    return relations
+
+
+def _consensus_count_from_provenance(provenance: list[dict[str, Any]]) -> int:
+    formalisms: set[str] = set()
+
+    def visit(item: Any) -> None:
+        if isinstance(item, dict):
+            formalism = item.get("formalism")
+            if formalism:
+                formalisms.add(str(formalism))
+            for source_edge in item.get("source_edges") or []:
+                visit(source_edge)
+            for nested in item.get("provenance") or []:
+                visit(nested)
+            for nested in item.get("evidence") or []:
+                visit(nested)
+        elif isinstance(item, list):
+            for nested in item:
+                visit(nested)
+
+    visit(provenance)
+    return len(formalisms)
+
+
 def _merge_edge(
     edge_map: dict[tuple[str, str], TokenReasoningEdge],
     nodes: dict[str, TokenReasoningNode],
@@ -3433,12 +3714,25 @@ def _merge_edge(
     target_id: str,
     *,
     support: float,
+    edge_quality: str | None = None,
     derived: bool,
     rule: str,
     provenance: list[dict[str, Any]],
 ) -> TokenReasoningEdge:
+    edge_quality = _normalize_edge_quality(edge_quality or _infer_edge_quality(nodes, source_id, target_id, rule, provenance))
     if source_id == target_id:
-        return TokenReasoningEdge(source_id, target_id, nodes[source_id].text, nodes[target_id].text)
+        return TokenReasoningEdge(
+            source_id,
+            target_id,
+            nodes[source_id].text,
+            nodes[target_id].text,
+            support=EDGE_QUALITY_SCORES[edge_quality],
+            edge_quality=edge_quality,
+            consensus_count=_consensus_count_from_provenance(provenance),
+            derived=derived,
+            rule=rule,
+            provenance=list(provenance),
+        )
     key = _edge_key(source_id, target_id)
     source, target = key
     if key not in edge_map:
@@ -3447,17 +3741,28 @@ def _merge_edge(
             target=target,
             source_text=nodes[source].text,
             target_text=nodes[target].text,
-            support=0.0,
+            support=EDGE_QUALITY_SCORES[edge_quality],
+            edge_quality=edge_quality,
+            consensus_count=0,
             derived=derived,
             rule=rule if derived else "raw_evidence",
             provenance=[],
         )
     edge = edge_map[key]
-    edge.support += support
+    if EDGE_QUALITY_RANK[edge_quality] > EDGE_QUALITY_RANK.get(edge.edge_quality, 0):
+        edge.edge_quality = edge_quality
+    edge.support = EDGE_QUALITY_SCORES[_normalize_edge_quality(edge.edge_quality)]
     edge.derived = edge.derived or derived
     if derived:
         edge.rule = _combine_rules(edge.rule, rule)
     edge.provenance.extend(provenance)
+    edge.consensus_count = _consensus_count_from_provenance(edge.provenance)
+    for item in provenance:
+        if isinstance(item, dict):
+            item.setdefault("edge_quality", edge_quality)
+            item.setdefault("consensus_count", edge.consensus_count)
+            item.setdefault("derived", derived)
+            item.setdefault("rule", rule)
     return edge
 
 
@@ -3468,6 +3773,8 @@ def _copy_edge(edge: TokenReasoningEdge) -> TokenReasoningEdge:
         source_text=edge.source_text,
         target_text=edge.target_text,
         support=edge.support,
+        edge_quality=edge.edge_quality,
+        consensus_count=edge.consensus_count,
         derived=edge.derived,
         rule=edge.rule,
         provenance=[dict(item) for item in edge.provenance],
@@ -3813,15 +4120,15 @@ def _weighted_adjacency(
 
 
 def _edge_cost(edge: TokenReasoningEdge, source: TokenReasoningNode, target: TokenReasoningNode) -> float:
-    support = max(edge.support, 1e-6)
-    cost = 1.0 / support
+    quality = _normalize_edge_quality(edge.edge_quality)
+    quality_cost = {"STRONG": 1.0, "MEDIUM": 2.0, "WEAK": 4.0}[quality]
+    cost = quality_cost
     if edge.derived:
-        for rule, penalty in DERIVED_PENALTIES.items():
-            if rule in edge.rule:
-                cost += penalty
+        cost += 0.25
     cost += 0.01 * abs(source.index - target.index)
     if source.kind == "function" or target.kind == "function":
         cost += 0.20
+    cost -= min(edge.consensus_count, 3) * 0.02
     return cost
 
 
@@ -3973,18 +4280,23 @@ def _contract_function_backbone_nodes(
                     for edge in (left_edge, right_edge)
                     if edge is not None
                 ]
-                support = max(0.05, min((edge.support for edge in (left_edge, right_edge) if edge is not None), default=0.2) * 0.70)
+                edge_quality = "MEDIUM"
+                support = EDGE_QUALITY_SCORES[edge_quality]
                 _merge_edge(
                     edges,
                     nodes,
                     left_id,
                     right_id,
                     support=support,
+                    edge_quality=edge_quality,
                     derived=True,
                     rule="function_backbone_contraction",
                     provenance=[
                         {
                             "rule": "function_backbone_contraction",
+                            "edge_quality": edge_quality,
+                            "derived": True,
+                            "support": support,
                             "bridge": nodes[node_id].text,
                             "collapsed_path": [nodes[left_id].text, nodes[node_id].text, nodes[right_id].text],
                             "source_edges": source_edges,
@@ -4207,6 +4519,8 @@ def _final_edges(
                 source_text=nodes[source].text,
                 target_text=nodes[target].text,
                 support=0.0,
+                edge_quality="WEAK",
+                consensus_count=0,
             )
         final_edges.append(
             TokenReasoningEdge(
@@ -4215,6 +4529,8 @@ def _final_edges(
                 source_text=nodes[source].text,
                 target_text=nodes[target].text,
                 support=base.support,
+                edge_quality=base.edge_quality,
+                consensus_count=base.consensus_count,
                 derived=base.derived,
                 rule=base.rule,
                 provenance=list(base.provenance),
