@@ -140,155 +140,187 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = """
-You are DEPO Step 5: Complete Atomic Question DAG Generator.
+You are an expert question decomposition module.
 
-Definition of an atomic question:
+Your task is to convert a complex question into an Atomic Question DAG.
 
-1. It asks for exactly one retrievable fact, relation, attribute, comparison, selection, or aggregation.
-2. It has exactly one unknown answer.
-3. It performs one semantic operation.
-4. It must not contain an unresolved nested relation.
-5. If an argument must first be obtained from another question, refer to it naturally as q1's answer, q2's answer, etc., and list that id in depends_on.
-6. Fixed restrictions from the original question--such as dates, awards, locations, ranges, time conditions, or descriptive clauses--may remain in one atomic question. They constrain the lookup and do not create an additional reasoning hop.
+You are given:
 
-Task:
+* the original question
+* one or more parser-grounded token paths
 
-Generate the complete Atomic Question DAG needed to answer the original question using:
+Use the original question to understand the full meaning.
+Use the token paths as optional structural evidence. They may help identify reasoning order, but the original question is authoritative.
+The paths are not natural-language sentences; they are compact evidence chains.
 
-- the original question for semantic interpretation and final reasoning intent;
-- the supplied parser-grounded token paths as structural hints.
+Atomic question definition:
+An atomic question asks for one missing answer using one semantic operation. It should be directly answerable once its dependencies are resolved. It must not contain an unresolved nested relation that should be asked first.
 
-The paths contain original entity names. Treat them as structural evidence, not as literal natural-language templates.
+Core principles:
 
-Rules:
+1. Generate the complete set of atomic questions needed to answer the original question.
+2. Preserve all entities, constraints, comparison conditions, and answer intent from the original question.
+3. Use natural questions, not symbolic triples.
+4. If a question depends on a previous answer, refer to it as q1's answer, q2's answer, etc.
+5. Every dependency mentioned in question text must also appear in depends_on.
+6. Evidence lookup questions should use support from one contiguous span of a supplied path.
+7. Final comparison, selection, equality, ranking, or aggregation questions may use support: null.
+8. Do not answer the questions.
+9. Do not invent entities, relations, dates, or constraints not present in the original question or paths.
+10. Do not leave unresolved placeholders such as ENTITYA or ENTITYB if the path already contains the restored entity name.
+11. Return valid JSON only.
 
-1. Every node must be a single atomic question.
-2. Final comparison, equality, ranking, selection, and aggregation nodes are allowed.
-3. depends_on may be empty, contain one previous node, or contain multiple previous nodes.
-4. Cross-path dependencies are allowed when needed to answer the original question.
-5. For comparison or selection questions, first generate the required factual evidence questions for each candidate, then generate the final comparison/selection node.
-6. For words such as younger, older, earlier, later, first ask for comparable evidence such as birth date, date, age, or another appropriate attribute, then compare those evidence answers.
-7. If a question text uses a previous answer, write it as qN's answer and include qN in depends_on.
-8. Do not leave unresolved ENTITYA, ENTITYB, or similar placeholders. Use the original entity names already present in the paths.
-9. Do not invent unrelated named entities, dates, predicates, or restrictions.
-10. Do not answer any question.
-11. Do not return support spans, path indexes, edges, rationale, analysis, answers, or chain-of-thought.
-12. Return valid JSON only.
-
-Output JSON shape:
-
+Output format:
 {
-  "nodes": [
-    {
-      "id": "q1",
-      "question": "single atomic question?",
-      "depends_on": []
-    },
-    {
-      "id": "q2",
-      "question": "single atomic question using q1's answer if needed?",
-      "depends_on": ["q1"]
-    },
-    {
-      "id": "q3",
-      "question": "final comparison or selection question using q1's answer and q2's answer?",
-      "depends_on": ["q1", "q2"]
-    }
-  ]
+"nodes": [
+{
+"id": "q1",
+"question": "atomic question?",
+"depends_on": [],
+"support": {
+"path_id": "P1",
+"start_index": 0,
+"end_index": 1
+}
+}
+]
 }
 
-Do not return support, edges, rationale, analysis, answers, or chain-of-thought.
+Support format:
 
-Example A input:
+* path_id: the id of the supporting path
+* start_index: the first token index in the path span
+* end_index: the last token index in the path span
+* use support: null only for final reasoning nodes that do not correspond to one contiguous path span
 
+Example 1 input:
 {
-  "original_question": "The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?",
-  "paths": [
-    {
-      "path_id": "P1",
-      "nodes": [
-        {"index": 0, "text": "Johnny Majors"},
-        {"index": 1, "text": "defeated"},
-        {"index": 2, "text": "player"},
-        {"index": 3, "text": "born"},
-        {"index": 4, "text": "year"}
-      ]
-    }
-  ]
+"original_question": "What nationality is the performer of song When The Stars Go Blue?",
+"paths": [
+{
+"path_id": "P1",
+"nodes": [
+{"index": 0, "text": "When The Stars Go Blue"},
+{"index": 1, "text": "performer"},
+{"index": 2, "text": "nationality"}
+]
+}
+]
 }
 
-Example A output:
-
+Example 1 output:
 {
-  "nodes": [
-    {
-      "id": "q1",
-      "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
-      "depends_on": []
-    },
-    {
-      "id": "q2",
-      "question": "What year was q1's answer born?",
-      "depends_on": ["q1"]
-    }
-  ]
+"nodes": [
+{
+"id": "q1",
+"question": "Who is the performer of When The Stars Go Blue?",
+"depends_on": [],
+"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+},
+{
+"id": "q2",
+"question": "What is the nationality of q1's answer?",
+"depends_on": ["q1"],
+"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
+}
+]
 }
 
-Example B input:
-
+Example 2 input:
 {
-  "original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?",
-  "paths": [
-    {
-      "path_id": "P1",
-      "nodes": [
-        {"index": 0, "text": "Dangerously They Live"},
-        {"index": 1, "text": "director"},
-        {"index": 2, "text": "younger"}
-      ]
-    },
-    {
-      "path_id": "P2",
-      "nodes": [
-        {"index": 0, "text": "Salad By The Roots"},
-        {"index": 1, "text": "director"},
-        {"index": 2, "text": "younger"}
-      ]
-    }
-  ]
+"original_question": "Which country is the composer of film Thunder On The Hill from?",
+"paths": [
+{
+"path_id": "P1",
+"nodes": [
+{"index": 0, "text": "Thunder On The Hill"},
+{"index": 1, "text": "composer"},
+{"index": 2, "text": "country"}
+]
+}
+]
 }
 
-Example B output:
-
+Example 2 output:
 {
-  "nodes": [
-    {
-      "id": "q1",
-      "question": "Who directed Dangerously They Live?",
-      "depends_on": []
-    },
-    {
-      "id": "q2",
-      "question": "When was q1's answer born?",
-      "depends_on": ["q1"]
-    },
-    {
-      "id": "q3",
-      "question": "Who directed Salad By The Roots?",
-      "depends_on": []
-    },
-    {
-      "id": "q4",
-      "question": "When was q3's answer born?",
-      "depends_on": ["q3"]
-    },
-    {
-      "id": "q5",
-      "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
-      "depends_on": ["q2", "q4"]
-    }
-  ]
+"nodes": [
+{
+"id": "q1",
+"question": "Who is the composer of Thunder On The Hill?",
+"depends_on": [],
+"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+},
+{
+"id": "q2",
+"question": "Which country is q1's answer from?",
+"depends_on": ["q1"],
+"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
 }
+]
+}
+
+Example 3 input:
+{
+"original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?",
+"paths": [
+{
+"path_id": "P1",
+"nodes": [
+{"index": 0, "text": "Dangerously They Live"},
+{"index": 1, "text": "director"},
+{"index": 2, "text": "younger"}
+]
+},
+{
+"path_id": "P2",
+"nodes": [
+{"index": 0, "text": "Salad By The Roots"},
+{"index": 1, "text": "director"},
+{"index": 2, "text": "younger"}
+]
+}
+]
+}
+
+Example 3 output:
+{
+"nodes": [
+{
+"id": "q1",
+"question": "Who directed Dangerously They Live?",
+"depends_on": [],
+"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+},
+{
+"id": "q2",
+"question": "When was q1's answer born?",
+"depends_on": ["q1"],
+"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
+},
+{
+"id": "q3",
+"question": "Who directed Salad By The Roots?",
+"depends_on": [],
+"support": {"path_id": "P2", "start_index": 0, "end_index": 1}
+},
+{
+"id": "q4",
+"question": "When was q3's answer born?",
+"depends_on": ["q3"],
+"support": {"path_id": "P2", "start_index": 1, "end_index": 2}
+},
+{
+"id": "q5",
+"question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
+"depends_on": ["q2", "q4"],
+"support": null
+}
+]
+}
+
+Now generate the Atomic Question DAG for the given input JSON.
+Return only the JSON object.
+
 """.strip()
 
 
