@@ -142,6 +142,7 @@ class TokenReasoningStructureResult:
     paths: list[TokenReasoningPath]
     path_type: str
     anchor_path_results: list[dict[str, Any]] = field(default_factory=list)
+    global_selection: dict[str, Any] = field(default_factory=dict)
     answer_anchor: str | None = None
     answer_anchor_id: str | None = None
     entity_anchors: list[str] = field(default_factory=list)
@@ -158,6 +159,7 @@ class TokenReasoningStructureResult:
             "paths": [path.to_dict() for path in self.paths],
             "path_type": self.path_type,
             "anchor_path_results": list(self.anchor_path_results),
+            "global_selection": dict(self.global_selection),
             "answer_anchor": self.answer_anchor,
             "answer_anchor_id": self.answer_anchor_id,
             "entity_anchors": list(self.entity_anchors),
@@ -258,6 +260,40 @@ class _CandidatePath:
         return payload
 
 
+@dataclass
+class _GlobalPathCandidate:
+    anchor_index: int
+    path_index: int
+    anchor_id: str
+    anchor_text: str
+    anchor_source_types: list[str]
+    path: TokenReasoningPath
+    global_rank: tuple[int, int, int, int]
+    global_rank_components: dict[str, Any]
+    constraints: list[dict[str, Any]]
+    candidate_sets: list[list[str]]
+    query_focus: _QueryFocus
+    anchor_state: _WorkingState
+    path_type: str
+    selection_mode: str
+
+    def to_debug(self) -> dict[str, Any]:
+        return {
+            "anchor_index": self.anchor_index,
+            "path_index": self.path_index,
+            "anchor_id": self.anchor_id,
+            "anchor_text": self.anchor_text,
+            "source_types": list(self.anchor_source_types),
+            "path_id": self.path.path_id,
+            "node_ids": list(self.path.node_ids),
+            "nodes": list(self.path.nodes),
+            "global_rank": list(self.global_rank),
+            "global_rank_components": dict(self.global_rank_components),
+            "path_type": self.path_type,
+            "selection_mode": self.selection_mode,
+        }
+
+
 def compile_token_reasoning_structure(
     hanlp_sdp_result: HanLPSDPResult,
     explicit_entities: list[str],
@@ -293,11 +329,13 @@ def compile_token_reasoning_structure(
     add_bridge_contraction_edges(state)
     add_restriction_closure_edges(state)
 
+    question_semantic_node_ids = _collect_question_semantic_node_ids(
+        state,
+        explicit_entity_ids,
+        focus_node_ids=[candidate.node_id for candidate in answer_anchor_candidates],
+    )
     per_anchor_results: list[dict[str, Any]] = []
-    paths: list[TokenReasoningPath] = []
-    result_edge_map: dict[tuple[str, str], TokenReasoningEdge] = {}
-    aggregated_constraints: list[dict[str, Any]] = []
-    aggregated_candidate_sets: list[list[str]] = []
+    global_candidates: list[_GlobalPathCandidate] = []
 
     for anchor_index, anchor in enumerate(answer_anchor_candidates, start=1):
         anchor_state = _copy_working_state(state)
@@ -324,31 +362,30 @@ def compile_token_reasoning_structure(
             parallel_entity_sets=parallel_entity_sets,
         )
 
-        final_node_ids, final_pairs = _graph_from_selected_paths(anchor_paths)
-        active_entity_ids = _active_entity_ids(anchor_state.nodes, anchor_paths)
-        final_edges = _final_edges(
-            anchor_state.nodes,
-            anchor_state.edges,
-            final_pairs,
-            anchor_paths,
-            active_entity_ids,
-            anchor.node_id,
-        )
-        for edge in final_edges:
-            result_edge_map.setdefault(_edge_key(edge.source, edge.target), edge)
-
-        for path_index, path in enumerate(anchor_paths, start=1):
-            paths.append(
-                TokenReasoningPath(
-                    path_id=f"A{anchor_index}.P{path_index}",
-                    nodes=list(path.nodes),
-                    node_ids=list(path.node_ids),
-                )
-            )
-
         candidate_sets = _candidate_sets_for_result(anchor_state.nodes, direct_candidate_sets, parallel_entity_sets)
-        aggregated_constraints = _merge_constraint_debug_lists(aggregated_constraints, constraints)
-        aggregated_candidate_sets = _merge_candidate_set_lists(aggregated_candidate_sets, candidate_sets)
+        anchor_global_candidates: list[_GlobalPathCandidate] = []
+        for path_index, path in enumerate(anchor_paths, start=1):
+            global_path = TokenReasoningPath(
+                path_id=f"A{anchor_index}.P{path_index}",
+                nodes=list(path.nodes),
+                node_ids=list(path.node_ids),
+            )
+            global_candidate = _build_global_path_candidate(
+                anchor_index=anchor_index,
+                path_index=path_index,
+                anchor=anchor,
+                path=global_path,
+                question_semantic_node_ids=question_semantic_node_ids,
+                anchor_state=anchor_state,
+                constraints=constraints,
+                candidate_sets=candidate_sets,
+                query_focus=query_focus,
+                path_type=path_type,
+                selection_mode=selection_mode,
+                warnings=state.warnings,
+            )
+            global_candidates.append(global_candidate)
+            anchor_global_candidates.append(global_candidate)
 
         per_anchor_results.append(
             {
@@ -366,25 +403,42 @@ def compile_token_reasoning_structure(
                 "candidate_sets": candidate_sets,
                 "parallel_entity_sets": list(parallel_entity_sets),
                 "virtual_edges": list(anchor_state.virtual_edges),
+                "global_candidates": [candidate.to_debug() for candidate in anchor_global_candidates],
+                "contains_global_best_path": False,
             }
         )
 
-    result_nodes = _copy_node_map(state.nodes)
-    for anchor in answer_anchor_candidates:
-        _mark_anchors(result_nodes, explicit_entity_ids, anchor.node_id)
+    selected_global_candidate = _select_global_best_path(global_candidates)
+    _annotate_per_anchor_global_selection(per_anchor_results, global_candidates, selected_global_candidate)
+
+    if selected_global_candidate is not None:
+        result_state = selected_global_candidate.anchor_state
+        paths = [selected_global_candidate.path]
+        answer_anchor_id = selected_global_candidate.anchor_id
+        answer_anchor = selected_global_candidate.anchor_text
+        path_type = "global_best_path"
+        constraints = [dict(item) for item in selected_global_candidate.constraints]
+        candidate_sets = [list(item) for item in selected_global_candidate.candidate_sets]
+    else:
+        if "global path selection found no candidates" not in state.warnings:
+            state.warnings.append("global path selection found no candidates")
+        result_state = _copy_working_state(state)
+        paths = []
+        answer_anchor_id = None
+        answer_anchor = None
+        path_type = "no_global_path"
+        constraints = []
+        candidate_sets = []
 
     final_node_ids, final_pairs = _graph_from_selected_paths(paths)
-    result_state = _copy_working_state(state)
-    result_state.nodes = result_nodes
-    result_state.edges = {**result_state.edges, **result_edge_map}
-    backbone_before = _graph_snapshot(final_node_ids, final_pairs, result_nodes, result_state.edges)
+    backbone_before = _graph_snapshot(final_node_ids, final_pairs, result_state.nodes, result_state.edges)
     backbone_after = backbone_before
-    final_nodes = _final_nodes(result_nodes, final_node_ids)
-    active_entity_ids = _active_entity_ids(result_nodes, paths)
-    final_edges = _final_edges(result_nodes, result_state.edges, final_pairs, paths, active_entity_ids, None)
+    final_nodes = _final_nodes(result_state.nodes, final_node_ids)
+    active_entity_ids = _active_entity_ids(result_state.nodes, paths)
+    final_edges = _final_edges(result_state.nodes, result_state.edges, final_pairs, paths, active_entity_ids, answer_anchor_id)
 
-    candidate_sets = aggregated_candidate_sets
-    entity_anchors = [result_nodes[node_id].text for node_id in active_entity_ids if node_id in result_nodes]
+    entity_anchors = [result_state.nodes[node_id].text for node_id in active_entity_ids if node_id in result_state.nodes]
+    result_warnings = _unique_warnings([*state.warnings, *result_state.warnings])
     debug_payload = _build_debug_payload(
         question_id=question_id,
         masked_question=masked_question or hanlp_sdp_result.text,
@@ -395,9 +449,9 @@ def compile_token_reasoning_structure(
         hanlp_sdp_result=hanlp_sdp_result,
         explicit_entities=explicit_entities,
         state=result_state,
-        answer_anchor_id=None,
+        answer_anchor_id=answer_anchor_id,
         entity_ids=explicit_entity_ids,
-        constraints=aggregated_constraints,
+        constraints=constraints,
         candidate_sets=candidate_sets,
         terminals=[],
         backbone_before=backbone_before,
@@ -411,10 +465,16 @@ def compile_token_reasoning_structure(
         parallel_entity_sets=[],
         candidate_paths=[],
         selected_paths=paths,
-        selection_mode="multi_anchor_candidates",
+        selection_mode=path_type,
     )
     debug_payload["answer_anchor_candidates"] = [candidate.to_debug() for candidate in answer_anchor_candidates]
     debug_payload["per_anchor_results"] = list(per_anchor_results)
+    debug_payload["question_semantic_node_ids"] = _sort_node_ids(question_semantic_node_ids, state.nodes)
+    debug_payload["global_candidates"] = [candidate.to_debug() for candidate in global_candidates]
+    debug_payload["selected_global_candidate"] = (
+        selected_global_candidate.to_debug() if selected_global_candidate is not None else None
+    )
+    debug_payload["warnings"] = result_warnings
     debug_file = None
     if debug:
         debug_file = write_debug_json(debug_payload, question_id=question_id, debug_dir=debug_dir)
@@ -423,14 +483,15 @@ def compile_token_reasoning_structure(
         nodes=final_nodes,
         edges=final_edges,
         paths=paths,
-        path_type="multi_anchor_candidates",
+        path_type=path_type,
         anchor_path_results=per_anchor_results,
-        answer_anchor=None,
-        answer_anchor_id=None,
+        global_selection=selected_global_candidate.to_debug() if selected_global_candidate is not None else {},
+        answer_anchor=answer_anchor,
+        answer_anchor_id=answer_anchor_id,
         entity_anchors=entity_anchors,
-        constraints=aggregated_constraints,
+        constraints=constraints,
         candidate_sets=candidate_sets,
-        warnings=list(state.warnings),
+        warnings=result_warnings,
         debug_payload=debug_payload,
         debug_file=debug_file,
     )
@@ -2049,11 +2110,203 @@ def _select_query_focused_paths(
     return [], "empty", candidate_records, "empty"
 
 
+def _build_global_path_candidate(
+    *,
+    anchor_index: int,
+    path_index: int,
+    anchor: _AnswerAnchorCandidate,
+    path: TokenReasoningPath,
+    question_semantic_node_ids: set[str],
+    anchor_state: _WorkingState,
+    constraints: list[dict[str, Any]],
+    candidate_sets: list[list[str]],
+    query_focus: _QueryFocus,
+    path_type: str,
+    selection_mode: str,
+    warnings: list[str],
+) -> _GlobalPathCandidate:
+    global_rank, components = _rank_global_path_candidate(
+        path,
+        anchor,
+        anchor_state,
+        question_semantic_node_ids,
+        warnings=warnings,
+    )
+    return _GlobalPathCandidate(
+        anchor_index=anchor_index,
+        path_index=path_index,
+        anchor_id=anchor.node_id,
+        anchor_text=anchor.text,
+        anchor_source_types=list(anchor.source_types),
+        path=path,
+        global_rank=global_rank,
+        global_rank_components=components,
+        constraints=[dict(item) for item in constraints],
+        candidate_sets=[list(item) for item in candidate_sets],
+        query_focus=query_focus,
+        anchor_state=anchor_state,
+        path_type=path_type,
+        selection_mode=selection_mode,
+    )
+
+
+def _rank_global_path_candidate(
+    path: TokenReasoningPath,
+    anchor: _AnswerAnchorCandidate,
+    state: _WorkingState,
+    question_semantic_node_ids: set[str],
+    *,
+    warnings: list[str],
+) -> tuple[tuple[int, int, int, int], dict[str, Any]]:
+    covered_node_ids = set(path.node_ids)
+    missing_semantic_node_ids = set(question_semantic_node_ids) - covered_node_ids
+    weak_edge_count = 0
+    medium_edge_count = 0
+    derived_edge_count = 0
+    missing_edge_pairs: list[dict[str, Any]] = []
+
+    for left, right in zip(path.node_ids, path.node_ids[1:]):
+        edge = state.edges.get(_edge_key(left, right))
+        if edge is None:
+            weak_edge_count += 1
+            missing_edge_pair = {
+                "source": left,
+                "target": right,
+                "source_text": state.nodes[left].text if left in state.nodes else left,
+                "target_text": state.nodes[right].text if right in state.nodes else right,
+            }
+            missing_edge_pairs.append(missing_edge_pair)
+            warning = (
+                "global path rank missing edge for "
+                f"{missing_edge_pair['source_text']}[{left}] -- {missing_edge_pair['target_text']}[{right}] "
+                f"on {path.path_id}; counted as WEAK"
+            )
+            if warning not in warnings:
+                warnings.append(warning)
+            if warning not in state.warnings:
+                state.warnings.append(warning)
+            continue
+        quality = _normalize_edge_quality(edge.edge_quality)
+        if quality == "WEAK":
+            weak_edge_count += 1
+        elif quality == "MEDIUM":
+            medium_edge_count += 1
+        if edge.derived:
+            derived_edge_count += 1
+
+    function_node_count = sum(
+        1 for node_id in path.node_ids if node_id in state.nodes and state.nodes[node_id].kind == "function"
+    )
+    dirty_path_count = weak_edge_count + medium_edge_count + function_node_count + derived_edge_count
+    path_length = max(0, len(path.node_ids) - 1)
+    fallback_penalty = max(ANSWER_ANCHOR_SOURCE_ORDER.values(), default=0) + 1
+    anchor_fit_penalty = min(
+        (ANSWER_ANCHOR_SOURCE_ORDER.get(source_type, fallback_penalty) for source_type in anchor.source_types),
+        default=fallback_penalty,
+    )
+    global_rank = (
+        len(missing_semantic_node_ids),
+        dirty_path_count,
+        path_length,
+        anchor_fit_penalty,
+    )
+    semantic_ids = _sort_node_ids(question_semantic_node_ids, state.nodes)
+    covered_semantic_ids = _sort_node_ids(question_semantic_node_ids & covered_node_ids, state.nodes)
+    missing_semantic_ids = _sort_node_ids(missing_semantic_node_ids, state.nodes)
+    components = {
+        "semantic_node_ids": semantic_ids,
+        "semantic_nodes": [state.nodes[node_id].text for node_id in semantic_ids if node_id in state.nodes],
+        "covered_semantic_node_ids": covered_semantic_ids,
+        "covered_semantic_nodes": [
+            state.nodes[node_id].text for node_id in covered_semantic_ids if node_id in state.nodes
+        ],
+        "missing_semantic_node_ids": missing_semantic_ids,
+        "missing_semantic_nodes": [
+            state.nodes[node_id].text for node_id in missing_semantic_ids if node_id in state.nodes
+        ],
+        "missing_semantic_nodes_count": len(missing_semantic_node_ids),
+        "weak_edge_count": weak_edge_count,
+        "medium_edge_count": medium_edge_count,
+        "function_node_count": function_node_count,
+        "derived_edge_count": derived_edge_count,
+        "dirty_path_count": dirty_path_count,
+        "path_length": path_length,
+        "anchor_fit_penalty": anchor_fit_penalty,
+        "rank": list(global_rank),
+    }
+    if missing_edge_pairs:
+        components["missing_edge_pairs"] = missing_edge_pairs
+    return global_rank, components
+
+
+def _select_global_best_path(candidates: list[_GlobalPathCandidate]) -> _GlobalPathCandidate | None:
+    if not candidates:
+        return None
+    return min(
+        candidates,
+        key=lambda item: (
+            item.global_rank,
+            item.anchor_index,
+            item.path_index,
+            tuple(item.path.node_ids),
+        ),
+    )
+
+
+def _annotate_per_anchor_global_selection(
+    per_anchor_results: list[dict[str, Any]],
+    global_candidates: list[_GlobalPathCandidate],
+    selected: _GlobalPathCandidate | None,
+) -> None:
+    by_anchor: dict[int, list[_GlobalPathCandidate]] = {}
+    by_anchor_path: dict[tuple[int, int], _GlobalPathCandidate] = {}
+    for candidate in global_candidates:
+        by_anchor.setdefault(candidate.anchor_index, []).append(candidate)
+        by_anchor_path[(candidate.anchor_index, candidate.path_index)] = candidate
+
+    for anchor_index, anchor_result in enumerate(per_anchor_results, start=1):
+        anchor_candidates = by_anchor.get(anchor_index, [])
+        anchor_result["global_candidates"] = [candidate.to_debug() for candidate in anchor_candidates]
+        anchor_result["contains_global_best_path"] = any(candidate is selected for candidate in anchor_candidates)
+        paths = anchor_result.get("paths")
+        if not isinstance(paths, list):
+            continue
+        for path_index, path_payload in enumerate(paths, start=1):
+            if not isinstance(path_payload, dict):
+                continue
+            candidate = by_anchor_path.get((anchor_index, path_index))
+            if candidate is None:
+                continue
+            path_payload["global_rank"] = list(candidate.global_rank)
+            path_payload["global_rank_components"] = dict(candidate.global_rank_components)
+            path_payload["contains_global_best_path"] = candidate is selected
+
+
 def _collect_question_semantic_nodes(
     state: _WorkingState,
     explicit_entity_ids: list[str],
     query_focus: _QueryFocus,
     answer_anchor_id: str | None,
+) -> set[str]:
+    return _collect_question_semantic_node_ids(
+        state,
+        explicit_entity_ids,
+        focus_node_ids=[
+            query_focus.answer_anchor_id,
+            query_focus.query_root_id,
+            query_focus.slot_id,
+            query_focus.terminal_id,
+            answer_anchor_id,
+            *query_focus.required_ids,
+        ],
+    )
+
+
+def _collect_question_semantic_node_ids(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    *,
+    focus_node_ids: Iterable[str | None] = (),
 ) -> set[str]:
     semantic_nodes: set[str] = set()
 
@@ -2065,15 +2318,7 @@ def _collect_question_semantic_nodes(
 
     for entity_id in explicit_entity_ids:
         add(entity_id, force=True)
-    for node_id in (
-        query_focus.answer_anchor_id,
-        query_focus.query_root_id,
-        query_focus.slot_id,
-        query_focus.terminal_id,
-        answer_anchor_id,
-    ):
-        add(node_id)
-    for node_id in query_focus.required_ids:
+    for node_id in focus_node_ids:
         add(node_id)
 
     for edge in state.edges.values():
@@ -3580,6 +3825,18 @@ def _merge_candidate_set_lists(
             continue
         seen.add(key)
         result.append(list(item))
+    return result
+
+
+def _unique_warnings(warnings: Iterable[str]) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for warning in warnings:
+        text = str(warning)
+        if text in seen:
+            continue
+        seen.add(text)
+        result.append(text)
     return result
 
 

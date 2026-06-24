@@ -37,8 +37,8 @@ def parse_args() -> argparse.Namespace:
         default="debug/hanlp_sdp",
         help="Directory for HanLP Tri-SDP debug JSON files when --debug is enabled.",
     )
-    parser.add_argument("--skip-step5", action="store_true", help="Compatibility flag; Step5 is skipped by default.")
-    parser.add_argument("--run-step5", action="store_true", help="Run Step5 DAG generation after Step4.")
+    parser.add_argument("--skip-step5", action="store_true", help="Skip Step5 DAG generation.")
+    parser.add_argument("--run-step5", action="store_true", help="Compatibility flag; Step5 runs by default.")
     return parser.parse_args()
 
 
@@ -56,7 +56,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
             "This HanLP SDP branch requires LLM calls for explicit entity masking and Step5 DAG generation.",
             file=sys.stderr,
         )
-        print("Set OPENAI_API_KEY or pass --api-key. Step5 is disabled by default while debugging Step4.", file=sys.stderr)
+        print("Set OPENAI_API_KEY or pass --api-key. Use --skip-step5 only when debugging Step4.", file=sys.stderr)
         return 2
 
     try:
@@ -82,7 +82,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
                 debug_dir=args.debug_dir,
                 llm_client=llm_client,
                 skip_step5=args.skip_step5,
-                run_step5=args.run_step5,
+                run_step5=args.run_step5 or not args.skip_step5,
             )
             print_hanlp_sdp_result(index, record, result, debug=args.debug)
     except ModuleNotFoundError as exc:
@@ -108,7 +108,7 @@ def run_hanlp_sdp_pipeline(
     debug_dir: str | None = None,
     llm_client: Any | None = None,
     skip_step5: bool = False,
-    run_step5: bool = False,
+    run_step5: bool = True,
 ) -> dict[str, Any]:
     from tri_sdp_reasoning_compiler import compile_token_reasoning_structure
 
@@ -253,6 +253,20 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
                 print("  (no path selected)")
     else:
         print("(none)")
+    print()
+    print("[Global Best Path]")
+    global_selection = getattr(token_reasoning_structure, "global_selection", {}) or {}
+    if global_selection:
+        anchor_text = global_selection.get("anchor_text") or "(unknown)"
+        anchor_id = global_selection.get("anchor_id") or "(unknown)"
+        source_types = ",".join(global_selection.get("source_types") or [])
+        nodes = global_selection.get("nodes") or []
+        rank = tuple(global_selection.get("global_rank") or ())
+        print(f"Anchor: {anchor_text}[{anchor_id}] sources={source_types}")
+        print(f"Path: {' ---- '.join(nodes)}")
+        print(f"Global rank: {rank}")
+    else:
+        print("(no path selected)")
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
     if debug and combined_warnings:
         print()
@@ -264,7 +278,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     print("[5. Atomic Question DAG]")
     atomic_question_dag = result.get("atomic_question_dag")
     if atomic_question_dag is None:
-        print("(skipped: Step5 disabled while debugging Step4)")
+        print("(skipped: Step5 disabled)")
         print()
         return
     if not atomic_question_dag.valid:
@@ -279,11 +293,6 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     for node in atomic_question_dag.nodes:
         print(f"{node.id}: {node.question}")
         print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
-        if node.support is None:
-            print("  support: null")
-        else:
-            print(f"  support: {node.support.path_id}[{node.support.start_index}:{node.support.end_index}]")
-            print(f"  path: {' ---- '.join(node.support.nodes)}")
         print()
 
 

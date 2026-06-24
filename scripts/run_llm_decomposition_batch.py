@@ -18,22 +18,126 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 
-DIRECT_LLM_DECOMPOSITION_SYSTEM = """You decompose an original question into atomic subquestions.
+DIRECT_LLM_DECOMPOSITION_SYSTEM = """
+You are a Direct LLM Atomic Question DAG Generator baseline.
 
-Return valid JSON only.
-Do not answer the original question.
+Definition of an atomic question:
 
-Use this shape:
+1. It asks for exactly one retrievable fact, relation, attribute, comparison, selection, or aggregation.
+2. It has exactly one unknown answer.
+3. It performs one semantic operation.
+4. It must not contain an unresolved nested relation.
+5. If an argument must first be obtained from another question, refer to it naturally as q1's answer, q2's answer, etc., and list that id in depends_on.
+6. Fixed restrictions from the original question--such as dates, awards, locations, ranges, time conditions, or descriptive clauses--may remain in one atomic question. They constrain the lookup and do not create an additional reasoning hop.
+
+Task:
+
+Generate the complete Atomic Question DAG needed to answer the original question using only the original question.
+
+This is a no-structure baseline for comparison with DEPO Step 5. You will not receive parser-grounded token paths, graph paths, supports, or any other structural hints.
+
+Rules:
+
+1. Every node must be a single atomic question.
+2. Final comparison, equality, ranking, selection, and aggregation nodes are allowed.
+3. depends_on may be empty, contain one previous node, or contain multiple previous nodes.
+4. Cross-branch dependencies are allowed when needed to answer the original question.
+5. Preserve every semantic constraint from the original question. Do not drop modifiers, dates, locations, comparison candidates, source entities, descriptive clauses, or same/different conditions.
+6. Do not add background, definition, biography, history, significance, or explanation questions unless the original question explicitly asks for them.
+7. For comparison or selection questions, first generate the required factual evidence questions for each candidate, then generate the final comparison/selection node.
+8. For words such as younger, older, earlier, later, first ask for comparable evidence such as birth date, death date, release date, date, age, or another appropriate attribute, then compare those evidence answers.
+9. If a question text uses a previous answer, write it as qN's answer and include qN in depends_on.
+10. Do not invent unrelated named entities, dates, predicates, or restrictions.
+11. Keep named entities exactly as written in the original question.
+12. Do not answer any question.
+13. Do not return support spans, path indexes, edges, rationale, analysis, answers, or chain-of-thought.
+14. Return valid JSON only.
+
+Output JSON shape:
+
 {
   "nodes": [
     {
-      "node_id": "q1",
-      "question": "atomic subquestion",
-      "dependencies": []
+      "id": "q1",
+      "question": "single atomic question?",
+      "depends_on": []
+    },
+    {
+      "id": "q2",
+      "question": "single atomic question using q1's answer if needed?",
+      "depends_on": ["q1"]
+    },
+    {
+      "id": "q3",
+      "question": "final comparison or selection question using q1's answer and q2's answer?",
+      "depends_on": ["q1", "q2"]
     }
   ]
 }
-"""
+
+Do not return support, edges, rationale, analysis, answers, or chain-of-thought.
+
+Example A input:
+
+{
+  "original_question": "The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?"
+}
+
+Example A output:
+
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
+      "depends_on": []
+    },
+    {
+      "id": "q2",
+      "question": "What year was q1's answer born?",
+      "depends_on": ["q1"]
+    }
+  ]
+}
+
+Example B input:
+
+{
+  "original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?"
+}
+
+Example B output:
+
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who directed Dangerously They Live?",
+      "depends_on": []
+    },
+    {
+      "id": "q2",
+      "question": "When was q1's answer born?",
+      "depends_on": ["q1"]
+    },
+    {
+      "id": "q3",
+      "question": "Who directed Salad By The Roots?",
+      "depends_on": []
+    },
+    {
+      "id": "q4",
+      "question": "When was q3's answer born?",
+      "depends_on": ["q3"]
+    },
+    {
+      "id": "q5",
+      "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
+      "depends_on": ["q2", "q4"]
+    }
+  ]
+}
+""".strip()
 
 
 def parse_args() -> argparse.Namespace:
@@ -187,16 +291,8 @@ def decompose_question_direct(
 
 
 def build_direct_decomposition_prompt(question: str) -> str:
-    return (
-        "Decompose this original question into atomic subquestions.\n\n"
-        f"Original question:\n{question}\n\n"
-        "Return JSON only:\n"
-        "{\n"
-        '  "nodes": [\n'
-        '    {"node_id": "q1", "question": "...", "dependencies": []}\n'
-        "  ]\n"
-        "}"
-    )
+    payload = {"original_question": question}
+    return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
 def normalize_atomic_dag_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:

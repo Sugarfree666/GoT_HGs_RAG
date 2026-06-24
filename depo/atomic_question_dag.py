@@ -48,12 +48,14 @@ class AtomicQuestionNode:
     support: PathSpanSupport | None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        payload = {
             "id": self.id,
             "question": self.question,
             "depends_on": list(self.depends_on),
-            "support": self.support.to_dict() if self.support is not None else None,
         }
+        if self.support is not None:
+            payload["support"] = self.support.to_dict()
+        return payload
 
 
 @dataclass(frozen=True)
@@ -136,7 +138,7 @@ def validate_atomic_question_dag(
     paths: list[RestoredTokenPath],
 ) -> AtomicQuestionDAGResult:
     errors: list[str] = []
-    path_by_id = {path.path_id: path for path in paths}
+    del paths
     raw_nodes = raw_payload.get("nodes") if isinstance(raw_payload, dict) else None
     if not isinstance(raw_nodes, list) or not raw_nodes:
         return _invalid_result(["nodes must be a non-empty list."], raw_payload=raw_payload if isinstance(raw_payload, dict) else None)
@@ -180,17 +182,12 @@ def validate_atomic_question_dag(
         if missing_dependencies:
             errors.append(f"{node_id or expected_id}: question references {sorted(question_refs)} but depends_on is {sorted(depends_on)}.")
 
-        support_raw = raw_node.get("support") if "support" in raw_node else None
-        support = _parse_support(support_raw, path_by_id, node_id or expected_id, errors)
-        if support is not None and any(_contains_placeholder(node) for node in support.nodes):
-            errors.append(f"{node_id or expected_id}: support contains unresolved ENTITY placeholder.")
-
         parsed_nodes.append(
             AtomicQuestionNode(
                 id=node_id,
                 question=question,
                 depends_on=tuple(depends_on),
-                support=support,
+                support=None,
             )
         )
 

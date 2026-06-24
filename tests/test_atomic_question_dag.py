@@ -98,10 +98,9 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.nodes[1].depends_on, ("q1",))
         self.assertEqual(result.edges[0].to_dict(), {"source": "q1", "target": "q2"})
         self.assertEqual(result.leaf_node_ids, ["q2"])
-        self.assertEqual(result.nodes[0].support.nodes, ("Johnny Majors", "defeated", "player"))
-        self.assertEqual(result.nodes[1].support.nodes, ("player", "born", "year"))
+        self.assertTrue(all(node.support is None for node in result.nodes))
 
-    def test_single_node_path_is_sent_to_llm_and_can_support_node(self) -> None:
+    def test_single_node_path_is_sent_to_llm_without_requiring_support(self) -> None:
         llm = RecordingStep5LLM(_payload_with_support("P1", 0, 0))
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="What is the nationality of Some Entity?",
@@ -112,8 +111,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(len(llm.user_prompts), 1)
         payload = json.loads(llm.user_prompts[0])
         self.assertEqual(payload["paths"][0]["nodes"], [{"index": 0, "text": "Some Entity"}])
-        self.assertIsNotNone(result.nodes[0].support)
-        self.assertEqual(result.nodes[0].support.nodes, ("Some Entity",))
+        self.assertIsNone(result.nodes[0].support)
 
     def test_empty_paths_still_fail_before_llm_call(self) -> None:
         llm = RecordingStep5LLM(_payload_with_support("P1", 0, 0))
@@ -150,7 +148,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             ],
         )
         self.assertEqual(result.leaf_node_ids, ["q5"])
-        self.assertIsNone(result.nodes[-1].support)
+        self.assertTrue(all(node.support is None for node in result.nodes))
         self.assertIn("same nationality", result.nodes[-1].question)
 
     def test_born_later_paths_generate_complete_selection_dag(self) -> None:
@@ -173,7 +171,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             ],
         )
         self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q3"}, {"source": "q2", "target": "q3"}])
-        self.assertIsNone(result.nodes[-1].support)
+        self.assertTrue(all(node.support is None for node in result.nodes))
 
     def test_comparison_dag_allows_final_multi_parent_node(self) -> None:
         paths = [
@@ -201,9 +199,9 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertNotIn("at most one previous node", "; ".join(result.validation_errors))
         self.assertNotIn("crosses paths", "; ".join(result.validation_errors))
         self.assertNotIn("uncovered adjacent edge", "; ".join(result.validation_errors))
-        self.assertEqual(result.nodes[1].support.nodes, ("director", "younger"))
+        self.assertTrue(all(node.support is None for node in result.nodes))
 
-    def test_dell_long_path_requires_contiguous_support_cover(self) -> None:
+    def test_dell_long_path_generates_dag_without_support_cover(self) -> None:
         paths = [
             RestoredTokenPath("P1", ("FireWire", "replacing", "interface", "letting", "feature", "call", "What"))
         ]
@@ -216,29 +214,26 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([node.support.nodes for node in result.nodes], [
-            ("FireWire", "replacing", "interface"),
-            ("interface", "letting", "feature"),
-            ("feature", "call", "What"),
-        ])
+        self.assertTrue(all(node.support is None for node in result.nodes))
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}, {"source": "q2", "target": "q3"}])
 
-    def test_invalid_path_id_fails_validation(self) -> None:
+    def test_legacy_invalid_support_path_id_is_ignored(self) -> None:
         result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(_payload_with_support("P9", 0, 1))).generate(
             original_question="Question?",
             paths=[RestoredTokenPath("P1", ("A", "B"))],
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("support.path_id does not exist", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertIsNone(result.nodes[0].support)
 
-    def test_invalid_index_or_reversed_span_fails_validation(self) -> None:
+    def test_legacy_invalid_index_or_reversed_span_is_ignored(self) -> None:
         result = PathAlignedAtomicDAGGenerator(RecordingStep5LLM(_payload_with_support("P1", 1, 0))).generate(
             original_question="Question?",
             paths=[RestoredTokenPath("P1", ("A", "B"))],
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("start_index must be <= end_index", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertIsNone(result.nodes[0].support)
 
     def test_future_dependency_is_rejected(self) -> None:
         payload = {
@@ -359,7 +354,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=FakeOlderParser(),
-            run_step5=True,
         )
 
         dag = result["atomic_question_dag"]
@@ -367,6 +361,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual([node.question for node in dag.nodes], ["When was Ryan Tubridy born?", "When was Mauro Massironi born?"])
         payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(set(payload), {"original_question", "paths"})
+        self.assertEqual(len(payload["paths"]), 1)
         self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
         self.assertNotIn("ENTITYB", json.dumps(payload, ensure_ascii=False))
 
@@ -408,10 +403,12 @@ class FullPipelineLLM:
             }
         if system_prompt == ATOMIC_QUESTION_DAG_SYSTEM:
             self.step5_user_prompt = user_prompt
+            payload = json.loads(user_prompt)
+            path_id = payload["paths"][0]["path_id"]
             return {
                 "nodes": [
-                    {"id": "q1", "question": "When was Ryan Tubridy born?", "depends_on": [], "support": {"path_id": "A1.P1", "start_index": 0, "end_index": 1}},
-                    {"id": "q2", "question": "When was Mauro Massironi born?", "depends_on": [], "support": {"path_id": "A3.P1", "start_index": 0, "end_index": 0}},
+                    {"id": "q1", "question": "When was Ryan Tubridy born?", "depends_on": [], "support": {"path_id": path_id, "start_index": 0, "end_index": 1}},
+                    {"id": "q2", "question": "When was Mauro Massironi born?", "depends_on": [], "support": {"path_id": path_id, "start_index": 0, "end_index": 0}},
                 ]
             }
         raise AssertionError(f"Unexpected system prompt: {system_prompt}")

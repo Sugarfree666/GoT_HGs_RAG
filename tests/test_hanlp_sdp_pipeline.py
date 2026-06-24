@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from types import SimpleNamespace
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -20,11 +21,35 @@ from main import (  # noqa: E402
     run_hanlp_sdp_pipeline,
 )
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
-from tri_sdp_reasoning_compiler import build_evidence_graph, compile_token_reasoning_structure  # noqa: E402
+from tri_sdp_reasoning_compiler import (  # noqa: E402
+    TokenReasoningEdge,
+    TokenReasoningNode,
+    TokenReasoningPath,
+    _AnswerAnchorCandidate,
+    _WorkingState,
+    _rank_global_path_candidate,
+    _select_global_best_path,
+    build_evidence_graph,
+    compile_token_reasoning_structure,
+)
+
+
+def _global_candidate_stub(
+    rank: tuple[int, int, int, int],
+    anchor_index: int,
+    path_index: int,
+    node_ids: list[str],
+) -> SimpleNamespace:
+    return SimpleNamespace(
+        global_rank=rank,
+        anchor_index=anchor_index,
+        path_index=path_index,
+        path=SimpleNamespace(node_ids=node_ids),
+    )
 
 
 class HanLPSDPMainlineTest(unittest.TestCase):
-    def test_hanlp_sdp_pipeline_preprocesses_once_and_parses_masked_question(self) -> None:
+    def test_hanlp_sdp_pipeline_runs_step5_from_global_best_path_by_default(self) -> None:
         record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
         parser = FakeHanLPSDPParser()
         llm = FakePreprocessLLM()
@@ -44,7 +69,11 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.placeholders, ["ENTITYA", "ENTITYB"])
         self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(llm.calls, 1)
+        self.assertEqual(llm.calls, 2)
+        step5_payload = json.loads(llm.step5_user_prompt)
+        self.assertEqual(set(step5_payload), {"original_question", "paths"})
+        self.assertEqual(len(step5_payload["paths"]), 1)
+        self.assertEqual(step5_payload["paths"][0]["path_id"], result["token_reasoning_structure"].paths[0].path_id)
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -81,9 +110,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("answer_anchor:", output)
         self.assertNotIn("entity_anchors:", output)
         self.assertIn("[5. Atomic Question DAG]", output)
-        self.assertIn("(skipped: Step5 disabled while debugging Step4)", output)
-        self.assertNotIn("q1: When was Ryan Tubridy born?", output)
-        self.assertNotIn("q2: When was Mauro Massironi born?", output)
+        self.assertNotIn("(skipped: Step5 disabled)", output)
+        self.assertIn("q1: When was Ryan Tubridy born?", output)
+        self.assertIn("q2: When was Mauro Massironi born?", output)
         self.assertNotIn("[4. Content Reasoning Chains]", output)
         self.assertNotIn("[4. Simplified SDP/DM Graph]", output)
         self.assertNotIn("[Kept / Derived Edges]", output)
@@ -118,6 +147,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                 parser=parser,
                 debug=True,
                 debug_dir=tmpdir,
+                skip_step5=True,
             )
             debug_file = Path(result["token_reasoning_structure"].debug_file or "")
             self.assertTrue(debug_file.exists())
@@ -151,6 +181,26 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertTrue(debug_payload["normalization_changed"])
         self.assertEqual(debug_payload["normalization_note"], "Inserted auxiliary is for wh-question order.")
         self.assertEqual(debug_payload["masked_question"], masked)
+
+    def test_hanlp_sdp_pipeline_can_skip_step5(self) -> None:
+        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
+        parser = FakeHanLPSDPParser()
+        llm = FakePreprocessLLM()
+
+        result = run_hanlp_sdp_pipeline(
+            record=record,
+            index=1,
+            preprocessor=EntityMaskingPreprocessor(llm),
+            parser=parser,
+            skip_step5=True,
+        )
+
+        self.assertEqual(llm.calls, 1)
+        self.assertIsNone(result["atomic_question_dag"])
+        stream = io.StringIO()
+        with redirect_stdout(stream):
+            print_hanlp_sdp_result(1, record, result)
+        self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [
@@ -402,10 +452,14 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
-        substitution_edges = [edge for edge in compiled.edges if "candidate_slot_substitution" in edge.rule]
+        substitution_edges = [
+            edge
+            for edge in self.anchor_result(compiled, "film").get("virtual_edges", [])  # type: ignore[union-attr]
+            if "candidate_slot_substitution" in str(edge.get("rule", ""))
+        ]
         self.assertEqual(len(substitution_edges), 2)
         for edge in substitution_edges:
-            provenance = edge.provenance[0]
+            provenance = edge["provenance"][0]
             self.assertEqual(provenance["typed_wh_slot_id"], "2")
             self.assertEqual(provenance["schema_path_ids"], ["2", "4", "6"])
             self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
@@ -562,11 +616,15 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
-        substitution_edges = [edge for edge in compiled.edges if "candidate_bare_wh_substitution" in edge.rule]
+        substitution_edges = [
+            edge
+            for edge in self.anchor_result(compiled, "born").get("virtual_edges", [])  # type: ignore[union-attr]
+            if "candidate_bare_wh_substitution" in str(edge.get("rule", ""))
+        ]
         self.assertEqual(len(substitution_edges), 2)
-        self.assertTrue(all(edge.derived and edge.provenance for edge in substitution_edges))
+        self.assertTrue(all(edge.get("derived") and edge.get("provenance") for edge in substitution_edges))
         for edge in substitution_edges:
-            provenance = edge.provenance[0]
+            provenance = edge["provenance"][0]
             self.assertEqual(provenance["rule"], "candidate_bare_wh_substitution")
             self.assertEqual(provenance["bare_wh_slot_id"], "1")
             self.assertEqual(provenance["query_predicate_id"], "3")
@@ -616,7 +674,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-        self.assertEqual(compiled.debug_payload["selection_mode"], "multi_anchor_candidates")
+        self.assertEqual(compiled.debug_payload["selection_mode"], "global_best_path")
         self.assertFalse(
             any(
                 result.get("selection_mode") == "candidate_bare_wh_substitution"
@@ -805,7 +863,116 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 self.assertEqual(len(edge_pairs), len(set(frozenset(pair) for pair in edge_pairs)))
                 for path in first.paths:
                     self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-                self.assertEqual(first.path_type, "multi_anchor_candidates")
+                self.assertEqual(first.path_type, "global_best_path")
+                self.assertEqual(len(first.paths), 1)
+                self.assertTrue(first.global_selection)
+
+    def test_global_rank_tiebreak_prefers_typed_anchor_fit(self) -> None:
+        selected = _select_global_best_path(
+            [
+                _global_candidate_stub((0, 0, 2, 6), 2, 1, ["8", "5", "2"]),
+                _global_candidate_stub((0, 0, 2, 0), 1, 1, ["8", "5", "2"]),
+            ]
+        )
+
+        self.assertEqual(selected.anchor_index, 1)  # type: ignore[union-attr]
+
+    def test_global_rank_priorities_are_lexicographic(self) -> None:
+        semantic_winner = _select_global_best_path(
+            [
+                _global_candidate_stub((1, 0, 1, 0), 1, 1, ["1"]),
+                _global_candidate_stub((0, 9, 9, 6), 2, 1, ["1", "2", "3"]),
+            ]
+        )
+        self.assertEqual(semantic_winner.anchor_index, 2)  # type: ignore[union-attr]
+
+        dirty_winner = _select_global_best_path(
+            [
+                _global_candidate_stub((0, 1, 2, 0), 1, 1, ["1", "2"]),
+                _global_candidate_stub((0, 0, 9, 6), 2, 1, ["1", "2", "3"]),
+            ]
+        )
+        self.assertEqual(dirty_winner.anchor_index, 2)  # type: ignore[union-attr]
+
+        length_winner = _select_global_best_path(
+            [
+                _global_candidate_stub((0, 0, 3, 0), 1, 1, ["1", "2", "3", "4"]),
+                _global_candidate_stub((0, 0, 2, 6), 2, 1, ["1", "2", "3"]),
+            ]
+        )
+        self.assertEqual(length_winner.anchor_index, 2)  # type: ignore[union-attr]
+
+    def test_global_rank_stable_when_tuples_match(self) -> None:
+        selected = _select_global_best_path(
+            [
+                _global_candidate_stub((0, 0, 2, 0), 2, 1, ["1", "3"]),
+                _global_candidate_stub((0, 0, 2, 0), 1, 2, ["1", "2"]),
+                _global_candidate_stub((0, 0, 2, 0), 1, 1, ["1", "4"]),
+            ]
+        )
+
+        self.assertEqual((selected.anchor_index, selected.path_index), (1, 1))  # type: ignore[union-attr]
+
+    def test_global_rank_components_count_dirty_path_and_missing_edges(self) -> None:
+        state = _WorkingState(
+            nodes={
+                "1": TokenReasoningNode("1", "ENTITYA", 1, "entity"),
+                "2": TokenReasoningNode("2", "of", 2, "function"),
+                "3": TokenReasoningNode("3", "target", 3, "content"),
+            },
+            raw_edges={},
+            edges={
+                ("1", "2"): TokenReasoningEdge(
+                    "1",
+                    "2",
+                    "ENTITYA",
+                    "of",
+                    support=0.67,
+                    edge_quality="MEDIUM",
+                    derived=True,
+                    rule="test_edge",
+                )
+            },
+            normalized_edges=[],
+            virtual_edges=[],
+            warnings=[],
+        )
+        warnings: list[str] = []
+
+        rank, components = _rank_global_path_candidate(
+            TokenReasoningPath("A1.P1", ["ENTITYA", "of", "target"], ["1", "2", "3"]),
+            _AnswerAnchorCandidate("3", "target", ["clause_predicate"], 0),
+            state,
+            {"1", "3"},
+            warnings=warnings,
+        )
+
+        self.assertEqual(rank, (0, 4, 2, 6))
+        self.assertEqual(components["medium_edge_count"], 1)
+        self.assertEqual(components["weak_edge_count"], 1)
+        self.assertEqual(components["function_node_count"], 1)
+        self.assertEqual(components["derived_edge_count"], 1)
+        self.assertEqual(components["dirty_path_count"], 4)
+        self.assertTrue(warnings)
+
+    def test_no_global_candidate_fallback(self) -> None:
+        result = HanLPSDPResult(
+            text="?",
+            tokens=["?"],
+            available_keys=[],
+            sdp_graphs={},
+            edges=[],
+            raw={},
+        )
+
+        compiled = compile_token_reasoning_structure(result, [])
+
+        self.assertEqual(compiled.path_type, "no_global_path")
+        self.assertEqual(compiled.paths, [])
+        self.assertEqual(compiled.global_selection, {})
+        self.assertIsNone(compiled.answer_anchor)
+        self.assertIsNone(compiled.answer_anchor_id)
+        self.assertIn("global path selection found no candidates", compiled.warnings)
 
     def assert_ordered_subsequence(self, values: list[str], expected: list[str]) -> None:
         cursor = 0
@@ -827,10 +994,12 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(final_pairs, path_pairs)
 
     def assert_multi_anchor_result(self, compiled: object) -> None:
-        self.assertEqual(compiled.path_type, "multi_anchor_candidates")  # type: ignore[attr-defined]
-        self.assertIsNone(compiled.answer_anchor)  # type: ignore[attr-defined]
-        self.assertIsNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
+        self.assertEqual(compiled.path_type, "global_best_path")  # type: ignore[attr-defined]
+        self.assertIsNotNone(compiled.answer_anchor)  # type: ignore[attr-defined]
+        self.assertIsNotNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
         self.assertTrue(compiled.anchor_path_results)  # type: ignore[attr-defined]
+        self.assertTrue(compiled.global_selection)  # type: ignore[attr-defined]
+        self.assertEqual(len(compiled.paths), 1)  # type: ignore[attr-defined]
 
     def anchor_result(self, compiled: object, anchor_text: str) -> dict[str, object]:
         matches = [
@@ -1096,6 +1265,8 @@ class FakePreprocessLLM:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
             assert set(payload) == {"original_question", "paths"}
+            assert len(payload["paths"]) == 1
+            path_id = payload["paths"][0]["path_id"]
             serialized = json.dumps(payload, ensure_ascii=False)
             assert "ENTITYA" not in serialized
             assert "ENTITYB" not in serialized
@@ -1107,13 +1278,13 @@ class FakePreprocessLLM:
                         "id": "q1",
                         "question": "When was Ryan Tubridy born?",
                         "depends_on": [],
-                        "support": {"path_id": "P1", "start_index": 0, "end_index": 1},
+                        "support": {"path_id": path_id, "start_index": 0, "end_index": 1},
                     },
                     {
                         "id": "q2",
                         "question": "When was Mauro Massironi born?",
                         "depends_on": [],
-                        "support": {"path_id": "P2", "start_index": 0, "end_index": 1},
+                        "support": {"path_id": path_id, "start_index": 0, "end_index": 0},
                     },
                 ]
             }

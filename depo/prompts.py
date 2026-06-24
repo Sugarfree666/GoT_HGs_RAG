@@ -156,25 +156,24 @@ Task:
 Generate the complete Atomic Question DAG needed to answer the original question using:
 
 - the original question for semantic interpretation and final reasoning intent;
-- the supplied parser-grounded token paths for structural support.
+- the supplied parser-grounded token paths as structural hints.
 
 The paths contain original entity names. Treat them as structural evidence, not as literal natural-language templates.
 
 Rules:
 
 1. Every node must be a single atomic question.
-2. Evidence lookup nodes should include support: one contiguous span of one supplied path.
-3. Final comparison, equality, ranking, selection, and aggregation nodes are allowed.
-4. A final reasoning node that does not directly correspond to a single Step4 path span may use "support": null.
-5. depends_on may be empty, contain one previous node, or contain multiple previous nodes.
-6. Cross-path dependencies are allowed when needed to answer the original question.
-7. For comparison or selection questions, first generate the required factual evidence questions for each candidate, then generate the final comparison/selection node.
-8. For words such as younger, older, earlier, later, first ask for comparable evidence such as birth date, date, age, or another appropriate attribute, then compare those evidence answers.
-9. If a question text uses a previous answer, write it as qN's answer and include qN in depends_on.
-10. Do not leave unresolved ENTITYA, ENTITYB, or similar placeholders. Use the original entity names already present in the paths.
-11. Do not invent unrelated named entities, dates, predicates, or restrictions.
-12. Do not answer any question.
-13. Return valid JSON only.
+2. Final comparison, equality, ranking, selection, and aggregation nodes are allowed.
+3. depends_on may be empty, contain one previous node, or contain multiple previous nodes.
+4. Cross-path dependencies are allowed when needed to answer the original question.
+5. For comparison or selection questions, first generate the required factual evidence questions for each candidate, then generate the final comparison/selection node.
+6. For words such as younger, older, earlier, later, first ask for comparable evidence such as birth date, date, age, or another appropriate attribute, then compare those evidence answers.
+7. If a question text uses a previous answer, write it as qN's answer and include qN in depends_on.
+8. Do not leave unresolved ENTITYA, ENTITYB, or similar placeholders. Use the original entity names already present in the paths.
+9. Do not invent unrelated named entities, dates, predicates, or restrictions.
+10. Do not answer any question.
+11. Do not return support spans, path indexes, edges, rationale, analysis, answers, or chain-of-thought.
+12. Return valid JSON only.
 
 Output JSON shape:
 
@@ -183,33 +182,22 @@ Output JSON shape:
     {
       "id": "q1",
       "question": "single atomic question?",
-      "depends_on": [],
-      "support": {
-        "path_id": "P1",
-        "start_index": 0,
-        "end_index": 1
-      }
+      "depends_on": []
     },
     {
       "id": "q2",
       "question": "single atomic question using q1's answer if needed?",
-      "depends_on": ["q1"],
-      "support": {
-        "path_id": "P1",
-        "start_index": 1,
-        "end_index": 2
-      }
+      "depends_on": ["q1"]
     },
     {
       "id": "q3",
       "question": "final comparison or selection question using q1's answer and q2's answer?",
-      "depends_on": ["q1", "q2"],
-      "support": null
+      "depends_on": ["q1", "q2"]
     }
   ]
 }
 
-Do not return edges, rationale, analysis, answers, or chain-of-thought.
+Do not return support, edges, rationale, analysis, answers, or chain-of-thought.
 
 Example A input:
 
@@ -236,14 +224,12 @@ Example A output:
     {
       "id": "q1",
       "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
-      "depends_on": [],
-      "support": {"path_id": "P1", "start_index": 0, "end_index": 2}
+      "depends_on": []
     },
     {
       "id": "q2",
       "question": "What year was q1's answer born?",
-      "depends_on": ["q1"],
-      "support": {"path_id": "P1", "start_index": 2, "end_index": 4}
+      "depends_on": ["q1"]
     }
   ]
 }
@@ -279,32 +265,27 @@ Example B output:
     {
       "id": "q1",
       "question": "Who directed Dangerously They Live?",
-      "depends_on": [],
-      "support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+      "depends_on": []
     },
     {
       "id": "q2",
       "question": "When was q1's answer born?",
-      "depends_on": ["q1"],
-      "support": {"path_id": "P1", "start_index": 1, "end_index": 2}
+      "depends_on": ["q1"]
     },
     {
       "id": "q3",
       "question": "Who directed Salad By The Roots?",
-      "depends_on": [],
-      "support": {"path_id": "P2", "start_index": 0, "end_index": 1}
+      "depends_on": []
     },
     {
       "id": "q4",
       "question": "When was q3's answer born?",
-      "depends_on": ["q3"],
-      "support": {"path_id": "P2", "start_index": 1, "end_index": 2}
+      "depends_on": ["q3"]
     },
     {
       "id": "q5",
       "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
-      "depends_on": ["q2", "q4"],
-      "support": null
+      "depends_on": ["q2", "q4"]
     }
   ]
 }
