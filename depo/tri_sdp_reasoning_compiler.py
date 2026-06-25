@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -105,7 +105,13 @@ class TokenReasoningNode:
     is_anchor: bool = False
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {
+            "id": self.id,
+            "text": self.text,
+            "index": self.index,
+            "kind": self.kind,
+            "is_anchor": self.is_anchor,
+        }
 
 
 @dataclass
@@ -122,7 +128,18 @@ class TokenReasoningEdge:
     provenance: list[dict[str, Any]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {
+            "source": self.source,
+            "target": self.target,
+            "source_text": self.source_text,
+            "target_text": self.target_text,
+            "support": self.support,
+            "edge_quality": self.edge_quality,
+            "consensus_count": self.consensus_count,
+            "derived": self.derived,
+            "rule": self.rule,
+            "provenance": [dict(item) if isinstance(item, dict) else item for item in self.provenance],
+        }
 
 
 @dataclass
@@ -132,7 +149,11 @@ class TokenReasoningPath:
     node_ids: list[str]
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {
+            "path_id": self.path_id,
+            "nodes": list(self.nodes),
+            "node_ids": list(self.node_ids),
+        }
 
 
 @dataclass
@@ -683,7 +704,7 @@ def _find_typed_wh_slot_candidates(
                         "rule": "typed_wh_neighbor",
                         "wh_id": wh_id,
                         "wh": nodes[wh_id].text,
-                        "edge": edge.to_dict(),
+                        "edge": _edge_provenance_summary(edge),
                         "support": edge.support,
                     },
                     edge.support,
@@ -1123,7 +1144,7 @@ def _collect_clause_predicate_anchor_candidates(
                     "rule": "clause_predicate_edge",
                     "other_id": other_id,
                     "other": nodes[other_id].text if other_id in nodes else None,
-                    "edge": edge.to_dict(),
+                    "edge": _edge_provenance_summary(edge),
                     "support": support,
                 }
             )
@@ -1263,7 +1284,7 @@ def _anchor_incident_evidence(
     for edge in raw_edges.values():
         if node_id not in (edge.source, edge.target):
             continue
-        evidence.append({"rule": rule, "edge": edge.to_dict(), "support": edge.support})
+        evidence.append({"rule": rule, "edge": _edge_provenance_summary(edge), "support": edge.support})
     return evidence
 
 
@@ -1419,7 +1440,7 @@ def add_bridge_contraction_edges(state: _WorkingState) -> None:
                         bridge.text,
                         state.nodes[right_id].text,
                     ],
-                    "source_edges": [left_edge.to_dict(), right_edge.to_dict()],
+                    "source_edges": _edge_provenance_summaries([left_edge, right_edge]),
                 }
                 edge_quality = _infer_edge_quality(state.nodes, left_id, right_id, "bridge_contraction", [provenance])
                 support = EDGE_QUALITY_SCORES[edge_quality]
@@ -1468,7 +1489,7 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                         marker.text,
                         state.nodes[possessed_id].text,
                     ],
-                    "source_edges": [owner_edge.to_dict(), possessed_edge.to_dict()],
+                    "source_edges": _edge_provenance_summaries([owner_edge, possessed_edge]),
                     "support": support,
                 }
                 virtual = _merge_edge(
@@ -1520,7 +1541,7 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
                         state.nodes[predicate].text,
                         neighbor_node.text,
                     ],
-                    "source_edges": [restrict_edge.to_dict(), neighbor_edge.to_dict()],
+                    "source_edges": _edge_provenance_summaries([restrict_edge, neighbor_edge]),
                     "support": support,
                 }
                 virtual = _merge_edge(
@@ -1561,7 +1582,7 @@ def add_restriction_closure_edges(state: _WorkingState) -> None:
                         state.nodes[predicate_id].text,
                         state.nodes[right_id].text,
                     ],
-                    "source_edges": [left_edge.to_dict(), right_edge.to_dict()],
+                    "source_edges": _edge_provenance_summaries([left_edge, right_edge]),
                     "support": support,
                 }
                 virtual = _merge_edge(
@@ -1602,7 +1623,7 @@ def add_descriptor_lifting_edges(
             if not _target_reaches_anchor(target_id, entity_id, anchor_targets, graph):
                 continue
             source_edges = [
-                state.edges[_edge_key(path[index], path[index + 1])].to_dict()
+                _edge_provenance_summary(state.edges[_edge_key(path[index], path[index + 1])])
                 for index in range(len(path) - 1)
                 if _edge_key(path[index], path[index + 1]) in state.edges
             ]
@@ -2835,22 +2856,7 @@ def _edge_rule_penalty(edge: TokenReasoningEdge) -> float:
 
 def _edge_label_classes_deep(edge: TokenReasoningEdge) -> set[str]:
     classes = set(_edge_label_classes(edge))
-
-    def visit(payload: Any) -> None:
-        if isinstance(payload, dict):
-            label_class = payload.get("label_class")
-            if label_class:
-                classes.add(str(label_class))
-            for source_edge in payload.get("source_edges") or []:
-                visit(source_edge)
-            for provenance in payload.get("provenance") or []:
-                visit(provenance)
-        elif isinstance(payload, list):
-            for item in payload:
-                visit(item)
-
-    for item in edge.provenance:
-        visit(item)
+    classes.update(_label_class_values_from_payload(edge.provenance))
     return classes
 
 
@@ -2928,7 +2934,7 @@ def _content_coordination_groups(state: _WorkingState) -> list[dict[str, Any]]:
             groups.append(
                 {
                     "member_ids": [source, target],
-                    "evidence": {"rule": "content_coordination_edge", "edge": edge.to_dict()},
+                    "evidence": {"rule": "content_coordination_edge", "edge": _edge_provenance_summary(edge)},
                 }
             )
 
@@ -2946,7 +2952,7 @@ def _content_coordination_groups(state: _WorkingState) -> list[dict[str, Any]]:
             if not _is_content_branch_head(state.nodes[neighbor_id]):
                 continue
             member_ids.append(neighbor_id)
-            source_edges.append(edge.to_dict())
+            source_edges.append(_edge_provenance_summary(edge))
         ordered = _sort_node_ids(member_ids, state.nodes)
         if len(ordered) >= 2:
             groups.append(
@@ -3314,7 +3320,7 @@ def _ensure_candidate_slot_edge(
         "candidate_set_evidence": _candidate_set_coordination_evidence(state, candidate_set),
         "schema_path_ids": list(schema_path),
         "schema_path": [state.nodes[node_id].text for node_id in schema_path if node_id in state.nodes],
-        "schema_edge": schema_edge.to_dict() if schema_edge else None,
+        "schema_edge": _edge_provenance_summary(schema_edge) if schema_edge else None,
     }
     virtual = _merge_edge(
         state.edges,
@@ -3343,7 +3349,7 @@ def _typed_wh_slot_evidence(state: _WorkingState, slot_id: str) -> dict[str, Any
             )
             for item in edge.provenance
         ):
-            raw_edges.append(edge.to_dict())
+            raw_edges.append(_edge_provenance_summary(edge))
 
     surface_adjacency: dict[str, Any] | None = None
     slot = state.nodes.get(slot_id)
@@ -3393,8 +3399,8 @@ def _ensure_candidate_bare_wh_edge(
         "candidate_set_evidence": _candidate_set_coordination_evidence(state, candidate_set),
         "schema_path_ids": list(schema_path),
         "schema_path": [state.nodes[node_id].text for node_id in schema_path if node_id in state.nodes],
-        "schema_edge": schema_edge.to_dict() if schema_edge else None,
-        "wh_predicate_edge": wh_predicate_edge.to_dict() if wh_predicate_edge else None,
+        "schema_edge": _edge_provenance_summary(schema_edge) if schema_edge else None,
+        "wh_predicate_edge": _edge_provenance_summary(wh_predicate_edge) if wh_predicate_edge else None,
         "support": support,
     }
     virtual = _merge_edge(
@@ -3424,7 +3430,7 @@ def _candidate_set_coordination_evidence(
         if "COORD" not in classes and not (_is_scope_node(state.nodes[source]) or _is_scope_node(state.nodes[target])):
             continue
         if source in candidate_ids or target in candidate_ids:
-            evidence.append(edge.to_dict())
+            evidence.append(_edge_provenance_summary(edge))
     return evidence
 
 
@@ -3886,23 +3892,60 @@ def _highest_quality(values: Iterable[str | None]) -> str | None:
     return best
 
 
+_PROVENANCE_WALK_MAX_DEPTH = 4
+_PROVENANCE_NESTED_KEYS = (
+    "source_edges",
+    "provenance",
+    "evidence",
+    "raw_edges",
+    "edge",
+    "schema_edge",
+    "wh_predicate_edge",
+)
+
+
+def _iter_sequence(value: Any) -> list[Any]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return list(value)
+    return [value]
+
+
+def _walk_provenance_payload(payload: Any, *, max_depth: int = _PROVENANCE_WALK_MAX_DEPTH) -> Iterable[dict[str, Any]]:
+    visited: set[int] = set()
+
+    def visit(item: Any, depth: int) -> Iterable[dict[str, Any]]:
+        if depth > max_depth:
+            return
+        if isinstance(item, dict):
+            marker = id(item)
+            if marker in visited:
+                return
+            visited.add(marker)
+            yield item
+            for key in _PROVENANCE_NESTED_KEYS:
+                if key not in item:
+                    continue
+                nested = item.get(key)
+                for child in _iter_sequence(nested):
+                    yield from visit(child, depth + 1)
+        elif isinstance(item, (list, tuple, set)):
+            for nested in item:
+                yield from visit(nested, depth)
+
+    yield from visit(payload, 0)
+
+
 def _label_class_values_from_payload(payload: Any) -> list[str]:
     values: list[str] = []
-
-    def visit(item: Any) -> None:
-        if isinstance(item, dict):
-            label_class = item.get("label_class")
-            if label_class:
-                values.append(str(label_class))
-            for source_edge in item.get("source_edges") or []:
-                visit(source_edge)
-            for provenance in item.get("provenance") or []:
-                visit(provenance)
-        elif isinstance(item, list):
-            for nested in item:
-                visit(nested)
-
-    visit(payload)
+    for item in _walk_provenance_payload(payload):
+        label_class = item.get("label_class")
+        if label_class:
+            values.append(str(label_class))
+        for value in _iter_sequence(item.get("label_classes")):
+            if value:
+                values.append(str(value))
     return values
 
 
@@ -3924,44 +3967,91 @@ def _bridge_contraction_has_strong_evidence(provenance: list[dict[str, Any]]) ->
 
 def _relation_keys_from_payload(payload: Any) -> set[str]:
     relations: set[str] = set()
-
-    def visit(item: Any) -> None:
-        if isinstance(item, dict):
-            relation = item.get("normalized_relation") or item.get("relation")
+    for item in _walk_provenance_payload(payload):
+        for key in ("normalized_relation", "relation"):
+            relation = item.get(key)
             if relation:
                 relations.add(_normalized_relation_key(str(relation)))
-            for source_edge in item.get("source_edges") or []:
-                visit(source_edge)
-            for provenance in item.get("provenance") or []:
-                visit(provenance)
-        elif isinstance(item, list):
-            for nested in item:
-                visit(nested)
-
-    visit(payload)
+        for key in ("normalized_relations", "relations"):
+            for relation in _iter_sequence(item.get(key)):
+                if relation:
+                    relations.add(_normalized_relation_key(str(relation)))
     return relations
 
 
 def _consensus_count_from_provenance(provenance: list[dict[str, Any]]) -> int:
     formalisms: set[str] = set()
+    explicit_counts: list[int] = []
+    for item in _walk_provenance_payload(provenance):
+        formalism = item.get("formalism")
+        if formalism:
+            formalisms.add(str(formalism))
+        for value in _iter_sequence(item.get("formalisms")):
+            if value:
+                formalisms.add(str(value))
+        try:
+            explicit_counts.append(int(item.get("consensus_count") or 0))
+        except (TypeError, ValueError):
+            continue
+    return max([len(formalisms), *explicit_counts, 0])
 
-    def visit(item: Any) -> None:
-        if isinstance(item, dict):
-            formalism = item.get("formalism")
-            if formalism:
-                formalisms.add(str(formalism))
-            for source_edge in item.get("source_edges") or []:
-                visit(source_edge)
-            for nested in item.get("provenance") or []:
-                visit(nested)
-            for nested in item.get("evidence") or []:
-                visit(nested)
-        elif isinstance(item, list):
-            for nested in item:
-                visit(nested)
 
-    visit(provenance)
-    return len(formalisms)
+def _edge_relation_values_from_payload(payload: Any) -> set[str]:
+    values: set[str] = set()
+    for item in _walk_provenance_payload(payload):
+        for key in ("normalized_relation", "relation"):
+            relation = item.get(key)
+            if relation:
+                values.add(_normalize_relation(str(relation)))
+        for key in ("normalized_relations", "relations"):
+            for relation in _iter_sequence(item.get(key)):
+                if relation:
+                    values.add(_normalize_relation(str(relation)))
+    return values
+
+
+def _formalism_values_from_payload(payload: Any) -> set[str]:
+    values: set[str] = set()
+    for item in _walk_provenance_payload(payload):
+        formalism = item.get("formalism")
+        if formalism:
+            values.add(str(formalism))
+        for value in _iter_sequence(item.get("formalisms")):
+            if value:
+                values.add(str(value))
+    return values
+
+
+def _edge_provenance_summary(edge: TokenReasoningEdge) -> dict[str, Any]:
+    label_classes = sorted(set(_label_class_values_from_payload(edge.provenance)))
+    relation_values = sorted(_edge_relation_values_from_payload(edge.provenance))
+    relation_keys = sorted(_relation_keys_from_payload(edge.provenance))
+    formalisms = sorted(_formalism_values_from_payload(edge.provenance))
+    consensus_count = max(edge.consensus_count, _consensus_count_from_provenance(edge.provenance))
+    summary: dict[str, Any] = {
+        "source_id": edge.source,
+        "target_id": edge.target,
+        "source": edge.source_text,
+        "target": edge.target_text,
+        "label_class": label_classes[0] if len(label_classes) == 1 else None,
+        "label_classes": label_classes,
+        "edge_quality": edge.edge_quality,
+        "consensus_count": consensus_count,
+        "derived": edge.derived,
+        "rule": edge.rule,
+        "formalism": formalisms[0] if len(formalisms) == 1 else None,
+        "formalisms": formalisms,
+        "relation": relation_values[0] if len(relation_values) == 1 else None,
+        "relations": relation_values,
+        "normalized_relation": relation_keys[0] if len(relation_keys) == 1 else None,
+        "normalized_relations": relation_keys,
+        "support": edge.support,
+    }
+    return summary
+
+
+def _edge_provenance_summaries(edges: Iterable[TokenReasoningEdge | None]) -> list[dict[str, Any]]:
+    return [_edge_provenance_summary(edge) for edge in edges if edge is not None]
 
 
 def _merge_edge(
@@ -4480,11 +4570,11 @@ def _path_has_descriptor_evidence(
         for source_edge in item.get("source_edges") or []:
             if not isinstance(source_edge, dict):
                 continue
-            for source_provenance in source_edge.get("provenance") or []:
-                relation = str(source_provenance.get("relation") or "").lower()
-                token = str(source_provenance.get("head") or source_provenance.get("dep") or "").lower()
-                if relation in {"cop", "bv"} or token in LIGHT_VERBS:
-                    return True
+            relation_keys = _relation_keys_from_payload(source_edge)
+            source_token = str(source_edge.get("source") or "").lower()
+            target_token = str(source_edge.get("target") or "").lower()
+            if relation_keys & {"cop", "bv"} or source_token in LIGHT_VERBS or target_token in LIGHT_VERBS:
+                return True
     return False
 
 
@@ -4532,11 +4622,7 @@ def _contract_function_backbone_nodes(
             if _edge_key(left_id, right_id) not in edges:
                 left_edge = edges.get(_edge_key(left_id, node_id))
                 right_edge = edges.get(_edge_key(node_id, right_id))
-                source_edges = [
-                    edge.to_dict()
-                    for edge in (left_edge, right_edge)
-                    if edge is not None
-                ]
+                source_edges = _edge_provenance_summaries([left_edge, right_edge])
                 edge_quality = "MEDIUM"
                 support = EDGE_QUALITY_SCORES[edge_quality]
                 _merge_edge(

@@ -4,6 +4,7 @@ import io
 import json
 import sys
 import tempfile
+import time
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
@@ -537,6 +538,71 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(edges[frozenset(("director", "spouse"))].edge_quality, "STRONG")
         self.assertTrue(edges[frozenset(("ENTITYA", "director"))].derived)
         self.assertTrue(edges[frozenset(("director", "spouse"))].derived)
+
+    def test_washington_state_prison_step4_finishes_under_30_seconds(self) -> None:
+        result = _hanlp_result(
+            "Which county shares a border with the county where the most populous city in the state where ENTITYA can be found is located?",
+            [
+                "Which",
+                "county",
+                "shares",
+                "a",
+                "border",
+                "with",
+                "the",
+                "county",
+                "where",
+                "the",
+                "most",
+                "populous",
+                "city",
+                "in",
+                "the",
+                "state",
+                "where",
+                "ENTITYA",
+                "can",
+                "be",
+                "found",
+                "is",
+                "located",
+                "?",
+            ],
+            [
+                _root("sdp/dm", "shares", 3),
+                _dm("county", "BV", "Which", 2, 1),
+                _dm("shares", "ARG1", "county", 3, 2),
+                _dm("shares", "ARG2", "border", 3, 5),
+                _psd("shares", "ACT-arg", "county", 3, 2),
+                _psd("shares", "PAT-arg", "border", 3, 5),
+                _pas("with", "prep_ARG1", "border", 6, 5),
+                _pas("with", "prep_ARG2", "county", 6, 8),
+                _dm("border", "ARG2", "county", 5, 8),
+                _psd("border", "PAT-arg", "county", 5, 8),
+                _dm("county", "RSTR", "located", 8, 23),
+                _dm("located", "ARG1", "city", 23, 13),
+                _pas("located", "verb_ARG1", "city", 23, 13),
+                _psd("located", "ACT-arg", "city", 23, 13),
+                _dm("city", "RSTR", "populous", 13, 12),
+                _dm("populous", "ARG1", "most", 12, 11),
+                _pas("in", "prep_ARG1", "city", 14, 13),
+                _pas("in", "prep_ARG2", "state", 14, 16),
+                _dm("city", "LOC", "state", 13, 16),
+                _dm("state", "RSTR", "found", 16, 21),
+                _dm("found", "ARG1", "ENTITYA", 21, 18),
+                _pas("found", "verb_ARG1", "ENTITYA", 21, 18),
+                _psd("state", "RSTR", "found", 16, 21),
+                _psd("found", "PAT-arg", "ENTITYA", 21, 18),
+            ],
+        )
+
+        started = time.perf_counter()
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+        elapsed = time.perf_counter() - started
+
+        self.assertLess(elapsed, 30.0)
+        self.assert_multi_anchor_result(compiled)
+        json.dumps(compiled.to_dict())
 
     def test_local_rank_prefers_semantic_coverage_over_short_entity_path(self) -> None:
         result = _hanlp_result(
@@ -1261,7 +1327,7 @@ class FakePreprocessLLM:
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
-        if "DEPO Step 5" in system_prompt:
+        if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
             assert set(payload) == {"original_question", "paths"}
