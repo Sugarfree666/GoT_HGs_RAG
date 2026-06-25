@@ -133,15 +133,15 @@ def run_hanlp_sdp_pipeline(
     )
     atomic_question_dag = None
     if run_step5 and not skip_step5:
-        from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_entity_paths
+        from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_global_best_path
 
         step5_llm = llm_client or _llm_client_from_preprocessor(preprocessor)
         if step5_llm is None:
             atomic_question_dag = invalid_atomic_question_dag(["Step5 requires an LLM client."])
         else:
             try:
-                restored_paths = restore_entity_paths(
-                    token_reasoning_structure.paths,
+                restored_global_best_path = restore_global_best_path(
+                    getattr(token_reasoning_structure, "global_selection", {}) or {},
                     preprocess_result.mask_mappings,
                 )
             except ValueError as exc:
@@ -149,7 +149,8 @@ def run_hanlp_sdp_pipeline(
             else:
                 atomic_question_dag = PathAlignedAtomicDAGGenerator(step5_llm).generate(
                     original_question=record.question,
-                    paths=restored_paths,
+                    explicit_entities=[entity.text for entity in preprocess_result.explicit_entities.entities],
+                    global_best_path=restored_global_best_path,
                 )
     return {
         "preprocess_result": preprocess_result,

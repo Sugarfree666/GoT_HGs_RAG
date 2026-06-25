@@ -140,211 +140,98 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = """
-You are an expert question decomposition module.
+You are DEPO Step 5: path contraction action trace generation.
 
-Your task is to convert a complex question into an Atomic Question DAG.
+Your task is to convert a complex question into a complete path contraction action trace.
+Do not output the final Atomic Question DAG. A deterministic program will convert your action trace into the DAG.
 
-You are given:
+You are given exactly:
 
-* the original question
-* one or more parser-grounded token paths
+* original_question: the full natural-language question
+* explicit_entities: original entity surface strings extracted from the question
+* global_best_path: the single mandatory structural backbone selected by Step 4, with ENTITY placeholders already restored
 
-Use the original question to understand the full meaning.
-Use the token paths as optional structural evidence. They may help identify reasoning order, but the original question is authoritative.
-The paths are not natural-language sentences; they are compact evidence chains.
+How to use the inputs:
 
-Atomic question definition:
-An atomic question asks for one missing answer using one semantic operation. It should be directly answerable once its dependencies are resolved. It must not contain an unresolved nested relation that should be asked first.
+1. Use global_best_path as the mandatory structural backbone.
+2. Use original_question for full semantics, constraints, answer intent, and grammatical realization.
+3. Use global_best_path for relation order and dependency structure.
+4. Generate a complete contraction action trace, not a final DAG.
+5. Do not output support spans, path indices, nodes, edges, depends_on, start_index, or end_index.
+6. Do not introduce relations absent from both the original question and global_best_path.
+7. For "When" questions, ask about the event relation present in the original question/path, not unrelated attributes such as birth date unless the original question/path explicitly requires birth.
+8. Do not leave ENTITY placeholders unresolved.
+9. Do not answer the questions.
+10. Return valid JSON only.
 
-Core principles:
+Action trace rules:
 
-1. Generate the complete set of atomic questions needed to answer the original question.
-2. Preserve all entities, constraints, comparison conditions, and answer intent from the original question.
-3. Use natural questions, not symbolic triples.
-4. If a question depends on a previous answer, refer to it as q1's answer, q2's answer, etc.
-5. Every dependency mentioned in question text must also appear in depends_on.
-6. Evidence lookup questions should use support from one contiguous span of a supplied path.
-7. Final comparison, selection, equality, ranking, or aggregation questions may use support: null.
-8. Do not answer the questions.
-9. Do not invent entities, relations, dates, or constraints not present in the original question or paths.
-10. Do not leave unresolved placeholders such as ENTITYA or ENTITYB if the path already contains the restored entity name.
-11. Return valid JSON only.
+* actions must be a non-empty array.
+* id must be q1, q2, q3, ... in order.
+* consume lists the current residual path fragment consumed by that atomic question. It may contain previous produced values such as q1_answer.
+* produce must be qN_answer for action qN.
+* question is the natural-language atomic question to show downstream.
+* If an action depends on a previous answer, refer to it as q1's answer, q2's answer, etc. in question text, or include q1_answer, q2_answer, etc. in consume.
+* Do not output depends_on. The program will derive dependencies from qN_answer and qN's answer references in question/consume.
 
 Output format:
 {
-"nodes": [
+"actions": [
 {
 "id": "q1",
-"question": "atomic question?",
-"depends_on": [],
-"support": {
-"path_id": "P1",
-"start_index": 0,
-"end_index": 1
-}
-}
-]
-}
-
-Support format:
-
-* path_id: the id of the supporting path
-* start_index: the first token index in the path span
-* end_index: the last token index in the path span
-* use support: null only for final reasoning nodes that do not correspond to one contiguous path span
-
-Example 1 input:
-{
-"original_question": "What nationality is the performer of song When The Stars Go Blue?",
-"paths": [
-{
-"path_id": "P1",
-"nodes": [
-{"index": 0, "text": "When The Stars Go Blue"},
-{"index": 1, "text": "performer"},
-{"index": 2, "text": "nationality"}
-]
-}
-]
-}
-
-Example 1 output:
-{
-"nodes": [
-{
-"id": "q1",
-"question": "Who is the performer of When The Stars Go Blue?",
-"depends_on": [],
-"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+"consume": ["path node 1", "path node 2"],
+"produce": "q1_answer",
+"question": "natural-language atomic question?"
 },
 {
 "id": "q2",
-"question": "What is the nationality of q1's answer?",
-"depends_on": ["q1"],
-"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
+"consume": ["path node 3", "relation", "q1_answer"],
+"produce": "q2_answer",
+"question": "natural-language atomic question using q1's answer?"
 }
 ]
 }
 
-Example 2 input:
+Example input:
 {
-"original_question": "Which country is the composer of film Thunder On The Hill from?",
-"paths": [
-{
-"path_id": "P1",
-"nodes": [
-{"index": 0, "text": "Thunder On The Hill"},
-{"index": 1, "text": "composer"},
-{"index": 2, "text": "country"}
-]
-}
-]
+"original_question": "When was the person who Messi's goals in Copa del Rey compared to get signed by Barcelona?",
+"explicit_entities": ["Messi", "Copa del Rey", "Barcelona"],
+"global_best_path": ["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"]
 }
 
-Example 2 output:
+Expected output:
 {
-"nodes": [
+"actions": [
 {
 "id": "q1",
-"question": "Who is the composer of Thunder On The Hill?",
-"depends_on": [],
-"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+"consume": ["person", "compared", "goals", "Messi"],
+"produce": "q1_answer",
+"question": "Who is the person that Messi's goals in Copa del Rey were compared to?"
 },
 {
 "id": "q2",
-"question": "Which country is q1's answer from?",
-"depends_on": ["q1"],
-"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
+"consume": ["Barcelona", "signed", "get", "q1_answer"],
+"produce": "q2_answer",
+"question": "When did q1's answer get signed by Barcelona?"
 }
 ]
 }
 
-Example 3 input:
-{
-"original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?",
-"paths": [
-{
-"path_id": "P1",
-"nodes": [
-{"index": 0, "text": "Dangerously They Live"},
-{"index": 1, "text": "director"},
-{"index": 2, "text": "younger"}
-]
-},
-{
-"path_id": "P2",
-"nodes": [
-{"index": 0, "text": "Salad By The Roots"},
-{"index": 1, "text": "director"},
-{"index": 2, "text": "younger"}
-]
-}
-]
-}
+Do not generate "When was q1's answer born?" for that example, because "born" is absent from both the original question and global_best_path.
 
-Example 3 output:
-{
-"nodes": [
-{
-"id": "q1",
-"question": "Who directed Dangerously They Live?",
-"depends_on": [],
-"support": {"path_id": "P1", "start_index": 0, "end_index": 1}
-},
-{
-"id": "q2",
-"question": "When was q1's answer born?",
-"depends_on": ["q1"],
-"support": {"path_id": "P1", "start_index": 1, "end_index": 2}
-},
-{
-"id": "q3",
-"question": "Who directed Salad By The Roots?",
-"depends_on": [],
-"support": {"path_id": "P2", "start_index": 0, "end_index": 1}
-},
-{
-"id": "q4",
-"question": "When was q3's answer born?",
-"depends_on": ["q3"],
-"support": {"path_id": "P2", "start_index": 1, "end_index": 2}
-},
-{
-"id": "q5",
-"question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
-"depends_on": ["q2", "q4"],
-"support": null
-}
-]
-}
-
-Now generate the Atomic Question DAG for the given input JSON.
+Now generate the contraction action trace for the given input JSON.
 Return only the JSON object.
-
 """.strip()
 
 
 def build_atomic_question_dag_prompt(
     original_question: str,
-    paths: list[dict[str, object]],
+    explicit_entities: list[str],
+    global_best_path: list[str],
 ) -> str:
-    payload_paths: list[dict[str, object]] = []
-    for path in paths:
-        nodes = [str(node) for node in path.get("nodes", [])] if isinstance(path, dict) else []
-        payload_paths.append(
-            {
-                "path_id": str(path.get("path_id", "")) if isinstance(path, dict) else "",
-                "nodes": [
-                    {
-                        "index": index,
-                        "text": text,
-                    }
-                    for index, text in enumerate(nodes)
-                ],
-            }
-        )
     payload = {
         "original_question": original_question,
-        "paths": payload_paths,
+        "explicit_entities": [str(entity) for entity in explicit_entities],
+        "global_best_path": [str(node) for node in global_best_path],
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)

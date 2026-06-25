@@ -74,7 +74,7 @@ def main() -> int:
         return 2
 
     try:
-        from atomic_question_dag import restore_entity_paths
+        from atomic_question_dag import restore_global_best_path
         from entity_masking_preprocessor import EntityMaskingPreprocessor
         from hanlp_sdp_parser import HanLPSDPParser
         from llm_client import LLMClient
@@ -146,8 +146,8 @@ def main() -> int:
                         debug_dir=debug_dir,
                         llm_client=llm_client,
                     )
-                    restored_paths = restore_entity_paths(
-                        result["token_reasoning_structure"].paths,
+                    restored_global_best_path = restore_global_best_path(
+                        result["token_reasoning_structure"].global_selection,
                         result["preprocess_result"].mask_mappings,
                     )
                     payload = build_decomposition_payload(
@@ -155,7 +155,7 @@ def main() -> int:
                         questions_file=questions_file,
                         item=item,
                         result=result,
-                        restored_paths=restored_paths,
+                        restored_global_best_path=restored_global_best_path,
                     )
                     _write_json(decomposition_path, payload)
                     (question_dir / "decomposition.md").write_text(build_markdown_report(payload), encoding="utf-8")
@@ -199,7 +199,7 @@ def build_decomposition_payload(
     questions_file: Path,
     item: dict[str, Any],
     result: dict[str, Any],
-    restored_paths: list[Any],
+    restored_global_best_path: list[str],
 ) -> dict[str, Any]:
     preprocess_result = result["preprocess_result"]
     token_reasoning_structure = result["token_reasoning_structure"]
@@ -229,7 +229,14 @@ def build_decomposition_payload(
                 "warnings": list(result["hanlp_sdp_result"].warnings),
             },
             "4_token_reasoning_structure": _compact_token_reasoning(token_reasoning_structure),
-            "5_restored_paths_for_step5": [path.to_dict() for path in restored_paths],
+            "5_step5_action_trace": {
+                "input": {
+                    "original_question": item["question"],
+                    "explicit_entities": [entity.text for entity in preprocess_result.explicit_entities.entities],
+                    "global_best_path": list(restored_global_best_path),
+                },
+                "actions": _step5_actions(atomic_question_dag),
+            },
             "6_atomic_question_dag": atomic_question_dag.to_dict() if atomic_question_dag is not None else None,
         },
     }
@@ -259,6 +266,7 @@ def build_error_payload(
 def build_markdown_report(payload: dict[str, Any]) -> str:
     stages = payload["stages"]
     dag = stages.get("6_atomic_question_dag") or {}
+    action_trace = stages.get("5_step5_action_trace") or {}
     lines: list[str] = [
         f"# DEPO Decomposition #{payload['index']}",
         "",
@@ -290,16 +298,27 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append(f"Masked question: {masking.get('masked_question', '')}")
     lines.append("")
 
-    lines.append("## 3. Step4 Paths")
-    restored_paths = stages.get("5_restored_paths_for_step5") or []
-    if restored_paths:
-        for path in restored_paths:
-            lines.append(f"- {path.get('path_id')}: {' ---- '.join(path.get('nodes', []))}")
+    lines.append("## 3. Global Best Path")
+    global_best_path = ((action_trace.get("input") or {}).get("global_best_path")) or []
+    if global_best_path:
+        lines.append(f"- {' ---- '.join(global_best_path)}")
     else:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 4. Atomic Question DAG")
+    lines.append("## 4. Step5 Action Trace")
+    actions = action_trace.get("actions") or []
+    if actions:
+        for action in actions:
+            lines.append(f"- {action.get('id')}: {action.get('question')}")
+            consume = action.get("consume") or []
+            lines.append(f"  - consume: {' ---- '.join(consume) if consume else '(none)'}")
+            lines.append(f"  - produce: {action.get('produce') or ''}")
+    else:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 5. Atomic Question DAG")
     if dag is None:
         lines.append("(not generated)")
     elif not dag.get("valid", False):
@@ -311,16 +330,6 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
             lines.append(f"- {node.get('id')}: {node.get('question')}")
             depends_on = node.get("depends_on") or []
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
-            support = node.get("support")
-            if support is None:
-                lines.append("  - support: null")
-            else:
-                nodes = support.get("nodes") or []
-                lines.append(
-                    f"  - support: {support.get('path_id')}[{support.get('start_index')}:{support.get('end_index')}]"
-                )
-                if nodes:
-                    lines.append(f"  - path: {' ---- '.join(nodes)}")
     lines.append("")
     return "\n".join(lines)
 
@@ -418,6 +427,18 @@ def _slice_items(
     return selected[:limit] if limit is not None else selected
 
 
+def _step5_actions(atomic_question_dag: Any) -> list[dict[str, Any]]:
+    if atomic_question_dag is None:
+        return []
+    raw_payload = getattr(atomic_question_dag, "raw_payload", None)
+    if not isinstance(raw_payload, dict):
+        return []
+    actions = raw_payload.get("actions")
+    if not isinstance(actions, list):
+        return []
+    return [dict(action) for action in actions if isinstance(action, dict)]
+
+
 def _compact_token_reasoning(token_reasoning_structure: Any) -> dict[str, Any]:
     return {
         "path_type": token_reasoning_structure.path_type,
@@ -426,6 +447,7 @@ def _compact_token_reasoning(token_reasoning_structure: Any) -> dict[str, Any]:
         "entity_anchors": list(token_reasoning_structure.entity_anchors),
         "candidate_sets": [list(candidate_set) for candidate_set in token_reasoning_structure.candidate_sets],
         "constraints": list(token_reasoning_structure.constraints),
+        "global_selection": dict(token_reasoning_structure.global_selection or {}),
         "warnings": list(token_reasoning_structure.warnings),
         "debug_file": token_reasoning_structure.debug_file,
         "graph_edges": [

@@ -72,9 +72,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
         step5_payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(set(step5_payload), {"original_question", "paths"})
-        self.assertEqual(len(step5_payload["paths"]), 1)
-        self.assertEqual(step5_payload["paths"][0]["path_id"], result["token_reasoning_structure"].paths[0].path_id)
+        self.assertEqual(set(step5_payload), {"original_question", "explicit_entities", "global_best_path"})
+        self.assertEqual(step5_payload["explicit_entities"], ["Ryan Tubridy", "Mauro Massironi"])
+        self.assertTrue(step5_payload["global_best_path"])
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -1330,27 +1330,27 @@ class FakePreprocessLLM:
         if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
-            assert set(payload) == {"original_question", "paths"}
-            assert len(payload["paths"]) == 1
-            path_id = payload["paths"][0]["path_id"]
+            assert set(payload) == {"original_question", "explicit_entities", "global_best_path"}
+            assert payload["explicit_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
+            assert payload["global_best_path"]
             serialized = json.dumps(payload, ensure_ascii=False)
             assert "ENTITYA" not in serialized
             assert "ENTITYB" not in serialized
             assert "masked_question" not in serialized
             assert "answer_anchor" not in serialized
             return {
-                "nodes": [
+                "actions": [
                     {
                         "id": "q1",
+                        "consume": ["Ryan Tubridy", "older"],
+                        "produce": "q1_answer",
                         "question": "When was Ryan Tubridy born?",
-                        "depends_on": [],
-                        "support": {"path_id": path_id, "start_index": 0, "end_index": 1},
                     },
                     {
                         "id": "q2",
+                        "consume": ["Mauro Massironi", "older"],
+                        "produce": "q2_answer",
                         "question": "When was Mauro Massironi born?",
-                        "depends_on": [],
-                        "support": {"path_id": path_id, "start_index": 0, "end_index": 0},
                     },
                 ]
             }

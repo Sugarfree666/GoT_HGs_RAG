@@ -1,23 +1,32 @@
 # DEPO HanLP-SDP Pipeline
 
-DEPO is now a single HanLP-SDP mainline:
+DEPO is currently maintained as one HanLP-SDP decomposition mainline. Older
+CoreNLP/OpenIE and Semantic Reasoning Path variants are not part of this active
+pipeline.
 
 ```text
 original question
 -> explicit entity detection
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
--> query-focused token reasoning structure
--> complete atomic question DAG
+-> query-focused token reasoning structure with one global best path
+-> Step5 path contraction action trace
+-> deterministic Atomic Question DAG conversion
 ```
 
 The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
-question DAG generation. Placeholder assignment, overlap removal, and
+path contraction action trace generation. Placeholder assignment, overlap removal, and
 `masked_question` construction are deterministic Python logic. Step 4 consumes
-all three HanLP SDP views and emits a compact token graph plus a selected main
-path or parallel path cover. Step 5 sees only the original question and the
-Step 4 paths after entity placeholders have been deterministically restored to
-their original text.
+all three HanLP SDP views and emits a compact token graph plus a single selected
+Global Best Path. Step 5 sees only:
+
+1. `original_question`
+2. `explicit_entities`
+3. `global_best_path`
+
+`explicit_entities` are the original Step 2 entity surface strings. The
+`global_best_path` is the Step 4 Global Best Path after ENTITY placeholders have
+been deterministically restored to their original text.
 
 ## Output Shape
 
@@ -31,17 +40,29 @@ The CLI prints:
 6. Atomic Question DAG
 
 Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure. Step 5 converts those selected paths into a complete atomic question
-DAG. Evidence lookup nodes should be supported by a contiguous path span, while
-final comparison, selection, equality, or aggregation nodes may use
-`support: null`.
+structure. Step 5 does not receive all anchor paths, raw SDP edges, masks,
+candidate sets, constraints, support spans, or path indices.
 
-Step 5 does not receive `masked_question`, entity maps, `answer_anchor`,
-constraints, candidate sets, path type, Step 4 graph/debug metadata, or raw SDP
-edges. It generates the complete atomic question DAG needed to answer the
-original question, including final comparison, selection, equality, or
-aggregation nodes when the original question requires them. Evidence lookup
-nodes should point to a path span; final reasoning nodes may use `support: null`.
+Step 5 returns JSON action trace only:
+
+```json
+{
+  "actions": [
+    {
+      "id": "q1",
+      "consume": ["path node", "relation"],
+      "produce": "q1_answer",
+      "question": "natural-language atomic question?"
+    }
+  ]
+}
+```
+
+The program converts this action trace into the Atomic Question DAG. Each action
+becomes one DAG node. `depends_on` is derived from `qN_answer` references in
+`consume` and from `qN's answer` references in `question`. Edges and leaf nodes
+are then derived from `depends_on`. Step5 no longer asks the LLM to emit
+`support`, `start_index`, `end_index`, or final DAG edges.
 
 ## Install
 
