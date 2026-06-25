@@ -9,7 +9,7 @@ original question
 -> explicit entity detection
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
--> query-focused token reasoning structure with one global best path
+-> query-focused token reasoning structure with global best path(s)
 -> Step5 path contraction action trace
 -> deterministic Atomic Question DAG conversion
 ```
@@ -17,16 +17,17 @@ original question
 The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
 path contraction action trace generation. Placeholder assignment, overlap removal, and
 `masked_question` construction are deterministic Python logic. Step 4 consumes
-all three HanLP SDP views and emits a compact token graph plus a single selected
-Global Best Path. Step 5 sees only:
+all three HanLP SDP views and emits a compact token graph plus selected Global
+Best Path structure. Ordinary questions keep one path; comparison/candidate
+questions may keep one path per candidate branch. Step 5 sees only:
 
 1. `original_question`
 2. `explicit_entities`
-3. `global_best_path`
+3. `global_best_paths`
 
 `explicit_entities` are the original Step 2 entity surface strings. The
-`global_best_path` is the Step 4 Global Best Path after ENTITY placeholders have
-been deterministically restored to their original text.
+`global_best_paths` value is a list of restored Step 4 paths. Ordinary questions
+pass one path; candidate/comparison questions pass multiple branch paths.
 
 ## Output Shape
 

@@ -133,15 +133,15 @@ def run_hanlp_sdp_pipeline(
     )
     atomic_question_dag = None
     if run_step5 and not skip_step5:
-        from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_global_best_path
+        from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_global_best_paths
 
         step5_llm = llm_client or _llm_client_from_preprocessor(preprocessor)
         if step5_llm is None:
             atomic_question_dag = invalid_atomic_question_dag(["Step5 requires an LLM client."])
         else:
             try:
-                restored_global_best_path = restore_global_best_path(
-                    getattr(token_reasoning_structure, "global_selection", {}) or {},
+                restored_global_best_paths = restore_global_best_paths(
+                    token_reasoning_structure.paths,
                     preprocess_result.mask_mappings,
                 )
             except ValueError as exc:
@@ -150,7 +150,7 @@ def run_hanlp_sdp_pipeline(
                 atomic_question_dag = PathAlignedAtomicDAGGenerator(step5_llm).generate(
                     original_question=record.question,
                     explicit_entities=[entity.text for entity in preprocess_result.explicit_entities.entities],
-                    global_best_path=restored_global_best_path,
+                    global_best_paths=restored_global_best_paths,
                 )
     return {
         "preprocess_result": preprocess_result,
@@ -255,17 +255,33 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     else:
         print("(none)")
     print()
-    print("[Global Best Path]")
+    selected_paths = getattr(token_reasoning_structure, "paths", []) or []
+    is_cover = getattr(token_reasoning_structure, "path_type", "") == "global_best_path_cover" or len(selected_paths) > 1
+    print("[Global Best Path Cover]" if is_cover else "[Global Best Path]")
     global_selection = getattr(token_reasoning_structure, "global_selection", {}) or {}
-    if global_selection:
+    if global_selection and selected_paths:
         anchor_text = global_selection.get("anchor_text") or "(unknown)"
         anchor_id = global_selection.get("anchor_id") or "(unknown)"
         source_types = ",".join(global_selection.get("source_types") or [])
-        nodes = global_selection.get("nodes") or []
-        rank = tuple(global_selection.get("global_rank") or ())
         print(f"Anchor: {anchor_text}[{anchor_id}] sources={source_types}")
-        print(f"Path: {' ---- '.join(nodes)}")
-        print(f"Global rank: {rank}")
+        if is_cover:
+            candidate_set = global_selection.get("candidate_set") or []
+            if candidate_set:
+                print(f"Candidate set: {', '.join(candidate_set)}")
+            selected_payloads = global_selection.get("paths") or []
+            for path_index, path in enumerate(selected_paths, start=1):
+                nodes = list(getattr(path, "nodes", []))
+                rank_payload = selected_payloads[path_index - 1] if path_index - 1 < len(selected_payloads) else {}
+                rank = tuple(rank_payload.get("global_rank") or ())
+                print(f"P{path_index}: {' ---- '.join(nodes)}")
+                if rank:
+                    print(f"  Global rank: {rank}")
+        else:
+            path = selected_paths[0]
+            nodes = list(getattr(path, "nodes", []))
+            rank = tuple(global_selection.get("global_rank") or ())
+            print(f"Path: {' ---- '.join(nodes)}")
+            print(f"Global rank: {rank}")
     else:
         print("(no path selected)")
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]

@@ -72,9 +72,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
         step5_payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(set(step5_payload), {"original_question", "explicit_entities", "global_best_path"})
+        self.assertEqual(set(step5_payload), {"original_question", "explicit_entities", "global_best_paths"})
         self.assertEqual(step5_payload["explicit_entities"], ["Ryan Tubridy", "Mauro Massironi"])
-        self.assertTrue(step5_payload["global_best_path"])
+        self.assertTrue(step5_payload["global_best_paths"])
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -202,6 +202,33 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         with redirect_stdout(stream):
             print_hanlp_sdp_result(1, record, result)
         self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
+
+    def test_pipeline_sends_restored_global_best_path_cover_to_step5(self) -> None:
+        question = "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
+        llm = IllusionsPipelineLLM(question)
+        result = run_hanlp_sdp_pipeline(
+            record=QuestionRecord(question=question),
+            index=1,
+            preprocessor=EntityMaskingPreprocessor(llm),
+            parser=FakeIllusionsBornLaterParser(),
+        )
+
+        compiled = result["token_reasoning_structure"]
+        self.assertEqual(compiled.path_type, "global_best_path_cover")
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        payload = json.loads(llm.step5_user_prompt)
+        self.assertEqual(
+            payload["global_best_paths"],
+            [
+                ["Illusions (1982 Film)", "director", "born"],
+                ["It'S A Wonderful Afterlife", "director", "born"],
+            ],
+        )
+        self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
+        self.assertNotIn("ENTITYB", json.dumps(payload, ensure_ascii=False))
+        dag = result["atomic_question_dag"]
+        self.assertTrue(dag.valid, dag.validation_errors)
+        self.assertEqual(dag.nodes[-1].depends_on, ("q2", "q4"))
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [
@@ -465,6 +492,33 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             self.assertEqual(provenance["schema_path_ids"], ["2", "4", "6"])
             self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
             self.assertTrue(provenance["candidate_set_evidence"])
+
+    def test_global_best_path_cover_preserves_both_born_later_film_branches(self) -> None:
+        result = self._film_director_born_later_result()
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_best_path_cover")
+        self.assertEqual(len(compiled.paths), 2)
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path_cover")
+        self.assertEqual(compiled.global_selection["candidate_set"], ["ENTITYA", "ENTITYB"])
+        self.assertEqual(
+            [path["nodes"] for path in compiled.global_selection["paths"]],
+            [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]],
+        )
+        anchor = self.anchor_result(compiled, "film")
+        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
+        self.assertEqual([path["nodes"] for path in selected_paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        self.assert_path_union_graph(compiled)
+
+    def test_simple_chain_still_uses_single_global_best_path(self) -> None:
+        compiled = compile_token_reasoning_structure(self._director_born_result(), ["ENTITYA"])
+
+        self.assertEqual(compiled.path_type, "global_best_path")
+        self.assertEqual(len(compiled.paths), 1)
+        self.assertEqual(list(compiled.paths[0].nodes), ["ENTITYA", "director", "born"])
+        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path")
 
     def test_surface_typed_wh_adjacency_positive_and_negative_cases(self) -> None:
         what_year = _hanlp_result(
@@ -911,15 +965,15 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
     def test_global_path_union_invariants_and_determinism(self) -> None:
         cases = [
-            (self._dell_result(), ["ENTITYA", "ENTITYB"]),
-            (self._johnny_result(), ["ENTITYA", "ENTITYB"]),
-            (self._nationality_result(), ["ENTITYA", "ENTITYB"]),
-            (self._film_director_died_result(), ["ENTITYA", "ENTITYB"]),
-            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"]),
-            (self._born_later_result(), ["ENTITYA", "ENTITYB"]),
-            (self._director_born_result(), ["ENTITYA"]),
+            (self._dell_result(), ["ENTITYA", "ENTITYB"], "global_best_path", 1),
+            (self._johnny_result(), ["ENTITYA", "ENTITYB"], "global_best_path", 1),
+            (self._nationality_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
+            (self._film_director_died_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
+            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
+            (self._born_later_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
+            (self._director_born_result(), ["ENTITYA"], "global_best_path", 1),
         ]
-        for result, entities in cases:
+        for result, entities, expected_path_type, expected_path_count in cases:
             with self.subTest(question=result.text):
                 first = compile_token_reasoning_structure(result, entities)
                 second = compile_token_reasoning_structure(result, entities)
@@ -929,8 +983,8 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 self.assertEqual(len(edge_pairs), len(set(frozenset(pair) for pair in edge_pairs)))
                 for path in first.paths:
                     self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-                self.assertEqual(first.path_type, "global_best_path")
-                self.assertEqual(len(first.paths), 1)
+                self.assertEqual(first.path_type, expected_path_type)
+                self.assertEqual(len(first.paths), expected_path_count)
                 self.assertTrue(first.global_selection)
 
     def test_global_rank_tiebreak_prefers_typed_anchor_fit(self) -> None:
@@ -1060,12 +1114,12 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(final_pairs, path_pairs)
 
     def assert_multi_anchor_result(self, compiled: object) -> None:
-        self.assertEqual(compiled.path_type, "global_best_path")  # type: ignore[attr-defined]
+        self.assertIn(compiled.path_type, {"global_best_path", "global_best_path_cover"})  # type: ignore[attr-defined]
         self.assertIsNotNone(compiled.answer_anchor)  # type: ignore[attr-defined]
         self.assertIsNotNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
         self.assertTrue(compiled.anchor_path_results)  # type: ignore[attr-defined]
         self.assertTrue(compiled.global_selection)  # type: ignore[attr-defined]
-        self.assertEqual(len(compiled.paths), 1)  # type: ignore[attr-defined]
+        self.assertGreaterEqual(len(compiled.paths), 1)  # type: ignore[attr-defined]
 
     def anchor_result(self, compiled: object, anchor_text: str) -> dict[str, object]:
         matches = [
@@ -1206,6 +1260,9 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             ],
         )
 
+    def _film_director_born_later_result(self) -> HanLPSDPResult:
+        return _film_director_born_later_hanlp_result()
+
     def _director_born_result(self) -> HanLPSDPResult:
         return _hanlp_result(
             "Where was the director of film ENTITYA born?",
@@ -1330,9 +1387,9 @@ class FakePreprocessLLM:
         if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
-            assert set(payload) == {"original_question", "explicit_entities", "global_best_path"}
+            assert set(payload) == {"original_question", "explicit_entities", "global_best_paths"}
             assert payload["explicit_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
-            assert payload["global_best_path"]
+            assert payload["global_best_paths"]
             serialized = json.dumps(payload, ensure_ascii=False)
             assert "ENTITYA" not in serialized
             assert "ENTITYB" not in serialized
@@ -1375,6 +1432,67 @@ class FakePreprocessLLM:
                     "confidence": 1.0,
                     "reason": "explicit person name",
                 },
+            ],
+            "warnings": [],
+        }
+
+
+class IllusionsPipelineLLM:
+    def __init__(self, question: str) -> None:
+        self.question = question
+        self.calls = 0
+        self.step5_user_prompt = ""
+
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
+        self.calls += 1
+        if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
+            self.step5_user_prompt = user_prompt
+            payload = json.loads(user_prompt)
+            assert set(payload) == {"original_question", "explicit_entities", "global_best_paths"}
+            assert payload["explicit_entities"] == ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"]
+            assert payload["global_best_paths"] == [
+                ["Illusions (1982 Film)", "director", "born"],
+                ["It'S A Wonderful Afterlife", "director", "born"],
+            ]
+            return {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": ["Illusions (1982 Film)", "director"],
+                        "produce": "q1_answer",
+                        "question": "Who is the director of Illusions (1982 Film)?",
+                    },
+                    {
+                        "id": "q2",
+                        "consume": ["q1_answer", "born"],
+                        "produce": "q2_answer",
+                        "question": "When was q1's answer born?",
+                    },
+                    {
+                        "id": "q3",
+                        "consume": ["It'S A Wonderful Afterlife", "director"],
+                        "produce": "q3_answer",
+                        "question": "Who is the director of It'S A Wonderful Afterlife?",
+                    },
+                    {
+                        "id": "q4",
+                        "consume": ["q3_answer", "born"],
+                        "produce": "q4_answer",
+                        "question": "When was q3's answer born?",
+                    },
+                    {
+                        "id": "q5",
+                        "consume": ["q2_answer", "q4_answer"],
+                        "produce": "q5_answer",
+                        "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
+                    },
+                ]
+            }
+        assert "DEPO Step 2: topic entity extraction" in system_prompt
+        return {
+            "entities": [
+                _entity(self.question, "Illusions (1982 Film)", "Work"),
+                _entity(self.question, "It'S A Wonderful Afterlife", "Work"),
             ],
             "warnings": [],
         }
@@ -1452,6 +1570,30 @@ class FakeHanLPSDPParser:
             model="fake.hanlp.model",
             mask_token_checks={placeholder: "OK" for placeholder in self.placeholders},
         )
+
+
+class FakeIllusionsBornLaterParser:
+    def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
+        del text, placeholders
+        return _film_director_born_later_hanlp_result()
+
+
+def _film_director_born_later_hanlp_result() -> HanLPSDPResult:
+    return _hanlp_result(
+        "Which film has the director who was born later, ENTITYA or ENTITYB?",
+        ["Which", "film", "has", "the", "director", "who", "was", "born", "later", ",", "ENTITYA", "or", "ENTITYB", "?"],
+        [
+            _dm("Which", "BV", "film", 1, 2),
+            _dm("has", "ARG1", "film", 3, 2),
+            _dm("has", "ARG2", "director", 3, 5),
+            _dm("born", "ARG2", "director", 8, 5),
+            _psd("born", "ACT-arg", "director", 8, 5),
+            _pas("or", "coord_ARG1", "ENTITYA", 12, 11),
+            _pas("or", "coord_ARG2", "ENTITYB", 12, 13),
+            _psd("or", "DISJ.member", "ENTITYA", 12, 11),
+            _psd("or", "DISJ.member", "ENTITYB", 12, 13),
+        ],
+    )
 
 
 def _entity(question: str, text: str, semantic_type: str = "Entity") -> dict[str, object]:

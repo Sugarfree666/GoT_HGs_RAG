@@ -83,13 +83,13 @@ class PathAlignedAtomicDAGGenerator:
         *,
         original_question: str,
         explicit_entities: list[str],
-        global_best_path: list[str],
+        global_best_paths: list[list[str]],
     ) -> AtomicQuestionDAGResult:
         explicit_entity_texts = [str(entity) for entity in explicit_entities]
-        restored_global_best_path = [str(node) for node in global_best_path]
+        restored_global_best_paths = [[str(node) for node in path] for path in global_best_paths]
         preflight_errors = _preflight_errors(
             explicit_entities=explicit_entity_texts,
-            global_best_path=restored_global_best_path,
+            global_best_paths=restored_global_best_paths,
         )
         if preflight_errors:
             return _invalid_result(preflight_errors, raw_payload=None)
@@ -97,7 +97,7 @@ class PathAlignedAtomicDAGGenerator:
         user_prompt = build_atomic_question_dag_prompt(
             original_question=original_question,
             explicit_entities=explicit_entity_texts,
-            global_best_path=restored_global_best_path,
+            global_best_paths=restored_global_best_paths,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
         return validate_atomic_question_dag(raw_payload)
@@ -129,6 +129,19 @@ def restore_global_best_path(step4_global_selection: Any, mask_mappings: Any) ->
     else:
         raw_nodes = getattr(step4_global_selection, "nodes", [])
     return _restore_path_nodes(raw_nodes, mask_mappings)
+
+
+def restore_global_best_paths(step4_paths: Any, mask_mappings: Any) -> list[list[str]]:
+    restored_paths: list[list[str]] = []
+    for path in step4_paths or []:
+        if isinstance(path, dict):
+            raw_nodes = path.get("nodes") or []
+        elif isinstance(path, (list, tuple)):
+            raw_nodes = path
+        else:
+            raw_nodes = getattr(path, "nodes", [])
+        restored_paths.append(_restore_path_nodes(raw_nodes, mask_mappings))
+    return restored_paths
 
 
 def validate_atomic_question_dag(raw_payload: dict[str, Any]) -> AtomicQuestionDAGResult:
@@ -237,18 +250,23 @@ def _restore_path_nodes(raw_nodes: Any, mask_mappings: Any) -> list[str]:
     return restored_nodes
 
 
-def _preflight_errors(*, explicit_entities: list[str], global_best_path: list[str]) -> list[str]:
+def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[list[str]]) -> list[str]:
     errors: list[str] = []
     if not isinstance(explicit_entities, list):
         errors.append("Step5 explicit_entities must be a list.")
     for entity in explicit_entities:
         if _contains_placeholder(entity):
             errors.append(f"Step5 explicit_entities contains unresolved ENTITY placeholder: {entity}.")
-    if not global_best_path:
-        errors.append("Step5 requires a non-empty global_best_path.")
-    for node in global_best_path:
-        if _contains_placeholder(node):
-            errors.append(f"Step5 global_best_path contains unresolved ENTITY placeholder: {node}.")
+    if not global_best_paths:
+        errors.append("Step5 requires at least one non-empty global_best_paths entry.")
+        return errors
+    for path_index, path in enumerate(global_best_paths, start=1):
+        if not isinstance(path, list) or not path:
+            errors.append(f"Step5 global_best_paths[{path_index - 1}] must be a non-empty list.")
+            continue
+        for node in path:
+            if _contains_placeholder(node):
+                errors.append(f"Step5 global_best_paths[{path_index - 1}] contains unresolved ENTITY placeholder: {node}.")
     return errors
 
 
@@ -310,12 +328,12 @@ def _invalid_result(errors: list[str], raw_payload: dict[str, Any] | None) -> At
 def prompt_input_payload(
     original_question: str,
     explicit_entities: list[str],
-    global_best_path: list[str],
+    global_best_paths: list[list[str]],
 ) -> dict[str, Any]:
     return json.loads(
         build_atomic_question_dag_prompt(
             original_question=original_question,
             explicit_entities=explicit_entities,
-            global_best_path=global_best_path,
+            global_best_paths=global_best_paths,
         )
     )

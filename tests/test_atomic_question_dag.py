@@ -18,6 +18,7 @@ from atomic_question_dag import (  # noqa: E402
     PathAlignedAtomicDAGGenerator,
     restore_entity_paths,
     restore_global_best_path,
+    restore_global_best_paths,
 )
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from main import run_hanlp_sdp_pipeline  # noqa: E402
@@ -25,21 +26,21 @@ from models import HanLPSDPEdge, HanLPSDPResult, MaskMapping, QuestionRecord  # 
 
 
 class AtomicQuestionDAGTest(unittest.TestCase):
-    def test_llm_input_contract_contains_only_original_entities_and_global_best_path(self) -> None:
+    def test_llm_input_contract_contains_only_original_entities_and_global_best_paths(self) -> None:
         llm = RecordingStep5LLM(_johnny_payload())
 
         PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Do director of film Ten9Eight: Shoot For The Moon share the same nationality?",
             explicit_entities=["Ten9Eight: Shoot For The Moon"],
-            global_best_path=["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"],
+            global_best_paths=[["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"]],
         )
 
         payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_path"})
+        self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
         self.assertEqual(payload["explicit_entities"], ["Ten9Eight: Shoot For The Moon"])
         self.assertEqual(
-            payload["global_best_path"],
-            ["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"],
+            payload["global_best_paths"],
+            [["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"]],
         )
         serialized = json.dumps(payload, ensure_ascii=False)
         forbidden = [
@@ -50,7 +51,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             "path_type",
             "masked_question",
             "entity_map",
-            "paths",
             "path_id",
             "start_index",
             "end_index",
@@ -83,6 +83,27 @@ class AtomicQuestionDAGTest(unittest.TestCase):
 
         self.assertEqual(restored, ["Barcelona", "signed", "person"])
 
+    def test_restore_global_best_paths_replaces_each_selected_path(self) -> None:
+        paths = [
+            SimpleNamespace(nodes=["ENTITYA", "director", "born"]),
+            SimpleNamespace(nodes=["ENTITYB", "director", "born"]),
+        ]
+        restored = restore_global_best_paths(
+            paths,
+            [
+                MaskMapping("ENTITYA", "Illusions (1982 Film)", "entity"),
+                MaskMapping("ENTITYB", "It'S A Wonderful Afterlife", "entity"),
+            ],
+        )
+
+        self.assertEqual(
+            restored,
+            [
+                ["Illusions (1982 Film)", "director", "born"],
+                ["It'S A Wonderful Afterlife", "director", "born"],
+            ],
+        )
+
     def test_restore_global_best_path_rejects_unmapped_placeholder(self) -> None:
         with self.assertRaisesRegex(ValueError, "Unresolved entity placeholder"):
             restore_global_best_path({"nodes": ["ENTITYA", "born"]}, [])
@@ -102,12 +123,12 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="What is the nationality of Some Entity?",
             explicit_entities=["Some Entity"],
-            global_best_path=["Some Entity"],
+            global_best_paths=[["Some Entity"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(payload["global_best_path"], ["Some Entity"])
+        self.assertEqual(payload["global_best_paths"], [["Some Entity"]])
         self.assertNotIn("index", json.dumps(payload, ensure_ascii=False))
         self.assertIsNone(result.nodes[0].support)
 
@@ -116,12 +137,34 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Question?",
             explicit_entities=[],
-            global_best_path=[],
+            global_best_paths=[],
         )
 
         self.assertFalse(result.valid)
         self.assertEqual(llm.user_prompts, [])
-        self.assertIn("Step5 requires a non-empty global_best_path.", result.validation_errors)
+        self.assertIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
+
+    def test_multi_path_cover_is_sent_to_llm(self) -> None:
+        llm = RecordingStep5LLM(_parallel_born_later_payload())
+        result = PathAlignedAtomicDAGGenerator(llm).generate(
+            original_question="Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?",
+            explicit_entities=["Illusions (1982 Film)", "It'S A Wonderful Afterlife"],
+            global_best_paths=[
+                ["Illusions (1982 Film)", "director", "born"],
+                ["It'S A Wonderful Afterlife", "director", "born"],
+            ],
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        payload = json.loads(llm.user_prompts[0])
+        self.assertEqual(
+            payload["global_best_paths"],
+            [
+                ["Illusions (1982 Film)", "director", "born"],
+                ["It'S A Wonderful Afterlife", "director", "born"],
+            ],
+        )
+        self.assertEqual(result.nodes[-1].depends_on, ("q2", "q4"))
 
     def test_parallel_nationality_actions_can_feed_final_comparison(self) -> None:
         result = _generate(
@@ -348,7 +391,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertTrue(dag.valid, dag.validation_errors)
         self.assertEqual([node.question for node in dag.nodes], ["When was Ryan Tubridy born?", "When was Mauro Massironi born?"])
         payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_path"})
+        self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
         self.assertEqual(payload["explicit_entities"], ["Ryan Tubridy", "Mauro Massironi"])
         self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
         self.assertNotIn("ENTITYB", json.dumps(payload, ensure_ascii=False))
@@ -371,7 +414,7 @@ class RecordingStep5LLM:
         if system_prompt != ATOMIC_QUESTION_DAG_SYSTEM:
             raise AssertionError("Unexpected system prompt")
         payload = json.loads(user_prompt)
-        if set(payload) != {"original_question", "explicit_entities", "global_best_path"}:
+        if set(payload) != {"original_question", "explicit_entities", "global_best_paths"}:
             raise AssertionError(f"Unexpected Step5 prompt keys: {set(payload)}")
 
 
@@ -392,7 +435,7 @@ class FullPipelineLLM:
         if system_prompt == ATOMIC_QUESTION_DAG_SYSTEM:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
-            if set(payload) != {"original_question", "explicit_entities", "global_best_path"}:
+            if set(payload) != {"original_question", "explicit_entities", "global_best_paths"}:
                 raise AssertionError(f"Unexpected Step5 prompt keys: {set(payload)}")
             return {
                 "actions": [
@@ -447,7 +490,7 @@ def _generate(
     return PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
         original_question=question,
         explicit_entities=entities or ["A"],
-        global_best_path=path or ["A", "B"],
+        global_best_paths=[path or ["A", "B"]],
     )
 
 
@@ -621,6 +664,43 @@ def _messi_barcelona_payload() -> dict[str, Any]:
                 "consume": ["Barcelona", "signed", "get", "q1_answer"],
                 "produce": "q2_answer",
                 "question": "When did q1's answer get signed by Barcelona?",
+            },
+        ]
+    }
+
+
+def _parallel_born_later_payload() -> dict[str, Any]:
+    return {
+        "actions": [
+            {
+                "id": "q1",
+                "consume": ["Illusions (1982 Film)", "director"],
+                "produce": "q1_answer",
+                "question": "Who is the director of Illusions (1982 Film)?",
+            },
+            {
+                "id": "q2",
+                "consume": ["q1_answer", "born"],
+                "produce": "q2_answer",
+                "question": "When was q1's answer born?",
+            },
+            {
+                "id": "q3",
+                "consume": ["It'S A Wonderful Afterlife", "director"],
+                "produce": "q3_answer",
+                "question": "Who is the director of It'S A Wonderful Afterlife?",
+            },
+            {
+                "id": "q4",
+                "consume": ["q3_answer", "born"],
+                "produce": "q4_answer",
+                "question": "When was q3's answer born?",
+            },
+            {
+                "id": "q5",
+                "consume": ["q2_answer", "q4_answer"],
+                "produce": "q5_answer",
+                "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
             },
         ]
     }

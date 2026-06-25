@@ -315,6 +315,24 @@ class _GlobalPathCandidate:
         }
 
 
+@dataclass
+class _GlobalPathSelection:
+    selection_type: str
+    candidates: list[_GlobalPathCandidate]
+    winning_candidate: _GlobalPathCandidate
+    candidate_set: list[str] = field(default_factory=list)
+
+    def to_debug(self) -> dict[str, Any]:
+        payload = self.winning_candidate.to_debug()
+        payload["selection_type"] = self.selection_type
+        payload["selected_paths"] = [candidate.to_debug() for candidate in self.candidates]
+        if self.selection_type == "global_best_path_cover":
+            payload["candidate_set"] = list(self.candidate_set)
+            payload["paths"] = [candidate.to_debug() for candidate in self.candidates]
+            payload["winning_path"] = self.winning_candidate.to_debug()
+        return payload
+
+
 def compile_token_reasoning_structure(
     hanlp_sdp_result: HanLPSDPResult,
     explicit_entities: list[str],
@@ -429,15 +447,17 @@ def compile_token_reasoning_structure(
             }
         )
 
-    selected_global_candidate = _select_global_best_path(global_candidates)
-    _annotate_per_anchor_global_selection(per_anchor_results, global_candidates, selected_global_candidate)
+    selected_global_selection = _select_global_path_structure(global_candidates, warnings=state.warnings)
+    selected_global_candidates = selected_global_selection.candidates if selected_global_selection is not None else []
+    _annotate_per_anchor_global_selection(per_anchor_results, global_candidates, selected_global_candidates)
 
-    if selected_global_candidate is not None:
+    if selected_global_selection is not None:
+        selected_global_candidate = selected_global_selection.winning_candidate
         result_state = selected_global_candidate.anchor_state
-        paths = [selected_global_candidate.path]
+        paths = _renumber_selected_global_paths(selected_global_candidates)
         answer_anchor_id = selected_global_candidate.anchor_id
         answer_anchor = selected_global_candidate.anchor_text
-        path_type = "global_best_path"
+        path_type = selected_global_selection.selection_type
         constraints = [dict(item) for item in selected_global_candidate.constraints]
         candidate_sets = [list(item) for item in selected_global_candidate.candidate_sets]
     else:
@@ -493,7 +513,11 @@ def compile_token_reasoning_structure(
     debug_payload["question_semantic_node_ids"] = _sort_node_ids(question_semantic_node_ids, state.nodes)
     debug_payload["global_candidates"] = [candidate.to_debug() for candidate in global_candidates]
     debug_payload["selected_global_candidate"] = (
-        selected_global_candidate.to_debug() if selected_global_candidate is not None else None
+        selected_global_selection.winning_candidate.to_debug() if selected_global_selection is not None else None
+    )
+    debug_payload["selected_global_candidates"] = [candidate.to_debug() for candidate in selected_global_candidates]
+    debug_payload["selected_global_selection"] = (
+        selected_global_selection.to_debug() if selected_global_selection is not None else None
     )
     debug_payload["warnings"] = result_warnings
     debug_file = None
@@ -506,7 +530,7 @@ def compile_token_reasoning_structure(
         paths=paths,
         path_type=path_type,
         anchor_path_results=per_anchor_results,
-        global_selection=selected_global_candidate.to_debug() if selected_global_candidate is not None else {},
+        global_selection=selected_global_selection.to_debug() if selected_global_selection is not None else {},
         answer_anchor=answer_anchor,
         answer_anchor_id=answer_anchor_id,
         entity_anchors=entity_anchors,
@@ -2274,13 +2298,159 @@ def _select_global_best_path(candidates: list[_GlobalPathCandidate]) -> _GlobalP
     )
 
 
+def _select_global_path_structure(
+    candidates: list[_GlobalPathCandidate],
+    *,
+    warnings: list[str],
+) -> _GlobalPathSelection | None:
+    cover_selection = _select_global_best_path_cover(candidates)
+    if cover_selection is not None:
+        return cover_selection
+
+    if any(candidate.path_type == "candidate_path_cover" for candidate in candidates):
+        warning = "global path cover selection found no complete candidate set; falling back to single global best path"
+        if warning not in warnings:
+            warnings.append(warning)
+        for candidate in candidates:
+            if warning not in candidate.anchor_state.warnings:
+                candidate.anchor_state.warnings.append(warning)
+
+    selected = _select_global_best_path(candidates)
+    if selected is None:
+        return None
+    return _GlobalPathSelection(
+        selection_type="global_best_path",
+        candidates=[selected],
+        winning_candidate=selected,
+    )
+
+
+def _renumber_selected_global_paths(candidates: list[_GlobalPathCandidate]) -> list[TokenReasoningPath]:
+    return [
+        TokenReasoningPath(
+            path_id=f"P{index}",
+            nodes=list(candidate.path.nodes),
+            node_ids=list(candidate.path.node_ids),
+        )
+        for index, candidate in enumerate(candidates, start=1)
+    ]
+
+
+def _select_global_best_path_cover(candidates: list[_GlobalPathCandidate]) -> _GlobalPathSelection | None:
+    complete_covers = _complete_global_cover_groups(candidates)
+    if not complete_covers:
+        return None
+
+    candidate_pool: list[_GlobalPathCandidate] = []
+    seen_pool_keys: set[tuple[int, int]] = set()
+    for cover in complete_covers:
+        for candidate in cover["candidates"]:
+            key = (candidate.anchor_index, candidate.path_index)
+            if key in seen_pool_keys:
+                continue
+            seen_pool_keys.add(key)
+            candidate_pool.append(candidate)
+
+    winning_seed = _select_global_best_path(candidate_pool)
+    if winning_seed is None:
+        return None
+
+    winning_covers = [
+        cover
+        for cover in complete_covers
+        if cover["anchor_index"] == winning_seed.anchor_index
+        and any(candidate is winning_seed for candidate in cover["candidates"])
+    ] or [cover for cover in complete_covers if cover["anchor_index"] == winning_seed.anchor_index]
+    winning_cover = sorted(
+        winning_covers,
+        key=lambda cover: (
+            _candidate_set_sort_key(cover["candidate_set"], cover["candidates"]),
+            len(cover["candidate_set"]),
+        ),
+    )[0]
+
+    selected_candidates: list[_GlobalPathCandidate] = []
+    selected_keys: set[tuple[int, int]] = set()
+    for entity in winning_cover["candidate_set"]:
+        entity_candidates = [
+            candidate for candidate in winning_cover["candidates"] if entity in candidate.path.nodes
+        ]
+        unused_candidates = [
+            candidate
+            for candidate in entity_candidates
+            if (candidate.anchor_index, candidate.path_index) not in selected_keys
+        ]
+        selected = _select_global_best_path(unused_candidates or entity_candidates)
+        if selected is None:
+            return None
+        selected_candidates.append(selected)
+        selected_keys.add((selected.anchor_index, selected.path_index))
+
+    return _GlobalPathSelection(
+        selection_type="global_best_path_cover",
+        candidates=selected_candidates,
+        winning_candidate=winning_seed,
+        candidate_set=list(winning_cover["candidate_set"]),
+    )
+
+
+def _complete_global_cover_groups(candidates: list[_GlobalPathCandidate]) -> list[dict[str, Any]]:
+    by_anchor: dict[int, list[_GlobalPathCandidate]] = {}
+    for candidate in candidates:
+        by_anchor.setdefault(candidate.anchor_index, []).append(candidate)
+
+    complete: list[dict[str, Any]] = []
+    for anchor_index in sorted(by_anchor):
+        anchor_candidates = by_anchor[anchor_index]
+        cover_candidates = [candidate for candidate in anchor_candidates if candidate.path_type == "candidate_path_cover"]
+        if not cover_candidates:
+            continue
+        for candidate_set in _ordered_candidate_sets(cover_candidates):
+            if len(candidate_set) < 2:
+                continue
+            if all(any(entity in candidate.path.nodes for candidate in cover_candidates) for entity in candidate_set):
+                complete.append(
+                    {
+                        "anchor_index": anchor_index,
+                        "candidate_set": list(candidate_set),
+                        "candidates": cover_candidates,
+                    }
+                )
+    return complete
+
+
+def _ordered_candidate_sets(candidates: list[_GlobalPathCandidate]) -> list[list[str]]:
+    ordered: list[list[str]] = []
+    seen: set[tuple[str, ...]] = set()
+    for candidate in sorted(candidates, key=lambda item: (item.anchor_index, item.path_index)):
+        for candidate_set in candidate.candidate_sets:
+            key = tuple(candidate_set)
+            if len(key) >= 2 and key not in seen:
+                seen.add(key)
+                ordered.append(list(key))
+    return ordered
+
+
+def _candidate_set_sort_key(candidate_set: list[str], candidates: list[_GlobalPathCandidate]) -> tuple[int, ...]:
+    first_positions: list[int] = []
+    for entity in candidate_set:
+        positions = [
+            min((index for index, node in enumerate(candidate.path.nodes) if node == entity), default=10**6)
+            for candidate in candidates
+            if entity in candidate.path.nodes
+        ]
+        first_positions.append(min(positions) if positions else 10**6)
+    return tuple(first_positions)
+
+
 def _annotate_per_anchor_global_selection(
     per_anchor_results: list[dict[str, Any]],
     global_candidates: list[_GlobalPathCandidate],
-    selected: _GlobalPathCandidate | None,
+    selected: list[_GlobalPathCandidate],
 ) -> None:
     by_anchor: dict[int, list[_GlobalPathCandidate]] = {}
     by_anchor_path: dict[tuple[int, int], _GlobalPathCandidate] = {}
+    selected_keys = {(candidate.anchor_index, candidate.path_index) for candidate in selected}
     for candidate in global_candidates:
         by_anchor.setdefault(candidate.anchor_index, []).append(candidate)
         by_anchor_path[(candidate.anchor_index, candidate.path_index)] = candidate
@@ -2288,7 +2458,9 @@ def _annotate_per_anchor_global_selection(
     for anchor_index, anchor_result in enumerate(per_anchor_results, start=1):
         anchor_candidates = by_anchor.get(anchor_index, [])
         anchor_result["global_candidates"] = [candidate.to_debug() for candidate in anchor_candidates]
-        anchor_result["contains_global_best_path"] = any(candidate is selected for candidate in anchor_candidates)
+        anchor_result["contains_global_best_path"] = any(
+            (candidate.anchor_index, candidate.path_index) in selected_keys for candidate in anchor_candidates
+        )
         paths = anchor_result.get("paths")
         if not isinstance(paths, list):
             continue
@@ -2300,7 +2472,7 @@ def _annotate_per_anchor_global_selection(
                 continue
             path_payload["global_rank"] = list(candidate.global_rank)
             path_payload["global_rank_components"] = dict(candidate.global_rank_components)
-            path_payload["contains_global_best_path"] = candidate is selected
+            path_payload["contains_global_best_path"] = (candidate.anchor_index, candidate.path_index) in selected_keys
 
 
 def _collect_question_semantic_nodes(

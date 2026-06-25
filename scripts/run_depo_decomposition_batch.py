@@ -74,7 +74,7 @@ def main() -> int:
         return 2
 
     try:
-        from atomic_question_dag import restore_global_best_path
+        from atomic_question_dag import restore_global_best_paths
         from entity_masking_preprocessor import EntityMaskingPreprocessor
         from hanlp_sdp_parser import HanLPSDPParser
         from llm_client import LLMClient
@@ -146,8 +146,8 @@ def main() -> int:
                         debug_dir=debug_dir,
                         llm_client=llm_client,
                     )
-                    restored_global_best_path = restore_global_best_path(
-                        result["token_reasoning_structure"].global_selection,
+                    restored_global_best_paths = restore_global_best_paths(
+                        result["token_reasoning_structure"].paths,
                         result["preprocess_result"].mask_mappings,
                     )
                     payload = build_decomposition_payload(
@@ -155,7 +155,7 @@ def main() -> int:
                         questions_file=questions_file,
                         item=item,
                         result=result,
-                        restored_global_best_path=restored_global_best_path,
+                        restored_global_best_paths=restored_global_best_paths,
                     )
                     _write_json(decomposition_path, payload)
                     (question_dir / "decomposition.md").write_text(build_markdown_report(payload), encoding="utf-8")
@@ -199,7 +199,7 @@ def build_decomposition_payload(
     questions_file: Path,
     item: dict[str, Any],
     result: dict[str, Any],
-    restored_global_best_path: list[str],
+    restored_global_best_paths: list[list[str]],
 ) -> dict[str, Any]:
     preprocess_result = result["preprocess_result"]
     token_reasoning_structure = result["token_reasoning_structure"]
@@ -233,7 +233,7 @@ def build_decomposition_payload(
                 "input": {
                     "original_question": item["question"],
                     "explicit_entities": [entity.text for entity in preprocess_result.explicit_entities.entities],
-                    "global_best_path": list(restored_global_best_path),
+                    "global_best_paths": [list(path) for path in restored_global_best_paths],
                 },
                 "actions": _step5_actions(atomic_question_dag),
             },
@@ -299,9 +299,11 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("")
 
     lines.append("## 3. Global Best Path")
-    global_best_path = ((action_trace.get("input") or {}).get("global_best_path")) or []
-    if global_best_path:
-        lines.append(f"- {' ---- '.join(global_best_path)}")
+    global_best_paths = ((action_trace.get("input") or {}).get("global_best_paths")) or []
+    if global_best_paths:
+        for path_index, path in enumerate(global_best_paths, start=1):
+            prefix = f"P{path_index}: " if len(global_best_paths) > 1 else ""
+            lines.append(f"- {prefix}{' ---- '.join(path)}")
     else:
         lines.append("(none)")
     lines.append("")

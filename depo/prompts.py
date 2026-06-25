@@ -149,20 +149,23 @@ You are given exactly:
 
 * original_question: the full natural-language question
 * explicit_entities: original entity surface strings extracted from the question
-* global_best_path: the single mandatory structural backbone selected by Step 4, with ENTITY placeholders already restored
+* global_best_paths: the mandatory structural backbone paths selected by Step 4, with ENTITY placeholders already restored
 
 How to use the inputs:
 
-1. Use global_best_path as the mandatory structural backbone.
+1. Use global_best_paths as the mandatory structural backbone.
 2. Use original_question for full semantics, constraints, answer intent, and grammatical realization.
-3. Use global_best_path for relation order and dependency structure.
+3. Use global_best_paths for relation order and dependency structure.
 4. Generate a complete contraction action trace, not a final DAG.
 5. Do not output support spans, path indices, nodes, edges, depends_on, start_index, or end_index.
-6. Do not introduce relations absent from both the original question and global_best_path.
+6. Do not introduce relations absent from both the original question and global_best_paths.
 7. For "When" questions, ask about the event relation present in the original question/path, not unrelated attributes such as birth date unless the original question/path explicitly requires birth.
 8. Do not leave ENTITY placeholders unresolved.
 9. Do not answer the questions.
 10. Return valid JSON only.
+
+When global_best_paths contains one path, contract that path into the complete action trace.
+When global_best_paths contains multiple paths, each path is a parallel candidate/comparison branch. Generate branch actions for each path, then generate the final comparison, selection, equality, or aggregation action required by the original question.
 
 Action trace rules:
 
@@ -196,7 +199,7 @@ Example input:
 {
 "original_question": "When was the person who Messi's goals in Copa del Rey compared to get signed by Barcelona?",
 "explicit_entities": ["Messi", "Copa del Rey", "Barcelona"],
-"global_best_path": ["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"]
+"global_best_paths": [["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"]]
 }
 
 Expected output:
@@ -217,7 +220,53 @@ Expected output:
 ]
 }
 
-Do not generate "When was q1's answer born?" for that example, because "born" is absent from both the original question and global_best_path.
+Do not generate "When was q1's answer born?" for that example, because "born" is absent from both the original question and global_best_paths.
+
+Parallel path example input:
+{
+"original_question": "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?",
+"explicit_entities": ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"],
+"global_best_paths": [
+["Illusions (1982 Film)", "director", "born"],
+["It'S A Wonderful Afterlife", "director", "born"]
+]
+}
+
+Parallel path example output:
+{
+"actions": [
+{
+"id": "q1",
+"consume": ["Illusions (1982 Film)", "director"],
+"produce": "q1_answer",
+"question": "Who is the director of Illusions (1982 Film)?"
+},
+{
+"id": "q2",
+"consume": ["q1_answer", "born"],
+"produce": "q2_answer",
+"question": "When was q1's answer born?"
+},
+{
+"id": "q3",
+"consume": ["It'S A Wonderful Afterlife", "director"],
+"produce": "q3_answer",
+"question": "Who is the director of It'S A Wonderful Afterlife?"
+},
+{
+"id": "q4",
+"consume": ["q3_answer", "born"],
+"produce": "q4_answer",
+"question": "When was q3's answer born?"
+},
+{
+"id": "q5",
+"consume": ["q2_answer", "q4_answer"],
+"produce": "q5_answer",
+"question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?"
+}
+]
+}
 
 Now generate the contraction action trace for the given input JSON.
 Return only the JSON object.
@@ -227,11 +276,11 @@ Return only the JSON object.
 def build_atomic_question_dag_prompt(
     original_question: str,
     explicit_entities: list[str],
-    global_best_path: list[str],
+    global_best_paths: list[list[str]],
 ) -> str:
     payload = {
         "original_question": original_question,
         "explicit_entities": [str(entity) for entity in explicit_entities],
-        "global_best_path": [str(node) for node in global_best_path],
+        "global_best_paths": [[str(node) for node in path] for path in global_best_paths],
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)
