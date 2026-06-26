@@ -151,21 +151,36 @@ You are given exactly:
 * explicit_entities: original entity surface strings extracted from the question
 * global_best_paths: the mandatory structural backbone paths selected by Step 4, with ENTITY placeholders already restored
 
-How to use the inputs:
+Important principle:
 
-1. Use global_best_paths as the mandatory structural backbone.
-2. Use original_question for full semantics, constraints, answer intent, and grammatical realization.
-3. Use global_best_paths for relation order and dependency structure.
-4. Generate a complete contraction action trace, not a final DAG.
-5. Do not output support spans, path indices, nodes, edges, depends_on, start_index, or end_index.
-6. Do not introduce relations absent from both the original question and global_best_paths.
-7. For "When" questions, ask about the event relation present in the original question/path, not unrelated attributes such as birth date unless the original question/path explicitly requires birth.
-8. Do not leave ENTITY placeholders unresolved.
-9. Do not answer the questions.
-10. Return valid JSON only.
+The original_question is the semantic authority.
+The global_best_paths are structural backbones, not complete semantic representations.
+
+This means:
+
+1. Use original_question to determine the full meaning, entity roles, constraints, answer intent, and final target.
+2. Use global_best_paths to guide relation order, dependency structure, and likely contraction order.
+3. A path may omit modifiers or constraints that are present in original_question. Preserve those constraints in the generated questions.
+4. A path may linearize multiple constraints into one chain. Do not blindly treat the linear path order as the true semantic nesting.
+5. Do not move an entity from one semantic role to another. If original_question says “the region where Israel is located”, do not replace Israel with an intermediate answer unless the original question explicitly requires that replacement.
+6. If original_question describes multiple constraints on the same target, preserve them as constraints on the same target rather than forcing them into a nested chain.
+7. Do not introduce relations absent from both original_question and global_best_paths.
+8. For “When” questions, ask about the event relation present in original_question/path, not unrelated attributes such as birth date unless the original_question/path explicitly requires birth.
+9. Do not leave ENTITY placeholders unresolved.
+10. Do not answer the questions.
+11. Return valid JSON only.
+
+How to use global_best_paths:
+
+1. Use global_best_paths as mandatory structural evidence.
+2. Do not ignore global_best_paths.
+3. Do not rely on global_best_paths as the only source of semantics.
+4. If a path node sequence is incomplete, use original_question to recover missing constraints.
+5. If a path node sequence suggests a role assignment that conflicts with original_question, follow original_question.
+6. The consume field should describe the path fragment or residual path fragment consumed by the action. The question field may include additional constraints from original_question even if they are not explicitly present in consume.
 
 When global_best_paths contains one path, contract that path into the complete action trace.
-When global_best_paths contains multiple paths, each path is a parallel candidate/comparison branch. Generate branch actions for each path, then generate the final comparison, selection, equality, or aggregation action required by the original question.
+When global_best_paths contains multiple paths, each path is a parallel candidate/comparison branch. Generate branch actions for each path, then generate the final comparison, selection, equality, or aggregation action required by original_question.
 
 Action trace rules:
 
@@ -176,6 +191,7 @@ Action trace rules:
 * question is the natural-language atomic question to show downstream.
 * If an action depends on a previous answer, refer to it as q1's answer, q2's answer, etc. in question text, or include q1_answer, q2_answer, etc. in consume.
 * Do not output depends_on. The program will derive dependencies from qN_answer and qN's answer references in question/consume.
+* Do not output support spans, path indices, nodes, edges, depends_on, start_index, or end_index.
 
 Output format:
 {
@@ -220,7 +236,52 @@ Expected output:
 ]
 }
 
-Do not generate "When was q1's answer born?" for that example, because "born" is absent from both the original question and global_best_paths.
+Do not generate "When was q1's answer born?" for that example, because "born" is absent from both original_question and global_best_paths.
+
+Semantic-authority example input:
+{
+"original_question": "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?",
+"explicit_entities": ["Israel", "Battle of Qurah and Umm al Maradim"],
+"global_best_paths": [["Battle of Qurah and Umm al Maradim", "location", "created", "region", "Israel", "region", "located", "north", "immediately"]]
+}
+
+Expected output:
+{
+"actions": [
+{
+"id": "q1",
+"consume": ["Israel", "located", "region"],
+"produce": "q1_answer",
+"question": "What region is Israel located in?"
+},
+{
+"id": "q2",
+"consume": ["region", "north", "immediately", "q1_answer"],
+"produce": "q2_answer",
+"question": "What region is immediately north of q1's answer?"
+},
+{
+"id": "q3",
+"consume": ["Battle of Qurah and Umm al Maradim", "location"],
+"produce": "q3_answer",
+"question": "What is the location of the Battle of Qurah and Umm al Maradim?"
+},
+{
+"id": "q4",
+"consume": ["q2_answer", "q3_answer"],
+"produce": "q4_answer",
+"question": "Which region is both q2's answer and q3's answer?"
+},
+{
+"id": "q5",
+"consume": ["q4_answer", "created"],
+"produce": "q5_answer",
+"question": "When was q4's answer created?"
+}
+]
+}
+
+Do not generate "When was the region immediately north of the region where q1's answer is located created?" for that example, because original_question says Israel is located in the reference region. The Battle entity is used to identify the target region's location, not to replace Israel in the located-in relation.
 
 Parallel path example input:
 {
@@ -270,6 +331,7 @@ Parallel path example output:
 
 Now generate the contraction action trace for the given input JSON.
 Return only the JSON object.
+
 """.strip()
 
 
