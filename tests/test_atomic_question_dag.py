@@ -147,7 +147,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
 
     def test_no_path_generator_accepts_original_question_only(self) -> None:
-        llm = RecordingNoPathLLM(_no_path_dependency_payload())
+        llm = RecordingNoPathLLM(_no_path_question_dependency_payload())
         result = NoPathAtomicDAGGenerator(llm).generate(
             original_question="Where was the performer of Song A born?"
         )
@@ -158,8 +158,55 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertNotIn("global_best_paths", llm.user_prompts[0])
         self.assertNotIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
 
-    def test_no_path_generator_derives_dependencies_from_answer_references(self) -> None:
-        llm = RecordingNoPathLLM(_no_path_dependency_payload())
+    def test_no_path_generator_clears_path_like_consume_with_warning(self) -> None:
+        llm = RecordingNoPathLLM(
+            {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": ["A", "relation", "B"],
+                        "produce": "q1_answer",
+                        "question": "What is B?",
+                    }
+                ]
+            }
+        )
+        result = NoPathAtomicDAGGenerator(llm).generate(original_question="What is B?")
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["actions"][0]["consume"], [])
+        self.assertIn("no-path mode ignored non-empty consume", "; ".join(result.warnings))
+        self.assertEqual(result.nodes[0].depends_on, ())
+
+    def test_no_path_generator_ignores_consume_answer_refs_for_dependencies(self) -> None:
+        llm = RecordingNoPathLLM(
+            {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": [],
+                        "produce": "q1_answer",
+                        "question": "Who is the performer of Song A?",
+                    },
+                    {
+                        "id": "q2",
+                        "consume": ["q1_answer"],
+                        "produce": "q2_answer",
+                        "question": "Where was the performer born?",
+                    },
+                ]
+            }
+        )
+        result = NoPathAtomicDAGGenerator(llm).generate(
+            original_question="Where was the performer of Song A born?"
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["actions"][1]["consume"], [])
+        self.assertEqual(result.nodes[1].depends_on, ())
+
+    def test_no_path_generator_derives_dependencies_from_question_references(self) -> None:
+        llm = RecordingNoPathLLM(_no_path_question_dependency_payload())
         result = NoPathAtomicDAGGenerator(llm).generate(
             original_question="Where was the performer of Song A born?"
         )
@@ -171,6 +218,29 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             [edge.to_dict() for edge in result.edges],
             [{"source": "q1", "target": "q2"}, {"source": "q2", "target": "q3"}],
         )
+
+    def test_path_mode_still_derives_dependencies_from_consume(self) -> None:
+        result = _generate(
+            {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": ["A"],
+                        "produce": "q1_answer",
+                        "question": "What is A?",
+                    },
+                    {
+                        "id": "q2",
+                        "consume": ["q1_answer"],
+                        "produce": "q2_answer",
+                        "question": "What follows?",
+                    },
+                ]
+            }
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[1].depends_on, ("q1",))
 
     def test_multi_path_cover_is_sent_to_llm(self) -> None:
         llm = RecordingStep5LLM(_parallel_born_later_payload())
@@ -552,24 +622,24 @@ def _single_action_payload(question: str = "What is the supported fact?") -> dic
     }
 
 
-def _no_path_dependency_payload() -> dict[str, Any]:
+def _no_path_question_dependency_payload() -> dict[str, Any]:
     return {
         "actions": [
             {
                 "id": "q1",
-                "consume": ["Song A", "performer"],
+                "consume": [],
                 "produce": "q1_answer",
                 "question": "Who is the performer of Song A?",
             },
             {
                 "id": "q2",
-                "consume": ["q1_answer", "born"],
+                "consume": [],
                 "produce": "q2_answer",
-                "question": "Where was the performer born?",
+                "question": "Where was q1's answer born?",
             },
             {
                 "id": "q3",
-                "consume": ["birthplace"],
+                "consume": [],
                 "produce": "q3_answer",
                 "question": "What country is q2's answer in?",
             },

@@ -358,22 +358,26 @@ You are given exactly:
 
 * original_question: the full natural-language question
 
+No-path mode has no parser path, no path evidence, and no structural backbone.
+You must not construct a pseudo-path, semantic path, relation chain, support span, or any path-like fragment yourself.
+
 Use only the semantics of original_question.
 Do not use external knowledge.
 Do not answer the question.
 Do not invent entities, relations, events, dates, constraints, or comparison criteria.
 Preserve all entities, modifiers, constraints, operators, and the final answer intent from original_question.
 If the question contains a comparison, equality check, choice, or aggregation, decompose each needed branch and then generate the final comparison, equality, choice, or aggregation action.
-If a subquestion depends on a previous answer, refer to it as q1's answer, q2's answer, etc. in question text, or include q1_answer, q2_answer, etc. in consume.
+If a subquestion depends on a previous answer, express the dependency only in the question text using natural references such as q1's answer, q2's answer, etc.
 
 Action trace rules:
 
 * actions must be a non-empty array.
 * id must be q1, q2, q3, ... in order.
-* consume lists the semantic fragment consumed by that action. It may contain previous produced values such as q1_answer.
+* consume must be exactly [] for every action.
+* Do not put entities, relations, constraints, qN_answer references, semantic fragments, or any other text in consume.
 * produce must be qN_answer for action qN.
 * question is the natural-language question to show downstream.
-* Do not output depends_on. The program will derive dependencies from qN_answer and qN's answer references in question/consume.
+* Do not output depends_on. The program will derive dependencies only from qN's answer references in question text.
 * Do not output support spans, nodes, edges, depends_on, start_index, or end_index.
 * Return valid JSON only.
 
@@ -382,13 +386,13 @@ Output format:
 "actions": [
 {
 "id": "q1",
-"consume": ["semantic fragment"],
+"consume": [],
 "produce": "q1_answer",
 "question": "natural-language question?"
 },
 {
 "id": "q2",
-"consume": ["q1_answer", "relation or constraint"],
+"consume": [],
 "produce": "q2_answer",
 "question": "natural-language question using q1's answer?"
 }
@@ -405,31 +409,31 @@ Expected output:
 "actions": [
 {
 "id": "q1",
-"consume": ["Illusions (1982 Film)", "director"],
+"consume": [],
 "produce": "q1_answer",
 "question": "Who is the director of Illusions (1982 Film)?"
 },
 {
 "id": "q2",
-"consume": ["q1_answer", "born"],
+"consume": [],
 "produce": "q2_answer",
 "question": "When was q1's answer born?"
 },
 {
 "id": "q3",
-"consume": ["It'S A Wonderful Afterlife", "director"],
+"consume": [],
 "produce": "q3_answer",
 "question": "Who is the director of It'S A Wonderful Afterlife?"
 },
 {
 "id": "q4",
-"consume": ["q3_answer", "born"],
+"consume": [],
 "produce": "q4_answer",
 "question": "When was q3's answer born?"
 },
 {
 "id": "q5",
-"consume": ["q2_answer", "q4_answer", "born later"],
+"consume": [],
 "produce": "q5_answer",
 "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?"
 }

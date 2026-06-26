@@ -212,6 +212,7 @@ def build_decomposition_payload(
                     "original_question": item["question"],
                 },
                 "actions": _step5_actions(atomic_question_dag),
+                "warnings": list(getattr(atomic_question_dag, "warnings", []) or []),
             },
             "6_atomic_question_dag": atomic_question_dag.to_dict() if atomic_question_dag is not None else None,
         },
@@ -262,11 +263,16 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     if actions:
         for action in actions:
             lines.append(f"- {action.get('id')}: {action.get('question')}")
-            consume = action.get("consume") or []
-            lines.append(f"  - consume: {' ---- '.join(consume) if consume else '(none)'}")
+            lines.append("  - consume: []")
             lines.append(f"  - produce: {action.get('produce') or ''}")
     else:
         lines.append("(none)")
+    warnings = action_trace.get("warnings") or []
+    if warnings:
+        lines.append("")
+        lines.append("Warnings:")
+        for warning in warnings:
+            lines.append(f"- {warning}")
     lines.append("")
 
     lines.append("## 2. Atomic Question DAG")

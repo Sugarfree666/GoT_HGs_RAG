@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any
 
 from prompts import (
@@ -65,6 +65,7 @@ class AtomicQuestionDAGResult:
     valid: bool
     validation_errors: list[str]
     raw_payload: dict[str, Any] | None
+    warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -73,6 +74,7 @@ class AtomicQuestionDAGResult:
             "leaf_node_ids": list(self.leaf_node_ids),
             "valid": self.valid,
             "validation_errors": list(self.validation_errors),
+            "warnings": list(self.warnings),
             "raw_payload": self.raw_payload,
         }
 
@@ -117,7 +119,10 @@ class NoPathAtomicDAGGenerator:
     def generate(self, *, original_question: str) -> AtomicQuestionDAGResult:
         user_prompt = build_atomic_question_dag_no_path_prompt(original_question=original_question)
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM, user_prompt)
-        return validate_atomic_question_dag(raw_payload)
+        sanitized_payload, warnings = _sanitize_no_path_action_trace(raw_payload)
+        result = validate_atomic_question_dag(sanitized_payload)
+        result.warnings.extend(warnings)
+        return result
 
 
 def restore_entity_paths(step4_paths: Any, mask_mappings: Any) -> list[RestoredTokenPath]:
@@ -239,6 +244,32 @@ def validate_atomic_question_dag(raw_payload: dict[str, Any]) -> AtomicQuestionD
         validation_errors=[],
         raw_payload=raw_payload,
     )
+
+
+def _sanitize_no_path_action_trace(raw_payload: Any) -> tuple[Any, list[str]]:
+    warnings: list[str] = []
+    if not isinstance(raw_payload, dict):
+        return raw_payload, warnings
+    raw_actions = raw_payload.get("actions")
+    if not isinstance(raw_actions, list):
+        return dict(raw_payload), warnings
+
+    sanitized_payload = dict(raw_payload)
+    sanitized_actions: list[Any] = []
+    for index, raw_action in enumerate(raw_actions, start=1):
+        if not isinstance(raw_action, dict):
+            sanitized_actions.append(raw_action)
+            continue
+        action = dict(raw_action)
+        if "consume" not in action:
+            warnings.append(f"q{index}: no-path mode inserted empty consume [].")
+        elif action.get("consume") != []:
+            warnings.append(f"q{index}: no-path mode ignored non-empty consume and replaced it with [].")
+        action["consume"] = []
+        sanitized_actions.append(action)
+
+    sanitized_payload["actions"] = sanitized_actions
+    return sanitized_payload, warnings
 
 
 def invalid_atomic_question_dag(errors: list[str]) -> AtomicQuestionDAGResult:
