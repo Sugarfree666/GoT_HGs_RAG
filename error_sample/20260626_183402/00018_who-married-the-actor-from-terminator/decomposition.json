@@ -1,0 +1,349 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 18,
+  "qid": null,
+  "question": "Who married the actor from Terminator?",
+  "raw_question_item": {
+    "question": "Who married the actor from Terminator?",
+    "answer": "Maria Shriver"
+  },
+  "gold_answer": "Maria Shriver",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Terminator",
+          "start_char": 27,
+          "end_char": 37,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Terminator",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "Who married the actor from Terminator?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Terminator",
+            "start_char": 27,
+            "end_char": 37,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who married the actor from Terminator?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Who married the actor from ENTITYA?",
+      "hanlp_input_sentence": "Who married the actor from ENTITYA?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Terminator",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            27,
+            37
+          ],
+          "masked_char_span": [
+            27,
+            34
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "married",
+        "the",
+        "actor",
+        "from",
+        "ENTITYA",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "married",
+      "answer_anchor_id": "2",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "2",
+        "anchor_text": "married",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "6",
+          "4",
+          "2"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "actor",
+          "married"
+        ],
+        "global_rank": [
+          0,
+          1,
+          2,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "4",
+            "6"
+          ],
+          "semantic_nodes": [
+            "married",
+            "actor",
+            "ENTITYA"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "4",
+            "6"
+          ],
+          "covered_semantic_nodes": [
+            "married",
+            "actor",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 1,
+          "dirty_path_count": 1,
+          "path_length": 2,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            1,
+            2,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "married",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "6",
+              "4",
+              "2"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "actor",
+              "married"
+            ],
+            "global_rank": [
+              0,
+              1,
+              2,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "4",
+                "6"
+              ],
+              "semantic_nodes": [
+                "married",
+                "actor",
+                "ENTITYA"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "4",
+                "6"
+              ],
+              "covered_semantic_nodes": [
+                "married",
+                "actor",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 1,
+              "dirty_path_count": 1,
+              "path_length": 2,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                1,
+                2,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: actor[4]/root_projection+modifier_projection+clause_predicate, married[2]/clause_predicate, ENTITYA[6]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "actor",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "actor",
+          "target": "married",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "actor",
+            "married"
+          ],
+          "node_ids": [
+            "6",
+            "4",
+            "2"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who married the actor from Terminator?",
+        "explicit_entities": [
+          "Terminator"
+        ],
+        "global_best_paths": [
+          [
+            "Terminator",
+            "actor",
+            "married"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Terminator -> actor"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the actor from the movie Terminator?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "actor -> married"
+          ],
+          "produce": "q2_answer",
+          "question": "Who is married to q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the actor from the movie Terminator?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Who is married to q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Terminator -> actor"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the actor from the movie Terminator?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "actor -> married"
+            ],
+            "produce": "q2_answer",
+            "question": "Who is married to q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

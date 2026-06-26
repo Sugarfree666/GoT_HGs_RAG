@@ -159,8 +159,8 @@ def main() -> int:
                     )
                 except Exception as exc:  # Keep long batch jobs inspectable even if one item fails.
                     payload = build_error_payload(dataset, questions_file, item, exc)
-                    _write_json(question_dir / "error.json", payload)
-                    (question_dir / "error.md").write_text(build_error_markdown(payload), encoding="utf-8")
+                    _write_json(question_dir / "sample.json", payload)
+                    (question_dir / "sample.md").write_text(build_error_markdown(payload), encoding="utf-8")
                     manifest_item = {
                         "method": METHOD,
                         "dataset": dataset,
@@ -168,11 +168,11 @@ def main() -> int:
                         "qid": item.get("qid"),
                         "question": item["question"],
                         "gold_answer": item.get("answer"),
-                        "status": "error",
+                        "status": "sample",
                         "dag_valid": None,
                         "dag_node_count": None,
                         "error_type": type(exc).__name__,
-                        "error": str(exc),
+                        "sample": str(exc),
                         "output_dir": str(question_dir),
                     }
                     summary_lines.extend(_summary_error_lines(payload, question_dir))
@@ -226,7 +226,7 @@ def build_error_payload(
     exc: Exception,
 ) -> dict[str, Any]:
     return {
-        "status": "error",
+        "status": "sample",
         "method": METHOD,
         "step5_mode": STEP5_MODE,
         "dataset": dataset,
@@ -237,7 +237,7 @@ def build_error_payload(
         "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "error_type": type(exc).__name__,
-        "error": str(exc),
+        "sample": str(exc),
     }
 
 

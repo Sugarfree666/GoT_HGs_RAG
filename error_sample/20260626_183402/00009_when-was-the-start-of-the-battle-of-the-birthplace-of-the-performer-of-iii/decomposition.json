@@ -1,0 +1,429 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 9,
+  "qid": null,
+  "question": "When was the start of the battle of the birthplace of the performer of III?",
+  "raw_question_item": {
+    "question": "When was the start of the battle of the birthplace of the performer of III?",
+    "answer": "December 14, 1814"
+  },
+  "gold_answer": "December 14, 1814",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "III",
+          "start_char": 71,
+          "end_char": 74,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "III",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "When was the start of the battle of the birthplace of the performer of III?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "III",
+            "start_char": 71,
+            "end_char": 74,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the start of the battle of the birthplace of the performer of III?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the start of the battle of the birthplace of the performer of ENTITYA?",
+      "hanlp_input_sentence": "When was the start of the battle of the birthplace of the performer of ENTITYA?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "III",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            71,
+            74
+          ],
+          "masked_char_span": [
+            71,
+            78
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "start",
+        "of",
+        "the",
+        "battle",
+        "of",
+        "the",
+        "birthplace",
+        "of",
+        "the",
+        "performer",
+        "of",
+        "ENTITYA",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "start",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "start",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "15",
+          "13",
+          "10",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "performer",
+          "birthplace",
+          "battle",
+          "start"
+        ],
+        "global_rank": [
+          0,
+          4,
+          4,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "15"
+          ],
+          "semantic_nodes": [
+            "start",
+            "battle",
+            "birthplace",
+            "performer",
+            "ENTITYA"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "15"
+          ],
+          "covered_semantic_nodes": [
+            "start",
+            "battle",
+            "birthplace",
+            "performer",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 4,
+          "dirty_path_count": 4,
+          "path_length": 4,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            4,
+            4,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "start",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "15",
+              "13",
+              "10",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "performer",
+              "birthplace",
+              "battle",
+              "start"
+            ],
+            "global_rank": [
+              0,
+              4,
+              4,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "15"
+              ],
+              "semantic_nodes": [
+                "start",
+                "battle",
+                "birthplace",
+                "performer",
+                "ENTITYA"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "15"
+              ],
+              "covered_semantic_nodes": [
+                "start",
+                "battle",
+                "birthplace",
+                "performer",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 4,
+              "dirty_path_count": 4,
+              "path_length": 4,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                4,
+                4,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: start[4]/clause_predicate, battle[7]/clause_predicate, birthplace[10]/clause_predicate, performer[13]/clause_predicate, ENTITYA[15]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "performer",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "performer",
+          "target": "birthplace",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "birthplace",
+          "target": "battle",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "battle",
+          "target": "start",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "performer",
+            "birthplace",
+            "battle",
+            "start"
+          ],
+          "node_ids": [
+            "15",
+            "13",
+            "10",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the start of the battle of the birthplace of the performer of III?",
+        "explicit_entities": [
+          "III"
+        ],
+        "global_best_paths": [
+          [
+            "III",
+            "performer",
+            "birthplace",
+            "battle",
+            "start"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "III -> performer"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the performer of III?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "performer -> birthplace"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the birthplace of q1's answer?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "birthplace -> battle -> start"
+          ],
+          "produce": "q3_answer",
+          "question": "When was the start of the battle of q2's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the performer of III?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the birthplace of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When was the start of the battle of q2's answer?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "III -> performer"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the performer of III?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "performer -> birthplace"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the birthplace of q1's answer?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "birthplace -> battle -> start"
+            ],
+            "produce": "q3_answer",
+            "question": "When was the start of the battle of q2's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 28,
+  "qid": null,
+  "question": "In what year was the group who performed Attics To Eden formed?",
+  "raw_question_item": {
+    "question": "In what year was the group who performed Attics To Eden formed?",
+    "answer": "2005"
+  },
+  "gold_answer": "2005",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Attics To Eden",
+          "start_char": 41,
+          "end_char": 55,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Attics To Eden",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "In what year was the group who performed Attics To Eden formed?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "In",
+            "start_char": 0,
+            "end_char": 2,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Attics To Eden",
+            "start_char": 41,
+            "end_char": 55,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Attics",
+            "start_char": 41,
+            "end_char": 47,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "To",
+            "start_char": 48,
+            "end_char": 50,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Eden",
+            "start_char": 51,
+            "end_char": 55,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "In what year was the group who performed Attics To Eden formed?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "In what year was the group who performed ENTITYA formed?",
+      "hanlp_input_sentence": "In what year was the group who performed ENTITYA formed?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Attics To Eden",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            41,
+            55
+          ],
+          "masked_char_span": [
+            41,
+            48
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "In",
+        "what",
+        "year",
+        "was",
+        "the",
+        "group",
+        "who",
+        "performed",
+        "ENTITYA",
+        "formed",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "year",
+      "answer_anchor_id": "3",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "3",
+        "anchor_text": "year",
+        "source_types": [
+          "typed_wh_slot",
+          "root_projection",
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "9"
+        ],
+        "nodes": [
+          "ENTITYA"
+        ],
+        "global_rank": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "3",
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "semantic_nodes": [
+            "year",
+            "group",
+            "performed",
+            "ENTITYA",
+            "formed"
+          ],
+          "covered_semantic_node_ids": [
+            "9"
+          ],
+          "covered_semantic_nodes": [
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "3",
+            "6",
+            "8",
+            "10"
+          ],
+          "missing_semantic_nodes": [
+            "year",
+            "group",
+            "performed",
+            "formed"
+          ],
+          "missing_semantic_nodes_count": 4,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 0,
+          "path_length": 0,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        "path_type": "empty",
+        "selection_mode": "single_node_fallback",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "3",
+            "anchor_text": "year",
+            "source_types": [
+              "typed_wh_slot",
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "9"
+            ],
+            "nodes": [
+              "ENTITYA"
+            ],
+            "global_rank": [
+              4,
+              0,
+              0,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "3",
+                "6",
+                "8",
+                "9",
+                "10"
+              ],
+              "semantic_nodes": [
+                "year",
+                "group",
+                "performed",
+                "ENTITYA",
+                "formed"
+              ],
+              "covered_semantic_node_ids": [
+                "9"
+              ],
+              "covered_semantic_nodes": [
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "3",
+                "6",
+                "8",
+                "10"
+              ],
+              "missing_semantic_nodes": [
+                "year",
+                "group",
+                "performed",
+                "formed"
+              ],
+              "missing_semantic_nodes_count": 4,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 0,
+              "path_length": 0,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "path_type": "empty",
+            "selection_mode": "single_node_fallback"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: year[3]/typed_wh_slot+root_projection+modifier_projection+clause_predicate, group[6]/root_projection+modifier_projection+clause_predicate, performed[8]/modifier_projection+clause_predicate, formed[10]/clause_predicate, ENTITYA[9]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "9"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "In what year was the group who performed Attics To Eden formed?",
+        "explicit_entities": [
+          "Attics To Eden"
+        ],
+        "global_best_paths": [
+          [
+            "Attics To Eden"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Attics To Eden"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the group that performed the song Attics To Eden?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "In what year was q1's answer formed?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the group that performed the song Attics To Eden?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "In what year was q1's answer formed?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Attics To Eden"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the group that performed the song Attics To Eden?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "In what year was q1's answer formed?"
+          }
+        ]
+      }
+    }
+  }
+}

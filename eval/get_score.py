@@ -52,7 +52,7 @@ def load_json(path: Path) -> dict[str, Any] | list[Any] | None:
 
 
 def resolve_run_question(run_dir: Path) -> tuple[str | None, str]:
-    error_payload = load_json(run_dir / "artifacts" / "error.json")
+    error_payload = load_json(run_dir / "artifacts" / "sample.json")
     if isinstance(error_payload, dict):
         question = error_payload.get("question")
         if isinstance(question, str) and question.strip():
@@ -252,7 +252,7 @@ def build_eval_record(question_entry: dict[str, Any], run_index: dict[str, dict[
     final_answer = load_json(run_dir / "artifacts" / "final_answer.json")
     thought_graph = load_json(run_dir / "artifacts" / "thought_graph.json")
     evidence_subgraph = load_json(run_dir / "artifacts" / "evidence_subgraph.json")
-    error_payload = load_json(run_dir / "artifacts" / "error.json")
+    error_payload = load_json(run_dir / "artifacts" / "sample.json")
 
     answer, generation, generation_explanation = extract_generation(final_answer if isinstance(final_answer, dict) else None)
     retrieved = extract_retrieved_knowledge(thought_graph if isinstance(thought_graph, dict) else None)

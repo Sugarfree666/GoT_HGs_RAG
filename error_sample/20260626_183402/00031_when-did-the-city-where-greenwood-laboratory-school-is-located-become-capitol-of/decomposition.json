@@ -1,0 +1,587 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 31,
+  "qid": null,
+  "question": "When did the city where Greenwood Laboratory School is located become capitol of the state where the screenwriter of The Poor Boob was born?",
+  "raw_question_item": {
+    "question": "When did the city where Greenwood Laboratory School is located become capitol of the state where the screenwriter of The Poor Boob was born?",
+    "answer": "1839"
+  },
+  "gold_answer": "1839",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Greenwood Laboratory School",
+          "start_char": 24,
+          "end_char": 51,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "The Poor Boob",
+          "start_char": 117,
+          "end_char": 130,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Greenwood Laboratory School",
+            "type": "Organization"
+          },
+          {
+            "surface": "The Poor Boob",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "When did the city where Greenwood Laboratory School is located become the capitol of the state where the screenwriter of The Poor Boob was born?",
+        "normalization_changed": true,
+        "normalization_note": "Added 'the' before 'capitol' for grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Greenwood Laboratory School",
+            "start_char": 24,
+            "end_char": 51,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Greenwood",
+            "start_char": 24,
+            "end_char": 33,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Laboratory",
+            "start_char": 34,
+            "end_char": 44,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "School",
+            "start_char": 45,
+            "end_char": 51,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "The Poor Boob",
+            "start_char": 117,
+            "end_char": 130,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Poor",
+            "start_char": 121,
+            "end_char": 125,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c7",
+            "text": "Boob",
+            "start_char": 126,
+            "end_char": 130,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When did the city where Greenwood Laboratory School is located become the capitol of the state where the screenwriter of The Poor Boob was born?",
+      "normalization_changed": true,
+      "normalization_note": "Added 'the' before 'capitol' for grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "When did the city where ENTITYA is located become the capitol of the state where the screenwriter of ENTITYB was born?",
+      "hanlp_input_sentence": "When did the city where ENTITYA is located become the capitol of the state where the screenwriter of ENTITYB was born?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Greenwood Laboratory School",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            24,
+            51
+          ],
+          "masked_char_span": [
+            24,
+            31
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "The Poor Boob",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            117,
+            130
+          ],
+          "masked_char_span": [
+            101,
+            108
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "did",
+        "the",
+        "city",
+        "where",
+        "ENTITYA",
+        "is",
+        "located",
+        "become",
+        "the",
+        "capitol",
+        "of",
+        "the",
+        "state",
+        "where",
+        "the",
+        "screenwriter",
+        "of",
+        "ENTITYB",
+        "was",
+        "born",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "6",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 8,
+        "path_index": 1,
+        "anchor_id": "6",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A8.P1",
+        "node_ids": [
+          "19",
+          "17",
+          "14",
+          "21",
+          "11",
+          "9",
+          "4",
+          "8",
+          "6"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "screenwriter",
+          "state",
+          "born",
+          "capitol",
+          "become",
+          "city",
+          "located",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          0,
+          5,
+          8,
+          5
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "6",
+            "8",
+            "9",
+            "11",
+            "14",
+            "17",
+            "19",
+            "21"
+          ],
+          "semantic_nodes": [
+            "city",
+            "ENTITYA",
+            "located",
+            "become",
+            "capitol",
+            "state",
+            "screenwriter",
+            "ENTITYB",
+            "born"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "8",
+            "9",
+            "11",
+            "14",
+            "17",
+            "19",
+            "21"
+          ],
+          "covered_semantic_nodes": [
+            "city",
+            "ENTITYA",
+            "located",
+            "become",
+            "capitol",
+            "state",
+            "screenwriter",
+            "ENTITYB",
+            "born"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 5,
+          "dirty_path_count": 5,
+          "path_length": 8,
+          "anchor_fit_penalty": 5,
+          "rank": [
+            0,
+            5,
+            8,
+            5
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 8,
+            "path_index": 1,
+            "anchor_id": "6",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A8.P1",
+            "node_ids": [
+              "19",
+              "17",
+              "14",
+              "21",
+              "11",
+              "9",
+              "4",
+              "8",
+              "6"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "screenwriter",
+              "state",
+              "born",
+              "capitol",
+              "become",
+              "city",
+              "located",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              0,
+              5,
+              8,
+              5
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "11",
+                "14",
+                "17",
+                "19",
+                "21"
+              ],
+              "semantic_nodes": [
+                "city",
+                "ENTITYA",
+                "located",
+                "become",
+                "capitol",
+                "state",
+                "screenwriter",
+                "ENTITYB",
+                "born"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "8",
+                "9",
+                "11",
+                "14",
+                "17",
+                "19",
+                "21"
+              ],
+              "covered_semantic_nodes": [
+                "city",
+                "ENTITYA",
+                "located",
+                "become",
+                "capitol",
+                "state",
+                "screenwriter",
+                "ENTITYB",
+                "born"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 5,
+              "dirty_path_count": 5,
+              "path_length": 8,
+              "anchor_fit_penalty": 5,
+              "rank": [
+                0,
+                5,
+                8,
+                5
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: capitol[11]/root_projection+modifier_projection+clause_predicate, located[8]/modifier_projection+clause_predicate, state[14]/modifier_projection+clause_predicate, city[4]/clause_predicate, become[9]/clause_predicate, screenwriter[17]/clause_predicate, born[21]/clause_predicate, ENTITYA[6]/explicit_entity, ENTITYB[19]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "screenwriter",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "screenwriter",
+          "target": "state",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "state",
+          "target": "born",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "born",
+          "target": "capitol",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "capitol",
+          "target": "become",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "become",
+          "target": "city",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "city",
+          "target": "located",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "located",
+          "target": "ENTITYA",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "screenwriter",
+            "state",
+            "born",
+            "capitol",
+            "become",
+            "city",
+            "located",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "19",
+            "17",
+            "14",
+            "21",
+            "11",
+            "9",
+            "4",
+            "8",
+            "6"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When did the city where Greenwood Laboratory School is located become capitol of the state where the screenwriter of The Poor Boob was born?",
+        "explicit_entities": [
+          "Greenwood Laboratory School",
+          "The Poor Boob"
+        ],
+        "global_best_paths": [
+          [
+            "The Poor Boob",
+            "screenwriter",
+            "state",
+            "born",
+            "capitol",
+            "become",
+            "city",
+            "located",
+            "Greenwood Laboratory School"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "The Poor Boob -> screenwriter -> state -> born"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the screenwriter of The Poor Boob?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "state -> capitol -> city"
+          ],
+          "produce": "q2_answer",
+          "question": "What city became the capitol of the state where q1's answer was born?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer -> located -> Greenwood Laboratory School"
+          ],
+          "produce": "q3_answer",
+          "question": "When did q2's answer become the city where Greenwood Laboratory School is located?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the screenwriter of The Poor Boob?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What city became the capitol of the state where q1's answer was born?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When did q2's answer become the city where Greenwood Laboratory School is located?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "The Poor Boob -> screenwriter -> state -> born"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the screenwriter of The Poor Boob?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "state -> capitol -> city"
+            ],
+            "produce": "q2_answer",
+            "question": "What city became the capitol of the state where q1's answer was born?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer -> located -> Greenwood Laboratory School"
+            ],
+            "produce": "q3_answer",
+            "question": "When did q2's answer become the city where Greenwood Laboratory School is located?"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -235,17 +235,17 @@ def main() -> int:
                     print(f"[ok]  {dataset} #{item['index']} nodes={len(dag.get('nodes', []))} -> {question_dir}")
                 except Exception as exc:
                     payload = build_error_payload(dataset, questions_file, item, exc)
-                    _write_json(question_dir / "error.json", payload)
-                    (question_dir / "error.md").write_text(build_error_markdown(payload), encoding="utf-8")
+                    _write_json(question_dir / "sample.json", payload)
+                    (question_dir / "sample.md").write_text(build_error_markdown(payload), encoding="utf-8")
                     manifest_item = {
                         "method": "direct_llm_atomic_dag",
                         "dataset": dataset,
                         "index": item["index"],
                         "qid": item.get("qid"),
                         "question": item["question"],
-                        "status": "error",
+                        "status": "sample",
                         "error_type": type(exc).__name__,
-                        "error": str(exc),
+                        "sample": str(exc),
                         "output_dir": str(question_dir),
                     }
                     print(f"[err] {dataset} #{item['index']} {type(exc).__name__}: {exc}")
@@ -372,7 +372,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
 
 def build_error_payload(dataset: str, questions_file: Path, item: dict[str, Any], exc: Exception) -> dict[str, Any]:
     return {
-        "status": "error",
+        "status": "sample",
         "method": "direct_llm_atomic_dag",
         "dataset": dataset,
         "questions_file": str(questions_file),
@@ -382,7 +382,7 @@ def build_error_payload(dataset: str, questions_file: Path, item: dict[str, Any]
         "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "error_type": type(exc).__name__,
-        "error": str(exc),
+        "sample": str(exc),
     }
 
 
@@ -395,7 +395,7 @@ def build_error_markdown(payload: dict[str, Any]) -> str:
     ]
     if payload.get("gold_answer") is not None:
         lines.append(f"- Gold answer: {payload['gold_answer']}")
-    lines.extend(["", f"- Error type: `{payload['error_type']}`", "", "```text", str(payload["error"]), "```", ""])
+    lines.extend(["", f"- Error type: `{payload['error_type']}`", "", "```text", str(payload["sample"]), "```", ""])
     return "\n".join(lines)
 
 

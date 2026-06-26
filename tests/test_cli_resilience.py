@@ -107,7 +107,7 @@ class CLIAllowFailureTest(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             run_dirs = sorted(base_run_dir.iterdir())
             self.assertEqual(len(run_dirs), 1)
-            error_artifact = run_dirs[0] / "artifacts" / "error.json"
+            error_artifact = run_dirs[0] / "artifacts" / "sample.json"
             self.assertTrue(error_artifact.exists())
             self.assertIn("status=failed", stdout.getvalue())
 

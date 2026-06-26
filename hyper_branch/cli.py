@@ -62,7 +62,7 @@ def main() -> int:
     except Exception as exc:
         logger.error("Pipeline failed for question: %s", question)
         trace_store.save_artifact(
-            "artifacts/error.json",
+            "artifacts/sample.json",
             {
                 "question": question,
                 "error_type": type(exc).__name__,
@@ -76,7 +76,7 @@ def main() -> int:
             },
         )
         print("status=failed")
-        print(f"error={type(exc).__name__}: {exc}")
+        print(f"sample={type(exc).__name__}: {exc}")
         print(f"run_dir={run_dir}")
         exit_code = 0 if args.allow_failure else 1
     else:

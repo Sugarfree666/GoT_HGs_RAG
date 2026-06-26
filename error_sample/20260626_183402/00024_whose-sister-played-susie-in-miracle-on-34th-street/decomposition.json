@@ -1,0 +1,389 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 24,
+  "qid": null,
+  "question": "Whose sister played Susie in miracle on 34th street?",
+  "raw_question_item": {
+    "question": "Whose sister played Susie in miracle on 34th street?",
+    "answer": "Lana Wood"
+  },
+  "gold_answer": "Lana Wood",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Susie",
+          "start_char": 20,
+          "end_char": 25,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "miracle on 34th street",
+          "start_char": 29,
+          "end_char": 51,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Susie",
+            "type": "Person"
+          },
+          {
+            "surface": "miracle on 34th street",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "Whose sister played Susie in miracle on 34th street?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Susie",
+            "start_char": 20,
+            "end_char": 25,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Whose sister played Susie in miracle on 34th street?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Whose sister played ENTITYA in ENTITYB?",
+      "hanlp_input_sentence": "Whose sister played ENTITYA in ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Susie",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            20,
+            25
+          ],
+          "masked_char_span": [
+            20,
+            27
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "miracle on 34th street",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            29,
+            51
+          ],
+          "masked_char_span": [
+            31,
+            38
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Whose",
+        "sister",
+        "played",
+        "ENTITYA",
+        "in",
+        "ENTITYB",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "sister",
+      "answer_anchor_id": "2",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "2",
+        "anchor_text": "sister",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "4",
+          "3",
+          "2"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "played",
+          "sister"
+        ],
+        "global_rank": [
+          1,
+          0,
+          2,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "semantic_nodes": [
+            "sister",
+            "played",
+            "ENTITYA",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "3",
+            "4"
+          ],
+          "covered_semantic_nodes": [
+            "sister",
+            "played",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "6"
+          ],
+          "missing_semantic_nodes": [
+            "ENTITYB"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 0,
+          "path_length": 2,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            1,
+            0,
+            2,
+            6
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "sister",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "4",
+              "3",
+              "2"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "played",
+              "sister"
+            ],
+            "global_rank": [
+              1,
+              0,
+              2,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "3",
+                "4",
+                "6"
+              ],
+              "semantic_nodes": [
+                "sister",
+                "played",
+                "ENTITYA",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "3",
+                "4"
+              ],
+              "covered_semantic_nodes": [
+                "sister",
+                "played",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "6"
+              ],
+              "missing_semantic_nodes": [
+                "ENTITYB"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 0,
+              "path_length": 2,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                1,
+                0,
+                2,
+                6
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: sister[2]/clause_predicate, played[3]/clause_predicate, ENTITYA[4]/explicit_entity, ENTITYB[6]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "played",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "played",
+          "target": "sister",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "played",
+            "sister"
+          ],
+          "node_ids": [
+            "4",
+            "3",
+            "2"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Whose sister played Susie in miracle on 34th street?",
+        "explicit_entities": [
+          "Susie",
+          "miracle on 34th street"
+        ],
+        "global_best_paths": [
+          [
+            "Susie",
+            "played",
+            "sister"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Susie -> played"
+          ],
+          "produce": "q1_answer",
+          "question": "Who played the character Susie in miracle on 34th street?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "played -> sister"
+          ],
+          "produce": "q2_answer",
+          "question": "Whose sister is q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who played the character Susie in miracle on 34th street?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Whose sister is q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Susie -> played"
+            ],
+            "produce": "q1_answer",
+            "question": "Who played the character Susie in miracle on 34th street?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "played -> sister"
+            ],
+            "produce": "q2_answer",
+            "question": "Whose sister is q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

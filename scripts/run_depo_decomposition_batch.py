@@ -167,17 +167,17 @@ def main() -> int:
                     )
                 except Exception as exc:  # Keep long batch jobs inspectable even if one item fails.
                     payload = build_error_payload(dataset, questions_file, item, exc)
-                    _write_json(question_dir / "error.json", payload)
-                    (question_dir / "error.md").write_text(build_error_markdown(payload), encoding="utf-8")
+                    _write_json(question_dir / "sample.json", payload)
+                    (question_dir / "sample.md").write_text(build_error_markdown(payload), encoding="utf-8")
                     manifest_item = {
                         "method": "depo_hanlp_sdp_atomic_dag",
                         "dataset": dataset,
                         "index": item["index"],
                         "qid": item.get("qid"),
                         "question": item["question"],
-                        "status": "error",
+                        "status": "sample",
                         "error_type": type(exc).__name__,
-                        "error": str(exc),
+                        "sample": str(exc),
                         "output_dir": str(question_dir),
                     }
                     summary_lines.extend(_summary_error_lines(payload, question_dir))
@@ -249,7 +249,7 @@ def build_error_payload(
     exc: Exception,
 ) -> dict[str, Any]:
     return {
-        "status": "error",
+        "status": "sample",
         "method": "depo_hanlp_sdp_atomic_dag",
         "dataset": dataset,
         "questions_file": str(questions_file),
@@ -259,7 +259,7 @@ def build_error_payload(
         "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "error_type": type(exc).__name__,
-        "error": str(exc),
+        "sample": str(exc),
     }
 
 
@@ -350,7 +350,7 @@ def build_error_markdown(payload: dict[str, Any]) -> str:
             f"- Error type: `{payload['error_type']}`",
             "",
             "```text",
-            str(payload["error"]),
+            str(payload["sample"]),
             "```",
             "",
         ]
@@ -509,8 +509,8 @@ def _summary_error_lines(payload: dict[str, Any], question_dir: Path) -> list[st
         f"## {payload['index']}. {payload['question']}",
         "",
         f"- Output: `{question_dir}`",
-        f"- Status: error",
-        f"- Error: `{payload['error_type']}: {payload['error']}`",
+        f"- Status: sample",
+        f"- Error: `{payload['error_type']}: {payload['sample']}`",
         "",
     ]
 

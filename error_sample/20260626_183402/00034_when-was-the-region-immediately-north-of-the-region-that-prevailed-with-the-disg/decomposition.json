@@ -1,0 +1,432 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 34,
+  "qid": null,
+  "question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+  "raw_question_item": {
+    "question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+    "answer": "1930"
+  },
+  "gold_answer": "1930",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Near East",
+          "start_char": 88,
+          "end_char": 97,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Near East",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Near East",
+            "start_char": 88,
+            "end_char": 97,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Near",
+            "start_char": 88,
+            "end_char": 92,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "East",
+            "start_char": 93,
+            "end_char": 97,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the region immediately north of the region that prevailed with the disgrace of ENTITYA and the terrain feature on which shamal is located created?",
+      "hanlp_input_sentence": "When was the region immediately north of the region that prevailed with the disgrace of ENTITYA and the terrain feature on which shamal is located created?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Near East",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            88,
+            97
+          ],
+          "masked_char_span": [
+            88,
+            95
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "region",
+        "immediately",
+        "north",
+        "of",
+        "the",
+        "region",
+        "that",
+        "prevailed",
+        "with",
+        "the",
+        "disgrace",
+        "of",
+        "ENTITYA",
+        "and",
+        "the",
+        "terrain",
+        "feature",
+        "on",
+        "which",
+        "shamal",
+        "is",
+        "located",
+        "created",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "feature",
+      "answer_anchor_id": "20",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "20",
+        "anchor_text": "feature",
+        "source_types": [
+          "typed_wh_slot",
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "16"
+        ],
+        "nodes": [
+          "ENTITYA"
+        ],
+        "global_rank": [
+          11,
+          0,
+          0,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "11",
+            "14",
+            "16",
+            "19",
+            "20",
+            "23",
+            "25",
+            "26"
+          ],
+          "semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "prevailed",
+            "disgrace",
+            "ENTITYA",
+            "terrain",
+            "feature",
+            "shamal",
+            "located",
+            "created"
+          ],
+          "covered_semantic_node_ids": [
+            "16"
+          ],
+          "covered_semantic_nodes": [
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "11",
+            "14",
+            "19",
+            "20",
+            "23",
+            "25",
+            "26"
+          ],
+          "missing_semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "prevailed",
+            "disgrace",
+            "terrain",
+            "feature",
+            "shamal",
+            "located",
+            "created"
+          ],
+          "missing_semantic_nodes_count": 11,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 0,
+          "path_length": 0,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            11,
+            0,
+            0,
+            0
+          ]
+        },
+        "path_type": "empty",
+        "selection_mode": "single_node_fallback",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "20",
+            "anchor_text": "feature",
+            "source_types": [
+              "typed_wh_slot",
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "16"
+            ],
+            "nodes": [
+              "ENTITYA"
+            ],
+            "global_rank": [
+              11,
+              0,
+              0,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "11",
+                "14",
+                "16",
+                "19",
+                "20",
+                "23",
+                "25",
+                "26"
+              ],
+              "semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "prevailed",
+                "disgrace",
+                "ENTITYA",
+                "terrain",
+                "feature",
+                "shamal",
+                "located",
+                "created"
+              ],
+              "covered_semantic_node_ids": [
+                "16"
+              ],
+              "covered_semantic_nodes": [
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "11",
+                "14",
+                "19",
+                "20",
+                "23",
+                "25",
+                "26"
+              ],
+              "missing_semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "prevailed",
+                "disgrace",
+                "terrain",
+                "feature",
+                "shamal",
+                "located",
+                "created"
+              ],
+              "missing_semantic_nodes_count": 11,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 0,
+              "path_length": 0,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                11,
+                0,
+                0,
+                0
+              ]
+            },
+            "path_type": "empty",
+            "selection_mode": "single_node_fallback"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: region[4]/root_projection+modifier_projection+clause_predicate, feature[20]/typed_wh_slot+clause_predicate, shamal[23]/typed_wh_slot+clause_predicate, north[6]/modifier_projection+clause_predicate, prevailed[11]/modifier_projection+clause_predicate, immediately[5]/clause_predicate, region[9]/clause_predicate, disgrace[14]/clause_predicate, terrain[19]/clause_predicate, located[25]/clause_predicate, created[26]/clause_predicate, ENTITYA[16]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "16"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+        "explicit_entities": [
+          "Near East"
+        ],
+        "global_best_paths": [
+          [
+            "Near East"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Near East"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the region immediately north of the Near East?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "When was the region that is immediately north of q1's answer created?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the region immediately north of the Near East?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "When was the region that is immediately north of q1's answer created?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Near East"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the region immediately north of the Near East?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "When was the region that is immediately north of q1's answer created?"
+          }
+        ]
+      }
+    }
+  }
+}

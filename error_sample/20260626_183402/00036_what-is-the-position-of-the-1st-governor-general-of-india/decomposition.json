@@ -1,0 +1,396 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 36,
+  "qid": null,
+  "question": "What is the position of the 1st governor general of India?",
+  "raw_question_item": {
+    "question": "What is the position of the 1st governor general of India?",
+    "answer": "Governor-General of India"
+  },
+  "gold_answer": "Governor-General of India",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "India",
+          "start_char": 52,
+          "end_char": 57,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "India",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "What is the position of the 1st governor general of India?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "India",
+            "start_char": 52,
+            "end_char": 57,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the position of the 1st governor general of India?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the position of the 1st governor general of ENTITYA?",
+      "hanlp_input_sentence": "What is the position of the 1st governor general of ENTITYA?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "India",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            52,
+            57
+          ],
+          "masked_char_span": [
+            52,
+            59
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "position",
+        "of",
+        "the",
+        "1st",
+        "governor",
+        "general",
+        "of",
+        "ENTITYA",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "position",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "position",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "11",
+          "9",
+          "7",
+          "8",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "general",
+          "1st",
+          "governor",
+          "position"
+        ],
+        "global_rank": [
+          0,
+          3,
+          4,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "9",
+            "11"
+          ],
+          "semantic_nodes": [
+            "position",
+            "1st",
+            "governor",
+            "general",
+            "ENTITYA"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "9",
+            "11"
+          ],
+          "covered_semantic_nodes": [
+            "position",
+            "1st",
+            "governor",
+            "general",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 4,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            3,
+            4,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "position",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "11",
+              "9",
+              "7",
+              "8",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "general",
+              "1st",
+              "governor",
+              "position"
+            ],
+            "global_rank": [
+              0,
+              3,
+              4,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "9",
+                "11"
+              ],
+              "semantic_nodes": [
+                "position",
+                "1st",
+                "governor",
+                "general",
+                "ENTITYA"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "9",
+                "11"
+              ],
+              "covered_semantic_nodes": [
+                "position",
+                "1st",
+                "governor",
+                "general",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 4,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                3,
+                4,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: position[4]/clause_predicate, 1st[7]/clause_predicate, governor[8]/clause_predicate, general[9]/clause_predicate, ENTITYA[11]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "general",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "general",
+          "target": "1st",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "1st",
+          "target": "governor",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "governor",
+          "target": "position",
+          "derived": true,
+          "rule": "restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "general",
+            "1st",
+            "governor",
+            "position"
+          ],
+          "node_ids": [
+            "11",
+            "9",
+            "7",
+            "8",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the position of the 1st governor general of India?",
+        "explicit_entities": [
+          "India"
+        ],
+        "global_best_paths": [
+          [
+            "India",
+            "general",
+            "1st",
+            "governor",
+            "position"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "India -> general -> 1st -> governor"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the 1st governor general of India?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "governor -> position"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the position of q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the 1st governor general of India?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the position of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "India -> general -> 1st -> governor"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the 1st governor general of India?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "governor -> position"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the position of q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

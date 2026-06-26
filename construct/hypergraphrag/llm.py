@@ -174,7 +174,7 @@ async def azure_openai_complete_if_cache(
 
 
 class BedrockError(Exception):
-    """Generic error for issues related to Amazon Bedrock"""
+    """Generic sample for issues related to Amazon Bedrock"""
 
 
 @retry(

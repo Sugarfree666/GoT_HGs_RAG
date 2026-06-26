@@ -1,0 +1,366 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 22,
+  "qid": null,
+  "question": "Who is the child of Chiang Hsiao-wen's father?",
+  "raw_question_item": {
+    "question": "Who is the child of Chiang Hsiao-wen's father?",
+    "answer": "Chiang Hsiao-wu"
+  },
+  "gold_answer": "Chiang Hsiao-wu",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Chiang Hsiao-wen",
+          "start_char": 20,
+          "end_char": 36,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Chiang Hsiao-wen",
+            "type": "Person"
+          }
+        ],
+        "normalized_question": "Who is the child of Chiang Hsiao-wen's father?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Chiang Hsiao-wen",
+            "start_char": 20,
+            "end_char": 36,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Chiang",
+            "start_char": 20,
+            "end_char": 26,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Hsiao-wen",
+            "start_char": 27,
+            "end_char": 36,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who is the child of Chiang Hsiao-wen's father?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Who is the child of ENTITYA's father?",
+      "hanlp_input_sentence": "Who is the child of ENTITYA's father?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Chiang Hsiao-wen",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            20,
+            36
+          ],
+          "masked_char_span": [
+            20,
+            27
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "is",
+        "the",
+        "child",
+        "of",
+        "ENTITYA",
+        "'",
+        "s",
+        "father",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "child",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "child",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "6",
+          "9",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "father",
+          "child"
+        ],
+        "global_rank": [
+          0,
+          2,
+          2,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "6",
+            "9"
+          ],
+          "semantic_nodes": [
+            "child",
+            "ENTITYA",
+            "father"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "9"
+          ],
+          "covered_semantic_nodes": [
+            "child",
+            "ENTITYA",
+            "father"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 2,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            2,
+            2,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "child",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "6",
+              "9",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "father",
+              "child"
+            ],
+            "global_rank": [
+              0,
+              2,
+              2,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "6",
+                "9"
+              ],
+              "semantic_nodes": [
+                "child",
+                "ENTITYA",
+                "father"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "9"
+              ],
+              "covered_semantic_nodes": [
+                "child",
+                "ENTITYA",
+                "father"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 2,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                2,
+                2,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: child[4]/clause_predicate, father[9]/clause_predicate, ENTITYA[6]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "father",
+          "derived": true,
+          "rule": "possessive_marker_contraction"
+        },
+        {
+          "source": "father",
+          "target": "child",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "father",
+            "child"
+          ],
+          "node_ids": [
+            "6",
+            "9",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who is the child of Chiang Hsiao-wen's father?",
+        "explicit_entities": [
+          "Chiang Hsiao-wen"
+        ],
+        "global_best_paths": [
+          [
+            "Chiang Hsiao-wen",
+            "father",
+            "child"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Chiang Hsiao-wen -> father"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the father of Chiang Hsiao-wen?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "father -> child"
+          ],
+          "produce": "q2_answer",
+          "question": "Who is the child of q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the father of Chiang Hsiao-wen?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Who is the child of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Chiang Hsiao-wen -> father"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the father of Chiang Hsiao-wen?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "father -> child"
+            ],
+            "produce": "q2_answer",
+            "question": "Who is the child of q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

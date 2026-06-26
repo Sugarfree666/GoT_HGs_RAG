@@ -1,0 +1,440 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 21,
+  "qid": null,
+  "question": "What does seal stand for in the U.S. military branch that operates destroyers, as well as the USS Edsall?",
+  "raw_question_item": {
+    "question": "What does seal stand for in the U.S. military branch that operates destroyers, as well as the USS Edsall?",
+    "answer": "Sea, Air, and Land"
+  },
+  "gold_answer": "Sea, Air, and Land",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "U.S",
+          "start_char": 32,
+          "end_char": 35,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "USS Edsall",
+          "start_char": 94,
+          "end_char": 104,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "U.S.",
+            "type": "Organization"
+          },
+          {
+            "surface": "USS Edsall",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "What does seal stand for in the U.S. military branch that operates destroyers, as well as the USS Edsall?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "U.S",
+            "start_char": 32,
+            "end_char": 35,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "USS Edsall",
+            "start_char": 94,
+            "end_char": 104,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "USS",
+            "start_char": 94,
+            "end_char": 97,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Edsall",
+            "start_char": 98,
+            "end_char": 104,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What does seal stand for in the U.S. military branch that operates destroyers, as well as the USS Edsall?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What does seal stand for in the ENTITYA. military branch that operates destroyers, as well as the ENTITYB?",
+      "hanlp_input_sentence": "What does seal stand for in the ENTITYA. military branch that operates destroyers, as well as the ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "U.S",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            32,
+            35
+          ],
+          "masked_char_span": [
+            32,
+            39
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "USS Edsall",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            94,
+            104
+          ],
+          "masked_char_span": [
+            98,
+            105
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "does",
+        "seal",
+        "stand",
+        "for",
+        "in",
+        "the",
+        "ENTITYA.",
+        "military",
+        "branch",
+        "that",
+        "operates",
+        "destroyers",
+        ",",
+        "as",
+        "well",
+        "as",
+        "the",
+        "ENTITYB",
+        "?"
+      ],
+      "warnings": [
+        "ENTITYA: FAILED, placeholder was not found as a single HanLP token. This SDP graph may be unreliable because entity masking was split by HanLP tokenization."
+      ]
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "branch",
+      "answer_anchor_id": "10",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "10",
+        "anchor_text": "branch",
+        "source_types": [
+          "root_projection",
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "19"
+        ],
+        "nodes": [
+          "ENTITYB"
+        ],
+        "global_rank": [
+          8,
+          0,
+          0,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "3",
+            "4",
+            "8",
+            "9",
+            "10",
+            "12",
+            "13",
+            "16",
+            "19"
+          ],
+          "semantic_nodes": [
+            "seal",
+            "stand",
+            "ENTITYA.",
+            "military",
+            "branch",
+            "operates",
+            "destroyers",
+            "well",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "19"
+          ],
+          "covered_semantic_nodes": [
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "3",
+            "4",
+            "8",
+            "9",
+            "10",
+            "12",
+            "13",
+            "16"
+          ],
+          "missing_semantic_nodes": [
+            "seal",
+            "stand",
+            "ENTITYA.",
+            "military",
+            "branch",
+            "operates",
+            "destroyers",
+            "well"
+          ],
+          "missing_semantic_nodes_count": 8,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 0,
+          "path_length": 0,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            8,
+            0,
+            0,
+            1
+          ]
+        },
+        "path_type": "empty",
+        "selection_mode": "single_node_fallback",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "10",
+            "anchor_text": "branch",
+            "source_types": [
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "19"
+            ],
+            "nodes": [
+              "ENTITYB"
+            ],
+            "global_rank": [
+              8,
+              0,
+              0,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "3",
+                "4",
+                "8",
+                "9",
+                "10",
+                "12",
+                "13",
+                "16",
+                "19"
+              ],
+              "semantic_nodes": [
+                "seal",
+                "stand",
+                "ENTITYA.",
+                "military",
+                "branch",
+                "operates",
+                "destroyers",
+                "well",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "19"
+              ],
+              "covered_semantic_nodes": [
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "3",
+                "4",
+                "8",
+                "9",
+                "10",
+                "12",
+                "13",
+                "16"
+              ],
+              "missing_semantic_nodes": [
+                "seal",
+                "stand",
+                "ENTITYA.",
+                "military",
+                "branch",
+                "operates",
+                "destroyers",
+                "well"
+              ],
+              "missing_semantic_nodes_count": 8,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 0,
+              "path_length": 0,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                8,
+                0,
+                0,
+                1
+              ]
+            },
+            "path_type": "empty",
+            "selection_mode": "single_node_fallback"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: branch[10]/root_projection+modifier_projection+clause_predicate, ENTITYA.[8]/modifier_projection+clause_predicate, military[9]/modifier_projection+clause_predicate, operates[12]/modifier_projection+clause_predicate, stand[4]/bare_wh_predicate_root+clause_predicate, seal[3]/clause_predicate, destroyers[13]/clause_predicate, well[16]/clause_predicate, ENTITYB[19]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB"
+          ],
+          "node_ids": [
+            "19"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What does seal stand for in the U.S. military branch that operates destroyers, as well as the USS Edsall?",
+        "explicit_entities": [
+          "U.S",
+          "USS Edsall"
+        ],
+        "global_best_paths": [
+          [
+            "USS Edsall"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "USS Edsall"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the U.S. military branch that operates the USS Edsall?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "What does seal stand for in the U.S. military branch identified in q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the U.S. military branch that operates the USS Edsall?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What does seal stand for in the U.S. military branch identified in q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "USS Edsall"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the U.S. military branch that operates the USS Edsall?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "What does seal stand for in the U.S. military branch identified in q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

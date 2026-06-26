@@ -1,0 +1,405 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 4,
+  "qid": null,
+  "question": "What year did the publisher of Labyrinth end?",
+  "raw_question_item": {
+    "question": "What year did the publisher of Labyrinth end?",
+    "answer": "1986"
+  },
+  "gold_answer": "1986",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Labyrinth",
+          "start_char": 31,
+          "end_char": 40,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Labyrinth",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "What year did the publisher of Labyrinth end?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Labyrinth",
+            "start_char": 31,
+            "end_char": 40,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What year did the publisher of Labyrinth end?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What year did the publisher of ENTITYA end?",
+      "hanlp_input_sentence": "What year did the publisher of ENTITYA end?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Labyrinth",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            31,
+            40
+          ],
+          "masked_char_span": [
+            31,
+            38
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "year",
+        "did",
+        "the",
+        "publisher",
+        "of",
+        "ENTITYA",
+        "end",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "year",
+      "answer_anchor_id": "2",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "2",
+        "anchor_text": "year",
+        "source_types": [
+          "typed_wh_slot",
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "7",
+          "5",
+          "8",
+          "2"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "publisher",
+          "end",
+          "year"
+        ],
+        "global_rank": [
+          0,
+          2,
+          3,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "5",
+            "7",
+            "8"
+          ],
+          "semantic_nodes": [
+            "year",
+            "publisher",
+            "ENTITYA",
+            "end"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "5",
+            "7",
+            "8"
+          ],
+          "covered_semantic_nodes": [
+            "year",
+            "publisher",
+            "ENTITYA",
+            "end"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 3,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            0,
+            2,
+            3,
+            0
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "year",
+            "source_types": [
+              "typed_wh_slot",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "7",
+              "5",
+              "8",
+              "2"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "publisher",
+              "end",
+              "year"
+            ],
+            "global_rank": [
+              0,
+              2,
+              3,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "7",
+                "8"
+              ],
+              "semantic_nodes": [
+                "year",
+                "publisher",
+                "ENTITYA",
+                "end"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "5",
+                "7",
+                "8"
+              ],
+              "covered_semantic_nodes": [
+                "year",
+                "publisher",
+                "ENTITYA",
+                "end"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 3,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                0,
+                2,
+                3,
+                0
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: year[2]/typed_wh_slot+modifier_projection+clause_predicate, publisher[5]/clause_predicate, end[8]/clause_predicate, ENTITYA[7]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "publisher",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "publisher",
+          "target": "end",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "end",
+          "target": "year",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "publisher",
+            "end",
+            "year"
+          ],
+          "node_ids": [
+            "7",
+            "5",
+            "8",
+            "2"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What year did the publisher of Labyrinth end?",
+        "explicit_entities": [
+          "Labyrinth"
+        ],
+        "global_best_paths": [
+          [
+            "Labyrinth",
+            "publisher",
+            "end",
+            "year"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Labyrinth -> publisher"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the publisher of Labyrinth?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "publisher -> end"
+          ],
+          "produce": "q2_answer",
+          "question": "When did q1's answer end?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "end -> year"
+          ],
+          "produce": "q3_answer",
+          "question": "What year did q2's answer end?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the publisher of Labyrinth?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "When did q1's answer end?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What year did q2's answer end?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Labyrinth -> publisher"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the publisher of Labyrinth?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "publisher -> end"
+            ],
+            "produce": "q2_answer",
+            "question": "When did q1's answer end?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "end -> year"
+            ],
+            "produce": "q3_answer",
+            "question": "What year did q2's answer end?"
+          }
+        ]
+      }
+    }
+  }
+}

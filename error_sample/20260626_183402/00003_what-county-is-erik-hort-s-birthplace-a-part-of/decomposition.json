@@ -1,0 +1,390 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 3,
+  "qid": null,
+  "question": "What county is Erik Hort's birthplace a part of?",
+  "raw_question_item": {
+    "question": "What county is Erik Hort's birthplace a part of?",
+    "answer": "Rockland County"
+  },
+  "gold_answer": "Rockland County",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Erik Hort",
+          "start_char": 15,
+          "end_char": 24,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Erik Hort",
+            "type": "Person"
+          }
+        ],
+        "normalized_question": "What county is Erik Hort's birthplace a part of?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Erik Hort",
+            "start_char": 15,
+            "end_char": 24,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Erik",
+            "start_char": 15,
+            "end_char": 19,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Hort",
+            "start_char": 20,
+            "end_char": 24,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What county is Erik Hort's birthplace a part of?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What county is ENTITYA's birthplace a part of?",
+      "hanlp_input_sentence": "What county is ENTITYA's birthplace a part of?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Erik Hort",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            15,
+            24
+          ],
+          "masked_char_span": [
+            15,
+            22
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "county",
+        "is",
+        "ENTITYA",
+        "'",
+        "s",
+        "birthplace",
+        "a",
+        "part",
+        "of",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "county",
+      "answer_anchor_id": "2",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "2",
+        "anchor_text": "county",
+        "source_types": [
+          "typed_wh_slot",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "4",
+          "7",
+          "9",
+          "2"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "birthplace",
+          "part",
+          "county"
+        ],
+        "global_rank": [
+          0,
+          5,
+          3,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "4",
+            "7",
+            "9"
+          ],
+          "semantic_nodes": [
+            "county",
+            "ENTITYA",
+            "birthplace",
+            "part"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "4",
+            "7",
+            "9"
+          ],
+          "covered_semantic_nodes": [
+            "county",
+            "ENTITYA",
+            "birthplace",
+            "part"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 2,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 5,
+          "path_length": 3,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            0,
+            5,
+            3,
+            0
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "county",
+            "source_types": [
+              "typed_wh_slot",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "4",
+              "7",
+              "9",
+              "2"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "birthplace",
+              "part",
+              "county"
+            ],
+            "global_rank": [
+              0,
+              5,
+              3,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "4",
+                "7",
+                "9"
+              ],
+              "semantic_nodes": [
+                "county",
+                "ENTITYA",
+                "birthplace",
+                "part"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "4",
+                "7",
+                "9"
+              ],
+              "covered_semantic_nodes": [
+                "county",
+                "ENTITYA",
+                "birthplace",
+                "part"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 2,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 5,
+              "path_length": 3,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                0,
+                5,
+                3,
+                0
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: county[2]/typed_wh_slot+clause_predicate, part[9]/modifier_projection+clause_predicate, birthplace[7]/clause_predicate, ENTITYA[4]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "birthplace",
+          "derived": true,
+          "rule": "possessive_marker_contraction"
+        },
+        {
+          "source": "birthplace",
+          "target": "part",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "part",
+          "target": "county",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "birthplace",
+            "part",
+            "county"
+          ],
+          "node_ids": [
+            "4",
+            "7",
+            "9",
+            "2"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What county is Erik Hort's birthplace a part of?",
+        "explicit_entities": [
+          "Erik Hort"
+        ],
+        "global_best_paths": [
+          [
+            "Erik Hort",
+            "birthplace",
+            "part",
+            "county"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Erik Hort -> birthplace"
+          ],
+          "produce": "q1_answer",
+          "question": "Where is Erik Hort's birthplace?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "birthplace -> part -> county"
+          ],
+          "produce": "q2_answer",
+          "question": "What county is q1's answer a part of?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Where is Erik Hort's birthplace?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What county is q1's answer a part of?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Erik Hort -> birthplace"
+            ],
+            "produce": "q1_answer",
+            "question": "Where is Erik Hort's birthplace?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "birthplace -> part -> county"
+            ],
+            "produce": "q2_answer",
+            "question": "What county is q1's answer a part of?"
+          }
+        ]
+      }
+    }
+  }
+}

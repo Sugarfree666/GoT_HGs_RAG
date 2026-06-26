@@ -1,0 +1,449 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 39,
+  "qid": null,
+  "question": "Who wrote Turn Me On by the singer of Come Away with Me?",
+  "raw_question_item": {
+    "question": "Who wrote Turn Me On by the singer of Come Away with Me?",
+    "answer": "John D. Loudermilk"
+  },
+  "gold_answer": "John D. Loudermilk",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Turn Me On",
+          "start_char": 10,
+          "end_char": 20,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Come Away with Me",
+          "start_char": 38,
+          "end_char": 55,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Turn Me On",
+            "type": "Work"
+          },
+          {
+            "surface": "Come Away with Me",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "Who wrote Turn Me On by the singer of Come Away with Me?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Turn Me On",
+            "start_char": 10,
+            "end_char": 20,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Turn",
+            "start_char": 10,
+            "end_char": 14,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Me",
+            "start_char": 15,
+            "end_char": 17,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "On",
+            "start_char": 18,
+            "end_char": 20,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Come Away",
+            "start_char": 38,
+            "end_char": 47,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Come",
+            "start_char": 38,
+            "end_char": 42,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c7",
+            "text": "Away",
+            "start_char": 43,
+            "end_char": 47,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c8",
+            "text": "Me",
+            "start_char": 53,
+            "end_char": 55,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who wrote Turn Me On by the singer of Come Away with Me?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Who wrote ENTITYA by the singer of ENTITYB?",
+      "hanlp_input_sentence": "Who wrote ENTITYA by the singer of ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Turn Me On",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            10,
+            20
+          ],
+          "masked_char_span": [
+            10,
+            17
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Come Away with Me",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            38,
+            55
+          ],
+          "masked_char_span": [
+            35,
+            42
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "wrote",
+        "ENTITYA",
+        "by",
+        "the",
+        "singer",
+        "of",
+        "ENTITYB",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "3",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 3,
+        "path_index": 1,
+        "anchor_id": "3",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A3.P1",
+        "node_ids": [
+          "8",
+          "6",
+          "2",
+          "3"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "singer",
+          "wrote",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "3",
+            "6",
+            "8"
+          ],
+          "semantic_nodes": [
+            "wrote",
+            "ENTITYA",
+            "singer",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "3",
+            "6",
+            "8"
+          ],
+          "covered_semantic_nodes": [
+            "wrote",
+            "ENTITYA",
+            "singer",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 3,
+          "anchor_fit_penalty": 5,
+          "rank": [
+            0,
+            2,
+            3,
+            5
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 3,
+            "path_index": 1,
+            "anchor_id": "3",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A3.P1",
+            "node_ids": [
+              "8",
+              "6",
+              "2",
+              "3"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "singer",
+              "wrote",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              0,
+              2,
+              3,
+              5
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "3",
+                "6",
+                "8"
+              ],
+              "semantic_nodes": [
+                "wrote",
+                "ENTITYA",
+                "singer",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "3",
+                "6",
+                "8"
+              ],
+              "covered_semantic_nodes": [
+                "wrote",
+                "ENTITYA",
+                "singer",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 3,
+              "anchor_fit_penalty": 5,
+              "rank": [
+                0,
+                2,
+                3,
+                5
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: singer[6]/modifier_projection+clause_predicate, wrote[2]/clause_predicate, ENTITYA[3]/explicit_entity, ENTITYB[8]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "singer",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "singer",
+          "target": "wrote",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "wrote",
+          "target": "ENTITYA",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "singer",
+            "wrote",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "8",
+            "6",
+            "2",
+            "3"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who wrote Turn Me On by the singer of Come Away with Me?",
+        "explicit_entities": [
+          "Turn Me On",
+          "Come Away with Me"
+        ],
+        "global_best_paths": [
+          [
+            "Come Away with Me",
+            "singer",
+            "wrote",
+            "Turn Me On"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Come Away with Me -> singer"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the singer of the song Come Away with Me?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "singer -> wrote -> Turn Me On"
+          ],
+          "produce": "q2_answer",
+          "question": "Who wrote the song Turn Me On by q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the singer of the song Come Away with Me?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Who wrote the song Turn Me On by q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Come Away with Me -> singer"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the singer of the song Come Away with Me?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "singer -> wrote -> Turn Me On"
+            ],
+            "produce": "q2_answer",
+            "question": "Who wrote the song Turn Me On by q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -894,7 +894,7 @@ async def kg_query(
                 ll_keywords.append(clean_str(record_attributes[1]).upper())
             else:
                 continue
-    # Handle parsing error
+    # Handle parsing sample
     except json.JSONDecodeError as e:
         print(f"JSON parsing error: {e} {final_result}")
         return PROMPTS["fail_response"]

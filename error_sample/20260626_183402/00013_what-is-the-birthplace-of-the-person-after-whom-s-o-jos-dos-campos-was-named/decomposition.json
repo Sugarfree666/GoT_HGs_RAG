@@ -1,0 +1,397 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 13,
+  "qid": null,
+  "question": "What is the birthplace of the person after whom São José dos Campos was named?",
+  "raw_question_item": {
+    "question": "What is the birthplace of the person after whom São José dos Campos was named?",
+    "answer": "Nazareth"
+  },
+  "gold_answer": "Nazareth",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "São José dos Campos",
+          "start_char": 48,
+          "end_char": 67,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "São José dos Campos",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "What is the birthplace of the person after whom São José dos Campos was named?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "São José",
+            "start_char": 48,
+            "end_char": 56,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "São",
+            "start_char": 48,
+            "end_char": 51,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "José",
+            "start_char": 52,
+            "end_char": 56,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Campos",
+            "start_char": 61,
+            "end_char": 67,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the birthplace of the person after whom São José dos Campos was named?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the birthplace of the person after whom ENTITYA was named?",
+      "hanlp_input_sentence": "What is the birthplace of the person after whom ENTITYA was named?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "São José dos Campos",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            48,
+            67
+          ],
+          "masked_char_span": [
+            48,
+            55
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "birthplace",
+        "of",
+        "the",
+        "person",
+        "after",
+        "whom",
+        "ENTITYA",
+        "was",
+        "named",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "birthplace",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "birthplace",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "named",
+          "person",
+          "birthplace"
+        ],
+        "global_rank": [
+          0,
+          3,
+          3,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "12"
+          ],
+          "semantic_nodes": [
+            "birthplace",
+            "person",
+            "ENTITYA",
+            "named"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "12"
+          ],
+          "covered_semantic_nodes": [
+            "birthplace",
+            "person",
+            "ENTITYA",
+            "named"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 3,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            3,
+            3,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "birthplace",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "10",
+              "12",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "named",
+              "person",
+              "birthplace"
+            ],
+            "global_rank": [
+              0,
+              3,
+              3,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "12"
+              ],
+              "semantic_nodes": [
+                "birthplace",
+                "person",
+                "ENTITYA",
+                "named"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "12"
+              ],
+              "covered_semantic_nodes": [
+                "birthplace",
+                "person",
+                "ENTITYA",
+                "named"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 3,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                3,
+                3,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: birthplace[4]/clause_predicate, person[7]/clause_predicate, named[12]/clause_predicate, ENTITYA[10]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "named",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "named",
+          "target": "person",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "person",
+          "target": "birthplace",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "named",
+            "person",
+            "birthplace"
+          ],
+          "node_ids": [
+            "10",
+            "12",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the birthplace of the person after whom São José dos Campos was named?",
+        "explicit_entities": [
+          "São José dos Campos"
+        ],
+        "global_best_paths": [
+          [
+            "São José dos Campos",
+            "named",
+            "person",
+            "birthplace"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "São José dos Campos -> named -> person"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the person after whom São José dos Campos was named?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "person -> birthplace"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the birthplace of q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the person after whom São José dos Campos was named?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the birthplace of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "São José dos Campos -> named -> person"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the person after whom São José dos Campos was named?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "person -> birthplace"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the birthplace of q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}
