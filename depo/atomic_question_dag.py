@@ -5,7 +5,12 @@ import re
 from dataclasses import asdict, dataclass
 from typing import TYPE_CHECKING, Any
 
-from prompts import ATOMIC_QUESTION_DAG_SYSTEM, build_atomic_question_dag_prompt
+from prompts import (
+    ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM,
+    ATOMIC_QUESTION_DAG_SYSTEM,
+    build_atomic_question_dag_no_path_prompt,
+    build_atomic_question_dag_prompt,
+)
 
 if TYPE_CHECKING:
     from llm_client import LLMClient
@@ -100,6 +105,18 @@ class PathAlignedAtomicDAGGenerator:
             global_best_paths=restored_global_best_paths,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
+        return validate_atomic_question_dag(raw_payload)
+
+
+class NoPathAtomicDAGGenerator:
+    """Generate and validate an original-question-only action-trace DAG."""
+
+    def __init__(self, llm_client: "LLMClient") -> None:
+        self.llm_client = llm_client
+
+    def generate(self, *, original_question: str) -> AtomicQuestionDAGResult:
+        user_prompt = build_atomic_question_dag_no_path_prompt(original_question=original_question)
+        raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM, user_prompt)
         return validate_atomic_question_dag(raw_payload)
 
 

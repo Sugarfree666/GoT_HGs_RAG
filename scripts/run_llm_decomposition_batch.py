@@ -19,136 +19,105 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 DIRECT_LLM_DECOMPOSITION_SYSTEM = """
-You are an expert question decomposition module.
+Your task is to convert a complex natural-language question into an Atomic Question DAG.
 
-Your task is to convert a complex question directly into an Atomic Question DAG.
+You are given only:
+* original_question
 
-You are given:
-
-* the original question
-
-Use the original question as the authoritative source of meaning.
-Do not rely on any external knowledge.
-Do not answer the question.
+Do not use external knowledge.
+Do not answer the original question.
+Do not invent entities, relations, constraints, dates, or facts.
 
 Atomic question definition:
-An atomic question asks for one missing answer using one semantic operation. It should be directly answerable once its dependencies are resolved. It must not contain an unresolved nested relation that should be asked first.
+An atomic question asks for one missing answer using one semantic operation.
+It should be directly answerable once its dependencies are resolved.
 
-Core principles:
+Goal:
+Generate a minimal complete DAG of atomic questions.
+The final node should answer the original question.
 
-1. Generate the complete set of atomic questions needed to answer the original question.
-2. Preserve all entities, constraints, comparison conditions, and answer intent from the original question.
-3. Use natural questions, not symbolic triples.
+Rules:
+1. Preserve all entities, relations, constraints, comparisons, superlatives, and answer intent from the original question.
+2. Decompose nested descriptions from inside to outside.
+3. If the original question compares two or more branches, decompose each branch first, then add a final comparison question.
 4. If a question depends on a previous answer, refer to it as q1's answer, q2's answer, etc.
-5. Every dependency mentioned in question text must also appear in depends_on.
-6. Do not answer the questions.
-7. Do not invent entities, relations, dates, or constraints not present in the original question.
-8. Do not leave unresolved placeholders such as ENTITYA or ENTITYB if the original question contains the restored entity names.
-9. Since no token path evidence is provided, set support to null for every node.
-10. Return valid JSON only.
+5. Every qN reference in the question text must appear in depends_on.
+6. Every item in depends_on must be referenced in the question text.
+7. depends_on may only refer to earlier nodes.
+8. Do not create unnecessary helper questions.
+9. If the question does not need decomposition, output a single node.
+10. Output valid JSON only.
 
 Output format:
 {
-"nodes": [
-{
-"id": "q1",
-"question": "atomic question?",
-"depends_on": [],
-"support": null
-}
-]
-}
-
-Example 1 input:
-{
-"original_question": "What nationality is the performer of song When The Stars Go Blue?"
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "atomic question?",
+      "depends_on": []
+    }
+  ]
 }
 
-Example 1 output:
+Example input:
 {
-"nodes": [
-{
-"id": "q1",
-"question": "Who is the performer of When The Stars Go Blue?",
-"depends_on": [],
-"support": null
-},
-{
-"id": "q2",
-"question": "What is the nationality of q1's answer?",
-"depends_on": ["q1"],
-"support": null
-}
-]
+  "original_question": "What nationality is the performer of song When The Stars Go Blue?"
 }
 
-Example 2 input:
+Example output:
 {
-"original_question": "Which country is the composer of film Thunder On The Hill from?"
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who is the performer of When The Stars Go Blue?",
+      "depends_on": []
+    },
+    {
+      "id": "q2",
+      "question": "What is the nationality of q1's answer?",
+      "depends_on": ["q1"]
+    }
+  ]
 }
 
-Example 2 output:
+Example input:
 {
-"nodes": [
-{
-"id": "q1",
-"question": "Who is the composer of Thunder On The Hill?",
-"depends_on": [],
-"support": null
-},
-{
-"id": "q2",
-"question": "Which country is q1's answer from?",
-"depends_on": ["q1"],
-"support": null
-}
-]
+  "original_question": "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
 }
 
-Example 3 input:
+Example output:
 {
-"original_question": "Which film whose director is younger, Dangerously They Live or Salad By The Roots?"
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who is the director of Illusions (1982 Film)?",
+      "depends_on": []
+    },
+    {
+      "id": "q2",
+      "question": "When was q1's answer born?",
+      "depends_on": ["q1"]
+    },
+    {
+      "id": "q3",
+      "question": "Who is the director of It'S A Wonderful Afterlife?",
+      "depends_on": []
+    },
+    {
+      "id": "q4",
+      "question": "When was q3's answer born?",
+      "depends_on": ["q3"]
+    },
+    {
+      "id": "q5",
+      "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
+      "depends_on": ["q2", "q4"]
+    }
+  ]
 }
 
-Example 3 output:
-{
-"nodes": [
-{
-"id": "q1",
-"question": "Who directed Dangerously They Live?",
-"depends_on": [],
-"support": null
-},
-{
-"id": "q2",
-"question": "When was q1's answer born?",
-"depends_on": ["q1"],
-"support": null
-},
-{
-"id": "q3",
-"question": "Who directed Salad By The Roots?",
-"depends_on": [],
-"support": null
-},
-{
-"id": "q4",
-"question": "When was q3's answer born?",
-"depends_on": ["q3"],
-"support": null
-},
-{
-"id": "q5",
-"question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
-"depends_on": ["q2", "q4"],
-"support": null
-}
-]
-}
-
-Now generate the Atomic Question DAG for the given input JSON.
+Now decompose the given original_question.
 Return only the JSON object.
-
 """.strip()
 
 

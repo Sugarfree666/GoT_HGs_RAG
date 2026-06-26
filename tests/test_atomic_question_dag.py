@@ -14,7 +14,9 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from atomic_question_dag import (  # noqa: E402
+    ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM,
     ATOMIC_QUESTION_DAG_SYSTEM,
+    NoPathAtomicDAGGenerator,
     PathAlignedAtomicDAGGenerator,
     restore_entity_paths,
     restore_global_best_path,
@@ -143,6 +145,32 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertFalse(result.valid)
         self.assertEqual(llm.user_prompts, [])
         self.assertIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
+
+    def test_no_path_generator_accepts_original_question_only(self) -> None:
+        llm = RecordingNoPathLLM(_no_path_dependency_payload())
+        result = NoPathAtomicDAGGenerator(llm).generate(
+            original_question="Where was the performer of Song A born?"
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        payload = json.loads(llm.user_prompts[0])
+        self.assertEqual(payload, {"original_question": "Where was the performer of Song A born?"})
+        self.assertNotIn("global_best_paths", llm.user_prompts[0])
+        self.assertNotIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
+
+    def test_no_path_generator_derives_dependencies_from_answer_references(self) -> None:
+        llm = RecordingNoPathLLM(_no_path_dependency_payload())
+        result = NoPathAtomicDAGGenerator(llm).generate(
+            original_question="Where was the performer of Song A born?"
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[1].depends_on, ("q1",))
+        self.assertEqual(result.nodes[2].depends_on, ("q2",))
+        self.assertEqual(
+            [edge.to_dict() for edge in result.edges],
+            [{"source": "q1", "target": "q2"}, {"source": "q2", "target": "q3"}],
+        )
 
     def test_multi_path_cover_is_sent_to_llm(self) -> None:
         llm = RecordingStep5LLM(_parallel_born_later_payload())
@@ -418,6 +446,23 @@ class RecordingStep5LLM:
             raise AssertionError(f"Unexpected Step5 prompt keys: {set(payload)}")
 
 
+class RecordingNoPathLLM:
+    def __init__(self, payload: dict[str, Any]) -> None:
+        self.payload = payload
+        self.system_prompts: list[str] = []
+        self.user_prompts: list[str] = []
+
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, Any]:
+        self.system_prompts.append(system_prompt)
+        self.user_prompts.append(user_prompt)
+        if system_prompt != ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM:
+            raise AssertionError("Unexpected no-path system prompt")
+        payload = json.loads(user_prompt)
+        if set(payload) != {"original_question"}:
+            raise AssertionError(f"Unexpected no-path Step5 prompt keys: {set(payload)}")
+        return self.payload
+
+
 class FullPipelineLLM:
     def __init__(self) -> None:
         self.step5_user_prompt = ""
@@ -503,6 +548,31 @@ def _single_action_payload(question: str = "What is the supported fact?") -> dic
                 "produce": "q1_answer",
                 "question": question,
             }
+        ]
+    }
+
+
+def _no_path_dependency_payload() -> dict[str, Any]:
+    return {
+        "actions": [
+            {
+                "id": "q1",
+                "consume": ["Song A", "performer"],
+                "produce": "q1_answer",
+                "question": "Who is the performer of Song A?",
+            },
+            {
+                "id": "q2",
+                "consume": ["q1_answer", "born"],
+                "produce": "q2_answer",
+                "question": "Where was the performer born?",
+            },
+            {
+                "id": "q3",
+                "consume": ["birthplace"],
+                "produce": "q3_answer",
+                "question": "What country is q2's answer in?",
+            },
         ]
     }
 
