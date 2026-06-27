@@ -1,0 +1,542 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 95,
+  "qid": null,
+  "question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
+  "raw_question_item": {
+    "question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
+    "answer": "Bill Bergen"
+  },
+  "gold_answer": "Bill Bergen",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "MLB MVP",
+          "start_char": 114,
+          "end_char": 121,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "MLB MVP",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "MLB MVP",
+            "start_char": 114,
+            "end_char": 121,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "MLB",
+            "start_char": 114,
+            "end_char": 117,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "MVP",
+            "start_char": 118,
+            "end_char": 121,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Who had the lowest batting average in the league where the team with the most games in the series after which the ENTITYA is awarded played?",
+      "hanlp_input_sentence": "Who had the lowest batting average in the league where the team with the most games in the series after which the ENTITYA is awarded played?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "MLB MVP",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            114,
+            121
+          ],
+          "masked_char_span": [
+            114,
+            121
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "had",
+        "the",
+        "lowest",
+        "batting",
+        "average",
+        "in",
+        "the",
+        "league",
+        "where",
+        "the",
+        "team",
+        "with",
+        "the",
+        "most",
+        "games",
+        "in",
+        "the",
+        "series",
+        "after",
+        "which",
+        "the",
+        "ENTITYA",
+        "is",
+        "awarded",
+        "played",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "which",
+      "answer_anchor_id": "21",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 4,
+        "path_index": 1,
+        "anchor_id": "21",
+        "anchor_text": "which",
+        "source_types": [
+          "wh_anchor"
+        ],
+        "path_id": "A4.P1",
+        "node_ids": [
+          "23",
+          "25",
+          "21",
+          "26",
+          "9",
+          "12",
+          "19"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "awarded",
+          "which",
+          "played",
+          "league",
+          "team",
+          "series"
+        ],
+        "global_rank": [
+          5,
+          2,
+          6,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "12",
+            "15",
+            "16",
+            "19",
+            "23",
+            "25",
+            "26"
+          ],
+          "semantic_nodes": [
+            "lowest",
+            "batting",
+            "average",
+            "league",
+            "team",
+            "most",
+            "games",
+            "series",
+            "ENTITYA",
+            "awarded",
+            "played"
+          ],
+          "covered_semantic_node_ids": [
+            "9",
+            "12",
+            "19",
+            "23",
+            "25",
+            "26"
+          ],
+          "covered_semantic_nodes": [
+            "league",
+            "team",
+            "series",
+            "ENTITYA",
+            "awarded",
+            "played"
+          ],
+          "missing_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "15",
+            "16"
+          ],
+          "missing_semantic_nodes": [
+            "lowest",
+            "batting",
+            "average",
+            "most",
+            "games"
+          ],
+          "missing_semantic_nodes_count": 5,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 6,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            5,
+            2,
+            6,
+            1
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 4,
+            "path_index": 1,
+            "anchor_id": "21",
+            "anchor_text": "which",
+            "source_types": [
+              "wh_anchor"
+            ],
+            "path_id": "A4.P1",
+            "node_ids": [
+              "23",
+              "25",
+              "21",
+              "26",
+              "9",
+              "12",
+              "19"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "awarded",
+              "which",
+              "played",
+              "league",
+              "team",
+              "series"
+            ],
+            "global_rank": [
+              5,
+              2,
+              6,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "12",
+                "15",
+                "16",
+                "19",
+                "23",
+                "25",
+                "26"
+              ],
+              "semantic_nodes": [
+                "lowest",
+                "batting",
+                "average",
+                "league",
+                "team",
+                "most",
+                "games",
+                "series",
+                "ENTITYA",
+                "awarded",
+                "played"
+              ],
+              "covered_semantic_node_ids": [
+                "9",
+                "12",
+                "19",
+                "23",
+                "25",
+                "26"
+              ],
+              "covered_semantic_nodes": [
+                "league",
+                "team",
+                "series",
+                "ENTITYA",
+                "awarded",
+                "played"
+              ],
+              "missing_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "15",
+                "16"
+              ],
+              "missing_semantic_nodes": [
+                "lowest",
+                "batting",
+                "average",
+                "most",
+                "games"
+              ],
+              "missing_semantic_nodes_count": 5,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 6,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                5,
+                2,
+                6,
+                1
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: series[19]/typed_wh_slot+clause_predicate, Who[1]/wh_anchor, where[10]/wh_anchor, which[21]/wh_anchor, lowest[4]/clause_predicate, batting[5]/clause_predicate, average[6]/clause_predicate, league[9]/clause_predicate, team[12]/clause_predicate, most[15]/clause_predicate, games[16]/clause_predicate, awarded[25]/clause_predicate, played[26]/clause_predicate, ENTITYA[23]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "awarded",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "awarded",
+          "target": "which",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "which",
+          "target": "played",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "played",
+          "target": "league",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "league",
+          "target": "team",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "team",
+          "target": "series",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "awarded",
+            "which",
+            "played",
+            "league",
+            "team",
+            "series"
+          ],
+          "node_ids": [
+            "23",
+            "25",
+            "21",
+            "26",
+            "9",
+            "12",
+            "19"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
+        "explicit_entities": [
+          "MLB MVP"
+        ],
+        "global_best_paths": [
+          [
+            "MLB MVP",
+            "awarded",
+            "which",
+            "played",
+            "league",
+            "team",
+            "series"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "MLB MVP",
+            "awarded"
+          ],
+          "produce": "q1_answer",
+          "question": "Which league is the MLB MVP awarded in?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "played",
+            "team",
+            "series"
+          ],
+          "produce": "q2_answer",
+          "question": "What team played in the series in the league where q1's answer is?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "lowest",
+            "batting",
+            "average"
+          ],
+          "produce": "q3_answer",
+          "question": "Who had the lowest batting average in the league where q2's answer played?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Which league is the MLB MVP awarded in?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What team played in the series in the league where q1's answer is?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "Who had the lowest batting average in the league where q2's answer played?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "MLB MVP",
+              "awarded"
+            ],
+            "produce": "q1_answer",
+            "question": "Which league is the MLB MVP awarded in?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "played",
+              "team",
+              "series"
+            ],
+            "produce": "q2_answer",
+            "question": "What team played in the series in the league where q1's answer is?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "lowest",
+              "batting",
+              "average"
+            ],
+            "produce": "q3_answer",
+            "question": "Who had the lowest batting average in the league where q2's answer played?"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 48,
+  "qid": null,
+  "question": "Who stars in the video \"One Last Time\" by the performer of Baby I?",
+  "raw_question_item": {
+    "question": "Who stars in the video \"One Last Time\" by the performer of Baby I?",
+    "answer": "Matt Bennett"
+  },
+  "gold_answer": "Matt Bennett",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "One Last Time",
+          "start_char": 24,
+          "end_char": 37,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Baby I",
+          "start_char": 59,
+          "end_char": 65,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "One Last Time",
+            "type": "Work"
+          },
+          {
+            "surface": "Baby I",
+            "type": "Person"
+          }
+        ],
+        "normalized_question": "Who stars in the video 'One Last Time' by the performer of 'Baby I'?",
+        "normalization_changed": true,
+        "normalization_note": "Added single quotes around titles for clarity.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "One Last Time",
+            "start_char": 24,
+            "end_char": 37,
+            "reason": "quoted complex title/name"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "One",
+            "start_char": 24,
+            "end_char": 27,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Last",
+            "start_char": 28,
+            "end_char": 32,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Time",
+            "start_char": 33,
+            "end_char": 37,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Baby I",
+            "start_char": 59,
+            "end_char": 65,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Baby",
+            "start_char": 59,
+            "end_char": 63,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who stars in the video 'One Last Time' by the performer of 'Baby I'?",
+      "normalization_changed": true,
+      "normalization_note": "Added single quotes around titles for clarity."
+    },
+    "2_entity_masking": {
+      "masked_question": "Who stars in the video 'ENTITYA' by the performer of 'ENTITYB'?",
+      "hanlp_input_sentence": "Who stars in the video 'ENTITYA' by the performer of 'ENTITYB'?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "One Last Time",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            24,
+            37
+          ],
+          "masked_char_span": [
+            24,
+            31
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Baby I",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            59,
+            65
+          ],
+          "masked_char_span": [
+            54,
+            61
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "stars",
+        "in",
+        "the",
+        "video",
+        "'",
+        "ENTITYA",
+        "'",
+        "by",
+        "the",
+        "performer",
+        "of",
+        "'",
+        "ENTITYB",
+        "'",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "Who",
+      "answer_anchor_id": "1",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 4,
+        "path_index": 1,
+        "anchor_id": "1",
+        "anchor_text": "Who",
+        "source_types": [
+          "wh_anchor"
+        ],
+        "path_id": "A4.P1",
+        "node_ids": [
+          "14",
+          "11",
+          "7",
+          "5",
+          "2",
+          "1"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "performer",
+          "ENTITYA",
+          "video",
+          "stars",
+          "Who"
+        ],
+        "global_rank": [
+          0,
+          4,
+          5,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "5",
+            "7",
+            "11",
+            "14"
+          ],
+          "semantic_nodes": [
+            "stars",
+            "video",
+            "ENTITYA",
+            "performer",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "5",
+            "7",
+            "11",
+            "14"
+          ],
+          "covered_semantic_nodes": [
+            "stars",
+            "video",
+            "ENTITYA",
+            "performer",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 1,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 4,
+          "path_length": 5,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            0,
+            4,
+            5,
+            1
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 4,
+            "path_index": 1,
+            "anchor_id": "1",
+            "anchor_text": "Who",
+            "source_types": [
+              "wh_anchor"
+            ],
+            "path_id": "A4.P1",
+            "node_ids": [
+              "14",
+              "11",
+              "7",
+              "5",
+              "2",
+              "1"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "performer",
+              "ENTITYA",
+              "video",
+              "stars",
+              "Who"
+            ],
+            "global_rank": [
+              0,
+              4,
+              5,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "7",
+                "11",
+                "14"
+              ],
+              "semantic_nodes": [
+                "stars",
+                "video",
+                "ENTITYA",
+                "performer",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "5",
+                "7",
+                "11",
+                "14"
+              ],
+              "covered_semantic_nodes": [
+                "stars",
+                "video",
+                "ENTITYA",
+                "performer",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 4,
+              "path_length": 5,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                0,
+                4,
+                5,
+                1
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: video[5]/root_projection+modifier_projection+clause_predicate, performer[11]/modifier_projection+clause_predicate, stars[2]/bare_wh_predicate_root+clause_predicate, Who[1]/wh_anchor, ENTITYA[7]/explicit_entity, ENTITYB[14]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "performer",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "performer",
+          "target": "ENTITYA",
+          "derived": true,
+          "rule": "descriptor_lifting"
+        },
+        {
+          "source": "ENTITYA",
+          "target": "video",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "video",
+          "target": "stars",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "stars",
+          "target": "Who",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "performer",
+            "ENTITYA",
+            "video",
+            "stars",
+            "Who"
+          ],
+          "node_ids": [
+            "14",
+            "11",
+            "7",
+            "5",
+            "2",
+            "1"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who stars in the video \"One Last Time\" by the performer of Baby I?",
+        "explicit_entities": [
+          "One Last Time",
+          "Baby I"
+        ],
+        "global_best_paths": [
+          [
+            "Baby I",
+            "performer",
+            "One Last Time",
+            "video",
+            "stars",
+            "Who"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Baby I",
+            "performer"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the performer of the video \"One Last Time\"?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "One Last Time",
+            "video",
+            "stars",
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "Who stars in the video \"One Last Time\" by q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the performer of the video \"One Last Time\"?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Who stars in the video \"One Last Time\" by q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Baby I",
+              "performer"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the performer of the video \"One Last Time\"?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "One Last Time",
+              "video",
+              "stars",
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "Who stars in the video \"One Last Time\" by q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

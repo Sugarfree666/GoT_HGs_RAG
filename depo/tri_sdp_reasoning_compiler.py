@@ -39,6 +39,7 @@ NUMERIC_RE = re.compile(r"^[+-]?(?:\d[\d,]*(?:\.\d+)?|\d{1,4}(?:[-/]\d{1,2}){1,2
 
 DETERMINERS = {"a", "an", "the"}
 WH_WORDS = {"what", "which", "who", "whom", "whose", "where", "when"}
+WH_ANCHOR_WORDS = {"who", "whom", "whose", "what", "which", "when", "where", "why", "how"}
 RELATIVE_PRONOUNS = {"that"}
 LIGHT_VERBS = {
     "is",
@@ -87,12 +88,13 @@ APPROX_CUES = {"approximately", "about", "around", "roughly"}
 
 ANSWER_ANCHOR_SOURCE_ORDER = {
     "typed_wh_slot": 0,
-    "root_projection": 1,
-    "modifier_projection": 2,
-    "comparative_focus": 3,
-    "bare_wh_predicate_root": 4,
-    "explicit_entity": 5,
-    "clause_predicate": 6,
+    "wh_anchor": 1,
+    "root_projection": 2,
+    "modifier_projection": 3,
+    "comparative_focus": 4,
+    "bare_wh_predicate_root": 5,
+    "explicit_entity": 6,
+    "clause_predicate": 7,
 }
 
 
@@ -671,6 +673,7 @@ def collect_answer_anchor_candidates(
     candidates: list[_AnswerAnchorCandidate] = []
 
     candidates.extend(_find_typed_wh_slot_candidates(nodes, raw_edges))
+    candidates.extend(_find_wh_anchor_candidates(nodes))
     if query_root:
         candidates.extend(_collect_root_projection_candidates(nodes, raw_edges, query_root))
         candidates.extend(_find_modifier_projection_candidates(nodes, raw_edges, query_root))
@@ -755,6 +758,30 @@ def _find_typed_wh_slot_candidates(
             )
         )
     return _merge_answer_anchor_candidates(nodes, candidates)
+
+
+def _find_wh_anchor_candidates(
+    nodes: dict[str, TokenReasoningNode],
+) -> list[_AnswerAnchorCandidate]:
+    candidates: list[_AnswerAnchorCandidate] = []
+    for node in _sorted_nodes(nodes.values()):
+        if node.id == "0" or node.text.lower() not in WH_ANCHOR_WORDS:
+            continue
+        candidates.append(
+            _answer_anchor_candidate(
+                nodes,
+                node.id,
+                "wh_anchor",
+                {
+                    "rule": "wh_token_anchor",
+                    "wh_id": node.id,
+                    "wh": node.text,
+                    "support": 1.0,
+                },
+                1.0,
+            )
+        )
+    return candidates
 
 
 def _find_typed_wh_slot(
@@ -1264,6 +1291,7 @@ def _score_answer_anchor_candidate(
     }.get(node.kind, 1.0)
     anchor_source_weights = {
         "typed_wh_slot": 16.0,
+        "wh_anchor": 15.0,
         "root_projection": 14.0,
         "modifier_projection": 12.0,
         "comparative_focus": 10.0,
@@ -2512,7 +2540,7 @@ def _collect_question_semantic_node_ids(
     for entity_id in explicit_entity_ids:
         add(entity_id, force=True)
     for node_id in focus_node_ids:
-        add(node_id)
+        add(node_id, force=_is_possessive_wh_anchor_node(state.nodes.get(node_id or "")))
 
     for edge in state.edges.values():
         if _normalize_edge_quality(edge.edge_quality) != "STRONG":
@@ -2544,6 +2572,12 @@ def _is_semantic_node_candidate(node: TokenReasoningNode) -> bool:
     if _is_punctuation(node.text):
         return False
     return node.kind in {"entity", "content", "constraint", "answer"}
+
+
+def _is_possessive_wh_anchor_node(node: TokenReasoningNode | None) -> bool:
+    if node is None or node.id == "0":
+        return False
+    return node.text.lower() == "whose"
 
 
 def _edge_has_core_semantic_evidence(edge: TokenReasoningEdge) -> bool:
@@ -2776,6 +2810,8 @@ def _enumerate_entity_focus_paths(
             top_k=12,
         )
         for path in raw_paths:
+            if _path_should_start_from_wh_anchor(state.nodes, path, target_id):
+                path = list(reversed(path))
             key = tuple(path)
             if key in seen_paths:
                 continue
@@ -2794,6 +2830,16 @@ def _enumerate_entity_focus_paths(
             )
     candidates.sort(key=lambda record: record.rank)
     return candidates[:12]
+
+
+def _path_should_start_from_wh_anchor(
+    nodes: dict[str, TokenReasoningNode],
+    path: list[str],
+    target_id: str,
+) -> bool:
+    if len(path) < 2 or not path or path[-1] != target_id or target_id not in nodes:
+        return False
+    return nodes[target_id].text.lower() == "whose"
 
 
 def _bounded_k_simple_paths(

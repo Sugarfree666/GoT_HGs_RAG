@@ -1,0 +1,587 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 74,
+  "qid": null,
+  "question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+  "raw_question_item": {
+    "question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+    "answer": "\"Southern Capital\""
+  },
+  "gold_answer": "\"Southern Capital\"",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Yongle",
+          "start_char": 54,
+          "end_char": 60,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Yongle",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Yongle",
+            "start_char": 54,
+            "end_char": 60,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the meaning of the name of the city where the ENTITYA emperor greeted the person to whom the edict was addressed?",
+      "hanlp_input_sentence": "What is the meaning of the name of the city where the ENTITYA emperor greeted the person to whom the edict was addressed?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Yongle",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            54,
+            60
+          ],
+          "masked_char_span": [
+            54,
+            61
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "meaning",
+        "of",
+        "the",
+        "name",
+        "of",
+        "the",
+        "city",
+        "where",
+        "the",
+        "ENTITYA",
+        "emperor",
+        "greeted",
+        "the",
+        "person",
+        "to",
+        "whom",
+        "the",
+        "edict",
+        "was",
+        "addressed",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "meaning",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 4,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "meaning",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A4.P1",
+        "node_ids": [
+          "13",
+          "14",
+          "15",
+          "23",
+          "21",
+          "17",
+          "10",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "emperor",
+          "greeted",
+          "addressed",
+          "edict",
+          "person",
+          "city",
+          "name",
+          "meaning"
+        ],
+        "global_rank": [
+          0,
+          6,
+          8,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "14",
+            "15",
+            "17",
+            "21",
+            "23"
+          ],
+          "semantic_nodes": [
+            "meaning",
+            "name",
+            "city",
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "person",
+            "edict",
+            "addressed"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "14",
+            "15",
+            "17",
+            "21",
+            "23"
+          ],
+          "covered_semantic_nodes": [
+            "meaning",
+            "name",
+            "city",
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "person",
+            "edict",
+            "addressed"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 6,
+          "dirty_path_count": 6,
+          "path_length": 8,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            0,
+            6,
+            8,
+            7
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 4,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "meaning",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A4.P1",
+            "node_ids": [
+              "13",
+              "14",
+              "15",
+              "23",
+              "21",
+              "17",
+              "10",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "emperor",
+              "greeted",
+              "addressed",
+              "edict",
+              "person",
+              "city",
+              "name",
+              "meaning"
+            ],
+            "global_rank": [
+              0,
+              6,
+              8,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "14",
+                "15",
+                "17",
+                "21",
+                "23"
+              ],
+              "semantic_nodes": [
+                "meaning",
+                "name",
+                "city",
+                "ENTITYA",
+                "emperor",
+                "greeted",
+                "person",
+                "edict",
+                "addressed"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "14",
+                "15",
+                "17",
+                "21",
+                "23"
+              ],
+              "covered_semantic_nodes": [
+                "meaning",
+                "name",
+                "city",
+                "ENTITYA",
+                "emperor",
+                "greeted",
+                "person",
+                "edict",
+                "addressed"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 6,
+              "dirty_path_count": 6,
+              "path_length": 8,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                0,
+                6,
+                8,
+                7
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: What[1]/wh_anchor, where[11]/wh_anchor, whom[19]/wh_anchor, meaning[4]/clause_predicate, name[7]/clause_predicate, city[10]/clause_predicate, emperor[14]/clause_predicate, greeted[15]/clause_predicate, person[17]/clause_predicate, edict[21]/clause_predicate, addressed[23]/clause_predicate, ENTITYA[13]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "emperor",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "emperor",
+          "target": "greeted",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "greeted",
+          "target": "addressed",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "addressed",
+          "target": "edict",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "edict",
+          "target": "person",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "person",
+          "target": "city",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "city",
+          "target": "name",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "name",
+          "target": "meaning",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "addressed",
+            "edict",
+            "person",
+            "city",
+            "name",
+            "meaning"
+          ],
+          "node_ids": [
+            "13",
+            "14",
+            "15",
+            "23",
+            "21",
+            "17",
+            "10",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+        "explicit_entities": [
+          "Yongle"
+        ],
+        "global_best_paths": [
+          [
+            "Yongle",
+            "emperor",
+            "greeted",
+            "addressed",
+            "edict",
+            "person",
+            "city",
+            "name",
+            "meaning"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Yongle",
+            "emperor",
+            "greeted",
+            "person"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the person that the Yongle emperor greeted?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "addressed",
+            "edict"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the edict addressed to q1's answer?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "city"
+          ],
+          "produce": "q3_answer",
+          "question": "What city is associated with q2's answer?"
+        },
+        {
+          "id": "q4",
+          "consume": [
+            "q3_answer",
+            "name"
+          ],
+          "produce": "q4_answer",
+          "question": "What is the name of q3's answer?"
+        },
+        {
+          "id": "q5",
+          "consume": [
+            "q4_answer",
+            "meaning"
+          ],
+          "produce": "q5_answer",
+          "question": "What is the meaning of the name q4's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the person that the Yongle emperor greeted?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the edict addressed to q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What city is associated with q2's answer?",
+          "depends_on": [
+            "q2"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What is the name of q3's answer?",
+          "depends_on": [
+            "q3"
+          ]
+        },
+        {
+          "id": "q5",
+          "question": "What is the meaning of the name q4's answer?",
+          "depends_on": [
+            "q4"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        },
+        {
+          "source": "q4",
+          "target": "q5"
+        }
+      ],
+      "leaf_node_ids": [
+        "q5"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Yongle",
+              "emperor",
+              "greeted",
+              "person"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the person that the Yongle emperor greeted?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "addressed",
+              "edict"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the edict addressed to q1's answer?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "city"
+            ],
+            "produce": "q3_answer",
+            "question": "What city is associated with q2's answer?"
+          },
+          {
+            "id": "q4",
+            "consume": [
+              "q3_answer",
+              "name"
+            ],
+            "produce": "q4_answer",
+            "question": "What is the name of q3's answer?"
+          },
+          {
+            "id": "q5",
+            "consume": [
+              "q4_answer",
+              "meaning"
+            ],
+            "produce": "q5_answer",
+            "question": "What is the meaning of the name q4's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

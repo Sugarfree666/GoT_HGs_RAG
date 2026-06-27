@@ -1,0 +1,659 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 47,
+  "qid": null,
+  "question": "what is meaning of the word that is a majority religion of the area that became India when the country origin of Mizraab was created in Arabic dictionary?",
+  "raw_question_item": {
+    "question": "what is meaning of the word that is a majority religion of the area that became India when the country origin of Mizraab was created in Arabic dictionary?",
+    "answer": "the country of India"
+  },
+  "gold_answer": "the country of India",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "India",
+          "start_char": 80,
+          "end_char": 85,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Mizraab",
+          "start_char": 113,
+          "end_char": 120,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Arabic",
+          "start_char": 136,
+          "end_char": 142,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "India",
+            "type": "Location"
+          },
+          {
+            "surface": "Mizraab",
+            "type": "Other"
+          },
+          {
+            "surface": "Arabic",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What is the meaning of the word that is a majority religion of the area that became India when the country of Mizraab was created in the Arabic dictionary?",
+        "normalization_changed": true,
+        "normalization_note": "Added 'the' before 'country of Mizraab' for grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "India",
+            "start_char": 80,
+            "end_char": 85,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Mizraab",
+            "start_char": 113,
+            "end_char": 120,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Arabic",
+            "start_char": 136,
+            "end_char": 142,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the meaning of the word that is a majority religion of the area that became India when the country of Mizraab was created in the Arabic dictionary?",
+      "normalization_changed": true,
+      "normalization_note": "Added 'the' before 'country of Mizraab' for grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the meaning of the word that is a majority religion of the area that became ENTITYA when the country of ENTITYB was created in the ENTITYC dictionary?",
+      "hanlp_input_sentence": "What is the meaning of the word that is a majority religion of the area that became ENTITYA when the country of ENTITYB was created in the ENTITYC dictionary?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "India",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            80,
+            85
+          ],
+          "masked_char_span": [
+            84,
+            91
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Mizraab",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            113,
+            120
+          ],
+          "masked_char_span": [
+            112,
+            119
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYC",
+          "original_text": "Arabic",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            136,
+            142
+          ],
+          "masked_char_span": [
+            139,
+            146
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "meaning",
+        "of",
+        "the",
+        "word",
+        "that",
+        "is",
+        "a",
+        "majority",
+        "religion",
+        "of",
+        "the",
+        "area",
+        "that",
+        "became",
+        "ENTITYA",
+        "when",
+        "the",
+        "country",
+        "of",
+        "ENTITYB",
+        "was",
+        "created",
+        "in",
+        "the",
+        "ENTITYC",
+        "dictionary",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "meaning",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYC"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 5,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "meaning",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A5.P1",
+        "node_ids": [
+          "28",
+          "29",
+          "25",
+          "17",
+          "12",
+          "11",
+          "15",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYC",
+          "dictionary",
+          "created",
+          "became",
+          "religion",
+          "majority",
+          "area",
+          "word",
+          "meaning"
+        ],
+        "global_rank": [
+          3,
+          5,
+          8,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "11",
+            "12",
+            "15",
+            "17",
+            "18",
+            "21",
+            "23",
+            "25",
+            "28",
+            "29"
+          ],
+          "semantic_nodes": [
+            "meaning",
+            "word",
+            "majority",
+            "religion",
+            "area",
+            "became",
+            "ENTITYA",
+            "country",
+            "ENTITYB",
+            "created",
+            "ENTITYC",
+            "dictionary"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "11",
+            "12",
+            "15",
+            "17",
+            "25",
+            "28",
+            "29"
+          ],
+          "covered_semantic_nodes": [
+            "meaning",
+            "word",
+            "majority",
+            "religion",
+            "area",
+            "became",
+            "created",
+            "ENTITYC",
+            "dictionary"
+          ],
+          "missing_semantic_node_ids": [
+            "18",
+            "21",
+            "23"
+          ],
+          "missing_semantic_nodes": [
+            "ENTITYA",
+            "country",
+            "ENTITYB"
+          ],
+          "missing_semantic_nodes_count": 3,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 5,
+          "dirty_path_count": 5,
+          "path_length": 8,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            3,
+            5,
+            8,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 5,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "meaning",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A5.P1",
+            "node_ids": [
+              "28",
+              "29",
+              "25",
+              "17",
+              "12",
+              "11",
+              "15",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYC",
+              "dictionary",
+              "created",
+              "became",
+              "religion",
+              "majority",
+              "area",
+              "word",
+              "meaning"
+            ],
+            "global_rank": [
+              3,
+              5,
+              8,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "11",
+                "12",
+                "15",
+                "17",
+                "18",
+                "21",
+                "23",
+                "25",
+                "28",
+                "29"
+              ],
+              "semantic_nodes": [
+                "meaning",
+                "word",
+                "majority",
+                "religion",
+                "area",
+                "became",
+                "ENTITYA",
+                "country",
+                "ENTITYB",
+                "created",
+                "ENTITYC",
+                "dictionary"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "11",
+                "12",
+                "15",
+                "17",
+                "25",
+                "28",
+                "29"
+              ],
+              "covered_semantic_nodes": [
+                "meaning",
+                "word",
+                "majority",
+                "religion",
+                "area",
+                "became",
+                "created",
+                "ENTITYC",
+                "dictionary"
+              ],
+              "missing_semantic_node_ids": [
+                "18",
+                "21",
+                "23"
+              ],
+              "missing_semantic_nodes": [
+                "ENTITYA",
+                "country",
+                "ENTITYB"
+              ],
+              "missing_semantic_nodes_count": 3,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 5,
+              "dirty_path_count": 5,
+              "path_length": 8,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                3,
+                5,
+                8,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: word[7]/root_projection+modifier_projection+clause_predicate, became[17]/bare_wh_predicate_root+clause_predicate, What[1]/wh_anchor, when[19]/wh_anchor, meaning[4]/clause_predicate, majority[11]/clause_predicate, religion[12]/clause_predicate, area[15]/clause_predicate, country[21]/clause_predicate, created[25]/clause_predicate, dictionary[29]/clause_predicate, ENTITYA[18]/explicit_entity, ENTITYB[23]/explicit_entity, ENTITYC[28]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYC",
+          "target": "dictionary",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "dictionary",
+          "target": "created",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "created",
+          "target": "became",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "became",
+          "target": "religion",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "religion",
+          "target": "majority",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "majority",
+          "target": "area",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "area",
+          "target": "word",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "word",
+          "target": "meaning",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYC",
+            "dictionary",
+            "created",
+            "became",
+            "religion",
+            "majority",
+            "area",
+            "word",
+            "meaning"
+          ],
+          "node_ids": [
+            "28",
+            "29",
+            "25",
+            "17",
+            "12",
+            "11",
+            "15",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "what is meaning of the word that is a majority religion of the area that became India when the country origin of Mizraab was created in Arabic dictionary?",
+        "explicit_entities": [
+          "India",
+          "Mizraab",
+          "Arabic"
+        ],
+        "global_best_paths": [
+          [
+            "Arabic",
+            "dictionary",
+            "created",
+            "became",
+            "religion",
+            "majority",
+            "area",
+            "word",
+            "meaning"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "area",
+            "became",
+            "India"
+          ],
+          "produce": "q1_answer",
+          "question": "What area became India?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "majority",
+            "religion"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the majority religion of q1's answer?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "Arabic",
+            "dictionary",
+            "created"
+          ],
+          "produce": "q3_answer",
+          "question": "What was created in the Arabic dictionary?"
+        },
+        {
+          "id": "q4",
+          "consume": [
+            "q2_answer",
+            "word",
+            "meaning"
+          ],
+          "produce": "q4_answer",
+          "question": "What is the meaning of the word that is the majority religion of q2's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What area became India?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the majority religion of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What was created in the Arabic dictionary?",
+          "depends_on": []
+        },
+        {
+          "id": "q4",
+          "question": "What is the meaning of the word that is the majority religion of q2's answer?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q4"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3",
+        "q4"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "area",
+              "became",
+              "India"
+            ],
+            "produce": "q1_answer",
+            "question": "What area became India?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "majority",
+              "religion"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the majority religion of q1's answer?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "Arabic",
+              "dictionary",
+              "created"
+            ],
+            "produce": "q3_answer",
+            "question": "What was created in the Arabic dictionary?"
+          },
+          {
+            "id": "q4",
+            "consume": [
+              "q2_answer",
+              "word",
+              "meaning"
+            ],
+            "produce": "q4_answer",
+            "question": "What is the meaning of the word that is the majority religion of q2's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

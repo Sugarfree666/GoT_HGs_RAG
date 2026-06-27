@@ -1,0 +1,623 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 29,
+  "qid": null,
+  "question": "Where did the arguer that the country Directive 10/2 called for actions against had become an imperialist power declare he would intervene in the Korean conflict?",
+  "raw_question_item": {
+    "question": "Where did the arguer that the country Directive 10/2 called for actions against had become an imperialist power declare he would intervene in the Korean conflict?",
+    "answer": "the Politburo"
+  },
+  "gold_answer": "the Politburo",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Directive 10/2",
+          "start_char": 38,
+          "end_char": 52,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Korean",
+          "start_char": 146,
+          "end_char": 152,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Directive 10/2",
+            "type": "Other"
+          },
+          {
+            "surface": "Korean",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "Where did the arguer that the country Directive 10/2 called for actions against had become an imperialist power declare he would intervene in the Korean conflict?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Directive",
+            "start_char": 38,
+            "end_char": 47,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Korean",
+            "start_char": 146,
+            "end_char": 152,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Where did the arguer that the country Directive 10/2 called for actions against had become an imperialist power declare he would intervene in the Korean conflict?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Where did the arguer that the country ENTITYA called for actions against had become an imperialist power declare he would intervene in the ENTITYB conflict?",
+      "hanlp_input_sentence": "Where did the arguer that the country ENTITYA called for actions against had become an imperialist power declare he would intervene in the ENTITYB conflict?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Directive 10/2",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            38,
+            52
+          ],
+          "masked_char_span": [
+            38,
+            45
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Korean",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            146,
+            152
+          ],
+          "masked_char_span": [
+            139,
+            146
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Where",
+        "did",
+        "the",
+        "arguer",
+        "that",
+        "the",
+        "country",
+        "ENTITYA",
+        "called",
+        "for",
+        "actions",
+        "against",
+        "had",
+        "become",
+        "an",
+        "imperialist",
+        "power",
+        "declare",
+        "he",
+        "would",
+        "intervene",
+        "in",
+        "the",
+        "ENTITYB",
+        "conflict",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "actions",
+      "answer_anchor_id": "11",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 10,
+        "path_index": 1,
+        "anchor_id": "11",
+        "anchor_text": "actions",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A10.P1",
+        "node_ids": [
+          "24",
+          "25",
+          "21",
+          "20",
+          "18",
+          "14",
+          "4",
+          "9",
+          "7",
+          "12",
+          "11"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "conflict",
+          "intervene",
+          "would",
+          "declare",
+          "become",
+          "arguer",
+          "called",
+          "country",
+          "against",
+          "actions"
+        ],
+        "global_rank": [
+          4,
+          2,
+          10,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "9",
+            "11",
+            "12",
+            "14",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "24",
+            "25"
+          ],
+          "semantic_nodes": [
+            "arguer",
+            "country",
+            "ENTITYA",
+            "called",
+            "actions",
+            "against",
+            "become",
+            "imperialist",
+            "power",
+            "declare",
+            "he",
+            "would",
+            "intervene",
+            "ENTITYB",
+            "conflict"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "9",
+            "11",
+            "12",
+            "14",
+            "18",
+            "20",
+            "21",
+            "24",
+            "25"
+          ],
+          "covered_semantic_nodes": [
+            "arguer",
+            "country",
+            "called",
+            "actions",
+            "against",
+            "become",
+            "declare",
+            "would",
+            "intervene",
+            "ENTITYB",
+            "conflict"
+          ],
+          "missing_semantic_node_ids": [
+            "8",
+            "16",
+            "17",
+            "19"
+          ],
+          "missing_semantic_nodes": [
+            "ENTITYA",
+            "imperialist",
+            "power",
+            "he"
+          ],
+          "missing_semantic_nodes_count": 4,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 10,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            4,
+            2,
+            10,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 10,
+            "path_index": 1,
+            "anchor_id": "11",
+            "anchor_text": "actions",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A10.P1",
+            "node_ids": [
+              "24",
+              "25",
+              "21",
+              "20",
+              "18",
+              "14",
+              "4",
+              "9",
+              "7",
+              "12",
+              "11"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "conflict",
+              "intervene",
+              "would",
+              "declare",
+              "become",
+              "arguer",
+              "called",
+              "country",
+              "against",
+              "actions"
+            ],
+            "global_rank": [
+              4,
+              2,
+              10,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "9",
+                "11",
+                "12",
+                "14",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "24",
+                "25"
+              ],
+              "semantic_nodes": [
+                "arguer",
+                "country",
+                "ENTITYA",
+                "called",
+                "actions",
+                "against",
+                "become",
+                "imperialist",
+                "power",
+                "declare",
+                "he",
+                "would",
+                "intervene",
+                "ENTITYB",
+                "conflict"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "9",
+                "11",
+                "12",
+                "14",
+                "18",
+                "20",
+                "21",
+                "24",
+                "25"
+              ],
+              "covered_semantic_nodes": [
+                "arguer",
+                "country",
+                "called",
+                "actions",
+                "against",
+                "become",
+                "declare",
+                "would",
+                "intervene",
+                "ENTITYB",
+                "conflict"
+              ],
+              "missing_semantic_node_ids": [
+                "8",
+                "16",
+                "17",
+                "19"
+              ],
+              "missing_semantic_nodes": [
+                "ENTITYA",
+                "imperialist",
+                "power",
+                "he"
+              ],
+              "missing_semantic_nodes_count": 4,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 10,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                4,
+                2,
+                10,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: would[20]/root_projection+modifier_projection+clause_predicate, intervene[21]/root_projection+modifier_projection+clause_predicate, become[14]/modifier_projection+clause_predicate, he[19]/modifier_projection+clause_predicate, conflict[25]/modifier_projection+clause_predicate, Where[1]/wh_anchor, arguer[4]/clause_predicate, country[7]/clause_predicate, called[9]/clause_predicate, actions[11]/clause_predicate, against[12]/clause_predicate, imperialist[16]/clause_predicate, power[17]/clause_predicate, declare[18]/clause_predicate, ENTITYA[8]/explicit_entity, ENTITYB[24]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "conflict",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "conflict",
+          "target": "intervene",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "intervene",
+          "target": "would",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "would",
+          "target": "declare",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "declare",
+          "target": "become",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "become",
+          "target": "arguer",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "arguer",
+          "target": "called",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "called",
+          "target": "country",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "country",
+          "target": "against",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "against",
+          "target": "actions",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "conflict",
+            "intervene",
+            "would",
+            "declare",
+            "become",
+            "arguer",
+            "called",
+            "country",
+            "against",
+            "actions"
+          ],
+          "node_ids": [
+            "24",
+            "25",
+            "21",
+            "20",
+            "18",
+            "14",
+            "4",
+            "9",
+            "7",
+            "12",
+            "11"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Where did the arguer that the country Directive 10/2 called for actions against had become an imperialist power declare he would intervene in the Korean conflict?",
+        "explicit_entities": [
+          "Directive 10/2",
+          "Korean"
+        ],
+        "global_best_paths": [
+          [
+            "Korean",
+            "conflict",
+            "intervene",
+            "would",
+            "declare",
+            "become",
+            "arguer",
+            "called",
+            "country",
+            "against",
+            "actions"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "arguer",
+            "called",
+            "country",
+            "against",
+            "actions"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the arguer that the country Directive 10/2 called for actions against?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "Korean",
+            "conflict",
+            "intervene",
+            "would",
+            "declare",
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "Where did q1's answer declare he would intervene in the Korean conflict?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the arguer that the country Directive 10/2 called for actions against?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Where did q1's answer declare he would intervene in the Korean conflict?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "arguer",
+              "called",
+              "country",
+              "against",
+              "actions"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the arguer that the country Directive 10/2 called for actions against?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "Korean",
+              "conflict",
+              "intervene",
+              "would",
+              "declare",
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "Where did q1's answer declare he would intervene in the Korean conflict?"
+          }
+        ]
+      }
+    }
+  }
+}

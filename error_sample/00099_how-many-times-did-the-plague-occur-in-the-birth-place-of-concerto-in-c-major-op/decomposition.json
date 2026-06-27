@@ -1,0 +1,595 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 99,
+  "qid": null,
+  "question": "How many times did the plague occur in the birth place of Concerto in C Major Op 3 6's composer?",
+  "raw_question_item": {
+    "question": "How many times did the plague occur in the birth place of Concerto in C Major Op 3 6's composer?",
+    "answer": "22"
+  },
+  "gold_answer": "22",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Concerto",
+          "start_char": 58,
+          "end_char": 66,
+          "semantic_type_hint": "Location",
+          "confidence": 0.5,
+          "reason": "single-token proper-name candidate"
+        },
+        {
+          "text": "C Major Op",
+          "start_char": 70,
+          "end_char": 80,
+          "semantic_type_hint": "Location",
+          "confidence": 0.55,
+          "reason": "continuous multi-word named entity"
+        }
+      ],
+      "warnings": [
+        "LLM returned no verified explicit entities; using deterministic candidates.",
+        "Dropped overlapping non-minimal entity span text='Op'.",
+        "Dropped overlapping non-minimal entity span text='Major'."
+      ],
+      "raw_payload": {
+        "explicit_entities": [],
+        "normalized_question": "How many times did the plague occur in the birthplace of the composer of Concerto in C Major Op 3 6?",
+        "normalization_changed": true,
+        "normalization_note": "Corrected 'birth place' to 'birthplace' for grammatical accuracy.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Concerto",
+            "start_char": 58,
+            "end_char": 66,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "C Major Op",
+            "start_char": 70,
+            "end_char": 80,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Major",
+            "start_char": 72,
+            "end_char": 77,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Op",
+            "start_char": 78,
+            "end_char": 80,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "How many times did the plague occur in the birthplace of the composer of Concerto in C Major Op 3 6?",
+      "normalization_changed": true,
+      "normalization_note": "Corrected 'birth place' to 'birthplace' for grammatical accuracy."
+    },
+    "2_entity_masking": {
+      "masked_question": "How many times did the plague occur in the birthplace of the composer of ENTITYA in ENTITYB 3 6?",
+      "hanlp_input_sentence": "How many times did the plague occur in the birthplace of the composer of ENTITYA in ENTITYB 3 6?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Concerto",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            58,
+            66
+          ],
+          "masked_char_span": [
+            73,
+            80
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "C Major Op",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            70,
+            80
+          ],
+          "masked_char_span": [
+            84,
+            91
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": [
+        "LLM returned no verified explicit entities; using deterministic candidates.",
+        "Dropped overlapping non-minimal entity span text='Op'.",
+        "Dropped overlapping non-minimal entity span text='Major'."
+      ]
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "How",
+        "many",
+        "times",
+        "did",
+        "the",
+        "plague",
+        "occur",
+        "in",
+        "the",
+        "birthplace",
+        "of",
+        "the",
+        "composer",
+        "of",
+        "ENTITYA",
+        "in",
+        "ENTITYB",
+        "3",
+        "6",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "How",
+      "answer_anchor_id": "1",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "numeric",
+          "text": "3",
+          "node_id": "18",
+          "target": "6",
+          "target_id": "19"
+        },
+        {
+          "type": "numeric",
+          "text": "6",
+          "node_id": "19",
+          "target": "3",
+          "target_id": "18"
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "1",
+        "anchor_text": "How",
+        "source_types": [
+          "wh_anchor",
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "17",
+          "15",
+          "13",
+          "10",
+          "7",
+          "2",
+          "3",
+          "1"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "ENTITYA",
+          "composer",
+          "birthplace",
+          "occur",
+          "many",
+          "times",
+          "How"
+        ],
+        "global_rank": [
+          3,
+          6,
+          7,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "7",
+            "10",
+            "13",
+            "15",
+            "17",
+            "18",
+            "19"
+          ],
+          "semantic_nodes": [
+            "How",
+            "many",
+            "times",
+            "plague",
+            "occur",
+            "birthplace",
+            "composer",
+            "ENTITYA",
+            "ENTITYB",
+            "3",
+            "6"
+          ],
+          "covered_semantic_node_ids": [
+            "1",
+            "2",
+            "3",
+            "7",
+            "10",
+            "13",
+            "15",
+            "17"
+          ],
+          "covered_semantic_nodes": [
+            "How",
+            "many",
+            "times",
+            "occur",
+            "birthplace",
+            "composer",
+            "ENTITYA",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "6",
+            "18",
+            "19"
+          ],
+          "missing_semantic_nodes": [
+            "plague",
+            "3",
+            "6"
+          ],
+          "missing_semantic_nodes_count": 3,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 6,
+          "dirty_path_count": 6,
+          "path_length": 7,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            3,
+            6,
+            7,
+            1
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "1",
+            "anchor_text": "How",
+            "source_types": [
+              "wh_anchor",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "17",
+              "15",
+              "13",
+              "10",
+              "7",
+              "2",
+              "3",
+              "1"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "ENTITYA",
+              "composer",
+              "birthplace",
+              "occur",
+              "many",
+              "times",
+              "How"
+            ],
+            "global_rank": [
+              3,
+              6,
+              7,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "7",
+                "10",
+                "13",
+                "15",
+                "17",
+                "18",
+                "19"
+              ],
+              "semantic_nodes": [
+                "How",
+                "many",
+                "times",
+                "plague",
+                "occur",
+                "birthplace",
+                "composer",
+                "ENTITYA",
+                "ENTITYB",
+                "3",
+                "6"
+              ],
+              "covered_semantic_node_ids": [
+                "1",
+                "2",
+                "3",
+                "7",
+                "10",
+                "13",
+                "15",
+                "17"
+              ],
+              "covered_semantic_nodes": [
+                "How",
+                "many",
+                "times",
+                "occur",
+                "birthplace",
+                "composer",
+                "ENTITYA",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "6",
+                "18",
+                "19"
+              ],
+              "missing_semantic_nodes": [
+                "plague",
+                "3",
+                "6"
+              ],
+              "missing_semantic_nodes_count": 3,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 6,
+              "dirty_path_count": 6,
+              "path_length": 7,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                3,
+                6,
+                7,
+                1
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: How[1]/wh_anchor+modifier_projection+clause_predicate, birthplace[10]/root_projection+modifier_projection+clause_predicate, many[2]/modifier_projection+clause_predicate, times[3]/modifier_projection+clause_predicate, composer[13]/modifier_projection+clause_predicate, plague[6]/clause_predicate, occur[7]/clause_predicate, 3[18]/clause_predicate, 6[19]/clause_predicate, ENTITYA[15]/explicit_entity, ENTITYB[17]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "ENTITYA",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "ENTITYA",
+          "target": "composer",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "composer",
+          "target": "birthplace",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "birthplace",
+          "target": "occur",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "occur",
+          "target": "many",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "many",
+          "target": "times",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "times",
+          "target": "How",
+          "derived": true,
+          "rule": "restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "ENTITYA",
+            "composer",
+            "birthplace",
+            "occur",
+            "many",
+            "times",
+            "How"
+          ],
+          "node_ids": [
+            "17",
+            "15",
+            "13",
+            "10",
+            "7",
+            "2",
+            "3",
+            "1"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "How many times did the plague occur in the birth place of Concerto in C Major Op 3 6's composer?",
+        "explicit_entities": [
+          "Concerto",
+          "C Major Op"
+        ],
+        "global_best_paths": [
+          [
+            "C Major Op",
+            "Concerto",
+            "composer",
+            "birthplace",
+            "occur",
+            "many",
+            "times",
+            "How"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "C Major Op",
+            "Concerto",
+            "composer"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the composer of Concerto in C Major Op?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "birthplace"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the birthplace of q1's answer?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "occur"
+          ],
+          "produce": "q3_answer",
+          "question": "How many times did the plague occur in q2's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the composer of Concerto in C Major Op?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the birthplace of q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "How many times did the plague occur in q2's answer?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "C Major Op",
+              "Concerto",
+              "composer"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the composer of Concerto in C Major Op?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "birthplace"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the birthplace of q1's answer?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "occur"
+            ],
+            "produce": "q3_answer",
+            "question": "How many times did the plague occur in q2's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

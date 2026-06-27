@@ -1,0 +1,604 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 62,
+  "qid": null,
+  "question": "How long had Pfrang Association's headquarters location been the capitol city of the area where Guangling District is located?",
+  "raw_question_item": {
+    "question": "How long had Pfrang Association's headquarters location been the capitol city of the area where Guangling District is located?",
+    "answer": "about 400 years"
+  },
+  "gold_answer": "about 400 years",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Pfrang Association",
+          "start_char": 13,
+          "end_char": 31,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Guangling District",
+          "start_char": 96,
+          "end_char": 114,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Pfrang Association",
+            "type": "Organization"
+          },
+          {
+            "surface": "Guangling District",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "How long had Pfrang Association's headquarters location been the capitol city of the area where Guangling District is located?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Pfrang Association",
+            "start_char": 13,
+            "end_char": 31,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Pfrang",
+            "start_char": 13,
+            "end_char": 19,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Association",
+            "start_char": 20,
+            "end_char": 31,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Guangling District",
+            "start_char": 96,
+            "end_char": 114,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Guangling",
+            "start_char": 96,
+            "end_char": 105,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "District",
+            "start_char": 106,
+            "end_char": 114,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "How long had Pfrang Association's headquarters location been the capitol city of the area where Guangling District is located?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "How long had ENTITYA's headquarters location been the capitol city of the area where ENTITYB is located?",
+      "hanlp_input_sentence": "How long had ENTITYA's headquarters location been the capitol city of the area where ENTITYB is located?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Pfrang Association",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            13,
+            31
+          ],
+          "masked_char_span": [
+            13,
+            20
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Guangling District",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            96,
+            114
+          ],
+          "masked_char_span": [
+            85,
+            92
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "How",
+        "long",
+        "had",
+        "ENTITYA",
+        "'",
+        "s",
+        "headquarters",
+        "location",
+        "been",
+        "the",
+        "capitol",
+        "city",
+        "of",
+        "the",
+        "area",
+        "where",
+        "ENTITYB",
+        "is",
+        "located",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 10,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A10.P1",
+        "node_ids": [
+          "17",
+          "19",
+          "15",
+          "11",
+          "12",
+          "2",
+          "8",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "located",
+          "area",
+          "capitol",
+          "city",
+          "long",
+          "location",
+          "headquarters",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          1,
+          7,
+          8,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "1",
+            "2",
+            "4",
+            "7",
+            "8",
+            "11",
+            "12",
+            "15",
+            "17",
+            "19"
+          ],
+          "semantic_nodes": [
+            "How",
+            "long",
+            "ENTITYA",
+            "headquarters",
+            "location",
+            "capitol",
+            "city",
+            "area",
+            "ENTITYB",
+            "located"
+          ],
+          "covered_semantic_node_ids": [
+            "2",
+            "4",
+            "7",
+            "8",
+            "11",
+            "12",
+            "15",
+            "17",
+            "19"
+          ],
+          "covered_semantic_nodes": [
+            "long",
+            "ENTITYA",
+            "headquarters",
+            "location",
+            "capitol",
+            "city",
+            "area",
+            "ENTITYB",
+            "located"
+          ],
+          "missing_semantic_node_ids": [
+            "1"
+          ],
+          "missing_semantic_nodes": [
+            "How"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 2,
+          "function_node_count": 0,
+          "derived_edge_count": 5,
+          "dirty_path_count": 7,
+          "path_length": 8,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            1,
+            7,
+            8,
+            6
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 10,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A10.P1",
+            "node_ids": [
+              "17",
+              "19",
+              "15",
+              "11",
+              "12",
+              "2",
+              "8",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "located",
+              "area",
+              "capitol",
+              "city",
+              "long",
+              "location",
+              "headquarters",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              1,
+              7,
+              8,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "1",
+                "2",
+                "4",
+                "7",
+                "8",
+                "11",
+                "12",
+                "15",
+                "17",
+                "19"
+              ],
+              "semantic_nodes": [
+                "How",
+                "long",
+                "ENTITYA",
+                "headquarters",
+                "location",
+                "capitol",
+                "city",
+                "area",
+                "ENTITYB",
+                "located"
+              ],
+              "covered_semantic_node_ids": [
+                "2",
+                "4",
+                "7",
+                "8",
+                "11",
+                "12",
+                "15",
+                "17",
+                "19"
+              ],
+              "covered_semantic_nodes": [
+                "long",
+                "ENTITYA",
+                "headquarters",
+                "location",
+                "capitol",
+                "city",
+                "area",
+                "ENTITYB",
+                "located"
+              ],
+              "missing_semantic_node_ids": [
+                "1"
+              ],
+              "missing_semantic_nodes": [
+                "How"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 2,
+              "function_node_count": 0,
+              "derived_edge_count": 5,
+              "dirty_path_count": 7,
+              "path_length": 8,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                1,
+                7,
+                8,
+                6
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: How[1]/wh_anchor+clause_predicate, where[16]/wh_anchor, long[2]/clause_predicate, headquarters[7]/clause_predicate, location[8]/clause_predicate, capitol[11]/clause_predicate, city[12]/clause_predicate, area[15]/clause_predicate, located[19]/clause_predicate, ENTITYA[4]/explicit_entity, ENTITYB[17]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "located",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "located",
+          "target": "area",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "area",
+          "target": "capitol",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "capitol",
+          "target": "city",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "city",
+          "target": "long",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "long",
+          "target": "location",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "location",
+          "target": "headquarters",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "headquarters",
+          "target": "ENTITYA",
+          "derived": true,
+          "rule": "restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "located",
+            "area",
+            "capitol",
+            "city",
+            "long",
+            "location",
+            "headquarters",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "17",
+            "19",
+            "15",
+            "11",
+            "12",
+            "2",
+            "8",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "How long had Pfrang Association's headquarters location been the capitol city of the area where Guangling District is located?",
+        "explicit_entities": [
+          "Pfrang Association",
+          "Guangling District"
+        ],
+        "global_best_paths": [
+          [
+            "Guangling District",
+            "located",
+            "area",
+            "capitol",
+            "city",
+            "long",
+            "location",
+            "headquarters",
+            "Pfrang Association"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Guangling District",
+            "located",
+            "area"
+          ],
+          "produce": "q1_answer",
+          "question": "What area is Guangling District located in?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "capitol",
+            "city",
+            "location",
+            "headquarters",
+            "Pfrang Association"
+          ],
+          "produce": "q2_answer",
+          "question": "What is the capitol city of the area where q1's answer is located?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "q2_answer",
+            "long"
+          ],
+          "produce": "q3_answer",
+          "question": "How long had q2's answer been the capitol city?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What area is Guangling District located in?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is the capitol city of the area where q1's answer is located?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "How long had q2's answer been the capitol city?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Guangling District",
+              "located",
+              "area"
+            ],
+            "produce": "q1_answer",
+            "question": "What area is Guangling District located in?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "capitol",
+              "city",
+              "location",
+              "headquarters",
+              "Pfrang Association"
+            ],
+            "produce": "q2_answer",
+            "question": "What is the capitol city of the area where q1's answer is located?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "q2_answer",
+              "long"
+            ],
+            "produce": "q3_answer",
+            "question": "How long had q2's answer been the capitol city?"
+          }
+        ]
+      }
+    }
+  }
+}

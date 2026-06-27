@@ -106,8 +106,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("[Anchor Paths]", output)
         self.assertIn("Anchor A1: older[3] sources=comparative_focus,clause_predicate", output)
         self.assertIn("  P1: ENTITYA ---- older", output)
-        self.assertIn("Anchor A2: ENTITYA[5] sources=explicit_entity", output)
-        self.assertIn("Anchor A3: ENTITYB[7] sources=explicit_entity", output)
+        self.assertIn("Anchor A2: Who[1] sources=wh_anchor", output)
+        self.assertIn("Anchor A3: ENTITYA[5] sources=explicit_entity", output)
+        self.assertIn("Anchor A4: ENTITYB[7] sources=explicit_entity", output)
         self.assertNotIn("answer_anchor:", output)
         self.assertNotIn("entity_anchors:", output)
         self.assertIn("[5. Atomic Question DAG]", output)
@@ -560,6 +561,32 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         )
         compiled_which_of = compile_token_reasoning_structure(which_of, ["ENTITYA"])
         self.assertFalse([result for result in compiled_which_of.anchor_path_results if result.get("anchor_text") == "of"])
+
+    def test_wh_anchor_candidate_preserves_possessive_answer_intent(self) -> None:
+        result = _hanlp_result(
+            "Whose sister played ENTITYA in ENTITYB?",
+            ["Whose", "sister", "played", "ENTITYA", "in", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "played", 3),
+                _dm("sister", "poss", "Whose", 2, 1),
+                _pas("sister", "poss_ARG1", "Whose", 2, 1),
+                _dm("played", "ARG1", "sister", 3, 2),
+                _dm("played", "ARG2", "ENTITYA", 3, 4),
+                _pas("in", "prep_ARG1", "played", 5, 3),
+                _pas("in", "prep_ARG2", "ENTITYB", 5, 6),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        wh_candidates = [
+            candidate
+            for candidate in compiled.debug_payload["answer_anchor_candidates"]
+            if candidate["text"] == "Whose" and "wh_anchor" in candidate["source_types"]
+        ]
+        self.assertTrue(wh_candidates)
+        self.assertEqual(compiled.answer_anchor, "Whose")
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["Whose", "sister", "played", "ENTITYA"]])
 
     def test_bridge_contraction_edges_are_strong_and_semantic(self) -> None:
         result = _hanlp_result(
@@ -1067,7 +1094,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             warnings=warnings,
         )
 
-        self.assertEqual(rank, (0, 4, 2, 6))
+        self.assertEqual(rank, (0, 4, 2, 7))
         self.assertEqual(components["medium_edge_count"], 1)
         self.assertEqual(components["weak_edge_count"], 1)
         self.assertEqual(components["function_node_count"], 1)

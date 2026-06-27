@@ -1,0 +1,497 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 96,
+  "qid": null,
+  "question": "What is the public library system called in the place where the Cosbys live in New York?",
+  "raw_question_item": {
+    "question": "What is the public library system called in the place where the Cosbys live in New York?",
+    "answer": "Brooklyn Public Library"
+  },
+  "gold_answer": "Brooklyn Public Library",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Cosbys",
+          "start_char": 64,
+          "end_char": 70,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "New York",
+          "start_char": 79,
+          "end_char": 87,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Cosbys",
+            "type": "Other"
+          },
+          {
+            "surface": "New York",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "What is the public library system called in the place where the Cosbys live in New York?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Cosbys",
+            "start_char": 64,
+            "end_char": 70,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "New York",
+            "start_char": 79,
+            "end_char": 87,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "New",
+            "start_char": 79,
+            "end_char": 82,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "York",
+            "start_char": 83,
+            "end_char": 87,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the public library system called in the place where the Cosbys live in New York?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the public library system called in the place where the ENTITYA live in ENTITYB?",
+      "hanlp_input_sentence": "What is the public library system called in the place where the ENTITYA live in ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Cosbys",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            64,
+            70
+          ],
+          "masked_char_span": [
+            64,
+            71
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "New York",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            79,
+            87
+          ],
+          "masked_char_span": [
+            80,
+            87
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "public",
+        "library",
+        "system",
+        "called",
+        "in",
+        "the",
+        "place",
+        "where",
+        "the",
+        "ENTITYA",
+        "live",
+        "in",
+        "ENTITYB",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "What",
+      "answer_anchor_id": "1",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 7,
+        "path_index": 1,
+        "anchor_id": "1",
+        "anchor_text": "What",
+        "source_types": [
+          "wh_anchor"
+        ],
+        "path_id": "A7.P1",
+        "node_ids": [
+          "13",
+          "14",
+          "16",
+          "10",
+          "7",
+          "1"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "live",
+          "ENTITYB",
+          "place",
+          "called",
+          "What"
+        ],
+        "global_rank": [
+          3,
+          3,
+          5,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "10",
+            "13",
+            "14",
+            "16"
+          ],
+          "semantic_nodes": [
+            "public",
+            "library",
+            "system",
+            "called",
+            "place",
+            "ENTITYA",
+            "live",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "7",
+            "10",
+            "13",
+            "14",
+            "16"
+          ],
+          "covered_semantic_nodes": [
+            "called",
+            "place",
+            "ENTITYA",
+            "live",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "4",
+            "5",
+            "6"
+          ],
+          "missing_semantic_nodes": [
+            "public",
+            "library",
+            "system"
+          ],
+          "missing_semantic_nodes_count": 3,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 5,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            3,
+            3,
+            5,
+            1
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 7,
+            "path_index": 1,
+            "anchor_id": "1",
+            "anchor_text": "What",
+            "source_types": [
+              "wh_anchor"
+            ],
+            "path_id": "A7.P1",
+            "node_ids": [
+              "13",
+              "14",
+              "16",
+              "10",
+              "7",
+              "1"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "live",
+              "ENTITYB",
+              "place",
+              "called",
+              "What"
+            ],
+            "global_rank": [
+              3,
+              3,
+              5,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "7",
+                "10",
+                "13",
+                "14",
+                "16"
+              ],
+              "semantic_nodes": [
+                "public",
+                "library",
+                "system",
+                "called",
+                "place",
+                "ENTITYA",
+                "live",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "10",
+                "13",
+                "14",
+                "16"
+              ],
+              "covered_semantic_nodes": [
+                "called",
+                "place",
+                "ENTITYA",
+                "live",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "4",
+                "5",
+                "6"
+              ],
+              "missing_semantic_nodes": [
+                "public",
+                "library",
+                "system"
+              ],
+              "missing_semantic_nodes_count": 3,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 5,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                3,
+                3,
+                5,
+                1
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: system[6]/root_projection+modifier_projection+clause_predicate, place[10]/root_projection+modifier_projection+clause_predicate, public[4]/modifier_projection+clause_predicate, library[5]/modifier_projection+clause_predicate, live[14]/modifier_projection+clause_predicate, called[7]/bare_wh_predicate_root+clause_predicate, What[1]/wh_anchor, where[11]/wh_anchor, ENTITYA[13]/explicit_entity, ENTITYB[16]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "live",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "live",
+          "target": "ENTITYB",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "ENTITYB",
+          "target": "place",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "place",
+          "target": "called",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "called",
+          "target": "What",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "live",
+            "ENTITYB",
+            "place",
+            "called",
+            "What"
+          ],
+          "node_ids": [
+            "13",
+            "14",
+            "16",
+            "10",
+            "7",
+            "1"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the public library system called in the place where the Cosbys live in New York?",
+        "explicit_entities": [
+          "Cosbys",
+          "New York"
+        ],
+        "global_best_paths": [
+          [
+            "Cosbys",
+            "live",
+            "New York",
+            "place",
+            "called",
+            "What"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Cosbys",
+            "live",
+            "New York",
+            "place"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the place where the Cosbys live in New York?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "called"
+          ],
+          "produce": "q2_answer",
+          "question": "What is q1's answer called?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the place where the Cosbys live in New York?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What is q1's answer called?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Cosbys",
+              "live",
+              "New York",
+              "place"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the place where the Cosbys live in New York?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "called"
+            ],
+            "produce": "q2_answer",
+            "question": "What is q1's answer called?"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,652 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 60,
+  "qid": null,
+  "question": "Where is the district that the person who wanted to reform and address John Kodwo Amissah's religion preached a sermon on Marian devotion before his death located?",
+  "raw_question_item": {
+    "question": "Where is the district that the person who wanted to reform and address John Kodwo Amissah's religion preached a sermon on Marian devotion before his death located?",
+    "answer": "Saxony-Anhalt"
+  },
+  "gold_answer": "Saxony-Anhalt",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "John Kodwo Amissah",
+          "start_char": 71,
+          "end_char": 89,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Marian",
+          "start_char": 122,
+          "end_char": 128,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "John Kodwo Amissah",
+            "type": "Person"
+          },
+          {
+            "surface": "Marian",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "Where is the district that the person who wanted to reform and address John Kodwo Amissah's religion preached a sermon on Marian devotion before his death located?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "John Kodwo Amissah",
+            "start_char": 71,
+            "end_char": 89,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "John",
+            "start_char": 71,
+            "end_char": 75,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Kodwo",
+            "start_char": 76,
+            "end_char": 81,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Amissah",
+            "start_char": 82,
+            "end_char": 89,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Marian",
+            "start_char": 122,
+            "end_char": 128,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Where is the district that the person who wanted to reform and address John Kodwo Amissah's religion preached a sermon on Marian devotion before his death located?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Where is the district that the person who wanted to reform and address ENTITYA's religion preached a sermon on ENTITYB devotion before his death located?",
+      "hanlp_input_sentence": "Where is the district that the person who wanted to reform and address ENTITYA's religion preached a sermon on ENTITYB devotion before his death located?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "John Kodwo Amissah",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            71,
+            89
+          ],
+          "masked_char_span": [
+            71,
+            78
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Marian",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            122,
+            128
+          ],
+          "masked_char_span": [
+            111,
+            118
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Where",
+        "is",
+        "the",
+        "district",
+        "that",
+        "the",
+        "person",
+        "who",
+        "wanted",
+        "to",
+        "reform",
+        "and",
+        "address",
+        "ENTITYA",
+        "'",
+        "s",
+        "religion",
+        "preached",
+        "a",
+        "sermon",
+        "on",
+        "ENTITYB",
+        "devotion",
+        "before",
+        "his",
+        "death",
+        "located",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "reform",
+      "answer_anchor_id": "11",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 6,
+        "path_index": 1,
+        "anchor_id": "11",
+        "anchor_text": "reform",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A6.P1",
+        "node_ids": [
+          "22",
+          "23",
+          "20",
+          "27",
+          "4",
+          "18",
+          "7",
+          "13",
+          "17",
+          "11"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "devotion",
+          "sermon",
+          "located",
+          "district",
+          "preached",
+          "person",
+          "address",
+          "religion",
+          "reform"
+        ],
+        "global_rank": [
+          4,
+          3,
+          9,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "9",
+            "11",
+            "13",
+            "14",
+            "17",
+            "18",
+            "20",
+            "22",
+            "23",
+            "25",
+            "26",
+            "27"
+          ],
+          "semantic_nodes": [
+            "district",
+            "person",
+            "wanted",
+            "reform",
+            "address",
+            "ENTITYA",
+            "religion",
+            "preached",
+            "sermon",
+            "ENTITYB",
+            "devotion",
+            "his",
+            "death",
+            "located"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "11",
+            "13",
+            "17",
+            "18",
+            "20",
+            "22",
+            "23",
+            "27"
+          ],
+          "covered_semantic_nodes": [
+            "district",
+            "person",
+            "reform",
+            "address",
+            "religion",
+            "preached",
+            "sermon",
+            "ENTITYB",
+            "devotion",
+            "located"
+          ],
+          "missing_semantic_node_ids": [
+            "9",
+            "14",
+            "25",
+            "26"
+          ],
+          "missing_semantic_nodes": [
+            "wanted",
+            "ENTITYA",
+            "his",
+            "death"
+          ],
+          "missing_semantic_nodes_count": 4,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 9,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            4,
+            3,
+            9,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 6,
+            "path_index": 1,
+            "anchor_id": "11",
+            "anchor_text": "reform",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A6.P1",
+            "node_ids": [
+              "22",
+              "23",
+              "20",
+              "27",
+              "4",
+              "18",
+              "7",
+              "13",
+              "17",
+              "11"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "devotion",
+              "sermon",
+              "located",
+              "district",
+              "preached",
+              "person",
+              "address",
+              "religion",
+              "reform"
+            ],
+            "global_rank": [
+              4,
+              3,
+              9,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "9",
+                "11",
+                "13",
+                "14",
+                "17",
+                "18",
+                "20",
+                "22",
+                "23",
+                "25",
+                "26",
+                "27"
+              ],
+              "semantic_nodes": [
+                "district",
+                "person",
+                "wanted",
+                "reform",
+                "address",
+                "ENTITYA",
+                "religion",
+                "preached",
+                "sermon",
+                "ENTITYB",
+                "devotion",
+                "his",
+                "death",
+                "located"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "11",
+                "13",
+                "17",
+                "18",
+                "20",
+                "22",
+                "23",
+                "27"
+              ],
+              "covered_semantic_nodes": [
+                "district",
+                "person",
+                "reform",
+                "address",
+                "religion",
+                "preached",
+                "sermon",
+                "ENTITYB",
+                "devotion",
+                "located"
+              ],
+              "missing_semantic_node_ids": [
+                "9",
+                "14",
+                "25",
+                "26"
+              ],
+              "missing_semantic_nodes": [
+                "wanted",
+                "ENTITYA",
+                "his",
+                "death"
+              ],
+              "missing_semantic_nodes_count": 4,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 9,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                4,
+                3,
+                9,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: wanted[9]/bare_wh_predicate_root+clause_predicate, Where[1]/wh_anchor, who[8]/wh_anchor, district[4]/clause_predicate, person[7]/clause_predicate, reform[11]/clause_predicate, address[13]/clause_predicate, religion[17]/clause_predicate, preached[18]/clause_predicate, sermon[20]/clause_predicate, devotion[23]/clause_predicate, his[25]/clause_predicate, death[26]/clause_predicate, located[27]/clause_predicate, ENTITYA[14]/explicit_entity, ENTITYB[22]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "devotion",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "devotion",
+          "target": "sermon",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "sermon",
+          "target": "located",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "located",
+          "target": "district",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "district",
+          "target": "preached",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "preached",
+          "target": "person",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "person",
+          "target": "address",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "address",
+          "target": "religion",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "religion",
+          "target": "reform",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "devotion",
+            "sermon",
+            "located",
+            "district",
+            "preached",
+            "person",
+            "address",
+            "religion",
+            "reform"
+          ],
+          "node_ids": [
+            "22",
+            "23",
+            "20",
+            "27",
+            "4",
+            "18",
+            "7",
+            "13",
+            "17",
+            "11"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Where is the district that the person who wanted to reform and address John Kodwo Amissah's religion preached a sermon on Marian devotion before his death located?",
+        "explicit_entities": [
+          "John Kodwo Amissah",
+          "Marian"
+        ],
+        "global_best_paths": [
+          [
+            "Marian",
+            "devotion",
+            "sermon",
+            "located",
+            "district",
+            "preached",
+            "person",
+            "address",
+            "religion",
+            "reform"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "person",
+            "address",
+            "religion",
+            "reform"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the person that wanted to reform and address John Kodwo Amissah's religion?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "Marian",
+            "devotion",
+            "sermon",
+            "preached",
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "What sermon on Marian devotion did q1's answer preach?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "district",
+            "located",
+            "q2_answer"
+          ],
+          "produce": "q3_answer",
+          "question": "Where is the district that q2's answer is located?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the person that wanted to reform and address John Kodwo Amissah's religion?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What sermon on Marian devotion did q1's answer preach?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "Where is the district that q2's answer is located?",
+          "depends_on": [
+            "q2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "person",
+              "address",
+              "religion",
+              "reform"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the person that wanted to reform and address John Kodwo Amissah's religion?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "Marian",
+              "devotion",
+              "sermon",
+              "preached",
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "What sermon on Marian devotion did q1's answer preach?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "district",
+              "located",
+              "q2_answer"
+            ],
+            "produce": "q3_answer",
+            "question": "Where is the district that q2's answer is located?"
+          }
+        ]
+      }
+    }
+  }
+}

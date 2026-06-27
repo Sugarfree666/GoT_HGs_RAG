@@ -1,0 +1,539 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 80,
+  "qid": null,
+  "question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+  "raw_question_item": {
+    "question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+    "answer": "1 December 2010"
+  },
+  "gold_answer": "1 December 2010",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Darren Carter",
+          "start_char": 23,
+          "end_char": 36,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "FA Cup",
+          "start_char": 61,
+          "end_char": 67,
+          "semantic_type_hint": "Event",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Darren Carter",
+            "type": "Person"
+          },
+          {
+            "surface": "FA Cup",
+            "type": "Event"
+          }
+        ],
+        "normalized_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Darren Carter",
+            "start_char": 23,
+            "end_char": 36,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Darren",
+            "start_char": 23,
+            "end_char": 29,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Carter",
+            "start_char": 30,
+            "end_char": 36,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "FA Cup",
+            "start_char": 61,
+            "end_char": 67,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "FA",
+            "start_char": 61,
+            "end_char": 63,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Cup",
+            "start_char": 64,
+            "end_char": 67,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the last time ENTITYA's team beat the 1894-95 ENTITYB winner?",
+      "hanlp_input_sentence": "When was the last time ENTITYA's team beat the 1894-95 ENTITYB winner?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Darren Carter",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            23,
+            36
+          ],
+          "masked_char_span": [
+            23,
+            30
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "FA Cup",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Event",
+          "original_char_span": [
+            61,
+            67
+          ],
+          "masked_char_span": [
+            55,
+            62
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "last",
+        "time",
+        "ENTITYA",
+        "'",
+        "s",
+        "team",
+        "beat",
+        "the",
+        "1894-95",
+        "ENTITYB",
+        "winner",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "last",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "order",
+          "text": "last",
+          "node_id": "4",
+          "target": "time",
+          "target_id": "5"
+        },
+        {
+          "type": "numeric",
+          "text": "1894-95",
+          "node_id": "12",
+          "target": "winner",
+          "target_id": "14"
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "last",
+        "source_types": [
+          "comparative_focus",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "6",
+          "9",
+          "10",
+          "13",
+          "14",
+          "5",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "team",
+          "beat",
+          "ENTITYB",
+          "winner",
+          "time",
+          "last"
+        ],
+        "global_rank": [
+          1,
+          3,
+          6,
+          4
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "10",
+            "12",
+            "13",
+            "14"
+          ],
+          "semantic_nodes": [
+            "last",
+            "time",
+            "ENTITYA",
+            "team",
+            "beat",
+            "1894-95",
+            "ENTITYB",
+            "winner"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "10",
+            "13",
+            "14"
+          ],
+          "covered_semantic_nodes": [
+            "last",
+            "time",
+            "ENTITYA",
+            "team",
+            "beat",
+            "ENTITYB",
+            "winner"
+          ],
+          "missing_semantic_node_ids": [
+            "12"
+          ],
+          "missing_semantic_nodes": [
+            "1894-95"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 6,
+          "anchor_fit_penalty": 4,
+          "rank": [
+            1,
+            3,
+            6,
+            4
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "last",
+            "source_types": [
+              "comparative_focus",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "6",
+              "9",
+              "10",
+              "13",
+              "14",
+              "5",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "team",
+              "beat",
+              "ENTITYB",
+              "winner",
+              "time",
+              "last"
+            ],
+            "global_rank": [
+              1,
+              3,
+              6,
+              4
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "12",
+                "13",
+                "14"
+              ],
+              "semantic_nodes": [
+                "last",
+                "time",
+                "ENTITYA",
+                "team",
+                "beat",
+                "1894-95",
+                "ENTITYB",
+                "winner"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "13",
+                "14"
+              ],
+              "covered_semantic_nodes": [
+                "last",
+                "time",
+                "ENTITYA",
+                "team",
+                "beat",
+                "ENTITYB",
+                "winner"
+              ],
+              "missing_semantic_node_ids": [
+                "12"
+              ],
+              "missing_semantic_nodes": [
+                "1894-95"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 6,
+              "anchor_fit_penalty": 4,
+              "rank": [
+                1,
+                3,
+                6,
+                4
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: last[4]/comparative_focus+clause_predicate, When[1]/wh_anchor, time[5]/clause_predicate, team[9]/clause_predicate, beat[10]/clause_predicate, winner[14]/clause_predicate, 1894-95[12]/clause_predicate, ENTITYA[6]/explicit_entity, ENTITYB[13]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "team",
+          "derived": true,
+          "rule": "possessive_marker_contraction"
+        },
+        {
+          "source": "team",
+          "target": "beat",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "beat",
+          "target": "ENTITYB",
+          "derived": true,
+          "rule": "restriction_closure+descriptor_lifting"
+        },
+        {
+          "source": "ENTITYB",
+          "target": "winner",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "winner",
+          "target": "time",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "time",
+          "target": "last",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "team",
+            "beat",
+            "ENTITYB",
+            "winner",
+            "time",
+            "last"
+          ],
+          "node_ids": [
+            "6",
+            "9",
+            "10",
+            "13",
+            "14",
+            "5",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+        "explicit_entities": [
+          "Darren Carter",
+          "FA Cup"
+        ],
+        "global_best_paths": [
+          [
+            "Darren Carter",
+            "team",
+            "beat",
+            "FA Cup",
+            "winner",
+            "time",
+            "last"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Darren Carter",
+            "team"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the name of Darren Carter's team?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "q1_answer",
+            "beat",
+            "FA Cup",
+            "winner"
+          ],
+          "produce": "q2_answer",
+          "question": "When was the last time q1's answer beat the FA Cup winner?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the name of Darren Carter's team?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "When was the last time q1's answer beat the FA Cup winner?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Darren Carter",
+              "team"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the name of Darren Carter's team?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "q1_answer",
+              "beat",
+              "FA Cup",
+              "winner"
+            ],
+            "produce": "q2_answer",
+            "question": "When was the last time q1's answer beat the FA Cup winner?"
+          }
+        ]
+      }
+    }
+  }
+}

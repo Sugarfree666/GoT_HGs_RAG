@@ -1,0 +1,583 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 7,
+  "qid": null,
+  "question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+  "raw_question_item": {
+    "question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+    "answer": "the Mississippi River Delta"
+  },
+  "gold_answer": "the Mississippi River Delta",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Southeast Library",
+          "start_char": 51,
+          "end_char": 68,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Gulf of Mexico",
+          "start_char": 98,
+          "end_char": 112,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Southeast Library",
+            "type": "Organization"
+          },
+          {
+            "surface": "Gulf of Mexico",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Southeast Library",
+            "start_char": 51,
+            "end_char": 68,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Southeast",
+            "start_char": 51,
+            "end_char": 60,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Library",
+            "start_char": 61,
+            "end_char": 68,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Gulf of Mexico",
+            "start_char": 98,
+            "end_char": 112,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Gulf",
+            "start_char": 98,
+            "end_char": 102,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Mexico",
+            "start_char": 106,
+            "end_char": 112,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Where does the body of water by the city where the ENTITYA designer died empty into the ENTITYB?",
+      "hanlp_input_sentence": "Where does the body of water by the city where the ENTITYA designer died empty into the ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Southeast Library",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            51,
+            68
+          ],
+          "masked_char_span": [
+            51,
+            58
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Gulf of Mexico",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            98,
+            112
+          ],
+          "masked_char_span": [
+            88,
+            95
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Where",
+        "does",
+        "the",
+        "body",
+        "of",
+        "water",
+        "by",
+        "the",
+        "city",
+        "where",
+        "the",
+        "ENTITYA",
+        "designer",
+        "died",
+        "empty",
+        "into",
+        "the",
+        "ENTITYB",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "12",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 9,
+        "path_index": 1,
+        "anchor_id": "12",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A9.P1",
+        "node_ids": [
+          "18",
+          "15",
+          "4",
+          "6",
+          "14",
+          "13",
+          "12"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "empty",
+          "body",
+          "water",
+          "died",
+          "designer",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "6",
+            "9",
+            "12",
+            "13",
+            "14",
+            "15",
+            "18"
+          ],
+          "semantic_nodes": [
+            "body",
+            "water",
+            "city",
+            "ENTITYA",
+            "designer",
+            "died",
+            "empty",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "18"
+          ],
+          "covered_semantic_nodes": [
+            "body",
+            "water",
+            "ENTITYA",
+            "designer",
+            "died",
+            "empty",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "9"
+          ],
+          "missing_semantic_nodes": [
+            "city"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 4,
+          "dirty_path_count": 4,
+          "path_length": 6,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            1,
+            4,
+            6,
+            6
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 9,
+            "path_index": 1,
+            "anchor_id": "12",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A9.P1",
+            "node_ids": [
+              "18",
+              "15",
+              "4",
+              "6",
+              "14",
+              "13",
+              "12"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "empty",
+              "body",
+              "water",
+              "died",
+              "designer",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              1,
+              4,
+              6,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "6",
+                "9",
+                "12",
+                "13",
+                "14",
+                "15",
+                "18"
+              ],
+              "semantic_nodes": [
+                "body",
+                "water",
+                "city",
+                "ENTITYA",
+                "designer",
+                "died",
+                "empty",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "12",
+                "13",
+                "14",
+                "15",
+                "18"
+              ],
+              "covered_semantic_nodes": [
+                "body",
+                "water",
+                "ENTITYA",
+                "designer",
+                "died",
+                "empty",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "9"
+              ],
+              "missing_semantic_nodes": [
+                "city"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 4,
+              "dirty_path_count": 4,
+              "path_length": 6,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                1,
+                4,
+                6,
+                6
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: Where[1]/wh_anchor, where[10]/wh_anchor, body[4]/clause_predicate, water[6]/clause_predicate, city[9]/clause_predicate, designer[13]/clause_predicate, died[14]/clause_predicate, empty[15]/clause_predicate, ENTITYA[12]/explicit_entity, ENTITYB[18]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "empty",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "empty",
+          "target": "body",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "body",
+          "target": "water",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "water",
+          "target": "died",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "died",
+          "target": "designer",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "designer",
+          "target": "ENTITYA",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "empty",
+            "body",
+            "water",
+            "died",
+            "designer",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "18",
+            "15",
+            "4",
+            "6",
+            "14",
+            "13",
+            "12"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+        "explicit_entities": [
+          "Southeast Library",
+          "Gulf of Mexico"
+        ],
+        "global_best_paths": [
+          [
+            "Gulf of Mexico",
+            "empty",
+            "body",
+            "water",
+            "died",
+            "designer",
+            "Southeast Library"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "Southeast Library",
+            "designer",
+            "died"
+          ],
+          "produce": "q1_answer",
+          "question": "Who is the designer of the Southeast Library that died?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "body",
+            "water",
+            "empty",
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "Where does the body of water associated with q1's answer empty into?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "Gulf of Mexico"
+          ],
+          "produce": "q3_answer",
+          "question": "What is the Gulf of Mexico?"
+        },
+        {
+          "id": "q4",
+          "consume": [
+            "q2_answer",
+            "q3_answer"
+          ],
+          "produce": "q4_answer",
+          "question": "Where does the body of water by q2's answer empty into the Gulf of Mexico?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the designer of the Southeast Library that died?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "Where does the body of water associated with q1's answer empty into?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What is the Gulf of Mexico?",
+          "depends_on": []
+        },
+        {
+          "id": "q4",
+          "question": "Where does the body of water by q2's answer empty into the Gulf of Mexico?",
+          "depends_on": [
+            "q2",
+            "q3"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q4"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        }
+      ],
+      "leaf_node_ids": [
+        "q4"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "Southeast Library",
+              "designer",
+              "died"
+            ],
+            "produce": "q1_answer",
+            "question": "Who is the designer of the Southeast Library that died?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "body",
+              "water",
+              "empty",
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "Where does the body of water associated with q1's answer empty into?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "Gulf of Mexico"
+            ],
+            "produce": "q3_answer",
+            "question": "What is the Gulf of Mexico?"
+          },
+          {
+            "id": "q4",
+            "consume": [
+              "q2_answer",
+              "q3_answer"
+            ],
+            "produce": "q4_answer",
+            "question": "Where does the body of water by q2's answer empty into the Gulf of Mexico?"
+          }
+        ]
+      }
+    }
+  }
+}

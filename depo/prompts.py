@@ -138,143 +138,200 @@ MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 def build_mask_span_extraction_prompt(question: str) -> str:
     return build_explicit_entity_extraction_prompt(question)
 
+
 ATOMIC_QUESTION_DAG_SYSTEM = """
--Goal-
+You are DEPO Step 5: path contraction action trace generation.
 
-You are a helpful assistant for multi-hop question decomposition over parser-grounded reasoning paths.
-
-An atomic subquestion asks for exactly one missing answer through a single semantic operation, and it must not contain any unresolved nested relation that should be answered by another subquestion first.
-
-Given a multi-hop question, its explicit topic entities, and the selected reasoning paths, your task is to:
-
-1. Understand the full semantic intent of the original question.
-2. Decompose the question into atomic subquestions.
-3. Output a complete path contraction action trace.
-
+Your task is to convert a complex question into a complete path contraction action trace.
 Do not output the final Atomic Question DAG. A deterministic program will convert your action trace into the DAG.
 
-Use the original question as the semantic authority, and use the reasoning paths only as structural evidence for ordering, dependency, and contraction.
-
 You are given exactly:
-- original_question: the full natural-language question.
-- explicit_entities: the explicit topic entities extracted from the question.
-- global_best_paths: the selected parser-grounded token paths.
 
-Path usage rules:
-- Treat global_best_paths as fixed structural skeletons, not as complete semantic representations.
-- Do not ignore global_best_paths.
-- Do not blindly verbalize path tokens.
-- Do not repair, extend, or complete the selected paths.
-- Do not invent new path nodes, new path edges, or unsupported intermediate reasoning steps.
-- A path may omit semantic constraints that are explicit in original_question. Preserve those constraints in the natural-language question field.
-- If a path suggests a role assignment that conflicts with original_question, follow original_question.
-- Do not introduce relations absent from both original_question and global_best_paths.
+* original_question: the full natural-language question
+* explicit_entities: original entity surface strings extracted from the question
+* global_best_paths: the mandatory structural backbone paths selected by Step 4, with ENTITY placeholders already restored
 
-Semantic rules:
-- Preserve the answer intent of original_question.
-- Preserve explicit entity roles, modifiers, temporal constraints, comparison conditions, superlatives, appositions, and type constraints.
-- If multiple constraints describe the same target, keep them as constraints on that target instead of forcing them into an artificial nested chain.
-- If global_best_paths contains multiple paths, treat them as parallel branches when the original question requires comparison, selection, equality checking, or aggregation.
-- The final action must produce the answer requested by original_question.
-- Do not answer the question.
+Important principle:
+
+The original_question is the semantic authority.
+The global_best_paths are structural backbones, not complete semantic representations.
+
+This means:
+
+1. Use original_question to determine the full meaning, entity roles, constraints, answer intent, and final target.
+2. Use global_best_paths to guide relation order, dependency structure, and likely contraction order.
+3. A path may omit modifiers or constraints that are present in original_question. Preserve those constraints in the generated questions.
+4. A path may linearize multiple constraints into one chain. Do not blindly treat the linear path order as the true semantic nesting.
+5. Do not move an entity from one semantic role to another. If original_question says “the region where Israel is located”, do not replace Israel with an intermediate answer unless the original question explicitly requires that replacement.
+6. If original_question describes multiple constraints on the same target, preserve them as constraints on the same target rather than forcing them into a nested chain.
+7. Do not introduce relations absent from both original_question and global_best_paths.
+8. For “When” questions, ask about the event relation present in original_question/path, not unrelated attributes such as birth date unless the original_question/path explicitly requires birth.
+9. Do not leave ENTITY placeholders unresolved.
+10. Do not answer the questions.
+11. Return valid JSON only.
+
+How to use global_best_paths:
+
+1. Use global_best_paths as mandatory structural evidence.
+2. Do not ignore global_best_paths.
+3. Do not rely on global_best_paths as the only source of semantics.
+4. If a path node sequence is incomplete, use original_question to recover missing constraints.
+5. If a path node sequence suggests a role assignment that conflicts with original_question, follow original_question.
+6. The consume field should describe the path fragment or residual path fragment consumed by the action. The question field may include additional constraints from original_question even if they are not explicitly present in consume.
+
+When global_best_paths contains one path, contract that path into the complete action trace.
+When global_best_paths contains multiple paths, each path is a parallel candidate/comparison branch. Generate branch actions for each path, then generate the final comparison, selection, equality, or aggregation action required by original_question.
 
 Action trace rules:
-- Output a non-empty JSON array under the key "actions".
-- Each action must correspond to one atomic subquestion.
-- Each action must have exactly these fields: id, consume, produce, question.
-- id must be q1, q2, q3, ... in order.
-- produce must be qN_answer for action qN.
-- consume lists the supported path fragment, residual path fragment, topic entity, or previous answer consumed by the action.
-- If an action depends on a previous answer, refer to it as qN's answer in the question field or include qN_answer in consume.
-- Do not output depends_on. Dependencies will be derived automatically from qN_answer and qN's answer references.
-- Do not output support spans, path indices, nodes, edges, start_index, or end_index.
 
-Examples:
-
-Example 1: chain-style multi-hop question
-
-Input:
-{
-  "original_question": "What is the nationality of the performer of the song When The Stars Go Blue?",
-  "explicit_entities": ["When The Stars Go Blue"],
-  "global_best_paths": [
-    ["When The Stars Go Blue", "performer", "nationality"]
-  ]
-}
-
-Output:
-{
-  "actions": [
-    {
-      "id": "q1",
-      "consume": ["When The Stars Go Blue -> performer"],
-      "produce": "q1_answer",
-      "question": "Who is the performer of the song When The Stars Go Blue?"
-    },
-    {
-      "id": "q2",
-      "consume": ["q1_answer", "performer -> nationality"],
-      "produce": "q2_answer",
-      "question": "What is the nationality of q1's answer?"
-    }
-  ]
-}
-
-Example 2: parallel-branch question
-
-Input:
-{
-  "original_question": "Which city has a larger population, Paris or Berlin?",
-  "explicit_entities": ["Paris", "Berlin"],
-  "global_best_paths": [
-    ["Paris", "population"],
-    ["Berlin", "population"]
-  ]
-}
-
-Output:
-{
-  "actions": [
-    {
-      "id": "q1",
-      "consume": ["Paris -> population"],
-      "produce": "q1_answer",
-      "question": "What is the population of the city Paris?"
-    },
-    {
-      "id": "q2",
-      "consume": ["Berlin -> population"],
-      "produce": "q2_answer",
-      "question": "What is the population of the city Berlin?"
-    },
-    {
-      "id": "q3",
-      "consume": ["q1_answer", "q2_answer"],
-      "produce": "q3_answer",
-      "question": "Based on q1's answer and q2's answer, which city has the larger population, Paris or Berlin?"
-    }
-  ]
-}
+* actions must be a non-empty array.
+* id must be q1, q2, q3, ... in order.
+* consume lists the current residual path fragment consumed by that atomic question. It may contain previous produced values such as q1_answer.
+* produce must be qN_answer for action qN.
+* question is the natural-language atomic question to show downstream.
+* If an action depends on a previous answer, refer to it as q1's answer, q2's answer, etc. in question text, or include q1_answer, q2_answer, etc. in consume.
+* Do not output depends_on. The program will derive dependencies from qN_answer and qN's answer references in question/consume.
+* Do not output support spans, path indices, nodes, edges, depends_on, start_index, or end_index.
 
 Output format:
 {
-  "actions": [
-    {
-      "id": "q1",
-      "consume": ["path fragment or entity"],
-      "produce": "q1_answer",
-      "question": "natural-language atomic question?"
-    },
-    {
-      "id": "q2",
-      "consume": ["q1_answer", "path fragment or relation"],
-      "produce": "q2_answer",
-      "question": "natural-language atomic question using q1's answer?"
-    }
-  ]
+"actions": [
+{
+"id": "q1",
+"consume": ["path node 1", "path node 2"],
+"produce": "q1_answer",
+"question": "natural-language atomic question?"
+},
+{
+"id": "q2",
+"consume": ["path node 3", "relation", "q1_answer"],
+"produce": "q2_answer",
+"question": "natural-language atomic question using q1's answer?"
+}
+]
 }
 
+Example input:
+{
+"original_question": "When was the person who Messi's goals in Copa del Rey compared to get signed by Barcelona?",
+"explicit_entities": ["Messi", "Copa del Rey", "Barcelona"],
+"global_best_paths": [["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"]]
+}
+
+Expected output:
+{
+"actions": [
+{
+"id": "q1",
+"consume": ["person", "compared", "goals", "Messi"],
+"produce": "q1_answer",
+"question": "Who is the person that Messi's goals in Copa del Rey were compared to?"
+},
+{
+"id": "q2",
+"consume": ["Barcelona", "signed", "get", "q1_answer"],
+"produce": "q2_answer",
+"question": "When did q1's answer get signed by Barcelona?"
+}
+]
+}
+
+Do not generate "When was q1's answer born?" for that example, because "born" is absent from both original_question and global_best_paths.
+
+Semantic-authority example input:
+{
+"original_question": "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?",
+"explicit_entities": ["Israel", "Battle of Qurah and Umm al Maradim"],
+"global_best_paths": [["Battle of Qurah and Umm al Maradim", "location", "created", "region", "Israel", "region", "located", "north", "immediately"]]
+}
+
+Expected output:
+{
+"actions": [
+{
+"id": "q1",
+"consume": ["Israel", "located", "region"],
+"produce": "q1_answer",
+"question": "What region is Israel located in?"
+},
+{
+"id": "q2",
+"consume": ["region", "north", "immediately", "q1_answer"],
+"produce": "q2_answer",
+"question": "What region is immediately north of q1's answer?"
+},
+{
+"id": "q3",
+"consume": ["Battle of Qurah and Umm al Maradim", "location"],
+"produce": "q3_answer",
+"question": "What is the location of the Battle of Qurah and Umm al Maradim?"
+},
+{
+"id": "q4",
+"consume": ["q2_answer", "q3_answer"],
+"produce": "q4_answer",
+"question": "Which region is both q2's answer and q3's answer?"
+},
+{
+"id": "q5",
+"consume": ["q4_answer", "created"],
+"produce": "q5_answer",
+"question": "When was q4's answer created?"
+}
+]
+}
+
+Do not generate "When was the region immediately north of the region where q1's answer is located created?" for that example, because original_question says Israel is located in the reference region. The Battle entity is used to identify the target region's location, not to replace Israel in the located-in relation.
+
+Parallel path example input:
+{
+"original_question": "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?",
+"explicit_entities": ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"],
+"global_best_paths": [
+["Illusions (1982 Film)", "director", "born"],
+["It'S A Wonderful Afterlife", "director", "born"]
+]
+}
+
+Parallel path example output:
+{
+"actions": [
+{
+"id": "q1",
+"consume": ["Illusions (1982 Film)", "director"],
+"produce": "q1_answer",
+"question": "Who is the director of Illusions (1982 Film)?"
+},
+{
+"id": "q2",
+"consume": ["q1_answer", "born"],
+"produce": "q2_answer",
+"question": "When was q1's answer born?"
+},
+{
+"id": "q3",
+"consume": ["It'S A Wonderful Afterlife", "director"],
+"produce": "q3_answer",
+"question": "Who is the director of It'S A Wonderful Afterlife?"
+},
+{
+"id": "q4",
+"consume": ["q3_answer", "born"],
+"produce": "q4_answer",
+"question": "When was q3's answer born?"
+},
+{
+"id": "q5",
+"consume": ["q2_answer", "q4_answer"],
+"produce": "q5_answer",
+"question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?"
+}
+]
+}
+
+Now generate the contraction action trace for the given input JSON.
 Return only the JSON object.
+
 """.strip()
 
 

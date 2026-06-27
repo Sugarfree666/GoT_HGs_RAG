@@ -1,0 +1,724 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 51,
+  "qid": null,
+  "question": "When did the country the top-ranking Warsaw Pact operatives came from, despite it being headquartered in the country where A Generation is set, agree to a unified Germany inside NATO?",
+  "raw_question_item": {
+    "question": "When did the country the top-ranking Warsaw Pact operatives came from, despite it being headquartered in the country where A Generation is set, agree to a unified Germany inside NATO?",
+    "answer": "May 1990"
+  },
+  "gold_answer": "May 1990",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Warsaw Pact",
+          "start_char": 37,
+          "end_char": 48,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "A Generation",
+          "start_char": 123,
+          "end_char": 135,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Germany",
+          "start_char": 163,
+          "end_char": 170,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "NATO",
+          "start_char": 178,
+          "end_char": 182,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Warsaw Pact",
+            "type": "Organization"
+          },
+          {
+            "surface": "A Generation",
+            "type": "Work"
+          },
+          {
+            "surface": "Germany",
+            "type": "Location"
+          },
+          {
+            "surface": "NATO",
+            "type": "Organization"
+          }
+        ],
+        "normalized_question": "When did the country that the top-ranking Warsaw Pact operatives came from, despite it being headquartered in the country where A Generation is set, agree to a unified Germany inside NATO?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Warsaw Pact",
+            "start_char": 37,
+            "end_char": 48,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Warsaw",
+            "start_char": 37,
+            "end_char": 43,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Pact",
+            "start_char": 44,
+            "end_char": 48,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "A Generation",
+            "start_char": 123,
+            "end_char": 135,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Generation",
+            "start_char": 125,
+            "end_char": 135,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Germany",
+            "start_char": 163,
+            "end_char": 170,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c7",
+            "text": "NATO",
+            "start_char": 178,
+            "end_char": 182,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When did the country that the top-ranking Warsaw Pact operatives came from, despite it being headquartered in the country where A Generation is set, agree to a unified Germany inside NATO?",
+      "normalization_changed": true,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When did the country that the top-ranking ENTITYA operatives came from, despite it being headquartered in the country where ENTITYB is set, agree to a unified ENTITYC inside ENTITYD?",
+      "hanlp_input_sentence": "When did the country that the top-ranking ENTITYA operatives came from, despite it being headquartered in the country where ENTITYB is set, agree to a unified ENTITYC inside ENTITYD?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Warsaw Pact",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            37,
+            48
+          ],
+          "masked_char_span": [
+            42,
+            49
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "A Generation",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            123,
+            135
+          ],
+          "masked_char_span": [
+            124,
+            131
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYC",
+          "original_text": "Germany",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            163,
+            170
+          ],
+          "masked_char_span": [
+            159,
+            166
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYD",
+          "original_text": "NATO",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            178,
+            182
+          ],
+          "masked_char_span": [
+            174,
+            181
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "did",
+        "the",
+        "country",
+        "that",
+        "the",
+        "top-ranking",
+        "ENTITYA",
+        "operatives",
+        "came",
+        "from",
+        ",",
+        "despite",
+        "it",
+        "being",
+        "headquartered",
+        "in",
+        "the",
+        "country",
+        "where",
+        "ENTITYB",
+        "is",
+        "set",
+        ",",
+        "agree",
+        "to",
+        "a",
+        "unified",
+        "ENTITYC",
+        "inside",
+        "ENTITYD",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "8",
+      "entity_anchors": [
+        "ENTITYD"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 15,
+        "path_index": 1,
+        "anchor_id": "8",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A15.P1",
+        "node_ids": [
+          "31",
+          "30",
+          "29",
+          "28",
+          "25",
+          "10",
+          "7",
+          "9",
+          "8"
+        ],
+        "nodes": [
+          "ENTITYD",
+          "inside",
+          "ENTITYC",
+          "unified",
+          "agree",
+          "came",
+          "top-ranking",
+          "operatives",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          7,
+          3,
+          8,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "9",
+            "10",
+            "13",
+            "14",
+            "16",
+            "19",
+            "21",
+            "23",
+            "25",
+            "28",
+            "29",
+            "30",
+            "31"
+          ],
+          "semantic_nodes": [
+            "country",
+            "top-ranking",
+            "ENTITYA",
+            "operatives",
+            "came",
+            "despite",
+            "it",
+            "headquartered",
+            "country",
+            "ENTITYB",
+            "set",
+            "agree",
+            "unified",
+            "ENTITYC",
+            "inside",
+            "ENTITYD"
+          ],
+          "covered_semantic_node_ids": [
+            "7",
+            "8",
+            "9",
+            "10",
+            "25",
+            "28",
+            "29",
+            "30",
+            "31"
+          ],
+          "covered_semantic_nodes": [
+            "top-ranking",
+            "ENTITYA",
+            "operatives",
+            "came",
+            "agree",
+            "unified",
+            "ENTITYC",
+            "inside",
+            "ENTITYD"
+          ],
+          "missing_semantic_node_ids": [
+            "4",
+            "13",
+            "14",
+            "16",
+            "19",
+            "21",
+            "23"
+          ],
+          "missing_semantic_nodes": [
+            "country",
+            "despite",
+            "it",
+            "headquartered",
+            "country",
+            "ENTITYB",
+            "set"
+          ],
+          "missing_semantic_nodes_count": 7,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 8,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            7,
+            3,
+            8,
+            6
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 15,
+            "path_index": 1,
+            "anchor_id": "8",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A15.P1",
+            "node_ids": [
+              "31",
+              "30",
+              "29",
+              "28",
+              "25",
+              "10",
+              "7",
+              "9",
+              "8"
+            ],
+            "nodes": [
+              "ENTITYD",
+              "inside",
+              "ENTITYC",
+              "unified",
+              "agree",
+              "came",
+              "top-ranking",
+              "operatives",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              7,
+              3,
+              8,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "9",
+                "10",
+                "13",
+                "14",
+                "16",
+                "19",
+                "21",
+                "23",
+                "25",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "semantic_nodes": [
+                "country",
+                "top-ranking",
+                "ENTITYA",
+                "operatives",
+                "came",
+                "despite",
+                "it",
+                "headquartered",
+                "country",
+                "ENTITYB",
+                "set",
+                "agree",
+                "unified",
+                "ENTITYC",
+                "inside",
+                "ENTITYD"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "8",
+                "9",
+                "10",
+                "25",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "covered_semantic_nodes": [
+                "top-ranking",
+                "ENTITYA",
+                "operatives",
+                "came",
+                "agree",
+                "unified",
+                "ENTITYC",
+                "inside",
+                "ENTITYD"
+              ],
+              "missing_semantic_node_ids": [
+                "4",
+                "13",
+                "14",
+                "16",
+                "19",
+                "21",
+                "23"
+              ],
+              "missing_semantic_nodes": [
+                "country",
+                "despite",
+                "it",
+                "headquartered",
+                "country",
+                "ENTITYB",
+                "set"
+              ],
+              "missing_semantic_nodes_count": 7,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 8,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                7,
+                3,
+                8,
+                6
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: unified[28]/modifier_projection+clause_predicate, inside[30]/modifier_projection+clause_predicate, When[1]/wh_anchor, where[20]/wh_anchor, country[4]/clause_predicate, top-ranking[7]/clause_predicate, operatives[9]/clause_predicate, came[10]/clause_predicate, despite[13]/clause_predicate, it[14]/clause_predicate, headquartered[16]/clause_predicate, country[19]/clause_predicate, set[23]/clause_predicate, agree[25]/clause_predicate, ENTITYA[8]/explicit_entity, ENTITYB[21]/explicit_entity, ENTITYC[29]/explicit_entity, ENTITYD[31]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYD",
+          "target": "inside",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "inside",
+          "target": "ENTITYC",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "ENTITYC",
+          "target": "unified",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "unified",
+          "target": "agree",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "agree",
+          "target": "came",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "came",
+          "target": "top-ranking",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "top-ranking",
+          "target": "operatives",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "operatives",
+          "target": "ENTITYA",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYD",
+            "inside",
+            "ENTITYC",
+            "unified",
+            "agree",
+            "came",
+            "top-ranking",
+            "operatives",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "31",
+            "30",
+            "29",
+            "28",
+            "25",
+            "10",
+            "7",
+            "9",
+            "8"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When did the country the top-ranking Warsaw Pact operatives came from, despite it being headquartered in the country where A Generation is set, agree to a unified Germany inside NATO?",
+        "explicit_entities": [
+          "Warsaw Pact",
+          "A Generation",
+          "Germany",
+          "NATO"
+        ],
+        "global_best_paths": [
+          [
+            "NATO",
+            "inside",
+            "Germany",
+            "unified",
+            "agree",
+            "came",
+            "top-ranking",
+            "operatives",
+            "Warsaw Pact"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "top-ranking",
+            "operatives",
+            "Warsaw Pact"
+          ],
+          "produce": "q1_answer",
+          "question": "Which country did the top-ranking operatives of the Warsaw Pact come from?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "A Generation",
+            "set",
+            "country"
+          ],
+          "produce": "q2_answer",
+          "question": "In which country is A Generation set?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "Germany",
+            "unified",
+            "agree",
+            "inside",
+            "NATO",
+            "q1_answer"
+          ],
+          "produce": "q3_answer",
+          "question": "When did q1's answer agree to a unified Germany inside NATO?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Which country did the top-ranking operatives of the Warsaw Pact come from?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "In which country is A Generation set?",
+          "depends_on": []
+        },
+        {
+          "id": "q3",
+          "question": "When did q1's answer agree to a unified Germany inside NATO?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2",
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "top-ranking",
+              "operatives",
+              "Warsaw Pact"
+            ],
+            "produce": "q1_answer",
+            "question": "Which country did the top-ranking operatives of the Warsaw Pact come from?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "A Generation",
+              "set",
+              "country"
+            ],
+            "produce": "q2_answer",
+            "question": "In which country is A Generation set?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "Germany",
+              "unified",
+              "agree",
+              "inside",
+              "NATO",
+              "q1_answer"
+            ],
+            "produce": "q3_answer",
+            "question": "When did q1's answer agree to a unified Germany inside NATO?"
+          }
+        ]
+      }
+    }
+  }
+}

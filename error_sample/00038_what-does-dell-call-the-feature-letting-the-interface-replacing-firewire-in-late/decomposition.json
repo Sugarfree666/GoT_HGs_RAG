@@ -1,0 +1,605 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 38,
+  "qid": null,
+  "question": "What does dell call the feature letting the interface replacing FireWire in later iterations of the iPod drives to remain powered when the computer is off?",
+  "raw_question_item": {
+    "question": "What does dell call the feature letting the interface replacing FireWire in later iterations of the iPod drives to remain powered when the computer is off?",
+    "answer": "PowerShare"
+  },
+  "gold_answer": "PowerShare",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "FireWire",
+          "start_char": 64,
+          "end_char": 72,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "iPod",
+          "start_char": 100,
+          "end_char": 104,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "FireWire",
+            "type": "Other"
+          },
+          {
+            "surface": "iPod",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What does Dell call the feature letting the interface replace FireWire in later iterations of the iPod drives to remain powered when the computer is off?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "FireWire",
+            "start_char": 64,
+            "end_char": 72,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "iPod",
+            "start_char": 100,
+            "end_char": 104,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What does Dell call the feature letting the interface replace FireWire in later iterations of the iPod drives to remain powered when the computer is off?",
+      "normalization_changed": true,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What does Dell call the feature letting the interface replace ENTITYA in later iterations of the ENTITYB drives to remain powered when the computer is off?",
+      "hanlp_input_sentence": "What does Dell call the feature letting the interface replace ENTITYA in later iterations of the ENTITYB drives to remain powered when the computer is off?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "FireWire",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            64,
+            72
+          ],
+          "masked_char_span": [
+            62,
+            69
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "iPod",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            100,
+            104
+          ],
+          "masked_char_span": [
+            97,
+            104
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "does",
+        "Dell",
+        "call",
+        "the",
+        "feature",
+        "letting",
+        "the",
+        "interface",
+        "replace",
+        "ENTITYA",
+        "in",
+        "later",
+        "iterations",
+        "of",
+        "the",
+        "ENTITYB",
+        "drives",
+        "to",
+        "remain",
+        "powered",
+        "when",
+        "the",
+        "computer",
+        "is",
+        "off",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "What",
+      "answer_anchor_id": "1",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 4,
+        "path_index": 1,
+        "anchor_id": "1",
+        "anchor_text": "What",
+        "source_types": [
+          "wh_anchor"
+        ],
+        "path_id": "A4.P1",
+        "node_ids": [
+          "17",
+          "18",
+          "13",
+          "14",
+          "10",
+          "9",
+          "7",
+          "6",
+          "4",
+          "1"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "drives",
+          "later",
+          "iterations",
+          "replace",
+          "interface",
+          "letting",
+          "feature",
+          "call",
+          "What"
+        ],
+        "global_rank": [
+          6,
+          2,
+          9,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "3",
+            "4",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "13",
+            "14",
+            "17",
+            "18",
+            "20",
+            "21",
+            "24",
+            "26"
+          ],
+          "semantic_nodes": [
+            "Dell",
+            "call",
+            "feature",
+            "letting",
+            "interface",
+            "replace",
+            "ENTITYA",
+            "later",
+            "iterations",
+            "ENTITYB",
+            "drives",
+            "remain",
+            "powered",
+            "computer",
+            "off"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "7",
+            "9",
+            "10",
+            "13",
+            "14",
+            "17",
+            "18"
+          ],
+          "covered_semantic_nodes": [
+            "call",
+            "feature",
+            "letting",
+            "interface",
+            "replace",
+            "later",
+            "iterations",
+            "ENTITYB",
+            "drives"
+          ],
+          "missing_semantic_node_ids": [
+            "3",
+            "11",
+            "20",
+            "21",
+            "24",
+            "26"
+          ],
+          "missing_semantic_nodes": [
+            "Dell",
+            "ENTITYA",
+            "remain",
+            "powered",
+            "computer",
+            "off"
+          ],
+          "missing_semantic_nodes_count": 6,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 9,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            6,
+            2,
+            9,
+            1
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 4,
+            "path_index": 1,
+            "anchor_id": "1",
+            "anchor_text": "What",
+            "source_types": [
+              "wh_anchor"
+            ],
+            "path_id": "A4.P1",
+            "node_ids": [
+              "17",
+              "18",
+              "13",
+              "14",
+              "10",
+              "9",
+              "7",
+              "6",
+              "4",
+              "1"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "drives",
+              "later",
+              "iterations",
+              "replace",
+              "interface",
+              "letting",
+              "feature",
+              "call",
+              "What"
+            ],
+            "global_rank": [
+              6,
+              2,
+              9,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "3",
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "11",
+                "13",
+                "14",
+                "17",
+                "18",
+                "20",
+                "21",
+                "24",
+                "26"
+              ],
+              "semantic_nodes": [
+                "Dell",
+                "call",
+                "feature",
+                "letting",
+                "interface",
+                "replace",
+                "ENTITYA",
+                "later",
+                "iterations",
+                "ENTITYB",
+                "drives",
+                "remain",
+                "powered",
+                "computer",
+                "off"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "7",
+                "9",
+                "10",
+                "13",
+                "14",
+                "17",
+                "18"
+              ],
+              "covered_semantic_nodes": [
+                "call",
+                "feature",
+                "letting",
+                "interface",
+                "replace",
+                "later",
+                "iterations",
+                "ENTITYB",
+                "drives"
+              ],
+              "missing_semantic_node_ids": [
+                "3",
+                "11",
+                "20",
+                "21",
+                "24",
+                "26"
+              ],
+              "missing_semantic_nodes": [
+                "Dell",
+                "ENTITYA",
+                "remain",
+                "powered",
+                "computer",
+                "off"
+              ],
+              "missing_semantic_nodes_count": 6,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 9,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                6,
+                2,
+                9,
+                1
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: feature[6]/root_projection+modifier_projection+clause_predicate, letting[7]/modifier_projection+clause_predicate, off[26]/bare_wh_predicate_root+clause_predicate, What[1]/wh_anchor, when[22]/wh_anchor, Dell[3]/clause_predicate, call[4]/clause_predicate, interface[9]/clause_predicate, replace[10]/clause_predicate, later[13]/clause_predicate, iterations[14]/clause_predicate, drives[18]/clause_predicate, remain[20]/clause_predicate, powered[21]/clause_predicate, computer[24]/clause_predicate, ENTITYA[11]/explicit_entity, ENTITYB[17]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "drives",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "drives",
+          "target": "later",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "later",
+          "target": "iterations",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "iterations",
+          "target": "replace",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "replace",
+          "target": "interface",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "interface",
+          "target": "letting",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "letting",
+          "target": "feature",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "feature",
+          "target": "call",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "call",
+          "target": "What",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "drives",
+            "later",
+            "iterations",
+            "replace",
+            "interface",
+            "letting",
+            "feature",
+            "call",
+            "What"
+          ],
+          "node_ids": [
+            "17",
+            "18",
+            "13",
+            "14",
+            "10",
+            "9",
+            "7",
+            "6",
+            "4",
+            "1"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What does dell call the feature letting the interface replacing FireWire in later iterations of the iPod drives to remain powered when the computer is off?",
+        "explicit_entities": [
+          "FireWire",
+          "iPod"
+        ],
+        "global_best_paths": [
+          [
+            "iPod",
+            "drives",
+            "later",
+            "iterations",
+            "replace",
+            "interface",
+            "letting",
+            "feature",
+            "call",
+            "What"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "iPod",
+            "drives",
+            "later",
+            "iterations",
+            "replace",
+            "interface"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the feature that lets the interface replace FireWire in later iterations of the iPod drives?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "call",
+            "q1_answer"
+          ],
+          "produce": "q2_answer",
+          "question": "What does Dell call q1's answer?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the feature that lets the interface replace FireWire in later iterations of the iPod drives?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What does Dell call q1's answer?",
+          "depends_on": [
+            "q1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "iPod",
+              "drives",
+              "later",
+              "iterations",
+              "replace",
+              "interface"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the feature that lets the interface replace FireWire in later iterations of the iPod drives?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "call",
+              "q1_answer"
+            ],
+            "produce": "q2_answer",
+            "question": "What does Dell call q1's answer?"
+          }
+        ]
+      }
+    }
+  }
+}

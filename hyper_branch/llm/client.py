@@ -53,12 +53,19 @@ class OpenAICompatibleClient:
             "temperature": self.config.temperature if temperature is None else temperature,
             "max_tokens": max_tokens,
         }
-        response = self._post_json("/chat/completions", payload)
-        content = response["choices"][0]["message"]["content"]
-        if isinstance(content, list):
-            content = "".join(part.get("text", "") if isinstance(part, dict) else str(part) for part in content)
+        cache_key = self._response_cache_key("/chat/completions", payload)
+        cached = cache_key in self.response_cache
+        if cached:
+            content = self.response_cache[cache_key]
+        else:
+            response = self._post_json("/chat/completions", payload)
+            content = response["choices"][0]["message"]["content"]
+            if isinstance(content, list):
+                content = "".join(part.get("text", "") if isinstance(part, dict) else str(part) for part in content)
+            content = str(content)
+            self.response_cache[cache_key] = content
         if self.trace_store is not None:
-            self.trace_store.log_llm_call(stage, payload, {"content": content})
+            self.trace_store.log_llm_call(stage, payload, {"content": content, "cached": cached})
         return str(content)
 
     def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
@@ -127,6 +134,15 @@ class OpenAICompatibleClient:
                 ) from exc
 
         raise RuntimeError(f"LLM request failed after {attempts} attempt(s): exhausted retries.")
+
+    def _response_cache_key(self, endpoint: str, payload: dict[str, Any]) -> str:
+        return json.dumps(
+            {"endpoint": endpoint, "payload": payload},
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            default=str,
+        )
 
     def _before_retry(self, endpoint: str, attempt: int, attempts: int, reason: object) -> None:
         if self.trace_store is not None:

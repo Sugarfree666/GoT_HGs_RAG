@@ -1,0 +1,657 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 100,
+  "qid": null,
+  "question": "When was the region immediately north of the region where the country in which Aluf can be found is located and the Persian Gulf established?",
+  "raw_question_item": {
+    "question": "When was the region immediately north of the region where the country in which Aluf can be found is located and the Persian Gulf established?",
+    "answer": "1932"
+  },
+  "gold_answer": "1932",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Aluf",
+          "start_char": 79,
+          "end_char": 83,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Persian Gulf",
+          "start_char": 116,
+          "end_char": 128,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Aluf",
+            "type": "Other"
+          },
+          {
+            "surface": "Persian Gulf",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "When was the region immediately north of the region where the country in which Aluf can be found is located and the Persian Gulf established?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Aluf",
+            "start_char": 79,
+            "end_char": 83,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Persian Gulf",
+            "start_char": 116,
+            "end_char": 128,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Persian",
+            "start_char": 116,
+            "end_char": 123,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Gulf",
+            "start_char": 124,
+            "end_char": 128,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the region immediately north of the region where the country in which Aluf can be found is located and the Persian Gulf established?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the region immediately north of the region where the country in which ENTITYA can be found is located and the ENTITYB established?",
+      "hanlp_input_sentence": "When was the region immediately north of the region where the country in which ENTITYA can be found is located and the ENTITYB established?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Aluf",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            79,
+            83
+          ],
+          "masked_char_span": [
+            79,
+            86
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Persian Gulf",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            116,
+            128
+          ],
+          "masked_char_span": [
+            119,
+            126
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "region",
+        "immediately",
+        "north",
+        "of",
+        "the",
+        "region",
+        "where",
+        "the",
+        "country",
+        "in",
+        "which",
+        "ENTITYA",
+        "can",
+        "be",
+        "found",
+        "is",
+        "located",
+        "and",
+        "the",
+        "ENTITYB",
+        "established",
+        "?"
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "region",
+      "answer_anchor_id": "9",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "9",
+        "anchor_text": "region",
+        "source_types": [
+          "typed_wh_slot",
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "23",
+          "24",
+          "4",
+          "6",
+          "18",
+          "12",
+          "16",
+          "9"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "established",
+          "region",
+          "north",
+          "found",
+          "country",
+          "can",
+          "region"
+        ],
+        "global_rank": [
+          3,
+          4,
+          7,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "12",
+            "15",
+            "16",
+            "18",
+            "20",
+            "23",
+            "24"
+          ],
+          "semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "country",
+            "ENTITYA",
+            "can",
+            "found",
+            "located",
+            "ENTITYB",
+            "established"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "9",
+            "12",
+            "16",
+            "18",
+            "23",
+            "24"
+          ],
+          "covered_semantic_nodes": [
+            "region",
+            "north",
+            "region",
+            "country",
+            "can",
+            "found",
+            "ENTITYB",
+            "established"
+          ],
+          "missing_semantic_node_ids": [
+            "5",
+            "15",
+            "20"
+          ],
+          "missing_semantic_nodes": [
+            "immediately",
+            "ENTITYA",
+            "located"
+          ],
+          "missing_semantic_nodes_count": 3,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 4,
+          "dirty_path_count": 4,
+          "path_length": 7,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            3,
+            4,
+            7,
+            0
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "9",
+            "anchor_text": "region",
+            "source_types": [
+              "typed_wh_slot",
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "23",
+              "24",
+              "4",
+              "6",
+              "18",
+              "12",
+              "16",
+              "9"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "established",
+              "region",
+              "north",
+              "found",
+              "country",
+              "can",
+              "region"
+            ],
+            "global_rank": [
+              3,
+              4,
+              7,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "12",
+                "15",
+                "16",
+                "18",
+                "20",
+                "23",
+                "24"
+              ],
+              "semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "country",
+                "ENTITYA",
+                "can",
+                "found",
+                "located",
+                "ENTITYB",
+                "established"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "9",
+                "12",
+                "16",
+                "18",
+                "23",
+                "24"
+              ],
+              "covered_semantic_nodes": [
+                "region",
+                "north",
+                "region",
+                "country",
+                "can",
+                "found",
+                "ENTITYB",
+                "established"
+              ],
+              "missing_semantic_node_ids": [
+                "5",
+                "15",
+                "20"
+              ],
+              "missing_semantic_nodes": [
+                "immediately",
+                "ENTITYA",
+                "located"
+              ],
+              "missing_semantic_nodes_count": 3,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 4,
+              "dirty_path_count": 4,
+              "path_length": 7,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                3,
+                4,
+                7,
+                0
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: region[4]/root_projection+modifier_projection+clause_predicate, region[9]/typed_wh_slot+clause_predicate, country[12]/typed_wh_slot+clause_predicate, north[6]/modifier_projection+clause_predicate, When[1]/wh_anchor, where[10]/wh_anchor, which[14]/wh_anchor, immediately[5]/clause_predicate, can[16]/clause_predicate, found[18]/clause_predicate, located[20]/clause_predicate, established[24]/clause_predicate, ENTITYA[15]/explicit_entity, ENTITYB[23]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "established",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "established",
+          "target": "region",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "region",
+          "target": "north",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "north",
+          "target": "found",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "found",
+          "target": "country",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "country",
+          "target": "can",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "can",
+          "target": "region",
+          "derived": true,
+          "rule": "restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "established",
+            "region",
+            "north",
+            "found",
+            "country",
+            "can",
+            "region"
+          ],
+          "node_ids": [
+            "23",
+            "24",
+            "4",
+            "6",
+            "18",
+            "12",
+            "16",
+            "9"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the region immediately north of the region where the country in which Aluf can be found is located and the Persian Gulf established?",
+        "explicit_entities": [
+          "Aluf",
+          "Persian Gulf"
+        ],
+        "global_best_paths": [
+          [
+            "Persian Gulf",
+            "established",
+            "region",
+            "north",
+            "found",
+            "country",
+            "can",
+            "region"
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "id": "q1",
+          "consume": [
+            "country",
+            "where",
+            "Aluf",
+            "can",
+            "be",
+            "found"
+          ],
+          "produce": "q1_answer",
+          "question": "What is the country in which Aluf can be found?"
+        },
+        {
+          "id": "q2",
+          "consume": [
+            "region",
+            "where",
+            "q1_answer",
+            "is",
+            "located"
+          ],
+          "produce": "q2_answer",
+          "question": "What region is where q1's answer is located?"
+        },
+        {
+          "id": "q3",
+          "consume": [
+            "region",
+            "north",
+            "immediately",
+            "q2_answer"
+          ],
+          "produce": "q3_answer",
+          "question": "What region is immediately north of q2's answer?"
+        },
+        {
+          "id": "q4",
+          "consume": [
+            "Persian Gulf",
+            "established"
+          ],
+          "produce": "q4_answer",
+          "question": "When was the Persian Gulf established?"
+        },
+        {
+          "id": "q5",
+          "consume": [
+            "q3_answer",
+            "q4_answer"
+          ],
+          "produce": "q5_answer",
+          "question": "When was q3's answer established?"
+        }
+      ]
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the country in which Aluf can be found?",
+          "depends_on": []
+        },
+        {
+          "id": "q2",
+          "question": "What region is where q1's answer is located?",
+          "depends_on": [
+            "q1"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What region is immediately north of q2's answer?",
+          "depends_on": [
+            "q2"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "When was the Persian Gulf established?",
+          "depends_on": []
+        },
+        {
+          "id": "q5",
+          "question": "When was q3's answer established?",
+          "depends_on": [
+            "q3",
+            "q4"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        },
+        {
+          "source": "q3",
+          "target": "q5"
+        },
+        {
+          "source": "q4",
+          "target": "q5"
+        }
+      ],
+      "leaf_node_ids": [
+        "q5"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "actions": [
+          {
+            "id": "q1",
+            "consume": [
+              "country",
+              "where",
+              "Aluf",
+              "can",
+              "be",
+              "found"
+            ],
+            "produce": "q1_answer",
+            "question": "What is the country in which Aluf can be found?"
+          },
+          {
+            "id": "q2",
+            "consume": [
+              "region",
+              "where",
+              "q1_answer",
+              "is",
+              "located"
+            ],
+            "produce": "q2_answer",
+            "question": "What region is where q1's answer is located?"
+          },
+          {
+            "id": "q3",
+            "consume": [
+              "region",
+              "north",
+              "immediately",
+              "q2_answer"
+            ],
+            "produce": "q3_answer",
+            "question": "What region is immediately north of q2's answer?"
+          },
+          {
+            "id": "q4",
+            "consume": [
+              "Persian Gulf",
+              "established"
+            ],
+            "produce": "q4_answer",
+            "question": "When was the Persian Gulf established?"
+          },
+          {
+            "id": "q5",
+            "consume": [
+              "q3_answer",
+              "q4_answer"
+            ],
+            "produce": "q5_answer",
+            "question": "When was q3's answer established?"
+          }
+        ]
+      }
+    }
+  }
+}
