@@ -34,8 +34,48 @@ from run_depo_decomposition_batch import (  # noqa: E402
 )
 
 
-METHOD = "depo_no_path_atomic_dag"
+METHOD = "depo_no_path_minimal_atomic_dag"
 STEP5_MODE = "no_path"
+PROMPT_VARIANT = "minimal_no_path"
+
+MINIMAL_NO_PATH_SYSTEM = """
+You are a baseline question decomposition module.
+
+Your task is to convert one complex question into an ordered list of atomic questions.
+Do not answer the question.
+
+You are given only:
+- original_question
+
+There is no parser path, no structural evidence, no entity list, and no support span.
+Use only the information explicitly stated in the original question.
+
+Return valid JSON only:
+{
+  "actions": [
+    {
+      "id": "q1",
+      "consume": [],
+      "produce": "q1_answer",
+      "question": "atomic question?"
+    }
+  ]
+}
+
+Rules:
+1. Each action must ask one natural-language atomic question.
+2. ids must be q1, q2, q3, ... in order.
+3. produce must be qN_answer for action qN.
+4. consume must be exactly [] for every action.
+5. If a later question depends on an earlier answer, refer to it as q1's answer, q2's answer, etc.
+6. Do not output depends_on; the program will infer dependencies from qN's answer references.
+7. Do not output support spans, paths, nodes, edges, start_index, or end_index.
+8. Do not use external knowledge.
+9. Do not include explanations or markdown.
+
+Now generate the action trace for the given input JSON.
+Return only the JSON object.
+""".strip()
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,6 +105,49 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+class MinimalNoPathAtomicDAGGenerator:
+    def __init__(self, llm_client: Any, validator: Any) -> None:
+        self.llm_client = llm_client
+        self.validator = validator
+
+    def generate(self, *, original_question: str) -> Any:
+        user_prompt = json.dumps(
+            {"original_question": original_question},
+            ensure_ascii=False,
+            indent=2,
+        )
+        raw_payload = self.llm_client.chat_json(MINIMAL_NO_PATH_SYSTEM, user_prompt)
+        sanitized_payload, warnings = _sanitize_minimal_no_path_payload(raw_payload)
+        result = self.validator(sanitized_payload)
+        result.warnings.extend(warnings)
+        return result
+
+
+def _sanitize_minimal_no_path_payload(raw_payload: Any) -> tuple[Any, list[str]]:
+    warnings: list[str] = []
+    if not isinstance(raw_payload, dict):
+        return raw_payload, warnings
+    raw_actions = raw_payload.get("actions")
+    if not isinstance(raw_actions, list):
+        return dict(raw_payload), warnings
+
+    sanitized_payload = dict(raw_payload)
+    sanitized_actions: list[Any] = []
+    for index, raw_action in enumerate(raw_actions, start=1):
+        if not isinstance(raw_action, dict):
+            sanitized_actions.append(raw_action)
+            continue
+        action = dict(raw_action)
+        if "consume" not in action:
+            warnings.append(f"q{index}: minimal no-path inserted empty consume [].")
+        elif action.get("consume") != []:
+            warnings.append(f"q{index}: minimal no-path ignored non-empty consume and replaced it with [].")
+        action["consume"] = []
+        sanitized_actions.append(action)
+    sanitized_payload["actions"] = sanitized_actions
+    return sanitized_payload, warnings
+
+
 def main() -> int:
     args = parse_args()
     api_key = os.getenv("OPENAI_API_KEY") or args.api_key
@@ -83,7 +166,7 @@ def main() -> int:
         return 2
 
     try:
-        from atomic_question_dag import NoPathAtomicDAGGenerator
+        from atomic_question_dag import validate_atomic_question_dag
         from llm_client import LLMClient
     except ModuleNotFoundError as exc:
         print(f"Missing dependency: {exc.name}. Run: pip install -r requirements.txt", file=sys.stderr)
@@ -93,7 +176,7 @@ def main() -> int:
     output_root = _repo_path(args.output_root)
 
     llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
-    generator = NoPathAtomicDAGGenerator(llm_client)
+    generator = MinimalNoPathAtomicDAGGenerator(llm_client, validate_atomic_question_dag)
 
     for questions_file in question_files:
         dataset = _dataset_name(questions_file)
@@ -199,6 +282,7 @@ def build_decomposition_payload(
         "status": "ok",
         "method": METHOD,
         "step5_mode": STEP5_MODE,
+        "ablation": PROMPT_VARIANT,
         "dataset": dataset,
         "questions_file": str(questions_file),
         "index": item["index"],
@@ -210,6 +294,7 @@ def build_decomposition_payload(
             "5_step5_action_trace": {
                 "input": {
                     "original_question": item["question"],
+                    "prompt_variant": PROMPT_VARIANT,
                 },
                 "actions": _step5_actions(atomic_question_dag),
                 "warnings": list(getattr(atomic_question_dag, "warnings", []) or []),
@@ -229,6 +314,7 @@ def build_error_payload(
         "status": "sample",
         "method": METHOD,
         "step5_mode": STEP5_MODE,
+        "ablation": PROMPT_VARIANT,
         "dataset": dataset,
         "questions_file": str(questions_file),
         "index": item["index"],
@@ -256,6 +342,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     if payload.get("gold_answer") is not None:
         lines.append(f"- Gold answer: {payload['gold_answer']}")
     lines.append(f"- Step5 mode: `{payload.get('step5_mode', STEP5_MODE)}`")
+    lines.append(f"- Prompt variant: `{payload.get('ablation', PROMPT_VARIANT)}`")
     lines.append("")
 
     lines.append("## 1. Step5 Action Trace")
