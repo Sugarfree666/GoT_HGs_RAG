@@ -111,7 +111,8 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("Anchor A4: ENTITYB[7] sources=explicit_entity", output)
         self.assertNotIn("answer_anchor:", output)
         self.assertNotIn("entity_anchors:", output)
-        self.assertIn("[5. Atomic Question DAG]", output)
+        self.assertIn("[5. Semantic Reasoning Paths]", output)
+        self.assertIn("[6. Atomic Question DAG]", output)
         self.assertNotIn("(skipped: Step5 disabled)", output)
         self.assertIn("q1: When was Ryan Tubridy born?", output)
         self.assertIn("q2: When was Mauro Massironi born?", output)
@@ -1404,6 +1405,99 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         )
 
 
+def _semantic_path(branch_id: str, source_token_path: list[str], edge_ids: list[str]) -> dict[str, object]:
+    return {
+        "branch_id": branch_id,
+        "source_token_path": source_token_path,
+        "semantic_nodes": [
+            {"id": f"{branch_id}_n1", "label": source_token_path[0], "kind": "entity"},
+            {"id": f"{branch_id}_n2", "label": source_token_path[-1], "kind": "value_slot"},
+        ],
+        "semantic_edges": [
+            {
+                "id": edge_id,
+                "source": f"{branch_id}_n1",
+                "target": f"{branch_id}_n2",
+                "relation": " ".join(source_token_path[1:]) or "lookup",
+                "support_tokens": source_token_path[:2] if len(source_token_path) > 1 else source_token_path,
+            }
+            for edge_id in edge_ids
+        ],
+        "terminal_node_id": f"{branch_id}_n2",
+    }
+
+
+def _older_step5_payload() -> dict[str, object]:
+    return {
+        "semantic_reasoning_paths": [
+            _semantic_path("p1", ["Ryan Tubridy", "older"], ["p1_e1"]),
+            _semantic_path("p2", ["Mauro Massironi", "older"], ["p2_e1"]),
+        ],
+        "atomic_questions": [
+            {
+                "id": "q1",
+                "question": "When was Ryan Tubridy born?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e1"],
+            },
+            {
+                "id": "q2",
+                "question": "When was Mauro Massironi born?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e1"],
+            },
+        ],
+    }
+
+
+def _illusions_step5_payload() -> dict[str, object]:
+    return {
+        "semantic_reasoning_paths": [
+            _semantic_path("p1", ["Illusions (1982 Film)", "director", "born"], ["p1_e1", "p1_e2"]),
+            _semantic_path("p2", ["It'S A Wonderful Afterlife", "director", "born"], ["p2_e1", "p2_e2"]),
+        ],
+        "atomic_questions": [
+            {
+                "id": "q1",
+                "question": "Who is the director of Illusions (1982 Film)?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e1"],
+            },
+            {
+                "id": "q2",
+                "question": "When was q1's answer born?",
+                "depends_on": ["q1"],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e2"],
+            },
+            {
+                "id": "q3",
+                "question": "Who is the director of It'S A Wonderful Afterlife?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e1"],
+            },
+            {
+                "id": "q4",
+                "question": "When was q3's answer born?",
+                "depends_on": ["q3"],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e2"],
+            },
+            {
+                "id": "q5",
+                "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
+                "depends_on": ["q2", "q4"],
+                "operation": "select",
+                "semantic_edge_ids": [],
+            },
+        ],
+    }
+
+
 class FakePreprocessLLM:
     def __init__(self) -> None:
         self.calls = 0
@@ -1422,22 +1516,7 @@ class FakePreprocessLLM:
             assert "ENTITYB" not in serialized
             assert "masked_question" not in serialized
             assert "answer_anchor" not in serialized
-            return {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": ["Ryan Tubridy", "older"],
-                        "produce": "q1_answer",
-                        "question": "When was Ryan Tubridy born?",
-                    },
-                    {
-                        "id": "q2",
-                        "consume": ["Mauro Massironi", "older"],
-                        "produce": "q2_answer",
-                        "question": "When was Mauro Massironi born?",
-                    },
-                ]
-            }
+            return _older_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         assert "Deterministic entity candidates" in user_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
@@ -1481,40 +1560,7 @@ class IllusionsPipelineLLM:
                 ["Illusions (1982 Film)", "director", "born"],
                 ["It'S A Wonderful Afterlife", "director", "born"],
             ]
-            return {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": ["Illusions (1982 Film)", "director"],
-                        "produce": "q1_answer",
-                        "question": "Who is the director of Illusions (1982 Film)?",
-                    },
-                    {
-                        "id": "q2",
-                        "consume": ["q1_answer", "born"],
-                        "produce": "q2_answer",
-                        "question": "When was q1's answer born?",
-                    },
-                    {
-                        "id": "q3",
-                        "consume": ["It'S A Wonderful Afterlife", "director"],
-                        "produce": "q3_answer",
-                        "question": "Who is the director of It'S A Wonderful Afterlife?",
-                    },
-                    {
-                        "id": "q4",
-                        "consume": ["q3_answer", "born"],
-                        "produce": "q4_answer",
-                        "question": "When was q3's answer born?",
-                    },
-                    {
-                        "id": "q5",
-                        "consume": ["q2_answer", "q4_answer"],
-                        "produce": "q5_answer",
-                        "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
-                    },
-                ]
-            }
+            return _illusions_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         return {
             "entities": [

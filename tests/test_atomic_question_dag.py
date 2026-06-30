@@ -18,9 +18,11 @@ from atomic_question_dag import (  # noqa: E402
     ATOMIC_QUESTION_DAG_SYSTEM,
     NoPathAtomicDAGGenerator,
     PathAlignedAtomicDAGGenerator,
+    prompt_input_payload,
     restore_entity_paths,
     restore_global_best_path,
     restore_global_best_paths,
+    validate_atomic_question_dag,
 )
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from main import run_hanlp_sdp_pipeline  # noqa: E402
@@ -28,39 +30,19 @@ from models import HanLPSDPEdge, HanLPSDPResult, MaskMapping, QuestionRecord  # 
 
 
 class AtomicQuestionDAGTest(unittest.TestCase):
-    def test_llm_input_contract_contains_only_original_entities_and_global_best_paths(self) -> None:
-        llm = RecordingStep5LLM(_johnny_payload())
-
-        PathAlignedAtomicDAGGenerator(llm).generate(
-            original_question="Do director of film Ten9Eight: Shoot For The Moon share the same nationality?",
+    def test_prompt_input_contract_contains_only_original_entities_and_global_best_paths(self) -> None:
+        payload = prompt_input_payload(
+            original_question="Question?",
             explicit_entities=["Ten9Eight: Shoot For The Moon"],
-            global_best_paths=[["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"]],
+            global_best_paths=[["Ten9Eight: Shoot For The Moon", "director", "nationality"]],
         )
 
-        payload = json.loads(llm.user_prompts[0])
         self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
         self.assertEqual(payload["explicit_entities"], ["Ten9Eight: Shoot For The Moon"])
-        self.assertEqual(
-            payload["global_best_paths"],
-            [["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"]],
-        )
+        self.assertEqual(payload["global_best_paths"], [["Ten9Eight: Shoot For The Moon", "director", "nationality"]])
         serialized = json.dumps(payload, ensure_ascii=False)
-        forbidden = [
-            "answer_anchor",
-            "entity_anchors",
-            "constraints",
-            "candidate_sets",
-            "path_type",
-            "masked_question",
-            "entity_map",
-            "path_id",
-            "start_index",
-            "end_index",
-            "ENTITYA",
-            "ENTITYB",
-        ]
-        for item in forbidden:
-            self.assertNotIn(item, serialized)
+        for forbidden in ("masked_question", "normalized_question", "sdp", "candidate_sets", "ENTITYA"):
+            self.assertNotIn(forbidden, serialized)
 
     def test_restore_entity_paths_replaces_complete_placeholder_tokens_only(self) -> None:
         paths = [
@@ -110,32 +92,33 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unresolved entity placeholder"):
             restore_global_best_path({"nodes": ["ENTITYA", "born"]}, [])
 
-    def test_single_path_predicate_chain_generates_dependent_atomic_questions(self) -> None:
-        result = _generate(_johnny_payload())
+    def test_valid_new_payload_builds_dag_from_atomic_questions(self) -> None:
+        result = validate_atomic_question_dag(_johnny_payload())
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual([node.id for node in result.nodes], ["q1", "q2"])
         self.assertEqual(result.nodes[1].depends_on, ("q1",))
-        self.assertEqual(result.edges[0].to_dict(), {"source": "q1", "target": "q2"})
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
         self.assertEqual(result.leaf_node_ids, ["q2"])
-        self.assertTrue(all(node.support is None for node in result.nodes))
+        self.assertIn("semantic_reasoning_paths", result.raw_payload)
+        self.assertEqual(result.nodes[0].operation, "lookup")
+        self.assertEqual(result.nodes[0].semantic_edge_ids, ("p1_e1",))
 
-    def test_single_node_global_best_path_is_sent_to_llm_without_indices(self) -> None:
-        llm = RecordingStep5LLM(_single_action_payload())
+    def test_path_generator_keeps_step5_input_contract(self) -> None:
+        llm = RecordingStep5LLM(_johnny_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
-            original_question="What is the nationality of Some Entity?",
-            explicit_entities=["Some Entity"],
-            global_best_paths=[["Some Entity"]],
+            original_question="The player who defeated Johnny Majors was born in what year?",
+            explicit_entities=["Johnny Majors"],
+            global_best_paths=[["Johnny Majors", "defeated", "player", "born", "year"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(payload["global_best_paths"], [["Some Entity"]])
-        self.assertNotIn("index", json.dumps(payload, ensure_ascii=False))
-        self.assertIsNone(result.nodes[0].support)
+        self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
+        self.assertEqual(payload["global_best_paths"], [["Johnny Majors", "defeated", "player", "born", "year"]])
 
     def test_empty_global_best_path_fails_before_llm_call(self) -> None:
-        llm = RecordingStep5LLM(_single_action_payload())
+        llm = RecordingStep5LLM(_johnny_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Question?",
             explicit_entities=[],
@@ -146,81 +129,8 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(llm.user_prompts, [])
         self.assertIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
 
-    def test_no_path_generator_accepts_original_question_only(self) -> None:
-        llm = RecordingNoPathLLM(_no_path_question_dependency_payload())
-        result = NoPathAtomicDAGGenerator(llm).generate(
-            original_question="Where was the performer of Song A born?"
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(payload, {"original_question": "Where was the performer of Song A born?"})
-        self.assertNotIn("global_best_paths", llm.user_prompts[0])
-        self.assertNotIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
-
-    def test_no_path_generator_clears_path_like_consume_with_warning(self) -> None:
-        llm = RecordingNoPathLLM(
-            {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": ["A", "relation", "B"],
-                        "produce": "q1_answer",
-                        "question": "What is B?",
-                    }
-                ]
-            }
-        )
-        result = NoPathAtomicDAGGenerator(llm).generate(original_question="What is B?")
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(result.raw_payload["actions"][0]["consume"], [])
-        self.assertIn("no-path mode ignored non-empty consume", "; ".join(result.warnings))
-        self.assertEqual(result.nodes[0].depends_on, ())
-
-    def test_no_path_generator_ignores_consume_answer_refs_for_dependencies(self) -> None:
-        llm = RecordingNoPathLLM(
-            {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": [],
-                        "produce": "q1_answer",
-                        "question": "Who is the performer of Song A?",
-                    },
-                    {
-                        "id": "q2",
-                        "consume": ["q1_answer"],
-                        "produce": "q2_answer",
-                        "question": "Where was the performer born?",
-                    },
-                ]
-            }
-        )
-        result = NoPathAtomicDAGGenerator(llm).generate(
-            original_question="Where was the performer of Song A born?"
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(result.raw_payload["actions"][1]["consume"], [])
-        self.assertEqual(result.nodes[1].depends_on, ())
-
-    def test_no_path_generator_derives_dependencies_from_question_references(self) -> None:
-        llm = RecordingNoPathLLM(_no_path_question_dependency_payload())
-        result = NoPathAtomicDAGGenerator(llm).generate(
-            original_question="Where was the performer of Song A born?"
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(result.nodes[1].depends_on, ("q1",))
-        self.assertEqual(result.nodes[2].depends_on, ("q2",))
-        self.assertEqual(
-            [edge.to_dict() for edge in result.edges],
-            [{"source": "q1", "target": "q2"}, {"source": "q2", "target": "q3"}],
-        )
-
-    def test_path_mode_still_derives_dependencies_from_consume(self) -> None:
-        result = _generate(
+    def test_old_actions_payload_is_rejected_for_path_aligned_step5(self) -> None:
+        result = validate_atomic_question_dag(
             {
                 "actions": [
                     {
@@ -228,253 +138,124 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                         "consume": ["A"],
                         "produce": "q1_answer",
                         "question": "What is A?",
+                    }
+                ]
+            }
+        )
+
+        self.assertFalse(result.valid)
+        self.assertIn("semantic_reasoning_paths must be a non-empty list.", result.validation_errors)
+        self.assertIn("atomic_questions must be a non-empty list.", result.validation_errors)
+
+    def test_invalid_dependencies_are_rejected(self) -> None:
+        cases = [
+            ("future", ["q3"], "depends_on references non-previous node 'q3'"),
+            ("self", ["q1"], "depends_on references non-previous node 'q1'"),
+            ("unknown", ["qx"], "depends_on contains invalid dependency id 'qx'"),
+        ]
+        for _, dependencies, expected in cases:
+            with self.subTest(expected=expected):
+                payload = _johnny_payload()
+                payload["atomic_questions"][0]["depends_on"] = dependencies
+                result = validate_atomic_question_dag(payload)
+                self.assertFalse(result.valid)
+                self.assertIn(expected, "; ".join(result.validation_errors))
+
+    def test_unresolved_entity_placeholder_in_question_is_rejected(self) -> None:
+        payload = _johnny_payload()
+        payload["atomic_questions"][0]["question"] = "Who defeated ENTITYA?"
+
+        result = validate_atomic_question_dag(payload)
+
+        self.assertFalse(result.valid)
+        self.assertIn("question contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+
+    def test_unresolved_entity_placeholder_in_semantic_path_is_rejected(self) -> None:
+        payload = _johnny_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_nodes"][0]["label"] = "ENTITYA"
+
+        result = validate_atomic_question_dag(payload)
+
+        self.assertFalse(result.valid)
+        self.assertIn("label contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+
+    def test_unresolved_entity_placeholder_in_support_tokens_is_rejected(self) -> None:
+        payload = _johnny_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["support_tokens"] = ["ENTITYA"]
+
+        result = validate_atomic_question_dag(payload)
+
+        self.assertFalse(result.valid)
+        self.assertIn("support_tokens contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+
+    def test_support_tokens_must_be_copied_from_source_token_path(self) -> None:
+        payload = _johnny_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["support_tokens"] = ["not-in-path"]
+
+        result = validate_atomic_question_dag(payload)
+
+        self.assertFalse(result.valid)
+        self.assertIn("token not copied from source_token_path", "; ".join(result.validation_errors))
+
+    def test_braced_question_reference_is_rejected(self) -> None:
+        payload = _johnny_payload()
+        payload["atomic_questions"][1]["question"] = "What year was {{q1}} born?"
+
+        result = validate_atomic_question_dag(payload)
+
+        self.assertFalse(result.valid)
+        self.assertIn("must use qN's answer references", "; ".join(result.validation_errors))
+
+    def test_comparison_case_generates_expected_edges(self) -> None:
+        result = validate_atomic_question_dag(_parallel_nationality_payload())
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(
+            [node.question for node in result.nodes],
+            [
+                "Who directed Ten9Eight: Shoot For The Moon?",
+                "What is the nationality of q1's answer?",
+                "Who directed Sabotage (1936 Film)?",
+                "What is the nationality of q3's answer?",
+                "Do q2's answer and q4's answer indicate that the two directors share the same nationality?",
+            ],
+        )
+        self.assertEqual(
+            [edge.to_dict() for edge in result.edges],
+            [
+                {"source": "q1", "target": "q2"},
+                {"source": "q3", "target": "q4"},
+                {"source": "q2", "target": "q5"},
+                {"source": "q4", "target": "q5"},
+            ],
+        )
+        self.assertEqual(result.leaf_node_ids, ["q5"])
+
+    def test_no_path_generator_still_accepts_isolated_old_action_trace(self) -> None:
+        llm = RecordingNoPathLLM(
+            {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": ["A", "relation"],
+                        "produce": "q1_answer",
+                        "question": "Who is the performer of Song A?",
                     },
                     {
                         "id": "q2",
                         "consume": ["q1_answer"],
                         "produce": "q2_answer",
-                        "question": "What follows?",
+                        "question": "Where was q1's answer born?",
                     },
                 ]
             }
         )
+        result = NoPathAtomicDAGGenerator(llm).generate(original_question="Where was the performer of Song A born?")
 
         self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["actions"][0]["consume"], [])
         self.assertEqual(result.nodes[1].depends_on, ("q1",))
-
-    def test_multi_path_cover_is_sent_to_llm(self) -> None:
-        llm = RecordingStep5LLM(_parallel_born_later_payload())
-        result = PathAlignedAtomicDAGGenerator(llm).generate(
-            original_question="Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?",
-            explicit_entities=["Illusions (1982 Film)", "It'S A Wonderful Afterlife"],
-            global_best_paths=[
-                ["Illusions (1982 Film)", "director", "born"],
-                ["It'S A Wonderful Afterlife", "director", "born"],
-            ],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(
-            payload["global_best_paths"],
-            [
-                ["Illusions (1982 Film)", "director", "born"],
-                ["It'S A Wonderful Afterlife", "director", "born"],
-            ],
-        )
-        self.assertEqual(result.nodes[-1].depends_on, ("q2", "q4"))
-
-    def test_parallel_nationality_actions_can_feed_final_comparison(self) -> None:
-        result = _generate(
-            _parallel_nationality_payload(),
-            question=(
-                "Do director of film Ten9Eight: Shoot For The Moon and director of film "
-                "Sabotage (1936 Film) share the same nationality?"
-            ),
-            entities=["Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"],
-            path=["Ten9Eight: Shoot For The Moon", "director", "share", "nationality"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(
-            [edge.to_dict() for edge in result.edges],
-            [
-                {"source": "q1", "target": "q2"},
-                {"source": "q3", "target": "q4"},
-                {"source": "q2", "target": "q5"},
-                {"source": "q4", "target": "q5"},
-            ],
-        )
-        self.assertEqual(result.leaf_node_ids, ["q5"])
-        self.assertIn("same nationality", result.nodes[-1].question)
-
-    def test_born_later_actions_generate_complete_selection_dag(self) -> None:
-        result = _generate(
-            _born_later_payload(),
-            question="Who was born later, Gideon Johnson Pillow or Holm Jølsen?",
-            entities=["Gideon Johnson Pillow", "Holm Jølsen"],
-            path=["Gideon Johnson Pillow", "born", "later"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(
-            [node.question for node in result.nodes],
-            [
-                "When was Gideon Johnson Pillow born?",
-                "When was Holm Jølsen born?",
-                "Who was born later, Gideon Johnson Pillow or Holm Jølsen, based on q1's answer and q2's answer?",
-            ],
-        )
-        self.assertEqual(
-            [edge.to_dict() for edge in result.edges],
-            [{"source": "q1", "target": "q3"}, {"source": "q2", "target": "q3"}],
-        )
-
-    def test_comparison_action_trace_allows_final_multi_parent_node(self) -> None:
-        result = _generate(
-            _younger_director_payload(),
-            question="Which film whose director is younger, Dangerously They Live or Salad By The Roots?",
-            entities=["Dangerously They Live", "Salad By The Roots"],
-            path=["Dangerously They Live", "director", "younger"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(
-            [edge.to_dict() for edge in result.edges],
-            [
-                {"source": "q1", "target": "q2"},
-                {"source": "q3", "target": "q4"},
-                {"source": "q2", "target": "q5"},
-                {"source": "q4", "target": "q5"},
-            ],
-        )
-        self.assertEqual(result.leaf_node_ids, ["q5"])
-        self.assertEqual(result.nodes[-1].depends_on, ("q2", "q4"))
-        self.assertTrue(all(node.support is None for node in result.nodes))
-
-    def test_dell_long_path_generates_dag_without_support_cover(self) -> None:
-        result = _generate(
-            _dell_payload(),
-            question=(
-                "What does dell call the feature letting the interface replacing FireWire "
-                "to remain powered when the computer is off?"
-            ),
-            entities=["FireWire"],
-            path=["FireWire", "replacing", "interface", "letting", "feature", "call", "What"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertTrue(all(node.support is None for node in result.nodes))
-        self.assertEqual(
-            [edge.to_dict() for edge in result.edges],
-            [{"source": "q1", "target": "q2"}, {"source": "q2", "target": "q3"}],
-        )
-
-    def test_messi_barcelona_action_trace_regression(self) -> None:
-        result = _generate(
-            _messi_barcelona_payload(),
-            question="When was the person who Messi's goals in Copa del Rey compared to get signed by Barcelona?",
-            entities=["Messi", "Copa del Rey", "Barcelona"],
-            path=["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(
-            [node.question for node in result.nodes],
-            [
-                "Who is the person that Messi's goals in Copa del Rey were compared to?",
-                "When did q1's answer get signed by Barcelona?",
-            ],
-        )
-        self.assertEqual(result.nodes[1].depends_on, ("q1",))
-        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
-        self.assertNotIn("born", result.nodes[1].question.lower())
-
-    def test_actions_payload_is_required(self) -> None:
-        result = _generate({"nodes": [{"id": "q1", "question": "What is A?"}]})
-
-        self.assertFalse(result.valid)
-        self.assertIn("actions must be a non-empty list.", result.validation_errors)
-
-    def test_future_dependency_is_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["q2_answer"], "produce": "q1_answer", "question": "What follows q2's answer?"},
-                {"id": "q2", "consume": ["B"], "produce": "q2_answer", "question": "What is B?"},
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("qN reference points to non-previous node 'q2'", "; ".join(result.validation_errors))
-
-    def test_unresolved_entity_placeholder_in_question_is_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["A", "director"], "produce": "q1_answer", "question": "Who directed ENTITYA?"},
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("question contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
-
-    def test_unresolved_entity_placeholder_in_consume_is_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["ENTITYA", "director"], "produce": "q1_answer", "question": "Who directed A?"},
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("consume contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
-
-    def test_question_and_consume_references_are_auto_dependencies(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["A", "director"], "produce": "q1_answer", "question": "Who directed A?"},
-                {"id": "q2", "consume": ["nationality", "q1_answer"], "produce": "q2_answer", "question": "What is the nationality?"},
-                {
-                    "id": "q3",
-                    "consume": ["q1_answer", "q2_answer"],
-                    "produce": "q3_answer",
-                    "question": "What nationality does q1's answer have based on q2_answer?",
-                },
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(result.nodes[1].depends_on, ("q1",))
-        self.assertEqual(result.nodes[2].depends_on, ("q1", "q2"))
-
-    def test_braced_question_reference_is_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["A", "director"], "produce": "q1_answer", "question": "Who directed A?"},
-                {
-                    "id": "q2",
-                    "consume": ["nationality", "q1_answer"],
-                    "produce": "q2_answer",
-                    "question": "What is the nationality of {{q1}}?",
-                },
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("must use qN's answer references", "; ".join(result.validation_errors))
-
-    def test_bad_action_id_and_produce_are_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q2", "consume": ["A"], "produce": "q2_answer", "question": "What is A?"},
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        errors = "; ".join(result.validation_errors)
-        self.assertIn("action id must be q1", errors)
-        self.assertIn("produce must be 'q1_answer'", errors)
-
-    def test_non_question_is_rejected(self) -> None:
-        payload = {
-            "actions": [
-                {"id": "q1", "consume": ["A"], "produce": "q1_answer", "question": "Tell me A."},
-            ]
-        }
-        result = _generate(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("question must be a non-empty single question", "; ".join(result.validation_errors))
-
-    def test_deterministic_output_for_same_payload(self) -> None:
-        first = _generate(_johnny_payload())
-        second = _generate(_johnny_payload())
-
-        self.assertEqual(first.to_dict(), second.to_dict())
+        self.assertIn("no-path mode ignored non-empty consume", "; ".join(result.warnings))
 
     def test_pipeline_integration_returns_atomic_question_dag(self) -> None:
         llm = FullPipelineLLM()
@@ -488,6 +269,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         dag = result["atomic_question_dag"]
         self.assertTrue(dag.valid, dag.validation_errors)
         self.assertEqual([node.question for node in dag.nodes], ["When was Ryan Tubridy born?", "When was Mauro Massironi born?"])
+        self.assertIn("semantic_reasoning_paths", dag.raw_payload)
         payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
         self.assertEqual(payload["explicit_entities"], ["Ryan Tubridy", "Mauro Massironi"])
@@ -504,16 +286,12 @@ class RecordingStep5LLM:
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, Any]:
         self.system_prompts.append(system_prompt)
         self.user_prompts.append(user_prompt)
-        self.assert_step5_prompt(system_prompt, user_prompt)
-        return self.payload
-
-    @staticmethod
-    def assert_step5_prompt(system_prompt: str, user_prompt: str) -> None:
         if system_prompt != ATOMIC_QUESTION_DAG_SYSTEM:
             raise AssertionError("Unexpected system prompt")
         payload = json.loads(user_prompt)
         if set(payload) != {"original_question", "explicit_entities", "global_best_paths"}:
             raise AssertionError(f"Unexpected Step5 prompt keys: {set(payload)}")
+        return self.payload
 
 
 class RecordingNoPathLLM:
@@ -552,22 +330,7 @@ class FullPipelineLLM:
             payload = json.loads(user_prompt)
             if set(payload) != {"original_question", "explicit_entities", "global_best_paths"}:
                 raise AssertionError(f"Unexpected Step5 prompt keys: {set(payload)}")
-            return {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": ["Ryan Tubridy", "older"],
-                        "produce": "q1_answer",
-                        "question": "When was Ryan Tubridy born?",
-                    },
-                    {
-                        "id": "q2",
-                        "consume": ["Mauro Massironi", "older"],
-                        "produce": "q2_answer",
-                        "question": "When was Mauro Massironi born?",
-                    },
-                ]
-            }
+            return _older_payload()
         raise AssertionError(f"Unexpected system prompt: {system_prompt}")
 
 
@@ -595,254 +358,126 @@ class FakeOlderParser:
         )
 
 
-def _generate(
-    payload: dict[str, Any],
-    *,
-    question: str = "Question?",
-    entities: list[str] | None = None,
-    path: list[str] | None = None,
-) -> Any:
-    return PathAlignedAtomicDAGGenerator(RecordingStep5LLM(payload)).generate(
-        original_question=question,
-        explicit_entities=entities or ["A"],
-        global_best_paths=[path or ["A", "B"]],
-    )
-
-
-def _single_action_payload(question: str = "What is the supported fact?") -> dict[str, Any]:
+def _semantic_path(
+    branch_id: str,
+    source_token_path: list[str],
+    edge_ids: list[str],
+) -> dict[str, Any]:
+    nodes = [
+        {"id": f"{branch_id}_n1", "label": source_token_path[0], "kind": "entity"},
+        {"id": f"{branch_id}_n2", "label": source_token_path[-1], "kind": "value_slot"},
+    ]
+    edges = [
+        {
+            "id": edge_id,
+            "source": f"{branch_id}_n1",
+            "target": f"{branch_id}_n2",
+            "relation": " ".join(source_token_path[1:]) or "lookup",
+            "support_tokens": source_token_path[:2] if len(source_token_path) > 1 else source_token_path,
+        }
+        for edge_id in edge_ids
+    ]
     return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": ["A"],
-                "produce": "q1_answer",
-                "question": question,
-            }
-        ]
-    }
-
-
-def _no_path_question_dependency_payload() -> dict[str, Any]:
-    return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": [],
-                "produce": "q1_answer",
-                "question": "Who is the performer of Song A?",
-            },
-            {
-                "id": "q2",
-                "consume": [],
-                "produce": "q2_answer",
-                "question": "Where was q1's answer born?",
-            },
-            {
-                "id": "q3",
-                "consume": [],
-                "produce": "q3_answer",
-                "question": "What country is q2's answer in?",
-            },
-        ]
+        "branch_id": branch_id,
+        "source_token_path": source_token_path,
+        "semantic_nodes": nodes,
+        "semantic_edges": edges,
+        "terminal_node_id": f"{branch_id}_n2",
     }
 
 
 def _johnny_payload() -> dict[str, Any]:
     return {
-        "actions": [
+        "semantic_reasoning_paths": [
+            _semantic_path("p1", ["Johnny Majors", "defeated", "player", "born", "year"], ["p1_e1", "p1_e2"])
+        ],
+        "atomic_questions": [
             {
                 "id": "q1",
-                "consume": ["Johnny Majors", "defeated", "player"],
-                "produce": "q1_answer",
                 "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e1"],
             },
             {
                 "id": "q2",
-                "consume": ["q1_answer", "born", "year"],
-                "produce": "q2_answer",
                 "question": "What year was q1's answer born?",
+                "depends_on": ["q1"],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e2"],
             },
-        ]
+        ],
     }
 
 
 def _parallel_nationality_payload() -> dict[str, Any]:
     return {
-        "actions": [
+        "semantic_reasoning_paths": [
+            _semantic_path("p1", ["Ten9Eight: Shoot For The Moon", "director", "nationality"], ["p1_e1", "p1_e2"]),
+            _semantic_path("p2", ["Sabotage (1936 Film)", "director", "nationality"], ["p2_e1", "p2_e2"]),
+        ],
+        "atomic_questions": [
             {
                 "id": "q1",
-                "consume": ["Ten9Eight: Shoot For The Moon", "director"],
-                "produce": "q1_answer",
                 "question": "Who directed Ten9Eight: Shoot For The Moon?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e1"],
             },
             {
                 "id": "q2",
-                "consume": ["q1_answer", "nationality"],
-                "produce": "q2_answer",
                 "question": "What is the nationality of q1's answer?",
+                "depends_on": ["q1"],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e2"],
             },
             {
                 "id": "q3",
-                "consume": ["Sabotage (1936 Film)", "director"],
-                "produce": "q3_answer",
                 "question": "Who directed Sabotage (1936 Film)?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e1"],
             },
             {
                 "id": "q4",
-                "consume": ["q3_answer", "nationality"],
-                "produce": "q4_answer",
                 "question": "What is the nationality of q3's answer?",
+                "depends_on": ["q3"],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e2"],
             },
             {
                 "id": "q5",
-                "consume": ["q2_answer", "q4_answer", "share", "nationality"],
-                "produce": "q5_answer",
-                "question": "Do the directors have the same nationality based on q2's answer and q4's answer?",
+                "question": "Do q2's answer and q4's answer indicate that the two directors share the same nationality?",
+                "depends_on": ["q2", "q4"],
+                "operation": "verify",
+                "semantic_edge_ids": [],
             },
-        ]
+        ],
     }
 
 
-def _born_later_payload() -> dict[str, Any]:
+def _older_payload() -> dict[str, Any]:
     return {
-        "actions": [
+        "semantic_reasoning_paths": [
+            _semantic_path("p1", ["Ryan Tubridy", "older"], ["p1_e1"]),
+            _semantic_path("p2", ["Mauro Massironi", "older"], ["p2_e1"]),
+        ],
+        "atomic_questions": [
             {
                 "id": "q1",
-                "consume": ["Gideon Johnson Pillow", "born"],
-                "produce": "q1_answer",
-                "question": "When was Gideon Johnson Pillow born?",
+                "question": "When was Ryan Tubridy born?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p1_e1"],
             },
             {
                 "id": "q2",
-                "consume": ["Holm Jølsen", "born"],
-                "produce": "q2_answer",
-                "question": "When was Holm Jølsen born?",
+                "question": "When was Mauro Massironi born?",
+                "depends_on": [],
+                "operation": "lookup",
+                "semantic_edge_ids": ["p2_e1"],
             },
-            {
-                "id": "q3",
-                "consume": ["q1_answer", "q2_answer", "later"],
-                "produce": "q3_answer",
-                "question": "Who was born later, Gideon Johnson Pillow or Holm Jølsen, based on q1's answer and q2's answer?",
-            },
-        ]
-    }
-
-
-def _younger_director_payload() -> dict[str, Any]:
-    return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": ["Dangerously They Live", "director"],
-                "produce": "q1_answer",
-                "question": "Who directed Dangerously They Live?",
-            },
-            {
-                "id": "q2",
-                "consume": ["q1_answer", "younger"],
-                "produce": "q2_answer",
-                "question": "When was q1's answer born?",
-            },
-            {
-                "id": "q3",
-                "consume": ["Salad By The Roots", "director"],
-                "produce": "q3_answer",
-                "question": "Who directed Salad By The Roots?",
-            },
-            {
-                "id": "q4",
-                "consume": ["q3_answer", "younger"],
-                "produce": "q4_answer",
-                "question": "When was q3's answer born?",
-            },
-            {
-                "id": "q5",
-                "consume": ["q2_answer", "q4_answer", "younger"],
-                "produce": "q5_answer",
-                "question": "Which film has the younger director, Dangerously They Live or Salad By The Roots, based on q2's answer and q4's answer?",
-            },
-        ]
-    }
-
-
-def _dell_payload() -> dict[str, Any]:
-    return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": ["FireWire", "replacing", "interface"],
-                "produce": "q1_answer",
-                "question": "What interface replaced FireWire?",
-            },
-            {
-                "id": "q2",
-                "consume": ["q1_answer", "letting", "feature"],
-                "produce": "q2_answer",
-                "question": "What feature lets q1's answer remain powered?",
-            },
-            {
-                "id": "q3",
-                "consume": ["q2_answer", "call"],
-                "produce": "q3_answer",
-                "question": "What does Dell call q2's answer?",
-            },
-        ]
-    }
-
-
-def _messi_barcelona_payload() -> dict[str, Any]:
-    return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": ["person", "compared", "goals", "Messi"],
-                "produce": "q1_answer",
-                "question": "Who is the person that Messi's goals in Copa del Rey were compared to?",
-            },
-            {
-                "id": "q2",
-                "consume": ["Barcelona", "signed", "get", "q1_answer"],
-                "produce": "q2_answer",
-                "question": "When did q1's answer get signed by Barcelona?",
-            },
-        ]
-    }
-
-
-def _parallel_born_later_payload() -> dict[str, Any]:
-    return {
-        "actions": [
-            {
-                "id": "q1",
-                "consume": ["Illusions (1982 Film)", "director"],
-                "produce": "q1_answer",
-                "question": "Who is the director of Illusions (1982 Film)?",
-            },
-            {
-                "id": "q2",
-                "consume": ["q1_answer", "born"],
-                "produce": "q2_answer",
-                "question": "When was q1's answer born?",
-            },
-            {
-                "id": "q3",
-                "consume": ["It'S A Wonderful Afterlife", "director"],
-                "produce": "q3_answer",
-                "question": "Who is the director of It'S A Wonderful Afterlife?",
-            },
-            {
-                "id": "q4",
-                "consume": ["q3_answer", "born"],
-                "produce": "q4_answer",
-                "question": "When was q3's answer born?",
-            },
-            {
-                "id": "q5",
-                "consume": ["q2_answer", "q4_answer"],
-                "produce": "q5_answer",
-                "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
-            },
-        ]
+        ],
     }
 
 

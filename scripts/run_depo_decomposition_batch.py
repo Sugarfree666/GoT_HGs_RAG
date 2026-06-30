@@ -239,6 +239,8 @@ def build_decomposition_payload(
                     "explicit_entities": [entity.text for entity in preprocess_result.explicit_entities.entities],
                     "global_best_paths": [list(path) for path in restored_global_best_paths],
                 },
+                "semantic_reasoning_paths": _step5_semantic_reasoning_paths(atomic_question_dag),
+                "atomic_questions": _step5_atomic_questions(atomic_question_dag),
                 "actions": _step5_actions(atomic_question_dag),
             },
             "6_atomic_question_dag": atomic_question_dag.to_dict() if atomic_question_dag is not None else None,
@@ -337,7 +339,37 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 5. Step5 Action Trace")
+    lines.append("## 5. Step5 Semantic Reasoning Paths")
+    semantic_paths = action_trace.get("semantic_reasoning_paths") or []
+    if semantic_paths:
+        for path in semantic_paths:
+            branch_id = path.get("branch_id") or "(unknown)"
+            source_path = path.get("source_token_path") or []
+            lines.append(f"- {branch_id}: {' ---- '.join(str(token) for token in source_path)}")
+            for edge in path.get("semantic_edges") or []:
+                if isinstance(edge, dict):
+                    lines.append(
+                        f"  - {edge.get('id')}: {edge.get('source')} --{edge.get('relation')}--> {edge.get('target')}"
+                    )
+    else:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 6. Step5 Atomic Questions")
+    atomic_questions = action_trace.get("atomic_questions") or []
+    if atomic_questions:
+        for question in atomic_questions:
+            depends_on = question.get("depends_on") or []
+            semantic_edge_ids = question.get("semantic_edge_ids") or []
+            lines.append(f"- {question.get('id')}: {question.get('question')}")
+            lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
+            lines.append(f"  - operation: {question.get('operation') or ''}")
+            lines.append(f"  - semantic_edge_ids: {', '.join(semantic_edge_ids) if semantic_edge_ids else '(none)'}")
+    else:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 7. Step5 Legacy Action Trace")
     actions = action_trace.get("actions") or []
     if actions:
         for action in actions:
@@ -349,7 +381,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 6. Atomic Question DAG")
+    lines.append("## 8. Atomic Question DAG")
     if dag is None:
         lines.append("(not generated)")
     elif not dag.get("valid", False):
@@ -468,6 +500,30 @@ def _step5_actions(atomic_question_dag: Any) -> list[dict[str, Any]]:
     if not isinstance(actions, list):
         return []
     return [dict(action) for action in actions if isinstance(action, dict)]
+
+
+def _step5_semantic_reasoning_paths(atomic_question_dag: Any) -> list[dict[str, Any]]:
+    if atomic_question_dag is None:
+        return []
+    raw_payload = getattr(atomic_question_dag, "raw_payload", None)
+    if not isinstance(raw_payload, dict):
+        return []
+    paths = raw_payload.get("semantic_reasoning_paths")
+    if not isinstance(paths, list):
+        return []
+    return [dict(path) for path in paths if isinstance(path, dict)]
+
+
+def _step5_atomic_questions(atomic_question_dag: Any) -> list[dict[str, Any]]:
+    if atomic_question_dag is None:
+        return []
+    raw_payload = getattr(atomic_question_dag, "raw_payload", None)
+    if not isinstance(raw_payload, dict):
+        return []
+    questions = raw_payload.get("atomic_questions")
+    if not isinstance(questions, list):
+        return []
+    return [dict(question) for question in questions if isinstance(question, dict)]
 
 
 def _hanlp_sdp_edges(hanlp_sdp_result: Any) -> list[dict[str, Any]]:

@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 
@@ -140,169 +140,146 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = """
-You are DEPO Step 5: constrained path-contraction action trace generation.
+You are DEPO Step 5: semantic-reasoning-path-guided Atomic Question DAG generation.
 
-Your task is to convert a complex question into a complete atomic question action trace.
-Do not answer the question. Do not output the final DAG. A deterministic program will convert your action trace into the DAG.
+Your task is to convert parser-grounded token paths into semantic reasoning paths, then generate atomic questions from those semantic paths.
+Do not answer the question. Do not use external knowledge. Return valid JSON only.
 
-You are given:
-- original_question: the full natural-language question.
-- explicit_entities: named entities explicitly mentioned in the question.
-- global_best_paths: structural backbone path(s) selected by Step 4, with entity placeholders already restored.
+You are given exactly:
+- original_question: the full natural-language question. This is the semantic authority.
+- explicit_entities: named entities explicitly mentioned in the original question.
+- global_best_paths: token-level structural evidence selected by Step 4, with entity placeholders already restored.
 
-Return valid JSON only.
+You must not require or assume any additional input fields. Do not ask for masked_question, normalized_question, SDP edges, anchor paths, path scores, candidate sets, debug structures, or hidden context.
 
-Output format:
+Required output schema:
 {
-  "actions": [
+  "semantic_reasoning_paths": [
+    {
+      "branch_id": "p1",
+      "source_token_path": ["token copied from global_best_paths", "..."],
+      "semantic_nodes": [
+        {
+          "id": "p1_n1",
+          "label": "meaningful semantic object",
+          "kind": "entity | intermediate_variable | value_slot | constraint | operator"
+        }
+      ],
+      "semantic_edges": [
+        {
+          "id": "p1_e1",
+          "source": "p1_n1",
+          "target": "p1_n2",
+          "relation": "one executable semantic relation",
+          "support_tokens": ["tokens copied from source_token_path"]
+        }
+      ],
+      "terminal_node_id": "p1_nK"
+    }
+  ],
+  "atomic_questions": [
     {
       "id": "q1",
-      "consume": ["path node or semantic fragment", "..."],
-      "produce": "q1_answer",
-      "question": "natural-language atomic question?"
+      "question": "natural-language atomic question?",
+      "depends_on": [],
+      "operation": "lookup | compare | select | verify | intersect | aggregate",
+      "semantic_edge_ids": ["p1_e1"]
     }
   ]
 }
 
-Required action rules:
+Core requirements:
+1. Use original_question as the semantic authority. Preserve entities, constraints, modifiers, operators, comparison conditions, and final answer intent.
+2. Use global_best_paths as mandatory parser-grounded structural evidence. They guide the decomposition, but they are noisy token paths, not the final semantic paths.
+3. First transduce each token-level path into a semantic reasoning path. Then generate atomic questions from semantic edges and operator nodes.
+4. Do not copy token paths directly as semantic paths. Remove function-word noise and recover relation direction from original_question.
+5. Do not output final DAG edges. The deterministic program derives DAG edges only from atomic_questions.depends_on.
+
+Semantic reasoning path rules:
+1. branch_id values must be p1, p2, p3, ... in the same order as global_best_paths.
+2. source_token_path must copy the corresponding global_best_paths entry exactly.
+3. Semantic nodes must be meaningful reasoning objects: explicit entities, intermediate variables, value slots, constraints, or operators.
+4. Do not make these function words semantic nodes unless they are truly operator metadata: who, what, which, where, when, why, is, was, were, be, do, did, does, have, the, a, an, of, in, by, from, to, with, for, at, punctuation.
+5. Convert predicate and event tokens into semantic relations or value slots:
+   - born + when -> birth_date
+   - born + where -> birthplace
+   - died + when -> death_date
+   - died + where -> death_place
+   - died + why -> cause_of_death
+   - located + country -> country
+   - graduated + university -> university
+   - performer + song -> performer of song
+   - director + film -> director of film
+6. Preserve common noun anchors when they define intermediate variables or answer types: performer, director, author, composer, spouse, child, company, city, country, region, county, team, league, university, school, award, event, body of water.
+7. Preserve operators as semantic operator nodes or final compare/select/verify/intersect/aggregate questions: same, different, both, either, common, later, earlier, older, younger, before, after, largest, smallest, highest, lowest, most, fewest, first, last.
+8. Every semantic edge must express one executable one-hop relation and cite support_tokens copied from its source_token_path.
+9. Do not include unresolved ENTITY placeholders anywhere.
+
+Atomic question rules:
 1. ids must be q1, q2, q3, ... in order.
-2. produce must be qN_answer for action qN.
-3. consume must describe the path fragment, residual fragment, or operator fragment consumed by that action.
-4. If an action depends on a previous answer, include qN_answer in consume and refer to it as "qN's answer" in question.
-5. Do not output depends_on, support spans, path indices, nodes, edges, start_index, or end_index.
+2. Each lookup question asks for exactly one missing answer and corresponds to one semantic edge.
+3. Do not ask multi-hop questions. Do not merge two unresolved lookups into one question.
+4. If a question depends on previous answers, put those ids in depends_on and refer to them naturally in the question, such as q1's answer. Do not use {{q1}} or any braced reference.
+5. operation must be one of: lookup, compare, select, verify, intersect, aggregate.
+6. lookup questions must include semantic_edge_ids. Final compare/select/verify/intersect/aggregate questions may use semantic_edge_ids=[] when they only combine previous answers.
+7. Generate lookup branches before comparison, selection, equality, intersection, or aggregation questions.
+8. The final atomic question must preserve the final answer intent of original_question.
 
-Core principles:
-1. original_question is the semantic authority.
-2. global_best_paths are mandatory structural evidence, but they may be incomplete, linearized, or direction-ambiguous.
-3. Generate a path contraction trace, not a free-form decomposition.
-4. Each action must consume exactly one atomic semantic unit: a relation, a typed intermediate variable, a constraint, a comparison, a superlative, or a final answer operation.
-5. The order of actions must follow semantic dependency, not necessarily left-to-right path order.
-
-Consume-question alignment:
-1. The question of an action may use only:
-   - nodes or phrases in its consume field;
-   - local wording from original_question needed to recover relation direction;
-   - local prepositions/connectors linking consumed nodes;
-   - previous answers explicitly listed as qN_answer in consume.
-2. Do not import a named entity, common noun anchor, relation, modifier, or operator from outside the consumed fragment.
-3. If a named entity appears in question, it must appear in consume, unless it has already been replaced by qN_answer.
-4. If consume is ["Baby I", "performer"], the question must be "Who is the performer of Baby I?", not "Who is the performer of the video One Last Time?"
-5. If a later question needs the result of an earlier question, replace the earlier fragment with qN_answer.
-
-Relation direction:
-1. Recover direction from original_question, not from path order alone.
-2. "the performer of X" means ask "Who is the performer of X?"
-3. "the country where X is located" means ask "What country is X located in?"
-4. "the city where X died" means ask "What city did X die in?"
-5. Never swap semantic roles. Do not move an entity from one relation to another.
-
-Common noun anchors:
-1. Preserve common noun anchors as answer types when they define intermediate variables.
-2. Examples: person, performer, designer, city, country, region, county, team, league, series, body of water, school, company, award, event.
-3. Ask typed questions such as "What city...", "Which team...", "What league...", "What body of water...".
-4. Do not replace typed anchors with vague phrases like "associated with", "related to", or "connected to" unless the original question explicitly uses that relation.
-
-Operators and comparisons:
-1. Treat operators as first-class semantic units, not ordinary path tokens.
-2. Preserve operators such as: largest, smallest, highest, lowest, most, fewest, first, last, earlier, later, before, after, same, both, either, between, winner, nearest.
-3. If an operator selects an intermediate entity, create a separate action for that selection.
-4. If the final answer asks for an extreme value or comparison, the final action must preserve that operator.
-5. Do not simplify "team with the most games" into "team that played".
-6. Do not simplify "lowest batting average" into a generic "played in the league" question.
-
-Multiple paths and branches:
-1. If global_best_paths contains multiple alternative or comparison branches, decompose each branch separately, then generate the final comparison/selection/equality action.
-2. If one path contains multiple semantic branches linearized into a chain, split it into separate actions according to original_question.
-3. If multiple constraints identify the same target, preserve them as constraints on the same target instead of forcing them into a wrong nested chain.
-
-Final intent:
-1. The last action must answer the original wh-intent.
-2. For "Who" questions, the final action should ask for a person or entity.
-3. For "When" questions, ask about the event/date relation in original_question, not an unrelated date such as birth unless birth is explicitly required.
-4. For "Where" questions, ask for the location required by original_question.
-5. Do not introduce external knowledge, inferred facts, or answers.
-
-Silent validation before returning:
-Check every action internally:
-- Does question use only consume + local original wording + previous qN_answer?
-- Are all explicit entities either consumed directly or intentionally replaced by qN_answer?
-- Are relation directions faithful to original_question?
-- Are common noun anchors preserved as typed variables?
-- Are all operators/comparisons/superlatives preserved?
-- Does the final action answer the original question?
-
-Example 1:
+Example:
 Input:
 {
-  "original_question": "Who stars in the video 'One Last Time' by the performer of Baby I?",
-  "explicit_entities": ["One Last Time", "Baby I"],
+  "original_question": "Do director of film Ten9Eight: Shoot For The Moon and director of film Sabotage (1936 Film) share the same nationality?",
+  "explicit_entities": ["Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"],
   "global_best_paths": [
-    ["Baby I", "performer", "One Last Time", "video", "stars", "Who"]
+    ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
+    ["Sabotage (1936 Film)", "director", "nationality"]
   ]
 }
 
 Correct output:
 {
-  "actions": [
+  "semantic_reasoning_paths": [
     {
-      "id": "q1",
-      "consume": ["Baby I", "performer"],
-      "produce": "q1_answer",
-      "question": "Who is the performer of Baby I?"
+      "branch_id": "p1",
+      "source_token_path": ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
+      "semantic_nodes": [
+        {"id": "p1_n1", "label": "Ten9Eight: Shoot For The Moon", "kind": "entity"},
+        {"id": "p1_n2", "label": "director of Ten9Eight: Shoot For The Moon", "kind": "intermediate_variable"},
+        {"id": "p1_n3", "label": "nationality of director", "kind": "value_slot"}
+      ],
+      "semantic_edges": [
+        {"id": "p1_e1", "source": "p1_n1", "target": "p1_n2", "relation": "director of film", "support_tokens": ["Ten9Eight: Shoot For The Moon", "director"]},
+        {"id": "p1_e2", "source": "p1_n2", "target": "p1_n3", "relation": "nationality of director", "support_tokens": ["director", "nationality"]}
+      ],
+      "terminal_node_id": "p1_n3"
     },
     {
-      "id": "q2",
-      "consume": ["One Last Time", "video", "stars", "Who", "q1_answer"],
-      "produce": "q2_answer",
-      "question": "Who stars in the video 'One Last Time' by q1's answer?"
+      "branch_id": "p2",
+      "source_token_path": ["Sabotage (1936 Film)", "director", "nationality"],
+      "semantic_nodes": [
+        {"id": "p2_n1", "label": "Sabotage (1936 Film)", "kind": "entity"},
+        {"id": "p2_n2", "label": "director of Sabotage (1936 Film)", "kind": "intermediate_variable"},
+        {"id": "p2_n3", "label": "nationality of director", "kind": "value_slot"}
+      ],
+      "semantic_edges": [
+        {"id": "p2_e1", "source": "p2_n1", "target": "p2_n2", "relation": "director of film", "support_tokens": ["Sabotage (1936 Film)", "director"]},
+        {"id": "p2_e2", "source": "p2_n2", "target": "p2_n3", "relation": "nationality of director", "support_tokens": ["director", "nationality"]}
+      ],
+      "terminal_node_id": "p2_n3"
     }
+  ],
+  "atomic_questions": [
+    {"id": "q1", "question": "Who directed Ten9Eight: Shoot For The Moon?", "depends_on": [], "operation": "lookup", "semantic_edge_ids": ["p1_e1"]},
+    {"id": "q2", "question": "What is the nationality of q1's answer?", "depends_on": ["q1"], "operation": "lookup", "semantic_edge_ids": ["p1_e2"]},
+    {"id": "q3", "question": "Who directed Sabotage (1936 Film)?", "depends_on": [], "operation": "lookup", "semantic_edge_ids": ["p2_e1"]},
+    {"id": "q4", "question": "What is the nationality of q3's answer?", "depends_on": ["q3"], "operation": "lookup", "semantic_edge_ids": ["p2_e2"]},
+    {"id": "q5", "question": "Do q2's answer and q4's answer indicate that the two directors share the same nationality?", "depends_on": ["q2", "q4"], "operation": "verify", "semantic_edge_ids": []}
   ]
 }
 
-Example 2:
-Input:
-{
-  "original_question": "Who had the lowest batting average in the league where the team with the most games in the series after which the MLB MVP is awarded played?",
-  "explicit_entities": ["MLB MVP"],
-  "global_best_paths": [
-    ["MLB MVP", "awarded", "which", "played", "league", "team", "series"]
-  ]
-}
-
-Correct output:
-{
-  "actions": [
-    {
-      "id": "q1",
-      "consume": ["MLB MVP", "awarded", "series"],
-      "produce": "q1_answer",
-      "question": "What is the series after which the MLB MVP is awarded?"
-    },
-    {
-      "id": "q2",
-      "consume": ["team", "most games", "q1_answer"],
-      "produce": "q2_answer",
-      "question": "Which team had the most games in q1's answer?"
-    },
-    {
-      "id": "q3",
-      "consume": ["q2_answer", "played", "league"],
-      "produce": "q3_answer",
-      "question": "What league did q2's answer play in?"
-    },
-    {
-      "id": "q4",
-      "consume": ["lowest batting average", "q3_answer", "Who"],
-      "produce": "q4_answer",
-      "question": "Who had the lowest batting average in q3's answer?"
-    }
-  ]
-}
-
-Now generate the contraction action trace for the given input JSON.
+Now generate the semantic reasoning paths and atomic questions for the given input JSON.
 Return only the JSON object.
 """.strip()
-
 
 def build_atomic_question_dag_prompt(
     original_question: str,
@@ -417,3 +394,4 @@ Return only the JSON object.
 def build_atomic_question_dag_no_path_prompt(original_question: str) -> str:
     payload = {"original_question": original_question}
     return json.dumps(payload, ensure_ascii=False, indent=2)
+

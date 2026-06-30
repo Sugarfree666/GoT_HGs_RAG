@@ -292,12 +292,20 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
             print(f" - {warning}")
     print()
 
-    print("[5. Atomic Question DAG]")
     atomic_question_dag = result.get("atomic_question_dag")
     if atomic_question_dag is None:
+        print("[5. Semantic Reasoning Paths]")
+        print("(skipped: Step5 disabled)")
+        print()
+        print("[6. Atomic Question DAG]")
         print("(skipped: Step5 disabled)")
         print()
         return
+    print("[5. Semantic Reasoning Paths]")
+    _print_semantic_reasoning_paths(atomic_question_dag)
+    print()
+
+    print("[6. Atomic Question DAG]")
     if not atomic_question_dag.valid:
         print("(invalid)")
         for error in atomic_question_dag.validation_errors:
@@ -311,6 +319,28 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         print(f"{node.id}: {node.question}")
         print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
         print()
+
+
+def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
+    raw_payload = getattr(atomic_question_dag, "raw_payload", None)
+    paths = raw_payload.get("semantic_reasoning_paths") if isinstance(raw_payload, dict) else None
+    if not isinstance(paths, list) or not paths:
+        print("(none)")
+        return
+    for path in paths:
+        if not isinstance(path, dict):
+            continue
+        branch_id = path.get("branch_id") or "(unknown)"
+        source_path = path.get("source_token_path") or []
+        print(f"{branch_id}: {' ---- '.join(str(token) for token in source_path)}")
+        for edge in path.get("semantic_edges") or []:
+            if not isinstance(edge, dict):
+                continue
+            edge_id = edge.get("id") or ""
+            relation = edge.get("relation") or ""
+            source = edge.get("source") or ""
+            target = edge.get("target") or ""
+            print(f"  {edge_id}: {source} --{relation}--> {target}")
 
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:

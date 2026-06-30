@@ -166,7 +166,7 @@ def main() -> int:
         return 2
 
     try:
-        from atomic_question_dag import validate_atomic_question_dag
+        from atomic_question_dag import validate_action_trace_atomic_question_dag
         from llm_client import LLMClient
     except ModuleNotFoundError as exc:
         print(f"Missing dependency: {exc.name}. Run: pip install -r requirements.txt", file=sys.stderr)
@@ -176,7 +176,7 @@ def main() -> int:
     output_root = _repo_path(args.output_root)
 
     llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
-    generator = MinimalNoPathAtomicDAGGenerator(llm_client, validate_atomic_question_dag)
+    generator = MinimalNoPathAtomicDAGGenerator(llm_client, validate_action_trace_atomic_question_dag)
 
     for questions_file in question_files:
         dataset = _dataset_name(questions_file)
