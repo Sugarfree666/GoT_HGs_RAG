@@ -226,6 +226,10 @@ def build_decomposition_payload(
             "3_hanlp_sdp_parsing": {
                 "model": result["hanlp_sdp_result"].model,
                 "tokens": list(result["hanlp_sdp_result"].tokens),
+                "available_keys": list(result["hanlp_sdp_result"].available_keys),
+                "mask_token_checks": dict(result["hanlp_sdp_result"].mask_token_checks),
+                "sdp_graphs": result["hanlp_sdp_result"].sdp_graphs,
+                "edges": _hanlp_sdp_edges(result["hanlp_sdp_result"]),
                 "warnings": list(result["hanlp_sdp_result"].warnings),
             },
             "4_token_reasoning_structure": _compact_token_reasoning(token_reasoning_structure),
@@ -298,7 +302,32 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append(f"Masked question: {masking.get('masked_question', '')}")
     lines.append("")
 
-    lines.append("## 3. Global Best Path")
+    lines.append("## 3. HanLP SDP Graph")
+    hanlp = stages.get("3_hanlp_sdp_parsing") or {}
+    lines.append(f"Model: {hanlp.get('model') or '(unknown)'}")
+    tokens = hanlp.get("tokens") or []
+    if tokens:
+        lines.append(f"Tokens: {' '.join(str(token) for token in tokens)}")
+    mask_checks = hanlp.get("mask_token_checks") or {}
+    if mask_checks:
+        lines.append("")
+        lines.append("Mask token checks:")
+        for placeholder, status in mask_checks.items():
+            lines.append(f"- {placeholder}: {status}")
+    edges = hanlp.get("edges") or []
+    if edges:
+        lines.append("")
+        lines.append("Readable SDP edges:")
+        for formalism in _hanlp_sdp_formalisms(edges):
+            lines.append(f"- {formalism}")
+            for edge in edges:
+                if edge.get("formalism") == formalism:
+                    lines.append(f"  - {_hanlp_sdp_edge_display(edge)}")
+    else:
+        lines.append("(no readable SDP edges)")
+    lines.append("")
+
+    lines.append("## 4. Global Best Path")
     global_best_paths = ((action_trace.get("input") or {}).get("global_best_paths")) or []
     if global_best_paths:
         for path_index, path in enumerate(global_best_paths, start=1):
@@ -308,7 +337,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 4. Step5 Action Trace")
+    lines.append("## 5. Step5 Action Trace")
     actions = action_trace.get("actions") or []
     if actions:
         for action in actions:
@@ -320,7 +349,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 5. Atomic Question DAG")
+    lines.append("## 6. Atomic Question DAG")
     if dag is None:
         lines.append("(not generated)")
     elif not dag.get("valid", False):
@@ -439,6 +468,42 @@ def _step5_actions(atomic_question_dag: Any) -> list[dict[str, Any]]:
     if not isinstance(actions, list):
         return []
     return [dict(action) for action in actions if isinstance(action, dict)]
+
+
+def _hanlp_sdp_edges(hanlp_sdp_result: Any) -> list[dict[str, Any]]:
+    return [
+        {
+            "formalism": edge.formalism,
+            "head_idx": edge.head_idx,
+            "head": edge.head,
+            "relation": edge.relation,
+            "dep_idx": edge.dep_idx,
+            "dep": edge.dep,
+            "display": edge.display() if hasattr(edge, "display") else _hanlp_sdp_edge_display(edge.__dict__),
+        }
+        for edge in getattr(hanlp_sdp_result, "edges", []) or []
+    ]
+
+
+def _hanlp_sdp_formalisms(edges: list[dict[str, Any]]) -> list[str]:
+    formalisms = {str(edge.get("formalism") or "") for edge in edges}
+    return sorted((formalism for formalism in formalisms if formalism), key=_hanlp_sdp_formalism_sort_key)
+
+
+def _hanlp_sdp_formalism_sort_key(formalism: str) -> tuple[int, str]:
+    order = {"sdp/dm": 0, "sdp/pas": 1, "sdp/psd": 2}
+    return (order.get(formalism, 100), formalism)
+
+
+def _hanlp_sdp_edge_display(edge: dict[str, Any]) -> str:
+    head_idx = int(edge.get("head_idx") or 0)
+    dep_idx = int(edge.get("dep_idx") or 0)
+    head = str(edge.get("head") or "")
+    dep = str(edge.get("dep") or "")
+    relation = str(edge.get("relation") or "")
+    head_label = "ROOT[0]" if head_idx == 0 else f"{head}[{head_idx}]"
+    dep_label = f"{dep}[{dep_idx}]" if dep_idx > 0 else dep
+    return f"{head_label} --{relation}--> {dep_label}"
 
 
 def _compact_token_reasoning(token_reasoning_structure: Any) -> dict[str, Any]:
