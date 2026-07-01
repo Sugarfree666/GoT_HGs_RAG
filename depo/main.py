@@ -333,14 +333,20 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
         branch_id = path.get("branch_id") or "(unknown)"
         source_path = path.get("source_token_path") or []
         print(f"{branch_id}: {' ---- '.join(str(token) for token in source_path)}")
-        for edge in path.get("semantic_edges") or []:
-            if not isinstance(edge, dict):
+        for step in path.get("reasoning_steps") or []:
+            if not isinstance(step, dict):
                 continue
-            edge_id = edge.get("id") or ""
-            relation = edge.get("relation") or ""
-            source = edge.get("source") or ""
-            target = edge.get("target") or ""
-            print(f"  {edge_id}: {source} --{relation}--> {target}")
+            step_id = step.get("id") or ""
+            known_inputs = step.get("known_inputs") or []
+            operation = step.get("operation") or ""
+            output = step.get("output") or ""
+            path_evidence = step.get("path_evidence") or []
+            output_type = step.get("output_type") or ""
+            step_type = step.get("step_type") or ""
+            evidence_status = step.get("evidence_status") or ""
+            print(f"  {step_id}: {', '.join(str(item) for item in known_inputs) or '(none)'} -> {operation} -> {output}")
+            print(f"    evidence: {', '.join(str(token) for token in path_evidence) if path_evidence else '(none)'}")
+            print(f"    type: {output_type} / {step_type} / {evidence_status}")
 
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:

@@ -39,6 +39,8 @@ class AtomicQuestionNode:
     question: str
     depends_on: tuple[str, ...]
     operation: str = "lookup"
+    support_step_ids: tuple[str, ...] = ()
+    output_type: str = ""
     semantic_edge_ids: tuple[str, ...] = ()
     support: None = None
 
@@ -48,6 +50,8 @@ class AtomicQuestionNode:
             "question": self.question,
             "depends_on": list(self.depends_on),
             "operation": self.operation,
+            "support_step_ids": list(self.support_step_ids),
+            "output_type": self.output_type,
             "semantic_edge_ids": list(self.semantic_edge_ids),
         }
 
@@ -111,7 +115,12 @@ class PathAlignedAtomicDAGGenerator:
             global_best_paths=restored_global_best_paths,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
-        return validate_atomic_question_dag(raw_payload)
+        return validate_atomic_question_dag(
+            raw_payload,
+            original_question=original_question,
+            explicit_entities=explicit_entity_texts,
+            global_best_paths=restored_global_best_paths,
+        )
 
 
 class NoPathAtomicDAGGenerator:
@@ -170,34 +179,77 @@ def restore_global_best_paths(step4_paths: Any, mask_mappings: Any) -> list[list
     return restored_paths
 
 
-def validate_atomic_question_dag(raw_payload: dict[str, Any]) -> AtomicQuestionDAGResult:
+def validate_atomic_question_dag(
+    raw_payload: Any,
+    *,
+    original_question: str | None = None,
+    explicit_entities: list[str] | None = None,
+    global_best_paths: list[list[str]] | None = None,
+) -> AtomicQuestionDAGResult:
+    del explicit_entities
     errors: list[str] = []
     warnings: list[str] = []
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
+    question_plan = raw_payload.get("question_plan")
     raw_paths = raw_payload.get("semantic_reasoning_paths")
     raw_questions = raw_payload.get("atomic_questions")
+    final_answer_type = ""
+
+    if not isinstance(question_plan, dict):
+        errors.append("question_plan must be an object.")
+    else:
+        final_answer_intent = str(question_plan.get("final_answer_intent") or "").strip()
+        final_answer_type = str(question_plan.get("final_answer_type") or "").strip()
+        if not final_answer_intent:
+            errors.append("question_plan.final_answer_intent must be a non-empty string.")
+        elif _contains_placeholder(final_answer_intent):
+            errors.append("question_plan.final_answer_intent contains unresolved ENTITY placeholder.")
+        if not final_answer_type:
+            errors.append("question_plan.final_answer_type must be a non-empty string.")
+        elif final_answer_type not in OUTPUT_TYPES:
+            errors.append(
+                f"question_plan.final_answer_type must be one of {sorted(OUTPUT_TYPES)}, got {final_answer_type!r}."
+            )
+        constraints = _string_list(
+            question_plan.get("must_preserve_constraints"),
+            "question_plan.must_preserve_constraints",
+            errors,
+        )
+        for constraint in constraints:
+            if _contains_placeholder(constraint):
+                errors.append("question_plan.must_preserve_constraints contains unresolved ENTITY placeholder.")
+                break
+
     if not isinstance(raw_paths, list) or not raw_paths:
         errors.append("semantic_reasoning_paths must be a non-empty list.")
     if not isinstance(raw_questions, list) or not raw_questions:
         errors.append("atomic_questions must be a non-empty list.")
 
-    semantic_edge_ids: set[str] = set()
+    step_ids: set[str] = set()
     if isinstance(raw_paths, list):
-        semantic_edge_ids = _validate_semantic_reasoning_paths(raw_paths, errors)
+        step_ids = _validate_semantic_reasoning_paths(
+            raw_paths,
+            errors,
+            warnings,
+            original_question=original_question,
+            global_best_paths=global_best_paths,
+        )
 
     parsed_nodes: list[AtomicQuestionNode] = []
     if isinstance(raw_questions, list):
         parsed_nodes = _parse_atomic_questions(
             raw_questions,
-            semantic_edge_ids=semantic_edge_ids,
+            support_step_ids=step_ids,
+            final_answer_type=final_answer_type,
             errors=errors,
             warnings=warnings,
         )
 
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
+    _validate_final_answer_leaf_type(parsed_nodes, leaf_node_ids, final_answer_type, errors)
     return AtomicQuestionDAGResult(
         nodes=parsed_nodes,
         edges=edges,
@@ -209,13 +261,23 @@ def validate_atomic_question_dag(raw_payload: dict[str, Any]) -> AtomicQuestionD
     )
 
 
-SEMANTIC_NODE_KINDS = {"entity", "intermediate_variable", "value_slot", "constraint", "operator"}
+OUTPUT_TYPES = {"entity", "person", "place", "organization", "work", "event", "date", "number", "boolean", "value", "set", "unknown"}
+STEP_TYPES = {"lookup", "constraint", "compare", "select", "verify", "intersect", "aggregate"}
+EVIDENCE_STATUSES = {"path_grounded", "question_only_required", "operator"}
 ATOMIC_OPERATIONS = {"lookup", "compare", "select", "verify", "intersect", "aggregate"}
+VAGUE_OPERATION_LABELS = ("related to", "associated with", "connected to", "about", "path to")
+WH_OUTPUT_TOKENS = {"who", "what", "which", "where", "when", "why", "whom", "whose"}
 
 
-def _validate_semantic_reasoning_paths(raw_paths: list[Any], errors: list[str]) -> set[str]:
-    all_node_ids: set[str] = set()
-    all_edge_ids: set[str] = set()
+def _validate_semantic_reasoning_paths(
+    raw_paths: list[Any],
+    errors: list[str],
+    warnings: list[str],
+    *,
+    original_question: str | None,
+    global_best_paths: list[list[str]] | None,
+) -> set[str]:
+    all_step_ids: set[str] = set()
 
     for path_index, raw_path in enumerate(raw_paths, start=1):
         prefix = f"semantic_reasoning_paths[{path_index - 1}]"
@@ -231,87 +293,106 @@ def _validate_semantic_reasoning_paths(raw_paths: list[Any], errors: list[str]) 
         source_token_path = _string_list(raw_path.get("source_token_path"), f"{prefix}.source_token_path", errors)
         if not source_token_path:
             errors.append(f"{prefix}.source_token_path must be a non-empty list of strings.")
+        if global_best_paths is not None and path_index <= len(global_best_paths):
+            expected_source_path = [str(token) for token in global_best_paths[path_index - 1]]
+            if source_token_path and source_token_path != expected_source_path:
+                errors.append(f"{prefix}.source_token_path must match global_best_paths[{path_index - 1}] exactly.")
         for token in source_token_path:
             if _contains_placeholder(token):
                 errors.append(f"{prefix}.source_token_path contains unresolved ENTITY placeholder.")
                 break
         source_token_set = set(source_token_path)
 
-        raw_nodes = raw_path.get("semantic_nodes")
-        if not isinstance(raw_nodes, list) or not raw_nodes:
-            errors.append(f"{prefix}.semantic_nodes must be a non-empty list.")
-            raw_nodes = []
-        local_node_ids: set[str] = set()
-        for node_index, raw_node in enumerate(raw_nodes):
-            node_prefix = f"{prefix}.semantic_nodes[{node_index}]"
-            if not isinstance(raw_node, dict):
-                errors.append(f"{node_prefix} must be an object.")
-                continue
-            node_id = str(raw_node.get("id") or "").strip()
-            label = str(raw_node.get("label") or "").strip()
-            kind = str(raw_node.get("kind") or "").strip()
-            if not node_id:
-                errors.append(f"{node_prefix}.id must be a non-empty string.")
-            elif node_id in local_node_ids:
-                errors.append(f"duplicate semantic node id in {branch_id or prefix}: {node_id}.")
-            elif node_id in all_node_ids:
-                errors.append(f"duplicate semantic node id: {node_id}.")
-            if node_id:
-                local_node_ids.add(node_id)
-                all_node_ids.add(node_id)
-            if not label:
-                errors.append(f"{node_prefix}.label must be a non-empty string.")
-            elif _contains_placeholder(label):
-                errors.append(f"{node_prefix}.label contains unresolved ENTITY placeholder.")
-            if kind not in SEMANTIC_NODE_KINDS:
-                errors.append(f"{node_prefix}.kind must be one of {sorted(SEMANTIC_NODE_KINDS)}, got {kind!r}.")
+        if "semantic_nodes" in raw_path or "semantic_edges" in raw_path:
+            errors.append(f"{prefix}: Step5 V2 uses reasoning_steps, not semantic_nodes/semantic_edges.")
 
-        terminal_node_id = str(raw_path.get("terminal_node_id") or "").strip()
-        if terminal_node_id not in local_node_ids:
-            errors.append(f"{prefix}.terminal_node_id must refer to a semantic node in the same path.")
+        raw_steps = raw_path.get("reasoning_steps")
+        if not isinstance(raw_steps, list) or not raw_steps:
+            errors.append(f"{prefix}.reasoning_steps must be a non-empty list.")
+            raw_steps = []
 
-        raw_edges = raw_path.get("semantic_edges")
-        if not isinstance(raw_edges, list):
-            errors.append(f"{prefix}.semantic_edges must be a list.")
-            raw_edges = []
-        for edge_index, raw_edge in enumerate(raw_edges):
-            edge_prefix = f"{prefix}.semantic_edges[{edge_index}]"
-            if not isinstance(raw_edge, dict):
-                errors.append(f"{edge_prefix} must be an object.")
+        step_outputs: list[str] = []
+        local_step_ids: set[str] = set()
+        for step_index, raw_step in enumerate(raw_steps, start=1):
+            step_prefix = f"{prefix}.reasoning_steps[{step_index - 1}]"
+            if not isinstance(raw_step, dict):
+                errors.append(f"{step_prefix} must be an object.")
                 continue
-            edge_id = str(raw_edge.get("id") or "").strip()
-            source = str(raw_edge.get("source") or "").strip()
-            target = str(raw_edge.get("target") or "").strip()
-            relation = str(raw_edge.get("relation") or "").strip()
-            if not edge_id:
-                errors.append(f"{edge_prefix}.id must be a non-empty string.")
-            elif edge_id in all_edge_ids:
-                errors.append(f"duplicate semantic edge id: {edge_id}.")
-            else:
-                all_edge_ids.add(edge_id)
-            if source not in local_node_ids:
-                errors.append(f"{edge_prefix}.source must refer to a semantic node in the same path.")
-            if target not in local_node_ids:
-                errors.append(f"{edge_prefix}.target must refer to a semantic node in the same path.")
-            if not relation:
-                errors.append(f"{edge_prefix}.relation must be a non-empty string.")
-            elif _contains_placeholder(relation):
-                errors.append(f"{edge_prefix}.relation contains unresolved ENTITY placeholder.")
-            support_tokens = _string_list(raw_edge.get("support_tokens"), f"{edge_prefix}.support_tokens", errors)
-            for token in support_tokens:
+
+            expected_step_id = f"{expected_branch_id}_s{step_index}"
+            step_id = str(raw_step.get("id") or "").strip()
+            if step_id != expected_step_id:
+                errors.append(f"{step_prefix}.id must be {expected_step_id!r}, got {step_id!r}.")
+            elif step_id in all_step_ids:
+                errors.append(f"duplicate reasoning step id: {step_id}.")
+            if step_id:
+                local_step_ids.add(step_id)
+                all_step_ids.add(step_id)
+
+            evidence_status = str(raw_step.get("evidence_status") or "").strip()
+            path_evidence = _string_list(raw_step.get("path_evidence"), f"{step_prefix}.path_evidence", errors)
+            for token in path_evidence:
                 if _contains_placeholder(token):
-                    errors.append(f"{edge_prefix}.support_tokens contains unresolved ENTITY placeholder.")
+                    errors.append(f"{step_prefix}.path_evidence contains unresolved ENTITY placeholder.")
                     break
                 if token not in source_token_set:
-                    errors.append(f"{edge_prefix}.support_tokens contains token not copied from source_token_path: {token!r}.")
+                    errors.append(f"{step_prefix}.path_evidence contains token not copied from source_token_path: {token!r}.")
+            if not path_evidence and evidence_status not in {"question_only_required", "operator"}:
+                errors.append(f"{step_prefix}.path_evidence may be empty only for question_only_required or operator steps.")
 
-    return all_edge_ids
+            question_evidence = _string_list(raw_step.get("question_evidence"), f"{step_prefix}.question_evidence", errors)
+            for evidence in question_evidence:
+                if _contains_placeholder(evidence):
+                    errors.append(f"{step_prefix}.question_evidence contains unresolved ENTITY placeholder.")
+                    break
+
+            known_inputs = _string_list(raw_step.get("known_inputs"), f"{step_prefix}.known_inputs", errors)
+            for known_input in known_inputs:
+                if _contains_placeholder(known_input):
+                    errors.append(f"{step_prefix}.known_inputs contains unresolved ENTITY placeholder.")
+                    break
+
+            operation = str(raw_step.get("operation") or "").strip()
+            if not operation:
+                errors.append(f"{step_prefix}.operation must be a non-empty string.")
+            elif _contains_placeholder(operation):
+                errors.append(f"{step_prefix}.operation contains unresolved ENTITY placeholder.")
+            elif _has_vague_operation(operation, original_question):
+                errors.append(f"{step_prefix}.operation is too vague for Step5 V2: {operation!r}.")
+
+            output = str(raw_step.get("output") or "").strip()
+            if not output:
+                errors.append(f"{step_prefix}.output must be a non-empty string.")
+            elif _contains_placeholder(output):
+                errors.append(f"{step_prefix}.output contains unresolved ENTITY placeholder.")
+            else:
+                step_outputs.append(output)
+
+            output_type = str(raw_step.get("output_type") or "").strip()
+            if not output_type:
+                errors.append(f"{step_prefix}.output_type must be a non-empty string.")
+            elif output_type not in OUTPUT_TYPES:
+                errors.append(f"{step_prefix}.output_type must be one of {sorted(OUTPUT_TYPES)}, got {output_type!r}.")
+
+            step_type = str(raw_step.get("step_type") or "").strip()
+            if step_type not in STEP_TYPES:
+                errors.append(f"{step_prefix}.step_type must be one of {sorted(STEP_TYPES)}, got {step_type!r}.")
+
+            if evidence_status not in EVIDENCE_STATUSES:
+                errors.append(
+                    f"{step_prefix}.evidence_status must be one of {sorted(EVIDENCE_STATUSES)}, got {evidence_status!r}."
+                )
+
+        _check_likely_token_path_relabeling(prefix, source_token_path, step_outputs, errors, warnings)
+
+    return all_step_ids
 
 
 def _parse_atomic_questions(
     raw_questions: list[Any],
     *,
-    semantic_edge_ids: set[str],
+    support_step_ids: set[str],
+    final_answer_type: str,
     errors: list[str],
     warnings: list[str],
 ) -> list[AtomicQuestionNode]:
@@ -353,18 +434,33 @@ def _parse_atomic_questions(
         if operation not in ATOMIC_OPERATIONS:
             errors.append(f"{node_id or expected_id}: operation must be one of {sorted(ATOMIC_OPERATIONS)}, got {operation!r}.")
 
+        raw_support_step_ids = _string_list(
+            raw_question.get("support_step_ids"),
+            f"{prefix}.support_step_ids",
+            errors,
+        )
+        if operation == "lookup" and not raw_support_step_ids:
+            errors.append(f"{node_id or expected_id}: lookup questions must include at least one support_step_id.")
+        for step_id in raw_support_step_ids:
+            if _contains_placeholder(step_id):
+                errors.append(f"{node_id or expected_id}: support_step_ids contains unresolved ENTITY placeholder.")
+            if step_id not in support_step_ids:
+                errors.append(f"{node_id or expected_id}: unknown support_step_id {step_id!r}.")
+
+        output_type = str(raw_question.get("output_type") or "").strip()
+        if not output_type:
+            errors.append(f"{node_id or expected_id}: output_type must be a non-empty string.")
+        elif output_type not in OUTPUT_TYPES:
+            errors.append(f"{node_id or expected_id}: output_type must be one of {sorted(OUTPUT_TYPES)}, got {output_type!r}.")
+
         raw_semantic_edge_ids = _string_list(
-            raw_question.get("semantic_edge_ids"),
+            raw_question.get("semantic_edge_ids", []),
             f"{prefix}.semantic_edge_ids",
             errors,
         )
-        if operation == "lookup" and not raw_semantic_edge_ids:
-            errors.append(f"{node_id or expected_id}: lookup questions must include at least one semantic_edge_id.")
         for edge_id in raw_semantic_edge_ids:
             if _contains_placeholder(edge_id):
                 errors.append(f"{node_id or expected_id}: semantic_edge_ids contains unresolved ENTITY placeholder.")
-            if edge_id not in semantic_edge_ids:
-                errors.append(f"{node_id or expected_id}: unknown semantic_edge_id {edge_id!r}.")
 
         parsed_nodes.append(
             AtomicQuestionNode(
@@ -372,11 +468,74 @@ def _parse_atomic_questions(
                 question=question,
                 depends_on=tuple(depends_on),
                 operation=operation or "lookup",
+                support_step_ids=tuple(raw_support_step_ids),
+                output_type=output_type or final_answer_type,
                 semantic_edge_ids=tuple(raw_semantic_edge_ids),
             )
         )
 
     return parsed_nodes
+
+
+def _has_vague_operation(operation: str, original_question: str | None) -> bool:
+    operation_lc = operation.casefold()
+    question_lc = (original_question or "").casefold()
+    for label in VAGUE_OPERATION_LABELS:
+        if label in operation_lc and label not in question_lc:
+            return True
+    return False
+
+
+def _check_likely_token_path_relabeling(
+    prefix: str,
+    source_token_path: list[str],
+    step_outputs: list[str],
+    errors: list[str],
+    warnings: list[str],
+) -> None:
+    del warnings
+    source_norm = [_normalize_for_relabeling(token) for token in source_token_path]
+    output_norm = [_normalize_for_relabeling(output) for output in step_outputs]
+    if any(output in WH_OUTPUT_TOKENS for output in output_norm):
+        errors.append(f"{prefix}: reasoning step output uses a wh-token from the token path; likely token-path relabeling.")
+
+    matched_positions: list[int] = []
+    for output in output_norm:
+        if not output:
+            continue
+        try:
+            matched_positions.append(source_norm.index(output))
+        except ValueError:
+            continue
+    if len(matched_positions) >= 3 and matched_positions == sorted(matched_positions):
+        errors.append(f"{prefix}: likely token-path relabeling; reasoning step outputs copy source_token_path tokens in order.")
+
+
+def _normalize_for_relabeling(value: str) -> str:
+    return re.sub(r"\s+", " ", value.strip().casefold())
+
+
+def _validate_final_answer_leaf_type(
+    parsed_nodes: list[AtomicQuestionNode],
+    leaf_node_ids: list[str],
+    final_answer_type: str,
+    errors: list[str],
+) -> None:
+    if not parsed_nodes:
+        return
+    if not leaf_node_ids:
+        errors.append("Atomic Question DAG must have at least one leaf node.")
+        return
+    if len(leaf_node_ids) != 1 or final_answer_type in {"", "unknown", "value"}:
+        return
+    node_by_id = {node.id: node for node in parsed_nodes}
+    leaf = node_by_id.get(leaf_node_ids[0])
+    if leaf is None or leaf.output_type in {"", "unknown", "value"}:
+        return
+    if leaf.output_type != final_answer_type:
+        errors.append(
+            f"final leaf output_type {leaf.output_type!r} does not match question_plan.final_answer_type {final_answer_type!r}."
+        )
 
 
 def _coerce_depends_on(value: Any, node_id: str, previous_ids: set[str], errors: list[str]) -> list[str]:

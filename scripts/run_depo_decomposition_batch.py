@@ -346,10 +346,20 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
             branch_id = path.get("branch_id") or "(unknown)"
             source_path = path.get("source_token_path") or []
             lines.append(f"- {branch_id}: {' ---- '.join(str(token) for token in source_path)}")
-            for edge in path.get("semantic_edges") or []:
-                if isinstance(edge, dict):
+            for step in path.get("reasoning_steps") or []:
+                if isinstance(step, dict):
+                    known_inputs = step.get("known_inputs") or []
+                    path_evidence = step.get("path_evidence") or []
                     lines.append(
-                        f"  - {edge.get('id')}: {edge.get('source')} --{edge.get('relation')}--> {edge.get('target')}"
+                        f"  - {step.get('id')}: {', '.join(str(item) for item in known_inputs) if known_inputs else '(none)'}"
+                        f" -> {step.get('operation') or ''} -> {step.get('output') or ''}"
+                    )
+                    lines.append(
+                        f"    - evidence: {', '.join(str(token) for token in path_evidence) if path_evidence else '(none)'}"
+                    )
+                    lines.append(
+                        "    - type: "
+                        f"{step.get('output_type') or ''} / {step.get('step_type') or ''} / {step.get('evidence_status') or ''}"
                     )
     else:
         lines.append("(none)")
@@ -360,11 +370,12 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     if atomic_questions:
         for question in atomic_questions:
             depends_on = question.get("depends_on") or []
-            semantic_edge_ids = question.get("semantic_edge_ids") or []
+            support_step_ids = question.get("support_step_ids") or []
             lines.append(f"- {question.get('id')}: {question.get('question')}")
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
             lines.append(f"  - operation: {question.get('operation') or ''}")
-            lines.append(f"  - semantic_edge_ids: {', '.join(semantic_edge_ids) if semantic_edge_ids else '(none)'}")
+            lines.append(f"  - support_step_ids: {', '.join(support_step_ids) if support_step_ids else '(none)'}")
+            lines.append(f"  - output_type: {question.get('output_type') or ''}")
     else:
         lines.append("(none)")
     lines.append("")
