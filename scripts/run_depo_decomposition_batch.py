@@ -343,34 +343,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     semantic_paths = action_trace.get("semantic_reasoning_paths") or []
     if semantic_paths:
         for path in semantic_paths:
-            branch_id = path.get("branch_id") or "(unknown)"
-            source_path = path.get("source_token_path") or []
-            lines.append(f"- {branch_id}: {' ---- '.join(str(token) for token in source_path)}")
-            nodes = path.get("semantic_nodes") or []
-            if nodes:
-                lines.append("  - nodes:")
-            for node in nodes:
-                if isinstance(node, dict):
-                    lines.append(
-                        f"    - {node.get('id')}: {node.get('label')} "
-                        f"[{node.get('kind') or ''}/{node.get('output_type') or ''}/{node.get('origin') or ''}]"
-                    )
-            edges = path.get("semantic_edges") or []
-            if edges:
-                lines.append("  - edges:")
-            for edge in edges:
-                if isinstance(edge, dict):
-                    condition_node_ids = edge.get("condition_node_ids") or []
-                    support_tokens = edge.get("support_tokens") or []
-                    lines.append(
-                        f"    - {edge.get('id')}: {edge.get('source')} --{edge.get('relation')}--> {edge.get('target')}"
-                    )
-                    if condition_node_ids:
-                        lines.append(f"      - condition_node_ids: {', '.join(str(item) for item in condition_node_ids)}")
-                    lines.append(f"      - evidence_status: {edge.get('evidence_status') or ''}")
-                    lines.append(
-                        f"      - support_tokens: {', '.join(str(token) for token in support_tokens) if support_tokens else '(none)'}"
-                    )
+            lines.extend(_semantic_reasoning_path_markdown_lines(path))
     else:
         lines.append("(none)")
     lines.append("")
@@ -417,6 +390,70 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
     lines.append("")
     return "\n".join(lines)
+
+
+def _semantic_reasoning_path_markdown_lines(path: dict[str, Any]) -> list[str]:
+    branch_id = path.get("branch_id") or "(unknown)"
+    source_path = path.get("source_token_path") or []
+    nodes = path.get("semantic_nodes") or []
+    edges = path.get("semantic_edges") or []
+    node_labels = {
+        str(node.get("id") or ""): str(node.get("label") or "")
+        for node in nodes
+        if isinstance(node, dict) and node.get("id")
+    }
+
+    lines = [f"- {branch_id}:"]
+    lines.append(f"  - source tokens: {' ---- '.join(str(token) for token in source_path) if source_path else '(none)'}")
+    lines.append("  - semantic path:")
+    if not edges:
+        node_lines = [
+            f"    - {_semantic_node_label(str(node.get('id') or ''), node_labels)}"
+            for node in nodes
+            if isinstance(node, dict)
+        ]
+        lines.extend(node_lines or ["    - (none)"])
+    for edge in edges:
+        if not isinstance(edge, dict):
+            continue
+        condition = _semantic_condition_labels(edge.get("condition_node_ids") or [], node_labels)
+        relation = str(edge.get("relation") or "")
+        if condition:
+            relation = f"{relation}; condition: {condition}"
+        lines.append(
+            "    - "
+            f"{_semantic_node_label(str(edge.get('source') or ''), node_labels)} "
+            f"--[{relation}]--> "
+            f"{_semantic_node_label(str(edge.get('target') or ''), node_labels)}"
+        )
+        evidence_status = edge.get("evidence_status") or ""
+        support_tokens = edge.get("support_tokens") or []
+        evidence = []
+        if evidence_status:
+            evidence.append(str(evidence_status))
+        evidence.append(
+            "support="
+            + (", ".join(str(token) for token in support_tokens) if support_tokens else "(none)")
+        )
+        lines.append(f"      - evidence: {'; '.join(evidence)}")
+    terminal_node_id = str(path.get("terminal_node_id") or "")
+    if terminal_node_id:
+        lines.append(f"  - terminal: {_semantic_node_label(terminal_node_id, node_labels)}")
+    return lines
+
+
+def _semantic_node_label(node_id: str, node_labels: dict[str, str]) -> str:
+    return node_labels.get(node_id) or "(unknown)"
+
+
+def _semantic_condition_labels(condition_node_ids: Any, node_labels: dict[str, str]) -> str:
+    if not isinstance(condition_node_ids, (list, tuple)):
+        return ""
+    return ", ".join(
+        _semantic_node_label(str(node_id), node_labels)
+        for node_id in condition_node_ids
+        if str(node_id)
+    )
 
 
 def build_error_markdown(payload: dict[str, Any]) -> str:

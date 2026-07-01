@@ -385,6 +385,7 @@ def compile_token_reasoning_structure(
         constraints = detect_constraints(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id)
         query_focus = _build_query_focus(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id, constraints)
         direct_candidate_sets = detect_candidate_sets(anchor_state.nodes, anchor_state.raw_edges, explicit_entity_ids)
+        add_candidate_typed_slot_instantiation_edges(anchor_state, query_focus, direct_candidate_sets)
         parallel_entity_sets = _detect_parallel_entity_sets(
             anchor_state,
             explicit_entity_ids,
@@ -1705,6 +1706,26 @@ def add_descriptor_lifting_edges(
             state.virtual_edges.append(virtual.to_dict())
 
 
+def add_candidate_typed_slot_instantiation_edges(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    direct_candidate_sets: list[list[str]],
+) -> None:
+    if query_focus.mode != "typed_wh_slot" or not query_focus.slot_id:
+        return
+    for candidate_set in direct_candidate_sets:
+        candidate_ids = _candidate_text_set_to_ids(state.nodes, candidate_set)
+        if len(candidate_ids) < 2:
+            continue
+        for candidate_id in candidate_ids:
+            _ensure_candidate_typed_slot_instantiation_edge(
+                state,
+                candidate_id,
+                query_focus.slot_id,
+                candidate_set,
+            )
+
+
 # Legacy terminal-cover utilities retained for offline comparison only. The
 # formal Step4 path no longer calls these functions.
 def extract_steiner_backbone(
@@ -2134,6 +2155,7 @@ def _select_query_focused_paths(
     parallel_paths = _extract_actual_parallel_path_cover(
         state,
         query_focus,
+        constraints,
         parallel_entity_sets,
     )
     if parallel_paths:
@@ -2695,31 +2717,37 @@ def _extract_bare_wh_candidate_path_cover(
 def _extract_actual_parallel_path_cover(
     state: _WorkingState,
     query_focus: _QueryFocus,
+    constraints: list[dict[str, Any]],
     parallel_entity_sets: list[dict[str, Any]],
 ) -> tuple[list[TokenReasoningPath], list[_CandidatePath], list[_CandidatePath]] | None:
     all_records: list[_CandidatePath] = []
     for parallel_set in _sort_parallel_entity_sets(state.nodes, parallel_entity_sets):
-        if parallel_set.get("kind") == "direct_entity_set" and query_focus.slot_id:
-            continue
         entity_ids = [node_id for node_id in parallel_set.get("entity_ids", []) if node_id in state.nodes]
         if len(entity_ids) < 2:
+            continue
+        if (
+            parallel_set.get("kind") == "direct_entity_set"
+            and query_focus.slot_id
+            and not _candidate_typed_slot_instantiation_edges_available(state, query_focus.slot_id, entity_ids)
+        ):
             continue
         branch_heads = {
             str(entity_id): str(head_id)
             for entity_id, head_id in dict(parallel_set.get("branch_heads") or {}).items()
             if str(head_id) in state.nodes
         }
+        path_query_focus = _candidate_path_query_focus(state, query_focus, constraints, parallel_set.get("kind"))
         semantic_nodes = _collect_question_semantic_nodes(state, entity_ids, query_focus, query_focus.answer_anchor_id)
         selected: list[_CandidatePath] = []
         viable = True
         for entity_id in entity_ids:
-            required_ids = list(query_focus.required_ids)
+            required_ids = list(path_query_focus.required_ids)
             if entity_id in branch_heads:
                 required_ids.insert(0, branch_heads[entity_id])
             candidates = _enumerate_entity_focus_paths(
                 state,
                 entity_id,
-                query_focus,
+                path_query_focus,
                 forbidden_entity_ids=set(entity_ids) - {entity_id},
                 required_ids=_unique_node_ids(required_ids, state.nodes),
                 semantic_nodes=semantic_nodes,
@@ -2747,6 +2775,40 @@ def _extract_actual_parallel_path_cover(
         ]
         return selected_paths, selected, marked_records
     return None
+
+
+def _candidate_path_query_focus(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    constraints: list[dict[str, Any]],
+    parallel_set_kind: object,
+) -> _QueryFocus:
+    if parallel_set_kind != "direct_entity_set" or not query_focus.slot_id:
+        return query_focus
+    focus_id = _schema_focus_id(state, query_focus, constraints)
+    if not focus_id or focus_id not in state.nodes or focus_id == query_focus.terminal_id:
+        return query_focus
+    required_ids = _unique_node_ids([*query_focus.required_ids, focus_id], state.nodes)
+    return _QueryFocus(
+        answer_anchor_id=query_focus.answer_anchor_id,
+        query_root_id=query_focus.query_root_id,
+        slot_id=query_focus.slot_id,
+        terminal_id=focus_id,
+        required_ids=tuple(required_ids),
+        mode=query_focus.mode,
+    )
+
+
+def _candidate_typed_slot_instantiation_edges_available(
+    state: _WorkingState,
+    slot_id: str,
+    entity_ids: list[str],
+) -> bool:
+    return all(
+        (edge := state.edges.get(_edge_key(entity_id, slot_id))) is not None
+        and "candidate_typed_slot_instantiation" in edge.rule
+        for entity_id in entity_ids
+    )
 
 
 def _select_single_main_path(
@@ -3554,6 +3616,59 @@ def _ensure_candidate_slot_edge(
     state.virtual_edges.append(virtual.to_dict())
 
 
+def _ensure_candidate_typed_slot_instantiation_edge(
+    state: _WorkingState,
+    candidate_id: str,
+    slot_id: str,
+    candidate_set: list[str],
+) -> None:
+    existing = state.edges.get(_edge_key(candidate_id, slot_id))
+    if existing is not None and "candidate_typed_slot_instantiation" in existing.rule:
+        return
+    edge_quality = "MEDIUM"
+    support = EDGE_QUALITY_SCORES[edge_quality]
+    provenance = {
+        "rule": "candidate_typed_slot_instantiation",
+        "edge_quality": edge_quality,
+        "derived": True,
+        "virtual": True,
+        "bidirectional": True,
+        "support": support,
+        "candidate_id": candidate_id,
+        "candidate": state.nodes[candidate_id].text,
+        "typed_slot_id": slot_id,
+        "typed_slot": state.nodes[slot_id].text,
+        "reason": "candidate fills the typed WH answer slot",
+        "typed_wh_evidence": _typed_wh_slot_evidence(state, slot_id),
+        "candidate_set": list(candidate_set),
+        "candidate_set_entity_ids": _candidate_text_set_to_ids(state.nodes, candidate_set),
+        "candidate_set_evidence": _candidate_set_coordination_evidence(state, candidate_set),
+    }
+    virtual = _merge_edge(
+        state.edges,
+        state.nodes,
+        candidate_id,
+        slot_id,
+        support=support,
+        edge_quality=edge_quality,
+        derived=True,
+        rule="candidate_typed_slot_instantiation",
+        provenance=[provenance],
+    )
+    payload = virtual.to_dict()
+    payload.update(
+        {
+            "source": candidate_id,
+            "target": slot_id,
+            "source_text": state.nodes[candidate_id].text,
+            "target_text": state.nodes[slot_id].text,
+            "virtual": True,
+            "bidirectional": True,
+        }
+    )
+    state.virtual_edges.append(payload)
+
+
 def _typed_wh_slot_evidence(state: _WorkingState, slot_id: str) -> dict[str, Any]:
     raw_edges: list[dict[str, Any]] = []
     for edge in state.raw_edges.values():
@@ -4085,7 +4200,12 @@ def _infer_edge_quality(
         return explicit
     if "descriptor_lifting" in rule:
         return "MEDIUM"
-    if "candidate_expansion" in rule or "candidate_slot_substitution" in rule or "candidate_bare_wh_substitution" in rule:
+    if (
+        "candidate_expansion" in rule
+        or "candidate_slot_substitution" in rule
+        or "candidate_bare_wh_substitution" in rule
+        or "candidate_typed_slot_instantiation" in rule
+    ):
         return "MEDIUM"
     if "bridge_contraction" in rule:
         if _is_high_salience_node(nodes[source_id], include_order_constraints=True) and _is_high_salience_node(nodes[target_id], include_order_constraints=True):

@@ -217,13 +217,13 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         compiled = result["token_reasoning_structure"]
         self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
         payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(
             payload["global_best_paths"],
             [
-                ["Illusions (1982 Film)", "director", "born"],
-                ["It'S A Wonderful Afterlife", "director", "born"],
+                ["Illusions (1982 Film)", "film", "director", "born"],
+                ["It'S A Wonderful Afterlife", "film", "director", "born"],
             ],
         )
         self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
@@ -449,7 +449,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertNotIn("ENTITYB", anchor["paths"][0]["nodes"])  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
-    def test_candidate_comparison_uses_typed_slot_substitution(self) -> None:
+    def test_candidate_comparison_uses_typed_slot_instantiation(self) -> None:
         result = self._film_director_died_result()
 
         compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
@@ -457,14 +457,15 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "film")
         self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "director", "died"], ["ENTITYB", "director", "died"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]])
         self.assertTrue(any(item["text"] == "first" for item in compiled.constraints))
         rendered = "\n".join(" ---- ".join(path) for path in self.anchor_path_nodes(compiled, "film"))
         self.assertNotIn(" or ", rendered)
         derived_rules = {edge.rule for edge in compiled.edges if edge.derived}
-        self.assertTrue(any("candidate_slot_substitution" in rule for rule in derived_rules))
-        substitution_edges = [edge for edge in compiled.edges if "candidate_slot_substitution" in edge.rule]
-        self.assertTrue(all(edge.provenance for edge in substitution_edges))
+        self.assertTrue(any("candidate_typed_slot_instantiation" in rule for rule in derived_rules))
+        instantiation_edges = [edge for edge in compiled.edges if "candidate_typed_slot_instantiation" in edge.rule]
+        self.assertEqual(len(instantiation_edges), 2)
+        self.assertTrue(all(edge.provenance for edge in instantiation_edges))
         self.assert_path_union_graph(compiled)
 
     def test_candidate_comparison_recovers_surface_typed_wh_slot(self) -> None:
@@ -476,22 +477,22 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assert_multi_anchor_result(compiled)
         anchor = self.anchor_result(compiled, "film")
         self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "film"), [["8", "4", "6"], ["10", "4", "6"]])
-        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "director", "younger"], ["ENTITYB", "director", "younger"]])
+        self.assertEqual(self.anchor_path_ids(compiled, "film"), [["8", "2", "4", "6"], ["10", "2", "4", "6"]])
+        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]])
         self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
         self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
         self.assert_path_union_graph(compiled)
 
-        substitution_edges = [
+        instantiation_edges = [
             edge
             for edge in self.anchor_result(compiled, "film").get("virtual_edges", [])  # type: ignore[union-attr]
-            if "candidate_slot_substitution" in str(edge.get("rule", ""))
+            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
         ]
-        self.assertEqual(len(substitution_edges), 2)
-        for edge in substitution_edges:
-            provenance = edge["provenance"][0]
-            self.assertEqual(provenance["typed_wh_slot_id"], "2")
-            self.assertEqual(provenance["schema_path_ids"], ["2", "4", "6"])
+        self.assertEqual(len(instantiation_edges), 2)
+        for edge in instantiation_edges:
+            provenance = next(item for item in edge["provenance"] if item.get("rule") == "candidate_typed_slot_instantiation")
+            self.assertEqual(provenance["typed_slot_id"], "2")
+            self.assertEqual(provenance["reason"], "candidate fills the typed WH answer slot")
             self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
             self.assertTrue(provenance["candidate_set_evidence"])
 
@@ -502,17 +503,98 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 
         self.assertEqual(compiled.path_type, "global_best_path_cover")
         self.assertEqual(len(compiled.paths), 2)
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
         self.assertEqual(compiled.global_selection["selection_type"], "global_best_path_cover")
         self.assertEqual(compiled.global_selection["candidate_set"], ["ENTITYA", "ENTITYB"])
         self.assertEqual(
             [path["nodes"] for path in compiled.global_selection["paths"]],
-            [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]],
+            [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]],
         )
         anchor = self.anchor_result(compiled, "film")
         selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
-        self.assertEqual([path["nodes"] for path in selected_paths], [["ENTITYA", "director", "born"], ["ENTITYB", "director", "born"]])
+        self.assertEqual([path["nodes"] for path in selected_paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
         self.assert_path_union_graph(compiled)
+
+    def test_candidate_typed_slot_instantiation_preserves_whose_restriction_chain(self) -> None:
+        result = _hanlp_result(
+            "Which film whose director was born first, ENTITYA or ENTITYB?",
+            ["Which", "film", "whose", "director", "was", "born", "first", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _dm("Which", "BV", "film", 1, 2),
+                _dm("film", "poss", "director", 2, 4),
+                _dm("whose", "poss", "director", 3, 4),
+                _dm("born", "ARG2", "director", 6, 4),
+                _dm("first", "ARG1", "born", 7, 6),
+                _pas("or", "coord_ARG1", "ENTITYA", 10, 9),
+                _pas("or", "coord_ARG2", "ENTITYB", 10, 11),
+                _psd("film", "RSTR", "born", 2, 6),
+                _psd("or", "DISJ.member", "ENTITYA", 10, 9),
+                _psd("or", "DISJ.member", "ENTITYB", 10, 11),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
+        self.assertNotEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "born"], ["ENTITYB", "born"]])
+        anchor = self.anchor_result(compiled, "film")
+        virtual_edges = [
+            edge
+            for edge in anchor.get("virtual_edges", [])  # type: ignore[union-attr]
+            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
+        ]
+        self.assertEqual({(edge["source_text"], edge["target_text"]) for edge in virtual_edges}, {("ENTITYA", "film"), ("ENTITYB", "film")})
+        self.assertTrue(
+            all(
+                next(item for item in edge["provenance"] if item.get("rule") == "candidate_typed_slot_instantiation")["reason"]
+                == "candidate fills the typed WH answer slot"
+                for edge in virtual_edges
+            )
+        )
+
+        extra_result = _hanlp_result(
+            "Which film whose director was born first, ENTITYA or ENTITYB, according to ENTITYC?",
+            [
+                "Which",
+                "film",
+                "whose",
+                "director",
+                "was",
+                "born",
+                "first",
+                ",",
+                "ENTITYA",
+                "or",
+                "ENTITYB",
+                ",",
+                "according",
+                "to",
+                "ENTITYC",
+                "?",
+            ],
+            [
+                _dm("Which", "BV", "film", 1, 2),
+                _dm("film", "poss", "director", 2, 4),
+                _dm("whose", "poss", "director", 3, 4),
+                _dm("born", "ARG2", "director", 6, 4),
+                _dm("first", "ARG1", "born", 7, 6),
+                _pas("or", "coord_ARG1", "ENTITYA", 10, 9),
+                _pas("or", "coord_ARG2", "ENTITYB", 10, 11),
+                _pas("according", "prep_ARG2", "ENTITYC", 13, 15),
+                _psd("film", "RSTR", "born", 2, 6),
+                _psd("or", "DISJ.member", "ENTITYA", 10, 9),
+                _psd("or", "DISJ.member", "ENTITYB", 10, 11),
+            ],
+        )
+        extra_compiled = compile_token_reasoning_structure(extra_result, ["ENTITYA", "ENTITYB", "ENTITYC"])
+        extra_anchor = self.anchor_result(extra_compiled, "film")
+        extra_virtual_edges = [
+            edge
+            for edge in extra_anchor.get("virtual_edges", [])  # type: ignore[union-attr]
+            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
+        ]
+        self.assertEqual({edge["source_text"] for edge in extra_virtual_edges}, {"ENTITYA", "ENTITYB"})
+        self.assertNotIn("ENTITYC", {edge["source_text"] for edge in extra_virtual_edges})
 
     def test_simple_chain_still_uses_single_global_best_path(self) -> None:
         compiled = compile_token_reasoning_structure(self._director_born_result(), ["ENTITYA"])
@@ -1542,7 +1624,7 @@ def _illusions_step5_payload() -> dict[str, object]:
         "semantic_reasoning_paths": [
             _semantic_path(
                 "p1",
-                ["Illusions (1982 Film)", "director", "born"],
+                ["Illusions (1982 Film)", "film", "director", "born"],
                 [
                     _semantic_node("p1_n1", "Illusions (1982 Film)", "entity", "work", "explicit_entity", ["Illusions (1982 Film)"], ["Illusions (1982 Film)"]),
                     _semantic_node("p1_n2", "director of Illusions (1982 Film)", "intermediate_variable", "person", "derived_variable", ["director"], ["director of Illusions (1982 Film)"]),
@@ -1556,7 +1638,7 @@ def _illusions_step5_payload() -> dict[str, object]:
             ),
             _semantic_path(
                 "p2",
-                ["It'S A Wonderful Afterlife", "director", "born"],
+                ["It'S A Wonderful Afterlife", "film", "director", "born"],
                 [
                     _semantic_node("p2_n1", "It'S A Wonderful Afterlife", "entity", "work", "explicit_entity", ["It'S A Wonderful Afterlife"], ["It'S A Wonderful Afterlife"]),
                     _semantic_node("p2_n2", "director of It'S A Wonderful Afterlife", "intermediate_variable", "person", "derived_variable", ["director"], ["director of It'S A Wonderful Afterlife"]),
@@ -1638,8 +1720,8 @@ class IllusionsPipelineLLM:
             assert set(payload) == {"original_question", "explicit_entities", "global_best_paths"}
             assert payload["explicit_entities"] == ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"]
             assert payload["global_best_paths"] == [
-                ["Illusions (1982 Film)", "director", "born"],
-                ["It'S A Wonderful Afterlife", "director", "born"],
+                ["Illusions (1982 Film)", "film", "director", "born"],
+                ["It'S A Wonderful Afterlife", "film", "director", "born"],
             ]
             return _illusions_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt

@@ -366,7 +366,7 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
             evidence_status = edge.get("evidence_status") or ""
             support_tokens = edge.get("support_tokens") or []
             condition = _format_semantic_condition_refs(condition_node_ids, node_labels)
-            relation_text = f"{edge_id}: {relation}" if edge_id else str(relation)
+            relation_text = str(relation)
             if condition:
                 relation_text = f"{relation_text}; condition: {condition}"
             print(
@@ -392,9 +392,7 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
 
 def _format_semantic_node_ref(node_id: str, node_labels: dict[str, str]) -> str:
     label = node_labels.get(node_id, "")
-    if node_id and label:
-        return f"{node_id} {label}"
-    return label or node_id or "(unknown)"
+    return label or "(unknown)"
 
 
 def _format_semantic_condition_refs(condition_node_ids: Any, node_labels: dict[str, str]) -> str:
