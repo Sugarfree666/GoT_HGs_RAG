@@ -1,0 +1,1284 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 63,
+  "qid": null,
+  "question": "What was the language Auctor comes from during the era of the man crowned first Holy Roman Emperor later known as?",
+  "raw_question_item": {
+    "question": "What was the language Auctor comes from during the era of the man crowned first Holy Roman Emperor later known as?",
+    "answer": "Medieval Latin"
+  },
+  "gold_answer": "Medieval Latin",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Auctor",
+          "start_char": 22,
+          "end_char": 28,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Holy Roman Emperor",
+          "start_char": 80,
+          "end_char": 98,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Auctor",
+            "type": "Other"
+          },
+          {
+            "surface": "Holy Roman Emperor",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What was the language Auctor comes from during the era of the man crowned the first Holy Roman Emperor?",
+        "normalization_changed": true,
+        "normalization_note": "Added 'the' before 'first Holy Roman Emperor' for grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Auctor",
+            "start_char": 22,
+            "end_char": 28,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Holy Roman Emperor",
+            "start_char": 80,
+            "end_char": 98,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Holy",
+            "start_char": 80,
+            "end_char": 84,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Roman",
+            "start_char": 85,
+            "end_char": 90,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Emperor",
+            "start_char": 91,
+            "end_char": 98,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What was the language Auctor comes from during the era of the man crowned the first Holy Roman Emperor?",
+      "normalization_changed": true,
+      "normalization_note": "Added 'the' before 'first Holy Roman Emperor' for grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "What was the language ENTITYA comes from during the era of the man crowned the first ENTITYB?",
+      "hanlp_input_sentence": "What was the language ENTITYA comes from during the era of the man crowned the first ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Auctor",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            22,
+            28
+          ],
+          "masked_char_span": [
+            22,
+            29
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Holy Roman Emperor",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            80,
+            98
+          ],
+          "masked_char_span": [
+            85,
+            92
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "was",
+        "the",
+        "language",
+        "ENTITYA",
+        "comes",
+        "from",
+        "during",
+        "the",
+        "era",
+        "of",
+        "the",
+        "man",
+        "crowned",
+        "the",
+        "first",
+        "ENTITYB",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ],
+            [
+              6,
+              "ARG2"
+            ]
+          ],
+          [
+            [
+              6,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              7,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              8,
+              "ARG2"
+            ],
+            [
+              9,
+              "BV"
+            ],
+            [
+              11,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              11,
+              "ARG2"
+            ],
+            [
+              12,
+              "BV"
+            ],
+            [
+              14,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              14,
+              "ARG2"
+            ],
+            [
+              15,
+              "BV"
+            ],
+            [
+              16,
+              "ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              8,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              7,
+              "prep_ARG2"
+            ]
+          ],
+          [
+            [
+              6,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              7,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              8,
+              "prep_ARG2"
+            ],
+            [
+              9,
+              "det_ARG1"
+            ],
+            [
+              11,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              11,
+              "prep_ARG2"
+            ],
+            [
+              12,
+              "det_ARG1"
+            ],
+            [
+              14,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              15,
+              "det_ARG1"
+            ],
+            [
+              16,
+              "adj_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              4,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              6,
+              "TWHEN"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              10,
+              "APP"
+            ]
+          ],
+          [
+            [
+              13,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              17,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              14,
+              "PAT-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "was[2] --ARG2--> language[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "the[3] --BV--> language[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "comes",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "comes[6] --ARG2--> language[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "comes",
+          "relation": "ARG1",
+          "dep_idx": 5,
+          "dep": "ENTITYA",
+          "display": "comes[6] --ARG1--> ENTITYA[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "from",
+          "relation": "ARG1",
+          "dep_idx": 6,
+          "dep": "comes",
+          "display": "from[7] --ARG1--> comes[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "during",
+          "relation": "ARG2",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "during[8] --ARG2--> era[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "the[9] --BV--> era[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "of[11] --ARG1--> era[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "of[11] --ARG2--> man[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "the[12] --BV--> man[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "crowned",
+          "relation": "ARG2",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "crowned[14] --ARG2--> man[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "crowned",
+          "relation": "ARG2",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "crowned[14] --ARG2--> ENTITYB[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "the[15] --BV--> ENTITYB[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "first",
+          "relation": "ARG1",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "first[16] --ARG1--> ENTITYB[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "was[2] --verb_ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "ROOT[0] --root--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "during",
+          "relation": "prep_ARG1",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "during[8] --prep_ARG1--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "was[2] --verb_ARG2--> language[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "the[3] --det_ARG1--> language[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "from",
+          "relation": "prep_ARG2",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "from[7] --prep_ARG2--> language[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "comes",
+          "relation": "verb_ARG1",
+          "dep_idx": 5,
+          "dep": "ENTITYA",
+          "display": "comes[6] --verb_ARG1--> ENTITYA[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "from",
+          "relation": "prep_ARG1",
+          "dep_idx": 6,
+          "dep": "comes",
+          "display": "from[7] --prep_ARG1--> comes[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "during",
+          "relation": "prep_ARG2",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "during[8] --prep_ARG2--> era[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "the[9] --det_ARG1--> era[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "of[11] --prep_ARG1--> era[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "of[11] --prep_ARG2--> man[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "the[12] --det_ARG1--> man[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "crowned",
+          "relation": "verb_ARG2",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "crowned[14] --verb_ARG2--> man[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "the[15] --det_ARG1--> ENTITYB[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "first",
+          "relation": "adj_ARG1",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "first[16] --adj_ARG1--> ENTITYB[17]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "PAT-arg",
+          "dep_idx": 4,
+          "dep": "language",
+          "display": "was[2] --PAT-arg--> language[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "language",
+          "relation": "RSTR",
+          "dep_idx": 6,
+          "dep": "comes",
+          "display": "language[4] --RSTR--> comes[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "comes",
+          "relation": "TWHEN",
+          "dep_idx": 10,
+          "dep": "era",
+          "display": "comes[6] --TWHEN--> era[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 10,
+          "head": "era",
+          "relation": "APP",
+          "dep_idx": 13,
+          "dep": "man",
+          "display": "era[10] --APP--> man[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "man",
+          "relation": "RSTR",
+          "dep_idx": 14,
+          "dep": "crowned",
+          "display": "man[13] --RSTR--> crowned[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 17,
+          "head": "ENTITYB",
+          "relation": "RSTR",
+          "dep_idx": 16,
+          "dep": "first",
+          "display": "ENTITYB[17] --RSTR--> first[16]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "crowned",
+          "relation": "PAT-arg",
+          "dep_idx": 17,
+          "dep": "ENTITYB",
+          "display": "crowned[14] --PAT-arg--> ENTITYB[17]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "first",
+      "answer_anchor_id": "16",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "order",
+          "text": "first",
+          "node_id": "16",
+          "target": "ENTITYB",
+          "target_id": "17"
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "16",
+        "anchor_text": "first",
+        "source_types": [
+          "comparative_focus",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "5",
+          "6",
+          "4",
+          "10",
+          "13",
+          "14",
+          "17",
+          "16"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "comes",
+          "language",
+          "era",
+          "man",
+          "crowned",
+          "ENTITYB",
+          "first"
+        ],
+        "global_rank": [
+          0,
+          3,
+          7,
+          4
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10",
+            "13",
+            "14",
+            "16",
+            "17"
+          ],
+          "semantic_nodes": [
+            "language",
+            "ENTITYA",
+            "comes",
+            "era",
+            "man",
+            "crowned",
+            "first",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10",
+            "13",
+            "14",
+            "16",
+            "17"
+          ],
+          "covered_semantic_nodes": [
+            "language",
+            "ENTITYA",
+            "comes",
+            "era",
+            "man",
+            "crowned",
+            "first",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 7,
+          "anchor_fit_penalty": 4,
+          "rank": [
+            0,
+            3,
+            7,
+            4
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "16",
+            "anchor_text": "first",
+            "source_types": [
+              "comparative_focus",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "5",
+              "6",
+              "4",
+              "10",
+              "13",
+              "14",
+              "17",
+              "16"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "comes",
+              "language",
+              "era",
+              "man",
+              "crowned",
+              "ENTITYB",
+              "first"
+            ],
+            "global_rank": [
+              0,
+              3,
+              7,
+              4
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "10",
+                "13",
+                "14",
+                "16",
+                "17"
+              ],
+              "semantic_nodes": [
+                "language",
+                "ENTITYA",
+                "comes",
+                "era",
+                "man",
+                "crowned",
+                "first",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "10",
+                "13",
+                "14",
+                "16",
+                "17"
+              ],
+              "covered_semantic_nodes": [
+                "language",
+                "ENTITYA",
+                "comes",
+                "era",
+                "man",
+                "crowned",
+                "first",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 7,
+              "anchor_fit_penalty": 4,
+              "rank": [
+                0,
+                3,
+                7,
+                4
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: first[16]/comparative_focus+clause_predicate, What[1]/wh_anchor, language[4]/clause_predicate, comes[6]/clause_predicate, era[10]/clause_predicate, man[13]/clause_predicate, crowned[14]/clause_predicate, ENTITYA[5]/explicit_entity, ENTITYB[17]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "comes",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "comes",
+          "target": "language",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "language",
+          "target": "era",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "era",
+          "target": "man",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "man",
+          "target": "crowned",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "crowned",
+          "target": "ENTITYB",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "ENTITYB",
+          "target": "first",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "comes",
+            "language",
+            "era",
+            "man",
+            "crowned",
+            "ENTITYB",
+            "first"
+          ],
+          "node_ids": [
+            "5",
+            "6",
+            "4",
+            "10",
+            "13",
+            "14",
+            "17",
+            "16"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What was the language Auctor comes from during the era of the man crowned first Holy Roman Emperor later known as?",
+        "explicit_entities": [
+          "Auctor",
+          "Holy Roman Emperor"
+        ],
+        "global_best_paths": [
+          [
+            "Auctor",
+            "comes",
+            "language",
+            "era",
+            "man",
+            "crowned",
+            "Holy Roman Emperor",
+            "first"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Auctor",
+            "comes",
+            "language",
+            "era",
+            "man",
+            "crowned",
+            "Holy Roman Emperor",
+            "first"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Auctor",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "language of Auctor",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "era of the first Holy Roman Emperor",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n4",
+              "label": "first Holy Roman Emperor",
+              "kind": "entity"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "language comes from",
+              "support_tokens": [
+                "Auctor",
+                "comes",
+                "language"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n4",
+              "target": "p1_n3",
+              "relation": "era of",
+              "support_tokens": [
+                "man",
+                "crowned",
+                "Holy Roman Emperor",
+                "first"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n2"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What language does Auctor come from?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Who was the first Holy Roman Emperor?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What was the era of the first Holy Roman Emperor?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What language does Auctor come from?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Who was the first Holy Roman Emperor?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What was the era of the first Holy Roman Emperor?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q1",
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [
+        "q3: depends_on entries are not mentioned as qN's answer in question: ['q2']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Auctor",
+              "comes",
+              "language",
+              "era",
+              "man",
+              "crowned",
+              "Holy Roman Emperor",
+              "first"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Auctor",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "language of Auctor",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "era of the first Holy Roman Emperor",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n4",
+                "label": "first Holy Roman Emperor",
+                "kind": "entity"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "language comes from",
+                "support_tokens": [
+                  "Auctor",
+                  "comes",
+                  "language"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n4",
+                "target": "p1_n3",
+                "relation": "era of",
+                "support_tokens": [
+                  "man",
+                  "crowned",
+                  "Holy Roman Emperor",
+                  "first"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n2"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What language does Auctor come from?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "Who was the first Holy Roman Emperor?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "What was the era of the first Holy Roman Emperor?",
+            "depends_on": [
+              "q2"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

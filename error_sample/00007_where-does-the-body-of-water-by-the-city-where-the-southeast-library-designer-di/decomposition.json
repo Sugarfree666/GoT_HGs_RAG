@@ -1,0 +1,1249 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 7,
+  "qid": null,
+  "question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+  "raw_question_item": {
+    "question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+    "answer": "the Mississippi River Delta"
+  },
+  "gold_answer": "the Mississippi River Delta",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Southeast Library",
+          "start_char": 51,
+          "end_char": 68,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Gulf of Mexico",
+          "start_char": 98,
+          "end_char": 112,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Southeast Library",
+            "type": "Organization"
+          },
+          {
+            "surface": "Gulf of Mexico",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Southeast Library",
+            "start_char": 51,
+            "end_char": 68,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Southeast",
+            "start_char": 51,
+            "end_char": 60,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Library",
+            "start_char": 61,
+            "end_char": 68,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Gulf of Mexico",
+            "start_char": 98,
+            "end_char": 112,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Gulf",
+            "start_char": 98,
+            "end_char": 102,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Mexico",
+            "start_char": 106,
+            "end_char": 112,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Where does the body of water by the city where the ENTITYA designer died empty into the ENTITYB?",
+      "hanlp_input_sentence": "Where does the body of water by the city where the ENTITYA designer died empty into the ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Southeast Library",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            51,
+            68
+          ],
+          "masked_char_span": [
+            51,
+            58
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Gulf of Mexico",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            98,
+            112
+          ],
+          "masked_char_span": [
+            88,
+            95
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Where",
+        "does",
+        "the",
+        "body",
+        "of",
+        "water",
+        "by",
+        "the",
+        "city",
+        "where",
+        "the",
+        "ENTITYA",
+        "designer",
+        "died",
+        "empty",
+        "into",
+        "the",
+        "ENTITYB",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [],
+          [
+            [
+              3,
+              "BV"
+            ],
+            [
+              15,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              7,
+              "ARG2"
+            ],
+            [
+              8,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              11,
+              "BV"
+            ],
+            [
+              12,
+              "compound"
+            ],
+            [
+              14,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              9,
+              "loc"
+            ]
+          ],
+          [
+            [
+              1,
+              "loc"
+            ],
+            [
+              16,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              16,
+              "ARG2"
+            ],
+            [
+              17,
+              "BV"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "aux_ARG1"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ],
+            [
+              15,
+              "verb_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "prep_ARG2"
+            ],
+            [
+              8,
+              "det_ARG1"
+            ],
+            [
+              10,
+              "conj_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              11,
+              "det_ARG1"
+            ],
+            [
+              12,
+              "noun_ARG1"
+            ],
+            [
+              14,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              10,
+              "conj_ARG2"
+            ]
+          ],
+          [
+            [
+              1,
+              "adj_ARG1"
+            ],
+            [
+              2,
+              "aux_ARG2"
+            ],
+            [
+              16,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              16,
+              "prep_ARG2"
+            ],
+            [
+              17,
+              "det_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [],
+          [],
+          [],
+          [
+            [
+              15,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              4,
+              "APP"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "LOC"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              13,
+              "PAT-arg"
+            ]
+          ],
+          [
+            [
+              14,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              4,
+              "RSTR"
+            ],
+            [
+              9,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              15,
+              "PAT-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "the[3] --BV--> body[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "empty",
+          "relation": "ARG1",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "empty[15] --ARG1--> body[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "by",
+          "relation": "ARG2",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "by[7] --ARG2--> city[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "the[8] --BV--> city[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "the[11] --BV--> designer[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "ENTITYA",
+          "relation": "compound",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "ENTITYA[12] --compound--> designer[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "died",
+          "relation": "ARG1",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "died[14] --ARG1--> designer[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "city",
+          "relation": "loc",
+          "dep_idx": 14,
+          "dep": "died",
+          "display": "city[9] --loc--> died[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 1,
+          "head": "Where",
+          "relation": "loc",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "Where[1] --loc--> empty[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "into",
+          "relation": "ARG1",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "into[16] --ARG1--> empty[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "into",
+          "relation": "ARG2",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "into[16] --ARG2--> ENTITYB[18]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 17,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "the[17] --BV--> ENTITYB[18]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "does",
+          "relation": "aux_ARG1",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "does[2] --aux_ARG1--> body[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "the[3] --det_ARG1--> body[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "of[5] --prep_ARG1--> body[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "empty",
+          "relation": "verb_ARG1",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "empty[15] --verb_ARG1--> body[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 6,
+          "dep": "water",
+          "display": "of[5] --prep_ARG2--> water[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "by",
+          "relation": "prep_ARG2",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "by[7] --prep_ARG2--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "the[8] --det_ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "where",
+          "relation": "conj_ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "where[10] --conj_ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "the[11] --det_ARG1--> designer[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "ENTITYA",
+          "relation": "noun_ARG1",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "ENTITYA[12] --noun_ARG1--> designer[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "died",
+          "relation": "verb_ARG1",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "died[14] --verb_ARG1--> designer[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "where",
+          "relation": "conj_ARG2",
+          "dep_idx": 14,
+          "dep": "died",
+          "display": "where[10] --conj_ARG2--> died[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "Where",
+          "relation": "adj_ARG1",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "Where[1] --adj_ARG1--> empty[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "does",
+          "relation": "aux_ARG2",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "does[2] --aux_ARG2--> empty[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "into",
+          "relation": "prep_ARG1",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "into[16] --prep_ARG1--> empty[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "into",
+          "relation": "prep_ARG2",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "into[16] --prep_ARG2--> ENTITYB[18]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "the[17] --det_ARG1--> ENTITYB[18]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "empty",
+          "relation": "ACT-arg",
+          "dep_idx": 4,
+          "dep": "body",
+          "display": "empty[15] --ACT-arg--> body[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "body",
+          "relation": "APP",
+          "dep_idx": 6,
+          "dep": "water",
+          "display": "body[4] --APP--> water[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "body",
+          "relation": "LOC",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "body[4] --LOC--> city[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "designer",
+          "relation": "PAT-arg",
+          "dep_idx": 12,
+          "dep": "ENTITYA",
+          "display": "designer[13] --PAT-arg--> ENTITYA[12]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "died",
+          "relation": "ACT-arg",
+          "dep_idx": 13,
+          "dep": "designer",
+          "display": "died[14] --ACT-arg--> designer[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "body",
+          "relation": "RSTR",
+          "dep_idx": 14,
+          "dep": "died",
+          "display": "body[4] --RSTR--> died[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "city",
+          "relation": "RSTR",
+          "dep_idx": 14,
+          "dep": "died",
+          "display": "city[9] --RSTR--> died[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 15,
+          "dep": "empty",
+          "display": "ROOT[0] --root--> empty[15]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "empty",
+          "relation": "PAT-arg",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "empty[15] --PAT-arg--> ENTITYB[18]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "12",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 9,
+        "path_index": 1,
+        "anchor_id": "12",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A9.P1",
+        "node_ids": [
+          "18",
+          "15",
+          "4",
+          "6",
+          "14",
+          "13",
+          "12"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "empty",
+          "body",
+          "water",
+          "died",
+          "designer",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "6",
+            "9",
+            "12",
+            "13",
+            "14",
+            "15",
+            "18"
+          ],
+          "semantic_nodes": [
+            "body",
+            "water",
+            "city",
+            "ENTITYA",
+            "designer",
+            "died",
+            "empty",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "12",
+            "13",
+            "14",
+            "15",
+            "18"
+          ],
+          "covered_semantic_nodes": [
+            "body",
+            "water",
+            "ENTITYA",
+            "designer",
+            "died",
+            "empty",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "9"
+          ],
+          "missing_semantic_nodes": [
+            "city"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 4,
+          "dirty_path_count": 4,
+          "path_length": 6,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            1,
+            4,
+            6,
+            6
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 9,
+            "path_index": 1,
+            "anchor_id": "12",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A9.P1",
+            "node_ids": [
+              "18",
+              "15",
+              "4",
+              "6",
+              "14",
+              "13",
+              "12"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "empty",
+              "body",
+              "water",
+              "died",
+              "designer",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              1,
+              4,
+              6,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "6",
+                "9",
+                "12",
+                "13",
+                "14",
+                "15",
+                "18"
+              ],
+              "semantic_nodes": [
+                "body",
+                "water",
+                "city",
+                "ENTITYA",
+                "designer",
+                "died",
+                "empty",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "12",
+                "13",
+                "14",
+                "15",
+                "18"
+              ],
+              "covered_semantic_nodes": [
+                "body",
+                "water",
+                "ENTITYA",
+                "designer",
+                "died",
+                "empty",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "9"
+              ],
+              "missing_semantic_nodes": [
+                "city"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 4,
+              "dirty_path_count": 4,
+              "path_length": 6,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                1,
+                4,
+                6,
+                6
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: Where[1]/wh_anchor, where[10]/wh_anchor, body[4]/clause_predicate, water[6]/clause_predicate, city[9]/clause_predicate, designer[13]/clause_predicate, died[14]/clause_predicate, empty[15]/clause_predicate, ENTITYA[12]/explicit_entity, ENTITYB[18]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "empty",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "empty",
+          "target": "body",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "body",
+          "target": "water",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "water",
+          "target": "died",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "died",
+          "target": "designer",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "designer",
+          "target": "ENTITYA",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "empty",
+            "body",
+            "water",
+            "died",
+            "designer",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "18",
+            "15",
+            "4",
+            "6",
+            "14",
+            "13",
+            "12"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Where does the body of water by the city where the Southeast Library designer died empty into the Gulf of Mexico?",
+        "explicit_entities": [
+          "Southeast Library",
+          "Gulf of Mexico"
+        ],
+        "global_best_paths": [
+          [
+            "Gulf of Mexico",
+            "empty",
+            "body",
+            "water",
+            "died",
+            "designer",
+            "Southeast Library"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Gulf of Mexico",
+            "empty",
+            "body",
+            "water",
+            "died",
+            "designer",
+            "Southeast Library"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Southeast Library designer",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "body of water",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "Gulf of Mexico",
+              "kind": "entity"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "identify body of water associated with",
+              "support_tokens": [
+                "died",
+                "designer",
+                "Southeast Library"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "empty into",
+              "support_tokens": [
+                "empty",
+                "body",
+                "water",
+                "Gulf of Mexico"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is the body of water associated with the Southeast Library designer who died?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Where does the body of water empty into the Gulf of Mexico?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the body of water associated with the Southeast Library designer who died?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Where does the body of water empty into the Gulf of Mexico?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Gulf of Mexico",
+              "empty",
+              "body",
+              "water",
+              "died",
+              "designer",
+              "Southeast Library"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Southeast Library designer",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "body of water",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "Gulf of Mexico",
+                "kind": "entity"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "identify body of water associated with",
+                "support_tokens": [
+                  "died",
+                  "designer",
+                  "Southeast Library"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "empty into",
+                "support_tokens": [
+                  "empty",
+                  "body",
+                  "water",
+                  "Gulf of Mexico"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is the body of water associated with the Southeast Library designer who died?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "Where does the body of water empty into the Gulf of Mexico?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

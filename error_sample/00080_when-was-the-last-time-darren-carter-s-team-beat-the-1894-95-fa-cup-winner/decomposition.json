@@ -1,0 +1,1232 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 80,
+  "qid": null,
+  "question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+  "raw_question_item": {
+    "question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+    "answer": "1 December 2010"
+  },
+  "gold_answer": "1 December 2010",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Darren Carter",
+          "start_char": 23,
+          "end_char": 36,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "FA Cup",
+          "start_char": 61,
+          "end_char": 67,
+          "semantic_type_hint": "Event",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Darren Carter",
+            "type": "Person"
+          },
+          {
+            "surface": "FA Cup",
+            "type": "Event"
+          }
+        ],
+        "normalized_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Darren Carter",
+            "start_char": 23,
+            "end_char": 36,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Darren",
+            "start_char": 23,
+            "end_char": 29,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Carter",
+            "start_char": 30,
+            "end_char": 36,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "FA Cup",
+            "start_char": 61,
+            "end_char": 67,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "FA",
+            "start_char": 61,
+            "end_char": 63,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Cup",
+            "start_char": 64,
+            "end_char": 67,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the last time ENTITYA's team beat the 1894-95 ENTITYB winner?",
+      "hanlp_input_sentence": "When was the last time ENTITYA's team beat the 1894-95 ENTITYB winner?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Darren Carter",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            23,
+            36
+          ],
+          "masked_char_span": [
+            23,
+            30
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "FA Cup",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Event",
+          "original_char_span": [
+            61,
+            67
+          ],
+          "masked_char_span": [
+            55,
+            62
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "last",
+        "time",
+        "ENTITYA",
+        "'",
+        "s",
+        "team",
+        "beat",
+        "the",
+        "1894-95",
+        "ENTITYB",
+        "winner",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [
+            [
+              2,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ],
+            [
+              4,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              6,
+              "poss"
+            ],
+            [
+              10,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              5,
+              "loc"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              10,
+              "ARG2"
+            ],
+            [
+              11,
+              "BV"
+            ],
+            [
+              12,
+              "compound"
+            ],
+            [
+              13,
+              "compound"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              1,
+              "adj_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              4,
+              "adj_ARG1"
+            ]
+          ],
+          [
+            [
+              7,
+              "poss_ARG2"
+            ],
+            [
+              8,
+              "poss_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "poss_ARG1"
+            ],
+            [
+              8,
+              "poss_ARG1"
+            ],
+            [
+              10,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              5,
+              "noun_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              10,
+              "verb_ARG2"
+            ],
+            [
+              11,
+              "det_ARG1"
+            ],
+            [
+              12,
+              "adj_ARG1"
+            ],
+            [
+              13,
+              "noun_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "TWHEN"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              5,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              2,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              9,
+              "APP"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              10,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              5,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              14,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              10,
+              "PAT-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG1",
+          "dep_idx": 1,
+          "dep": "When",
+          "display": "was[2] --ARG1--> When[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG2",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "was[2] --ARG2--> time[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "the[3] --BV--> time[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "last",
+          "relation": "ARG1",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "last[4] --ARG1--> time[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "ENTITYA",
+          "relation": "poss",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "ENTITYA[6] --poss--> team[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "ARG1",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "beat[10] --ARG1--> team[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "time",
+          "relation": "loc",
+          "dep_idx": 10,
+          "dep": "beat",
+          "display": "time[5] --loc--> beat[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "ARG2",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "beat[10] --ARG2--> winner[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "the[11] --BV--> winner[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "1894-95",
+          "relation": "compound",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "1894-95[12] --compound--> winner[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "ENTITYB",
+          "relation": "compound",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "ENTITYB[13] --compound--> winner[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "When",
+          "display": "was[2] --verb_ARG1--> When[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "ROOT[0] --root--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "When",
+          "relation": "adj_ARG1",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "When[1] --adj_ARG1--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG2",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "was[2] --verb_ARG2--> time[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "the[3] --det_ARG1--> time[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "last",
+          "relation": "adj_ARG1",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "last[4] --adj_ARG1--> time[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "'",
+          "relation": "poss_ARG2",
+          "dep_idx": 6,
+          "dep": "ENTITYA",
+          "display": "'[7] --poss_ARG2--> ENTITYA[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "s",
+          "relation": "poss_ARG2",
+          "dep_idx": 6,
+          "dep": "ENTITYA",
+          "display": "s[8] --poss_ARG2--> ENTITYA[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "'",
+          "relation": "poss_ARG1",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "'[7] --poss_ARG1--> team[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "s",
+          "relation": "poss_ARG1",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "s[8] --poss_ARG1--> team[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "verb_ARG1",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "beat[10] --verb_ARG1--> team[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "time",
+          "relation": "noun_ARG2",
+          "dep_idx": 10,
+          "dep": "beat",
+          "display": "time[5] --noun_ARG2--> beat[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "verb_ARG2",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "beat[10] --verb_ARG2--> winner[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "the[11] --det_ARG1--> winner[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "1894-95",
+          "relation": "adj_ARG1",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "1894-95[12] --adj_ARG1--> winner[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "ENTITYB",
+          "relation": "noun_ARG1",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "ENTITYB[13] --noun_ARG1--> winner[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "TWHEN",
+          "dep_idx": 1,
+          "dep": "When",
+          "display": "was[2] --TWHEN--> When[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "ROOT[0] --root--> was[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 5,
+          "head": "time",
+          "relation": "RSTR",
+          "dep_idx": 4,
+          "dep": "last",
+          "display": "time[5] --RSTR--> last[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ACT-arg",
+          "dep_idx": 5,
+          "dep": "time",
+          "display": "was[2] --ACT-arg--> time[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "team",
+          "relation": "APP",
+          "dep_idx": 6,
+          "dep": "ENTITYA",
+          "display": "team[9] --APP--> ENTITYA[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "ACT-arg",
+          "dep_idx": 9,
+          "dep": "team",
+          "display": "beat[10] --ACT-arg--> team[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 5,
+          "head": "time",
+          "relation": "RSTR",
+          "dep_idx": 10,
+          "dep": "beat",
+          "display": "time[5] --RSTR--> beat[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "winner",
+          "relation": "RSTR",
+          "dep_idx": 12,
+          "dep": "1894-95",
+          "display": "winner[14] --RSTR--> 1894-95[12]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "winner",
+          "relation": "RSTR",
+          "dep_idx": 13,
+          "dep": "ENTITYB",
+          "display": "winner[14] --RSTR--> ENTITYB[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 10,
+          "head": "beat",
+          "relation": "PAT-arg",
+          "dep_idx": 14,
+          "dep": "winner",
+          "display": "beat[10] --PAT-arg--> winner[14]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "last",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "order",
+          "text": "last",
+          "node_id": "4",
+          "target": "time",
+          "target_id": "5"
+        },
+        {
+          "type": "numeric",
+          "text": "1894-95",
+          "node_id": "12",
+          "target": "winner",
+          "target_id": "14"
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "last",
+        "source_types": [
+          "comparative_focus",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "6",
+          "9",
+          "10",
+          "13",
+          "14",
+          "5",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "team",
+          "beat",
+          "ENTITYB",
+          "winner",
+          "time",
+          "last"
+        ],
+        "global_rank": [
+          1,
+          3,
+          6,
+          4
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "10",
+            "12",
+            "13",
+            "14"
+          ],
+          "semantic_nodes": [
+            "last",
+            "time",
+            "ENTITYA",
+            "team",
+            "beat",
+            "1894-95",
+            "ENTITYB",
+            "winner"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "10",
+            "13",
+            "14"
+          ],
+          "covered_semantic_nodes": [
+            "last",
+            "time",
+            "ENTITYA",
+            "team",
+            "beat",
+            "ENTITYB",
+            "winner"
+          ],
+          "missing_semantic_node_ids": [
+            "12"
+          ],
+          "missing_semantic_nodes": [
+            "1894-95"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 6,
+          "anchor_fit_penalty": 4,
+          "rank": [
+            1,
+            3,
+            6,
+            4
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "last",
+            "source_types": [
+              "comparative_focus",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "6",
+              "9",
+              "10",
+              "13",
+              "14",
+              "5",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "team",
+              "beat",
+              "ENTITYB",
+              "winner",
+              "time",
+              "last"
+            ],
+            "global_rank": [
+              1,
+              3,
+              6,
+              4
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "12",
+                "13",
+                "14"
+              ],
+              "semantic_nodes": [
+                "last",
+                "time",
+                "ENTITYA",
+                "team",
+                "beat",
+                "1894-95",
+                "ENTITYB",
+                "winner"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "10",
+                "13",
+                "14"
+              ],
+              "covered_semantic_nodes": [
+                "last",
+                "time",
+                "ENTITYA",
+                "team",
+                "beat",
+                "ENTITYB",
+                "winner"
+              ],
+              "missing_semantic_node_ids": [
+                "12"
+              ],
+              "missing_semantic_nodes": [
+                "1894-95"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 6,
+              "anchor_fit_penalty": 4,
+              "rank": [
+                1,
+                3,
+                6,
+                4
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: last[4]/comparative_focus+clause_predicate, When[1]/wh_anchor, time[5]/clause_predicate, team[9]/clause_predicate, beat[10]/clause_predicate, winner[14]/clause_predicate, 1894-95[12]/clause_predicate, ENTITYA[6]/explicit_entity, ENTITYB[13]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "team",
+          "derived": true,
+          "rule": "possessive_marker_contraction"
+        },
+        {
+          "source": "team",
+          "target": "beat",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "beat",
+          "target": "ENTITYB",
+          "derived": true,
+          "rule": "restriction_closure+descriptor_lifting"
+        },
+        {
+          "source": "ENTITYB",
+          "target": "winner",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "winner",
+          "target": "time",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "time",
+          "target": "last",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "team",
+            "beat",
+            "ENTITYB",
+            "winner",
+            "time",
+            "last"
+          ],
+          "node_ids": [
+            "6",
+            "9",
+            "10",
+            "13",
+            "14",
+            "5",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the last time Darren Carter's team beat the 1894-95 FA Cup winner?",
+        "explicit_entities": [
+          "Darren Carter",
+          "FA Cup"
+        ],
+        "global_best_paths": [
+          [
+            "Darren Carter",
+            "team",
+            "beat",
+            "FA Cup",
+            "winner",
+            "time",
+            "last"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Darren Carter",
+            "team",
+            "beat",
+            "FA Cup",
+            "winner",
+            "time",
+            "last"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Darren Carter",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "FA Cup winner",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "last time",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "team of",
+              "support_tokens": [
+                "Darren Carter",
+                "team"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "beat",
+              "support_tokens": [
+                "beat",
+                "FA Cup",
+                "winner"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is Darren Carter's team?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "When was the last time q1's answer beat the FA Cup winner?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is Darren Carter's team?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "When was the last time q1's answer beat the FA Cup winner?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Darren Carter",
+              "team",
+              "beat",
+              "FA Cup",
+              "winner",
+              "time",
+              "last"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Darren Carter",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "FA Cup winner",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "last time",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "team of",
+                "support_tokens": [
+                  "Darren Carter",
+                  "team"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "beat",
+                "support_tokens": [
+                  "beat",
+                  "FA Cup",
+                  "winner"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is Darren Carter's team?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "When was the last time q1's answer beat the FA Cup winner?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,2616 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 2,
+  "qid": null,
+  "question": "What month did the Tripartite discussions begin between Britain, France, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking Warsaw Pact operatives originated?",
+  "raw_question_item": {
+    "question": "What month did the Tripartite discussions begin between Britain, France, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking Warsaw Pact operatives originated?",
+    "answer": "mid-June"
+  },
+  "gold_answer": "mid-June",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Tripartite",
+          "start_char": 19,
+          "end_char": 29,
+          "semantic_type_hint": "Event",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Britain",
+          "start_char": 56,
+          "end_char": 63,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "France",
+          "start_char": 65,
+          "end_char": 71,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Warsaw Pact",
+          "start_char": 190,
+          "end_char": 201,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Tripartite",
+            "type": "Event"
+          },
+          {
+            "surface": "Britain",
+            "type": "Location"
+          },
+          {
+            "surface": "France",
+            "type": "Location"
+          },
+          {
+            "surface": "Warsaw Pact",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What month did the Tripartite discussions begin between Britain, France, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking Warsaw Pact operatives originated?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Tripartite",
+            "start_char": 19,
+            "end_char": 29,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Britain",
+            "start_char": 56,
+            "end_char": 63,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "France",
+            "start_char": 65,
+            "end_char": 71,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Warsaw Pact",
+            "start_char": 190,
+            "end_char": 201,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Warsaw",
+            "start_char": 190,
+            "end_char": 196,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Pact",
+            "start_char": 197,
+            "end_char": 201,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What month did the Tripartite discussions begin between Britain, France, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking Warsaw Pact operatives originated?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What month did the ENTITYA discussions begin between ENTITYB, ENTITYC, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking ENTITYD operatives originated?",
+      "hanlp_input_sentence": "What month did the ENTITYA discussions begin between ENTITYB, ENTITYC, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking ENTITYD operatives originated?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Tripartite",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Event",
+          "original_char_span": [
+            19,
+            29
+          ],
+          "masked_char_span": [
+            19,
+            26
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Britain",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            56,
+            63
+          ],
+          "masked_char_span": [
+            53,
+            60
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYC",
+          "original_text": "France",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            65,
+            71
+          ],
+          "masked_char_span": [
+            62,
+            69
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYD",
+          "original_text": "Warsaw Pact",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            190,
+            201
+          ],
+          "masked_char_span": [
+            188,
+            195
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "month",
+        "did",
+        "the",
+        "ENTITYA",
+        "discussions",
+        "begin",
+        "between",
+        "ENTITYB",
+        ",",
+        "ENTITYC",
+        ",",
+        "and",
+        "the",
+        "country",
+        "where",
+        ",",
+        "despite",
+        "being",
+        "headquartered",
+        "in",
+        "the",
+        "nation",
+        "called",
+        "the",
+        "nobilities",
+        "commonwealth",
+        ",",
+        "the",
+        "top-ranking",
+        "ENTITYD",
+        "operatives",
+        "originated",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK",
+        "ENTITYC": "OK",
+        "ENTITYD": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [
+            [
+              1,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              4,
+              "BV"
+            ],
+            [
+              5,
+              "compound"
+            ],
+            [
+              7,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              2,
+              "loc"
+            ],
+            [
+              8,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              8,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              9,
+              "conj"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              14,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              18,
+              "ARG2"
+            ],
+            [
+              21,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              20,
+              "ARG2"
+            ],
+            [
+              21,
+              "ARG2"
+            ],
+            [
+              22,
+              "BV"
+            ],
+            [
+              24,
+              "ARG3"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              24,
+              "ARG2"
+            ],
+            [
+              27,
+              "appos"
+            ]
+          ],
+          [
+            [
+              24,
+              "ARG2"
+            ],
+            [
+              25,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              29,
+              "BV"
+            ],
+            [
+              30,
+              "compound"
+            ],
+            [
+              31,
+              "compound"
+            ],
+            [
+              33,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              15,
+              "loc"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [
+            [
+              1,
+              "noun_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              3,
+              "aux_ARG1"
+            ],
+            [
+              4,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "noun_ARG1"
+            ],
+            [
+              7,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              2,
+              "noun_ARG1"
+            ],
+            [
+              3,
+              "aux_ARG2"
+            ],
+            [
+              8,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              10,
+              "coord_ARG1"
+            ]
+          ],
+          [
+            [
+              13,
+              "coord_ARG1"
+            ]
+          ],
+          [
+            [
+              10,
+              "coord_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              8,
+              "prep_ARG2"
+            ],
+            [
+              12,
+              "punct_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "coord_ARG2"
+            ],
+            [
+              14,
+              "det_ARG1"
+            ],
+            [
+              16,
+              "conj_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              18,
+              "prep_ARG2"
+            ]
+          ],
+          [
+            [
+              18,
+              "prep_ARG2"
+            ],
+            [
+              19,
+              "aux_ARG2"
+            ],
+            [
+              21,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              20,
+              "verb_ARG2"
+            ],
+            [
+              21,
+              "prep_ARG2"
+            ],
+            [
+              22,
+              "det_ARG1"
+            ],
+            [
+              24,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              24,
+              "verb_ARG3"
+            ],
+            [
+              25,
+              "det_ARG1"
+            ],
+            [
+              26,
+              "noun_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              20,
+              "verb_ARG2"
+            ],
+            [
+              29,
+              "det_ARG1"
+            ],
+            [
+              30,
+              "adj_ARG1"
+            ],
+            [
+              31,
+              "noun_ARG1"
+            ],
+            [
+              33,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              28,
+              "punct_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              7,
+              "TWHEN"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              7,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              6,
+              "ACT-arg"
+            ],
+            [
+              13,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              13,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              33,
+              "CNCS"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              20,
+              "LOC"
+            ]
+          ],
+          [
+            [
+              23,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              27,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              24,
+              "EFF-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              32,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              32,
+              "APP"
+            ]
+          ],
+          [
+            [
+              33,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              15,
+              "RSTR"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 1,
+          "head": "What",
+          "relation": "BV",
+          "dep_idx": 2,
+          "dep": "month",
+          "display": "What[1] --BV--> month[2]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "the[4] --BV--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "ENTITYA",
+          "relation": "compound",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "ENTITYA[5] --compound--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "begin",
+          "relation": "ARG1",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "begin[7] --ARG1--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "ROOT[0] --root--> begin[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "month",
+          "relation": "loc",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "month[2] --loc--> begin[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "between",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "between[8] --ARG1--> begin[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "between",
+          "relation": "ARG2",
+          "dep_idx": 9,
+          "dep": "ENTITYB",
+          "display": "between[8] --ARG2--> ENTITYB[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "ENTITYB",
+          "relation": "conj",
+          "dep_idx": 11,
+          "dep": "ENTITYC",
+          "display": "ENTITYB[9] --conj--> ENTITYC[11]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 15,
+          "dep": "country",
+          "display": "the[14] --BV--> country[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "despite",
+          "relation": "ARG2",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "despite[18] --ARG2--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "in[21] --ARG1--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 20,
+          "head": "headquartered",
+          "relation": "ARG2",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "headquartered[20] --ARG2--> nation[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "in[21] --ARG2--> nation[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 22,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "the[22] --BV--> nation[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "ARG3",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "called[24] --ARG3--> nation[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "ARG2",
+          "dep_idx": 26,
+          "dep": "nobilities",
+          "display": "called[24] --ARG2--> nobilities[26]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 27,
+          "head": "commonwealth",
+          "relation": "appos",
+          "dep_idx": 26,
+          "dep": "nobilities",
+          "display": "commonwealth[27] --appos--> nobilities[26]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "ARG2",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "called[24] --ARG2--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 25,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "the[25] --BV--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 29,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "the[29] --BV--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 30,
+          "head": "top-ranking",
+          "relation": "compound",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "top-ranking[30] --compound--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 31,
+          "head": "ENTITYD",
+          "relation": "compound",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "ENTITYD[31] --compound--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 33,
+          "head": "originated",
+          "relation": "ARG1",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "originated[33] --ARG1--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "country",
+          "relation": "loc",
+          "dep_idx": 33,
+          "dep": "originated",
+          "display": "country[15] --loc--> originated[33]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "What",
+          "relation": "noun_ARG1",
+          "dep_idx": 2,
+          "dep": "month",
+          "display": "What[1] --noun_ARG1--> month[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "did",
+          "relation": "aux_ARG1",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "did[3] --aux_ARG1--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "the[4] --det_ARG1--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "ENTITYA",
+          "relation": "noun_ARG1",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "ENTITYA[5] --noun_ARG1--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "begin",
+          "relation": "verb_ARG1",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "begin[7] --verb_ARG1--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "ROOT[0] --root--> begin[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "month",
+          "relation": "noun_ARG1",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "month[2] --noun_ARG1--> begin[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "did",
+          "relation": "aux_ARG2",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "did[3] --aux_ARG2--> begin[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "between",
+          "relation": "prep_ARG1",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "between[8] --prep_ARG1--> begin[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": ",",
+          "relation": "coord_ARG1",
+          "dep_idx": 9,
+          "dep": "ENTITYB",
+          "display": ",[10] --coord_ARG1--> ENTITYB[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "and",
+          "relation": "coord_ARG1",
+          "dep_idx": 10,
+          "dep": ",",
+          "display": "and[13] --coord_ARG1--> ,[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": ",",
+          "relation": "coord_ARG2",
+          "dep_idx": 11,
+          "dep": "ENTITYC",
+          "display": ",[10] --coord_ARG2--> ENTITYC[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "between",
+          "relation": "prep_ARG2",
+          "dep_idx": 13,
+          "dep": "and",
+          "display": "between[8] --prep_ARG2--> and[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": ",",
+          "relation": "punct_ARG1",
+          "dep_idx": 13,
+          "dep": "and",
+          "display": ",[12] --punct_ARG1--> and[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "and",
+          "relation": "coord_ARG2",
+          "dep_idx": 15,
+          "dep": "country",
+          "display": "and[13] --coord_ARG2--> country[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 15,
+          "dep": "country",
+          "display": "the[14] --det_ARG1--> country[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "where",
+          "relation": "conj_ARG1",
+          "dep_idx": 15,
+          "dep": "country",
+          "display": "where[16] --conj_ARG1--> country[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "despite",
+          "relation": "prep_ARG2",
+          "dep_idx": 19,
+          "dep": "being",
+          "display": "despite[18] --prep_ARG2--> being[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "despite",
+          "relation": "prep_ARG2",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "despite[18] --prep_ARG2--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 19,
+          "head": "being",
+          "relation": "aux_ARG2",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "being[19] --aux_ARG2--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "in[21] --prep_ARG1--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 20,
+          "head": "headquartered",
+          "relation": "verb_ARG2",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "headquartered[20] --verb_ARG2--> nation[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "in[21] --prep_ARG2--> nation[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 22,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "the[22] --det_ARG1--> nation[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "verb_ARG2",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "called[24] --verb_ARG2--> nation[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "verb_ARG3",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "called[24] --verb_ARG3--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 25,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "the[25] --det_ARG1--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 26,
+          "head": "nobilities",
+          "relation": "noun_ARG1",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "nobilities[26] --noun_ARG1--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 20,
+          "head": "headquartered",
+          "relation": "verb_ARG2",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "headquartered[20] --verb_ARG2--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 29,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "the[29] --det_ARG1--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 30,
+          "head": "top-ranking",
+          "relation": "adj_ARG1",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "top-ranking[30] --adj_ARG1--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 31,
+          "head": "ENTITYD",
+          "relation": "noun_ARG1",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "ENTITYD[31] --noun_ARG1--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 33,
+          "head": "originated",
+          "relation": "verb_ARG1",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "originated[33] --verb_ARG1--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 28,
+          "head": ",",
+          "relation": "punct_ARG1",
+          "dep_idx": 33,
+          "dep": "originated",
+          "display": ",[28] --punct_ARG1--> originated[33]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "month",
+          "relation": "RSTR",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "month[2] --RSTR--> What[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "begin",
+          "relation": "TWHEN",
+          "dep_idx": 2,
+          "dep": "month",
+          "display": "begin[7] --TWHEN--> month[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "discussions",
+          "relation": "RSTR",
+          "dep_idx": 5,
+          "dep": "ENTITYA",
+          "display": "discussions[6] --RSTR--> ENTITYA[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "begin",
+          "relation": "ACT-arg",
+          "dep_idx": 6,
+          "dep": "discussions",
+          "display": "begin[7] --ACT-arg--> discussions[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 7,
+          "dep": "begin",
+          "display": "ROOT[0] --root--> begin[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "discussions",
+          "relation": "ACT-arg",
+          "dep_idx": 9,
+          "dep": "ENTITYB",
+          "display": "discussions[6] --ACT-arg--> ENTITYB[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 9,
+          "dep": "ENTITYB",
+          "display": "and[13] --CONJ.member--> ENTITYB[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 11,
+          "dep": "ENTITYC",
+          "display": "and[13] --CONJ.member--> ENTITYC[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 15,
+          "dep": "country",
+          "display": "and[13] --CONJ.member--> country[15]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 33,
+          "head": "originated",
+          "relation": "CNCS",
+          "dep_idx": 20,
+          "dep": "headquartered",
+          "display": "originated[33] --CNCS--> headquartered[20]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "headquartered",
+          "relation": "LOC",
+          "dep_idx": 23,
+          "dep": "nation",
+          "display": "headquartered[20] --LOC--> nation[23]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 23,
+          "head": "nation",
+          "relation": "RSTR",
+          "dep_idx": 24,
+          "dep": "called",
+          "display": "nation[23] --RSTR--> called[24]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 27,
+          "head": "commonwealth",
+          "relation": "RSTR",
+          "dep_idx": 26,
+          "dep": "nobilities",
+          "display": "commonwealth[27] --RSTR--> nobilities[26]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 24,
+          "head": "called",
+          "relation": "EFF-arg",
+          "dep_idx": 27,
+          "dep": "commonwealth",
+          "display": "called[24] --EFF-arg--> commonwealth[27]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 32,
+          "head": "operatives",
+          "relation": "RSTR",
+          "dep_idx": 30,
+          "dep": "top-ranking",
+          "display": "operatives[32] --RSTR--> top-ranking[30]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 32,
+          "head": "operatives",
+          "relation": "APP",
+          "dep_idx": 31,
+          "dep": "ENTITYD",
+          "display": "operatives[32] --APP--> ENTITYD[31]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 33,
+          "head": "originated",
+          "relation": "ACT-arg",
+          "dep_idx": 32,
+          "dep": "operatives",
+          "display": "originated[33] --ACT-arg--> operatives[32]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "country",
+          "relation": "RSTR",
+          "dep_idx": 33,
+          "dep": "originated",
+          "display": "country[15] --RSTR--> originated[33]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path_cover",
+      "answer_anchor": "month",
+      "answer_anchor_id": "2",
+      "entity_anchors": [
+        "ENTITYB",
+        "ENTITYC"
+      ],
+      "candidate_sets": [
+        [
+          "ENTITYB",
+          "ENTITYC"
+        ]
+      ],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "2",
+        "anchor_text": "month",
+        "source_types": [
+          "typed_wh_slot",
+          "root_projection",
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "9",
+          "7"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "begin"
+        ],
+        "global_rank": [
+          15,
+          2,
+          1,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "2",
+            "5",
+            "6",
+            "7",
+            "9",
+            "11",
+            "15",
+            "18",
+            "20",
+            "23",
+            "24",
+            "26",
+            "27",
+            "30",
+            "31",
+            "32",
+            "33"
+          ],
+          "semantic_nodes": [
+            "month",
+            "ENTITYA",
+            "discussions",
+            "begin",
+            "ENTITYB",
+            "ENTITYC",
+            "country",
+            "despite",
+            "headquartered",
+            "nation",
+            "called",
+            "nobilities",
+            "commonwealth",
+            "top-ranking",
+            "ENTITYD",
+            "operatives",
+            "originated"
+          ],
+          "covered_semantic_node_ids": [
+            "7",
+            "9"
+          ],
+          "covered_semantic_nodes": [
+            "begin",
+            "ENTITYB"
+          ],
+          "missing_semantic_node_ids": [
+            "2",
+            "5",
+            "6",
+            "11",
+            "15",
+            "18",
+            "20",
+            "23",
+            "24",
+            "26",
+            "27",
+            "30",
+            "31",
+            "32",
+            "33"
+          ],
+          "missing_semantic_nodes": [
+            "month",
+            "ENTITYA",
+            "discussions",
+            "ENTITYC",
+            "country",
+            "despite",
+            "headquartered",
+            "nation",
+            "called",
+            "nobilities",
+            "commonwealth",
+            "top-ranking",
+            "ENTITYD",
+            "operatives",
+            "originated"
+          ],
+          "missing_semantic_nodes_count": 15,
+          "weak_edge_count": 0,
+          "medium_edge_count": 1,
+          "function_node_count": 0,
+          "derived_edge_count": 1,
+          "dirty_path_count": 2,
+          "path_length": 1,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            15,
+            2,
+            1,
+            0
+          ]
+        },
+        "path_type": "candidate_path_cover",
+        "selection_mode": "candidate_slot_substitution",
+        "selection_type": "global_best_path_cover",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "month",
+            "source_types": [
+              "typed_wh_slot",
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "9",
+              "7"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "begin"
+            ],
+            "global_rank": [
+              15,
+              2,
+              1,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "begin",
+                "ENTITYB",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "9"
+              ],
+              "covered_semantic_nodes": [
+                "begin",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "missing_semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "missing_semantic_nodes_count": 15,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 1,
+              "dirty_path_count": 2,
+              "path_length": 1,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                15,
+                2,
+                1,
+                0
+              ]
+            },
+            "path_type": "candidate_path_cover",
+            "selection_mode": "candidate_slot_substitution"
+          },
+          {
+            "anchor_index": 1,
+            "path_index": 2,
+            "anchor_id": "2",
+            "anchor_text": "month",
+            "source_types": [
+              "typed_wh_slot",
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P2",
+            "node_ids": [
+              "11",
+              "7"
+            ],
+            "nodes": [
+              "ENTITYC",
+              "begin"
+            ],
+            "global_rank": [
+              15,
+              2,
+              1,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "begin",
+                "ENTITYB",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "11"
+              ],
+              "covered_semantic_nodes": [
+                "begin",
+                "ENTITYC"
+              ],
+              "missing_semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "9",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "missing_semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "ENTITYB",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "missing_semantic_nodes_count": 15,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 1,
+              "dirty_path_count": 2,
+              "path_length": 1,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                15,
+                2,
+                1,
+                0
+              ]
+            },
+            "path_type": "candidate_path_cover",
+            "selection_mode": "candidate_slot_substitution"
+          }
+        ],
+        "candidate_set": [
+          "ENTITYB",
+          "ENTITYC"
+        ],
+        "paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "2",
+            "anchor_text": "month",
+            "source_types": [
+              "typed_wh_slot",
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "9",
+              "7"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "begin"
+            ],
+            "global_rank": [
+              15,
+              2,
+              1,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "begin",
+                "ENTITYB",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "9"
+              ],
+              "covered_semantic_nodes": [
+                "begin",
+                "ENTITYB"
+              ],
+              "missing_semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "missing_semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "missing_semantic_nodes_count": 15,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 1,
+              "dirty_path_count": 2,
+              "path_length": 1,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                15,
+                2,
+                1,
+                0
+              ]
+            },
+            "path_type": "candidate_path_cover",
+            "selection_mode": "candidate_slot_substitution"
+          },
+          {
+            "anchor_index": 1,
+            "path_index": 2,
+            "anchor_id": "2",
+            "anchor_text": "month",
+            "source_types": [
+              "typed_wh_slot",
+              "root_projection",
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P2",
+            "node_ids": [
+              "11",
+              "7"
+            ],
+            "nodes": [
+              "ENTITYC",
+              "begin"
+            ],
+            "global_rank": [
+              15,
+              2,
+              1,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "7",
+                "9",
+                "11",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "begin",
+                "ENTITYB",
+                "ENTITYC",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "covered_semantic_node_ids": [
+                "7",
+                "11"
+              ],
+              "covered_semantic_nodes": [
+                "begin",
+                "ENTITYC"
+              ],
+              "missing_semantic_node_ids": [
+                "2",
+                "5",
+                "6",
+                "9",
+                "15",
+                "18",
+                "20",
+                "23",
+                "24",
+                "26",
+                "27",
+                "30",
+                "31",
+                "32",
+                "33"
+              ],
+              "missing_semantic_nodes": [
+                "month",
+                "ENTITYA",
+                "discussions",
+                "ENTITYB",
+                "country",
+                "despite",
+                "headquartered",
+                "nation",
+                "called",
+                "nobilities",
+                "commonwealth",
+                "top-ranking",
+                "ENTITYD",
+                "operatives",
+                "originated"
+              ],
+              "missing_semantic_nodes_count": 15,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 1,
+              "dirty_path_count": 2,
+              "path_length": 1,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                15,
+                2,
+                1,
+                0
+              ]
+            },
+            "path_type": "candidate_path_cover",
+            "selection_mode": "candidate_slot_substitution"
+          }
+        ],
+        "winning_path": {
+          "anchor_index": 1,
+          "path_index": 1,
+          "anchor_id": "2",
+          "anchor_text": "month",
+          "source_types": [
+            "typed_wh_slot",
+            "root_projection",
+            "modifier_projection",
+            "clause_predicate"
+          ],
+          "path_id": "A1.P1",
+          "node_ids": [
+            "9",
+            "7"
+          ],
+          "nodes": [
+            "ENTITYB",
+            "begin"
+          ],
+          "global_rank": [
+            15,
+            2,
+            1,
+            0
+          ],
+          "global_rank_components": {
+            "semantic_node_ids": [
+              "2",
+              "5",
+              "6",
+              "7",
+              "9",
+              "11",
+              "15",
+              "18",
+              "20",
+              "23",
+              "24",
+              "26",
+              "27",
+              "30",
+              "31",
+              "32",
+              "33"
+            ],
+            "semantic_nodes": [
+              "month",
+              "ENTITYA",
+              "discussions",
+              "begin",
+              "ENTITYB",
+              "ENTITYC",
+              "country",
+              "despite",
+              "headquartered",
+              "nation",
+              "called",
+              "nobilities",
+              "commonwealth",
+              "top-ranking",
+              "ENTITYD",
+              "operatives",
+              "originated"
+            ],
+            "covered_semantic_node_ids": [
+              "7",
+              "9"
+            ],
+            "covered_semantic_nodes": [
+              "begin",
+              "ENTITYB"
+            ],
+            "missing_semantic_node_ids": [
+              "2",
+              "5",
+              "6",
+              "11",
+              "15",
+              "18",
+              "20",
+              "23",
+              "24",
+              "26",
+              "27",
+              "30",
+              "31",
+              "32",
+              "33"
+            ],
+            "missing_semantic_nodes": [
+              "month",
+              "ENTITYA",
+              "discussions",
+              "ENTITYC",
+              "country",
+              "despite",
+              "headquartered",
+              "nation",
+              "called",
+              "nobilities",
+              "commonwealth",
+              "top-ranking",
+              "ENTITYD",
+              "operatives",
+              "originated"
+            ],
+            "missing_semantic_nodes_count": 15,
+            "weak_edge_count": 0,
+            "medium_edge_count": 1,
+            "function_node_count": 0,
+            "derived_edge_count": 1,
+            "dirty_path_count": 2,
+            "path_length": 1,
+            "anchor_fit_penalty": 0,
+            "rank": [
+              15,
+              2,
+              1,
+              0
+            ]
+          },
+          "path_type": "candidate_path_cover",
+          "selection_mode": "candidate_slot_substitution"
+        }
+      },
+      "warnings": [
+        "answer anchor candidates collected: month[2]/typed_wh_slot+root_projection+modifier_projection+clause_predicate, What[1]/wh_anchor, where[16]/wh_anchor, discussions[6]/clause_predicate, begin[7]/clause_predicate, country[15]/clause_predicate, despite[18]/clause_predicate, headquartered[20]/clause_predicate, nation[23]/clause_predicate, called[24]/clause_predicate, nobilities[26]/clause_predicate, commonwealth[27]/clause_predicate, top-ranking[30]/clause_predicate, operatives[32]/clause_predicate, originated[33]/clause_predicate, ENTITYA[5]/explicit_entity, ENTITYB[9]/explicit_entity, ENTITYC[11]/explicit_entity, ENTITYD[31]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "begin",
+          "derived": true,
+          "rule": "candidate_slot_substitution"
+        },
+        {
+          "source": "ENTITYC",
+          "target": "begin",
+          "derived": true,
+          "rule": "candidate_slot_substitution"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "begin"
+          ],
+          "node_ids": [
+            "9",
+            "7"
+          ]
+        },
+        {
+          "path_id": "P2",
+          "nodes": [
+            "ENTITYC",
+            "begin"
+          ],
+          "node_ids": [
+            "11",
+            "7"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What month did the Tripartite discussions begin between Britain, France, and the country where, despite being headquartered in the nation called the nobilities commonwealth, the top-ranking Warsaw Pact operatives originated?",
+        "explicit_entities": [
+          "Tripartite",
+          "Britain",
+          "France",
+          "Warsaw Pact"
+        ],
+        "global_best_paths": [
+          [
+            "Britain",
+            "begin"
+          ],
+          [
+            "France",
+            "begin"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Britain",
+            "begin"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Britain",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "Tripartite discussions",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "month",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "initiated",
+              "support_tokens": [
+                "Britain",
+                "begin"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "occurs in",
+              "support_tokens": [
+                "begin"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        },
+        {
+          "branch_id": "p2",
+          "source_token_path": [
+            "France",
+            "begin"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p2_n1",
+              "label": "France",
+              "kind": "entity"
+            },
+            {
+              "id": "p2_n2",
+              "label": "Tripartite discussions",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p2_n3",
+              "label": "month",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p2_e1",
+              "source": "p2_n1",
+              "target": "p2_n2",
+              "relation": "initiated",
+              "support_tokens": [
+                "France",
+                "begin"
+              ]
+            },
+            {
+              "id": "p2_e2",
+              "source": "p2_n2",
+              "target": "p2_n3",
+              "relation": "occurs in",
+              "support_tokens": [
+                "begin"
+              ]
+            }
+          ],
+          "terminal_node_id": "p2_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "When did the Tripartite discussions initiated by Britain begin?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What month did the Tripartite discussions occur in according to q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When did the Tripartite discussions initiated by France begin?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p2_e1"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What month did the Tripartite discussions occur in according to q3's answer?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p2_e2"
+          ]
+        },
+        {
+          "id": "q5",
+          "question": "Which month is earlier, q2's answer or q4's answer?",
+          "depends_on": [
+            "q2",
+            "q4"
+          ],
+          "operation": "compare",
+          "semantic_edge_ids": []
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "When did the Tripartite discussions initiated by Britain begin?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What month did the Tripartite discussions occur in according to q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When did the Tripartite discussions initiated by France begin?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p2_e1"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What month did the Tripartite discussions occur in according to q3's answer?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p2_e2"
+          ]
+        },
+        {
+          "id": "q5",
+          "question": "Which month is earlier, q2's answer or q4's answer?",
+          "depends_on": [
+            "q2",
+            "q4"
+          ],
+          "operation": "compare",
+          "semantic_edge_ids": []
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        },
+        {
+          "source": "q2",
+          "target": "q5"
+        },
+        {
+          "source": "q4",
+          "target": "q5"
+        }
+      ],
+      "leaf_node_ids": [
+        "q5"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Britain",
+              "begin"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Britain",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "Tripartite discussions",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "month",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "initiated",
+                "support_tokens": [
+                  "Britain",
+                  "begin"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "occurs in",
+                "support_tokens": [
+                  "begin"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          },
+          {
+            "branch_id": "p2",
+            "source_token_path": [
+              "France",
+              "begin"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p2_n1",
+                "label": "France",
+                "kind": "entity"
+              },
+              {
+                "id": "p2_n2",
+                "label": "Tripartite discussions",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p2_n3",
+                "label": "month",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p2_e1",
+                "source": "p2_n1",
+                "target": "p2_n2",
+                "relation": "initiated",
+                "support_tokens": [
+                  "France",
+                  "begin"
+                ]
+              },
+              {
+                "id": "p2_e2",
+                "source": "p2_n2",
+                "target": "p2_n3",
+                "relation": "occurs in",
+                "support_tokens": [
+                  "begin"
+                ]
+              }
+            ],
+            "terminal_node_id": "p2_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "When did the Tripartite discussions initiated by Britain begin?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What month did the Tripartite discussions occur in according to q1's answer?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "When did the Tripartite discussions initiated by France begin?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p2_e1"
+            ]
+          },
+          {
+            "id": "q4",
+            "question": "What month did the Tripartite discussions occur in according to q3's answer?",
+            "depends_on": [
+              "q3"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p2_e2"
+            ]
+          },
+          {
+            "id": "q5",
+            "question": "Which month is earlier, q2's answer or q4's answer?",
+            "depends_on": [
+              "q2",
+              "q4"
+            ],
+            "operation": "compare",
+            "semantic_edge_ids": []
+          }
+        ]
+      }
+    }
+  }
+}

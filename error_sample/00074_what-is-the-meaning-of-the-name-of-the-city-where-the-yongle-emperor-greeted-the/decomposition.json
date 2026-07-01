@@ -1,0 +1,1598 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 74,
+  "qid": null,
+  "question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+  "raw_question_item": {
+    "question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+    "answer": "\"Southern Capital\""
+  },
+  "gold_answer": "\"Southern Capital\"",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Yongle",
+          "start_char": 54,
+          "end_char": 60,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Yongle",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Yongle",
+            "start_char": 54,
+            "end_char": 60,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the meaning of the name of the city where the ENTITYA emperor greeted the person to whom the edict was addressed?",
+      "hanlp_input_sentence": "What is the meaning of the name of the city where the ENTITYA emperor greeted the person to whom the edict was addressed?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Yongle",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            54,
+            60
+          ],
+          "masked_char_span": [
+            54,
+            61
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "meaning",
+        "of",
+        "the",
+        "name",
+        "of",
+        "the",
+        "city",
+        "where",
+        "the",
+        "ENTITYA",
+        "emperor",
+        "greeted",
+        "the",
+        "person",
+        "to",
+        "whom",
+        "the",
+        "edict",
+        "was",
+        "addressed",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [
+            [
+              2,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "BV"
+            ],
+            [
+              8,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              8,
+              "ARG2"
+            ],
+            [
+              9,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              12,
+              "BV"
+            ],
+            [
+              13,
+              "compound"
+            ],
+            [
+              15,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              10,
+              "loc"
+            ],
+            [
+              17,
+              "loc"
+            ]
+          ],
+          [],
+          [
+            [
+              15,
+              "ARG2"
+            ],
+            [
+              16,
+              "BV"
+            ],
+            [
+              18,
+              "ARG2"
+            ],
+            [
+              23,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              20,
+              "BV"
+            ],
+            [
+              23,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              18,
+              "ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ],
+            [
+              6,
+              "det_ARG1"
+            ],
+            [
+              8,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              8,
+              "prep_ARG2"
+            ],
+            [
+              9,
+              "det_ARG1"
+            ],
+            [
+              11,
+              "conj_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              12,
+              "det_ARG1"
+            ],
+            [
+              13,
+              "noun_ARG1"
+            ],
+            [
+              15,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              11,
+              "conj_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              15,
+              "verb_ARG2"
+            ],
+            [
+              16,
+              "det_ARG1"
+            ],
+            [
+              18,
+              "prep_ARG2"
+            ],
+            [
+              19,
+              "relative_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              20,
+              "det_ARG1"
+            ],
+            [
+              22,
+              "aux_ARG1"
+            ],
+            [
+              23,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              18,
+              "prep_ARG1"
+            ],
+            [
+              22,
+              "aux_ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "APP"
+            ]
+          ],
+          [
+            [
+              15,
+              "LOC"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "APP"
+            ]
+          ],
+          [
+            [
+              15,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              10,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              15,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              23,
+              "ADDR-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              23,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              17,
+              "RSTR"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "is[2] --ARG2--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "the[3] --BV--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "the[6] --BV--> name[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "of[8] --ARG1--> name[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "of[8] --ARG2--> city[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "the[9] --BV--> city[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "the[12] --BV--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "ENTITYA",
+          "relation": "compound",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "ENTITYA[13] --compound--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "ARG1",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "greeted[15] --ARG1--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "city",
+          "relation": "loc",
+          "dep_idx": 15,
+          "dep": "greeted",
+          "display": "city[10] --loc--> greeted[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 17,
+          "head": "person",
+          "relation": "loc",
+          "dep_idx": 15,
+          "dep": "greeted",
+          "display": "person[17] --loc--> greeted[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "ARG2",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "greeted[15] --ARG2--> person[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "the[16] --BV--> person[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "to",
+          "relation": "ARG2",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "to[18] --ARG2--> person[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 23,
+          "head": "addressed",
+          "relation": "ARG2",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "addressed[23] --ARG2--> person[17]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 20,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "the[20] --BV--> edict[21]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 23,
+          "head": "addressed",
+          "relation": "ARG2",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "addressed[23] --ARG2--> edict[21]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "to",
+          "relation": "ARG1",
+          "dep_idx": 23,
+          "dep": "addressed",
+          "display": "to[18] --ARG1--> addressed[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --verb_ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "is",
+          "display": "ROOT[0] --root--> is[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "is[2] --verb_ARG2--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "the[3] --det_ARG1--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "of[5] --prep_ARG1--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "of[5] --prep_ARG2--> name[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "the[6] --det_ARG1--> name[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "of[8] --prep_ARG1--> name[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "of[8] --prep_ARG2--> city[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "the[9] --det_ARG1--> city[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "where",
+          "relation": "conj_ARG1",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "where[11] --conj_ARG1--> city[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "the[12] --det_ARG1--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "ENTITYA",
+          "relation": "noun_ARG1",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "ENTITYA[13] --noun_ARG1--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "verb_ARG1",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "greeted[15] --verb_ARG1--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "where",
+          "relation": "conj_ARG2",
+          "dep_idx": 15,
+          "dep": "greeted",
+          "display": "where[11] --conj_ARG2--> greeted[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "verb_ARG2",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "greeted[15] --verb_ARG2--> person[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "the[16] --det_ARG1--> person[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "to",
+          "relation": "prep_ARG2",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "to[18] --prep_ARG2--> person[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 19,
+          "head": "whom",
+          "relation": "relative_ARG1",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "whom[19] --relative_ARG1--> person[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 20,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "the[20] --det_ARG1--> edict[21]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 22,
+          "head": "was",
+          "relation": "aux_ARG1",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "was[22] --aux_ARG1--> edict[21]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 23,
+          "head": "addressed",
+          "relation": "verb_ARG2",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "addressed[23] --verb_ARG2--> edict[21]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "to",
+          "relation": "prep_ARG1",
+          "dep_idx": 23,
+          "dep": "addressed",
+          "display": "to[18] --prep_ARG1--> addressed[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 22,
+          "head": "was",
+          "relation": "aux_ARG2",
+          "dep_idx": 23,
+          "dep": "addressed",
+          "display": "was[22] --aux_ARG2--> addressed[23]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "PAT-arg",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --PAT-arg--> What[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ACT-arg",
+          "dep_idx": 4,
+          "dep": "meaning",
+          "display": "is[2] --ACT-arg--> meaning[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "meaning",
+          "relation": "PAT-arg",
+          "dep_idx": 7,
+          "dep": "name",
+          "display": "meaning[4] --PAT-arg--> name[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "name",
+          "relation": "APP",
+          "dep_idx": 10,
+          "dep": "city",
+          "display": "name[7] --APP--> city[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "LOC",
+          "dep_idx": 11,
+          "dep": "where",
+          "display": "greeted[15] --LOC--> where[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "emperor",
+          "relation": "APP",
+          "dep_idx": 13,
+          "dep": "ENTITYA",
+          "display": "emperor[14] --APP--> ENTITYA[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "ACT-arg",
+          "dep_idx": 14,
+          "dep": "emperor",
+          "display": "greeted[15] --ACT-arg--> emperor[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 10,
+          "head": "city",
+          "relation": "RSTR",
+          "dep_idx": 15,
+          "dep": "greeted",
+          "display": "city[10] --RSTR--> greeted[15]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "greeted",
+          "relation": "PAT-arg",
+          "dep_idx": 17,
+          "dep": "person",
+          "display": "greeted[15] --PAT-arg--> person[17]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 23,
+          "head": "addressed",
+          "relation": "ADDR-arg",
+          "dep_idx": 19,
+          "dep": "whom",
+          "display": "addressed[23] --ADDR-arg--> whom[19]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 23,
+          "head": "addressed",
+          "relation": "PAT-arg",
+          "dep_idx": 21,
+          "dep": "edict",
+          "display": "addressed[23] --PAT-arg--> edict[21]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 17,
+          "head": "person",
+          "relation": "RSTR",
+          "dep_idx": 23,
+          "dep": "addressed",
+          "display": "person[17] --RSTR--> addressed[23]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "meaning",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 4,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "meaning",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A4.P1",
+        "node_ids": [
+          "13",
+          "14",
+          "15",
+          "23",
+          "21",
+          "17",
+          "10",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "emperor",
+          "greeted",
+          "addressed",
+          "edict",
+          "person",
+          "city",
+          "name",
+          "meaning"
+        ],
+        "global_rank": [
+          0,
+          6,
+          8,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "14",
+            "15",
+            "17",
+            "21",
+            "23"
+          ],
+          "semantic_nodes": [
+            "meaning",
+            "name",
+            "city",
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "person",
+            "edict",
+            "addressed"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "10",
+            "13",
+            "14",
+            "15",
+            "17",
+            "21",
+            "23"
+          ],
+          "covered_semantic_nodes": [
+            "meaning",
+            "name",
+            "city",
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "person",
+            "edict",
+            "addressed"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 6,
+          "dirty_path_count": 6,
+          "path_length": 8,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            0,
+            6,
+            8,
+            7
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 4,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "meaning",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A4.P1",
+            "node_ids": [
+              "13",
+              "14",
+              "15",
+              "23",
+              "21",
+              "17",
+              "10",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "emperor",
+              "greeted",
+              "addressed",
+              "edict",
+              "person",
+              "city",
+              "name",
+              "meaning"
+            ],
+            "global_rank": [
+              0,
+              6,
+              8,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "14",
+                "15",
+                "17",
+                "21",
+                "23"
+              ],
+              "semantic_nodes": [
+                "meaning",
+                "name",
+                "city",
+                "ENTITYA",
+                "emperor",
+                "greeted",
+                "person",
+                "edict",
+                "addressed"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "10",
+                "13",
+                "14",
+                "15",
+                "17",
+                "21",
+                "23"
+              ],
+              "covered_semantic_nodes": [
+                "meaning",
+                "name",
+                "city",
+                "ENTITYA",
+                "emperor",
+                "greeted",
+                "person",
+                "edict",
+                "addressed"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 6,
+              "dirty_path_count": 6,
+              "path_length": 8,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                0,
+                6,
+                8,
+                7
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: What[1]/wh_anchor, where[11]/wh_anchor, whom[19]/wh_anchor, meaning[4]/clause_predicate, name[7]/clause_predicate, city[10]/clause_predicate, emperor[14]/clause_predicate, greeted[15]/clause_predicate, person[17]/clause_predicate, edict[21]/clause_predicate, addressed[23]/clause_predicate, ENTITYA[13]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "emperor",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "emperor",
+          "target": "greeted",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "greeted",
+          "target": "addressed",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "addressed",
+          "target": "edict",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "edict",
+          "target": "person",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "person",
+          "target": "city",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "city",
+          "target": "name",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "name",
+          "target": "meaning",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "emperor",
+            "greeted",
+            "addressed",
+            "edict",
+            "person",
+            "city",
+            "name",
+            "meaning"
+          ],
+          "node_ids": [
+            "13",
+            "14",
+            "15",
+            "23",
+            "21",
+            "17",
+            "10",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the meaning of the name of the city where the Yongle emperor greeted the person to whom the edict was addressed?",
+        "explicit_entities": [
+          "Yongle"
+        ],
+        "global_best_paths": [
+          [
+            "Yongle",
+            "emperor",
+            "greeted",
+            "addressed",
+            "edict",
+            "person",
+            "city",
+            "name",
+            "meaning"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Yongle",
+            "emperor",
+            "greeted",
+            "addressed",
+            "edict",
+            "person",
+            "city",
+            "name",
+            "meaning"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Yongle emperor",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "person addressed by the edict",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "city",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n4",
+              "label": "name of the city",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n5",
+              "label": "meaning of the name",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "greeted",
+              "support_tokens": [
+                "greeted"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "addressed by the edict",
+              "support_tokens": [
+                "addressed",
+                "edict",
+                "person"
+              ]
+            },
+            {
+              "id": "p1_e3",
+              "source": "p1_n3",
+              "target": "p1_n4",
+              "relation": "has name",
+              "support_tokens": [
+                "city",
+                "name"
+              ]
+            },
+            {
+              "id": "p1_e4",
+              "source": "p1_n4",
+              "target": "p1_n5",
+              "relation": "has meaning",
+              "support_tokens": [
+                "meaning"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n5"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "Who was greeted by the Yongle emperor?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Who was the person addressed by the edict?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What is the name of the city?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What is the meaning of the name of the city?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e4"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who was greeted by the Yongle emperor?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Who was the person addressed by the edict?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What is the name of the city?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What is the meaning of the name of the city?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e4"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        }
+      ],
+      "leaf_node_ids": [
+        "q4"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1'].",
+        "q3: depends_on entries are not mentioned as qN's answer in question: ['q2'].",
+        "q4: depends_on entries are not mentioned as qN's answer in question: ['q3']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Yongle",
+              "emperor",
+              "greeted",
+              "addressed",
+              "edict",
+              "person",
+              "city",
+              "name",
+              "meaning"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Yongle emperor",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "person addressed by the edict",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "city",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n4",
+                "label": "name of the city",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n5",
+                "label": "meaning of the name",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "greeted",
+                "support_tokens": [
+                  "greeted"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "addressed by the edict",
+                "support_tokens": [
+                  "addressed",
+                  "edict",
+                  "person"
+                ]
+              },
+              {
+                "id": "p1_e3",
+                "source": "p1_n3",
+                "target": "p1_n4",
+                "relation": "has name",
+                "support_tokens": [
+                  "city",
+                  "name"
+                ]
+              },
+              {
+                "id": "p1_e4",
+                "source": "p1_n4",
+                "target": "p1_n5",
+                "relation": "has meaning",
+                "support_tokens": [
+                  "meaning"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n5"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "Who was greeted by the Yongle emperor?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "Who was the person addressed by the edict?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "What is the name of the city?",
+            "depends_on": [
+              "q2"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e3"
+            ]
+          },
+          {
+            "id": "q4",
+            "question": "What is the meaning of the name of the city?",
+            "depends_on": [
+              "q3"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e4"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

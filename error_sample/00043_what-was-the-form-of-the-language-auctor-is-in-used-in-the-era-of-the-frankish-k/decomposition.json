@@ -1,0 +1,1615 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 43,
+  "qid": null,
+  "question": "What was the form of the language Auctor is in, used in the era of the Frankish king who created the Holy Roman Empire, later known as?",
+  "raw_question_item": {
+    "question": "What was the form of the language Auctor is in, used in the era of the Frankish king who created the Holy Roman Empire, later known as?",
+    "answer": "Medieval Latin"
+  },
+  "gold_answer": "Medieval Latin",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Auctor",
+          "start_char": 34,
+          "end_char": 40,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Frankish",
+          "start_char": 71,
+          "end_char": 79,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Holy Roman Empire",
+          "start_char": 101,
+          "end_char": 118,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Auctor",
+            "type": "Other"
+          },
+          {
+            "surface": "Frankish",
+            "type": "Other"
+          },
+          {
+            "surface": "Holy Roman Empire",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "What was the form of the language Auctor is in, used in the era of the Frankish king who created the Holy Roman Empire?",
+        "normalization_changed": true,
+        "normalization_note": "Added a missing auxiliary verb for grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Auctor",
+            "start_char": 34,
+            "end_char": 40,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Frankish",
+            "start_char": 71,
+            "end_char": 79,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Holy Roman Empire",
+            "start_char": 101,
+            "end_char": 118,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Holy",
+            "start_char": 101,
+            "end_char": 105,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Roman",
+            "start_char": 106,
+            "end_char": 111,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Empire",
+            "start_char": 112,
+            "end_char": 118,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What was the form of the language Auctor is in, used in the era of the Frankish king who created the Holy Roman Empire?",
+      "normalization_changed": true,
+      "normalization_note": "Added a missing auxiliary verb for grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "What was the form of the language ENTITYA is in, used in the era of the ENTITYB king who created the ENTITYC?",
+      "hanlp_input_sentence": "What was the form of the language ENTITYA is in, used in the era of the ENTITYB king who created the ENTITYC?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Auctor",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            34,
+            40
+          ],
+          "masked_char_span": [
+            34,
+            41
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Frankish",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            71,
+            79
+          ],
+          "masked_char_span": [
+            72,
+            79
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYC",
+          "original_text": "Holy Roman Empire",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            101,
+            118
+          ],
+          "masked_char_span": [
+            101,
+            108
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "was",
+        "the",
+        "form",
+        "of",
+        "the",
+        "language",
+        "ENTITYA",
+        "is",
+        "in",
+        ",",
+        "used",
+        "in",
+        "the",
+        "era",
+        "of",
+        "the",
+        "ENTITYB",
+        "king",
+        "who",
+        "created",
+        "the",
+        "ENTITYC",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK",
+        "ENTITYC": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG1"
+            ],
+            [
+              3,
+              "BV"
+            ],
+            [
+              12,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "ARG1"
+            ],
+            [
+              6,
+              "BV"
+            ],
+            [
+              10,
+              "ARG2"
+            ]
+          ],
+          [
+            [
+              10,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              13,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              13,
+              "ARG2"
+            ],
+            [
+              14,
+              "BV"
+            ],
+            [
+              16,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              16,
+              "ARG2"
+            ],
+            [
+              17,
+              "BV"
+            ],
+            [
+              18,
+              "compound"
+            ],
+            [
+              21,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              21,
+              "ARG2"
+            ],
+            [
+              22,
+              "BV"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ],
+            [
+              11,
+              "punct_ARG1"
+            ],
+            [
+              12,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ],
+            [
+              6,
+              "det_ARG1"
+            ],
+            [
+              10,
+              "prep_ARG2"
+            ]
+          ],
+          [
+            [
+              9,
+              "verb_ARG1"
+            ],
+            [
+              10,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              9,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              13,
+              "prep_ARG2"
+            ],
+            [
+              14,
+              "det_ARG1"
+            ],
+            [
+              16,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              16,
+              "prep_ARG2"
+            ],
+            [
+              17,
+              "det_ARG1"
+            ],
+            [
+              18,
+              "noun_ARG1"
+            ],
+            [
+              20,
+              "relative_ARG1"
+            ],
+            [
+              21,
+              "verb_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              21,
+              "verb_ARG2"
+            ],
+            [
+              22,
+              "det_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "APP"
+            ]
+          ],
+          [
+            [
+              9,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              7,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              12,
+              "TWHEN"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              19,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              15,
+              "APP"
+            ]
+          ],
+          [
+            [
+              21,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              19,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              21,
+              "PAT-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG1",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "was[2] --ARG1--> form[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "the[3] --BV--> form[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "used",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "used[12] --ARG2--> form[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "form",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "form[4] --ARG1--> language[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "the[6] --BV--> language[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "in[10] --ARG2--> language[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 8,
+          "dep": "ENTITYA",
+          "display": "in[10] --ARG1--> ENTITYA[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 12,
+          "dep": "used",
+          "display": "in[13] --ARG1--> used[12]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "in[13] --ARG2--> era[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "the[14] --BV--> era[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "of[16] --ARG1--> era[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "of[16] --ARG2--> king[19]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 17,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "the[17] --BV--> king[19]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "ENTITYB",
+          "relation": "compound",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "ENTITYB[18] --compound--> king[19]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "ARG1",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "created[21] --ARG1--> king[19]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "ARG2",
+          "dep_idx": 23,
+          "dep": "ENTITYC",
+          "display": "created[21] --ARG2--> ENTITYC[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 22,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 23,
+          "dep": "ENTITYC",
+          "display": "the[22] --BV--> ENTITYC[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "ROOT[0] --root--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "was[2] --verb_ARG2--> form[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "the[3] --det_ARG1--> form[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "of[5] --prep_ARG1--> form[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": ",",
+          "relation": "punct_ARG1",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": ",[11] --punct_ARG1--> form[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "used",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "used[12] --verb_ARG2--> form[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "of[5] --prep_ARG2--> language[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "the[6] --det_ARG1--> language[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "in[10] --prep_ARG2--> language[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "is",
+          "relation": "verb_ARG1",
+          "dep_idx": 8,
+          "dep": "ENTITYA",
+          "display": "is[9] --verb_ARG1--> ENTITYA[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 8,
+          "dep": "ENTITYA",
+          "display": "in[10] --prep_ARG1--> ENTITYA[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "is",
+          "relation": "verb_ARG2",
+          "dep_idx": 10,
+          "dep": "in",
+          "display": "is[9] --verb_ARG2--> in[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 12,
+          "dep": "used",
+          "display": "in[13] --prep_ARG1--> used[12]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "in[13] --prep_ARG2--> era[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "the[14] --det_ARG1--> era[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "of[16] --prep_ARG1--> era[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "of[16] --prep_ARG2--> king[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "the[17] --det_ARG1--> king[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "ENTITYB",
+          "relation": "noun_ARG1",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "ENTITYB[18] --noun_ARG1--> king[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 20,
+          "head": "who",
+          "relation": "relative_ARG1",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "who[20] --relative_ARG1--> king[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "verb_ARG1",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "created[21] --verb_ARG1--> king[19]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "verb_ARG2",
+          "dep_idx": 23,
+          "dep": "ENTITYC",
+          "display": "created[21] --verb_ARG2--> ENTITYC[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 22,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 23,
+          "dep": "ENTITYC",
+          "display": "the[22] --det_ARG1--> ENTITYC[23]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "PAT-arg",
+          "dep_idx": 4,
+          "dep": "form",
+          "display": "was[2] --PAT-arg--> form[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "form",
+          "relation": "APP",
+          "dep_idx": 7,
+          "dep": "language",
+          "display": "form[4] --APP--> language[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "is",
+          "relation": "ACT-arg",
+          "dep_idx": 8,
+          "dep": "ENTITYA",
+          "display": "is[9] --ACT-arg--> ENTITYA[8]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "language",
+          "relation": "RSTR",
+          "dep_idx": 9,
+          "dep": "is",
+          "display": "language[7] --RSTR--> is[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "form",
+          "relation": "RSTR",
+          "dep_idx": 12,
+          "dep": "used",
+          "display": "form[4] --RSTR--> used[12]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 12,
+          "head": "used",
+          "relation": "TWHEN",
+          "dep_idx": 15,
+          "dep": "era",
+          "display": "used[12] --TWHEN--> era[15]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 19,
+          "head": "king",
+          "relation": "RSTR",
+          "dep_idx": 18,
+          "dep": "ENTITYB",
+          "display": "king[19] --RSTR--> ENTITYB[18]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 15,
+          "head": "era",
+          "relation": "APP",
+          "dep_idx": 19,
+          "dep": "king",
+          "display": "era[15] --APP--> king[19]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "ACT-arg",
+          "dep_idx": 20,
+          "dep": "who",
+          "display": "created[21] --ACT-arg--> who[20]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 19,
+          "head": "king",
+          "relation": "RSTR",
+          "dep_idx": 21,
+          "dep": "created",
+          "display": "king[19] --RSTR--> created[21]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 21,
+          "head": "created",
+          "relation": "PAT-arg",
+          "dep_idx": 23,
+          "dep": "ENTITYC",
+          "display": "created[21] --PAT-arg--> ENTITYC[23]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "ENTITYA",
+      "answer_anchor_id": "8",
+      "entity_anchors": [
+        "ENTITYB"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 9,
+        "path_index": 1,
+        "anchor_id": "8",
+        "anchor_text": "ENTITYA",
+        "source_types": [
+          "explicit_entity"
+        ],
+        "path_id": "A9.P1",
+        "node_ids": [
+          "18",
+          "19",
+          "23",
+          "21",
+          "15",
+          "4",
+          "12",
+          "7",
+          "8"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "king",
+          "ENTITYC",
+          "created",
+          "era",
+          "form",
+          "used",
+          "language",
+          "ENTITYA"
+        ],
+        "global_rank": [
+          0,
+          5,
+          8,
+          6
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "12",
+            "15",
+            "18",
+            "19",
+            "21",
+            "23"
+          ],
+          "semantic_nodes": [
+            "form",
+            "language",
+            "ENTITYA",
+            "used",
+            "era",
+            "ENTITYB",
+            "king",
+            "created",
+            "ENTITYC"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "12",
+            "15",
+            "18",
+            "19",
+            "21",
+            "23"
+          ],
+          "covered_semantic_nodes": [
+            "form",
+            "language",
+            "ENTITYA",
+            "used",
+            "era",
+            "ENTITYB",
+            "king",
+            "created",
+            "ENTITYC"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 5,
+          "dirty_path_count": 5,
+          "path_length": 8,
+          "anchor_fit_penalty": 6,
+          "rank": [
+            0,
+            5,
+            8,
+            6
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 9,
+            "path_index": 1,
+            "anchor_id": "8",
+            "anchor_text": "ENTITYA",
+            "source_types": [
+              "explicit_entity"
+            ],
+            "path_id": "A9.P1",
+            "node_ids": [
+              "18",
+              "19",
+              "23",
+              "21",
+              "15",
+              "4",
+              "12",
+              "7",
+              "8"
+            ],
+            "nodes": [
+              "ENTITYB",
+              "king",
+              "ENTITYC",
+              "created",
+              "era",
+              "form",
+              "used",
+              "language",
+              "ENTITYA"
+            ],
+            "global_rank": [
+              0,
+              5,
+              8,
+              6
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "12",
+                "15",
+                "18",
+                "19",
+                "21",
+                "23"
+              ],
+              "semantic_nodes": [
+                "form",
+                "language",
+                "ENTITYA",
+                "used",
+                "era",
+                "ENTITYB",
+                "king",
+                "created",
+                "ENTITYC"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "12",
+                "15",
+                "18",
+                "19",
+                "21",
+                "23"
+              ],
+              "covered_semantic_nodes": [
+                "form",
+                "language",
+                "ENTITYA",
+                "used",
+                "era",
+                "ENTITYB",
+                "king",
+                "created",
+                "ENTITYC"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 5,
+              "dirty_path_count": 5,
+              "path_length": 8,
+              "anchor_fit_penalty": 6,
+              "rank": [
+                0,
+                5,
+                8,
+                6
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: created[21]/bare_wh_predicate_root+clause_predicate, What[1]/wh_anchor, who[20]/wh_anchor, form[4]/clause_predicate, language[7]/clause_predicate, used[12]/clause_predicate, era[15]/clause_predicate, king[19]/clause_predicate, ENTITYA[8]/explicit_entity, ENTITYB[18]/explicit_entity, ENTITYC[23]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYB",
+          "target": "king",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "king",
+          "target": "ENTITYC",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "ENTITYC",
+          "target": "created",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "created",
+          "target": "era",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "era",
+          "target": "form",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "form",
+          "target": "used",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "used",
+          "target": "language",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "language",
+          "target": "ENTITYA",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYB",
+            "king",
+            "ENTITYC",
+            "created",
+            "era",
+            "form",
+            "used",
+            "language",
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "18",
+            "19",
+            "23",
+            "21",
+            "15",
+            "4",
+            "12",
+            "7",
+            "8"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What was the form of the language Auctor is in, used in the era of the Frankish king who created the Holy Roman Empire, later known as?",
+        "explicit_entities": [
+          "Auctor",
+          "Frankish",
+          "Holy Roman Empire"
+        ],
+        "global_best_paths": [
+          [
+            "Frankish",
+            "king",
+            "Holy Roman Empire",
+            "created",
+            "era",
+            "form",
+            "used",
+            "language",
+            "Auctor"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Frankish",
+            "king",
+            "Holy Roman Empire",
+            "created",
+            "era",
+            "form",
+            "used",
+            "language",
+            "Auctor"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Frankish king",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "Holy Roman Empire",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n3",
+              "label": "Auctor",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n4",
+              "label": "form of language",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n5",
+              "label": "era of the Frankish king",
+              "kind": "intermediate_variable"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n5",
+              "relation": "refers to the era of",
+              "support_tokens": [
+                "Frankish",
+                "king",
+                "era"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n5",
+              "target": "p1_n4",
+              "relation": "has a form of language used in",
+              "support_tokens": [
+                "era",
+                "form",
+                "used",
+                "language"
+              ]
+            },
+            {
+              "id": "p1_e3",
+              "source": "p1_n2",
+              "target": "p1_n4",
+              "relation": "is associated with the form of language of",
+              "support_tokens": [
+                "Holy Roman Empire",
+                "form",
+                "language"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n4"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is the era of the Frankish king?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the form of language used in the era of the Frankish king?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What is the form of language associated with the Holy Roman Empire?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What was the form of language used in the era of the Frankish king and associated with the Holy Roman Empire?",
+          "depends_on": [
+            "q2",
+            "q3"
+          ],
+          "operation": "select",
+          "semantic_edge_ids": []
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the era of the Frankish king?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the form of language used in the era of the Frankish king?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "What is the form of language associated with the Holy Roman Empire?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "What was the form of language used in the era of the Frankish king and associated with the Holy Roman Empire?",
+          "depends_on": [
+            "q2",
+            "q3"
+          ],
+          "operation": "select",
+          "semantic_edge_ids": []
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q4"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        }
+      ],
+      "leaf_node_ids": [
+        "q4"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1'].",
+        "q4: depends_on entries are not mentioned as qN's answer in question: ['q2', 'q3']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Frankish",
+              "king",
+              "Holy Roman Empire",
+              "created",
+              "era",
+              "form",
+              "used",
+              "language",
+              "Auctor"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Frankish king",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "Holy Roman Empire",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n3",
+                "label": "Auctor",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n4",
+                "label": "form of language",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n5",
+                "label": "era of the Frankish king",
+                "kind": "intermediate_variable"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n5",
+                "relation": "refers to the era of",
+                "support_tokens": [
+                  "Frankish",
+                  "king",
+                  "era"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n5",
+                "target": "p1_n4",
+                "relation": "has a form of language used in",
+                "support_tokens": [
+                  "era",
+                  "form",
+                  "used",
+                  "language"
+                ]
+              },
+              {
+                "id": "p1_e3",
+                "source": "p1_n2",
+                "target": "p1_n4",
+                "relation": "is associated with the form of language of",
+                "support_tokens": [
+                  "Holy Roman Empire",
+                  "form",
+                  "language"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n4"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is the era of the Frankish king?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What is the form of language used in the era of the Frankish king?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "What is the form of language associated with the Holy Roman Empire?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e3"
+            ]
+          },
+          {
+            "id": "q4",
+            "question": "What was the form of language used in the era of the Frankish king and associated with the Holy Roman Empire?",
+            "depends_on": [
+              "q2",
+              "q3"
+            ],
+            "operation": "select",
+            "semantic_edge_ids": []
+          }
+        ]
+      }
+    }
+  }
+}

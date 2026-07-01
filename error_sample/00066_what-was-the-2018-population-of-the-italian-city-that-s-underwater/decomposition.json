@@ -1,0 +1,1033 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 66,
+  "qid": null,
+  "question": "What was the 2018 population of the Italian city that's underwater?",
+  "raw_question_item": {
+    "question": "What was the 2018 population of the Italian city that's underwater?",
+    "answer": "260,897"
+  },
+  "gold_answer": "260,897",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Italian",
+          "start_char": 36,
+          "end_char": 43,
+          "semantic_type_hint": "City",
+          "confidence": 0.5,
+          "reason": "single-token proper-name candidate"
+        }
+      ],
+      "warnings": [
+        "LLM returned no verified explicit entities; using deterministic candidates."
+      ],
+      "raw_payload": {
+        "explicit_entities": [],
+        "normalized_question": "What was the population of the Italian city that's underwater in 2018?",
+        "normalization_changed": true,
+        "normalization_note": "Added 'in' before '2018' for grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Italian",
+            "start_char": 36,
+            "end_char": 43,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What was the population of the Italian city that's underwater in 2018?",
+      "normalization_changed": true,
+      "normalization_note": "Added 'in' before '2018' for grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "What was the population of the ENTITYA city that's underwater in 2018?",
+      "hanlp_input_sentence": "What was the population of the ENTITYA city that's underwater in 2018?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Italian",
+          "kind_hint": "entity",
+          "semantic_type_hint": "City",
+          "original_char_span": [
+            36,
+            43
+          ],
+          "masked_char_span": [
+            31,
+            38
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": [
+        "LLM returned no verified explicit entities; using deterministic candidates."
+      ]
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "was",
+        "the",
+        "population",
+        "of",
+        "the",
+        "ENTITYA",
+        "city",
+        "that",
+        "'",
+        "s",
+        "underwater",
+        "in",
+        "2018",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              13,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              4,
+              "ARG1"
+            ],
+            [
+              5,
+              "ARG2"
+            ],
+            [
+              6,
+              "BV"
+            ],
+            [
+              7,
+              "compound"
+            ],
+            [
+              10,
+              "ARG1"
+            ],
+            [
+              12,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              11,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ],
+            [
+              6,
+              "det_ARG1"
+            ],
+            [
+              7,
+              "noun_ARG1"
+            ],
+            [
+              9,
+              "relative_ARG1"
+            ],
+            [
+              10,
+              "verb_ARG1"
+            ],
+            [
+              11,
+              "verb_ARG1"
+            ],
+            [
+              12,
+              "adj_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              10,
+              "verb_ARG2"
+            ],
+            [
+              11,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "prep_ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              8,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              4,
+              "APP"
+            ]
+          ],
+          [
+            [
+              11,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              8,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG2",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "was[2] --ARG2--> What[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "in[13] --ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "population",
+          "display": "was[2] --ARG2--> population[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "population",
+          "display": "the[3] --BV--> population[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "population",
+          "relation": "ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "population[4] --ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "of[5] --ARG2--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "the[6] --BV--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "ENTITYA",
+          "relation": "compound",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "ENTITYA[7] --compound--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "'",
+          "relation": "ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "'[10] --ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "underwater",
+          "relation": "ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "underwater[12] --ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "s",
+          "relation": "ARG2",
+          "dep_idx": 12,
+          "dep": "underwater",
+          "display": "s[11] --ARG2--> underwater[12]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 14,
+          "dep": "2018",
+          "display": "in[13] --ARG2--> 2018[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "was[2] --verb_ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "was",
+          "display": "ROOT[0] --root--> was[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "population",
+          "display": "was[2] --verb_ARG2--> population[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "population",
+          "display": "the[3] --det_ARG1--> population[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 4,
+          "dep": "population",
+          "display": "of[5] --prep_ARG1--> population[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "of[5] --prep_ARG2--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "the[6] --det_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "ENTITYA",
+          "relation": "noun_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "ENTITYA[7] --noun_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "that",
+          "relation": "relative_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "that[9] --relative_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "'",
+          "relation": "verb_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "'[10] --verb_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "s",
+          "relation": "verb_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "s[11] --verb_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "underwater",
+          "relation": "adj_ARG1",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "underwater[12] --adj_ARG1--> city[8]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "'",
+          "relation": "verb_ARG2",
+          "dep_idx": 12,
+          "dep": "underwater",
+          "display": "'[10] --verb_ARG2--> underwater[12]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "s",
+          "relation": "verb_ARG2",
+          "dep_idx": 12,
+          "dep": "underwater",
+          "display": "s[11] --verb_ARG2--> underwater[12]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 14,
+          "dep": "2018",
+          "display": "in[13] --prep_ARG2--> 2018[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "PAT-arg",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "was[2] --PAT-arg--> What[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 8,
+          "head": "city",
+          "relation": "RSTR",
+          "dep_idx": 7,
+          "dep": "ENTITYA",
+          "display": "city[8] --RSTR--> ENTITYA[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "population",
+          "relation": "APP",
+          "dep_idx": 8,
+          "dep": "city",
+          "display": "population[4] --APP--> city[8]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "s",
+          "relation": "ACT-arg",
+          "dep_idx": 9,
+          "dep": "that",
+          "display": "s[11] --ACT-arg--> that[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 8,
+          "head": "city",
+          "relation": "RSTR",
+          "dep_idx": 11,
+          "dep": "s",
+          "display": "city[8] --RSTR--> s[11]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "population",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "numeric",
+          "text": "2018",
+          "node_id": "14",
+          "target": null,
+          "target_id": null
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "population",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "7",
+          "8",
+          "12",
+          "11",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "city",
+          "underwater",
+          "s",
+          "population"
+        ],
+        "global_rank": [
+          1,
+          3,
+          4,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "11",
+            "12",
+            "14"
+          ],
+          "semantic_nodes": [
+            "population",
+            "ENTITYA",
+            "city",
+            "s",
+            "underwater",
+            "2018"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "8",
+            "11",
+            "12"
+          ],
+          "covered_semantic_nodes": [
+            "population",
+            "ENTITYA",
+            "city",
+            "s",
+            "underwater"
+          ],
+          "missing_semantic_node_ids": [
+            "14"
+          ],
+          "missing_semantic_nodes": [
+            "2018"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 4,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            1,
+            3,
+            4,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "population",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "7",
+              "8",
+              "12",
+              "11",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "city",
+              "underwater",
+              "s",
+              "population"
+            ],
+            "global_rank": [
+              1,
+              3,
+              4,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "11",
+                "12",
+                "14"
+              ],
+              "semantic_nodes": [
+                "population",
+                "ENTITYA",
+                "city",
+                "s",
+                "underwater",
+                "2018"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "8",
+                "11",
+                "12"
+              ],
+              "covered_semantic_nodes": [
+                "population",
+                "ENTITYA",
+                "city",
+                "s",
+                "underwater"
+              ],
+              "missing_semantic_node_ids": [
+                "14"
+              ],
+              "missing_semantic_nodes": [
+                "2018"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 4,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                1,
+                3,
+                4,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: What[1]/wh_anchor, population[4]/clause_predicate, city[8]/clause_predicate, s[11]/clause_predicate, underwater[12]/clause_predicate, 2018[14]/clause_predicate, ENTITYA[7]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "city",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "city",
+          "target": "underwater",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "underwater",
+          "target": "s",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "s",
+          "target": "population",
+          "derived": true,
+          "rule": "restriction_closure"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "city",
+            "underwater",
+            "s",
+            "population"
+          ],
+          "node_ids": [
+            "7",
+            "8",
+            "12",
+            "11",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What was the 2018 population of the Italian city that's underwater?",
+        "explicit_entities": [
+          "Italian"
+        ],
+        "global_best_paths": [
+          [
+            "Italian",
+            "city",
+            "underwater",
+            "s",
+            "population"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Italian",
+            "city",
+            "underwater",
+            "s",
+            "population"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Italian city",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "2018 population",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n3",
+              "label": "underwater",
+              "kind": "constraint"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "retrieve population",
+              "support_tokens": [
+                "Italian",
+                "city",
+                "population"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n1",
+              "target": "p1_n3",
+              "relation": "is",
+              "support_tokens": [
+                "Italian",
+                "city",
+                "underwater"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n2"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is the 2018 population of the Italian city?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Which Italian city is underwater?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the 2018 population of the Italian city?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "Which Italian city is underwater?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [],
+      "leaf_node_ids": [
+        "q1",
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Italian",
+              "city",
+              "underwater",
+              "s",
+              "population"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Italian city",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "2018 population",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n3",
+                "label": "underwater",
+                "kind": "constraint"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "retrieve population",
+                "support_tokens": [
+                  "Italian",
+                  "city",
+                  "population"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n1",
+                "target": "p1_n3",
+                "relation": "is",
+                "support_tokens": [
+                  "Italian",
+                  "city",
+                  "underwater"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n2"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is the 2018 population of the Italian city?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "Which Italian city is underwater?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

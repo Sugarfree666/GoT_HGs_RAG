@@ -1,0 +1,1974 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 76,
+  "qid": null,
+  "question": "How were people from whom new coins were a proclamation of independence by the Somali Muslim Ajuran Empire expelled from the natural boundary between Thailand and A Don's country?",
+  "raw_question_item": {
+    "question": "How were people from whom new coins were a proclamation of independence by the Somali Muslim Ajuran Empire expelled from the natural boundary between Thailand and A Don's country?",
+    "answer": "The dynasty regrouped and defeated the Portuguese"
+  },
+  "gold_answer": "The dynasty regrouped and defeated the Portuguese",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Somali Muslim Ajuran Empire",
+          "start_char": 79,
+          "end_char": 106,
+          "semantic_type_hint": "Organization",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Thailand",
+          "start_char": 150,
+          "end_char": 158,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "A Don",
+          "start_char": 163,
+          "end_char": 168,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Somali Muslim Ajuran Empire",
+            "type": "Organization"
+          },
+          {
+            "surface": "Thailand",
+            "type": "Location"
+          },
+          {
+            "surface": "A Don",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "How were people from whom new coins were a proclamation of independence by the Somali Muslim Ajuran Empire expelled from the natural boundary between Thailand and A Don's country?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Somali Muslim Ajuran Empire",
+            "start_char": 79,
+            "end_char": 106,
+            "reason": "multi-token person name in human context"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Somali",
+            "start_char": 79,
+            "end_char": 85,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Muslim",
+            "start_char": 86,
+            "end_char": 92,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Ajuran",
+            "start_char": 93,
+            "end_char": 99,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c5",
+            "text": "Empire",
+            "start_char": 100,
+            "end_char": 106,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c6",
+            "text": "Thailand",
+            "start_char": 150,
+            "end_char": 158,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c7",
+            "text": "A Don",
+            "start_char": 163,
+            "end_char": 168,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c8",
+            "text": "Don",
+            "start_char": 165,
+            "end_char": 168,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "How were people from whom new coins were a proclamation of independence by the Somali Muslim Ajuran Empire expelled from the natural boundary between Thailand and A Don's country?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "How were people from whom new coins were a proclamation of independence by the ENTITYA expelled from the natural boundary between ENTITYB and ENTITYC's country?",
+      "hanlp_input_sentence": "How were people from whom new coins were a proclamation of independence by the ENTITYA expelled from the natural boundary between ENTITYB and ENTITYC's country?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Somali Muslim Ajuran Empire",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Organization",
+          "original_char_span": [
+            79,
+            106
+          ],
+          "masked_char_span": [
+            79,
+            86
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Thailand",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            150,
+            158
+          ],
+          "masked_char_span": [
+            130,
+            137
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYC",
+          "original_text": "A Don",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            163,
+            168
+          ],
+          "masked_char_span": [
+            142,
+            149
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "How",
+        "were",
+        "people",
+        "from",
+        "whom",
+        "new",
+        "coins",
+        "were",
+        "a",
+        "proclamation",
+        "of",
+        "independence",
+        "by",
+        "the",
+        "ENTITYA",
+        "expelled",
+        "from",
+        "the",
+        "natural",
+        "boundary",
+        "between",
+        "ENTITYB",
+        "and",
+        "ENTITYC",
+        "'",
+        "s",
+        "country",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK",
+        "ENTITYC": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [
+            [
+              4,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              6,
+              "ARG1"
+            ],
+            [
+              8,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              8,
+              "ARG2"
+            ],
+            [
+              9,
+              "BV"
+            ],
+            [
+              11,
+              "ARG1"
+            ],
+            [
+              13,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              14,
+              "BV"
+            ]
+          ],
+          [
+            [
+              1,
+              "manner"
+            ],
+            [
+              17,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              17,
+              "ARG2"
+            ],
+            [
+              18,
+              "BV"
+            ],
+            [
+              19,
+              "ARG1"
+            ],
+            [
+              21,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              22,
+              "_and_c"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [
+            [
+              1,
+              "adj_ARG1"
+            ]
+          ],
+          [
+            [
+              2,
+              "aux_ARG1"
+            ],
+            [
+              4,
+              "prep_ARG2"
+            ],
+            [
+              5,
+              "relative_ARG1"
+            ],
+            [
+              16,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              4,
+              "prep_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              6,
+              "adj_ARG1"
+            ],
+            [
+              8,
+              "verb_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              8,
+              "verb_ARG2"
+            ],
+            [
+              9,
+              "det_ARG1"
+            ],
+            [
+              11,
+              "prep_ARG1"
+            ],
+            [
+              13,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "prep_ARG2"
+            ],
+            [
+              13,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              13,
+              "prep_ARG2"
+            ],
+            [
+              14,
+              "det_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              1,
+              "adj_ARG1"
+            ],
+            [
+              2,
+              "aux_ARG2"
+            ],
+            [
+              17,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              17,
+              "prep_ARG2"
+            ],
+            [
+              18,
+              "det_ARG1"
+            ],
+            [
+              19,
+              "adj_ARG1"
+            ],
+            [
+              21,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              23,
+              "coord_ARG1"
+            ]
+          ],
+          [
+            [
+              21,
+              "prep_ARG2"
+            ],
+            [
+              26,
+              "poss_ARG2"
+            ]
+          ],
+          [
+            [
+              23,
+              "coord_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              17,
+              "prep_ARG2"
+            ],
+            [
+              21,
+              "prep_ARG2"
+            ],
+            [
+              26,
+              "poss_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [],
+          [],
+          [
+            [
+              16,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              8,
+              "ORIG-arg"
+            ]
+          ],
+          [
+            [
+              7,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              8,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              3,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              8,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              10,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              20,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              16,
+              "ORIG-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              23,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [
+            [
+              23,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              16,
+              "DIR1-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "from",
+          "relation": "ARG2",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "from[4] --ARG2--> people[3]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "new",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "coins",
+          "display": "new[6] --ARG1--> coins[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "coins",
+          "display": "were[8] --ARG1--> coins[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "ARG2",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "were[8] --ARG2--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "a",
+          "relation": "BV",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "a[9] --BV--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "of[11] --ARG1--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "by",
+          "relation": "ARG1",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "by[13] --ARG1--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 12,
+          "dep": "independence",
+          "display": "of[11] --ARG2--> independence[12]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "the[14] --BV--> ENTITYA[15]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 1,
+          "head": "How",
+          "relation": "manner",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "How[1] --manner--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 17,
+          "head": "from",
+          "relation": "ARG1",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "from[17] --ARG1--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 17,
+          "head": "from",
+          "relation": "ARG2",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "from[17] --ARG2--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "the[18] --BV--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 19,
+          "head": "natural",
+          "relation": "ARG1",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "natural[19] --ARG1--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "between",
+          "relation": "ARG1",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "between[21] --ARG1--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 22,
+          "head": "ENTITYB",
+          "relation": "_and_c",
+          "dep_idx": 24,
+          "dep": "ENTITYC",
+          "display": "ENTITYB[22] --_and_c--> ENTITYC[24]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "How",
+          "relation": "adj_ARG1",
+          "dep_idx": 2,
+          "dep": "were",
+          "display": "How[1] --adj_ARG1--> were[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "were",
+          "relation": "aux_ARG1",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "were[2] --aux_ARG1--> people[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "from",
+          "relation": "prep_ARG2",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "from[4] --prep_ARG2--> people[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "whom",
+          "relation": "relative_ARG1",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "whom[5] --relative_ARG1--> people[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 16,
+          "head": "expelled",
+          "relation": "verb_ARG2",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "expelled[16] --verb_ARG2--> people[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "from",
+          "relation": "prep_ARG2",
+          "dep_idx": 5,
+          "dep": "whom",
+          "display": "from[4] --prep_ARG2--> whom[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "new",
+          "relation": "adj_ARG1",
+          "dep_idx": 7,
+          "dep": "coins",
+          "display": "new[6] --adj_ARG1--> coins[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "verb_ARG1",
+          "dep_idx": 7,
+          "dep": "coins",
+          "display": "were[8] --verb_ARG1--> coins[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "verb_ARG2",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "were[8] --verb_ARG2--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "a",
+          "relation": "det_ARG1",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "a[9] --det_ARG1--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "of[11] --prep_ARG1--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "by",
+          "relation": "prep_ARG1",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "by[13] --prep_ARG1--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 12,
+          "dep": "independence",
+          "display": "of[11] --prep_ARG2--> independence[12]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "by",
+          "relation": "prep_ARG1",
+          "dep_idx": 12,
+          "dep": "independence",
+          "display": "by[13] --prep_ARG1--> independence[12]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "by",
+          "relation": "prep_ARG2",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "by[13] --prep_ARG2--> ENTITYA[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "the[14] --det_ARG1--> ENTITYA[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "ROOT[0] --root--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "How",
+          "relation": "adj_ARG1",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "How[1] --adj_ARG1--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "were",
+          "relation": "aux_ARG2",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "were[2] --aux_ARG2--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "from",
+          "relation": "prep_ARG1",
+          "dep_idx": 16,
+          "dep": "expelled",
+          "display": "from[17] --prep_ARG1--> expelled[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "from",
+          "relation": "prep_ARG2",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "from[17] --prep_ARG2--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "the[18] --det_ARG1--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 19,
+          "head": "natural",
+          "relation": "adj_ARG1",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "natural[19] --adj_ARG1--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "between",
+          "relation": "prep_ARG1",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "between[21] --prep_ARG1--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 23,
+          "head": "and",
+          "relation": "coord_ARG1",
+          "dep_idx": 22,
+          "dep": "ENTITYB",
+          "display": "and[23] --coord_ARG1--> ENTITYB[22]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "between",
+          "relation": "prep_ARG2",
+          "dep_idx": 23,
+          "dep": "and",
+          "display": "between[21] --prep_ARG2--> and[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 26,
+          "head": "s",
+          "relation": "poss_ARG2",
+          "dep_idx": 23,
+          "dep": "and",
+          "display": "s[26] --poss_ARG2--> and[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 23,
+          "head": "and",
+          "relation": "coord_ARG2",
+          "dep_idx": 24,
+          "dep": "ENTITYC",
+          "display": "and[23] --coord_ARG2--> ENTITYC[24]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "from",
+          "relation": "prep_ARG2",
+          "dep_idx": 27,
+          "dep": "country",
+          "display": "from[17] --prep_ARG2--> country[27]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "between",
+          "relation": "prep_ARG2",
+          "dep_idx": 27,
+          "dep": "country",
+          "display": "between[21] --prep_ARG2--> country[27]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 26,
+          "head": "s",
+          "relation": "poss_ARG1",
+          "dep_idx": 27,
+          "dep": "country",
+          "display": "s[26] --poss_ARG1--> country[27]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 16,
+          "head": "expelled",
+          "relation": "PAT-arg",
+          "dep_idx": 3,
+          "dep": "people",
+          "display": "expelled[16] --PAT-arg--> people[3]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "ORIG-arg",
+          "dep_idx": 5,
+          "dep": "whom",
+          "display": "were[8] --ORIG-arg--> whom[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "coins",
+          "relation": "RSTR",
+          "dep_idx": 6,
+          "dep": "new",
+          "display": "coins[7] --RSTR--> new[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "ACT-arg",
+          "dep_idx": 7,
+          "dep": "coins",
+          "display": "were[8] --ACT-arg--> coins[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 3,
+          "head": "people",
+          "relation": "RSTR",
+          "dep_idx": 8,
+          "dep": "were",
+          "display": "people[3] --RSTR--> were[8]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 8,
+          "head": "were",
+          "relation": "PAT-arg",
+          "dep_idx": 10,
+          "dep": "proclamation",
+          "display": "were[8] --PAT-arg--> proclamation[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 10,
+          "head": "proclamation",
+          "relation": "PAT-arg",
+          "dep_idx": 12,
+          "dep": "independence",
+          "display": "proclamation[10] --PAT-arg--> independence[12]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "boundary",
+          "relation": "RSTR",
+          "dep_idx": 19,
+          "dep": "natural",
+          "display": "boundary[20] --RSTR--> natural[19]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 16,
+          "head": "expelled",
+          "relation": "ORIG-arg",
+          "dep_idx": 20,
+          "dep": "boundary",
+          "display": "expelled[16] --ORIG-arg--> boundary[20]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 23,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 22,
+          "dep": "ENTITYB",
+          "display": "and[23] --CONJ.member--> ENTITYB[22]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 23,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 24,
+          "dep": "ENTITYC",
+          "display": "and[23] --CONJ.member--> ENTITYC[24]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 16,
+          "head": "expelled",
+          "relation": "DIR1-arg",
+          "dep_idx": 27,
+          "dep": "country",
+          "display": "expelled[16] --DIR1-arg--> country[27]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "natural",
+      "answer_anchor_id": "19",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [
+        [
+          "ENTITYB",
+          "ENTITYC"
+        ]
+      ],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 3,
+        "path_index": 1,
+        "anchor_id": "19",
+        "anchor_text": "natural",
+        "source_types": [
+          "modifier_projection",
+          "clause_predicate"
+        ],
+        "path_id": "A3.P1",
+        "node_ids": [
+          "15",
+          "12",
+          "10",
+          "7",
+          "3",
+          "16",
+          "27",
+          "20",
+          "19"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "independence",
+          "proclamation",
+          "coins",
+          "people",
+          "expelled",
+          "country",
+          "boundary",
+          "natural"
+        ],
+        "global_rank": [
+          4,
+          7,
+          8,
+          3
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "1",
+            "3",
+            "6",
+            "7",
+            "10",
+            "12",
+            "15",
+            "16",
+            "19",
+            "20",
+            "22",
+            "24",
+            "27"
+          ],
+          "semantic_nodes": [
+            "How",
+            "people",
+            "new",
+            "coins",
+            "proclamation",
+            "independence",
+            "ENTITYA",
+            "expelled",
+            "natural",
+            "boundary",
+            "ENTITYB",
+            "ENTITYC",
+            "country"
+          ],
+          "covered_semantic_node_ids": [
+            "3",
+            "7",
+            "10",
+            "12",
+            "15",
+            "16",
+            "19",
+            "20",
+            "27"
+          ],
+          "covered_semantic_nodes": [
+            "people",
+            "coins",
+            "proclamation",
+            "independence",
+            "ENTITYA",
+            "expelled",
+            "natural",
+            "boundary",
+            "country"
+          ],
+          "missing_semantic_node_ids": [
+            "1",
+            "6",
+            "22",
+            "24"
+          ],
+          "missing_semantic_nodes": [
+            "How",
+            "new",
+            "ENTITYB",
+            "ENTITYC"
+          ],
+          "missing_semantic_nodes_count": 4,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 7,
+          "dirty_path_count": 7,
+          "path_length": 8,
+          "anchor_fit_penalty": 3,
+          "rank": [
+            4,
+            7,
+            8,
+            3
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 3,
+            "path_index": 1,
+            "anchor_id": "19",
+            "anchor_text": "natural",
+            "source_types": [
+              "modifier_projection",
+              "clause_predicate"
+            ],
+            "path_id": "A3.P1",
+            "node_ids": [
+              "15",
+              "12",
+              "10",
+              "7",
+              "3",
+              "16",
+              "27",
+              "20",
+              "19"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "independence",
+              "proclamation",
+              "coins",
+              "people",
+              "expelled",
+              "country",
+              "boundary",
+              "natural"
+            ],
+            "global_rank": [
+              4,
+              7,
+              8,
+              3
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "1",
+                "3",
+                "6",
+                "7",
+                "10",
+                "12",
+                "15",
+                "16",
+                "19",
+                "20",
+                "22",
+                "24",
+                "27"
+              ],
+              "semantic_nodes": [
+                "How",
+                "people",
+                "new",
+                "coins",
+                "proclamation",
+                "independence",
+                "ENTITYA",
+                "expelled",
+                "natural",
+                "boundary",
+                "ENTITYB",
+                "ENTITYC",
+                "country"
+              ],
+              "covered_semantic_node_ids": [
+                "3",
+                "7",
+                "10",
+                "12",
+                "15",
+                "16",
+                "19",
+                "20",
+                "27"
+              ],
+              "covered_semantic_nodes": [
+                "people",
+                "coins",
+                "proclamation",
+                "independence",
+                "ENTITYA",
+                "expelled",
+                "natural",
+                "boundary",
+                "country"
+              ],
+              "missing_semantic_node_ids": [
+                "1",
+                "6",
+                "22",
+                "24"
+              ],
+              "missing_semantic_nodes": [
+                "How",
+                "new",
+                "ENTITYB",
+                "ENTITYC"
+              ],
+              "missing_semantic_nodes_count": 4,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 7,
+              "dirty_path_count": 7,
+              "path_length": 8,
+              "anchor_fit_penalty": 3,
+              "rank": [
+                4,
+                7,
+                8,
+                3
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: How[1]/wh_anchor+modifier_projection+clause_predicate, people[3]/root_projection+modifier_projection+clause_predicate, natural[19]/modifier_projection+clause_predicate, boundary[20]/modifier_projection+clause_predicate, whom[5]/wh_anchor, new[6]/clause_predicate, coins[7]/clause_predicate, proclamation[10]/clause_predicate, independence[12]/clause_predicate, expelled[16]/clause_predicate, country[27]/clause_predicate, ENTITYB[22]/explicit_entity, ENTITYC[24]/explicit_entity, ENTITYA[15]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "independence",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "independence",
+          "target": "proclamation",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "proclamation",
+          "target": "coins",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "coins",
+          "target": "people",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "people",
+          "target": "expelled",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "expelled",
+          "target": "country",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "country",
+          "target": "boundary",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "boundary",
+          "target": "natural",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "independence",
+            "proclamation",
+            "coins",
+            "people",
+            "expelled",
+            "country",
+            "boundary",
+            "natural"
+          ],
+          "node_ids": [
+            "15",
+            "12",
+            "10",
+            "7",
+            "3",
+            "16",
+            "27",
+            "20",
+            "19"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "How were people from whom new coins were a proclamation of independence by the Somali Muslim Ajuran Empire expelled from the natural boundary between Thailand and A Don's country?",
+        "explicit_entities": [
+          "Somali Muslim Ajuran Empire",
+          "Thailand",
+          "A Don"
+        ],
+        "global_best_paths": [
+          [
+            "Somali Muslim Ajuran Empire",
+            "independence",
+            "proclamation",
+            "coins",
+            "people",
+            "expelled",
+            "country",
+            "boundary",
+            "natural"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Somali Muslim Ajuran Empire",
+            "independence",
+            "proclamation",
+            "coins",
+            "people",
+            "expelled",
+            "country",
+            "boundary",
+            "natural"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Somali Muslim Ajuran Empire",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "independence",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n3",
+              "label": "proclamation of independence",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n4",
+              "label": "coins",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n5",
+              "label": "people",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n6",
+              "label": "country",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n7",
+              "label": "natural boundary",
+              "kind": "value_slot"
+            },
+            {
+              "id": "p1_n8",
+              "label": "A Don",
+              "kind": "entity"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n3",
+              "relation": "declared through",
+              "support_tokens": [
+                "Somali Muslim Ajuran Empire",
+                "proclamation",
+                "independence"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n3",
+              "target": "p1_n4",
+              "relation": "issued as",
+              "support_tokens": [
+                "proclamation",
+                "coins"
+              ]
+            },
+            {
+              "id": "p1_e3",
+              "source": "p1_n4",
+              "target": "p1_n5",
+              "relation": "associated with",
+              "support_tokens": [
+                "coins",
+                "people"
+              ]
+            },
+            {
+              "id": "p1_e4",
+              "source": "p1_n5",
+              "target": "p1_n6",
+              "relation": "expelled from",
+              "support_tokens": [
+                "people",
+                "expelled",
+                "country"
+              ]
+            },
+            {
+              "id": "p1_e5",
+              "source": "p1_n6",
+              "target": "p1_n7",
+              "relation": "located at",
+              "support_tokens": [
+                "country",
+                "boundary",
+                "natural"
+              ]
+            },
+            {
+              "id": "p1_e6",
+              "source": "p1_n7",
+              "target": "p1_n8",
+              "relation": "associated with",
+              "support_tokens": [
+                "boundary",
+                "A Don"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n8"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What was the proclamation of independence by the Somali Muslim Ajuran Empire?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What were the coins issued as part of the proclamation of independence?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "Who were the people associated with the coins?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "From which country were the people expelled?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e4"
+          ]
+        },
+        {
+          "id": "q5",
+          "question": "What is the natural boundary of the country?",
+          "depends_on": [
+            "q4"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e5"
+          ]
+        },
+        {
+          "id": "q6",
+          "question": "How is A Don associated with the natural boundary?",
+          "depends_on": [
+            "q5"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e6"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What was the proclamation of independence by the Somali Muslim Ajuran Empire?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What were the coins issued as part of the proclamation of independence?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "Who were the people associated with the coins?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        },
+        {
+          "id": "q4",
+          "question": "From which country were the people expelled?",
+          "depends_on": [
+            "q3"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e4"
+          ]
+        },
+        {
+          "id": "q5",
+          "question": "What is the natural boundary of the country?",
+          "depends_on": [
+            "q4"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e5"
+          ]
+        },
+        {
+          "id": "q6",
+          "question": "How is A Don associated with the natural boundary?",
+          "depends_on": [
+            "q5"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e6"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        },
+        {
+          "source": "q3",
+          "target": "q4"
+        },
+        {
+          "source": "q4",
+          "target": "q5"
+        },
+        {
+          "source": "q5",
+          "target": "q6"
+        }
+      ],
+      "leaf_node_ids": [
+        "q6"
+      ],
+      "valid": false,
+      "validation_errors": [
+        "semantic_reasoning_paths[0].semantic_edges[5].support_tokens contains token not copied from source_token_path: 'A Don'."
+      ],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1'].",
+        "q3: depends_on entries are not mentioned as qN's answer in question: ['q2'].",
+        "q4: depends_on entries are not mentioned as qN's answer in question: ['q3'].",
+        "q5: depends_on entries are not mentioned as qN's answer in question: ['q4'].",
+        "q6: depends_on entries are not mentioned as qN's answer in question: ['q5']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Somali Muslim Ajuran Empire",
+              "independence",
+              "proclamation",
+              "coins",
+              "people",
+              "expelled",
+              "country",
+              "boundary",
+              "natural"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Somali Muslim Ajuran Empire",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "independence",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n3",
+                "label": "proclamation of independence",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n4",
+                "label": "coins",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n5",
+                "label": "people",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n6",
+                "label": "country",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n7",
+                "label": "natural boundary",
+                "kind": "value_slot"
+              },
+              {
+                "id": "p1_n8",
+                "label": "A Don",
+                "kind": "entity"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n3",
+                "relation": "declared through",
+                "support_tokens": [
+                  "Somali Muslim Ajuran Empire",
+                  "proclamation",
+                  "independence"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n3",
+                "target": "p1_n4",
+                "relation": "issued as",
+                "support_tokens": [
+                  "proclamation",
+                  "coins"
+                ]
+              },
+              {
+                "id": "p1_e3",
+                "source": "p1_n4",
+                "target": "p1_n5",
+                "relation": "associated with",
+                "support_tokens": [
+                  "coins",
+                  "people"
+                ]
+              },
+              {
+                "id": "p1_e4",
+                "source": "p1_n5",
+                "target": "p1_n6",
+                "relation": "expelled from",
+                "support_tokens": [
+                  "people",
+                  "expelled",
+                  "country"
+                ]
+              },
+              {
+                "id": "p1_e5",
+                "source": "p1_n6",
+                "target": "p1_n7",
+                "relation": "located at",
+                "support_tokens": [
+                  "country",
+                  "boundary",
+                  "natural"
+                ]
+              },
+              {
+                "id": "p1_e6",
+                "source": "p1_n7",
+                "target": "p1_n8",
+                "relation": "associated with",
+                "support_tokens": [
+                  "boundary",
+                  "A Don"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n8"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What was the proclamation of independence by the Somali Muslim Ajuran Empire?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What were the coins issued as part of the proclamation of independence?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "Who were the people associated with the coins?",
+            "depends_on": [
+              "q2"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e3"
+            ]
+          },
+          {
+            "id": "q4",
+            "question": "From which country were the people expelled?",
+            "depends_on": [
+              "q3"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e4"
+            ]
+          },
+          {
+            "id": "q5",
+            "question": "What is the natural boundary of the country?",
+            "depends_on": [
+              "q4"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e5"
+            ]
+          },
+          {
+            "id": "q6",
+            "question": "How is A Don associated with the natural boundary?",
+            "depends_on": [
+              "q5"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e6"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

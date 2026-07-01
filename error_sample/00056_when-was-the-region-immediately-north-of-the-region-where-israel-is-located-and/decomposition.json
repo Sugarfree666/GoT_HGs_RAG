@@ -1,0 +1,1715 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 56,
+  "qid": null,
+  "question": "When was the region immediately north of the region where Israel is located and the site of the most growth in desalination for agricultural use established?",
+  "raw_question_item": {
+    "question": "When was the region immediately north of the region where Israel is located and the site of the most growth in desalination for agricultural use established?",
+    "answer": "1932"
+  },
+  "gold_answer": "1932",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Israel",
+          "start_char": 58,
+          "end_char": 64,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Israel",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "When was the region immediately north of the region where Israel is located and the site of the most growth in desalination for agricultural use established?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Israel",
+            "start_char": 58,
+            "end_char": 64,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the region immediately north of the region where Israel is located and the site of the most growth in desalination for agricultural use established?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the region immediately north of the region where ENTITYA is located and the site of the most growth in desalination for agricultural use established?",
+      "hanlp_input_sentence": "When was the region immediately north of the region where ENTITYA is located and the site of the most growth in desalination for agricultural use established?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Israel",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            58,
+            64
+          ],
+          "masked_char_span": [
+            58,
+            65
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "region",
+        "immediately",
+        "north",
+        "of",
+        "the",
+        "region",
+        "where",
+        "ENTITYA",
+        "is",
+        "located",
+        "and",
+        "the",
+        "site",
+        "of",
+        "the",
+        "most",
+        "growth",
+        "in",
+        "desalination",
+        "for",
+        "agricultural",
+        "use",
+        "established",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [],
+          [
+            [
+              3,
+              "BV"
+            ],
+            [
+              6,
+              "loc"
+            ],
+            [
+              26,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              7,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "ARG2"
+            ],
+            [
+              8,
+              "BV"
+            ],
+            [
+              10,
+              "loc"
+            ]
+          ],
+          [],
+          [
+            [
+              13,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              4,
+              "_and_c"
+            ],
+            [
+              15,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              16,
+              "ARG1"
+            ],
+            [
+              18,
+              "BV"
+            ],
+            [
+              19,
+              "BV"
+            ],
+            [
+              21,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              21,
+              "ARG2"
+            ],
+            [
+              23,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              23,
+              "ARG2"
+            ],
+            [
+              24,
+              "ARG1"
+            ]
+          ],
+          [],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [],
+          [],
+          [
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              6,
+              "adj_ARG1"
+            ],
+            [
+              26,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              5,
+              "adj_ARG1"
+            ],
+            [
+              7,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "prep_ARG2"
+            ],
+            [
+              8,
+              "det_ARG1"
+            ],
+            [
+              10,
+              "conj_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              12,
+              "aux_ARG1"
+            ],
+            [
+              13,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              10,
+              "conj_ARG2"
+            ],
+            [
+              12,
+              "aux_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              14,
+              "coord_ARG2"
+            ],
+            [
+              15,
+              "det_ARG1"
+            ],
+            [
+              17,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              17,
+              "prep_ARG2"
+            ],
+            [
+              18,
+              "det_ARG1"
+            ],
+            [
+              19,
+              "adj_ARG1"
+            ],
+            [
+              21,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              18,
+              "det_ARG1"
+            ],
+            [
+              21,
+              "prep_ARG2"
+            ],
+            [
+              23,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              23,
+              "prep_ARG2"
+            ],
+            [
+              24,
+              "adj_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              1,
+              "adj_ARG1"
+            ],
+            [
+              2,
+              "aux_ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              26,
+              "TWHEN"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              26,
+              "PAT-arg"
+            ]
+          ],
+          [
+            [
+              6,
+              "EXT"
+            ]
+          ],
+          [
+            [
+              4,
+              "LOC"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "DIR1"
+            ]
+          ],
+          [
+            [
+              13,
+              "LOC-arg"
+            ]
+          ],
+          [
+            [
+              13,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              9,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              14,
+              "CONJ.member"
+            ],
+            [
+              26,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              20,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              16,
+              "APP"
+            ]
+          ],
+          [],
+          [
+            [
+              20,
+              "LOC"
+            ]
+          ],
+          [],
+          [
+            [
+              25,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              20,
+              "PAT-arg"
+            ],
+            [
+              22,
+              "AIM"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "the[3] --BV--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "loc",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "north[6] --loc--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 26,
+          "head": "established",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "established[26] --ARG2--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "of[7] --ARG1--> north[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "ARG2",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "north[6] --ARG2--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "the[8] --BV--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "where",
+          "relation": "loc",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "where[10] --loc--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "located",
+          "relation": "ARG2",
+          "dep_idx": 11,
+          "dep": "ENTITYA",
+          "display": "located[13] --ARG2--> ENTITYA[11]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "region",
+          "relation": "_and_c",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "region[4] --_and_c--> site[16]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "the[15] --BV--> site[16]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 16,
+          "head": "site",
+          "relation": "ARG1",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "site[16] --ARG1--> growth[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "the[18] --BV--> growth[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 19,
+          "head": "most",
+          "relation": "BV",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "most[19] --BV--> growth[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "in[21] --ARG1--> growth[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "in[21] --ARG2--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 23,
+          "head": "for",
+          "relation": "ARG1",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "for[23] --ARG1--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 23,
+          "head": "for",
+          "relation": "ARG2",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "for[23] --ARG2--> use[25]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 24,
+          "head": "agricultural",
+          "relation": "ARG1",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "agricultural[24] --ARG1--> use[25]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "the[3] --det_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "adj_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "north[6] --adj_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 26,
+          "head": "established",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "established[26] --verb_ARG2--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "immediately",
+          "relation": "adj_ARG1",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "immediately[5] --adj_ARG1--> north[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "of[7] --prep_ARG1--> north[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "of[7] --prep_ARG2--> region[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "the[8] --det_ARG1--> region[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "where",
+          "relation": "conj_ARG1",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "where[10] --conj_ARG1--> region[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "is",
+          "relation": "aux_ARG1",
+          "dep_idx": 11,
+          "dep": "ENTITYA",
+          "display": "is[12] --aux_ARG1--> ENTITYA[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "located",
+          "relation": "verb_ARG2",
+          "dep_idx": 11,
+          "dep": "ENTITYA",
+          "display": "located[13] --verb_ARG2--> ENTITYA[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "where",
+          "relation": "conj_ARG2",
+          "dep_idx": 13,
+          "dep": "located",
+          "display": "where[10] --conj_ARG2--> located[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "is",
+          "relation": "aux_ARG2",
+          "dep_idx": 13,
+          "dep": "located",
+          "display": "is[12] --aux_ARG2--> located[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "and",
+          "relation": "coord_ARG2",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "and[14] --coord_ARG2--> site[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "the[15] --det_ARG1--> site[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "of[17] --prep_ARG1--> site[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "of[17] --prep_ARG2--> growth[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "the[18] --det_ARG1--> growth[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 19,
+          "head": "most",
+          "relation": "adj_ARG1",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "most[19] --adj_ARG1--> growth[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "in[21] --prep_ARG1--> growth[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "the[18] --det_ARG1--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "in[21] --prep_ARG2--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 23,
+          "head": "for",
+          "relation": "prep_ARG1",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "for[23] --prep_ARG1--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 23,
+          "head": "for",
+          "relation": "prep_ARG2",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "for[23] --prep_ARG2--> use[25]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 24,
+          "head": "agricultural",
+          "relation": "adj_ARG1",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "agricultural[24] --adj_ARG1--> use[25]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 26,
+          "dep": "established",
+          "display": "ROOT[0] --root--> established[26]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "When",
+          "relation": "adj_ARG1",
+          "dep_idx": 26,
+          "dep": "established",
+          "display": "When[1] --adj_ARG1--> established[26]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "aux_ARG2",
+          "dep_idx": 26,
+          "dep": "established",
+          "display": "was[2] --aux_ARG2--> established[26]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 26,
+          "head": "established",
+          "relation": "TWHEN",
+          "dep_idx": 1,
+          "dep": "When",
+          "display": "established[26] --TWHEN--> When[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 26,
+          "head": "established",
+          "relation": "PAT-arg",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "established[26] --PAT-arg--> region[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "EXT",
+          "dep_idx": 5,
+          "dep": "immediately",
+          "display": "north[6] --EXT--> immediately[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "region",
+          "relation": "LOC",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "region[4] --LOC--> north[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "DIR1",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "north[6] --DIR1--> region[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "located",
+          "relation": "LOC-arg",
+          "dep_idx": 10,
+          "dep": "where",
+          "display": "located[13] --LOC-arg--> where[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 13,
+          "head": "located",
+          "relation": "PAT-arg",
+          "dep_idx": 11,
+          "dep": "ENTITYA",
+          "display": "located[13] --PAT-arg--> ENTITYA[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "region",
+          "relation": "RSTR",
+          "dep_idx": 13,
+          "dep": "located",
+          "display": "region[9] --RSTR--> located[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "and[14] --CONJ.member--> site[16]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 26,
+          "head": "established",
+          "relation": "PAT-arg",
+          "dep_idx": 16,
+          "dep": "site",
+          "display": "established[26] --PAT-arg--> site[16]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "growth",
+          "relation": "RSTR",
+          "dep_idx": 19,
+          "dep": "most",
+          "display": "growth[20] --RSTR--> most[19]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 16,
+          "head": "site",
+          "relation": "APP",
+          "dep_idx": 20,
+          "dep": "growth",
+          "display": "site[16] --APP--> growth[20]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "growth",
+          "relation": "LOC",
+          "dep_idx": 22,
+          "dep": "desalination",
+          "display": "growth[20] --LOC--> desalination[22]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 25,
+          "head": "use",
+          "relation": "RSTR",
+          "dep_idx": 24,
+          "dep": "agricultural",
+          "display": "use[25] --RSTR--> agricultural[24]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "growth",
+          "relation": "PAT-arg",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "growth[20] --PAT-arg--> use[25]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 22,
+          "head": "desalination",
+          "relation": "AIM",
+          "dep_idx": 25,
+          "dep": "use",
+          "display": "desalination[22] --AIM--> use[25]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 26,
+          "dep": "established",
+          "display": "ROOT[0] --root--> established[26]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "agricultural",
+      "answer_anchor_id": "24",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 12,
+        "path_index": 1,
+        "anchor_id": "24",
+        "anchor_text": "agricultural",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A12.P1",
+        "node_ids": [
+          "11",
+          "13",
+          "9",
+          "6",
+          "4",
+          "26",
+          "16",
+          "19",
+          "20",
+          "25",
+          "24"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "located",
+          "region",
+          "north",
+          "region",
+          "established",
+          "site",
+          "most",
+          "growth",
+          "use",
+          "agricultural"
+        ],
+        "global_rank": [
+          2,
+          3,
+          10,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "11",
+            "13",
+            "16",
+            "19",
+            "20",
+            "22",
+            "24",
+            "25",
+            "26"
+          ],
+          "semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "ENTITYA",
+            "located",
+            "site",
+            "most",
+            "growth",
+            "desalination",
+            "agricultural",
+            "use",
+            "established"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "6",
+            "9",
+            "11",
+            "13",
+            "16",
+            "19",
+            "20",
+            "24",
+            "25",
+            "26"
+          ],
+          "covered_semantic_nodes": [
+            "region",
+            "north",
+            "region",
+            "ENTITYA",
+            "located",
+            "site",
+            "most",
+            "growth",
+            "agricultural",
+            "use",
+            "established"
+          ],
+          "missing_semantic_node_ids": [
+            "5",
+            "22"
+          ],
+          "missing_semantic_nodes": [
+            "immediately",
+            "desalination"
+          ],
+          "missing_semantic_nodes_count": 2,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 3,
+          "dirty_path_count": 3,
+          "path_length": 10,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 12,
+            "path_index": 1,
+            "anchor_id": "24",
+            "anchor_text": "agricultural",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A12.P1",
+            "node_ids": [
+              "11",
+              "13",
+              "9",
+              "6",
+              "4",
+              "26",
+              "16",
+              "19",
+              "20",
+              "25",
+              "24"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "located",
+              "region",
+              "north",
+              "region",
+              "established",
+              "site",
+              "most",
+              "growth",
+              "use",
+              "agricultural"
+            ],
+            "global_rank": [
+              2,
+              3,
+              10,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "11",
+                "13",
+                "16",
+                "19",
+                "20",
+                "22",
+                "24",
+                "25",
+                "26"
+              ],
+              "semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "ENTITYA",
+                "located",
+                "site",
+                "most",
+                "growth",
+                "desalination",
+                "agricultural",
+                "use",
+                "established"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "6",
+                "9",
+                "11",
+                "13",
+                "16",
+                "19",
+                "20",
+                "24",
+                "25",
+                "26"
+              ],
+              "covered_semantic_nodes": [
+                "region",
+                "north",
+                "region",
+                "ENTITYA",
+                "located",
+                "site",
+                "most",
+                "growth",
+                "agricultural",
+                "use",
+                "established"
+              ],
+              "missing_semantic_node_ids": [
+                "5",
+                "22"
+              ],
+              "missing_semantic_nodes": [
+                "immediately",
+                "desalination"
+              ],
+              "missing_semantic_nodes_count": 2,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 3,
+              "dirty_path_count": 3,
+              "path_length": 10,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                2,
+                3,
+                10,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: region[4]/root_projection+modifier_projection+clause_predicate, site[16]/root_projection+modifier_projection+clause_predicate, north[6]/modifier_projection+clause_predicate, growth[20]/modifier_projection+clause_predicate, When[1]/wh_anchor, where[10]/wh_anchor, immediately[5]/clause_predicate, region[9]/clause_predicate, located[13]/clause_predicate, most[19]/clause_predicate, desalination[22]/clause_predicate, agricultural[24]/clause_predicate, use[25]/clause_predicate, established[26]/clause_predicate, ENTITYA[11]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "located",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "located",
+          "target": "region",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "region",
+          "target": "north",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "north",
+          "target": "region",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "region",
+          "target": "established",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "established",
+          "target": "site",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "site",
+          "target": "most",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "most",
+          "target": "growth",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "growth",
+          "target": "use",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "use",
+          "target": "agricultural",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "located",
+            "region",
+            "north",
+            "region",
+            "established",
+            "site",
+            "most",
+            "growth",
+            "use",
+            "agricultural"
+          ],
+          "node_ids": [
+            "11",
+            "13",
+            "9",
+            "6",
+            "4",
+            "26",
+            "16",
+            "19",
+            "20",
+            "25",
+            "24"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the region immediately north of the region where Israel is located and the site of the most growth in desalination for agricultural use established?",
+        "explicit_entities": [
+          "Israel"
+        ],
+        "global_best_paths": [
+          [
+            "Israel",
+            "located",
+            "region",
+            "north",
+            "region",
+            "established",
+            "site",
+            "most",
+            "growth",
+            "use",
+            "agricultural"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Israel",
+            "located",
+            "region",
+            "north",
+            "region",
+            "established",
+            "site",
+            "most",
+            "growth",
+            "use",
+            "agricultural"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Israel",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "region north of Israel",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "site of growth in desalination for agricultural use",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n4",
+              "label": "establishment date",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "identify region north of",
+              "support_tokens": [
+                "Israel",
+                "located",
+                "region",
+                "north"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "identify site of growth in desalination for agricultural use in",
+              "support_tokens": [
+                "region",
+                "established",
+                "site",
+                "most",
+                "growth",
+                "use",
+                "agricultural"
+              ]
+            },
+            {
+              "id": "p1_e3",
+              "source": "p1_n3",
+              "target": "p1_n4",
+              "relation": "determine establishment date of",
+              "support_tokens": [
+                "established"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n4"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is the region north of Israel?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the site of growth in desalination for agricultural use in the region north of Israel?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When was the site of growth in desalination for agricultural use established?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the region north of Israel?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the site of growth in desalination for agricultural use in the region north of Israel?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "When was the site of growth in desalination for agricultural use established?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1'].",
+        "q3: depends_on entries are not mentioned as qN's answer in question: ['q2']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Israel",
+              "located",
+              "region",
+              "north",
+              "region",
+              "established",
+              "site",
+              "most",
+              "growth",
+              "use",
+              "agricultural"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Israel",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "region north of Israel",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "site of growth in desalination for agricultural use",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n4",
+                "label": "establishment date",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "identify region north of",
+                "support_tokens": [
+                  "Israel",
+                  "located",
+                  "region",
+                  "north"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "identify site of growth in desalination for agricultural use in",
+                "support_tokens": [
+                  "region",
+                  "established",
+                  "site",
+                  "most",
+                  "growth",
+                  "use",
+                  "agricultural"
+                ]
+              },
+              {
+                "id": "p1_e3",
+                "source": "p1_n3",
+                "target": "p1_n4",
+                "relation": "determine establishment date of",
+                "support_tokens": [
+                  "established"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n4"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is the region north of Israel?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What is the site of growth in desalination for agricultural use in the region north of Israel?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "When was the site of growth in desalination for agricultural use established?",
+            "depends_on": [
+              "q2"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e3"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

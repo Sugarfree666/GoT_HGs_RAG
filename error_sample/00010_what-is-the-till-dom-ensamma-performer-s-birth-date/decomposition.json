@@ -1,0 +1,967 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 10,
+  "qid": null,
+  "question": "What is the Till dom ensamma performer's birth date?",
+  "raw_question_item": {
+    "question": "What is the Till dom ensamma performer's birth date?",
+    "answer": "11 September 1962"
+  },
+  "gold_answer": "11 September 1962",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Till",
+          "start_char": 12,
+          "end_char": 16,
+          "semantic_type_hint": "Person",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Till",
+            "type": "Person"
+          }
+        ],
+        "normalized_question": "What is the birth date of the Till dom ensamma performer?",
+        "normalization_changed": true,
+        "normalization_note": "Rephrased for grammatical clarity.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Till",
+            "start_char": 12,
+            "end_char": 16,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "What is the birth date of the Till dom ensamma performer?",
+      "normalization_changed": true,
+      "normalization_note": "Rephrased for grammatical clarity."
+    },
+    "2_entity_masking": {
+      "masked_question": "What is the birth date of the ENTITYA dom ensamma performer?",
+      "hanlp_input_sentence": "What is the birth date of the ENTITYA dom ensamma performer?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Till",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "original_char_span": [
+            12,
+            16
+          ],
+          "masked_char_span": [
+            30,
+            37
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "What",
+        "is",
+        "the",
+        "birth",
+        "date",
+        "of",
+        "the",
+        "ENTITYA",
+        "dom",
+        "ensamma",
+        "performer",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [
+            [
+              2,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ],
+            [
+              4,
+              "compound"
+            ],
+            [
+              6,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              6,
+              "ARG2"
+            ],
+            [
+              7,
+              "BV"
+            ],
+            [
+              10,
+              "compound"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "verb_ARG1"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              4,
+              "noun_ARG1"
+            ],
+            [
+              6,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              6,
+              "prep_ARG2"
+            ],
+            [
+              7,
+              "det_ARG1"
+            ],
+            [
+              8,
+              "noun_ARG1"
+            ],
+            [
+              9,
+              "noun_ARG1"
+            ],
+            [
+              10,
+              "noun_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "PAT-arg"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              5,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              2,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              11,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              11,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              11,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              5,
+              "APP"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG2",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "is[2] --ARG2--> date[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "the[3] --BV--> date[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "birth",
+          "relation": "compound",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "birth[4] --compound--> date[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "of[6] --ARG1--> date[5]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "of[6] --ARG2--> performer[11]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "the[7] --BV--> performer[11]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 10,
+          "head": "ensamma",
+          "relation": "compound",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "ensamma[10] --compound--> performer[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --verb_ARG1--> What[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "is",
+          "display": "ROOT[0] --root--> is[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG1",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "is[2] --verb_ARG1--> date[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "the[3] --det_ARG1--> date[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "birth",
+          "relation": "noun_ARG1",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "birth[4] --noun_ARG1--> date[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "of[6] --prep_ARG1--> date[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "of[6] --prep_ARG2--> performer[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "the[7] --det_ARG1--> performer[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "ENTITYA",
+          "relation": "noun_ARG1",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "ENTITYA[8] --noun_ARG1--> performer[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "dom",
+          "relation": "noun_ARG1",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "dom[9] --noun_ARG1--> performer[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "ensamma",
+          "relation": "noun_ARG1",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "ensamma[10] --noun_ARG1--> performer[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "PAT-arg",
+          "dep_idx": 1,
+          "dep": "What",
+          "display": "is[2] --PAT-arg--> What[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "is",
+          "display": "ROOT[0] --root--> is[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 5,
+          "head": "date",
+          "relation": "RSTR",
+          "dep_idx": 4,
+          "dep": "birth",
+          "display": "date[5] --RSTR--> birth[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ACT-arg",
+          "dep_idx": 5,
+          "dep": "date",
+          "display": "is[2] --ACT-arg--> date[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "performer",
+          "relation": "RSTR",
+          "dep_idx": 8,
+          "dep": "ENTITYA",
+          "display": "performer[11] --RSTR--> ENTITYA[8]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "performer",
+          "relation": "RSTR",
+          "dep_idx": 9,
+          "dep": "dom",
+          "display": "performer[11] --RSTR--> dom[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "performer",
+          "relation": "RSTR",
+          "dep_idx": 10,
+          "dep": "ensamma",
+          "display": "performer[11] --RSTR--> ensamma[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 5,
+          "head": "date",
+          "relation": "APP",
+          "dep_idx": 11,
+          "dep": "performer",
+          "display": "date[5] --APP--> performer[11]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "birth",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "birth",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "8",
+          "11",
+          "10",
+          "9",
+          "5",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "performer",
+          "ensamma",
+          "dom",
+          "date",
+          "birth"
+        ],
+        "global_rank": [
+          0,
+          2,
+          5,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "semantic_nodes": [
+            "birth",
+            "date",
+            "ENTITYA",
+            "dom",
+            "ensamma",
+            "performer"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "covered_semantic_nodes": [
+            "birth",
+            "date",
+            "ENTITYA",
+            "dom",
+            "ensamma",
+            "performer"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 5,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            0,
+            2,
+            5,
+            7
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "birth",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "8",
+              "11",
+              "10",
+              "9",
+              "5",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "performer",
+              "ensamma",
+              "dom",
+              "date",
+              "birth"
+            ],
+            "global_rank": [
+              0,
+              2,
+              5,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "semantic_nodes": [
+                "birth",
+                "date",
+                "ENTITYA",
+                "dom",
+                "ensamma",
+                "performer"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "5",
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "covered_semantic_nodes": [
+                "birth",
+                "date",
+                "ENTITYA",
+                "dom",
+                "ensamma",
+                "performer"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 5,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                0,
+                2,
+                5,
+                7
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: What[1]/wh_anchor, birth[4]/clause_predicate, date[5]/clause_predicate, dom[9]/clause_predicate, ensamma[10]/clause_predicate, performer[11]/clause_predicate, ENTITYA[8]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "performer",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "performer",
+          "target": "ensamma",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "ensamma",
+          "target": "dom",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "dom",
+          "target": "date",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "date",
+          "target": "birth",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "performer",
+            "ensamma",
+            "dom",
+            "date",
+            "birth"
+          ],
+          "node_ids": [
+            "8",
+            "11",
+            "10",
+            "9",
+            "5",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "What is the Till dom ensamma performer's birth date?",
+        "explicit_entities": [
+          "Till"
+        ],
+        "global_best_paths": [
+          [
+            "Till",
+            "performer",
+            "ensamma",
+            "dom",
+            "date",
+            "birth"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Till",
+            "performer",
+            "ensamma",
+            "dom",
+            "date",
+            "birth"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Till",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "performer",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "birth date",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "is a",
+              "support_tokens": [
+                "Till",
+                "performer"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "has birth date",
+              "support_tokens": [
+                "performer",
+                "date",
+                "birth"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What performer is Till?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the birth date of q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What performer is Till?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the birth date of q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Till",
+              "performer",
+              "ensamma",
+              "dom",
+              "date",
+              "birth"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Till",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "performer",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "birth date",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "is a",
+                "support_tokens": [
+                  "Till",
+                  "performer"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "has birth date",
+                "support_tokens": [
+                  "performer",
+                  "date",
+                  "birth"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What performer is Till?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What is the birth date of q1's answer?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

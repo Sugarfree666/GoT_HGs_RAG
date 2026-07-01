@@ -1,0 +1,820 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 11,
+  "qid": null,
+  "question": "How many episodes are in season 5 of the series with The Bag or the Bat?",
+  "raw_question_item": {
+    "question": "How many episodes are in season 5 of the series with The Bag or the Bat?",
+    "answer": "12"
+  },
+  "gold_answer": "12",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "The Bag or the Bat",
+          "start_char": 53,
+          "end_char": 71,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "The Bag or the Bat",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "How many episodes are in season 5 of the series The Bag or the Bat?",
+        "normalization_changed": true,
+        "normalization_note": "Removed 'with' for clarity and grammatical correctness.",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "with The Bag",
+            "start_char": 48,
+            "end_char": 60,
+            "reason": "complex title after explicit type head"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Bag",
+            "start_char": 57,
+            "end_char": 60,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Bat",
+            "start_char": 68,
+            "end_char": 71,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "How many episodes are in season 5 of the series The Bag or the Bat?",
+      "normalization_changed": true,
+      "normalization_note": "Removed 'with' for clarity and grammatical correctness."
+    },
+    "2_entity_masking": {
+      "masked_question": "How many episodes are in season 5 of the series ENTITYA?",
+      "hanlp_input_sentence": "How many episodes are in season 5 of the series ENTITYA?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "The Bag or the Bat",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            53,
+            71
+          ],
+          "masked_char_span": [
+            48,
+            55
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "How",
+        "many",
+        "episodes",
+        "are",
+        "in",
+        "season",
+        "5",
+        "of",
+        "the",
+        "series",
+        "ENTITYA",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG1"
+            ],
+            [
+              5,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              5,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              9,
+              "BV"
+            ]
+          ],
+          [],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [],
+          [
+            [
+              2,
+              "adj_ARG1"
+            ],
+            [
+              4,
+              "verb_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              4,
+              "verb_ARG2"
+            ]
+          ],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ],
+            [
+              7,
+              "adj_ARG1"
+            ],
+            [
+              8,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              10,
+              "noun_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "EXT"
+            ]
+          ],
+          [
+            [
+              3,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              4,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              4,
+              "LOC-arg"
+            ]
+          ],
+          [
+            [
+              6,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "many",
+          "relation": "ARG1",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "many[2] --ARG1--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "in[5] --ARG1--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "in",
+          "relation": "ARG2",
+          "dep_idx": 7,
+          "dep": "5",
+          "display": "in[5] --ARG2--> 5[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 10,
+          "dep": "series",
+          "display": "the[9] --BV--> series[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "many",
+          "relation": "adj_ARG1",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "many[2] --adj_ARG1--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "are",
+          "relation": "verb_ARG1",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "are[4] --verb_ARG1--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "in[5] --prep_ARG1--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "are",
+          "relation": "verb_ARG2",
+          "dep_idx": 5,
+          "dep": "in",
+          "display": "are[4] --verb_ARG2--> in[5]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "in",
+          "relation": "prep_ARG2",
+          "dep_idx": 6,
+          "dep": "season",
+          "display": "in[5] --prep_ARG2--> season[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "5",
+          "relation": "adj_ARG1",
+          "dep_idx": 6,
+          "dep": "season",
+          "display": "5[7] --adj_ARG1--> season[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 6,
+          "dep": "season",
+          "display": "of[8] --prep_ARG1--> season[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "series",
+          "relation": "noun_ARG1",
+          "dep_idx": 11,
+          "dep": "ENTITYA",
+          "display": "series[10] --noun_ARG1--> ENTITYA[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "many",
+          "relation": "EXT",
+          "dep_idx": 1,
+          "dep": "How",
+          "display": "many[2] --EXT--> How[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 3,
+          "head": "episodes",
+          "relation": "RSTR",
+          "dep_idx": 2,
+          "dep": "many",
+          "display": "episodes[3] --RSTR--> many[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "are",
+          "relation": "ACT-arg",
+          "dep_idx": 3,
+          "dep": "episodes",
+          "display": "are[4] --ACT-arg--> episodes[3]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 4,
+          "dep": "are",
+          "display": "ROOT[0] --root--> are[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "are",
+          "relation": "LOC-arg",
+          "dep_idx": 6,
+          "dep": "season",
+          "display": "are[4] --LOC-arg--> season[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "season",
+          "relation": "RSTR",
+          "dep_idx": 7,
+          "dep": "5",
+          "display": "season[6] --RSTR--> 5[7]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "series",
+      "answer_anchor_id": "10",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [
+        {
+          "type": "numeric",
+          "text": "5",
+          "node_id": "7",
+          "target": "season",
+          "target_id": "6"
+        }
+      ],
+      "global_selection": {
+        "anchor_index": 5,
+        "path_index": 1,
+        "anchor_id": "10",
+        "anchor_text": "series",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A5.P1",
+        "node_ids": [
+          "11",
+          "10"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "series"
+        ],
+        "global_rank": [
+          5,
+          1,
+          1,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "7",
+            "10",
+            "11"
+          ],
+          "semantic_nodes": [
+            "How",
+            "many",
+            "episodes",
+            "season",
+            "5",
+            "series",
+            "ENTITYA"
+          ],
+          "covered_semantic_node_ids": [
+            "10",
+            "11"
+          ],
+          "covered_semantic_nodes": [
+            "series",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "7"
+          ],
+          "missing_semantic_nodes": [
+            "How",
+            "many",
+            "episodes",
+            "season",
+            "5"
+          ],
+          "missing_semantic_nodes_count": 5,
+          "weak_edge_count": 0,
+          "medium_edge_count": 1,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 1,
+          "path_length": 1,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            5,
+            1,
+            1,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 5,
+            "path_index": 1,
+            "anchor_id": "10",
+            "anchor_text": "series",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A5.P1",
+            "node_ids": [
+              "11",
+              "10"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "series"
+            ],
+            "global_rank": [
+              5,
+              1,
+              1,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "7",
+                "10",
+                "11"
+              ],
+              "semantic_nodes": [
+                "How",
+                "many",
+                "episodes",
+                "season",
+                "5",
+                "series",
+                "ENTITYA"
+              ],
+              "covered_semantic_node_ids": [
+                "10",
+                "11"
+              ],
+              "covered_semantic_nodes": [
+                "series",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "1",
+                "2",
+                "3",
+                "6",
+                "7"
+              ],
+              "missing_semantic_nodes": [
+                "How",
+                "many",
+                "episodes",
+                "season",
+                "5"
+              ],
+              "missing_semantic_nodes_count": 5,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 1,
+              "path_length": 1,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                5,
+                1,
+                1,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: How[1]/wh_anchor+clause_predicate, many[2]/clause_predicate, episodes[3]/clause_predicate, season[6]/clause_predicate, series[10]/clause_predicate, 5[7]/clause_predicate, ENTITYA[11]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "series",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "series"
+          ],
+          "node_ids": [
+            "11",
+            "10"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "How many episodes are in season 5 of the series with The Bag or the Bat?",
+        "explicit_entities": [
+          "The Bag or the Bat"
+        ],
+        "global_best_paths": [
+          [
+            "The Bag or the Bat",
+            "series"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "The Bag or the Bat",
+            "series"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "The Bag or the Bat",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "season 5",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "number of episodes",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "is part of",
+              "support_tokens": [
+                "The Bag or the Bat",
+                "series"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "has",
+              "support_tokens": [
+                "season 5"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is season 5 of The Bag or the Bat?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "How many episodes are in q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is season 5 of The Bag or the Bat?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "How many episodes are in q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": false,
+      "validation_errors": [
+        "semantic_reasoning_paths[0].semantic_edges[1].support_tokens contains token not copied from source_token_path: 'season 5'."
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "The Bag or the Bat",
+              "series"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "The Bag or the Bat",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "season 5",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "number of episodes",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "is part of",
+                "support_tokens": [
+                  "The Bag or the Bat",
+                  "series"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "has",
+                "support_tokens": [
+                  "season 5"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is season 5 of The Bag or the Bat?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "How many episodes are in q1's answer?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

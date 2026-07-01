@@ -1,0 +1,1208 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 33,
+  "qid": null,
+  "question": "How long are the council terms of the city that shares a county with Helvetia?",
+  "raw_question_item": {
+    "question": "How long are the council terms of the city that shares a county with Helvetia?",
+    "answer": "four-year"
+  },
+  "gold_answer": "four-year",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Helvetia",
+          "start_char": 69,
+          "end_char": 77,
+          "semantic_type_hint": "Location",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Helvetia",
+            "type": "Location"
+          }
+        ],
+        "normalized_question": "How long are the council terms of the city that shares a county with Helvetia?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Helvetia",
+            "start_char": 69,
+            "end_char": 77,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "How long are the council terms of the city that shares a county with Helvetia?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "How long are the council terms of the city that shares a county with ENTITYA?",
+      "hanlp_input_sentence": "How long are the council terms of the city that shares a county with ENTITYA?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Helvetia",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            69,
+            77
+          ],
+          "masked_char_span": [
+            69,
+            76
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "How",
+        "long",
+        "are",
+        "the",
+        "council",
+        "terms",
+        "of",
+        "the",
+        "city",
+        "that",
+        "shares",
+        "a",
+        "county",
+        "with",
+        "ENTITYA",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [
+            [
+              1,
+              "measure"
+            ],
+            [
+              3,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              4,
+              "BV"
+            ],
+            [
+              5,
+              "compound"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              8,
+              "BV"
+            ],
+            [
+              11,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "ARG2"
+            ],
+            [
+              12,
+              "BV"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [
+            [
+              1,
+              "adj_ARG1"
+            ],
+            [
+              3,
+              "verb_ARG2"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              3,
+              "verb_ARG1"
+            ],
+            [
+              4,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "noun_ARG1"
+            ],
+            [
+              7,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "prep_ARG2"
+            ],
+            [
+              8,
+              "det_ARG1"
+            ],
+            [
+              10,
+              "relative_ARG1"
+            ],
+            [
+              11,
+              "verb_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "verb_ARG2"
+            ],
+            [
+              12,
+              "det_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "prep_ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "EXT"
+            ]
+          ],
+          [
+            [
+              3,
+              "THL"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              6,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              3,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "APP"
+            ]
+          ],
+          [
+            [
+              11,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              9,
+              "RSTR"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "ADDR-arg"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 1,
+          "head": "How",
+          "relation": "measure",
+          "dep_idx": 2,
+          "dep": "long",
+          "display": "How[1] --measure--> long[2]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "are",
+          "relation": "ARG1",
+          "dep_idx": 2,
+          "dep": "long",
+          "display": "are[3] --ARG1--> long[2]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 4,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "the[4] --BV--> terms[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "council",
+          "relation": "compound",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "council[5] --compound--> terms[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "the[8] --BV--> city[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "shares[11] --ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "with",
+          "relation": "ARG1",
+          "dep_idx": 11,
+          "dep": "shares",
+          "display": "with[14] --ARG1--> shares[11]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "ARG2",
+          "dep_idx": 13,
+          "dep": "county",
+          "display": "shares[11] --ARG2--> county[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "a",
+          "relation": "BV",
+          "dep_idx": 13,
+          "dep": "county",
+          "display": "a[12] --BV--> county[13]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "with",
+          "relation": "ARG2",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "with[14] --ARG2--> ENTITYA[15]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "How",
+          "relation": "adj_ARG1",
+          "dep_idx": 2,
+          "dep": "long",
+          "display": "How[1] --adj_ARG1--> long[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "are",
+          "relation": "verb_ARG2",
+          "dep_idx": 2,
+          "dep": "long",
+          "display": "are[3] --verb_ARG2--> long[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 3,
+          "dep": "are",
+          "display": "ROOT[0] --root--> are[3]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "are",
+          "relation": "verb_ARG1",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "are[3] --verb_ARG1--> terms[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 4,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "the[4] --det_ARG1--> terms[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "council",
+          "relation": "noun_ARG1",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "council[5] --noun_ARG1--> terms[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "of[7] --prep_ARG1--> terms[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "of[7] --prep_ARG2--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "the[8] --det_ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "that",
+          "relation": "relative_ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "that[10] --relative_ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "verb_ARG1",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "shares[11] --verb_ARG1--> city[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "with",
+          "relation": "prep_ARG1",
+          "dep_idx": 11,
+          "dep": "shares",
+          "display": "with[14] --prep_ARG1--> shares[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "verb_ARG2",
+          "dep_idx": 13,
+          "dep": "county",
+          "display": "shares[11] --verb_ARG2--> county[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "a",
+          "relation": "det_ARG1",
+          "dep_idx": 13,
+          "dep": "county",
+          "display": "a[12] --det_ARG1--> county[13]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 14,
+          "head": "with",
+          "relation": "prep_ARG2",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "with[14] --prep_ARG2--> ENTITYA[15]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "long",
+          "relation": "EXT",
+          "dep_idx": 1,
+          "dep": "How",
+          "display": "long[2] --EXT--> How[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 3,
+          "head": "are",
+          "relation": "THL",
+          "dep_idx": 2,
+          "dep": "long",
+          "display": "are[3] --THL--> long[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 3,
+          "dep": "are",
+          "display": "ROOT[0] --root--> are[3]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "terms",
+          "relation": "RSTR",
+          "dep_idx": 5,
+          "dep": "council",
+          "display": "terms[6] --RSTR--> council[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 3,
+          "head": "are",
+          "relation": "ACT-arg",
+          "dep_idx": 6,
+          "dep": "terms",
+          "display": "are[3] --ACT-arg--> terms[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "terms",
+          "relation": "APP",
+          "dep_idx": 9,
+          "dep": "city",
+          "display": "terms[6] --APP--> city[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "ACT-arg",
+          "dep_idx": 10,
+          "dep": "that",
+          "display": "shares[11] --ACT-arg--> that[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "city",
+          "relation": "RSTR",
+          "dep_idx": 11,
+          "dep": "shares",
+          "display": "city[9] --RSTR--> shares[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "PAT-arg",
+          "dep_idx": 13,
+          "dep": "county",
+          "display": "shares[11] --PAT-arg--> county[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "shares",
+          "relation": "ADDR-arg",
+          "dep_idx": 15,
+          "dep": "ENTITYA",
+          "display": "shares[11] --ADDR-arg--> ENTITYA[15]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "How",
+      "answer_anchor_id": "1",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 1,
+        "path_index": 1,
+        "anchor_id": "1",
+        "anchor_text": "How",
+        "source_types": [
+          "wh_anchor",
+          "clause_predicate"
+        ],
+        "path_id": "A1.P1",
+        "node_ids": [
+          "15",
+          "11",
+          "13",
+          "9",
+          "5",
+          "6",
+          "2",
+          "1"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "shares",
+          "county",
+          "city",
+          "council",
+          "terms",
+          "long",
+          "How"
+        ],
+        "global_rank": [
+          0,
+          5,
+          7,
+          1
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "9",
+            "11",
+            "13",
+            "15"
+          ],
+          "semantic_nodes": [
+            "How",
+            "long",
+            "council",
+            "terms",
+            "city",
+            "shares",
+            "county",
+            "ENTITYA"
+          ],
+          "covered_semantic_node_ids": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "9",
+            "11",
+            "13",
+            "15"
+          ],
+          "covered_semantic_nodes": [
+            "How",
+            "long",
+            "council",
+            "terms",
+            "city",
+            "shares",
+            "county",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [],
+          "missing_semantic_nodes": [],
+          "missing_semantic_nodes_count": 0,
+          "weak_edge_count": 0,
+          "medium_edge_count": 1,
+          "function_node_count": 0,
+          "derived_edge_count": 4,
+          "dirty_path_count": 5,
+          "path_length": 7,
+          "anchor_fit_penalty": 1,
+          "rank": [
+            0,
+            5,
+            7,
+            1
+          ]
+        },
+        "path_type": "single_main_path",
+        "selection_mode": "single_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 1,
+            "path_index": 1,
+            "anchor_id": "1",
+            "anchor_text": "How",
+            "source_types": [
+              "wh_anchor",
+              "clause_predicate"
+            ],
+            "path_id": "A1.P1",
+            "node_ids": [
+              "15",
+              "11",
+              "13",
+              "9",
+              "5",
+              "6",
+              "2",
+              "1"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "shares",
+              "county",
+              "city",
+              "council",
+              "terms",
+              "long",
+              "How"
+            ],
+            "global_rank": [
+              0,
+              5,
+              7,
+              1
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "9",
+                "11",
+                "13",
+                "15"
+              ],
+              "semantic_nodes": [
+                "How",
+                "long",
+                "council",
+                "terms",
+                "city",
+                "shares",
+                "county",
+                "ENTITYA"
+              ],
+              "covered_semantic_node_ids": [
+                "1",
+                "2",
+                "5",
+                "6",
+                "9",
+                "11",
+                "13",
+                "15"
+              ],
+              "covered_semantic_nodes": [
+                "How",
+                "long",
+                "council",
+                "terms",
+                "city",
+                "shares",
+                "county",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [],
+              "missing_semantic_nodes": [],
+              "missing_semantic_nodes_count": 0,
+              "weak_edge_count": 0,
+              "medium_edge_count": 1,
+              "function_node_count": 0,
+              "derived_edge_count": 4,
+              "dirty_path_count": 5,
+              "path_length": 7,
+              "anchor_fit_penalty": 1,
+              "rank": [
+                0,
+                5,
+                7,
+                1
+              ]
+            },
+            "path_type": "single_main_path",
+            "selection_mode": "single_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: How[1]/wh_anchor+clause_predicate, long[2]/clause_predicate, council[5]/clause_predicate, terms[6]/clause_predicate, city[9]/clause_predicate, shares[11]/clause_predicate, county[13]/clause_predicate, ENTITYA[15]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "shares",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "shares",
+          "target": "county",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "county",
+          "target": "city",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "city",
+          "target": "council",
+          "derived": true,
+          "rule": "restriction_closure"
+        },
+        {
+          "source": "council",
+          "target": "terms",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "terms",
+          "target": "long",
+          "derived": true,
+          "rule": "bridge_contraction"
+        },
+        {
+          "source": "long",
+          "target": "How",
+          "derived": false,
+          "rule": "raw_evidence"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "shares",
+            "county",
+            "city",
+            "council",
+            "terms",
+            "long",
+            "How"
+          ],
+          "node_ids": [
+            "15",
+            "11",
+            "13",
+            "9",
+            "5",
+            "6",
+            "2",
+            "1"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "How long are the council terms of the city that shares a county with Helvetia?",
+        "explicit_entities": [
+          "Helvetia"
+        ],
+        "global_best_paths": [
+          [
+            "Helvetia",
+            "shares",
+            "county",
+            "city",
+            "council",
+            "terms",
+            "long",
+            "How"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Helvetia",
+            "shares",
+            "county",
+            "city",
+            "council",
+            "terms",
+            "long",
+            "How"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Helvetia",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "county",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "city",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n4",
+              "label": "council terms",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "shares a county with",
+              "support_tokens": [
+                "shares",
+                "county"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "is the city in",
+              "support_tokens": [
+                "county",
+                "city"
+              ]
+            },
+            {
+              "id": "p1_e3",
+              "source": "p1_n3",
+              "target": "p1_n4",
+              "relation": "has council terms of",
+              "support_tokens": [
+                "council",
+                "terms"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n4"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What county does Helvetia share?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What city is in the county obtained from q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "How long are the council terms of the city obtained from q2's answer?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What county does Helvetia share?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What city is in the county obtained from q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        },
+        {
+          "id": "q3",
+          "question": "How long are the council terms of the city obtained from q2's answer?",
+          "depends_on": [
+            "q2"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e3"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        },
+        {
+          "source": "q2",
+          "target": "q3"
+        }
+      ],
+      "leaf_node_ids": [
+        "q3"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Helvetia",
+              "shares",
+              "county",
+              "city",
+              "council",
+              "terms",
+              "long",
+              "How"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Helvetia",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "county",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "city",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n4",
+                "label": "council terms",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "shares a county with",
+                "support_tokens": [
+                  "shares",
+                  "county"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "is the city in",
+                "support_tokens": [
+                  "county",
+                  "city"
+                ]
+              },
+              {
+                "id": "p1_e3",
+                "source": "p1_n3",
+                "target": "p1_n4",
+                "relation": "has council terms of",
+                "support_tokens": [
+                  "council",
+                  "terms"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n4"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What county does Helvetia share?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What city is in the county obtained from q1's answer?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "How long are the council terms of the city obtained from q2's answer?",
+            "depends_on": [
+              "q2"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e3"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

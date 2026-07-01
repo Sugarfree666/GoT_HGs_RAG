@@ -1,0 +1,1002 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 82,
+  "qid": null,
+  "question": "Who is the spouse of the actor that plays Jarvis in the Avengers Age of Ultron?",
+  "raw_question_item": {
+    "question": "Who is the spouse of the actor that plays Jarvis in the Avengers Age of Ultron?",
+    "answer": "Jennifer Connelly"
+  },
+  "gold_answer": "Jennifer Connelly",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Jarvis",
+          "start_char": 42,
+          "end_char": 48,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        },
+        {
+          "text": "Avengers Age of Ultron",
+          "start_char": 56,
+          "end_char": 78,
+          "semantic_type_hint": "Work",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Jarvis",
+            "type": "Other"
+          },
+          {
+            "surface": "Avengers Age of Ultron",
+            "type": "Work"
+          }
+        ],
+        "normalized_question": "Who is the spouse of the actor that plays Jarvis in the Avengers Age of Ultron?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Jarvis",
+            "start_char": 42,
+            "end_char": 48,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Avengers Age of Ultron",
+            "start_char": 56,
+            "end_char": 78,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Avengers",
+            "start_char": 56,
+            "end_char": 64,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Ultron",
+            "start_char": 72,
+            "end_char": 78,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "Who is the spouse of the actor that plays Jarvis in the Avengers Age of Ultron?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "Who is the spouse of the actor that plays ENTITYA in the ENTITYB?",
+      "hanlp_input_sentence": "Who is the spouse of the actor that plays ENTITYA in the ENTITYB?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Jarvis",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            42,
+            48
+          ],
+          "masked_char_span": [
+            42,
+            49
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "ENTITYB",
+          "original_text": "Avengers Age of Ultron",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Work",
+          "original_char_span": [
+            56,
+            78
+          ],
+          "masked_char_span": [
+            57,
+            64
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "Who",
+        "is",
+        "the",
+        "spouse",
+        "of",
+        "the",
+        "actor",
+        "that",
+        "plays",
+        "ENTITYA",
+        "in",
+        "the",
+        "ENTITYB",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK",
+        "ENTITYB": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [
+            [
+              2,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              2,
+              "ARG2"
+            ],
+            [
+              3,
+              "BV"
+            ],
+            [
+              5,
+              "ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              5,
+              "ARG2"
+            ],
+            [
+              6,
+              "BV"
+            ],
+            [
+              9,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              9,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ],
+        "sdp/pas": [
+          [
+            [
+              2,
+              "verb_ARG1"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "verb_ARG2"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              5,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              5,
+              "prep_ARG2"
+            ],
+            [
+              6,
+              "det_ARG1"
+            ],
+            [
+              8,
+              "relative_ARG1"
+            ],
+            [
+              9,
+              "verb_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              11,
+              "prep_ARG1"
+            ]
+          ],
+          [
+            [
+              9,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              12,
+              "det_ARG1"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [
+            [
+              2,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          [],
+          [
+            [
+              2,
+              "ACT-arg"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              4,
+              "APP"
+            ]
+          ],
+          [
+            [
+              9,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              7,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              9,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG1",
+          "dep_idx": 1,
+          "dep": "Who",
+          "display": "is[2] --ARG1--> Who[1]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "is[2] --ARG2--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "the[3] --BV--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "of[5] --ARG1--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "of[5] --ARG2--> actor[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "the[6] --BV--> actor[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "ARG1",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "plays[9] --ARG1--> actor[7]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "in",
+          "relation": "ARG1",
+          "dep_idx": 9,
+          "dep": "plays",
+          "display": "in[11] --ARG1--> plays[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "ARG2",
+          "dep_idx": 10,
+          "dep": "ENTITYA",
+          "display": "plays[9] --ARG2--> ENTITYA[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG1",
+          "dep_idx": 1,
+          "dep": "Who",
+          "display": "is[2] --verb_ARG1--> Who[1]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "is",
+          "display": "ROOT[0] --root--> is[2]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "is[2] --verb_ARG2--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "the[3] --det_ARG1--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "of[5] --prep_ARG1--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "of[5] --prep_ARG2--> actor[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "the[6] --det_ARG1--> actor[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "that",
+          "relation": "relative_ARG1",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "that[8] --relative_ARG1--> actor[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "verb_ARG1",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "plays[9] --verb_ARG1--> actor[7]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "in",
+          "relation": "prep_ARG1",
+          "dep_idx": 9,
+          "dep": "plays",
+          "display": "in[11] --prep_ARG1--> plays[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "verb_ARG2",
+          "dep_idx": 10,
+          "dep": "ENTITYA",
+          "display": "plays[9] --verb_ARG2--> ENTITYA[10]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 13,
+          "dep": "ENTITYB",
+          "display": "the[12] --det_ARG1--> ENTITYB[13]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ACT-arg",
+          "dep_idx": 1,
+          "dep": "Who",
+          "display": "is[2] --ACT-arg--> Who[1]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 2,
+          "dep": "is",
+          "display": "ROOT[0] --root--> is[2]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 2,
+          "head": "is",
+          "relation": "ACT-arg",
+          "dep_idx": 4,
+          "dep": "spouse",
+          "display": "is[2] --ACT-arg--> spouse[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "spouse",
+          "relation": "APP",
+          "dep_idx": 7,
+          "dep": "actor",
+          "display": "spouse[4] --APP--> actor[7]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "ACT-arg",
+          "dep_idx": 8,
+          "dep": "that",
+          "display": "plays[9] --ACT-arg--> that[8]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 7,
+          "head": "actor",
+          "relation": "RSTR",
+          "dep_idx": 9,
+          "dep": "plays",
+          "display": "actor[7] --RSTR--> plays[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 9,
+          "head": "plays",
+          "relation": "PAT-arg",
+          "dep_idx": 10,
+          "dep": "ENTITYA",
+          "display": "plays[9] --PAT-arg--> ENTITYA[10]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "spouse",
+      "answer_anchor_id": "4",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "4",
+        "anchor_text": "spouse",
+        "source_types": [
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "10",
+          "9",
+          "7",
+          "4"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "plays",
+          "actor",
+          "spouse"
+        ],
+        "global_rank": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "7",
+            "9",
+            "10",
+            "13"
+          ],
+          "semantic_nodes": [
+            "spouse",
+            "actor",
+            "plays",
+            "ENTITYA",
+            "ENTITYB"
+          ],
+          "covered_semantic_node_ids": [
+            "4",
+            "7",
+            "9",
+            "10"
+          ],
+          "covered_semantic_nodes": [
+            "spouse",
+            "actor",
+            "plays",
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "13"
+          ],
+          "missing_semantic_nodes": [
+            "ENTITYB"
+          ],
+          "missing_semantic_nodes_count": 1,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 2,
+          "dirty_path_count": 2,
+          "path_length": 3,
+          "anchor_fit_penalty": 7,
+          "rank": [
+            1,
+            2,
+            3,
+            7
+          ]
+        },
+        "path_type": "fallback_main_path",
+        "selection_mode": "fallback_main_path",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "4",
+            "anchor_text": "spouse",
+            "source_types": [
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "10",
+              "9",
+              "7",
+              "4"
+            ],
+            "nodes": [
+              "ENTITYA",
+              "plays",
+              "actor",
+              "spouse"
+            ],
+            "global_rank": [
+              1,
+              2,
+              3,
+              7
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "7",
+                "9",
+                "10",
+                "13"
+              ],
+              "semantic_nodes": [
+                "spouse",
+                "actor",
+                "plays",
+                "ENTITYA",
+                "ENTITYB"
+              ],
+              "covered_semantic_node_ids": [
+                "4",
+                "7",
+                "9",
+                "10"
+              ],
+              "covered_semantic_nodes": [
+                "spouse",
+                "actor",
+                "plays",
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "13"
+              ],
+              "missing_semantic_nodes": [
+                "ENTITYB"
+              ],
+              "missing_semantic_nodes_count": 1,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 2,
+              "dirty_path_count": 2,
+              "path_length": 3,
+              "anchor_fit_penalty": 7,
+              "rank": [
+                1,
+                2,
+                3,
+                7
+              ]
+            },
+            "path_type": "fallback_main_path",
+            "selection_mode": "fallback_main_path"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: Who[1]/wh_anchor, spouse[4]/clause_predicate, actor[7]/clause_predicate, plays[9]/clause_predicate, ENTITYA[10]/explicit_entity, ENTITYB[13]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [
+        {
+          "source": "ENTITYA",
+          "target": "plays",
+          "derived": false,
+          "rule": "raw_evidence"
+        },
+        {
+          "source": "plays",
+          "target": "actor",
+          "derived": true,
+          "rule": "bridge_contraction+restriction_closure"
+        },
+        {
+          "source": "actor",
+          "target": "spouse",
+          "derived": true,
+          "rule": "bridge_contraction"
+        }
+      ],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA",
+            "plays",
+            "actor",
+            "spouse"
+          ],
+          "node_ids": [
+            "10",
+            "9",
+            "7",
+            "4"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "Who is the spouse of the actor that plays Jarvis in the Avengers Age of Ultron?",
+        "explicit_entities": [
+          "Jarvis",
+          "Avengers Age of Ultron"
+        ],
+        "global_best_paths": [
+          [
+            "Jarvis",
+            "plays",
+            "actor",
+            "spouse"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Jarvis",
+            "plays",
+            "actor",
+            "spouse"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Jarvis",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "actor who plays Jarvis",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "spouse of the actor",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "who plays",
+              "support_tokens": [
+                "plays"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "spouse of",
+              "support_tokens": [
+                "spouse"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "Who plays Jarvis?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the spouse of q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who plays Jarvis?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "What is the spouse of q1's answer?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": true,
+      "validation_errors": [],
+      "warnings": [],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Jarvis",
+              "plays",
+              "actor",
+              "spouse"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Jarvis",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "actor who plays Jarvis",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "spouse of the actor",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "who plays",
+                "support_tokens": [
+                  "plays"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "spouse of",
+                "support_tokens": [
+                  "spouse"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "Who plays Jarvis?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What is the spouse of q1's answer?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

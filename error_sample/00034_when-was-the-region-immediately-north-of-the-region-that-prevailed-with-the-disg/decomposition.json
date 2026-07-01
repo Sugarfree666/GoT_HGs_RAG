@@ -1,0 +1,1504 @@
+{
+  "status": "ok",
+  "method": "depo_hanlp_sdp_atomic_dag",
+  "dataset": "musique",
+  "questions_file": "D:\\GitHub\\HyperBranch\\questions\\musique\\questions.json",
+  "index": 34,
+  "qid": null,
+  "question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+  "raw_question_item": {
+    "question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+    "answer": "1930"
+  },
+  "gold_answer": "1930",
+  "stages": {
+    "1_explicit_entities": {
+      "entities": [
+        {
+          "text": "Near East",
+          "start_char": 88,
+          "end_char": 97,
+          "semantic_type_hint": "Entity",
+          "confidence": 1.0,
+          "reason": ""
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "explicit_entities": [
+          {
+            "surface": "Near East",
+            "type": "Other"
+          }
+        ],
+        "normalized_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+        "normalization_changed": false,
+        "normalization_note": "",
+        "warnings": [],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Near East",
+            "start_char": 88,
+            "end_char": 97,
+            "reason": "continuous multi-word named entity"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Near",
+            "start_char": 88,
+            "end_char": 92,
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "East",
+            "start_char": 93,
+            "end_char": 97,
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      },
+      "normalized_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+      "normalization_changed": false,
+      "normalization_note": ""
+    },
+    "2_entity_masking": {
+      "masked_question": "When was the region immediately north of the region that prevailed with the disgrace of ENTITYA and the terrain feature on which shamal is located created?",
+      "hanlp_input_sentence": "When was the region immediately north of the region that prevailed with the disgrace of ENTITYA and the terrain feature on which shamal is located created?",
+      "mask_mappings": [
+        {
+          "placeholder": "ENTITYA",
+          "original_text": "Near East",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            88,
+            97
+          ],
+          "masked_char_span": [
+            88,
+            95
+          ],
+          "token_indices": []
+        }
+      ],
+      "warnings": []
+    },
+    "3_hanlp_sdp_parsing": {
+      "model": "hanlp.pretrained.mtl.EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
+      "tokens": [
+        "When",
+        "was",
+        "the",
+        "region",
+        "immediately",
+        "north",
+        "of",
+        "the",
+        "region",
+        "that",
+        "prevailed",
+        "with",
+        "the",
+        "disgrace",
+        "of",
+        "ENTITYA",
+        "and",
+        "the",
+        "terrain",
+        "feature",
+        "on",
+        "which",
+        "shamal",
+        "is",
+        "located",
+        "created",
+        "?"
+      ],
+      "available_keys": [
+        "tok",
+        "lem",
+        "pos",
+        "ner",
+        "srl",
+        "dep",
+        "sdp/dm",
+        "sdp/pas",
+        "sdp/psd",
+        "con"
+      ],
+      "mask_token_checks": {
+        "ENTITYA": "OK"
+      },
+      "sdp_graphs": {
+        "sdp/dm": [
+          [],
+          [],
+          [],
+          [
+            [
+              3,
+              "BV"
+            ],
+            [
+              6,
+              "loc"
+            ],
+            [
+              11,
+              "ARG1"
+            ],
+            [
+              26,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              7,
+              "mwe"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "ARG2"
+            ],
+            [
+              7,
+              "ARG2"
+            ],
+            [
+              8,
+              "BV"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              12,
+              "ARG2"
+            ],
+            [
+              13,
+              "BV"
+            ],
+            [
+              15,
+              "ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              15,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [
+            [
+              14,
+              "_and_c"
+            ],
+            [
+              18,
+              "BV"
+            ],
+            [
+              19,
+              "compound"
+            ],
+            [
+              21,
+              "ARG2"
+            ],
+            [
+              25,
+              "ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              25,
+              "ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              21,
+              "ARG1"
+            ]
+          ],
+          [
+            [
+              1,
+              "loc"
+            ]
+          ],
+          []
+        ],
+        "sdp/pas": [
+          [],
+          [],
+          [],
+          [
+            [
+              2,
+              "aux_ARG1"
+            ],
+            [
+              3,
+              "det_ARG1"
+            ],
+            [
+              6,
+              "adj_ARG1"
+            ],
+            [
+              10,
+              "relative_ARG1"
+            ],
+            [
+              11,
+              "verb_ARG1"
+            ],
+            [
+              26,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              5,
+              "adj_ARG1"
+            ],
+            [
+              7,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              7,
+              "prep_ARG2"
+            ],
+            [
+              8,
+              "det_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              12,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              12,
+              "prep_ARG2"
+            ],
+            [
+              13,
+              "det_ARG1"
+            ],
+            [
+              15,
+              "prep_ARG1"
+            ]
+          ],
+          [],
+          [
+            [
+              15,
+              "prep_ARG2"
+            ]
+          ],
+          [
+            [
+              2,
+              "aux_ARG1"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              17,
+              "coord_ARG2"
+            ],
+            [
+              18,
+              "det_ARG1"
+            ],
+            [
+              19,
+              "noun_ARG1"
+            ],
+            [
+              21,
+              "prep_ARG2"
+            ],
+            [
+              22,
+              "relative_ARG1"
+            ],
+            [
+              25,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              24,
+              "aux_ARG1"
+            ],
+            [
+              25,
+              "verb_ARG2"
+            ]
+          ],
+          [],
+          [
+            [
+              21,
+              "prep_ARG1"
+            ],
+            [
+              24,
+              "aux_ARG2"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ],
+            [
+              1,
+              "adj_ARG1"
+            ],
+            [
+              2,
+              "aux_ARG2"
+            ]
+          ],
+          []
+        ],
+        "sdp/psd": [
+          [],
+          [],
+          [],
+          [
+            [
+              26,
+              "PAT-arg"
+            ]
+          ],
+          [
+            [
+              6,
+              "EXT"
+            ]
+          ],
+          [
+            [
+              4,
+              "LOC"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              6,
+              "DIR1"
+            ]
+          ],
+          [
+            [
+              11,
+              "ACT-arg"
+            ]
+          ],
+          [
+            [
+              4,
+              "RSTR"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              11,
+              "ACMP"
+            ]
+          ],
+          [],
+          [
+            [
+              14,
+              "APP"
+            ]
+          ],
+          [],
+          [],
+          [
+            [
+              20,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              17,
+              "CONJ.member"
+            ]
+          ],
+          [],
+          [
+            [
+              25,
+              "LOC-arg"
+            ]
+          ],
+          [
+            [
+              25,
+              "PAT-arg"
+            ]
+          ],
+          [],
+          [
+            [
+              20,
+              "RSTR"
+            ]
+          ],
+          [
+            [
+              0,
+              "root"
+            ]
+          ],
+          []
+        ]
+      },
+      "edges": [
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "the[3] --BV--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "loc",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "north[6] --loc--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 11,
+          "head": "prevailed",
+          "relation": "ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "prevailed[11] --ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 26,
+          "head": "created",
+          "relation": "ARG2",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "created[26] --ARG2--> region[4]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "mwe",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "of[7] --mwe--> north[6]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "ARG2",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "north[6] --ARG2--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "of[7] --ARG2--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "the[8] --BV--> region[9]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 12,
+          "head": "with",
+          "relation": "ARG2",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "with[12] --ARG2--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 13,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "the[13] --BV--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "of",
+          "relation": "ARG1",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "of[15] --ARG1--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 15,
+          "head": "of",
+          "relation": "ARG2",
+          "dep_idx": 16,
+          "dep": "ENTITYA",
+          "display": "of[15] --ARG2--> ENTITYA[16]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 14,
+          "head": "disgrace",
+          "relation": "_and_c",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "disgrace[14] --_and_c--> feature[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "BV",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "the[18] --BV--> feature[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 19,
+          "head": "terrain",
+          "relation": "compound",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "terrain[19] --compound--> feature[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "on",
+          "relation": "ARG2",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "on[21] --ARG2--> feature[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "ARG2",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "located[25] --ARG2--> feature[20]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "ARG2",
+          "dep_idx": 23,
+          "dep": "shamal",
+          "display": "located[25] --ARG2--> shamal[23]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 21,
+          "head": "on",
+          "relation": "ARG1",
+          "dep_idx": 25,
+          "dep": "located",
+          "display": "on[21] --ARG1--> located[25]"
+        },
+        {
+          "formalism": "sdp/dm",
+          "head_idx": 1,
+          "head": "When",
+          "relation": "loc",
+          "dep_idx": 26,
+          "dep": "created",
+          "display": "When[1] --loc--> created[26]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "aux_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "was[2] --aux_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 3,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "the[3] --det_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "adj_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "north[6] --adj_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 10,
+          "head": "that",
+          "relation": "relative_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "that[10] --relative_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 11,
+          "head": "prevailed",
+          "relation": "verb_ARG1",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "prevailed[11] --verb_ARG1--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 26,
+          "head": "created",
+          "relation": "verb_ARG2",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "created[26] --verb_ARG2--> region[4]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 5,
+          "head": "immediately",
+          "relation": "adj_ARG1",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "immediately[5] --adj_ARG1--> north[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "of[7] --prep_ARG1--> north[6]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 7,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "of[7] --prep_ARG2--> region[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 8,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "the[8] --det_ARG1--> region[9]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "with",
+          "relation": "prep_ARG1",
+          "dep_idx": 11,
+          "dep": "prevailed",
+          "display": "with[12] --prep_ARG1--> prevailed[11]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 12,
+          "head": "with",
+          "relation": "prep_ARG2",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "with[12] --prep_ARG2--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 13,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "the[13] --det_ARG1--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "of",
+          "relation": "prep_ARG1",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "of[15] --prep_ARG1--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 15,
+          "head": "of",
+          "relation": "prep_ARG2",
+          "dep_idx": 16,
+          "dep": "ENTITYA",
+          "display": "of[15] --prep_ARG2--> ENTITYA[16]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "aux_ARG1",
+          "dep_idx": 17,
+          "dep": "and",
+          "display": "was[2] --aux_ARG1--> and[17]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 17,
+          "head": "and",
+          "relation": "coord_ARG2",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "and[17] --coord_ARG2--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 18,
+          "head": "the",
+          "relation": "det_ARG1",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "the[18] --det_ARG1--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 19,
+          "head": "terrain",
+          "relation": "noun_ARG1",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "terrain[19] --noun_ARG1--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "on",
+          "relation": "prep_ARG2",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "on[21] --prep_ARG2--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 22,
+          "head": "which",
+          "relation": "relative_ARG1",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "which[22] --relative_ARG1--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "verb_ARG2",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "located[25] --verb_ARG2--> feature[20]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 24,
+          "head": "is",
+          "relation": "aux_ARG1",
+          "dep_idx": 23,
+          "dep": "shamal",
+          "display": "is[24] --aux_ARG1--> shamal[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "verb_ARG2",
+          "dep_idx": 23,
+          "dep": "shamal",
+          "display": "located[25] --verb_ARG2--> shamal[23]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 21,
+          "head": "on",
+          "relation": "prep_ARG1",
+          "dep_idx": 25,
+          "dep": "located",
+          "display": "on[21] --prep_ARG1--> located[25]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 24,
+          "head": "is",
+          "relation": "aux_ARG2",
+          "dep_idx": 25,
+          "dep": "located",
+          "display": "is[24] --aux_ARG2--> located[25]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 26,
+          "dep": "created",
+          "display": "ROOT[0] --root--> created[26]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 1,
+          "head": "When",
+          "relation": "adj_ARG1",
+          "dep_idx": 26,
+          "dep": "created",
+          "display": "When[1] --adj_ARG1--> created[26]"
+        },
+        {
+          "formalism": "sdp/pas",
+          "head_idx": 2,
+          "head": "was",
+          "relation": "aux_ARG2",
+          "dep_idx": 26,
+          "dep": "created",
+          "display": "was[2] --aux_ARG2--> created[26]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 26,
+          "head": "created",
+          "relation": "PAT-arg",
+          "dep_idx": 4,
+          "dep": "region",
+          "display": "created[26] --PAT-arg--> region[4]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "EXT",
+          "dep_idx": 5,
+          "dep": "immediately",
+          "display": "north[6] --EXT--> immediately[5]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "region",
+          "relation": "LOC",
+          "dep_idx": 6,
+          "dep": "north",
+          "display": "region[4] --LOC--> north[6]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 6,
+          "head": "north",
+          "relation": "DIR1",
+          "dep_idx": 9,
+          "dep": "region",
+          "display": "north[6] --DIR1--> region[9]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "prevailed",
+          "relation": "ACT-arg",
+          "dep_idx": 10,
+          "dep": "that",
+          "display": "prevailed[11] --ACT-arg--> that[10]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 4,
+          "head": "region",
+          "relation": "RSTR",
+          "dep_idx": 11,
+          "dep": "prevailed",
+          "display": "region[4] --RSTR--> prevailed[11]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 11,
+          "head": "prevailed",
+          "relation": "ACMP",
+          "dep_idx": 14,
+          "dep": "disgrace",
+          "display": "prevailed[11] --ACMP--> disgrace[14]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 14,
+          "head": "disgrace",
+          "relation": "APP",
+          "dep_idx": 16,
+          "dep": "ENTITYA",
+          "display": "disgrace[14] --APP--> ENTITYA[16]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "feature",
+          "relation": "RSTR",
+          "dep_idx": 19,
+          "dep": "terrain",
+          "display": "feature[20] --RSTR--> terrain[19]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 17,
+          "head": "and",
+          "relation": "CONJ.member",
+          "dep_idx": 20,
+          "dep": "feature",
+          "display": "and[17] --CONJ.member--> feature[20]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "LOC-arg",
+          "dep_idx": 22,
+          "dep": "which",
+          "display": "located[25] --LOC-arg--> which[22]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 25,
+          "head": "located",
+          "relation": "PAT-arg",
+          "dep_idx": 23,
+          "dep": "shamal",
+          "display": "located[25] --PAT-arg--> shamal[23]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 20,
+          "head": "feature",
+          "relation": "RSTR",
+          "dep_idx": 25,
+          "dep": "located",
+          "display": "feature[20] --RSTR--> located[25]"
+        },
+        {
+          "formalism": "sdp/psd",
+          "head_idx": 0,
+          "head": "ROOT",
+          "relation": "root",
+          "dep_idx": 26,
+          "dep": "created",
+          "display": "ROOT[0] --root--> created[26]"
+        }
+      ],
+      "warnings": []
+    },
+    "4_token_reasoning_structure": {
+      "path_type": "global_best_path",
+      "answer_anchor": "feature",
+      "answer_anchor_id": "20",
+      "entity_anchors": [
+        "ENTITYA"
+      ],
+      "candidate_sets": [],
+      "constraints": [],
+      "global_selection": {
+        "anchor_index": 2,
+        "path_index": 1,
+        "anchor_id": "20",
+        "anchor_text": "feature",
+        "source_types": [
+          "typed_wh_slot",
+          "clause_predicate"
+        ],
+        "path_id": "A2.P1",
+        "node_ids": [
+          "16"
+        ],
+        "nodes": [
+          "ENTITYA"
+        ],
+        "global_rank": [
+          11,
+          0,
+          0,
+          0
+        ],
+        "global_rank_components": {
+          "semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "11",
+            "14",
+            "16",
+            "19",
+            "20",
+            "23",
+            "25",
+            "26"
+          ],
+          "semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "prevailed",
+            "disgrace",
+            "ENTITYA",
+            "terrain",
+            "feature",
+            "shamal",
+            "located",
+            "created"
+          ],
+          "covered_semantic_node_ids": [
+            "16"
+          ],
+          "covered_semantic_nodes": [
+            "ENTITYA"
+          ],
+          "missing_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "9",
+            "11",
+            "14",
+            "19",
+            "20",
+            "23",
+            "25",
+            "26"
+          ],
+          "missing_semantic_nodes": [
+            "region",
+            "immediately",
+            "north",
+            "region",
+            "prevailed",
+            "disgrace",
+            "terrain",
+            "feature",
+            "shamal",
+            "located",
+            "created"
+          ],
+          "missing_semantic_nodes_count": 11,
+          "weak_edge_count": 0,
+          "medium_edge_count": 0,
+          "function_node_count": 0,
+          "derived_edge_count": 0,
+          "dirty_path_count": 0,
+          "path_length": 0,
+          "anchor_fit_penalty": 0,
+          "rank": [
+            11,
+            0,
+            0,
+            0
+          ]
+        },
+        "path_type": "empty",
+        "selection_mode": "single_node_fallback",
+        "selection_type": "global_best_path",
+        "selected_paths": [
+          {
+            "anchor_index": 2,
+            "path_index": 1,
+            "anchor_id": "20",
+            "anchor_text": "feature",
+            "source_types": [
+              "typed_wh_slot",
+              "clause_predicate"
+            ],
+            "path_id": "A2.P1",
+            "node_ids": [
+              "16"
+            ],
+            "nodes": [
+              "ENTITYA"
+            ],
+            "global_rank": [
+              11,
+              0,
+              0,
+              0
+            ],
+            "global_rank_components": {
+              "semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "11",
+                "14",
+                "16",
+                "19",
+                "20",
+                "23",
+                "25",
+                "26"
+              ],
+              "semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "prevailed",
+                "disgrace",
+                "ENTITYA",
+                "terrain",
+                "feature",
+                "shamal",
+                "located",
+                "created"
+              ],
+              "covered_semantic_node_ids": [
+                "16"
+              ],
+              "covered_semantic_nodes": [
+                "ENTITYA"
+              ],
+              "missing_semantic_node_ids": [
+                "4",
+                "5",
+                "6",
+                "9",
+                "11",
+                "14",
+                "19",
+                "20",
+                "23",
+                "25",
+                "26"
+              ],
+              "missing_semantic_nodes": [
+                "region",
+                "immediately",
+                "north",
+                "region",
+                "prevailed",
+                "disgrace",
+                "terrain",
+                "feature",
+                "shamal",
+                "located",
+                "created"
+              ],
+              "missing_semantic_nodes_count": 11,
+              "weak_edge_count": 0,
+              "medium_edge_count": 0,
+              "function_node_count": 0,
+              "derived_edge_count": 0,
+              "dirty_path_count": 0,
+              "path_length": 0,
+              "anchor_fit_penalty": 0,
+              "rank": [
+                11,
+                0,
+                0,
+                0
+              ]
+            },
+            "path_type": "empty",
+            "selection_mode": "single_node_fallback"
+          }
+        ]
+      },
+      "warnings": [
+        "answer anchor candidates collected: region[4]/root_projection+modifier_projection+clause_predicate, feature[20]/typed_wh_slot+clause_predicate, shamal[23]/typed_wh_slot+clause_predicate, north[6]/modifier_projection+clause_predicate, prevailed[11]/modifier_projection+clause_predicate, When[1]/wh_anchor, which[22]/wh_anchor, immediately[5]/clause_predicate, region[9]/clause_predicate, disgrace[14]/clause_predicate, terrain[19]/clause_predicate, located[25]/clause_predicate, created[26]/clause_predicate, ENTITYA[16]/explicit_entity"
+      ],
+      "debug_file": null,
+      "graph_edges": [],
+      "paths": [
+        {
+          "path_id": "P1",
+          "nodes": [
+            "ENTITYA"
+          ],
+          "node_ids": [
+            "16"
+          ]
+        }
+      ]
+    },
+    "5_step5_action_trace": {
+      "input": {
+        "original_question": "When was the region immediately north of the region that prevailed with the disgrace of Near East and the terrain feature on which shamal is located created?",
+        "explicit_entities": [
+          "Near East"
+        ],
+        "global_best_paths": [
+          [
+            "Near East"
+          ]
+        ]
+      },
+      "semantic_reasoning_paths": [
+        {
+          "branch_id": "p1",
+          "source_token_path": [
+            "Near East"
+          ],
+          "semantic_nodes": [
+            {
+              "id": "p1_n1",
+              "label": "Near East",
+              "kind": "entity"
+            },
+            {
+              "id": "p1_n2",
+              "label": "region north of Near East",
+              "kind": "intermediate_variable"
+            },
+            {
+              "id": "p1_n3",
+              "label": "creation date of region north of Near East",
+              "kind": "value_slot"
+            }
+          ],
+          "semantic_edges": [
+            {
+              "id": "p1_e1",
+              "source": "p1_n1",
+              "target": "p1_n2",
+              "relation": "identify region north of",
+              "support_tokens": [
+                "Near East"
+              ]
+            },
+            {
+              "id": "p1_e2",
+              "source": "p1_n2",
+              "target": "p1_n3",
+              "relation": "retrieve creation date of",
+              "support_tokens": [
+                "region north of"
+              ]
+            }
+          ],
+          "terminal_node_id": "p1_n3"
+        }
+      ],
+      "atomic_questions": [
+        {
+          "id": "q1",
+          "question": "What is the region immediately north of the Near East?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "When was the region immediately north of the Near East created?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "actions": []
+    },
+    "6_atomic_question_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the region immediately north of the Near East?",
+          "depends_on": [],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e1"
+          ]
+        },
+        {
+          "id": "q2",
+          "question": "When was the region immediately north of the Near East created?",
+          "depends_on": [
+            "q1"
+          ],
+          "operation": "lookup",
+          "semantic_edge_ids": [
+            "p1_e2"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2"
+        }
+      ],
+      "leaf_node_ids": [
+        "q2"
+      ],
+      "valid": false,
+      "validation_errors": [
+        "semantic_reasoning_paths[0].semantic_edges[1].support_tokens contains token not copied from source_token_path: 'region north of'."
+      ],
+      "warnings": [
+        "q2: depends_on entries are not mentioned as qN's answer in question: ['q1']."
+      ],
+      "raw_payload": {
+        "semantic_reasoning_paths": [
+          {
+            "branch_id": "p1",
+            "source_token_path": [
+              "Near East"
+            ],
+            "semantic_nodes": [
+              {
+                "id": "p1_n1",
+                "label": "Near East",
+                "kind": "entity"
+              },
+              {
+                "id": "p1_n2",
+                "label": "region north of Near East",
+                "kind": "intermediate_variable"
+              },
+              {
+                "id": "p1_n3",
+                "label": "creation date of region north of Near East",
+                "kind": "value_slot"
+              }
+            ],
+            "semantic_edges": [
+              {
+                "id": "p1_e1",
+                "source": "p1_n1",
+                "target": "p1_n2",
+                "relation": "identify region north of",
+                "support_tokens": [
+                  "Near East"
+                ]
+              },
+              {
+                "id": "p1_e2",
+                "source": "p1_n2",
+                "target": "p1_n3",
+                "relation": "retrieve creation date of",
+                "support_tokens": [
+                  "region north of"
+                ]
+              }
+            ],
+            "terminal_node_id": "p1_n3"
+          }
+        ],
+        "atomic_questions": [
+          {
+            "id": "q1",
+            "question": "What is the region immediately north of the Near East?",
+            "depends_on": [],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e1"
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "When was the region immediately north of the Near East created?",
+            "depends_on": [
+              "q1"
+            ],
+            "operation": "lookup",
+            "semantic_edge_ids": [
+              "p1_e2"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
