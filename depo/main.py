@@ -338,19 +338,23 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
             continue
         branch_id = path.get("branch_id") or "(unknown)"
         source_path = path.get("source_token_path") or []
-        print(f"{branch_id}: {' ---- '.join(str(token) for token in source_path)}")
         nodes = path.get("semantic_nodes") or []
-        if nodes:
-            print("  nodes:")
-        for node in nodes:
-            if not isinstance(node, dict):
-                continue
-            node_id = node.get("id") or ""
-            label = node.get("label") or ""
-            print(f"    {node_id}: {label}")
         edges = path.get("semantic_edges") or []
-        if edges:
-            print("  edges:")
+        node_labels = {
+            str(node.get("id") or ""): str(node.get("label") or "")
+            for node in nodes
+            if isinstance(node, dict) and node.get("id")
+        }
+
+        print(f"{branch_id}:")
+        print(f"  source tokens: {' ---- '.join(str(token) for token in source_path) if source_path else '(none)'}")
+        print("  semantic path:")
+        if not edges:
+            print("    (none)")
+        for node in nodes:
+            if not isinstance(node, dict) or edges:
+                continue
+            print(f"    {_format_semantic_node_ref(str(node.get('id') or ''), node_labels)}")
         for edge in edges:
             if not isinstance(edge, dict):
                 continue
@@ -361,11 +365,46 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
             condition_node_ids = edge.get("condition_node_ids") or []
             evidence_status = edge.get("evidence_status") or ""
             support_tokens = edge.get("support_tokens") or []
-            print(f"    {edge_id}: {source} --{relation}--> {target}")
+            condition = _format_semantic_condition_refs(condition_node_ids, node_labels)
+            relation_text = f"{edge_id}: {relation}" if edge_id else str(relation)
+            if condition:
+                relation_text = f"{relation_text}; condition: {condition}"
+            print(
+                "    "
+                f"{_format_semantic_node_ref(str(source), node_labels)} "
+                f"--[{relation_text}]--> "
+                f"{_format_semantic_node_ref(str(target), node_labels)}"
+            )
+            evidence_parts = []
+            if evidence_status:
+                evidence_parts.append(str(evidence_status))
+            evidence_parts.append(
+                "support="
+                + (", ".join(str(token) for token in support_tokens) if support_tokens else "(none)")
+            )
+            print(f"      evidence: {'; '.join(evidence_parts)}")
             if condition_node_ids:
                 print(f"      condition_node_ids: {', '.join(str(item) for item in condition_node_ids)}")
-            print(f"      evidence_status: {evidence_status}")
-            print(f"      support_tokens: {', '.join(str(token) for token in support_tokens) if support_tokens else '(none)'}")
+        terminal_node_id = str(path.get("terminal_node_id") or "")
+        if terminal_node_id:
+            print(f"  terminal: {_format_semantic_node_ref(terminal_node_id, node_labels)}")
+
+
+def _format_semantic_node_ref(node_id: str, node_labels: dict[str, str]) -> str:
+    label = node_labels.get(node_id, "")
+    if node_id and label:
+        return f"{node_id} {label}"
+    return label or node_id or "(unknown)"
+
+
+def _format_semantic_condition_refs(condition_node_ids: Any, node_labels: dict[str, str]) -> str:
+    if not isinstance(condition_node_ids, (list, tuple)):
+        return ""
+    return ", ".join(
+        _format_semantic_node_ref(str(node_id), node_labels)
+        for node_id in condition_node_ids
+        if str(node_id)
+    )
 
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:
