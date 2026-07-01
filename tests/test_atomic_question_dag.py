@@ -41,12 +41,27 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(payload["explicit_entities"], ["Ten9Eight: Shoot For The Moon"])
         self.assertEqual(payload["global_best_paths"], [["Ten9Eight: Shoot For The Moon", "director", "nationality"]])
         serialized = json.dumps(payload, ensure_ascii=False)
-        for forbidden in ("masked_question", "normalized_question", "sdp", "candidate_sets", "ENTITYA"):
+        for forbidden in (
+            "masked_question",
+            "normalized_question",
+            "sdp",
+            "candidate_paths",
+            "candidate_sets",
+            "debug",
+            "raw",
+            "ENTITYA",
+        ):
             self.assertNotIn(forbidden, serialized)
-        self.assertIn("reasoning_steps", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("support_step_ids", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertNotIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertNotIn('"semantic_edges"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn('"semantic_edges"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn('"semantic_edge_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn('"reasoning_steps"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn('"support_step_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
+
+    def test_prompt_requires_dependency_mentions_in_question_text(self) -> None:
+        self.assertIn("question text must explicitly mention every dependency as q1's answer", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("do not write a dependent question that can be read without the dependency", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Do not add a follow-up question that merely restates or generalizes", ATOMIC_QUESTION_DAG_SYSTEM)
 
     def test_restore_entity_paths_replaces_complete_placeholder_tokens_only(self) -> None:
         paths = [
@@ -96,36 +111,35 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unresolved entity placeholder"):
             restore_global_best_path({"nodes": ["ENTITYA", "born"]}, [])
 
-    def test_valid_new_payload_builds_dag_from_atomic_questions(self) -> None:
-        result = validate_atomic_question_dag(_johnny_payload())
+    def test_valid_simple_semantic_path_builds_dag(self) -> None:
+        result = validate_atomic_question_dag(_a_nest_payload())
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual([node.id for node in result.nodes], ["q1", "q2"])
+        self.assertEqual([node.semantic_edge_ids for node in result.nodes], [("p1_e1",), ("p1_e2",)])
         self.assertEqual(result.nodes[1].depends_on, ("q1",))
+        self.assertEqual(result.nodes[1].output_node_id, "p1_n3")
         self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
         self.assertEqual(result.leaf_node_ids, ["q2"])
         self.assertIn("question_plan", result.raw_payload)
         self.assertIn("semantic_reasoning_paths", result.raw_payload)
-        self.assertEqual(result.nodes[0].operation, "lookup")
-        self.assertEqual(result.nodes[0].support_step_ids, ("p1_s1",))
-        self.assertEqual(result.nodes[0].to_dict()["support_step_ids"], ["p1_s1"])
-        self.assertEqual(result.nodes[0].to_dict()["semantic_edge_ids"], [])
+        self.assertEqual(result.nodes[0].to_dict()["support_step_ids"], [])
 
     def test_path_generator_keeps_step5_input_contract(self) -> None:
-        llm = RecordingStep5LLM(_johnny_payload())
+        llm = RecordingStep5LLM(_a_nest_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
-            original_question="The player who defeated Johnny Majors was born in what year?",
-            explicit_entities=["Johnny Majors"],
-            global_best_paths=[["Johnny Majors", "defeated", "player", "born", "year"]],
+            original_question="Where does the director of film A Nest Of Noblemen work at?",
+            explicit_entities=["A Nest Of Noblemen"],
+            global_best_paths=[["A Nest Of Noblemen", "director", "work"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         payload = json.loads(llm.user_prompts[0])
         self.assertEqual(set(payload), {"original_question", "explicit_entities", "global_best_paths"})
-        self.assertEqual(payload["global_best_paths"], [["Johnny Majors", "defeated", "player", "born", "year"]])
+        self.assertEqual(payload["global_best_paths"], [["A Nest Of Noblemen", "director", "work"]])
 
     def test_empty_global_best_path_fails_before_llm_call(self) -> None:
-        llm = RecordingStep5LLM(_johnny_payload())
+        llm = RecordingStep5LLM(_a_nest_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Question?",
             explicit_entities=[],
@@ -136,7 +150,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(llm.user_prompts, [])
         self.assertIn("Step5 requires at least one non-empty global_best_paths entry.", result.validation_errors)
 
-    def test_old_actions_payload_is_rejected_for_path_aligned_step5(self) -> None:
+    def test_old_actions_payload_does_not_block_path_aligned_output(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "actions": [
@@ -150,159 +164,173 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             }
         )
 
-        self.assertFalse(result.valid)
-        self.assertIn("semantic_reasoning_paths must be a non-empty list.", result.validation_errors)
-        self.assertIn("atomic_questions must be a non-empty list.", result.validation_errors)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes, [])
+        self.assertEqual(result.validation_errors, [])
 
-    def test_v1_semantic_graph_schema_is_rejected_for_path_aligned_step5(self) -> None:
-        payload = {
-            "question_plan": {
-                "final_answer_intent": "find the birth year",
-                "final_answer_type": "date",
-                "must_preserve_constraints": [],
-            },
-            "semantic_reasoning_paths": [
-                {
-                    "branch_id": "p1",
-                    "source_token_path": ["Johnny Majors", "defeated", "player", "born", "year"],
-                    "semantic_nodes": [{"id": "p1_n1", "label": "Johnny Majors", "kind": "entity"}],
-                    "semantic_edges": [],
-                    "terminal_node_id": "p1_n1",
-                }
-            ],
-            "atomic_questions": [
-                {
-                    "id": "q1",
-                    "question": "Who defeated Johnny Majors?",
-                    "depends_on": [],
-                    "operation": "lookup",
-                    "support_step_ids": ["p1_s1"],
-                    "output_type": "person",
-                }
-            ],
-        }
+    def test_v2_reasoning_steps_schema_is_preserved_without_step6_validation(self) -> None:
+        result = validate_atomic_question_dag(_v2_reasoning_steps_payload())
 
-        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual([node.id for node in result.nodes], ["q1"])
+        self.assertEqual(result.nodes[0].support_step_ids, ("p1_s1",))
+        self.assertEqual(result.validation_errors, [])
 
-        self.assertFalse(result.valid)
-        joined = "; ".join(result.validation_errors)
-        self.assertIn("Step5 V2 uses reasoning_steps, not semantic_nodes/semantic_edges", joined)
-        self.assertIn("reasoning_steps must be a non-empty list", joined)
-
-    def test_invalid_dependencies_are_rejected(self) -> None:
+    def test_dependencies_are_not_validated_and_edges_are_still_derived(self) -> None:
         cases = [
-            ("future", ["q3"], "depends_on references non-previous node 'q3'"),
-            ("self", ["q1"], "depends_on references non-previous node 'q1'"),
-            ("unknown", ["qx"], "depends_on contains invalid dependency id 'qx'"),
+            ("future", "q2", ["q3"], {"source": "q3", "target": "q2"}),
+            ("self", "q1", ["q1"], {"source": "q1", "target": "q1"}),
+            ("unknown", "q1", ["qx"], {"source": "qx", "target": "q1"}),
         ]
-        for _, dependencies, expected in cases:
-            with self.subTest(expected=expected):
-                payload = _johnny_payload()
-                payload["atomic_questions"][0]["depends_on"] = dependencies
+        for _, question_id, dependencies, expected_edge in cases:
+            with self.subTest(expected_edge=expected_edge):
+                payload = _a_nest_payload()
+                index = int(question_id[1:]) - 1
+                payload["atomic_questions"][index]["depends_on"] = dependencies
                 result = validate_atomic_question_dag(payload)
-                self.assertFalse(result.valid)
-                self.assertIn(expected, "; ".join(result.validation_errors))
+                self.assertTrue(result.valid, result.validation_errors)
+                self.assertIn(expected_edge, [edge.to_dict() for edge in result.edges])
+                self.assertEqual(result.validation_errors, [])
 
-    def test_unresolved_entity_placeholder_in_question_is_rejected(self) -> None:
-        payload = _johnny_payload()
-        payload["atomic_questions"][0]["question"] = "Who defeated ENTITYA?"
+    def test_self_reference_and_missing_dependency_reference_are_preserved(self) -> None:
+        payload = _baby_i_payload()
+        payload["atomic_questions"][0]["question"] = "Who stars in the video 'One Last Time' by q1's answer?"
+
+        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].question, "Who stars in the video 'One Last Time' by q1's answer?")
+
+        payload = _baby_i_payload()
+        payload["atomic_questions"][1]["depends_on"] = []
+        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[1].depends_on, ())
+
+    def test_unresolved_entity_placeholders_are_preserved_without_step6_validation(self) -> None:
+        payload = _a_nest_payload()
+        payload["atomic_questions"][0]["question"] = "Who directed ENTITYA?"
+        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].question, "Who directed ENTITYA?")
+
+        payload = _a_nest_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_nodes"][0]["label"] = "ENTITYA"
+        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["semantic_reasoning_paths"][0]["semantic_nodes"][0]["label"], "ENTITYA")
+
+        payload = _a_nest_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["support_tokens"] = ["ENTITYA"]
+        result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["support_tokens"], ["ENTITYA"])
+
+    def test_evidence_tokens_outside_source_token_path_are_preserved(self) -> None:
+        payload = _a_nest_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_nodes"][0]["path_evidence"] = ["not-in-path"]
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["support_tokens"] = ["director", "film title from question"]
 
         result = validate_atomic_question_dag(payload)
 
-        self.assertFalse(result.valid)
-        self.assertIn("question contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.raw_payload["semantic_reasoning_paths"][0]["semantic_nodes"][0]["path_evidence"], ["not-in-path"])
 
-    def test_unresolved_entity_placeholder_in_semantic_path_is_rejected(self) -> None:
-        payload = _johnny_payload()
-        payload["semantic_reasoning_paths"][0]["reasoning_steps"][0]["output"] = "ENTITYA"
-
-        result = validate_atomic_question_dag(payload)
-
-        self.assertFalse(result.valid)
-        self.assertIn("output contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
-
-    def test_unresolved_entity_placeholder_in_path_evidence_is_rejected(self) -> None:
-        payload = _johnny_payload()
-        payload["semantic_reasoning_paths"][0]["reasoning_steps"][0]["path_evidence"] = ["ENTITYA"]
+    def test_braced_question_reference_is_preserved(self) -> None:
+        payload = _a_nest_payload()
+        payload["atomic_questions"][1]["question"] = "Where does {{q1}} work?"
 
         result = validate_atomic_question_dag(payload)
 
-        self.assertFalse(result.valid)
-        self.assertIn("path_evidence contains unresolved ENTITY placeholder", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[1].question, "Where does {{q1}} work?")
 
-    def test_path_evidence_must_be_copied_from_source_token_path(self) -> None:
-        payload = _johnny_payload()
-        payload["semantic_reasoning_paths"][0]["reasoning_steps"][0]["path_evidence"] = ["not-in-path"]
-
+    def test_semantic_edge_fields_are_not_validated(self) -> None:
+        payload = _a_nest_payload()
+        payload["atomic_questions"][0]["semantic_edge_ids"] = []
         result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].semantic_edge_ids, ())
 
-        self.assertFalse(result.valid)
-        self.assertIn("token not copied from source_token_path", "; ".join(result.validation_errors))
-
-    def test_braced_question_reference_is_rejected(self) -> None:
-        payload = _johnny_payload()
-        payload["atomic_questions"][1]["question"] = "What year was {{q1}} born?"
-
+        payload = _a_nest_payload()
+        payload["atomic_questions"][0]["semantic_edge_ids"] = ["p9_e1"]
         result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].semantic_edge_ids, ("p9_e1",))
 
-        self.assertFalse(result.valid)
-        self.assertIn("must use qN's answer references", "; ".join(result.validation_errors))
-
-    def test_unknown_support_step_id_is_rejected(self) -> None:
-        payload = _johnny_payload()
-        payload["atomic_questions"][0]["support_step_ids"] = ["p9_s1"]
-
+        payload = _a_nest_payload()
+        payload["atomic_questions"][0]["output_node_id"] = "p9_n1"
         result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].output_node_id, "p9_n1")
 
-        self.assertFalse(result.valid)
-        self.assertIn("unknown support_step_id 'p9_s1'", "; ".join(result.validation_errors))
-
-    def test_lookup_question_requires_support_step_id(self) -> None:
-        payload = _johnny_payload()
-        payload["atomic_questions"][0]["support_step_ids"] = []
-
+        payload = _a_nest_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["source"] = "p9_n1"
         result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["semantic_reasoning_paths"][0]["semantic_edges"][0]["source"], "p9_n1")
 
-        self.assertFalse(result.valid)
-        self.assertIn("lookup questions must include at least one support_step_id", "; ".join(result.validation_errors))
-
-    def test_path_grounded_step_requires_path_evidence(self) -> None:
-        payload = _johnny_payload()
-        payload["semantic_reasoning_paths"][0]["reasoning_steps"][0]["path_evidence"] = []
-
+        payload = _a_nest_payload()
+        payload["semantic_reasoning_paths"][0]["semantic_edges"][1]["condition_node_ids"] = ["p9_n1"]
         result = validate_atomic_question_dag(payload)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["semantic_reasoning_paths"][0]["semantic_edges"][1]["condition_node_ids"], ["p9_n1"])
 
-        self.assertFalse(result.valid)
-        self.assertIn("path_evidence may be empty only for question_only_required or operator", "; ".join(result.validation_errors))
-
-    def test_final_answer_type_mismatch_is_rejected(self) -> None:
-        payload = _johnny_payload()
+    def test_final_answer_type_mismatch_is_not_validated(self) -> None:
+        payload = _a_nest_payload()
         payload["question_plan"]["final_answer_type"] = "person"
 
         result = validate_atomic_question_dag(payload)
 
-        self.assertFalse(result.valid)
-        self.assertIn("final leaf output_type 'date' does not match question_plan.final_answer_type 'person'", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.raw_payload["question_plan"]["final_answer_type"], "person")
 
-    def test_bad_baby_i_token_path_relabeling_is_rejected(self) -> None:
-        result = validate_atomic_question_dag(_bad_baby_i_payload())
+    def test_fort_deposit_case_uses_county_answer_directly(self) -> None:
+        result = validate_atomic_question_dag(_fort_deposit_payload())
 
-        self.assertFalse(result.valid)
-        self.assertIn("likely token-path relabeling", "; ".join(result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(
+            [node.question for node in result.nodes],
+            ["What county is Fort Deposit located in?", "What is the capital of q1's answer?"],
+        )
+        self.assertNotIn("county of q1's answer", result.nodes[1].question)
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
 
-    def test_correct_baby_i_case_is_compressed_and_builds_expected_edge(self) -> None:
+    def test_baby_i_missing_path_semantics_case(self) -> None:
         result = validate_atomic_question_dag(
             _baby_i_payload(),
-            global_best_paths=[["Baby I", "performer", "One Last Time", "video", "stars", "Who"]],
+            global_best_paths=[["One Last Time", "video", "stars", "Who"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
-        steps = result.raw_payload["semantic_reasoning_paths"][0]["reasoning_steps"]
-        self.assertEqual(len(steps), 2)
-        self.assertEqual(steps[0]["path_evidence"], ["Baby I", "performer"])
-        self.assertEqual(steps[1]["known_inputs"], ["One Last Time", "p1_s1 output"])
-        self.assertEqual([node.question for node in result.nodes], ["Who is the performer of Baby I?", "Who stars in the video One Last Time by q1's answer?"])
+        path = result.raw_payload["semantic_reasoning_paths"][0]
+        self.assertEqual(path["semantic_edges"][0]["evidence_status"], "question_required")
+        self.assertEqual(path["semantic_edges"][1]["condition_node_ids"], ["p1_n2"])
+        self.assertEqual(
+            [node.question for node in result.nodes],
+            ["Who is the performer of Baby I?", "Who stars in the video 'One Last Time' by q1's answer?"],
+        )
         self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
+
+    def test_possessive_wh_case_preserves_possessor_semantics(self) -> None:
+        result = validate_atomic_question_dag(_possessive_wh_payload())
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(
+            [node.question for node in result.nodes],
+            ["Who played Susie in miracle on 34th street?", "Whose sister is q1's answer?"],
+        )
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
+
+        bad = _possessive_wh_payload()
+        bad["atomic_questions"][0]["question"] = "Who is the sister of the person who played Susie?"
+        self.assertTrue(validate_atomic_question_dag(bad).valid)
+
+    def test_bad_baby_i_token_path_relabeling_is_preserved_without_step6_validation(self) -> None:
+        result = validate_atomic_question_dag(_bad_baby_i_payload())
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.validation_errors, [])
 
     def test_comparison_case_generates_expected_edges(self) -> None:
         result = validate_atomic_question_dag(_parallel_nationality_payload())
@@ -456,346 +484,336 @@ class FakeOlderParser:
         )
 
 
-def _reasoning_path(
-    branch_id: str,
-    source_token_path: list[str],
-    steps: list[dict[str, Any]],
+def _plan(final_answer_intent: str, final_answer_type: str, constraints: list[str] | None = None, variables: list[str] | None = None) -> dict[str, Any]:
+    return {
+        "final_answer_intent": final_answer_intent,
+        "final_answer_type": final_answer_type,
+        "required_constraints": constraints or [],
+        "required_intermediate_variables": variables or [],
+    }
+
+
+def _node(
+    node_id: str,
+    label: str,
+    kind: str,
+    output_type: str,
+    origin: str,
+    path_evidence: list[str],
+    question_evidence: list[str],
 ) -> dict[str, Any]:
+    return {
+        "id": node_id,
+        "label": label,
+        "kind": kind,
+        "output_type": output_type,
+        "origin": origin,
+        "path_evidence": path_evidence,
+        "question_evidence": question_evidence,
+    }
+
+
+def _edge(
+    edge_id: str,
+    source: str,
+    target: str,
+    relation: str,
+    support_tokens: list[str],
+    question_evidence: list[str],
+    atomic_question_hint: str,
+    *,
+    condition_node_ids: list[str] | None = None,
+    edge_type: str = "lookup",
+    evidence_status: str = "path_grounded",
+) -> dict[str, Any]:
+    return {
+        "id": edge_id,
+        "source": source,
+        "target": target,
+        "condition_node_ids": condition_node_ids or [],
+        "relation": relation,
+        "edge_type": edge_type,
+        "evidence_status": evidence_status,
+        "support_tokens": support_tokens,
+        "question_evidence": question_evidence,
+        "atomic_question_hint": atomic_question_hint,
+    }
+
+
+def _path(branch_id: str, source_token_path: list[str], nodes: list[dict[str, Any]], edges: list[dict[str, Any]], terminal_node_id: str) -> dict[str, Any]:
     return {
         "branch_id": branch_id,
         "source_token_path": source_token_path,
-        "reasoning_steps": steps,
+        "semantic_nodes": nodes,
+        "semantic_edges": edges,
+        "terminal_node_id": terminal_node_id,
+        "folded_or_discarded_tokens": [],
     }
 
 
-def _johnny_payload() -> dict[str, Any]:
+def _question(
+    question_id: str,
+    text: str,
+    depends_on: list[str],
+    semantic_edge_ids: list[str],
+    output_node_id: str,
+    output_type: str,
+    operation: str = "lookup",
+) -> dict[str, Any]:
     return {
-        "question_plan": {
-            "final_answer_intent": "find the birth year of the player who defeated Johnny Majors",
-            "final_answer_type": "date",
-            "must_preserve_constraints": ["defeated Johnny Majors", "birth year"],
-        },
+        "id": question_id,
+        "question": text,
+        "depends_on": depends_on,
+        "operation": operation,
+        "semantic_edge_ids": semantic_edge_ids,
+        "output_node_id": output_node_id,
+        "output_type": output_type,
+    }
+
+
+def _a_nest_payload() -> dict[str, Any]:
+    return {
+        "question_plan": _plan(
+            "find where the director of A Nest Of Noblemen works",
+            "place",
+            ["director of film A Nest Of Noblemen"],
+            ["director of A Nest Of Noblemen", "workplace of director"],
+        ),
         "semantic_reasoning_paths": [
-            _reasoning_path(
+            _path(
                 "p1",
-                ["Johnny Majors", "defeated", "player", "born", "year"],
+                ["A Nest Of Noblemen", "director", "work"],
                 [
-                    {
-                        "id": "p1_s1",
-                        "path_evidence": ["Johnny Majors", "defeated", "player"],
-                        "question_evidence": ["player who defeated Johnny Majors"],
-                        "known_inputs": ["Johnny Majors"],
-                        "operation": "find the player who defeated Johnny Majors",
-                        "output": "player who defeated Johnny Majors",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p1_s2",
-                        "path_evidence": ["player", "born", "year"],
-                        "question_evidence": ["born in what year"],
-                        "known_inputs": ["p1_s1 output"],
-                        "operation": "find the birth year of the player found in p1_s1",
-                        "output": "birth year of player",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    _node("p1_n1", "A Nest Of Noblemen", "entity", "work", "explicit_entity", ["A Nest Of Noblemen"], ["A Nest Of Noblemen"]),
+                    _node("p1_n2", "director of A Nest Of Noblemen", "intermediate_variable", "person", "derived_variable", ["director"], ["director of film A Nest Of Noblemen"]),
+                    _node("p1_n3", "workplace of director", "value_slot", "place", "derived_variable", ["work"], ["Where does the director work at"]),
                 ],
+                [
+                    _edge("p1_e1", "p1_n1", "p1_n2", "director of film", ["A Nest Of Noblemen", "director"], ["director of film A Nest Of Noblemen"], "Who directed A Nest Of Noblemen?"),
+                    _edge("p1_e2", "p1_n2", "p1_n3", "works at", ["director", "work"], ["Where does the director work at"], "Where does the director work?"),
+                ],
+                "p1_n3",
             )
         ],
         "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "person",
-            },
-            {
-                "id": "q2",
-                "question": "What year was q1's answer born?",
-                "depends_on": ["q1"],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s2"],
-                "output_type": "date",
-            },
+            _question("q1", "Who directed A Nest Of Noblemen?", [], ["p1_e1"], "p1_n2", "person"),
+            _question("q2", "Where does q1's answer work?", ["q1"], ["p1_e2"], "p1_n3", "place"),
         ],
     }
 
 
-def _parallel_nationality_payload() -> dict[str, Any]:
+def _fort_deposit_payload() -> dict[str, Any]:
     return {
-        "question_plan": {
-            "final_answer_intent": "verify whether the two film directors share the same nationality",
-            "final_answer_type": "boolean",
-            "must_preserve_constraints": ["director of each film", "same nationality"],
-        },
+        "question_plan": _plan("find the capital of the county containing Fort Deposit", "place", ["Fort Deposit is located in the county"], ["county containing Fort Deposit"]),
         "semantic_reasoning_paths": [
-            _reasoning_path(
+            _path(
                 "p1",
-                ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
+                ["Fort Deposit", "located", "county", "capital"],
                 [
-                    {
-                        "id": "p1_s1",
-                        "path_evidence": ["Ten9Eight: Shoot For The Moon", "director"],
-                        "question_evidence": ["director of film Ten9Eight: Shoot For The Moon"],
-                        "known_inputs": ["Ten9Eight: Shoot For The Moon"],
-                        "operation": "find the director of the film Ten9Eight: Shoot For The Moon",
-                        "output": "director of Ten9Eight: Shoot For The Moon",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p1_s2",
-                        "path_evidence": ["director", "nationality"],
-                        "question_evidence": ["same nationality"],
-                        "known_inputs": ["p1_s1 output"],
-                        "operation": "find the nationality of the director found in p1_s1",
-                        "output": "nationality of first director",
-                        "output_type": "value",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    _node("p1_n1", "Fort Deposit", "entity", "place", "explicit_entity", ["Fort Deposit"], ["Fort Deposit"]),
+                    _node("p1_n2", "county containing Fort Deposit", "intermediate_variable", "place", "derived_variable", ["located", "county"], ["county where Fort Deposit is located"]),
+                    _node("p1_n3", "capital of county", "value_slot", "place", "derived_variable", ["capital"], ["capital of the county"]),
                 ],
-            ),
-            _reasoning_path(
-                "p2",
-                ["Sabotage (1936 Film)", "director", "nationality"],
                 [
-                    {
-                        "id": "p2_s1",
-                        "path_evidence": ["Sabotage (1936 Film)", "director"],
-                        "question_evidence": ["director of film Sabotage (1936 Film)"],
-                        "known_inputs": ["Sabotage (1936 Film)"],
-                        "operation": "find the director of the film Sabotage (1936 Film)",
-                        "output": "director of Sabotage (1936 Film)",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p2_s2",
-                        "path_evidence": ["director", "nationality"],
-                        "question_evidence": ["same nationality"],
-                        "known_inputs": ["p2_s1 output"],
-                        "operation": "find the nationality of the director found in p2_s1",
-                        "output": "nationality of second director",
-                        "output_type": "value",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    _edge("p1_e1", "p1_n1", "p1_n2", "located in county", ["Fort Deposit", "located", "county"], ["county where Fort Deposit is located"], "What county is Fort Deposit located in?"),
+                    _edge("p1_e2", "p1_n2", "p1_n3", "capital of county", ["county", "capital"], ["capital of the county"], "What is the capital of the county?"),
                 ],
-            ),
-        ],
-        "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "Who directed Ten9Eight: Shoot For The Moon?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "person",
-            },
-            {
-                "id": "q2",
-                "question": "What is the nationality of q1's answer?",
-                "depends_on": ["q1"],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s2"],
-                "output_type": "value",
-            },
-            {
-                "id": "q3",
-                "question": "Who directed Sabotage (1936 Film)?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s1"],
-                "output_type": "person",
-            },
-            {
-                "id": "q4",
-                "question": "What is the nationality of q3's answer?",
-                "depends_on": ["q3"],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s2"],
-                "output_type": "value",
-            },
-            {
-                "id": "q5",
-                "question": "Do q2's answer and q4's answer indicate that the two directors share the same nationality?",
-                "depends_on": ["q2", "q4"],
-                "operation": "verify",
-                "support_step_ids": [],
-                "output_type": "boolean",
-            },
-        ],
-    }
-
-
-def _older_payload() -> dict[str, Any]:
-    return {
-        "question_plan": {
-            "final_answer_intent": "select which person is older",
-            "final_answer_type": "person",
-            "must_preserve_constraints": ["older comparison between Ryan Tubridy and Mauro Massironi"],
-        },
-        "semantic_reasoning_paths": [
-            _reasoning_path(
-                "p1",
-                ["Mauro Massironi", "older", "Ryan Tubridy"],
-                [
-                    {
-                        "id": "p1_s1",
-                        "path_evidence": ["Ryan Tubridy", "older"],
-                        "question_evidence": ["Ryan Tubridy", "older"],
-                        "known_inputs": ["Ryan Tubridy"],
-                        "operation": "find the birth date needed for an older-person comparison",
-                        "output": "birth date of Ryan Tubridy",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    }
-                ],
-            ),
-            _reasoning_path(
-                "p2",
-                ["Mauro Massironi", "older", "Ryan Tubridy"],
-                [
-                    {
-                        "id": "p2_s1",
-                        "path_evidence": ["Mauro Massironi", "older"],
-                        "question_evidence": ["Mauro Massironi", "older"],
-                        "known_inputs": ["Mauro Massironi"],
-                        "operation": "find the birth date needed for an older-person comparison",
-                        "output": "birth date of Mauro Massironi",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    }
-                ],
-            ),
-        ],
-        "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "When was Ryan Tubridy born?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "date",
-            },
-            {
-                "id": "q2",
-                "question": "When was Mauro Massironi born?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s1"],
-                "output_type": "date",
-            },
-        ],
-    }
-
-
-def _bad_baby_i_payload() -> dict[str, Any]:
-    source_path = ["Baby I", "performer", "One Last Time", "video", "stars", "Who"]
-    outputs = ["performer", "One Last Time", "video", "stars", "Who"]
-    return {
-        "question_plan": {
-            "final_answer_intent": "find who stars in the video One Last Time by the performer of Baby I",
-            "final_answer_type": "person",
-            "must_preserve_constraints": ["One Last Time", "performer of Baby I"],
-        },
-        "semantic_reasoning_paths": [
-            _reasoning_path(
-                "p1",
-                source_path,
-                [
-                    {
-                        "id": f"p1_s{index}",
-                        "path_evidence": [output],
-                        "question_evidence": [output],
-                        "known_inputs": ["Baby I"] if index == 1 else [f"p1_s{index - 1} output"],
-                        "operation": f"find {output}",
-                        "output": output,
-                        "output_type": "person" if output in {"performer", "Who"} else "value",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    }
-                    for index, output in enumerate(outputs, start=1)
-                ],
+                "p1_n3",
             )
         ],
         "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "Who is the performer of Baby I?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "person",
-            }
+            _question("q1", "What county is Fort Deposit located in?", [], ["p1_e1"], "p1_n2", "place"),
+            _question("q2", "What is the capital of q1's answer?", ["q1"], ["p1_e2"], "p1_n3", "place"),
         ],
     }
 
 
 def _baby_i_payload() -> dict[str, Any]:
     return {
-        "question_plan": {
-            "final_answer_intent": "find who stars in the video One Last Time by the performer of Baby I",
-            "final_answer_type": "person",
-            "must_preserve_constraints": ["One Last Time", "performer of Baby I"],
-        },
+        "question_plan": _plan("find who stars in the video 'One Last Time' by the performer of Baby I", "person", ["video 'One Last Time'", "performer of Baby I"], ["performer of Baby I"]),
         "semantic_reasoning_paths": [
-            _reasoning_path(
+            _path(
                 "p1",
-                ["Baby I", "performer", "One Last Time", "video", "stars", "Who"],
+                ["One Last Time", "video", "stars", "Who"],
                 [
+                    _node("p1_n1", "Baby I", "entity", "work", "question_required", [], ["Baby I"]),
+                    _node("p1_n2", "performer of Baby I", "intermediate_variable", "person", "question_required", [], ["performer of Baby I"]),
+                    _node("p1_n3", "video 'One Last Time'", "entity", "work", "explicit_entity", ["One Last Time", "video"], ["video 'One Last Time'"]),
+                    _node("p1_n4", "person who stars in the video", "answer_slot", "person", "derived_variable", ["stars", "Who"], ["Who stars in the video"]),
+                ],
+                [
+                    _edge("p1_e1", "p1_n1", "p1_n2", "performer of song", [], ["performer of Baby I"], "Who is the performer of Baby I?", evidence_status="question_required"),
+                    _edge(
+                        "p1_e2",
+                        "p1_n3",
+                        "p1_n4",
+                        "stars in video constrained by performer",
+                        ["One Last Time", "video", "stars"],
+                        ["Who stars in the video 'One Last Time' by the performer of Baby I"],
+                        "Who stars in the video 'One Last Time' by the performer?",
+                        condition_node_ids=["p1_n2"],
+                        evidence_status="mixed",
+                    ),
+                ],
+                "p1_n4",
+            )
+        ],
+        "atomic_questions": [
+            _question("q1", "Who is the performer of Baby I?", [], ["p1_e1"], "p1_n2", "person"),
+            _question("q2", "Who stars in the video 'One Last Time' by q1's answer?", ["q1"], ["p1_e2"], "p1_n4", "person"),
+        ],
+    }
+
+
+def _possessive_wh_payload() -> dict[str, Any]:
+    return {
+        "question_plan": _plan("find whose sister played Susie in miracle on 34th street", "person", ["played Susie", "miracle on 34th street"], ["actor who played Susie"]),
+        "semantic_reasoning_paths": [
+            _path(
+                "p1",
+                ["Whose", "sister", "played", "Susie"],
+                [
+                    _node("p1_n1", "Susie in miracle on 34th street", "entity", "value", "question_required", ["Susie"], ["Susie in miracle on 34th street"]),
+                    _node("p1_n2", "actor who played Susie", "intermediate_variable", "person", "derived_variable", ["played", "Susie"], ["played Susie in miracle on 34th street"]),
+                    _node("p1_n3", "person whose sister is the actor", "answer_slot", "person", "derived_variable", ["Whose", "sister"], ["Whose sister"]),
+                ],
+                [
+                    _edge("p1_e1", "p1_n1", "p1_n2", "played by in work", ["played", "Susie"], ["played Susie in miracle on 34th street"], "Who played Susie in miracle on 34th street?", evidence_status="mixed"),
+                    _edge("p1_e2", "p1_n2", "p1_n3", "is sister of whose person", ["Whose", "sister"], ["Whose sister"], "Whose sister is the actor?"),
+                ],
+                "p1_n3",
+            )
+        ],
+        "atomic_questions": [
+            _question("q1", "Who played Susie in miracle on 34th street?", [], ["p1_e1"], "p1_n2", "person"),
+            _question("q2", "Whose sister is q1's answer?", ["q1"], ["p1_e2"], "p1_n3", "person"),
+        ],
+    }
+
+
+def _bad_baby_i_payload() -> dict[str, Any]:
+    source_path = ["Baby I", "performer", "One Last Time", "video", "stars", "Who"]
+    nodes = [
+        _node(f"p1_n{index}", token, "intermediate_variable", "value", "path_evidence", [token], [token])
+        for index, token in enumerate(source_path, start=1)
+    ]
+    edges = [
+        _edge(f"p1_e{index}", f"p1_n{index}", f"p1_n{index + 1}", "related to", [source_path[index - 1], source_path[index]], [source_path[index]], "What is related?")
+        for index in range(1, len(source_path))
+    ]
+    return {
+        "question_plan": _plan("find who stars in the video One Last Time by the performer of Baby I", "person", ["One Last Time", "performer of Baby I"], []),
+        "semantic_reasoning_paths": [_path("p1", source_path, nodes, edges, "p1_n6")],
+        "atomic_questions": [_question("q1", "Who is the performer of Baby I?", [], ["p1_e1"], "p1_n2", "person")],
+    }
+
+
+def _parallel_nationality_payload() -> dict[str, Any]:
+    return {
+        "question_plan": _plan("verify whether the two film directors share the same nationality", "boolean", ["same nationality", "director of each film"], ["director of each film", "nationality of each director"]),
+        "semantic_reasoning_paths": [
+            _path(
+                "p1",
+                ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
+                [
+                    _node("p1_n1", "Ten9Eight: Shoot For The Moon", "entity", "work", "explicit_entity", ["Ten9Eight: Shoot For The Moon"], ["Ten9Eight: Shoot For The Moon"]),
+                    _node("p1_n2", "director of Ten9Eight: Shoot For The Moon", "intermediate_variable", "person", "derived_variable", ["director"], ["director of film Ten9Eight: Shoot For The Moon"]),
+                    _node("p1_n3", "nationality of first director", "value_slot", "value", "derived_variable", ["nationality"], ["same nationality"]),
+                ],
+                [
+                    _edge("p1_e1", "p1_n1", "p1_n2", "director of film", ["Ten9Eight: Shoot For The Moon", "director"], ["director of film Ten9Eight: Shoot For The Moon"], "Who directed Ten9Eight: Shoot For The Moon?"),
+                    _edge("p1_e2", "p1_n2", "p1_n3", "nationality of director", ["director", "nationality"], ["same nationality"], "What is the nationality of the director?"),
+                ],
+                "p1_n3",
+            ),
+            _path(
+                "p2",
+                ["Sabotage (1936 Film)", "director", "nationality"],
+                [
+                    _node("p2_n1", "Sabotage (1936 Film)", "entity", "work", "explicit_entity", ["Sabotage (1936 Film)"], ["Sabotage (1936 Film)"]),
+                    _node("p2_n2", "director of Sabotage (1936 Film)", "intermediate_variable", "person", "derived_variable", ["director"], ["director of film Sabotage (1936 Film)"]),
+                    _node("p2_n3", "nationality of second director", "value_slot", "value", "derived_variable", ["nationality"], ["same nationality"]),
+                ],
+                [
+                    _edge("p2_e1", "p2_n1", "p2_n2", "director of film", ["Sabotage (1936 Film)", "director"], ["director of film Sabotage (1936 Film)"], "Who directed Sabotage (1936 Film)?"),
+                    _edge("p2_e2", "p2_n2", "p2_n3", "nationality of director", ["director", "nationality"], ["same nationality"], "What is the nationality of the director?"),
+                ],
+                "p2_n3",
+            ),
+        ],
+        "atomic_questions": [
+            _question("q1", "Who directed Ten9Eight: Shoot For The Moon?", [], ["p1_e1"], "p1_n2", "person"),
+            _question("q2", "What is the nationality of q1's answer?", ["q1"], ["p1_e2"], "p1_n3", "value"),
+            _question("q3", "Who directed Sabotage (1936 Film)?", [], ["p2_e1"], "p2_n2", "person"),
+            _question("q4", "What is the nationality of q3's answer?", ["q3"], ["p2_e2"], "p2_n3", "value"),
+            _question("q5", "Do q2's answer and q4's answer indicate that the two directors share the same nationality?", ["q2", "q4"], [], "", "boolean", "verify"),
+        ],
+    }
+
+
+def _older_payload() -> dict[str, Any]:
+    return {
+        "question_plan": _plan("select which person is older", "person", ["older comparison between Ryan Tubridy and Mauro Massironi"], ["birth date of Ryan Tubridy", "birth date of Mauro Massironi"]),
+        "semantic_reasoning_paths": [
+            _path(
+                "p1",
+                ["Mauro Massironi", "older", "Ryan Tubridy"],
+                [
+                    _node("p1_n1", "Ryan Tubridy", "entity", "person", "explicit_entity", ["Ryan Tubridy"], ["Ryan Tubridy"]),
+                    _node("p1_n2", "birth date of Ryan Tubridy", "value_slot", "date", "derived_variable", ["older"], ["older"]),
+                ],
+                [_edge("p1_e1", "p1_n1", "p1_n2", "birth date for older comparison", ["Ryan Tubridy", "older"], ["Ryan Tubridy", "older"], "When was Ryan Tubridy born?")],
+                "p1_n2",
+            ),
+            _path(
+                "p2",
+                ["Mauro Massironi", "older", "Ryan Tubridy"],
+                [
+                    _node("p2_n1", "Mauro Massironi", "entity", "person", "explicit_entity", ["Mauro Massironi"], ["Mauro Massironi"]),
+                    _node("p2_n2", "birth date of Mauro Massironi", "value_slot", "date", "derived_variable", ["older"], ["older"]),
+                ],
+                [_edge("p2_e1", "p2_n1", "p2_n2", "birth date for older comparison", ["Mauro Massironi", "older"], ["Mauro Massironi", "older"], "When was Mauro Massironi born?")],
+                "p2_n2",
+            ),
+        ],
+        "atomic_questions": [
+            _question("q1", "When was Ryan Tubridy born?", [], ["p1_e1"], "p1_n2", "date"),
+            _question("q2", "When was Mauro Massironi born?", [], ["p2_e1"], "p2_n2", "date"),
+        ],
+    }
+
+
+def _v2_reasoning_steps_payload() -> dict[str, Any]:
+    return {
+        "question_plan": _plan("find where the director works", "place", [], []),
+        "semantic_reasoning_paths": [
+            {
+                "branch_id": "p1",
+                "source_token_path": ["A Nest Of Noblemen", "director", "work"],
+                "reasoning_steps": [
                     {
                         "id": "p1_s1",
-                        "path_evidence": ["Baby I", "performer"],
-                        "question_evidence": ["performer of Baby I"],
-                        "known_inputs": ["Baby I"],
-                        "operation": "find the performer of the song Baby I",
-                        "output": "performer of Baby I",
+                        "path_evidence": ["A Nest Of Noblemen", "director"],
+                        "question_evidence": ["director of film A Nest Of Noblemen"],
+                        "known_inputs": ["A Nest Of Noblemen"],
+                        "operation": "find director",
+                        "output": "director",
                         "output_type": "person",
                         "step_type": "lookup",
                         "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p1_s2",
-                        "path_evidence": ["One Last Time", "video", "stars"],
-                        "question_evidence": ["stars in the video One Last Time by the performer of Baby I"],
-                        "known_inputs": ["One Last Time", "p1_s1 output"],
-                        "operation": "find who stars in the video One Last Time by the performer found in p1_s1",
-                        "output": "person who stars in the video One Last Time",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    }
                 ],
-            )
+            }
         ],
         "atomic_questions": [
             {
                 "id": "q1",
-                "question": "Who is the performer of Baby I?",
+                "question": "Who directed A Nest Of Noblemen?",
                 "depends_on": [],
                 "operation": "lookup",
                 "support_step_ids": ["p1_s1"],
                 "output_type": "person",
-            },
-            {
-                "id": "q2",
-                "question": "Who stars in the video One Last Time by q1's answer?",
-                "depends_on": ["q1"],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s2"],
-                "output_type": "person",
-            },
+            }
         ],
     }
 

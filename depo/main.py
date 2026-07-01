@@ -318,6 +318,12 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     for node in atomic_question_dag.nodes:
         print(f"{node.id}: {node.question}")
         print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
+        semantic_edge_ids = getattr(node, "semantic_edge_ids", ()) or ()
+        output_node_id = getattr(node, "output_node_id", "") or ""
+        if semantic_edge_ids:
+            print(f"  semantic_edge_ids: {', '.join(semantic_edge_ids)}")
+        if output_node_id:
+            print(f"  output_node_id: {output_node_id}")
         print()
 
 
@@ -333,20 +339,33 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
         branch_id = path.get("branch_id") or "(unknown)"
         source_path = path.get("source_token_path") or []
         print(f"{branch_id}: {' ---- '.join(str(token) for token in source_path)}")
-        for step in path.get("reasoning_steps") or []:
-            if not isinstance(step, dict):
+        nodes = path.get("semantic_nodes") or []
+        if nodes:
+            print("  nodes:")
+        for node in nodes:
+            if not isinstance(node, dict):
                 continue
-            step_id = step.get("id") or ""
-            known_inputs = step.get("known_inputs") or []
-            operation = step.get("operation") or ""
-            output = step.get("output") or ""
-            path_evidence = step.get("path_evidence") or []
-            output_type = step.get("output_type") or ""
-            step_type = step.get("step_type") or ""
-            evidence_status = step.get("evidence_status") or ""
-            print(f"  {step_id}: {', '.join(str(item) for item in known_inputs) or '(none)'} -> {operation} -> {output}")
-            print(f"    evidence: {', '.join(str(token) for token in path_evidence) if path_evidence else '(none)'}")
-            print(f"    type: {output_type} / {step_type} / {evidence_status}")
+            node_id = node.get("id") or ""
+            label = node.get("label") or ""
+            print(f"    {node_id}: {label}")
+        edges = path.get("semantic_edges") or []
+        if edges:
+            print("  edges:")
+        for edge in edges:
+            if not isinstance(edge, dict):
+                continue
+            edge_id = edge.get("id") or ""
+            source = edge.get("source") or ""
+            target = edge.get("target") or ""
+            relation = edge.get("relation") or ""
+            condition_node_ids = edge.get("condition_node_ids") or []
+            evidence_status = edge.get("evidence_status") or ""
+            support_tokens = edge.get("support_tokens") or []
+            print(f"    {edge_id}: {source} --{relation}--> {target}")
+            if condition_node_ids:
+                print(f"      condition_node_ids: {', '.join(str(item) for item in condition_node_ids)}")
+            print(f"      evidence_status: {evidence_status}")
+            print(f"      support_tokens: {', '.join(str(token) for token in support_tokens) if support_tokens else '(none)'}")
 
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:

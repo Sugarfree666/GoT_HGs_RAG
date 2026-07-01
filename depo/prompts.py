@@ -140,13 +140,13 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = """
-You are DEPO Step 5: Conservative Semantic Reasoning Step Induction and Atomic Question DAG Generation.
+You are DEPO Step 5: Semantic Reasoning Path Induction and Atomic Question DAG Generation.
 
 Your task is to combine:
 1. the original question's semantics and constraints, and
 2. parser-grounded token-level path evidence,
 
-to produce a compressed executable semantic reasoning structure and then an Atomic Question DAG.
+to produce true semantic reasoning paths and then an Atomic Question DAG.
 
 Do not answer the original question.
 Do not use external knowledge.
@@ -160,174 +160,361 @@ You are given exactly:
 Do not assume any other input.
 
 ============================================================
-What the inputs mean
+Core idea
 ============================================================
 
-original_question is the semantic authority.
-It tells you the final answer intent, expected answer type, constraints, modifier attachment, operators, and comparison/selection logic.
+The original question provides:
+- final answer intent;
+- expected answer type;
+- explicit entities;
+- intermediate variables;
+- constraints;
+- modifier attachment;
+- comparison, selection, verification, aggregation, and superlative logic.
 
-global_best_paths are parser-grounded token paths.
-They provide structural evidence, but they are not semantic reasoning paths.
-
-A token path may contain:
-- useful entity anchors;
+The token paths provide:
+- parser-grounded token-level structural evidence;
+- useful anchor tokens;
 - useful relation cues;
-- useful constraint cues;
-- useful operator cues;
-- but also grammatical tokens, wh words, predicate wording, prepositions, attachment artifacts, direction ambiguity, and noisy parser artifacts.
+- useful constraint/operator cues.
 
-Your job is not to copy the token path.
-Your job is to semantically compress it into minimal executable reasoning steps.
+A token path is NOT a semantic reasoning path.
+
+Your job is:
+
+token path
++ original question semantics
+->
+semantic reasoning path
+->
+atomic question DAG
+
+============================================================
+What is a semantic reasoning path?
+============================================================
+
+A semantic reasoning path is a directed object-relation structure.
+
+It contains:
+
+1. Semantic nodes:
+   Meaning-bearing reasoning objects.
+
+2. Semantic edges:
+   Executable semantic relations between those objects.
+
+A semantic node is not a token.
+A semantic edge is not a dependency edge.
+
+A semantic node should represent one of:
+- an explicit known entity;
+- an intermediate variable to be found;
+- a requested value slot;
+- a necessary constraint;
+- an operator;
+- a final answer slot.
+
+A semantic edge should represent one executable relation or operation, such as:
+- identify a variable from a known entity;
+- retrieve a value of a resolved variable;
+- apply a constraint;
+- compare two values;
+- select an item;
+- verify a condition;
+- intersect or aggregate branch results.
+
+Each lookup semantic edge should be convertible into exactly one atomic question.
+
+Example:
+
+Original question:
+Where does the director of film A Nest Of Noblemen work at?
+
+Token path:
+A Nest Of Noblemen ---- director ---- work
+
+Correct semantic reasoning path:
+A Nest Of Noblemen
+  ---director of film--->
+director
+  ---works at--->
+workplace
+
+Atomic questions:
+q1: Who directed A Nest Of Noblemen?
+q2: Where does q1's answer work?
+
+This is correct because:
+- "A Nest Of Noblemen" is a known entity node.
+- "director" is an intermediate variable node.
+- "workplace" is a value/answer slot node.
+- "director of film" is one executable lookup edge.
+- "works at" is one executable lookup edge.
 
 ============================================================
 Critical anti-relabeling rule
 ============================================================
 
-Do NOT create one semantic unit for each token in source_token_path.
+Do NOT create one semantic node for each token in source_token_path.
 
-Do NOT preserve the token path as a node chain.
+Do NOT preserve the token path as a semantic node chain.
 
 Do NOT merely add relation labels between adjacent path tokens.
 
-The following is bad:
-source_token_path:
-A ---- token1 ---- token2 ---- token3 ---- Who
+Bad:
 
-bad semantic structure:
-A --relation--> token1 --relation--> token2 --relation--> token3 --relation--> Who
+source_token_path:
+Baby I ---- performer ---- One Last Time ---- video ---- stars ---- Who
+
+bad semantic path:
+Baby I
+  --performer of song-->
+performer
+  --performed in-->
+One Last Time
+  --video of song-->
+video
+  --stars in video-->
+Who
 
 This is token-path relabeling, not semantic reasoning.
 
-A semantic reasoning step may use multiple tokens as evidence, skip tokens, merge tokens, or reverse direction when the original question licenses it.
+Correct behavior:
+Use the original question to identify the true semantic objects and relations.
 
-The number of semantic reasoning steps is usually smaller than the number of tokens in the source token path.
+For:
+Who stars in the video 'One Last Time' by the performer of Baby I?
 
-============================================================
-What is a semantic reasoning step?
-============================================================
-
-A semantic reasoning step is one minimal executable operation needed to answer the original question.
-
-Each step must have:
-- known input(s);
-- an operation;
-- exactly one newly resolved output, unless it is a final operator step;
-- path evidence when available;
-- question evidence from the original question.
-
-A good semantic reasoning step looks like:
-
-known input:
+A better semantic path is:
 Baby I
-
-operation:
-find the performer of the song
-
-output:
+  --performer of song-->
 performer of Baby I
-
-This can become:
-Who is the performer of Baby I?
-
-Another good step:
-
-known input:
-One Last Time and q1's answer
-
-operation:
-find who stars in the video for One Last Time by q1's answer
-
-output:
+One Last Time video, constrained by performer of Baby I
+  --stars in video-->
 person who stars in the video
 
-This can become:
-Who stars in the video for One Last Time by q1's answer?
+This yields:
+q1: Who is the performer of Baby I?
+q2: Who stars in the video 'One Last Time' by q1's answer?
+
+If a required relation is missing from global_best_paths but present in original_question, include it as question_required evidence.
 
 ============================================================
-How to induce semantic reasoning steps
+How to convert token paths into semantic reasoning paths
 ============================================================
 
-First analyze original_question.
+First derive a question-level semantic plan from original_question.
 
 Identify:
 1. final_answer_intent:
    What is the original question ultimately asking for?
 
 2. final_answer_type:
-   Is the final answer a person, place, organization, work, event, date, number, boolean, value, set, or unknown?
+   person, place, organization, work, event, date, number, boolean, value, set, or unknown.
 
-3. explicit known anchors:
-   Entities explicitly given in the question.
+3. required intermediate variables:
+   What unknown entities or values must be resolved before the final answer?
 
-4. intermediate variables:
-   Entities or values that must be found before the final answer can be obtained.
+4. required constraints:
+   Which modifiers, relative clauses, appositions, titles, locations, dates, superlatives, or prepositional phrases restrict the answer?
 
-5. constraints:
-   Modifiers, relative clauses, temporal restrictions, location restrictions, superlative conditions, appositions, and other restrictions.
+5. required operators:
+   same/different, comparison, ordering, selection, verification, intersection, aggregation, superlative, etc.
 
-6. operators:
-   equality, difference, comparison, ordering, selection, verification, intersection, aggregation, or superlative choice.
-
-Then use global_best_paths as structural evidence.
+Then align global_best_paths to this plan.
 
 For each path:
-- align useful path tokens to the semantic units above;
-- decide which spans are evidence for each reasoning step;
-- do not make a token into a step output unless it represents a necessary variable or value;
-- fold grammatical material into the operation text;
-- recover the correct information-flow direction from original_question.
+- use path tokens as evidence;
+- do not copy them as nodes;
+- decide which path tokens are semantic objects;
+- decide which path tokens are relation cues;
+- decide which path tokens are constraints/operators;
+- fold grammatical tokens into relations or discard them;
+- correct path direction using original_question information flow.
 
-Reasoning direction should follow information flow:
-known anchor -> unresolved intermediate variable -> requested value -> final operator
+Reasoning direction should follow:
 
-Path order alone is not reasoning direction.
+known entity
+-> intermediate variable
+-> requested value slot
+-> final operator / final answer
+
+Path order alone is not semantic direction.
 
 ============================================================
-When to create a step
+Semantic node rules
 ============================================================
 
-Create a reasoning step only if it is necessary.
+Create a semantic node only if it is required for reasoning.
 
-A step is necessary if removing it would change:
-- what is being asked;
-- which entity is being queried;
-- which constraint is preserved;
-- which intermediate answer is needed;
-- which final operator is performed;
-- or the expected final answer type.
+A node is required if removing it would change:
+- the entity being queried;
+- the intermediate variable to resolve;
+- the value being retrieved;
+- the constraint being preserved;
+- the final answer type;
+- or the operator being applied.
 
-Do not create steps for:
-- pure grammatical material;
-- wh-word surface form;
+Do not create semantic nodes for:
+- pure grammar;
 - punctuation;
-- a token that only expresses syntax;
-- a token that is merely a relation cue already absorbed into the operation;
-- a dangling branch that will not be used.
+- wh surface words as ordinary objects;
+- auxiliary verbs;
+- prepositions by themselves;
+- path tokens that only function as relation cues;
+- parser artifacts.
+
+A wh word can influence final_answer_intent or final_answer_type, but it should not normally become a semantic node.
+
+A surface predicate can become:
+- a semantic relation;
+- a value slot;
+- a constraint;
+- or an operator,
+but it should not automatically become a semantic node.
 
 ============================================================
-Atomic question generation
+Semantic edge rules
 ============================================================
 
-Generate atomic questions from reasoning steps.
+Each semantic edge must:
+1. connect semantic object nodes;
+2. express a specific executable relation or operation;
+3. introduce at most one new unresolved target;
+4. preserve relevant constraints;
+5. be supported by source_token_path, original_question, or both;
+6. be convertible into one atomic question if it is a lookup edge.
+
+Use condition_node_ids when an edge requires an additional already-known or previously-resolved constraint.
+
+Example:
+For "video One Last Time by the performer of Baby I":
+
+Node A: One Last Time video
+Node B: performer of Baby I
+Node C: person who stars in the video
+
+Edge:
+source = Node A
+condition_node_ids = [Node B]
+target = Node C
+relation = "stars in video constrained by performer"
+atomic question = "Who stars in the video 'One Last Time' by q1's answer?"
+
+============================================================
+Question-required semantics
+============================================================
+
+global_best_paths may omit necessary semantics from original_question.
+
+Do not drop missing required semantics.
+
+If a necessary variable or constraint appears in original_question but not in source_token_path:
+- create a semantic node with origin = "question_required";
+- create an edge with evidence_status = "question_required" or "mixed";
+- use support_tokens = [] when no source_token_path token supports it;
+- include question_evidence from original_question.
+
+Example:
+If global_best_path is:
+One Last Time ---- video ---- stars ---- Who
+
+but original_question is:
+Who stars in the video 'One Last Time' by the performer of Baby I?
+
+Then "performer of Baby I" is required even though it is missing from the path.
+Create a question_required edge:
+Baby I -> performer of Baby I
+
+============================================================
+Atomic Question DAG generation
+============================================================
+
+Generate atomic questions from semantic edges.
 
 Rules:
-1. Each lookup atomic question should correspond to one reasoning step.
+1. Each lookup atomic question should correspond to one semantic edge.
 2. Each lookup atomic question asks for exactly one missing answer.
 3. Do not ask multi-hop questions.
 4. Do not merge two unresolved variables into one question.
-5. If a question depends on a previous answer, refer to it naturally as q1's answer, q2's answer, etc.
+5. If a question depends on a previous answer, its question text must explicitly mention every dependency as q1's answer, q2's answer, etc.
 6. Do not use braced placeholders such as {{q1}}.
 7. Do not leave unresolved ENTITY placeholders.
 8. Preserve exact entity surface forms from original_question.
-9. Preserve final answer intent.
-10. Do not generate useless dangling questions.
-11. Every depends_on id must refer to a previous q id.
-12. The final leaf question(s) must match the original question's final_answer_intent.
+9. Preserve all constraints.
+10. Preserve final answer intent and final answer type.
+11. Every depends_on id must refer only to a previous q id.
+12. The final leaf question must match final_answer_intent.
+13. Do not add a follow-up question that merely restates or generalizes the answer already produced by its dependency.
 
 For operator questions:
-- generate lookup questions first;
-- then generate compare/select/verify/intersect/aggregate questions;
-- operator questions may have support_step_ids = [] if they only combine previous answers.
+- generate lookup branches first;
+- then generate final compare/select/verify/intersect/aggregate question;
+- operator questions may have semantic_edge_ids = [] only if they combine previous answers and do not require new retrieval.
+
+============================================================
+Dependency and reference rules
+============================================================
+
+If a question text mentions qN's answer:
+- N must be smaller than the current question id.
+- qN must appear in depends_on.
+
+If depends_on contains qN:
+- the question text must explicitly mention qN's answer.
+- every dependency in depends_on must be mentioned exactly as qN's answer.
+- do not write a dependent question that can be read without the dependency.
+
+A question must never refer to its own answer.
+Bad:
+q1: Who stars in the video 'One Last Time' by q1's answer?
+
+Correct:
+q1: Who is the performer of Baby I?
+q2: Who stars in the video 'One Last Time' by q1's answer?
+
+When qN's answer already has the needed semantic type, do not wrap it in another noun phrase that duplicates or changes its type.
+
+Bad:
+q2: What is the capital of the county of q1's answer?
+when q1's answer is already a county.
+
+Good:
+q2: What is the capital of q1's answer?
+
+Avoid dangling generic follow-up questions.
+Bad:
+q1: Which city shares a county with Helvetia?
+q2: How long are the council terms of q1's answer?
+q3: What is the length of council terms?
+
+Correct:
+q1: Which city shares a county with Helvetia?
+q2: How long are the council terms of q1's answer?
+
+============================================================
+Possessive-WH rule
+============================================================
+
+For questions of the form "Whose X ...?", the final answer is the possessor/associated entity of X, not X itself.
+
+Do not convert:
+Whose sister played Susie in miracle on 34th street?
+
+into:
+Who is the sister of the person who played Susie?
+
+Correct decomposition:
+q1: Who played Susie in miracle on 34th street?
+q2: Whose sister is q1's answer?
+
+The semantic path should represent:
+Susie + miracle on 34th street
+  --played by in work-->
+actor
+actor
+  --is sister of whose person-->
+possessor / final answer
 
 ============================================================
 Output schema
@@ -339,23 +526,43 @@ Return exactly one JSON object:
   "question_plan": {
     "final_answer_intent": "what the original question ultimately asks",
     "final_answer_type": "person | place | organization | work | event | date | number | boolean | value | set | unknown",
-    "must_preserve_constraints": ["constraint phrase or description"]
+    "required_constraints": ["constraint phrase or description"],
+    "required_intermediate_variables": ["intermediate variable description"]
   },
   "semantic_reasoning_paths": [
     {
       "branch_id": "p1",
       "source_token_path": ["token copied from global_best_paths"],
-      "reasoning_steps": [
+      "semantic_nodes": [
         {
-          "id": "p1_s1",
-          "path_evidence": ["tokens copied from source_token_path"],
-          "question_evidence": ["short phrase(s) from original_question supporting the step"],
-          "known_inputs": ["known entity or previous step output"],
-          "operation": "minimal executable semantic operation",
-          "output": "one newly resolved variable or value",
+          "id": "p1_n1",
+          "label": "semantic object label",
+          "kind": "entity | intermediate_variable | value_slot | constraint | operator | answer_slot",
           "output_type": "entity | person | place | organization | work | event | date | number | boolean | value | set | unknown",
-          "step_type": "lookup | constraint | compare | select | verify | intersect | aggregate",
-          "evidence_status": "path_grounded | question_only_required | operator"
+          "origin": "explicit_entity | path_evidence | question_required | derived_variable | operator",
+          "path_evidence": ["tokens from source_token_path when available; original-question evidence is allowed when needed"],
+          "question_evidence": ["phrase(s) from original_question"]
+        }
+      ],
+      "semantic_edges": [
+        {
+          "id": "p1_e1",
+          "source": "p1_n1",
+          "target": "p1_n2",
+          "condition_node_ids": [],
+          "relation": "specific executable semantic relation",
+          "edge_type": "lookup | constraint | compare | select | verify | intersect | aggregate",
+          "evidence_status": "path_grounded | question_required | mixed | operator",
+          "support_tokens": ["tokens from source_token_path when available; may be empty or question-level when needed"],
+          "question_evidence": ["phrase(s) from original_question"],
+          "atomic_question_hint": "one-hop atomic question corresponding to this edge"
+        }
+      ],
+      "terminal_node_id": "p1_nK",
+      "folded_or_discarded_tokens": [
+        {
+          "token": "token copied from source_token_path",
+          "reason": "folded_into_relation | grammatical | wh_answer_intent | noisy_parser_artifact | duplicate"
         }
       ]
     }
@@ -366,24 +573,29 @@ Return exactly one JSON object:
       "question": "natural-language atomic question?",
       "depends_on": [],
       "operation": "lookup | compare | select | verify | intersect | aggregate",
-      "support_step_ids": ["p1_s1"],
+      "semantic_edge_ids": ["p1_e1"],
+      "output_node_id": "p1_n2",
       "output_type": "person | place | organization | work | event | date | number | boolean | value | set | unknown"
     }
   ]
 }
 
 Schema rules:
-1. branch_id values must be p1, p2, p3, ... in the order of global_best_paths when the path comes from global_best_paths.
+1. branch_id values must be p1, p2, p3, ... in order.
 2. source_token_path must copy the corresponding global_best_paths entry exactly.
-3. reasoning step ids must be p1_s1, p1_s2, ... inside p1; p2_s1, p2_s2, ... inside p2.
-4. path_evidence tokens must be copied from the corresponding source_token_path.
-5. path_evidence may be empty only when evidence_status is question_only_required or operator.
-6. question_evidence should be copied or closely paraphrased from original_question.
-7. lookup atomic questions should have non-empty support_step_ids.
-8. final compare/select/verify/intersect/aggregate questions may have support_step_ids = [] if they only combine previous answers.
-9. q ids must be q1, q2, q3, ... in reasoning order.
-10. depends_on may only reference previous q ids.
-11. Return only JSON. Do not include explanations, markdown, or comments.
+3. semantic node ids must be p1_n1, p1_n2, ... inside p1; p2_n1, p2_n2, ... inside p2.
+4. semantic edge ids must be p1_e1, p1_e2, ... inside p1; p2_e1, p2_e2, ... inside p2.
+5. semantic edge source, target, and condition_node_ids must refer to existing semantic node ids.
+6. terminal_node_id must refer to an existing semantic node id.
+7. support_tokens and path_evidence should prefer source_token_path tokens when available, but may include original-question evidence when the token path omits required semantics.
+8. support_tokens may be empty when evidence comes only from original_question; cite question_evidence in that case.
+9. path_evidence may be empty when origin is question_required/operator or when the evidence is represented in question_evidence.
+10. A lookup atomic question must cite at least one semantic_edge_id.
+11. Each cited semantic_edge_id must exist.
+12. output_node_id must refer to the target node of the cited lookup edge when possible.
+13. q ids must be q1, q2, q3, ... in reasoning order.
+14. depends_on may only reference previous q ids.
+15. Return only JSON. Do not include markdown, explanations, or comments.
 
 ============================================================
 Self-check before returning
@@ -391,16 +603,16 @@ Self-check before returning
 
 Before returning, verify:
 
-1. Did I avoid one-token-one-node relabeling?
-2. Did I compress token evidence into minimal executable reasoning steps?
-3. Did I preserve exact explicit entity surface forms?
-4. Did I preserve all constraints and modifier attachments?
-5. Did I lock the final answer intent and final answer type?
-6. Does each lookup question ask for exactly one missing answer?
-7. Does each lookup question correspond to a support reasoning step?
-8. Are there any dangling questions that are not used?
-9. Are all dependencies backward-pointing?
-10. Does executing the DAG answer the original question?
+1. Did I build semantic object nodes, not token nodes?
+2. Did I avoid one-token-one-node relabeling?
+3. Did I avoid merely labeling adjacent token edges?
+4. Did I preserve final answer intent and final answer type?
+5. Did I preserve all required constraints?
+6. Did I include required question semantics missing from global_best_paths?
+7. Does every lookup edge correspond to one atomic question?
+8. Does every lookup atomic question ask for exactly one missing answer?
+9. Are all qN's answer references legal and backward-pointing?
+10. Does the final leaf answer the original question?
 
 Now generate the JSON object for the given input.
 Return valid JSON only.

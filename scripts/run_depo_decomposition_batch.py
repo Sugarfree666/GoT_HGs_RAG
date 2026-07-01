@@ -346,20 +346,30 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
             branch_id = path.get("branch_id") or "(unknown)"
             source_path = path.get("source_token_path") or []
             lines.append(f"- {branch_id}: {' ---- '.join(str(token) for token in source_path)}")
-            for step in path.get("reasoning_steps") or []:
-                if isinstance(step, dict):
-                    known_inputs = step.get("known_inputs") or []
-                    path_evidence = step.get("path_evidence") or []
+            nodes = path.get("semantic_nodes") or []
+            if nodes:
+                lines.append("  - nodes:")
+            for node in nodes:
+                if isinstance(node, dict):
                     lines.append(
-                        f"  - {step.get('id')}: {', '.join(str(item) for item in known_inputs) if known_inputs else '(none)'}"
-                        f" -> {step.get('operation') or ''} -> {step.get('output') or ''}"
+                        f"    - {node.get('id')}: {node.get('label')} "
+                        f"[{node.get('kind') or ''}/{node.get('output_type') or ''}/{node.get('origin') or ''}]"
                     )
+            edges = path.get("semantic_edges") or []
+            if edges:
+                lines.append("  - edges:")
+            for edge in edges:
+                if isinstance(edge, dict):
+                    condition_node_ids = edge.get("condition_node_ids") or []
+                    support_tokens = edge.get("support_tokens") or []
                     lines.append(
-                        f"    - evidence: {', '.join(str(token) for token in path_evidence) if path_evidence else '(none)'}"
+                        f"    - {edge.get('id')}: {edge.get('source')} --{edge.get('relation')}--> {edge.get('target')}"
                     )
+                    if condition_node_ids:
+                        lines.append(f"      - condition_node_ids: {', '.join(str(item) for item in condition_node_ids)}")
+                    lines.append(f"      - evidence_status: {edge.get('evidence_status') or ''}")
                     lines.append(
-                        "    - type: "
-                        f"{step.get('output_type') or ''} / {step.get('step_type') or ''} / {step.get('evidence_status') or ''}"
+                        f"      - support_tokens: {', '.join(str(token) for token in support_tokens) if support_tokens else '(none)'}"
                     )
     else:
         lines.append("(none)")
@@ -370,11 +380,12 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     if atomic_questions:
         for question in atomic_questions:
             depends_on = question.get("depends_on") or []
-            support_step_ids = question.get("support_step_ids") or []
+            semantic_edge_ids = question.get("semantic_edge_ids") or []
             lines.append(f"- {question.get('id')}: {question.get('question')}")
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
             lines.append(f"  - operation: {question.get('operation') or ''}")
-            lines.append(f"  - support_step_ids: {', '.join(support_step_ids) if support_step_ids else '(none)'}")
+            lines.append(f"  - semantic_edge_ids: {', '.join(semantic_edge_ids) if semantic_edge_ids else '(none)'}")
+            lines.append(f"  - output_node_id: {question.get('output_node_id') or ''}")
             lines.append(f"  - output_type: {question.get('output_type') or ''}")
     else:
         lines.append("(none)")

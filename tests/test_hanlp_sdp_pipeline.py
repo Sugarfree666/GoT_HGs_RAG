@@ -1405,184 +1405,176 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         )
 
 
-def _reasoning_path(branch_id: str, source_token_path: list[str], steps: list[dict[str, object]]) -> dict[str, object]:
+def _plan(final_answer_intent: str, final_answer_type: str, constraints: list[str], variables: list[str]) -> dict[str, object]:
+    return {
+        "final_answer_intent": final_answer_intent,
+        "final_answer_type": final_answer_type,
+        "required_constraints": constraints,
+        "required_intermediate_variables": variables,
+    }
+
+
+def _semantic_node(
+    node_id: str,
+    label: str,
+    kind: str,
+    output_type: str,
+    origin: str,
+    path_evidence: list[str],
+    question_evidence: list[str],
+) -> dict[str, object]:
+    return {
+        "id": node_id,
+        "label": label,
+        "kind": kind,
+        "output_type": output_type,
+        "origin": origin,
+        "path_evidence": path_evidence,
+        "question_evidence": question_evidence,
+    }
+
+
+def _semantic_edge(
+    edge_id: str,
+    source: str,
+    target: str,
+    relation: str,
+    support_tokens: list[str],
+    question_evidence: list[str],
+    atomic_question_hint: str,
+) -> dict[str, object]:
+    return {
+        "id": edge_id,
+        "source": source,
+        "target": target,
+        "condition_node_ids": [],
+        "relation": relation,
+        "edge_type": "lookup",
+        "evidence_status": "path_grounded",
+        "support_tokens": support_tokens,
+        "question_evidence": question_evidence,
+        "atomic_question_hint": atomic_question_hint,
+    }
+
+
+def _semantic_path(
+    branch_id: str,
+    source_token_path: list[str],
+    nodes: list[dict[str, object]],
+    edges: list[dict[str, object]],
+    terminal_node_id: str,
+) -> dict[str, object]:
     return {
         "branch_id": branch_id,
         "source_token_path": source_token_path,
-        "reasoning_steps": steps,
+        "semantic_nodes": nodes,
+        "semantic_edges": edges,
+        "terminal_node_id": terminal_node_id,
+        "folded_or_discarded_tokens": [],
+    }
+
+
+def _atomic_question(
+    question_id: str,
+    question: str,
+    depends_on: list[str],
+    semantic_edge_ids: list[str],
+    output_node_id: str,
+    output_type: str,
+    operation: str = "lookup",
+) -> dict[str, object]:
+    return {
+        "id": question_id,
+        "question": question,
+        "depends_on": depends_on,
+        "operation": operation,
+        "semantic_edge_ids": semantic_edge_ids,
+        "output_node_id": output_node_id,
+        "output_type": output_type,
     }
 
 
 def _older_step5_payload() -> dict[str, object]:
     return {
-        "question_plan": {
-            "final_answer_intent": "select which person is older",
-            "final_answer_type": "person",
-            "must_preserve_constraints": ["older comparison between Ryan Tubridy and Mauro Massironi"],
-        },
+        "question_plan": _plan(
+            "select which person is older",
+            "person",
+            ["older comparison between Ryan Tubridy and Mauro Massironi"],
+            ["birth date of Ryan Tubridy", "birth date of Mauro Massironi"],
+        ),
         "semantic_reasoning_paths": [
-            _reasoning_path(
+            _semantic_path(
                 "p1",
                 ["Mauro Massironi", "older", "Ryan Tubridy"],
                 [
-                    {
-                        "id": "p1_s1",
-                        "path_evidence": ["Ryan Tubridy", "older"],
-                        "question_evidence": ["Ryan Tubridy", "older"],
-                        "known_inputs": ["Ryan Tubridy"],
-                        "operation": "find the birth date needed for an older-person comparison",
-                        "output": "birth date of Ryan Tubridy",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    }
+                    _semantic_node("p1_n1", "Ryan Tubridy", "entity", "person", "explicit_entity", ["Ryan Tubridy"], ["Ryan Tubridy"]),
+                    _semantic_node("p1_n2", "birth date of Ryan Tubridy", "value_slot", "date", "derived_variable", ["older"], ["older"]),
                 ],
+                [_semantic_edge("p1_e1", "p1_n1", "p1_n2", "birth date for older comparison", ["Ryan Tubridy", "older"], ["Ryan Tubridy", "older"], "When was Ryan Tubridy born?")],
+                "p1_n2",
             ),
-            _reasoning_path(
+            _semantic_path(
                 "p2",
                 ["Mauro Massironi", "older", "Ryan Tubridy"],
                 [
-                    {
-                        "id": "p2_s1",
-                        "path_evidence": ["Mauro Massironi", "older"],
-                        "question_evidence": ["Mauro Massironi", "older"],
-                        "known_inputs": ["Mauro Massironi"],
-                        "operation": "find the birth date needed for an older-person comparison",
-                        "output": "birth date of Mauro Massironi",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    }
+                    _semantic_node("p2_n1", "Mauro Massironi", "entity", "person", "explicit_entity", ["Mauro Massironi"], ["Mauro Massironi"]),
+                    _semantic_node("p2_n2", "birth date of Mauro Massironi", "value_slot", "date", "derived_variable", ["older"], ["older"]),
                 ],
+                [_semantic_edge("p2_e1", "p2_n1", "p2_n2", "birth date for older comparison", ["Mauro Massironi", "older"], ["Mauro Massironi", "older"], "When was Mauro Massironi born?")],
+                "p2_n2",
             ),
         ],
         "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "When was Ryan Tubridy born?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "date",
-            },
-            {
-                "id": "q2",
-                "question": "When was Mauro Massironi born?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s1"],
-                "output_type": "date",
-            },
+            _atomic_question("q1", "When was Ryan Tubridy born?", [], ["p1_e1"], "p1_n2", "date"),
+            _atomic_question("q2", "When was Mauro Massironi born?", [], ["p2_e1"], "p2_n2", "date"),
         ],
     }
 
 
 def _illusions_step5_payload() -> dict[str, object]:
     return {
-        "question_plan": {
-            "final_answer_intent": "select which film has the director who was born later",
-            "final_answer_type": "work",
-            "must_preserve_constraints": ["director of each film", "born later"],
-        },
+        "question_plan": _plan(
+            "select which film has the director who was born later",
+            "work",
+            ["director of each film", "born later"],
+            ["director of Illusions (1982 Film)", "director of It'S A Wonderful Afterlife"],
+        ),
         "semantic_reasoning_paths": [
-            _reasoning_path(
+            _semantic_path(
                 "p1",
                 ["Illusions (1982 Film)", "director", "born"],
                 [
-                    {
-                        "id": "p1_s1",
-                        "path_evidence": ["Illusions (1982 Film)", "director"],
-                        "question_evidence": ["director of Illusions (1982 Film)"],
-                        "known_inputs": ["Illusions (1982 Film)"],
-                        "operation": "find the director of Illusions (1982 Film)",
-                        "output": "director of Illusions (1982 Film)",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p1_s2",
-                        "path_evidence": ["director", "born"],
-                        "question_evidence": ["director who was born later"],
-                        "known_inputs": ["p1_s1 output"],
-                        "operation": "find the birth date of the director found in p1_s1",
-                        "output": "birth date of first director",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    _semantic_node("p1_n1", "Illusions (1982 Film)", "entity", "work", "explicit_entity", ["Illusions (1982 Film)"], ["Illusions (1982 Film)"]),
+                    _semantic_node("p1_n2", "director of Illusions (1982 Film)", "intermediate_variable", "person", "derived_variable", ["director"], ["director of Illusions (1982 Film)"]),
+                    _semantic_node("p1_n3", "birth date of first director", "value_slot", "date", "derived_variable", ["born"], ["director born later"]),
                 ],
+                [
+                    _semantic_edge("p1_e1", "p1_n1", "p1_n2", "director of film", ["Illusions (1982 Film)", "director"], ["director of Illusions (1982 Film)"], "Who is the director of Illusions (1982 Film)?"),
+                    _semantic_edge("p1_e2", "p1_n2", "p1_n3", "birth date of director", ["director", "born"], ["director born later"], "When was the director born?"),
+                ],
+                "p1_n3",
             ),
-            _reasoning_path(
+            _semantic_path(
                 "p2",
                 ["It'S A Wonderful Afterlife", "director", "born"],
                 [
-                    {
-                        "id": "p2_s1",
-                        "path_evidence": ["It'S A Wonderful Afterlife", "director"],
-                        "question_evidence": ["director of It'S A Wonderful Afterlife"],
-                        "known_inputs": ["It'S A Wonderful Afterlife"],
-                        "operation": "find the director of It'S A Wonderful Afterlife",
-                        "output": "director of It'S A Wonderful Afterlife",
-                        "output_type": "person",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
-                    {
-                        "id": "p2_s2",
-                        "path_evidence": ["director", "born"],
-                        "question_evidence": ["director who was born later"],
-                        "known_inputs": ["p2_s1 output"],
-                        "operation": "find the birth date of the director found in p2_s1",
-                        "output": "birth date of second director",
-                        "output_type": "date",
-                        "step_type": "lookup",
-                        "evidence_status": "path_grounded",
-                    },
+                    _semantic_node("p2_n1", "It'S A Wonderful Afterlife", "entity", "work", "explicit_entity", ["It'S A Wonderful Afterlife"], ["It'S A Wonderful Afterlife"]),
+                    _semantic_node("p2_n2", "director of It'S A Wonderful Afterlife", "intermediate_variable", "person", "derived_variable", ["director"], ["director of It'S A Wonderful Afterlife"]),
+                    _semantic_node("p2_n3", "birth date of second director", "value_slot", "date", "derived_variable", ["born"], ["director born later"]),
                 ],
+                [
+                    _semantic_edge("p2_e1", "p2_n1", "p2_n2", "director of film", ["It'S A Wonderful Afterlife", "director"], ["director of It'S A Wonderful Afterlife"], "Who is the director of It'S A Wonderful Afterlife?"),
+                    _semantic_edge("p2_e2", "p2_n2", "p2_n3", "birth date of director", ["director", "born"], ["director born later"], "When was the director born?"),
+                ],
+                "p2_n3",
             ),
         ],
         "atomic_questions": [
-            {
-                "id": "q1",
-                "question": "Who is the director of Illusions (1982 Film)?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s1"],
-                "output_type": "person",
-            },
-            {
-                "id": "q2",
-                "question": "When was q1's answer born?",
-                "depends_on": ["q1"],
-                "operation": "lookup",
-                "support_step_ids": ["p1_s2"],
-                "output_type": "date",
-            },
-            {
-                "id": "q3",
-                "question": "Who is the director of It'S A Wonderful Afterlife?",
-                "depends_on": [],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s1"],
-                "output_type": "person",
-            },
-            {
-                "id": "q4",
-                "question": "When was q3's answer born?",
-                "depends_on": ["q3"],
-                "operation": "lookup",
-                "support_step_ids": ["p2_s2"],
-                "output_type": "date",
-            },
-            {
-                "id": "q5",
-                "question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
-                "depends_on": ["q2", "q4"],
-                "operation": "select",
-                "support_step_ids": [],
-                "output_type": "work",
-            },
+            _atomic_question("q1", "Who is the director of Illusions (1982 Film)?", [], ["p1_e1"], "p1_n2", "person"),
+            _atomic_question("q2", "When was q1's answer born?", ["q1"], ["p1_e2"], "p1_n3", "date"),
+            _atomic_question("q3", "Who is the director of It'S A Wonderful Afterlife?", [], ["p2_e1"], "p2_n2", "person"),
+            _atomic_question("q4", "When was q3's answer born?", ["q3"], ["p2_e2"], "p2_n3", "date"),
+            _atomic_question("q5", "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?", ["q2", "q4"], [], "", "work", "select"),
         ],
     }
 
