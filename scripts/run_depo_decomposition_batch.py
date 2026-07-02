@@ -394,7 +394,6 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
 
 def _semantic_reasoning_path_markdown_lines(path: dict[str, Any]) -> list[str]:
     branch_id = path.get("branch_id") or "(unknown)"
-    source_path = path.get("source_token_path") or []
     nodes = path.get("semantic_nodes") or []
     edges = path.get("semantic_edges") or []
     node_labels = {
@@ -404,7 +403,6 @@ def _semantic_reasoning_path_markdown_lines(path: dict[str, Any]) -> list[str]:
     }
 
     lines = [f"- {branch_id}:"]
-    lines.append(f"  - source tokens: {' ---- '.join(str(token) for token in source_path) if source_path else '(none)'}")
     lines.append("  - semantic path:")
     if not edges:
         node_lines = [
@@ -426,19 +424,6 @@ def _semantic_reasoning_path_markdown_lines(path: dict[str, Any]) -> list[str]:
             f"--[{relation}]--> "
             f"{_semantic_node_label(str(edge.get('target') or ''), node_labels)}"
         )
-        evidence_status = edge.get("evidence_status") or ""
-        support_tokens = edge.get("support_tokens") or []
-        evidence = []
-        if evidence_status:
-            evidence.append(str(evidence_status))
-        evidence.append(
-            "support="
-            + (", ".join(str(token) for token in support_tokens) if support_tokens else "(none)")
-        )
-        lines.append(f"      - evidence: {'; '.join(evidence)}")
-    terminal_node_id = str(path.get("terminal_node_id") or "")
-    if terminal_node_id:
-        lines.append(f"  - terminal: {_semantic_node_label(terminal_node_id, node_labels)}")
     return lines
 
 

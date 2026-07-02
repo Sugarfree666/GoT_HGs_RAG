@@ -496,6 +496,48 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
             self.assertTrue(provenance["candidate_set_evidence"])
 
+    def test_candidate_path_cover_does_not_traverse_between_film_candidates_for_younger(self) -> None:
+        result = self._which_film_has_director_younger_with_candidate_predicate_edges_result()
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_best_path_cover")
+        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
+            [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]],
+        )
+        for path in compiled.paths:
+            self.assertNotIn(["ENTITYA", "ENTITYB"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
+            self.assertNotIn(["ENTITYB", "ENTITYA"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
+        anchor = self.anchor_result(compiled, "film")
+        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
+        self.assertEqual(
+            [path["nodes"] for path in selected_paths],
+            [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]],
+        )
+
+    def test_candidate_path_cover_does_not_traverse_between_film_candidates_for_died_first(self) -> None:
+        result = self._which_film_has_director_died_with_candidate_predicate_edges_result()
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_best_path_cover")
+        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
+            [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]],
+        )
+        for path in compiled.paths:
+            self.assertNotIn(["ENTITYA", "ENTITYB"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
+            self.assertNotIn(["ENTITYB", "ENTITYA"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
+        anchor = self.anchor_result(compiled, "film")
+        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
+        self.assertEqual(
+            [path["nodes"] for path in selected_paths],
+            [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]],
+        )
+
     def test_global_best_path_cover_preserves_both_born_later_film_branches(self) -> None:
         result = self._film_director_born_later_result()
 
@@ -1367,6 +1409,63 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _pas("or", "coord_ARG2", "ENTITYB", 9, 10),
                 _psd("or", "DISJ.member", "ENTITYA", 9, 8),
                 _psd("or", "DISJ.member", "ENTITYB", 9, 10),
+            ],
+        )
+
+    def _which_film_has_director_younger_with_candidate_predicate_edges_result(self) -> HanLPSDPResult:
+        return _hanlp_result(
+            "Which film has a director who is younger, ENTITYA or ENTITYB?",
+            ["Which", "film", "has", "a", "director", "who", "is", "younger", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _dm("Which", "BV", "film", 1, 2),
+                _dm("has", "ARG1", "film", 3, 2),
+                _dm("has", "ARG2", "director", 3, 5),
+                _dm("a", "BV", "director", 4, 5),
+                _dm("younger", "ARG1", "director", 8, 5),
+                _pas("has", "verb_ARG1", "film", 3, 2),
+                _pas("has", "verb_ARG2", "director", 3, 5),
+                _pas("a", "det_ARG1", "director", 4, 5),
+                _pas("who", "relative_ARG1", "director", 6, 5),
+                _pas("is", "verb_ARG1", "director", 7, 5),
+                _pas("younger", "adj_ARG1", "director", 8, 5),
+                _pas("is", "verb_ARG2", "younger", 7, 8),
+                _pas("or", "coord_ARG1", "ENTITYA", 11, 10),
+                _pas("or", "coord_ARG2", "ENTITYB", 11, 12),
+                _psd("has", "ACT-arg", "film", 3, 2),
+                _psd("has", "PAT-arg", "director", 3, 5),
+                _psd("is", "ACT-arg", "who", 7, 6),
+                _psd("director", "RSTR", "is", 5, 7),
+                _psd("is", "PAT-arg", "younger", 7, 8),
+                _psd("has", "PAT-arg", "ENTITYA", 3, 10),
+                _psd("or", "DISJ.member", "ENTITYA", 11, 10),
+                _psd("has", "ACT-arg", "ENTITYB", 3, 12),
+                _psd("or", "DISJ.member", "ENTITYB", 11, 12),
+            ],
+        )
+
+    def _which_film_has_director_died_with_candidate_predicate_edges_result(self) -> HanLPSDPResult:
+        return _hanlp_result(
+            "Which film has the director who died first, ENTITYA or ENTITYB?",
+            ["Which", "film", "has", "the", "director", "who", "died", "first", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _dm("Which", "BV", "film", 1, 2),
+                _dm("has", "ARG1", "film", 3, 2),
+                _dm("has", "ARG2", "director", 3, 5),
+                _dm("died", "ARG1", "director", 7, 5),
+                _dm("first", "ARG1", "died", 8, 7),
+                _pas("has", "verb_ARG1", "film", 3, 2),
+                _pas("has", "verb_ARG2", "director", 3, 5),
+                _pas("who", "relative_ARG1", "director", 6, 5),
+                _pas("died", "verb_ARG1", "director", 7, 5),
+                _pas("or", "coord_ARG1", "ENTITYA", 11, 10),
+                _pas("or", "coord_ARG2", "ENTITYB", 11, 12),
+                _psd("has", "ACT-arg", "film", 3, 2),
+                _psd("has", "PAT-arg", "director", 3, 5),
+                _psd("director", "RSTR", "died", 5, 7),
+                _psd("has", "PAT-arg", "ENTITYA", 3, 10),
+                _psd("or", "DISJ.member", "ENTITYA", 11, 10),
+                _psd("has", "ACT-arg", "ENTITYB", 3, 12),
+                _psd("or", "DISJ.member", "ENTITYB", 11, 12),
             ],
         )
 

@@ -337,7 +337,6 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
         if not isinstance(path, dict):
             continue
         branch_id = path.get("branch_id") or "(unknown)"
-        source_path = path.get("source_token_path") or []
         nodes = path.get("semantic_nodes") or []
         edges = path.get("semantic_edges") or []
         node_labels = {
@@ -347,7 +346,6 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
         }
 
         print(f"{branch_id}:")
-        print(f"  source tokens: {' ---- '.join(str(token) for token in source_path) if source_path else '(none)'}")
         print("  semantic path:")
         if not edges:
             print("    (none)")
@@ -363,8 +361,6 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
             target = edge.get("target") or ""
             relation = edge.get("relation") or ""
             condition_node_ids = edge.get("condition_node_ids") or []
-            evidence_status = edge.get("evidence_status") or ""
-            support_tokens = edge.get("support_tokens") or []
             condition = _format_semantic_condition_refs(condition_node_ids, node_labels)
             relation_text = str(relation)
             if condition:
@@ -375,19 +371,6 @@ def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
                 f"--[{relation_text}]--> "
                 f"{_format_semantic_node_ref(str(target), node_labels)}"
             )
-            evidence_parts = []
-            if evidence_status:
-                evidence_parts.append(str(evidence_status))
-            evidence_parts.append(
-                "support="
-                + (", ".join(str(token) for token in support_tokens) if support_tokens else "(none)")
-            )
-            print(f"      evidence: {'; '.join(evidence_parts)}")
-            if condition_node_ids:
-                print(f"      condition_node_ids: {', '.join(str(item) for item in condition_node_ids)}")
-        terminal_node_id = str(path.get("terminal_node_id") or "")
-        if terminal_node_id:
-            print(f"  terminal: {_format_semantic_node_ref(terminal_node_id, node_labels)}")
 
 
 def _format_semantic_node_ref(node_id: str, node_labels: dict[str, str]) -> str:

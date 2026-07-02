@@ -2738,19 +2738,31 @@ def _extract_actual_parallel_path_cover(
         }
         path_query_focus = _candidate_path_query_focus(state, query_focus, constraints, parallel_set.get("kind"))
         semantic_nodes = _collect_question_semantic_nodes(state, entity_ids, query_focus, query_focus.answer_anchor_id)
+        candidate_set_blocked_edge_keys = _candidate_set_traversal_edge_keys(state, entity_ids)
         selected: list[_CandidatePath] = []
         viable = True
         for entity_id in entity_ids:
             required_ids = list(path_query_focus.required_ids)
             if entity_id in branch_heads:
                 required_ids.insert(0, branch_heads[entity_id])
+            branch_semantic_nodes = set(semantic_nodes) - (set(entity_ids) - {entity_id})
+            blocked_edge_keys = set(candidate_set_blocked_edge_keys)
+            blocked_edge_keys.update(
+                _other_candidate_typed_slot_instantiation_edge_keys(
+                    state,
+                    query_focus.slot_id,
+                    entity_ids,
+                    entity_id,
+                )
+            )
             candidates = _enumerate_entity_focus_paths(
                 state,
                 entity_id,
                 path_query_focus,
                 forbidden_entity_ids=set(entity_ids) - {entity_id},
                 required_ids=_unique_node_ids(required_ids, state.nodes),
-                semantic_nodes=semantic_nodes,
+                semantic_nodes=branch_semantic_nodes,
+                blocked_edge_keys=blocked_edge_keys,
             )
             all_records.extend(candidates)
             if not candidates:
@@ -2761,7 +2773,9 @@ def _extract_actual_parallel_path_cover(
                 if not candidates:
                     viable = False
                     break
-            selected.append(candidates[0].with_selection(selected=True))
+            selected_record = candidates[0].with_selection(selected=True)
+            _warn_candidate_path_contains_other_candidate(state, selected_record, entity_ids)
+            selected.append(selected_record)
         if not viable or len(selected) != len(entity_ids):
             continue
         selected_paths = [
@@ -2811,6 +2825,85 @@ def _candidate_typed_slot_instantiation_edges_available(
     )
 
 
+def _candidate_set_traversal_edge_keys(
+    state: _WorkingState,
+    entity_ids: list[str],
+) -> set[tuple[str, str]]:
+    candidate_ids = set(entity_ids)
+    blocked: set[tuple[str, str]] = set()
+    for key, edge in state.edges.items():
+        source, target = key
+        if _edge_has_candidate_set_discovery_evidence(edge):
+            blocked.add(key)
+            continue
+        if source in candidate_ids and target in candidate_ids and _is_derived_candidate_bridge(edge):
+            blocked.add(key)
+    return blocked
+
+
+def _other_candidate_typed_slot_instantiation_edge_keys(
+    state: _WorkingState,
+    slot_id: str | None,
+    entity_ids: list[str],
+    active_entity_id: str,
+) -> set[tuple[str, str]]:
+    if not slot_id:
+        return set()
+    blocked: set[tuple[str, str]] = set()
+    for entity_id in entity_ids:
+        if entity_id == active_entity_id:
+            continue
+        key = _edge_key(entity_id, slot_id)
+        edge = state.edges.get(key)
+        if edge is not None and "candidate_typed_slot_instantiation" in edge.rule:
+            blocked.add(key)
+    return blocked
+
+
+def _warn_candidate_path_contains_other_candidate(
+    state: _WorkingState,
+    record: _CandidatePath,
+    entity_ids: list[str],
+) -> None:
+    if not record.source_entity_id:
+        return
+    other_candidate_ids = set(entity_ids) - {record.source_entity_id}
+    if not other_candidate_ids.intersection(record.node_ids):
+        return
+    warning = "candidate_path_contains_other_candidate"
+    if warning not in state.warnings:
+        state.warnings.append(warning)
+
+
+def _edge_has_candidate_set_discovery_evidence(edge: TokenReasoningEdge) -> bool:
+    for item in _walk_provenance_payload(edge.provenance):
+        label_class = str(item.get("label_class") or "").upper()
+        label_classes = {str(value).upper() for value in _iter_sequence(item.get("label_classes"))}
+        if label_class == "COORD" or "COORD" in label_classes:
+            return True
+        relation = str(item.get("normalized_relation") or item.get("relation") or "")
+        relation_key = _normalized_relation_key(relation)
+        if _is_candidate_set_discovery_relation_key(relation_key):
+            return True
+    return False
+
+
+def _is_candidate_set_discovery_relation_key(relation_key: str) -> bool:
+    return (
+        "coord" in relation_key
+        or "conj_member" in relation_key
+        or "disj_member" in relation_key
+        or "apps_member" in relation_key
+        or "appos" in relation_key
+        or relation_key.startswith("app_")
+        or relation_key == "app"
+    )
+
+
+def _is_derived_candidate_bridge(edge: TokenReasoningEdge) -> bool:
+    return edge.derived and "bridge_contraction" in edge.rule
+
+
 def _select_single_main_path(
     state: _WorkingState,
     explicit_entity_ids: list[str],
@@ -2850,6 +2943,7 @@ def _enumerate_entity_focus_paths(
     forbidden_entity_ids: set[str],
     required_ids: list[str],
     semantic_nodes: set[str],
+    blocked_edge_keys: set[tuple[str, str]] | None = None,
 ) -> list[_CandidatePath]:
     if entity_id not in state.nodes:
         return []
@@ -2859,6 +2953,7 @@ def _enumerate_entity_focus_paths(
     candidates: list[_CandidatePath] = []
     seen_paths: set[tuple[str, ...]] = set()
     effective_forbidden = set(forbidden_entity_ids) - set(semantic_nodes)
+    blocked_edge_keys = blocked_edge_keys or set()
     for search_pass, allow_weak in (("strong", False), ("weak", True)):
         raw_paths = _bounded_k_simple_paths(
             state.nodes,
@@ -2870,6 +2965,7 @@ def _enumerate_entity_focus_paths(
             allow_weak=allow_weak,
             max_nodes=12,
             top_k=12,
+            blocked_edge_keys=blocked_edge_keys,
         )
         for path in raw_paths:
             if _path_should_start_from_wh_anchor(state.nodes, path, target_id):
@@ -2915,10 +3011,12 @@ def _bounded_k_simple_paths(
     allow_weak: bool,
     max_nodes: int,
     top_k: int,
+    blocked_edge_keys: set[tuple[str, str]] | None = None,
 ) -> list[list[str]]:
     if source_id == target_id:
         return [[source_id]]
     adjacency = _adjacency(edges)
+    blocked_edge_keys = blocked_edge_keys or set()
     queue: list[list[str]] = [[source_id]]
     results: list[list[str]] = []
     expansions = 0
@@ -2936,6 +3034,8 @@ def _bounded_k_simple_paths(
         next_paths: list[list[str]] = []
         for neighbor_id, edge in _search_neighbor_edges(nodes, edges, adjacency, current):
             if neighbor_id in path or neighbor_id in forbidden_nodes:
+                continue
+            if _edge_key(current, neighbor_id) in blocked_edge_keys:
                 continue
             if not _edge_allowed_for_path(nodes, edge, neighbor_id, target_id, required_ids, allow_weak):
                 continue
