@@ -294,18 +294,12 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
 
     atomic_question_dag = result.get("atomic_question_dag")
     if atomic_question_dag is None:
-        print("[5. Semantic Reasoning Paths]")
-        print("(skipped: Step5 disabled)")
-        print()
-        print("[6. Atomic Question DAG]")
+        print("[5. Atomic Question DAG]")
         print("(skipped: Step5 disabled)")
         print()
         return
-    print("[5. Semantic Reasoning Paths]")
-    _print_semantic_reasoning_paths(atomic_question_dag)
-    print()
 
-    print("[6. Atomic Question DAG]")
+    print("[5. Atomic Question DAG]")
     if not atomic_question_dag.valid:
         print("(invalid)")
         for error in atomic_question_dag.validation_errors:
@@ -318,75 +312,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     for node in atomic_question_dag.nodes:
         print(f"{node.id}: {node.question}")
         print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
-        semantic_edge_ids = getattr(node, "semantic_edge_ids", ()) or ()
-        output_node_id = getattr(node, "output_node_id", "") or ""
-        if semantic_edge_ids:
-            print(f"  semantic_edge_ids: {', '.join(semantic_edge_ids)}")
-        if output_node_id:
-            print(f"  output_node_id: {output_node_id}")
         print()
-
-
-def _print_semantic_reasoning_paths(atomic_question_dag: Any) -> None:
-    raw_payload = getattr(atomic_question_dag, "raw_payload", None)
-    paths = raw_payload.get("semantic_reasoning_paths") if isinstance(raw_payload, dict) else None
-    if not isinstance(paths, list) or not paths:
-        print("(none)")
-        return
-    for path in paths:
-        if not isinstance(path, dict):
-            continue
-        branch_id = path.get("branch_id") or "(unknown)"
-        nodes = path.get("semantic_nodes") or []
-        edges = path.get("semantic_edges") or []
-        node_labels = {
-            str(node.get("id") or ""): str(node.get("label") or "")
-            for node in nodes
-            if isinstance(node, dict) and node.get("id")
-        }
-
-        print(f"{branch_id}:")
-        print("  semantic path:")
-        if not edges:
-            print("    (none)")
-        for node in nodes:
-            if not isinstance(node, dict) or edges:
-                continue
-            print(f"    {_format_semantic_node_ref(str(node.get('id') or ''), node_labels)}")
-        for edge in edges:
-            if not isinstance(edge, dict):
-                continue
-            edge_id = edge.get("id") or ""
-            source = edge.get("source") or ""
-            target = edge.get("target") or ""
-            relation = edge.get("relation") or ""
-            condition_node_ids = edge.get("condition_node_ids") or []
-            condition = _format_semantic_condition_refs(condition_node_ids, node_labels)
-            relation_text = str(relation)
-            if condition:
-                relation_text = f"{relation_text}; condition: {condition}"
-            print(
-                "    "
-                f"{_format_semantic_node_ref(str(source), node_labels)} "
-                f"--[{relation_text}]--> "
-                f"{_format_semantic_node_ref(str(target), node_labels)}"
-            )
-
-
-def _format_semantic_node_ref(node_id: str, node_labels: dict[str, str]) -> str:
-    label = node_labels.get(node_id, "")
-    return label or "(unknown)"
-
-
-def _format_semantic_condition_refs(condition_node_ids: Any, node_labels: dict[str, str]) -> str:
-    if not isinstance(condition_node_ids, (list, tuple)):
-        return ""
-    return ", ".join(
-        _format_semantic_node_ref(str(node_id), node_labels)
-        for node_id in condition_node_ids
-        if str(node_id)
-    )
-
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:
     if formalism not in hanlp_result.sdp_graphs:

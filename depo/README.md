@@ -10,24 +10,29 @@ original question
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
 -> query-focused token reasoning structure with global best path(s)
--> Step5 path contraction action trace
--> deterministic Atomic Question DAG conversion
+-> Step5 direct Atomic Question DAG generation
+-> deterministic DAG parsing
 ```
 
 The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
-path contraction action trace generation. Placeholder assignment, overlap removal, and
+question DAG generation. Placeholder assignment, overlap removal, and
 `masked_question` construction are deterministic Python logic. Step 4 consumes
 all three HanLP SDP views and emits a compact token graph plus selected Global
 Best Path structure. Ordinary questions keep one path; comparison/candidate
-questions may keep one path per candidate branch. Step 5 sees only:
+questions may keep one path per candidate branch. Step 5 directly generates an
+Atomic Question DAG from only:
 
 1. `original_question`
-2. `explicit_entities`
-3. `global_best_paths`
+2. `topic_entities` / `explicit_entities`
+3. restored Step 4 paths (`step4_paths` / `global_best_paths`)
 
 `explicit_entities` are the original Step 2 entity surface strings. The
-`global_best_paths` value is a list of restored Step 4 paths. Ordinary questions
-pass one path; candidate/comparison questions pass multiple branch paths.
+`global_best_paths` value is a list of restored Step 4 paths. In the Step5 LLM
+prompt these are rendered as `topic_entities` and `step4_paths`. Ordinary
+questions pass one path; candidate/comparison questions pass multiple branch
+paths. Step 4 paths are structural hints only: DAG nodes do not need explicit
+path support, and Step5 does not output semantic reasoning paths or path-aligned
+semantic edges.
 
 ## Output Shape
 
@@ -44,26 +49,26 @@ Step 4 is query-focused and stops at the token reasoning graph/path-cover
 structure. Step 5 does not receive all anchor paths, raw SDP edges, masks,
 candidate sets, constraints, support spans, or path indices.
 
-Step 5 returns JSON action trace only:
+Step 5 returns JSON atomic questions only:
 
 ```json
 {
-  "actions": [
+  "atomic_questions": [
     {
       "id": "q1",
-      "consume": ["path node", "relation"],
-      "produce": "q1_answer",
-      "question": "natural-language atomic question?"
+      "question": "natural-language atomic question?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "person"
     }
   ]
 }
 ```
 
-The program converts this action trace into the Atomic Question DAG. Each action
-becomes one DAG node. `depends_on` is derived from `qN_answer` references in
-`consume` and from `qN's answer` references in `question`. Edges and leaf nodes
-are then derived from `depends_on`. Step5 no longer asks the LLM to emit
-`support`, `start_index`, `end_index`, or final DAG edges.
+The program parses `atomic_questions` into `AtomicQuestionDAGResult`. Each
+question becomes one DAG node. Edges and leaf nodes are derived deterministically
+from `depends_on`. Step5 does not ask the LLM to emit semantic reasoning paths,
+path-aligned semantic edges, support spans, or final DAG edges.
 
 ## Install
 

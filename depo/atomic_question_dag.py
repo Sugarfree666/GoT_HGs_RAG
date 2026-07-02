@@ -90,7 +90,7 @@ class AtomicQuestionDAGResult:
 
 
 class PathAlignedAtomicDAGGenerator:
-    """Run Step5 as token path -> semantic reasoning path -> atomic question DAG."""
+    """Run Step5 as original question + topic entities + Step4 path hints -> atomic question DAG."""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
@@ -193,7 +193,14 @@ def validate_atomic_question_dag(
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
     raw_questions = _extract_atomic_questions(raw_payload)
+    if not isinstance(raw_questions, list):
+        return _invalid_result(["atomic_questions must be a non-empty list."], raw_payload=raw_payload)
+    if not raw_questions:
+        return _invalid_result(["atomic_questions must be a non-empty list."], raw_payload=raw_payload)
+
     parsed_nodes = _coerce_atomic_question_nodes(raw_questions)
+    if not parsed_nodes:
+        return _invalid_result(["atomic_questions did not contain any parseable question objects."], raw_payload=raw_payload)
 
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
@@ -209,7 +216,7 @@ def validate_atomic_question_dag(
 
 
 def _extract_atomic_questions(raw_payload: dict[str, Any]) -> Any:
-    """Read Step5 questions from the simplified DAG envelope, with legacy fallback."""
+    """Read Step5 questions from the direct DAG envelope, with legacy fallback."""
 
     if isinstance(raw_payload.get("atomic_questions"), list):
         return raw_payload.get("atomic_questions")
@@ -226,7 +233,7 @@ def _extract_atomic_questions(raw_payload: dict[str, Any]) -> Any:
 
 
 def _coerce_atomic_question_nodes(raw_questions: Any) -> list[AtomicQuestionNode]:
-    """Step6 is intentionally non-validating: display the LLM DAG as-is when possible."""
+    """Normalize Step5 DAG nodes without enforcing semantic path support."""
 
     if not isinstance(raw_questions, list):
         return []
@@ -245,7 +252,7 @@ def _coerce_atomic_question_nodes(raw_questions: Any) -> list[AtomicQuestionNode
                 operation=str(raw_question.get("operation") or "lookup").strip() or "lookup",
                 semantic_edge_ids=_coerce_string_tuple(raw_question.get("semantic_edge_ids")),
                 output_node_id=str(raw_question.get("output_node_id") or "").strip(),
-                output_type=str(raw_question.get("output_type") or "").strip(),
+                output_type=str(raw_question.get("output_type") or "unknown").strip() or "unknown",
                 support_step_ids=_coerce_string_tuple(raw_question.get("support_step_ids")),
             )
         )
@@ -914,20 +921,20 @@ def _restore_path_nodes(raw_nodes: Any, mask_mappings: Any) -> list[str]:
 def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[list[str]]) -> list[str]:
     errors: list[str] = []
     if not isinstance(explicit_entities, list):
-        errors.append("Step5 explicit_entities must be a list.")
+        errors.append("Step5 topic_entities/explicit_entities must be a list.")
     for entity in explicit_entities:
         if _contains_placeholder(entity):
-            errors.append(f"Step5 explicit_entities contains unresolved ENTITY placeholder: {entity}.")
+            errors.append(f"Step5 topic_entities contains unresolved ENTITY placeholder: {entity}.")
     if not global_best_paths:
-        errors.append("Step5 requires at least one non-empty global_best_paths entry.")
+        errors.append("Step5 requires at least one non-empty step4_paths/global_best_paths entry.")
         return errors
     for path_index, path in enumerate(global_best_paths, start=1):
         if not isinstance(path, list) or not path:
-            errors.append(f"Step5 global_best_paths[{path_index - 1}] must be a non-empty list.")
+            errors.append(f"Step5 step4_paths[{path_index - 1}] must be a non-empty list.")
             continue
         for node in path:
             if _contains_placeholder(node):
-                errors.append(f"Step5 global_best_paths[{path_index - 1}] contains unresolved ENTITY placeholder: {node}.")
+                errors.append(f"Step5 step4_paths[{path_index - 1}] contains unresolved ENTITY placeholder: {node}.")
     return errors
 
 

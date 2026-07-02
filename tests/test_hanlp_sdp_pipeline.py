@@ -72,9 +72,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
         step5_payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(set(step5_payload), {"original_question", "explicit_entities", "global_best_paths"})
-        self.assertEqual(step5_payload["explicit_entities"], ["Ryan Tubridy", "Mauro Massironi"])
-        self.assertTrue(step5_payload["global_best_paths"])
+        self.assertEqual(set(step5_payload), {"original_question", "topic_entities", "step4_paths"})
+        self.assertEqual(step5_payload["topic_entities"], ["Ryan Tubridy", "Mauro Massironi"])
+        self.assertTrue(step5_payload["step4_paths"])
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -111,8 +111,8 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("Anchor A4: ENTITYB[7] sources=explicit_entity", output)
         self.assertNotIn("answer_anchor:", output)
         self.assertNotIn("entity_anchors:", output)
-        self.assertIn("[5. Semantic Reasoning Paths]", output)
-        self.assertIn("[6. Atomic Question DAG]", output)
+        self.assertNotIn("[5. Semantic Reasoning Paths]", output)
+        self.assertIn("[5. Atomic Question DAG]", output)
         self.assertNotIn("(skipped: Step5 disabled)", output)
         self.assertIn("q1: When was Ryan Tubridy born?", output)
         self.assertIn("q2: When was Mauro Massironi born?", output)
@@ -220,7 +220,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
         payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(
-            payload["global_best_paths"],
+            payload["step4_paths"],
             [
                 ["Illusions (1982 Film)", "film", "director", "born"],
                 ["It'S A Wonderful Afterlife", "film", "director", "born"],
@@ -1586,81 +1586,10 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         )
 
 
-def _plan(final_answer_intent: str, final_answer_type: str, constraints: list[str], variables: list[str]) -> dict[str, object]:
-    return {
-        "final_answer_intent": final_answer_intent,
-        "final_answer_type": final_answer_type,
-        "required_constraints": constraints,
-        "required_intermediate_variables": variables,
-    }
-
-
-def _semantic_node(
-    node_id: str,
-    label: str,
-    kind: str,
-    output_type: str,
-    origin: str,
-    path_evidence: list[str],
-    question_evidence: list[str],
-) -> dict[str, object]:
-    return {
-        "id": node_id,
-        "label": label,
-        "kind": kind,
-        "output_type": output_type,
-        "origin": origin,
-        "path_evidence": path_evidence,
-        "question_evidence": question_evidence,
-    }
-
-
-def _semantic_edge(
-    edge_id: str,
-    source: str,
-    target: str,
-    relation: str,
-    support_tokens: list[str],
-    question_evidence: list[str],
-    atomic_question_hint: str,
-) -> dict[str, object]:
-    return {
-        "id": edge_id,
-        "source": source,
-        "target": target,
-        "condition_node_ids": [],
-        "relation": relation,
-        "edge_type": "lookup",
-        "evidence_status": "path_grounded",
-        "support_tokens": support_tokens,
-        "question_evidence": question_evidence,
-        "atomic_question_hint": atomic_question_hint,
-    }
-
-
-def _semantic_path(
-    branch_id: str,
-    source_token_path: list[str],
-    nodes: list[dict[str, object]],
-    edges: list[dict[str, object]],
-    terminal_node_id: str,
-) -> dict[str, object]:
-    return {
-        "branch_id": branch_id,
-        "source_token_path": source_token_path,
-        "semantic_nodes": nodes,
-        "semantic_edges": edges,
-        "terminal_node_id": terminal_node_id,
-        "folded_or_discarded_tokens": [],
-    }
-
-
 def _atomic_question(
     question_id: str,
     question: str,
     depends_on: list[str],
-    semantic_edge_ids: list[str],
-    output_node_id: str,
     output_type: str,
     operation: str = "lookup",
 ) -> dict[str, object]:
@@ -1669,93 +1598,40 @@ def _atomic_question(
         "question": question,
         "depends_on": depends_on,
         "operation": operation,
-        "semantic_edge_ids": semantic_edge_ids,
-        "output_node_id": output_node_id,
         "output_type": output_type,
     }
 
 
 def _older_step5_payload() -> dict[str, object]:
     return {
-        "question_plan": _plan(
-            "select which person is older",
-            "person",
-            ["older comparison between Ryan Tubridy and Mauro Massironi"],
-            ["birth date of Ryan Tubridy", "birth date of Mauro Massironi"],
-        ),
-        "semantic_reasoning_paths": [
-            _semantic_path(
-                "p1",
-                ["Mauro Massironi", "older", "Ryan Tubridy"],
-                [
-                    _semantic_node("p1_n1", "Ryan Tubridy", "entity", "person", "explicit_entity", ["Ryan Tubridy"], ["Ryan Tubridy"]),
-                    _semantic_node("p1_n2", "birth date of Ryan Tubridy", "value_slot", "date", "derived_variable", ["older"], ["older"]),
-                ],
-                [_semantic_edge("p1_e1", "p1_n1", "p1_n2", "birth date for older comparison", ["Ryan Tubridy", "older"], ["Ryan Tubridy", "older"], "When was Ryan Tubridy born?")],
-                "p1_n2",
-            ),
-            _semantic_path(
-                "p2",
-                ["Mauro Massironi", "older", "Ryan Tubridy"],
-                [
-                    _semantic_node("p2_n1", "Mauro Massironi", "entity", "person", "explicit_entity", ["Mauro Massironi"], ["Mauro Massironi"]),
-                    _semantic_node("p2_n2", "birth date of Mauro Massironi", "value_slot", "date", "derived_variable", ["older"], ["older"]),
-                ],
-                [_semantic_edge("p2_e1", "p2_n1", "p2_n2", "birth date for older comparison", ["Mauro Massironi", "older"], ["Mauro Massironi", "older"], "When was Mauro Massironi born?")],
-                "p2_n2",
-            ),
-        ],
         "atomic_questions": [
-            _atomic_question("q1", "When was Ryan Tubridy born?", [], ["p1_e1"], "p1_n2", "date"),
-            _atomic_question("q2", "When was Mauro Massironi born?", [], ["p2_e1"], "p2_n2", "date"),
+            _atomic_question("q1", "When was Ryan Tubridy born?", [], "date"),
+            _atomic_question("q2", "When was Mauro Massironi born?", [], "date"),
+            _atomic_question(
+                "q3",
+                "Based on q1's answer and q2's answer, who is older: Ryan Tubridy or Mauro Massironi?",
+                ["q1", "q2"],
+                "person",
+                "select",
+            ),
         ],
     }
 
 
 def _illusions_step5_payload() -> dict[str, object]:
     return {
-        "question_plan": _plan(
-            "select which film has the director who was born later",
-            "work",
-            ["director of each film", "born later"],
-            ["director of Illusions (1982 Film)", "director of It'S A Wonderful Afterlife"],
-        ),
-        "semantic_reasoning_paths": [
-            _semantic_path(
-                "p1",
-                ["Illusions (1982 Film)", "film", "director", "born"],
-                [
-                    _semantic_node("p1_n1", "Illusions (1982 Film)", "entity", "work", "explicit_entity", ["Illusions (1982 Film)"], ["Illusions (1982 Film)"]),
-                    _semantic_node("p1_n2", "director of Illusions (1982 Film)", "intermediate_variable", "person", "derived_variable", ["director"], ["director of Illusions (1982 Film)"]),
-                    _semantic_node("p1_n3", "birth date of first director", "value_slot", "date", "derived_variable", ["born"], ["director born later"]),
-                ],
-                [
-                    _semantic_edge("p1_e1", "p1_n1", "p1_n2", "director of film", ["Illusions (1982 Film)", "director"], ["director of Illusions (1982 Film)"], "Who is the director of Illusions (1982 Film)?"),
-                    _semantic_edge("p1_e2", "p1_n2", "p1_n3", "birth date of director", ["director", "born"], ["director born later"], "When was the director born?"),
-                ],
-                "p1_n3",
-            ),
-            _semantic_path(
-                "p2",
-                ["It'S A Wonderful Afterlife", "film", "director", "born"],
-                [
-                    _semantic_node("p2_n1", "It'S A Wonderful Afterlife", "entity", "work", "explicit_entity", ["It'S A Wonderful Afterlife"], ["It'S A Wonderful Afterlife"]),
-                    _semantic_node("p2_n2", "director of It'S A Wonderful Afterlife", "intermediate_variable", "person", "derived_variable", ["director"], ["director of It'S A Wonderful Afterlife"]),
-                    _semantic_node("p2_n3", "birth date of second director", "value_slot", "date", "derived_variable", ["born"], ["director born later"]),
-                ],
-                [
-                    _semantic_edge("p2_e1", "p2_n1", "p2_n2", "director of film", ["It'S A Wonderful Afterlife", "director"], ["director of It'S A Wonderful Afterlife"], "Who is the director of It'S A Wonderful Afterlife?"),
-                    _semantic_edge("p2_e2", "p2_n2", "p2_n3", "birth date of director", ["director", "born"], ["director born later"], "When was the director born?"),
-                ],
-                "p2_n3",
-            ),
-        ],
         "atomic_questions": [
-            _atomic_question("q1", "Who is the director of Illusions (1982 Film)?", [], ["p1_e1"], "p1_n2", "person"),
-            _atomic_question("q2", "When was q1's answer born?", ["q1"], ["p1_e2"], "p1_n3", "date"),
-            _atomic_question("q3", "Who is the director of It'S A Wonderful Afterlife?", [], ["p2_e1"], "p2_n2", "person"),
-            _atomic_question("q4", "When was q3's answer born?", ["q3"], ["p2_e2"], "p2_n3", "date"),
-            _atomic_question("q5", "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?", ["q2", "q4"], [], "", "work", "select"),
+            _atomic_question("q1", "Who is the director of Illusions (1982 Film)?", [], "person"),
+            _atomic_question("q2", "When was q1's answer born?", ["q1"], "date"),
+            _atomic_question("q3", "Who is the director of It'S A Wonderful Afterlife?", [], "person"),
+            _atomic_question("q4", "When was q3's answer born?", ["q3"], "date"),
+            _atomic_question(
+                "q5",
+                "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
+                ["q2", "q4"],
+                "work",
+                "select",
+            ),
         ],
     }
 
@@ -1770,9 +1646,9 @@ class FakePreprocessLLM:
         if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
-            assert set(payload) == {"original_question", "explicit_entities", "global_best_paths"}
-            assert payload["explicit_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
-            assert payload["global_best_paths"]
+            assert set(payload) == {"original_question", "topic_entities", "step4_paths"}
+            assert payload["topic_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
+            assert payload["step4_paths"]
             serialized = json.dumps(payload, ensure_ascii=False)
             assert "ENTITYA" not in serialized
             assert "ENTITYB" not in serialized
@@ -1816,9 +1692,9 @@ class IllusionsPipelineLLM:
         if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
-            assert set(payload) == {"original_question", "explicit_entities", "global_best_paths"}
-            assert payload["explicit_entities"] == ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"]
-            assert payload["global_best_paths"] == [
+            assert set(payload) == {"original_question", "topic_entities", "step4_paths"}
+            assert payload["topic_entities"] == ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"]
+            assert payload["step4_paths"] == [
                 ["Illusions (1982 Film)", "film", "director", "born"],
                 ["It'S A Wonderful Afterlife", "film", "director", "born"],
             ]
