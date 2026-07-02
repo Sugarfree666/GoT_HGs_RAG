@@ -190,7 +190,7 @@ A semantic reasoning path is a directed object-relation structure.
 
 It contains:
 - semantic nodes: meaning-bearing reasoning objects;
-- semantic edges: executable semantic relations between those objects.
+- semantic edges: semantic relations, constraints, or operator links between those objects.
 
 A semantic node is not merely a token.
 A semantic edge is not merely a dependency edge.
@@ -204,19 +204,19 @@ A semantic node should represent only something needed for reasoning:
 - an operator;
 - a final answer slot.
 
-A semantic edge should represent one executable semantic operation:
+A semantic edge should represent a meaningful semantic relation or transition:
 - identify an intermediate variable from a known object;
-- retrieve a value of a resolved object;
+- retrieve or describe a value of a resolved object;
 - apply or preserve a constraint;
 - compare values;
 - select an answer;
 - verify a condition;
 - combine branch results.
 
-Each lookup semantic edge should correspond to exactly one atomic question.
-
-A semantic path may contain multiple lookup edges.
-Therefore, one semantic path may generate multiple atomic questions.
+Semantic edges are reasoning-path structure, not an atomic-question execution trace.
+Do not require one semantic edge to map to one atomic question.
+Do not require every atomic question to cite a semantic edge.
+The Atomic Question DAG should be generated from the semantic reasoning paths together with the original_question.
 
 ============================================================
 2. Evidence Roles
@@ -300,8 +300,7 @@ For each evidence path in global_best_paths:
 
 2. Determine the primary semantic role of this path:
    - single_path: one ordinary reasoning branch;
-   - candidate: one branch for a candidate alternative;
-   - operator: a pure comparison/selection/verification branch.
+   - candidate: one branch for a candidate alternative.
 
 3. Identify the primary candidate if the path represents one candidate alternative.
 
@@ -328,19 +327,18 @@ Do not merge multiple candidates into one semantic path.
 For each candidate branch:
 - build one semantic path centered on that candidate;
 - resolve the branch-specific intermediate variables;
-- resolve the branch-specific value needed by the operator;
-- make the branch terminal the compared value or branch output needed by the final operator.
+- resolve the branch-specific value or object needed by the original question's operator;
+- make the branch terminal the evidence value or branch output needed for later final answering.
 
-Then build a separate operator path if the original question requires comparison, selection, equality checking, verification, or aggregation.
-
-The operator path should consume the relevant branch outputs.
-It should return the answer type required by final_answer_intent.
+Do not build an extra pure operator semantic path such as p3 only to compare branch outputs.
+The downstream HyperBranch answer stage will combine the original question with the retrieved branch facts.
+Represent comparison or selection semantics as branch_role, edge_type, relation wording, node labels, or folded operator evidence inside the candidate paths.
 
 ============================================================
 7. Intermediate Variable Preservation
 ============================================================
 
-Do not collapse an intermediate variable and its attribute into one semantic edge.
+Preserve intermediate variables in the semantic reasoning path when they are needed to explain the reasoning.
 
 If the question requires:
 
@@ -348,18 +346,10 @@ known object
 -> intermediate variable
 -> attribute or value
 
-then generate two lookup edges:
+then the semantic path should make the intermediate variable visible instead of hiding it completely.
 
-known object
--> intermediate variable
-
-intermediate variable
--> attribute or value
-
-The corresponding atomic questions must also be separated.
-
-An atomic question must not ask for an attribute of an unresolved intermediate variable.
-It must first resolve the intermediate variable, then ask for its attribute.
+This is a semantic-path requirement, not a one-edge-one-question requirement.
+The final Atomic Question DAG may use one or more questions as needed, as long as the questions are answerable, dependencies are explicit, and the final answer intent is preserved.
 
 ============================================================
 8. Comparison and Selection
@@ -369,19 +359,29 @@ For comparison, ordering, superlative, equality, difference, or selection:
 
 1. Resolve each candidate or branch first.
 2. Resolve the value being compared in each branch.
-3. Use a final operator edge/question to compare or select.
-4. The final operator must return the answer type requested by the original question.
+3. Do not add a final operator semantic path or final operator atomic question only to answer the original question.
+4. Leave the final comparison, selection, equality check, or verification to the downstream HyperBranch answer stage.
 
 The compared value is evidence for the decision.
 It is not necessarily the final answer.
 
-If the original question asks for an entity, candidate, person, place, work, organization, or other object type, the final operator question must return that object type.
+Use operator words to decide which branch facts must be retrieved.
+For example:
+- younger or older between people usually requires birth date or age; prefer birth date when it is natural to ask;
+- born first, born earlier, born later requires birth date;
+- died first, died earlier, died later requires death date;
+- same nationality requires nationality for each compared person;
+- larger, smaller, highest, lowest, most, fewest requires the relevant numeric value for each branch.
 
-If the original question asks for a boolean judgment, the final operator question must return a boolean judgment.
+Do not make operator words such as younger, older, first, same, larger, or highest into dangling value nodes unless they are clearly the requested answer slot.
+Do not use branch relations such as "is younger than" unless both compared objects are already explicit inputs to that one question.
+Prefer value nodes such as birth date, death date, nationality, population, count, height, date, or score.
 
-If the original question asks for a value, the final operator question may return a value.
+Bad semantic candidate branch:
+A --has director--> director of A --is younger than--> younger
 
-Do not return the compared attribute unless the original question asks for that attribute.
+Good semantic candidate branch:
+A --has director--> director of A --birth date for younger comparison--> birth date of director of A
 
 ============================================================
 9. Semantic Node Criteria
@@ -414,6 +414,7 @@ A predicate token may become:
 - or an operator.
 
 It should not automatically become a node.
+In candidate comparison branches, an operator token such as younger, older, first, same, or larger should normally be folded into the relation or folded_or_discarded_tokens, while the terminal node should be the concrete compared value.
 
 ============================================================
 10. Semantic Edge Criteria
@@ -422,17 +423,16 @@ It should not automatically become a node.
 Each semantic edge must:
 
 1. connect existing semantic object nodes;
-2. express a specific executable semantic relation or operation;
-3. introduce at most one unresolved target;
-4. preserve necessary constraints;
-5. be supported by the token path, the original question, or both;
-6. be convertible into one atomic question if it is a lookup edge.
+2. express a specific semantic relation, constraint, or operation;
+3. preserve necessary constraints;
+4. be supported by the token path, the original question, or both;
+5. help explain the reasoning path used to build the final Atomic Question DAG.
 
 Avoid vague relations unless the original question itself is vague.
 
 Use condition_node_ids when an edge requires an additional already-known or previously-resolved constraint.
 
-A lookup edge should have a target node representing the newly resolved object or value.
+An edge target should represent the next semantic object, value, constraint, operator output, or final answer slot in the reasoning path.
 
 An operator edge should have a target node representing the selected answer, boolean judgment, aggregated result, or final answer slot.
 
@@ -440,27 +440,56 @@ An operator edge should have a target node representing the selected answer, boo
 11. Atomic Question DAG
 ============================================================
 
-Generate atomic questions from semantic edges.
+Generate the Atomic Question DAG from:
+- the original_question;
+- explicit_entities;
+- the semantic_reasoning_paths you induced from global_best_paths.
+
+The semantic reasoning paths guide the decomposition, but they are not an execution trace.
+An atomic question may be supported by one semantic edge, multiple semantic edges, a whole semantic path segment, or question-required semantics.
+semantic_edge_ids are optional debug/provenance fields only; do not rely on them as the contract.
 
 Rules:
 
-1. Each lookup atomic question should correspond to exactly one lookup semantic edge.
-2. Each lookup atomic question must ask for exactly one missing answer.
-3. Do not ask multi-hop questions.
-4. Do not merge two unresolved variables into one question.
-5. If a question depends on a previous answer, mention that dependency as q1's answer, q2's answer, etc.
-6. Do not use braced placeholders such as {{q1}}.
-7. Do not leave unresolved ENTITY placeholders.
-8. Preserve exact entity surface forms from original_question.
-9. Preserve all necessary constraints.
-10. depends_on may only reference previous q ids.
-11. A question must never refer to its own answer.
-12. The final leaf question must match final_answer_intent and final_answer_type.
+1. Each lookup atomic question should ask for one missing answer whenever possible.
+2. Do not create unnecessary dangling questions.
+3. If a question depends on a previous answer, mention that dependency as q1's answer, q2's answer, etc.
+4. Do not use braced placeholders such as {{q1}}.
+5. Do not leave unresolved ENTITY placeholders.
+6. Preserve exact entity surface forms from original_question.
+7. Preserve all necessary constraints.
+8. depends_on may only reference previous q ids.
+9. A question must never refer to its own answer.
+10. Final leaf questions should provide the retrieved evidence facts needed by the original question.
+11. Do not add a final atomic question that merely asks the original comparison, selection, or verification question.
+12. Do not collapse unresolved branch reasoning into one direct comparison question.
 
-If depends_on contains qN, the question should explicitly use qN's answer unless the question is a pure final operator that clearly uses the dependency through the compared or combined values.
+Bad for "Which film has a director who is younger, A or B?":
+q1: Is the director of A younger than the director of B?
+
+Better:
+q1: Who directed A?
+q2: When was q1's answer born?
+q3: Who directed B?
+q4: When was q3's answer born?
+
+No final q5 is needed; the downstream HyperBranch answer stage will use the original question and the retrieved facts.
+
+If depends_on contains qN, the question text must explicitly mention qN's answer.
+Do not write a depends_on entry that is not used in the question text.
+
+Bad:
+q1: Who directed A?
+q2: What is the age of the director of A?
+depends_on: ["q1"]
+
+Good:
+q1: Who directed A?
+q2: When was q1's answer born?
+depends_on: ["q1"]
 
 Do not create dangling questions.
-Every non-final lookup question should either support a later question or be part of the final answer.
+Every non-final question should either support a later question or be part of the final answer.
 
 When a previous answer already has the needed semantic type, do not wrap it in a redundant or type-changing phrase.
 
@@ -471,18 +500,11 @@ When a previous answer already has the needed semantic type, do not wrap it in a
 Return exactly one JSON object:
 
 {
-  "question_plan": {
-    "final_answer_intent": "what the original question ultimately asks",
-    "final_answer_type": "entity | person | place | organization | work | event | date | number | boolean | value | set | unknown",
-    "required_intermediate_variables": ["intermediate variable description"],
-    "required_constraints": ["constraint description"],
-    "required_operators": ["operator description"]
-  },
   "semantic_reasoning_paths": [
     {
       "branch_id": "p1",
-      "source_token_path": ["token copied from global_best_paths, or [] for a pure operator path"],
-      "branch_role": "candidate | single_path | operator",
+      "source_token_path": ["token copied from global_best_paths"],
+      "branch_role": "candidate | single_path",
       "primary_candidate": "explicit entity for this branch, or empty string",
       "semantic_nodes": [
         {
@@ -501,12 +523,12 @@ Return exactly one JSON object:
           "source": "p1_n1",
           "target": "p1_n2",
           "condition_node_ids": [],
-          "relation": "specific executable semantic relation",
+          "relation": "specific semantic relation, constraint, or operator transition",
           "edge_type": "lookup | constraint | compare | select | verify | intersect | aggregate",
           "evidence_status": "path_grounded | question_required | mixed | operator",
           "support_tokens": ["tokens copied from source_token_path"],
           "question_evidence": ["phrase(s) from original_question"],
-          "atomic_question_hint": "one-hop atomic question corresponding to this edge"
+          "atomic_question_hint": "optional natural-language question hint"
         }
       ],
       "terminal_node_id": "p1_nK",
@@ -518,23 +540,26 @@ Return exactly one JSON object:
       ]
     }
   ],
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "natural-language atomic question?",
-      "depends_on": [],
-      "operation": "lookup | compare | select | verify | intersect | aggregate",
-      "semantic_edge_ids": ["p1_e1"],
-      "output_node_id": "p1_n2",
-      "output_type": "entity | person | place | organization | work | event | date | number | boolean | value | set | unknown"
-    }
-  ]
+  "atomic_question_dag": {
+    "atomic_questions": [
+      {
+        "id": "q1",
+        "question": "natural-language atomic question?",
+        "depends_on": [],
+        "operation": "lookup | compare | select | verify | intersect | aggregate",
+        "output_type": "entity | person | place | organization | work | event | date | number | boolean | value | set | unknown"
+      }
+    ]
+  }
 }
 
 Schema requirements:
+- The top-level object must contain semantic_reasoning_paths and atomic_question_dag.
+- Do not output question_plan as a top-level field; use the question-level plan internally.
 - branch_id values must be p1, p2, p3, ... in order.
-- For evidence branches, source_token_path must copy one global_best_paths entry exactly.
-- For pure operator branches, source_token_path may be [].
+- semantic_reasoning_paths should normally contain one path per global_best_paths entry.
+- source_token_path must copy the corresponding global_best_paths entry exactly.
+- Do not add extra pure operator paths such as p3 when there are only two candidate evidence paths.
 - candidate branches must not merge multiple candidates into one semantic path.
 - semantic node ids must be p1_n1, p1_n2, ... inside each path.
 - semantic edge ids must be p1_e1, p1_e2, ... inside each path.
@@ -543,11 +568,12 @@ Schema requirements:
 - support_tokens and path_evidence must be copied from source_token_path.
 - support_tokens may be empty only when evidence_status is question_required or operator.
 - path_evidence may be empty only when origin is question_required or operator.
-- lookup atomic questions must cite at least one semantic_edge_id.
-- operator atomic questions may have semantic_edge_ids = [] only if they combine previous answers and require no new retrieval.
+- atomic_question_dag.atomic_questions must be a non-empty list.
+- atomic questions do not need semantic_edge_ids.
+- If semantic_edge_ids or output_node_id are included, treat them only as optional debug provenance, not as required bindings.
 - q ids must be q1, q2, q3, ... in reasoning order.
 - depends_on may only reference previous q ids.
-- Return only JSON. Do not include markdown, comments, explanations, or extra fields.
+- Return only JSON. Do not include markdown, comments, or explanations.
 
 ============================================================
 13. Final Self-Check
@@ -562,13 +588,13 @@ Before returning, verify:
 5. Did I avoid merging multiple candidates into one semantic path?
 6. Did I build semantic object nodes rather than raw token nodes?
 7. Did I avoid one-token-one-node relabeling?
-8. Did I preserve intermediate variables instead of collapsing multi-hop relations?
-9. Does each lookup edge map to exactly one atomic question?
-10. Does each atomic question ask for exactly one missing answer?
-11. For comparison or selection, did I resolve compared values before the final operator?
-12. Does the final operator return the original question's requested answer type rather than merely the compared attribute?
+8. Did I preserve intermediate variables when they are needed to explain the reasoning?
+9. Did I avoid forcing one semantic edge to become one atomic question?
+10. Does each atomic question ask for a clear missing answer or perform a clear operator step?
+11. For comparison or selection, did I retrieve the compared values for each branch?
+12. Did I avoid adding a final compare/select/verify question that merely answers the original question?
 13. Are all qN's answer references legal and backward-pointing?
-14. Does the final leaf question answer the original question?
+14. Do the final leaf questions provide evidence facts for the downstream HyperBranch answer stage?
 
 Return valid JSON only.
 """.strip()

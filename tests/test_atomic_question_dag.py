@@ -54,14 +54,27 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             self.assertNotIn(forbidden, serialized)
         self.assertIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn('"semantic_edges"', ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn('"semantic_edge_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn('"atomic_question_dag"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("atomic questions do not need semantic_edge_ids", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"reasoning_steps"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"support_step_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
 
-    def test_prompt_requires_dependency_mentions_in_question_text(self) -> None:
-        self.assertIn("question text must explicitly mention every dependency as q1's answer", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("do not write a dependent question that can be read without the dependency", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Do not add a follow-up question that merely restates or generalizes", ATOMIC_QUESTION_DAG_SYSTEM)
+    def test_prompt_does_not_require_semantic_edge_to_question_binding(self) -> None:
+        self.assertIn("Do not require one semantic edge to map to one atomic question.", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("semantic_edge_ids are optional debug/provenance fields only", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("An atomic question may be supported by one semantic edge, multiple semantic edges", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn("lookup atomic questions must cite at least one semantic_edge_id", ATOMIC_QUESTION_DAG_SYSTEM)
+
+    def test_prompt_avoids_final_operator_path_for_candidate_comparison(self) -> None:
+        self.assertIn("Do not build an extra pure operator semantic path such as p3", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Do not add a final atomic question that merely asks the original comparison", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("q1: Is the director of A younger than the director of B?", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("q4: When was q3's answer born?", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("No final q5 is needed", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("question text must explicitly mention qN's answer", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Do not write a depends_on entry that is not used in the question text", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Bad semantic candidate branch:", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("birth date for younger comparison", ATOMIC_QUESTION_DAG_SYSTEM)
 
     def test_restore_entity_paths_replaces_complete_placeholder_tokens_only(self) -> None:
         paths = [
@@ -124,6 +137,17 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertIn("question_plan", result.raw_payload)
         self.assertIn("semantic_reasoning_paths", result.raw_payload)
         self.assertEqual(result.nodes[0].to_dict()["support_step_ids"], [])
+
+    def test_simplified_step5_payload_builds_dag_without_semantic_edge_bindings(self) -> None:
+        result = validate_atomic_question_dag(_a_nest_simplified_payload())
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual([node.id for node in result.nodes], ["q1", "q2"])
+        self.assertEqual([node.semantic_edge_ids for node in result.nodes], [(), ()])
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
+        self.assertEqual(result.leaf_node_ids, ["q2"])
+        self.assertIn("semantic_reasoning_paths", result.raw_payload)
+        self.assertIn("atomic_question_dag", result.raw_payload)
 
     def test_path_generator_keeps_step5_input_contract(self) -> None:
         llm = RecordingStep5LLM(_a_nest_payload())
@@ -599,6 +623,24 @@ def _a_nest_payload() -> dict[str, Any]:
             _question("q1", "Who directed A Nest Of Noblemen?", [], ["p1_e1"], "p1_n2", "person"),
             _question("q2", "Where does q1's answer work?", ["q1"], ["p1_e2"], "p1_n3", "place"),
         ],
+    }
+
+
+def _a_nest_simplified_payload() -> dict[str, Any]:
+    payload = _a_nest_payload()
+    atomic_questions = [
+        {
+            "id": question["id"],
+            "question": question["question"],
+            "depends_on": question["depends_on"],
+            "operation": question["operation"],
+            "output_type": question["output_type"],
+        }
+        for question in payload["atomic_questions"]
+    ]
+    return {
+        "semantic_reasoning_paths": payload["semantic_reasoning_paths"],
+        "atomic_question_dag": {"atomic_questions": atomic_questions},
     }
 
 

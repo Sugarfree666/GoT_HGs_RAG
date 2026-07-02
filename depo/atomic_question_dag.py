@@ -192,7 +192,7 @@ def validate_atomic_question_dag(
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
-    raw_questions = raw_payload.get("atomic_questions")
+    raw_questions = _extract_atomic_questions(raw_payload)
     parsed_nodes = _coerce_atomic_question_nodes(raw_questions)
 
     edges = _edges_from_nodes(parsed_nodes)
@@ -206,6 +206,23 @@ def validate_atomic_question_dag(
         raw_payload=raw_payload,
         warnings=[],
     )
+
+
+def _extract_atomic_questions(raw_payload: dict[str, Any]) -> Any:
+    """Read Step5 questions from the simplified DAG envelope, with legacy fallback."""
+
+    if isinstance(raw_payload.get("atomic_questions"), list):
+        return raw_payload.get("atomic_questions")
+
+    raw_dag = raw_payload.get("atomic_question_dag")
+    if isinstance(raw_dag, dict):
+        if isinstance(raw_dag.get("atomic_questions"), list):
+            return raw_dag.get("atomic_questions")
+        if isinstance(raw_dag.get("nodes"), list):
+            return raw_dag.get("nodes")
+    if isinstance(raw_dag, list):
+        return raw_dag
+    return None
 
 
 def _coerce_atomic_question_nodes(raw_questions: Any) -> list[AtomicQuestionNode]:

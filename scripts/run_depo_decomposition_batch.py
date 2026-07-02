@@ -240,6 +240,7 @@ def build_decomposition_payload(
                     "global_best_paths": [list(path) for path in restored_global_best_paths],
                 },
                 "semantic_reasoning_paths": _step5_semantic_reasoning_paths(atomic_question_dag),
+                "atomic_question_dag": {"atomic_questions": _step5_atomic_questions(atomic_question_dag)},
                 "atomic_questions": _step5_atomic_questions(atomic_question_dag),
                 "actions": _step5_actions(atomic_question_dag),
             },
@@ -349,7 +350,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("")
 
     lines.append("## 6. Step5 Atomic Questions")
-    atomic_questions = action_trace.get("atomic_questions") or []
+    atomic_questions = _atomic_questions_from_payload(action_trace)
     if atomic_questions:
         for question in atomic_questions:
             depends_on = question.get("depends_on") or []
@@ -564,10 +565,25 @@ def _step5_atomic_questions(atomic_question_dag: Any) -> list[dict[str, Any]]:
     raw_payload = getattr(atomic_question_dag, "raw_payload", None)
     if not isinstance(raw_payload, dict):
         return []
-    questions = raw_payload.get("atomic_questions")
-    if not isinstance(questions, list):
+    return _atomic_questions_from_payload(raw_payload)
+
+
+def _atomic_questions_from_payload(raw_payload: Any) -> list[dict[str, Any]]:
+    if not isinstance(raw_payload, dict):
         return []
-    return [dict(question) for question in questions if isinstance(question, dict)]
+
+    questions = raw_payload.get("atomic_questions")
+    if isinstance(questions, list):
+        return [dict(question) for question in questions if isinstance(question, dict)]
+
+    raw_dag = raw_payload.get("atomic_question_dag")
+    if isinstance(raw_dag, dict):
+        questions = raw_dag.get("atomic_questions")
+        if isinstance(questions, list):
+            return [dict(question) for question in questions if isinstance(question, dict)]
+    if isinstance(raw_dag, list):
+        return [dict(question) for question in raw_dag if isinstance(question, dict)]
+    return []
 
 
 def _hanlp_sdp_edges(hanlp_sdp_result: Any) -> list[dict[str, Any]]:
