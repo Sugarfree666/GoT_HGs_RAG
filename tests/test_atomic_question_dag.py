@@ -173,6 +173,146 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
 
+    def test_dependency_binding_quality_warning(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "Who is the singer of Come Away with Me?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    },
+                    {
+                        "id": "q2",
+                        "question": "Who wrote Turn Me On?",
+                        "depends_on": ["q1"],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    },
+                ]
+            },
+            original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
+            explicit_entities=["Turn Me On", "Come Away with Me"],
+        )
+
+        self.assertTrue(result.valid)
+        self.assertTrue(any("does not mention q1's answer" in warning for warning in result.warnings))
+
+    def test_possessive_wh_reversal_quality_warning(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "Who played Susie in Miracle on 34th Street?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    },
+                    {
+                        "id": "q2",
+                        "question": "Who is the sister of q1's answer?",
+                        "depends_on": ["q1"],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    },
+                ]
+            },
+            original_question="Whose sister played Susie in Miracle on 34th Street?",
+            explicit_entities=["Susie", "Miracle on 34th Street"],
+        )
+
+        self.assertTrue(result.valid)
+        self.assertTrue(any("possessive-WH" in warning for warning in result.warnings))
+
+    def test_lived_longer_needs_lifespan_evidence_warning(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "When was Ludwig Elsbett born?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "date",
+                    },
+                    {
+                        "id": "q2",
+                        "question": "When was Pamela Ann Rymer born?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "date",
+                    },
+                    {
+                        "id": "q3",
+                        "question": "Based on q1's answer and q2's answer, who lived longer: Ludwig Elsbett or Pamela Ann Rymer?",
+                        "depends_on": ["q1", "q2"],
+                        "operation": "compare",
+                        "output_type": "person",
+                    },
+                ]
+            },
+            original_question="Who lived longer, Ludwig Elsbett or Pamela Ann Rymer?",
+            explicit_entities=["Ludwig Elsbett", "Pamela Ann Rymer"],
+        )
+
+        self.assertTrue(result.valid)
+        self.assertTrue(any("lived-longer comparison" in warning for warning in result.warnings))
+
+    def test_appositive_identity_quality_warning(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "Who is John Ernest's father-in-law?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    }
+                ]
+            },
+            original_question="Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?",
+            explicit_entities=["John Ernest", "Duke Of Saxe-Eisenach"],
+        )
+
+        self.assertTrue(result.valid)
+        self.assertTrue(any("Duke Of Saxe-Eisenach" in warning for warning in result.warnings))
+
+    def test_path_generator_does_not_repair_quality_warnings(self) -> None:
+        bad_payload = {
+            "atomic_questions": [
+                {
+                    "id": "q1",
+                    "question": "Who is the singer of Come Away with Me?",
+                    "depends_on": [],
+                    "operation": "lookup",
+                    "output_type": "person",
+                },
+                {
+                    "id": "q2",
+                    "question": "Who wrote Turn Me On?",
+                    "depends_on": ["q1"],
+                    "operation": "lookup",
+                    "output_type": "person",
+                },
+            ]
+        }
+        llm = RecordingStep5LLM(bad_payload)
+
+        result = PathAlignedAtomicDAGGenerator(llm).generate(
+            original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
+            explicit_entities=["Turn Me On", "Come Away with Me"],
+            global_best_paths=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
+        )
+
+        self.assertTrue(result.valid)
+        self.assertEqual(len(llm.user_prompts), 1)
+        self.assertTrue(any("does not mention q1's answer" in warning for warning in result.warnings))
+        self.assertEqual(result.nodes[1].question, "Who wrote Turn Me On?")
+
     def test_empty_global_best_path_fails_before_llm_call(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(

@@ -188,7 +188,7 @@ def validate_atomic_question_dag(
     explicit_entities: list[str] | None = None,
     global_best_paths: list[list[str]] | None = None,
 ) -> AtomicQuestionDAGResult:
-    del original_question, explicit_entities, global_best_paths
+    del global_best_paths
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
@@ -204,6 +204,11 @@ def validate_atomic_question_dag(
 
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
+    warnings = _atomic_question_dag_quality_warnings(
+        parsed_nodes,
+        original_question=original_question,
+        explicit_entities=explicit_entities,
+    )
     return AtomicQuestionDAGResult(
         nodes=parsed_nodes,
         edges=edges,
@@ -211,7 +216,7 @@ def validate_atomic_question_dag(
         valid=True,
         validation_errors=[],
         raw_payload=raw_payload,
-        warnings=[],
+        warnings=warnings,
     )
 
 
@@ -266,6 +271,169 @@ def _coerce_string_tuple(value: Any) -> tuple[str, ...]:
     if not isinstance(value, (list, tuple)):
         return ()
     return tuple(text for item in value if (text := str(item).strip()))
+
+
+def _atomic_question_dag_quality_warnings(
+    nodes: list[AtomicQuestionNode],
+    *,
+    original_question: str | None,
+    explicit_entities: list[str] | None,
+) -> list[str]:
+    warnings: list[str] = []
+    question_text = original_question or ""
+    question_lc = question_text.casefold()
+
+    warnings.extend(_dependency_binding_warnings(nodes))
+    warnings.extend(_placeholder_warnings(nodes))
+    warnings.extend(_possessive_wh_warnings(nodes, question_lc))
+    warnings.extend(_lifespan_comparison_warnings(nodes, question_lc))
+    warnings.extend(_appositive_identity_warnings(nodes, question_text, explicit_entities or []))
+
+    return _dedupe_preserve_order(warnings)
+
+
+def _dependency_binding_warnings(nodes: list[AtomicQuestionNode]) -> list[str]:
+    warnings: list[str] = []
+    previous_ids: set[str] = set()
+    node_ids = {node.id for node in nodes}
+    for node in nodes:
+        refs = set(_question_refs([node.question]))
+        deps = set(node.depends_on)
+        for dependency in node.depends_on:
+            if dependency not in node_ids:
+                warnings.append(f"{node.id}: depends_on references unknown node {dependency!r}.")
+            elif dependency not in previous_ids:
+                warnings.append(f"{node.id}: depends_on references non-previous node {dependency!r}.")
+            elif dependency not in refs:
+                warnings.append(f"{node.id}: depends_on includes {dependency!r}, but the question text does not mention {dependency}'s answer.")
+        for ref in refs:
+            if ref == node.id:
+                warnings.append(f"{node.id}: question refers to its own answer.")
+            elif ref not in previous_ids:
+                warnings.append(f"{node.id}: question mentions {ref}'s answer before that answer exists.")
+            elif ref not in deps:
+                warnings.append(f"{node.id}: question mentions {ref}'s answer but depends_on does not include {ref!r}.")
+        previous_ids.add(node.id)
+    return warnings
+
+
+def _placeholder_warnings(nodes: list[AtomicQuestionNode]) -> list[str]:
+    warnings: list[str] = []
+    for node in nodes:
+        if _contains_placeholder(node.question):
+            warnings.append(f"{node.id}: question contains unresolved ENTITY placeholder.")
+    return warnings
+
+
+def _possessive_wh_warnings(nodes: list[AtomicQuestionNode], original_question_lc: str) -> list[str]:
+    if "whose " not in original_question_lc:
+        return []
+    kinship_terms = (
+        "sister",
+        "brother",
+        "father",
+        "mother",
+        "child",
+        "son",
+        "daughter",
+        "spouse",
+        "wife",
+        "husband",
+        "parent",
+        "grandfather",
+        "grandmother",
+    )
+    pattern = re.compile(
+        r"\bwho\s+is\s+(?:the\s+)?(?:" + "|".join(re.escape(term) for term in kinship_terms) + r")\s+of\s+q[1-9][0-9]*(?:'|\u2019)s\s+answer\b",
+        re.IGNORECASE,
+    )
+    return [
+        f"{node.id}: possessive-WH question likely reversed; ask whose relation qN's answer has instead."
+        for node in nodes
+        if pattern.search(node.question)
+    ]
+
+
+def _lifespan_comparison_warnings(nodes: list[AtomicQuestionNode], original_question_lc: str) -> list[str]:
+    if not re.search(r"\bliv(?:e|ed|es|ing)\s+longer\b", original_question_lc):
+        return []
+    questions = [node.question.casefold() for node in nodes]
+    birth_count = sum(1 for question in questions if re.search(r"\b(born|birth date|date of birth)\b", question))
+    death_count = sum(1 for question in questions if re.search(r"\b(die|died|death date|date of death)\b", question))
+    lifespan_count = sum(1 for question in questions if "how long" in question and re.search(r"\bliv(?:e|ed)\b", question))
+    if (birth_count >= 2 and death_count >= 2) or lifespan_count >= 2:
+        return []
+    return ["lived-longer comparison needs lifespan evidence for each branch, not only birth dates."]
+
+
+def _appositive_identity_warnings(
+    nodes: list[AtomicQuestionNode],
+    original_question: str,
+    explicit_entities: list[str],
+) -> list[str]:
+    del explicit_entities
+    warnings: list[str] = []
+    node_text = " ".join(node.question for node in nodes)
+    for mention, base in _disambiguated_mentions(original_question):
+        if mention in node_text:
+            continue
+        if base and base in node_text:
+            warnings.append(f"Entity mention {mention!r} appears to be shortened to {base!r}; preserve disambiguating parenthetical/appositive text.")
+    return warnings
+
+
+def _disambiguated_mentions(question: str) -> list[tuple[str, str]]:
+    mentions: list[tuple[str, str]] = []
+    token = r"[A-Z][A-Za-z0-9.'’-]*"
+    name = rf"{token}(?:\s+{token}){{0,5}}"
+
+    for match in re.finditer(rf"\b({name}\s*\([^()]+\))", question):
+        mention = match.group(1).strip()
+        base = re.sub(r"\s*\([^()]+\)\s*$", "", mention).strip()
+        if base and mention:
+            mentions.append((mention, base))
+
+    appositive_titles = (
+        "Duke",
+        "Duchess",
+        "Count",
+        "Countess",
+        "Prince",
+        "Princess",
+        "King",
+        "Queen",
+        "Emperor",
+        "Empress",
+        "Baron",
+        "Baronet",
+        "Lord",
+        "Lady",
+        "Earl",
+        "Bishop",
+        "Pope",
+        "Saint",
+    )
+    title_pattern = "|".join(re.escape(title) for title in appositive_titles)
+    for match in re.finditer(rf"\b({name}),\s+((?:{title_pattern})\b[^?]*)", question):
+        base = match.group(1).strip()
+        tail = match.group(2).strip()
+        tail = re.split(r"\s+(?:or|and)\s+", tail, maxsplit=1)[0].strip()
+        tail = tail.rstrip(" ?")
+        mention = f"{base}, {tail}".strip()
+        if base and tail:
+            mentions.append((mention, base))
+    return _dedupe_preserve_order(mentions)
+
+
+def _dedupe_preserve_order(items: list[Any]) -> list[Any]:
+    seen: set[Any] = set()
+    deduped: list[Any] = []
+    for item in items:
+        if item in seen:
+            continue
+        seen.add(item)
+        deduped.append(item)
+    return deduped
 
 
 OUTPUT_TYPES = {"entity", "person", "place", "organization", "work", "event", "date", "number", "boolean", "value", "set", "unknown"}
