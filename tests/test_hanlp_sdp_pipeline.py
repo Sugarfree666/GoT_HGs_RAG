@@ -538,6 +538,81 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]],
         )
 
+    def test_conjunctive_constraint_cover_preserves_region_and_location_branches(self) -> None:
+        compiled = compile_token_reasoning_structure(self._region_location_created_result(), ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_conjunctive_constraint_cover")
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
+            [
+                ["When", "created", "region", "north", "immediately", "region", "located", "ENTITYA"],
+                ["When", "created", "region", "and", "location", "ENTITYB"],
+            ],
+        )
+        self.assertEqual(compiled.global_selection["selection_type"], "global_conjunctive_constraint_cover")
+        cover = compiled.global_selection["conjunctive_constraint_cover"]
+        self.assertEqual(cover["predicate"], "created")
+        self.assertEqual(cover["target"], "region")
+        self.assertEqual(cover["marker"], "and")
+        rendered_paths = [list(path.nodes) for path in compiled.paths]
+        self.assertFalse(
+            any(
+                self.contains_ordered_subsequence(path, ["ENTITYB", "location", "created", "region", "ENTITYA"])
+                for path in rendered_paths
+            )
+        )
+        self.assertTrue(
+            any(
+                result.get("conjunctive_constraint_covers")
+                for result in compiled.debug_payload["per_anchor_results"]
+            )
+        )
+        self.assert_path_union_graph(compiled)
+
+    def test_or_candidate_comparison_does_not_become_conjunctive_constraint_cover(self) -> None:
+        compiled = compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_best_path_cover")
+        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path_cover")
+        self.assertFalse(
+            any(
+                result.get("path_type") == "conjunctive_constraint_path_cover"
+                for result in compiled.debug_payload["per_anchor_results"]
+            )
+        )
+
+    def test_conjunctive_constraint_cover_is_structural_not_lexical(self) -> None:
+        result = _hanlp_result(
+            "When was the object adjacent to ENTITYA and the marker around ENTITYB formed?",
+            ["When", "was", "the", "object", "adjacent", "to", "ENTITYA", "and", "the", "marker", "around", "ENTITYB", "formed", "?"],
+            [
+                _root("sdp/dm", "formed", 13),
+                _psd("formed", "TWHEN", "When", 13, 1),
+                _psd("formed", "PAT-arg", "object", 13, 4),
+                _pas("formed", "verb_ARG2", "and", 13, 8),
+                _pas("and", "coord_ARG2", "marker", 8, 10),
+                _psd("formed", "PAT-arg", "marker", 13, 10),
+                _psd("object", "LOC", "adjacent", 4, 5),
+                _psd("adjacent", "PAT-arg", "ENTITYA", 5, 7),
+                _psd("marker", "LOC", "around", 10, 11),
+                _psd("around", "PAT-arg", "ENTITYB", 11, 12),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "global_conjunctive_constraint_cover")
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
+            [
+                ["When", "formed", "object", "adjacent", "ENTITYA"],
+                ["When", "formed", "object", "and", "marker", "around", "ENTITYB"],
+            ],
+        )
+        self.assertEqual(compiled.global_selection["conjunctive_constraint_cover"]["predicate"], "formed")
+        self.assertEqual(compiled.global_selection["conjunctive_constraint_cover"]["target"], "object")
+        self.assert_path_union_graph(compiled)
+
     def test_global_best_path_cover_preserves_both_born_later_film_branches(self) -> None:
         result = self._film_director_born_later_result()
 
@@ -1253,6 +1328,13 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 cursor += 1
         self.assertEqual(cursor, len(expected), values)
 
+    def contains_ordered_subsequence(self, values: list[str], expected: list[str]) -> bool:
+        cursor = 0
+        for value in values:
+            if cursor < len(expected) and value == expected[cursor]:
+                cursor += 1
+        return cursor == len(expected)
+
     def assert_path_union_graph(self, compiled: object) -> None:
         path_node_ids: set[str] = set()
         path_pairs: set[frozenset[str]] = set()
@@ -1266,7 +1348,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(final_pairs, path_pairs)
 
     def assert_multi_anchor_result(self, compiled: object) -> None:
-        self.assertIn(compiled.path_type, {"global_best_path", "global_best_path_cover"})  # type: ignore[attr-defined]
+        self.assertIn(compiled.path_type, {"global_best_path", "global_best_path_cover", "global_conjunctive_constraint_cover"})  # type: ignore[attr-defined]
         self.assertIsNotNone(compiled.answer_anchor)  # type: ignore[attr-defined]
         self.assertIsNotNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
         self.assertTrue(compiled.anchor_path_results)  # type: ignore[attr-defined]
@@ -1513,6 +1595,81 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _pas("or", "coord_ARG2", "ENTITYB", 7, 8),
                 _psd("or", "DISJ.member", "ENTITYA", 7, 6),
                 _psd("or", "DISJ.member", "ENTITYB", 7, 8),
+            ],
+        )
+
+    def _region_location_created_result(self) -> HanLPSDPResult:
+        return _hanlp_result(
+            "When was the region immediately north of the region where ENTITYA is located and the location of the ENTITYB created?",
+            [
+                "When",
+                "was",
+                "the",
+                "region",
+                "immediately",
+                "north",
+                "of",
+                "the",
+                "region",
+                "where",
+                "ENTITYA",
+                "is",
+                "located",
+                "and",
+                "the",
+                "location",
+                "of",
+                "the",
+                "ENTITYB",
+                "created",
+                "?",
+            ],
+            [
+                _dm("the", "BV", "region", 3, 4),
+                _dm("north", "loc", "region", 6, 4),
+                _dm("created", "ARG2", "region", 20, 4),
+                _dm("of", "ARG1", "north", 7, 6),
+                _dm("north", "ARG2", "region", 6, 9),
+                _dm("of", "ARG2", "region", 7, 9),
+                _dm("the", "BV", "region", 8, 9),
+                _dm("located", "ARG2", "ENTITYA", 13, 11),
+                _dm("region", "loc", "located", 9, 13),
+                _dm("the", "BV", "location", 15, 16),
+                _dm("of", "ARG1", "location", 17, 16),
+                _dm("of", "ARG2", "ENTITYB", 17, 19),
+                _dm("the", "BV", "ENTITYB", 18, 19),
+                _pas("the", "det_ARG1", "region", 3, 4),
+                _pas("north", "adj_ARG1", "region", 6, 4),
+                _pas("created", "verb_ARG2", "region", 20, 4),
+                _pas("immediately", "adj_ARG1", "north", 5, 6),
+                _pas("of", "prep_ARG1", "north", 7, 6),
+                _pas("of", "prep_ARG2", "region", 7, 9),
+                _pas("the", "det_ARG1", "region", 8, 9),
+                _pas("where", "conj_ARG1", "region", 10, 9),
+                _pas("is", "aux_ARG1", "ENTITYA", 12, 11),
+                _pas("located", "verb_ARG2", "ENTITYA", 13, 11),
+                _pas("where", "conj_ARG2", "located", 10, 13),
+                _pas("is", "aux_ARG2", "located", 12, 13),
+                _pas("was", "aux_ARG1", "and", 2, 14),
+                _pas("created", "verb_ARG2", "and", 20, 14),
+                _pas("and", "coord_ARG2", "location", 14, 16),
+                _pas("the", "det_ARG1", "location", 15, 16),
+                _pas("of", "prep_ARG1", "location", 17, 16),
+                _pas("of", "prep_ARG2", "ENTITYB", 17, 19),
+                _pas("the", "det_ARG1", "ENTITYB", 18, 19),
+                _pas("When", "adj_ARG1", "created", 1, 20),
+                _pas("was", "aux_ARG2", "created", 2, 20),
+                _psd("created", "TWHEN", "When", 20, 1),
+                _psd("created", "PAT-arg", "region", 20, 4),
+                _psd("north", "EXT", "immediately", 6, 5),
+                _psd("region", "LOC", "north", 4, 6),
+                _psd("north", "DIR1", "region", 6, 9),
+                _psd("located", "LOC-arg", "where", 13, 10),
+                _psd("located", "PAT-arg", "ENTITYA", 13, 11),
+                _psd("region", "RSTR", "located", 9, 13),
+                _psd("created", "PAT-arg", "location", 20, 16),
+                _psd("location", "APP", "ENTITYB", 16, 19),
+                _root("sdp/psd", "created", 20),
             ],
         )
 

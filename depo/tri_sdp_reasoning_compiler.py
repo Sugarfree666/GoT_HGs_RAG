@@ -299,9 +299,10 @@ class _GlobalPathCandidate:
     anchor_state: _WorkingState
     path_type: str
     selection_mode: str
+    conjunctive_cover: dict[str, Any] = field(default_factory=dict)
 
     def to_debug(self) -> dict[str, Any]:
-        return {
+        payload = {
             "anchor_index": self.anchor_index,
             "path_index": self.path_index,
             "anchor_id": self.anchor_id,
@@ -315,6 +316,9 @@ class _GlobalPathCandidate:
             "path_type": self.path_type,
             "selection_mode": self.selection_mode,
         }
+        if self.conjunctive_cover:
+            payload["conjunctive_constraint_cover"] = dict(self.conjunctive_cover)
+        return payload
 
 
 @dataclass
@@ -332,7 +336,47 @@ class _GlobalPathSelection:
             payload["candidate_set"] = list(self.candidate_set)
             payload["paths"] = [candidate.to_debug() for candidate in self.candidates]
             payload["winning_path"] = self.winning_candidate.to_debug()
+        elif self.selection_type == "global_conjunctive_constraint_cover":
+            payload["paths"] = [candidate.to_debug() for candidate in self.candidates]
+            payload["winning_path"] = self.winning_candidate.to_debug()
+            if self.winning_candidate.conjunctive_cover:
+                payload["conjunctive_constraint_cover"] = dict(self.winning_candidate.conjunctive_cover)
         return payload
+
+
+@dataclass(frozen=True)
+class _ConjunctiveConstraintCover:
+    cover_id: str
+    predicate_id: str
+    target_id: str
+    role_family: str
+    marker_id: str | None
+    member_head_ids: tuple[str, ...]
+    branch_entity_ids: tuple[str, ...]
+    branch_paths: tuple[tuple[str, ...], ...]
+    evidence: dict[str, Any]
+
+    def to_debug(self, nodes: dict[str, TokenReasoningNode]) -> dict[str, Any]:
+        return {
+            "cover_id": self.cover_id,
+            "predicate_id": self.predicate_id,
+            "predicate": nodes[self.predicate_id].text if self.predicate_id in nodes else None,
+            "target_id": self.target_id,
+            "target": nodes[self.target_id].text if self.target_id in nodes else None,
+            "role_family": self.role_family,
+            "marker_id": self.marker_id,
+            "marker": nodes[self.marker_id].text if self.marker_id in nodes else None,
+            "member_head_ids": list(self.member_head_ids),
+            "member_heads": [nodes[node_id].text for node_id in self.member_head_ids if node_id in nodes],
+            "branch_entity_ids": list(self.branch_entity_ids),
+            "branch_entities": [nodes[node_id].text for node_id in self.branch_entity_ids if node_id in nodes],
+            "branch_paths": [list(path) for path in self.branch_paths],
+            "branch_path_nodes": [
+                [nodes[node_id].text for node_id in path if node_id in nodes]
+                for path in self.branch_paths
+            ],
+            "evidence": dict(self.evidence),
+        }
 
 
 def compile_token_reasoning_structure(
@@ -395,7 +439,7 @@ def compile_token_reasoning_structure(
 
         add_descriptor_lifting_edges(anchor_state, explicit_entity_ids, anchor.node_id)
 
-        anchor_paths, path_type, candidate_path_records, selection_mode = _select_query_focused_paths(
+        anchor_paths, path_type, candidate_path_records, selection_mode, conjunctive_cover_debug = _select_query_focused_paths(
             state=anchor_state,
             explicit_entity_ids=explicit_entity_ids,
             query_focus=query_focus,
@@ -424,6 +468,7 @@ def compile_token_reasoning_structure(
                 query_focus=query_focus,
                 path_type=path_type,
                 selection_mode=selection_mode,
+                conjunctive_cover=conjunctive_cover_debug,
                 warnings=state.warnings,
             )
             global_candidates.append(global_candidate)
@@ -441,6 +486,7 @@ def compile_token_reasoning_structure(
                 "path_type": path_type,
                 "paths": [path.to_dict() for path in anchor_paths],
                 "selection_mode": selection_mode,
+                "conjunctive_constraint_covers": [conjunctive_cover_debug] if conjunctive_cover_debug else [],
                 "candidate_paths": [record.to_debug(anchor_state.nodes) for record in candidate_path_records],
                 "candidate_sets": candidate_sets,
                 "parallel_entity_sets": list(parallel_entity_sets),
@@ -2149,7 +2195,7 @@ def _select_query_focused_paths(
     constraints: list[dict[str, Any]],
     direct_candidate_sets: list[list[str]],
     parallel_entity_sets: list[dict[str, Any]],
-) -> tuple[list[TokenReasoningPath], str, list[_CandidatePath], str]:
+) -> tuple[list[TokenReasoningPath], str, list[_CandidatePath], str, dict[str, Any]]:
     candidate_records: list[_CandidatePath] = []
 
     parallel_paths = _extract_actual_parallel_path_cover(
@@ -2161,7 +2207,7 @@ def _select_query_focused_paths(
     if parallel_paths:
         paths, selected_records, all_records = parallel_paths
         candidate_records.extend(all_records)
-        return paths, "candidate_path_cover", candidate_records, "parallel_entity_paths"
+        return paths, "candidate_path_cover", candidate_records, "parallel_entity_paths", {}
 
     typed_paths = _extract_typed_slot_candidate_path_cover(
         state,
@@ -2172,7 +2218,7 @@ def _select_query_focused_paths(
     if typed_paths:
         paths, selected_records = typed_paths
         candidate_records.extend(selected_records)
-        return paths, "candidate_path_cover", candidate_records, "candidate_slot_substitution"
+        return paths, "candidate_path_cover", candidate_records, "candidate_slot_substitution", {}
 
     bare_wh_paths = _extract_bare_wh_candidate_path_cover(
         state,
@@ -2182,12 +2228,37 @@ def _select_query_focused_paths(
     if bare_wh_paths:
         paths, selected_records = bare_wh_paths
         candidate_records.extend(selected_records)
-        return paths, "candidate_path_cover", candidate_records, "candidate_bare_wh_substitution"
+        return paths, "candidate_path_cover", candidate_records, "candidate_bare_wh_substitution", {}
+
+    conjunctive_covers = detect_conjunctive_constraint_covers(
+        state,
+        explicit_entity_ids,
+        query_focus,
+        direct_candidate_sets=direct_candidate_sets,
+    )
+    if conjunctive_covers:
+        add_conjunctive_constraint_edges(state, conjunctive_covers)
+        conjunctive_paths = _select_conjunctive_constraint_path_cover(
+            state,
+            query_focus,
+            conjunctive_covers,
+        )
+        if conjunctive_paths:
+            paths, selected_records, cover = conjunctive_paths
+            candidate_records.extend(selected_records)
+            return (
+                paths,
+                "conjunctive_constraint_path_cover",
+                candidate_records,
+                "conjunctive_constraint_path_cover",
+                cover.to_debug(state.nodes),
+            )
 
     single_path, path_type, selected_record, all_records = _select_single_main_path(
         state,
         explicit_entity_ids,
         query_focus,
+        conjunctive_covers=conjunctive_covers,
     )
     candidate_records.extend(all_records)
     if selected_record:
@@ -2196,13 +2267,13 @@ def _select_query_focused_paths(
             for record in candidate_records
         ]
     if single_path:
-        return [single_path], path_type, candidate_records, path_type
+        return [single_path], path_type, candidate_records, path_type, {}
 
     fallback_id = _fallback_single_node_id(state.nodes, explicit_entity_ids, query_focus)
     if fallback_id:
         path = _path_from_ids("P1", state.nodes, [fallback_id])
-        return [path], "empty", candidate_records, "single_node_fallback"
-    return [], "empty", candidate_records, "empty"
+        return [path], "empty", candidate_records, "single_node_fallback", {}
+    return [], "empty", candidate_records, "empty", {}
 
 
 def _build_global_path_candidate(
@@ -2218,6 +2289,7 @@ def _build_global_path_candidate(
     query_focus: _QueryFocus,
     path_type: str,
     selection_mode: str,
+    conjunctive_cover: dict[str, Any],
     warnings: list[str],
 ) -> _GlobalPathCandidate:
     global_rank, components = _rank_global_path_candidate(
@@ -2242,6 +2314,7 @@ def _build_global_path_candidate(
         anchor_state=anchor_state,
         path_type=path_type,
         selection_mode=selection_mode,
+        conjunctive_cover=dict(conjunctive_cover),
     )
 
 
@@ -2357,6 +2430,10 @@ def _select_global_path_structure(
     if cover_selection is not None:
         return cover_selection
 
+    conjunctive_selection = _select_global_conjunctive_constraint_cover(candidates)
+    if conjunctive_selection is not None:
+        return conjunctive_selection
+
     if any(candidate.path_type == "candidate_path_cover" for candidate in candidates):
         warning = "global path cover selection found no complete candidate set; falling back to single global best path"
         if warning not in warnings:
@@ -2372,6 +2449,59 @@ def _select_global_path_structure(
         selection_type="global_best_path",
         candidates=[selected],
         winning_candidate=selected,
+    )
+
+
+def _select_global_conjunctive_constraint_cover(
+    candidates: list[_GlobalPathCandidate],
+) -> _GlobalPathSelection | None:
+    cover_candidates = [
+        candidate
+        for candidate in candidates
+        if candidate.path_type == "conjunctive_constraint_path_cover"
+        and candidate.conjunctive_cover
+        and candidate.conjunctive_cover.get("cover_id")
+    ]
+    if not cover_candidates:
+        return None
+
+    groups: dict[tuple[int, str], list[_GlobalPathCandidate]] = {}
+    for candidate in cover_candidates:
+        cover_id = str(candidate.conjunctive_cover.get("cover_id"))
+        groups.setdefault((candidate.anchor_index, cover_id), []).append(candidate)
+
+    complete_groups: list[list[_GlobalPathCandidate]] = []
+    for group in groups.values():
+        expected_count = len(group[0].conjunctive_cover.get("member_head_ids") or [])
+        if expected_count < 2:
+            expected_count = len(group[0].conjunctive_cover.get("branch_entity_ids") or [])
+        unique_paths = {(candidate.anchor_index, candidate.path_index) for candidate in group}
+        if expected_count >= 2 and len(unique_paths) >= expected_count:
+            complete_groups.append(sorted(group, key=lambda item: item.path_index))
+
+    if not complete_groups:
+        return None
+
+    candidate_pool = [candidate for group in complete_groups for candidate in group]
+    winning_seed = _select_global_best_path(candidate_pool)
+    if winning_seed is None:
+        return None
+
+    winning_group = next(
+        (
+            group
+            for group in complete_groups
+            if any(candidate is winning_seed for candidate in group)
+        ),
+        None,
+    )
+    if winning_group is None:
+        return None
+
+    return _GlobalPathSelection(
+        selection_type="global_conjunctive_constraint_cover",
+        candidates=winning_group,
+        winning_candidate=winning_seed,
     )
 
 
@@ -2714,6 +2844,807 @@ def _extract_bare_wh_candidate_path_cover(
     return None
 
 
+def detect_conjunctive_constraint_covers(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    query_focus: _QueryFocus,
+    *,
+    direct_candidate_sets: list[list[str]],
+) -> list[_ConjunctiveConstraintCover]:
+    if len(explicit_entity_ids) < 2:
+        return []
+
+    groups = _shared_predicate_role_member_groups(state)
+    covers: list[_ConjunctiveConstraintCover] = []
+    for group in groups:
+        predicate_id = str(group["predicate_id"])
+        role_family = str(group["role_family"])
+        member_ids = _sort_node_ids(group["member_ids"], state.nodes)
+        if len(member_ids) < 2 or predicate_id not in state.nodes:
+            continue
+
+        marker_id = _conjunctive_coordination_marker_id(state, predicate_id, member_ids, group["evidence"])
+        if marker_id and state.nodes[marker_id].text.lower() != "and":
+            continue
+        if not marker_id and not _markerless_conjunctive_group_allowed(state, member_ids, query_focus):
+            continue
+
+        target_id = _conjunctive_target_id(state, predicate_id, role_family, member_ids, query_focus, marker_id)
+        if not target_id:
+            continue
+        if _conjunctive_group_is_candidate_like(state, member_ids, direct_candidate_sets, marker_id):
+            continue
+
+        branch_paths: list[tuple[str, ...]] = []
+        branch_entity_ids: list[str] = []
+        viable = True
+        member_set = set(member_ids)
+        for member_id in member_ids:
+            blocked_ids = {predicate_id, *(member_set - {member_id})}
+            if marker_id:
+                blocked_ids.add(marker_id)
+            branch = _best_conjunctive_branch_path(
+                state,
+                member_id,
+                explicit_entity_ids,
+                blocked_ids=blocked_ids,
+            )
+            if branch is None:
+                viable = False
+                break
+            entity_id, path_ids = branch
+            branch_entity_ids.append(entity_id)
+            branch_paths.append(tuple(path_ids))
+
+        if not viable or len(set(branch_entity_ids)) < len(branch_entity_ids):
+            continue
+
+        cover_id = "cc:" + ":".join([predicate_id, role_family, target_id, *(member_ids)])
+        evidence = {
+            "rule": "conjunctive_constraint_cover",
+            "predicate_id": predicate_id,
+            "predicate": state.nodes[predicate_id].text,
+            "role_family": role_family,
+            "marker_id": marker_id,
+            "marker": state.nodes[marker_id].text if marker_id in state.nodes else None,
+            "shared_role_evidence": list(group["evidence"]),
+            "branch_entity_ids": list(branch_entity_ids),
+            "branch_entities": [state.nodes[node_id].text for node_id in branch_entity_ids if node_id in state.nodes],
+        }
+        covers.append(
+            _ConjunctiveConstraintCover(
+                cover_id=cover_id,
+                predicate_id=predicate_id,
+                target_id=target_id,
+                role_family=role_family,
+                marker_id=marker_id,
+                member_head_ids=tuple(member_ids),
+                branch_entity_ids=tuple(branch_entity_ids),
+                branch_paths=tuple(branch_paths),
+                evidence=evidence,
+            )
+        )
+
+    covers.sort(key=lambda cover: _conjunctive_cover_sort_key(state, cover, query_focus))
+    return covers
+
+
+def add_conjunctive_constraint_edges(
+    state: _WorkingState,
+    covers: list[_ConjunctiveConstraintCover],
+) -> None:
+    for cover in covers:
+        for member_id in cover.member_head_ids:
+            if member_id == cover.target_id:
+                continue
+            if cover.marker_id and cover.marker_id in state.nodes:
+                _ensure_conjunctive_constraint_edge(
+                    state,
+                    cover.target_id,
+                    cover.marker_id,
+                    cover,
+                    relation_marker="coordination_constraint_marker",
+                )
+                _ensure_conjunctive_constraint_edge(
+                    state,
+                    cover.marker_id,
+                    member_id,
+                    cover,
+                    relation_marker="coordination_constraint_member",
+                )
+            else:
+                _ensure_conjunctive_constraint_edge(
+                    state,
+                    cover.target_id,
+                    member_id,
+                    cover,
+                    relation_marker="conjunctive_constraint_alias",
+                )
+
+
+def _select_conjunctive_constraint_path_cover(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    covers: list[_ConjunctiveConstraintCover],
+) -> tuple[list[TokenReasoningPath], list[_CandidatePath], _ConjunctiveConstraintCover] | None:
+    for cover in covers:
+        backbone = _conjunctive_backbone_path(state, cover, query_focus)
+        if len(backbone) < 2 or cover.target_id not in backbone:
+            continue
+
+        member_to_branch = dict(zip(cover.member_head_ids, cover.branch_paths))
+        member_to_entity = dict(zip(cover.member_head_ids, cover.branch_entity_ids))
+        threaded_branch_paths: dict[str, list[str]] = {}
+        for member_id, branch_path in member_to_branch.items():
+            blocked_ids = {cover.predicate_id, *(set(cover.member_head_ids) - {member_id})}
+            if cover.marker_id:
+                blocked_ids.add(cover.marker_id)
+            threaded = _thread_conjunctive_branch_modifiers(state, list(branch_path), blocked_ids=blocked_ids)
+            threaded_branch_paths[member_id] = threaded
+
+        selected_paths: list[TokenReasoningPath] = []
+        selected_records: list[_CandidatePath] = []
+        semantic_nodes = set(backbone)
+        for branch_path in threaded_branch_paths.values():
+            semantic_nodes.update(branch_path)
+        for path_index, member_id in enumerate(cover.member_head_ids, start=1):
+            branch_path = threaded_branch_paths.get(member_id, [])
+            if not branch_path:
+                break
+            if member_id == cover.target_id:
+                full_path = _dedupe_adjacent([*backbone, *branch_path[1:]])
+            else:
+                connector = _conjunctive_member_connector_path(cover, member_id)
+                if not connector:
+                    break
+                full_path = _dedupe_adjacent([*backbone, *connector[1:], *branch_path[1:]])
+            if len(full_path) != len(set(full_path)):
+                break
+            path = _path_from_ids(f"P{path_index}", state.nodes, full_path)
+            selected_paths.append(path)
+            selected_records.append(
+                _rank_candidate_path(
+                    state.nodes,
+                    state.edges,
+                    full_path,
+                    query_focus,
+                    member_to_entity.get(member_id),
+                    "conjunctive_constraint_path_cover",
+                    required_ids=full_path,
+                    semantic_nodes=semantic_nodes,
+                ).with_selection(selected=True)
+            )
+        if len(selected_paths) != len(cover.member_head_ids):
+            continue
+        threaded_cover = _ConjunctiveConstraintCover(
+            cover_id=cover.cover_id,
+            predicate_id=cover.predicate_id,
+            target_id=cover.target_id,
+            role_family=cover.role_family,
+            marker_id=cover.marker_id,
+            member_head_ids=cover.member_head_ids,
+            branch_entity_ids=cover.branch_entity_ids,
+            branch_paths=tuple(tuple(threaded_branch_paths[member_id]) for member_id in cover.member_head_ids),
+            evidence=cover.evidence,
+        )
+        return selected_paths, selected_records, threaded_cover
+    return None
+
+
+def _shared_predicate_role_member_groups(state: _WorkingState) -> list[dict[str, Any]]:
+    groups: dict[tuple[str, str], dict[str, Any]] = {}
+    marker_role_edges: list[dict[str, Any]] = []
+
+    for edge in state.raw_edges.values():
+        for item in _raw_provenance(edge):
+            role = _semantic_role_family(item.get("normalized_relation") or item.get("relation"))
+            if role is None:
+                continue
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            predicate_id = str(head_idx)
+            member_id = str(dep_idx)
+            if predicate_id not in state.nodes or member_id not in state.nodes or predicate_id == "0":
+                continue
+            predicate_node = state.nodes[predicate_id]
+            member_node = state.nodes[member_id]
+            if not _is_clause_predicate_anchor_node(state.nodes, predicate_id):
+                continue
+            key = (predicate_id, role)
+            if _is_conjunctive_marker_node(member_node):
+                marker_role_edges.append(
+                    {
+                        "predicate_id": predicate_id,
+                        "role_family": role,
+                        "marker_id": member_id,
+                        "edge": _edge_provenance_summary(edge),
+                    }
+                )
+                continue
+            if not _is_conjunctive_member_head(member_node):
+                continue
+            group = groups.setdefault(
+                key,
+                {
+                    "predicate_id": predicate_id,
+                    "predicate": predicate_node.text,
+                    "role_family": role,
+                    "member_ids": [],
+                    "evidence": [],
+                },
+            )
+            if member_id not in group["member_ids"]:
+                group["member_ids"].append(member_id)
+            group["evidence"].append(
+                {
+                    "rule": "shared_predicate_role",
+                    "predicate_id": predicate_id,
+                    "predicate": predicate_node.text,
+                    "member_id": member_id,
+                    "member": member_node.text,
+                    "role_family": role,
+                    "edge": _edge_provenance_summary(edge),
+                }
+            )
+
+    adjacency = _adjacency(state.raw_edges)
+    for marker_edge in marker_role_edges:
+        predicate_id = str(marker_edge["predicate_id"])
+        role = str(marker_edge["role_family"])
+        marker_id = str(marker_edge["marker_id"])
+        key = (predicate_id, role)
+        group = groups.setdefault(
+            key,
+            {
+                "predicate_id": predicate_id,
+                "predicate": state.nodes[predicate_id].text,
+                "role_family": role,
+                "member_ids": [],
+                "evidence": [],
+            },
+        )
+        for neighbor_id, edge in _neighbor_edges(marker_id, adjacency, state.raw_edges):
+            if not _is_conjunctive_member_head(state.nodes[neighbor_id]):
+                continue
+            if "COORD" not in _edge_label_classes(edge):
+                continue
+            if neighbor_id not in group["member_ids"]:
+                group["member_ids"].append(neighbor_id)
+            group["evidence"].append(
+                {
+                    "rule": "predicate_marker_member",
+                    "predicate_id": predicate_id,
+                    "predicate": state.nodes[predicate_id].text,
+                    "marker_id": marker_id,
+                    "marker": state.nodes[marker_id].text,
+                    "member_id": neighbor_id,
+                    "member": state.nodes[neighbor_id].text,
+                    "role_family": role,
+                    "predicate_marker_edge": marker_edge["edge"],
+                    "marker_member_edge": _edge_provenance_summary(edge),
+                }
+            )
+
+    result: list[dict[str, Any]] = []
+    for group in groups.values():
+        member_ids = _sort_node_ids(group["member_ids"], state.nodes)
+        if len(member_ids) < 2:
+            continue
+        payload = dict(group)
+        payload["member_ids"] = member_ids
+        result.append(payload)
+    result.sort(
+        key=lambda group: (
+            _node_sort_key(state.nodes[str(group["predicate_id"])]),
+            str(group["role_family"]),
+            tuple(_node_sort_key(state.nodes[node_id]) for node_id in group["member_ids"]),
+        )
+    )
+    return result
+
+
+def _semantic_role_family(relation: object) -> str | None:
+    key = _normalized_relation_key(str(relation or ""))
+    if not key:
+        return None
+    if any(key.startswith(prefix) for prefix in ("prep_", "det_", "aux_", "coord_", "conj_", "relative_")):
+        return None
+    if key in {"loc", "tloc", "tmp"} or key.startswith("loc_") or key.endswith("_loc") or key.startswith("dir"):
+        return "loc"
+    if "twhen" in key or "temporal" in key:
+        return "temporal"
+    if key in {"arg2", "verb_arg2", "pat_arg", "eff_arg", "compl", "object"}:
+        return "patient"
+    if key.endswith("_arg2") and not key.startswith(("prep_", "det_", "aux_", "coord_", "conj_")):
+        return "patient"
+    if key in {"arg1", "verb_arg1", "act_arg", "auth", "agent", "subject"}:
+        return "agent"
+    if key.endswith("_arg1") and not key.startswith(("prep_", "det_", "aux_", "coord_", "conj_")):
+        return "agent"
+    return None
+
+
+def _is_conjunctive_member_head(node: TokenReasoningNode) -> bool:
+    if node.id == "0" or node.kind == "entity" or node.kind == "function":
+        return False
+    if node.text.lower() in WH_WORDS or _is_scope_node(node):
+        return False
+    return node.kind in {"content", "constraint", "answer"}
+
+
+def _is_conjunctive_marker_node(node: TokenReasoningNode) -> bool:
+    return node.text.lower() in {"and", "or"}
+
+
+def _conjunctive_coordination_marker_id(
+    state: _WorkingState,
+    predicate_id: str,
+    member_ids: list[str],
+    evidence: list[dict[str, Any]],
+) -> str | None:
+    candidate_ids: set[str] = set()
+    for item in evidence:
+        marker_id = str(item.get("marker_id") or "")
+        if marker_id in state.nodes and _is_conjunctive_marker_node(state.nodes[marker_id]):
+            candidate_ids.add(marker_id)
+
+    member_set = set(member_ids)
+    adjacency = _adjacency(state.raw_edges)
+    for marker in state.nodes.values():
+        if not _is_conjunctive_marker_node(marker):
+            continue
+        if _surface_marker_between_nodes(state.nodes, marker.id, member_ids):
+            candidate_ids.add(marker.id)
+            continue
+        touches_member = False
+        touches_predicate = False
+        for neighbor_id, edge in _neighbor_edges(marker.id, adjacency, state.raw_edges):
+            if neighbor_id in member_set and "COORD" in _edge_label_classes(edge):
+                touches_member = True
+            if neighbor_id == predicate_id and _semantic_role_family_from_edge(edge) is not None:
+                touches_predicate = True
+        if touches_member and (touches_predicate or _surface_marker_between_nodes(state.nodes, marker.id, member_ids)):
+            candidate_ids.add(marker.id)
+
+    if not candidate_ids:
+        return None
+    return sorted(
+        candidate_ids,
+        key=lambda node_id: (
+            0 if state.nodes[node_id].text.lower() == "and" else 1,
+            _node_sort_key(state.nodes[node_id]),
+        ),
+    )[0]
+
+
+def _surface_marker_between_nodes(
+    nodes: dict[str, TokenReasoningNode],
+    marker_id: str,
+    member_ids: list[str],
+) -> bool:
+    if marker_id not in nodes or len(member_ids) < 2:
+        return False
+    positions = [nodes[node_id].index for node_id in member_ids if node_id in nodes]
+    if len(positions) < 2:
+        return False
+    marker_index = nodes[marker_id].index
+    return min(positions) < marker_index < max(positions)
+
+
+def _semantic_role_family_from_edge(edge: TokenReasoningEdge) -> str | None:
+    for item in _raw_provenance(edge):
+        role = _semantic_role_family(item.get("normalized_relation") or item.get("relation"))
+        if role is not None:
+            return role
+    return None
+
+
+def _markerless_conjunctive_group_allowed(
+    state: _WorkingState,
+    member_ids: list[str],
+    query_focus: _QueryFocus,
+) -> bool:
+    focus_ids = _query_focus_node_ids(query_focus)
+    return bool(focus_ids.intersection(member_ids))
+
+
+def _conjunctive_target_id(
+    state: _WorkingState,
+    predicate_id: str,
+    role_family: str,
+    member_ids: list[str],
+    query_focus: _QueryFocus,
+    marker_id: str | None,
+) -> str | None:
+    if marker_id and marker_id in state.nodes:
+        marker_index = state.nodes[marker_id].index
+        left_members = [node_id for node_id in member_ids if state.nodes[node_id].index < marker_index]
+        if left_members:
+            return _sort_node_ids(left_members, state.nodes)[0]
+        return member_ids[0]
+    focus_ids = _query_focus_node_ids(query_focus)
+    for node_id in _sort_node_ids(focus_ids.intersection(member_ids), state.nodes):
+        return node_id
+    if role_family == "agent":
+        return None
+    del predicate_id
+    return member_ids[0]
+
+
+def _query_focus_node_ids(query_focus: _QueryFocus) -> set[str]:
+    return {
+        node_id
+        for node_id in (
+            query_focus.slot_id,
+            query_focus.terminal_id,
+            query_focus.answer_anchor_id,
+            query_focus.query_root_id,
+            *query_focus.required_ids,
+        )
+        if node_id
+    }
+
+
+def _conjunctive_group_is_candidate_like(
+    state: _WorkingState,
+    member_ids: list[str],
+    direct_candidate_sets: list[list[str]],
+    marker_id: str | None,
+) -> bool:
+    if marker_id and state.nodes[marker_id].text.lower() == "or":
+        return True
+    if not direct_candidate_sets:
+        return False
+    member_texts = {state.nodes[node_id].text for node_id in member_ids if node_id in state.nodes}
+    for candidate_set in direct_candidate_sets:
+        if member_texts and member_texts == set(candidate_set):
+            return True
+    return False
+
+
+def _best_conjunctive_branch_path(
+    state: _WorkingState,
+    member_id: str,
+    explicit_entity_ids: list[str],
+    *,
+    blocked_ids: set[str],
+) -> tuple[str, list[str]] | None:
+    ranked: list[tuple[tuple[Any, ...], str, list[str]]] = []
+    for entity_id in _sort_node_ids(explicit_entity_ids, state.nodes):
+        forbidden = set(blocked_ids)
+        forbidden.update(set(explicit_entity_ids) - {entity_id})
+        semantic_nodes = _conjunctive_branch_semantic_nodes(
+            state,
+            member_id,
+            entity_id,
+            blocked_ids=forbidden,
+        )
+        raw_paths: list[list[str]] = []
+        for allow_weak in (False, True):
+            raw_paths.extend(
+                _bounded_k_simple_paths(
+                    state.nodes,
+                    state.edges,
+                    source_id=member_id,
+                    target_id=entity_id,
+                    forbidden_nodes=forbidden,
+                    required_ids={entity_id, *semantic_nodes},
+                    allow_weak=allow_weak,
+                    max_nodes=10,
+                    top_k=24,
+                )
+            )
+        seen: set[tuple[str, ...]] = set()
+        for path in raw_paths:
+            key = tuple(path)
+            if key in seen:
+                continue
+            seen.add(key)
+            if _violates_blocked_conjunctive_path(path, blocked_ids):
+                continue
+            missing = len(semantic_nodes - set(path))
+            search_key = _path_search_sort_key(state.nodes, state.edges, path)
+            ranked.append(((missing, *search_key), entity_id, path))
+    if not ranked:
+        return None
+    _rank, entity_id, path = sorted(ranked, key=lambda item: item[0])[0]
+    return entity_id, path
+
+
+def _conjunctive_branch_semantic_nodes(
+    state: _WorkingState,
+    member_id: str,
+    entity_id: str,
+    *,
+    blocked_ids: set[str],
+) -> set[str]:
+    semantic_nodes = {member_id, entity_id}
+    adjacency = _adjacency(state.edges)
+    queue: list[tuple[str, int]] = [(member_id, 0)]
+    visited = {member_id}
+    while queue:
+        current, depth = queue.pop(0)
+        if depth >= 5:
+            continue
+        for neighbor_id, edge in _neighbor_edges(current, adjacency, state.edges):
+            if neighbor_id in visited or neighbor_id in blocked_ids:
+                continue
+            if "COORD" in _edge_label_classes_deep(edge) or _is_scope_node(state.nodes[neighbor_id]):
+                continue
+            if state.nodes[neighbor_id].kind == "function":
+                continue
+            if not (_edge_label_classes_deep(edge) & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "BRIDGE", "UNKNOWN"}):
+                continue
+            visited.add(neighbor_id)
+            if _is_semantic_node_candidate(state.nodes[neighbor_id]):
+                semantic_nodes.add(neighbor_id)
+            if neighbor_id == entity_id:
+                continue
+            queue.append((neighbor_id, depth + 1))
+    return semantic_nodes
+
+
+def _violates_blocked_conjunctive_path(path_ids: list[str], blocked_ids: set[str]) -> bool:
+    return any(node_id in blocked_ids for node_id in path_ids[1:-1])
+
+
+def _conjunctive_backbone_path(
+    state: _WorkingState,
+    cover: _ConjunctiveConstraintCover,
+    query_focus: _QueryFocus,
+) -> list[str]:
+    predicate_id = cover.predicate_id
+    target_id = cover.target_id
+    start_id = _conjunctive_wh_start_id(state, predicate_id, query_focus)
+    if start_id and start_id != predicate_id:
+        path = _best_existing_path_between(
+            state,
+            start_id,
+            predicate_id,
+            blocked_ids=set(cover.member_head_ids) - {target_id},
+            max_nodes=5,
+        )
+        if not path:
+            path = [start_id, predicate_id]
+    else:
+        path = [predicate_id]
+    if target_id != predicate_id:
+        suffix = _best_existing_path_between(
+            state,
+            predicate_id,
+            target_id,
+            blocked_ids=set(cover.member_head_ids) - {target_id},
+            max_nodes=4,
+        )
+        if not suffix:
+            suffix = [predicate_id, target_id]
+        path = _dedupe_adjacent([*path, *suffix[1:]])
+    return path
+
+
+def _conjunctive_wh_start_id(
+    state: _WorkingState,
+    predicate_id: str,
+    query_focus: _QueryFocus,
+) -> str | None:
+    adjacency = _adjacency(state.raw_edges)
+    wh_neighbors = [
+        neighbor_id
+        for neighbor_id, _edge in _neighbor_edges(predicate_id, adjacency, state.raw_edges)
+        if neighbor_id in state.nodes and state.nodes[neighbor_id].text.lower() in WH_WORDS
+    ]
+    if wh_neighbors:
+        return _sort_node_ids(wh_neighbors, state.nodes)[0]
+    if query_focus.terminal_id in state.nodes and state.nodes[query_focus.terminal_id].text.lower() in WH_WORDS:
+        return query_focus.terminal_id
+    if query_focus.answer_anchor_id in state.nodes and state.nodes[query_focus.answer_anchor_id].text.lower() in WH_WORDS:
+        return query_focus.answer_anchor_id
+    return None
+
+
+def _best_existing_path_between(
+    state: _WorkingState,
+    source_id: str,
+    target_id: str,
+    *,
+    blocked_ids: set[str],
+    max_nodes: int,
+) -> list[str]:
+    for allow_weak in (False, True):
+        paths = _bounded_k_simple_paths(
+            state.nodes,
+            state.edges,
+            source_id=source_id,
+            target_id=target_id,
+            forbidden_nodes=set(blocked_ids),
+            required_ids={target_id},
+            allow_weak=allow_weak,
+            max_nodes=max_nodes,
+            top_k=8,
+        )
+        if paths:
+            return paths[0]
+    return []
+
+
+def _conjunctive_member_connector_path(
+    cover: _ConjunctiveConstraintCover,
+    member_id: str,
+) -> list[str]:
+    if cover.marker_id:
+        return [cover.target_id, cover.marker_id, member_id]
+    return [cover.target_id, member_id]
+
+
+def _thread_conjunctive_branch_modifiers(
+    state: _WorkingState,
+    path_ids: list[str],
+    *,
+    blocked_ids: set[str],
+) -> list[str]:
+    if len(path_ids) < 3:
+        return path_ids
+    threaded = list(path_ids)
+    index = 0
+    while index < len(threaded) - 1:
+        current_id = threaded[index]
+        next_id = threaded[index + 1]
+        modifiers = _conjunctive_modifier_neighbors(state, current_id, exclude=set(threaded) | blocked_ids)
+        for modifier_id in modifiers:
+            if modifier_id in threaded:
+                continue
+            _ensure_conjunctive_modifier_threading_edge(state, current_id, modifier_id, next_id)
+            threaded.insert(index + 1, modifier_id)
+            index += 1
+        index += 1
+    return threaded
+
+
+def _conjunctive_modifier_neighbors(
+    state: _WorkingState,
+    node_id: str,
+    *,
+    exclude: set[str],
+) -> list[str]:
+    adjacency = _adjacency(state.edges)
+    modifiers: list[str] = []
+    for neighbor_id, edge in _neighbor_edges(node_id, adjacency, state.edges):
+        if neighbor_id in exclude or neighbor_id not in state.nodes:
+            continue
+        neighbor = state.nodes[neighbor_id]
+        if neighbor.kind == "function" or neighbor.kind == "entity" or _is_scope_node(neighbor):
+            continue
+        if not _is_semantic_node_candidate(neighbor):
+            continue
+        if _edge_is_modifier_like(edge):
+            modifiers.append(neighbor_id)
+    return _sort_node_ids(modifiers, state.nodes)
+
+
+def _edge_is_modifier_like(edge: TokenReasoningEdge) -> bool:
+    if "MODIFIER" in _edge_label_classes_deep(edge):
+        return True
+    relation_keys = _relation_keys_from_payload(edge.provenance)
+    return bool(relation_keys & {"ext", "adj_arg1", "adj_arg2", "amod", "advmod", "modifier", "nummod"})
+
+
+def _ensure_conjunctive_constraint_edge(
+    state: _WorkingState,
+    source_id: str,
+    target_id: str,
+    cover: _ConjunctiveConstraintCover,
+    *,
+    relation_marker: str,
+) -> None:
+    existing = state.edges.get(_edge_key(source_id, target_id))
+    if existing is not None and "conjunctive_constraint" in existing.rule:
+        return
+    edge_quality = "MEDIUM"
+    support = EDGE_QUALITY_SCORES[edge_quality]
+    provenance = {
+        "rule": "conjunctive_constraint_edge",
+        "relation_marker": relation_marker,
+        "edge_quality": edge_quality,
+        "derived": True,
+        "support": support,
+        "cover_id": cover.cover_id,
+        "predicate_id": cover.predicate_id,
+        "predicate": state.nodes[cover.predicate_id].text if cover.predicate_id in state.nodes else None,
+        "target_id": cover.target_id,
+        "target": state.nodes[cover.target_id].text if cover.target_id in state.nodes else None,
+        "marker_id": cover.marker_id,
+        "marker": state.nodes[cover.marker_id].text if cover.marker_id in state.nodes else None,
+        "member_head_ids": list(cover.member_head_ids),
+        "member_heads": [state.nodes[node_id].text for node_id in cover.member_head_ids if node_id in state.nodes],
+        "evidence": dict(cover.evidence),
+    }
+    virtual = _merge_edge(
+        state.edges,
+        state.nodes,
+        source_id,
+        target_id,
+        support=support,
+        edge_quality=edge_quality,
+        derived=True,
+        rule="conjunctive_constraint_edge",
+        provenance=[provenance],
+    )
+    state.virtual_edges.append(virtual.to_dict())
+
+
+def _ensure_conjunctive_modifier_threading_edge(
+    state: _WorkingState,
+    modified_id: str,
+    modifier_id: str,
+    next_id: str,
+) -> None:
+    existing = state.edges.get(_edge_key(modifier_id, next_id))
+    if existing is not None and "conjunctive_constraint_modifier_threading" in existing.rule:
+        return
+    modifier_edge = state.edges.get(_edge_key(modified_id, modifier_id))
+    next_edge = state.edges.get(_edge_key(modified_id, next_id))
+    edge_quality = "MEDIUM"
+    support = EDGE_QUALITY_SCORES[edge_quality]
+    provenance = {
+        "rule": "conjunctive_constraint_modifier_threading",
+        "edge_quality": edge_quality,
+        "derived": True,
+        "support": support,
+        "modified_id": modified_id,
+        "modified": state.nodes[modified_id].text if modified_id in state.nodes else None,
+        "modifier_id": modifier_id,
+        "modifier": state.nodes[modifier_id].text if modifier_id in state.nodes else None,
+        "next_id": next_id,
+        "next": state.nodes[next_id].text if next_id in state.nodes else None,
+        "source_edges": _edge_provenance_summaries([modifier_edge, next_edge]),
+    }
+    virtual = _merge_edge(
+        state.edges,
+        state.nodes,
+        modifier_id,
+        next_id,
+        support=support,
+        edge_quality=edge_quality,
+        derived=True,
+        rule="conjunctive_constraint_modifier_threading",
+        provenance=[provenance],
+    )
+    state.virtual_edges.append(virtual.to_dict())
+
+
+def _conjunctive_cover_sort_key(
+    state: _WorkingState,
+    cover: _ConjunctiveConstraintCover,
+    query_focus: _QueryFocus,
+) -> tuple[Any, ...]:
+    focus_ids = _query_focus_node_ids(query_focus)
+    return (
+        0 if cover.target_id in focus_ids else 1,
+        0 if cover.marker_id and state.nodes[cover.marker_id].text.lower() == "and" else 1,
+        len(cover.member_head_ids),
+        _node_sort_key(state.nodes[cover.predicate_id]),
+        _node_sort_key(state.nodes[cover.target_id]),
+        tuple(_node_sort_key(state.nodes[node_id]) for node_id in cover.member_head_ids),
+    )
+
+
+def _violates_conjunctive_member_bridge_via_answer_predicate(
+    path_ids: Iterable[str],
+    covers: list[_ConjunctiveConstraintCover],
+) -> bool:
+    ids = list(path_ids)
+    if len(ids) < 3 or not covers:
+        return False
+    for cover in covers:
+        members = set(cover.member_head_ids)
+        for left, middle, right in zip(ids, ids[1:], ids[2:]):
+            if middle == cover.predicate_id and left in members and right in members and left != right:
+                return True
+    return False
+
+
 def _extract_actual_parallel_path_cover(
     state: _WorkingState,
     query_focus: _QueryFocus,
@@ -2908,10 +3839,13 @@ def _select_single_main_path(
     state: _WorkingState,
     explicit_entity_ids: list[str],
     query_focus: _QueryFocus,
+    *,
+    conjunctive_covers: list[_ConjunctiveConstraintCover] | None = None,
 ) -> tuple[TokenReasoningPath | None, str, _CandidatePath | None, list[_CandidatePath]]:
     all_records: list[_CandidatePath] = []
     entity_best: list[_CandidatePath] = []
     semantic_nodes = _collect_question_semantic_nodes(state, explicit_entity_ids, query_focus, query_focus.answer_anchor_id)
+    conjunctive_covers = conjunctive_covers or []
     for entity_id in explicit_entity_ids:
         candidates = _enumerate_entity_focus_paths(
             state,
@@ -2921,9 +3855,20 @@ def _select_single_main_path(
             required_ids=list(query_focus.required_ids),
             semantic_nodes=semantic_nodes,
         )
-        all_records.extend(candidates)
-        if candidates:
-            entity_best.append(candidates[0])
+        allowed_candidates: list[_CandidatePath] = []
+        for candidate in candidates:
+            if _violates_conjunctive_member_bridge_via_answer_predicate(candidate.node_ids, conjunctive_covers):
+                all_records.append(
+                    candidate.with_selection(
+                        selected=False,
+                        rejected_reason="conjunctive_member_bridge_via_answer_predicate",
+                    )
+                )
+                continue
+            all_records.append(candidate)
+            allowed_candidates.append(candidate)
+        if allowed_candidates:
+            entity_best.append(allowed_candidates[0])
 
     if not entity_best:
         return None, "empty", None, all_records
