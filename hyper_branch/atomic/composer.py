@@ -21,23 +21,16 @@ class FinalAnswerComposer:
         payload_results = [self._result_payload(result) for result in atomic_results]
         dag_payload = [node.to_dict() for node in dag_nodes or []]
         if self.llm_service is not None:
-            candidate_payload = self.llm_service.compose_final_answer(
+            final_payload = self.llm_service.compose_final_answer(
                 original_question=original_question,
                 dag_nodes=dag_payload,
                 atomic_results=payload_results,
             )
-            answer_span_payload = self.llm_service.finalize_answer_span(
-                original_question=original_question,
-                synthesis_candidate=candidate_payload,
-            )
         else:
-            candidate_payload = self._fallback_compose(original_question, payload_results)
-            answer_span_payload = {
-                "answer": candidate_payload.get("candidate_answer", candidate_payload.get("answer", "")),
-                "confidence": candidate_payload.get("confidence", 0.0),
-                "answer_span_reasoning": "Fallback final span mirrors the candidate answer.",
-            }
-        payload = self._coerce_payload(candidate_payload, answer_span_payload, original_question, payload_results)
+            final_payload = self._fallback_compose(original_question, payload_results)
+            final_payload.setdefault("answer", final_payload.get("candidate_answer", ""))
+            final_payload.setdefault("answer_span_reasoning", "Fallback final answer mirrors the candidate answer.")
+        payload = self._coerce_single_payload(final_payload, original_question, payload_results)
         return _postprocess_final_answer(
             payload=payload,
             original_question=original_question,
@@ -83,8 +76,12 @@ class FinalAnswerComposer:
             if not str(item.get("answer", "")).strip() or str(item.get("answer", "")).strip() == "INSUFFICIENT_EVIDENCE"
         ]
         return {
+            "answer": answer,
             "candidate_answer": answer,
+            "semantic_answer": answer,
+            "judgment": _yes_no_judgment(answer),
             "reasoning_summary": short_text(" | ".join(str(item.get("reasoning_summary", "")) for item in atomic_results), 800),
+            "answer_span_reasoning": "Fallback final answer mirrors the candidate answer.",
             "confidence": confidence,
             "atomic_answer_trace": [
                 {
@@ -98,53 +95,188 @@ class FinalAnswerComposer:
             "remaining_gaps": remaining_gaps,
         }
 
-    def _coerce_payload(
+    def _coerce_single_payload(
         self,
-        candidate_payload: Any,
-        answer_span_payload: Any,
+        final_payload: Any,
         original_question: str,
         atomic_results: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        if not isinstance(candidate_payload, dict):
-            candidate_payload = self._fallback_compose(original_question, atomic_results)
-        if not isinstance(answer_span_payload, dict):
-            answer_span_payload = {}
+        del original_question
+        if not isinstance(final_payload, dict):
+            final_payload = self._fallback_compose("", atomic_results)
 
-        candidate_payload.setdefault("candidate_answer", candidate_payload.get("answer", ""))
-        candidate_payload.setdefault("reasoning_summary", "")
-        candidate_payload.setdefault("confidence", 0.0)
-        candidate_payload.setdefault(
-            "atomic_answer_trace",
-            [
-                {
-                    "node_id": item.get("node_id", ""),
-                    "question": item.get("question", ""),
-                    "answer": item.get("answer", ""),
-                    "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])),
-                }
-                for item in atomic_results
-            ],
-        )
-        candidate_payload.setdefault("remaining_gaps", [])
+        answer = str(final_payload.get("answer", "") or "").strip()
+        candidate_answer = str(final_payload.get("candidate_answer", "") or "").strip()
+        semantic_answer = str(final_payload.get("semantic_answer", "") or "").strip()
+        if not answer:
+            answer = candidate_answer or semantic_answer
+        if not candidate_answer:
+            candidate_answer = answer
+        if not semantic_answer:
+            semantic_answer = candidate_answer or answer
 
-        final_answer = str(answer_span_payload.get("answer", "") or "").strip()
-        if not final_answer:
-            final_answer = str(candidate_payload.get("candidate_answer", "") or "").strip()
-        confidence = answer_span_payload.get("confidence", candidate_payload.get("confidence", 0.0))
+        confidence = _bounded_confidence(final_payload.get("confidence", 0.0))
+        if not answer:
+            answer = "INSUFFICIENT_EVIDENCE"
+            candidate_answer = "INSUFFICIENT_EVIDENCE"
+            semantic_answer = "INSUFFICIENT_EVIDENCE"
+            confidence = 0.0
+        if answer.upper() == "INSUFFICIENT_EVIDENCE":
+            confidence = 0.0
+
+        trace = final_payload.get("atomic_answer_trace")
+        if not isinstance(trace, list) or len(trace) != len(atomic_results):
+            trace = _atomic_answer_trace(atomic_results)
+        remaining_gaps = final_payload.get("remaining_gaps", [])
+        if not isinstance(remaining_gaps, list):
+            remaining_gaps = [str(remaining_gaps)] if str(remaining_gaps).strip() else []
+
+        judgment = final_payload.get("judgment", None)
+        if isinstance(judgment, str):
+            normalized_judgment = judgment.strip().lower()
+            judgment = normalized_judgment if normalized_judgment in {"yes", "no"} else None
+        else:
+            judgment = None
 
         payload = {
-            "answer": final_answer,
-            "candidate_answer": str(candidate_payload.get("candidate_answer", "") or "").strip(),
-            "reasoning_summary": str(candidate_payload.get("reasoning_summary", "") or "").strip(),
-            "answer_span_reasoning": str(answer_span_payload.get("answer_span_reasoning", "") or "").strip(),
-            "confidence": max(0.0, min(1.0, float(confidence or 0.0))),
-            "atomic_answer_trace": list(candidate_payload.get("atomic_answer_trace", [])),
-            "remaining_gaps": list(candidate_payload.get("remaining_gaps", [])),
+            "answer": answer,
+            "candidate_answer": candidate_answer,
+            "semantic_answer": semantic_answer,
+            "judgment": judgment,
+            "reasoning_summary": str(final_payload.get("reasoning_summary", "") or "").strip(),
+            "answer_span_reasoning": str(final_payload.get("answer_span_reasoning", "") or "").strip(),
+            "confidence": confidence,
+            "atomic_answer_trace": list(trace),
+            "remaining_gaps": [str(item).strip() for item in remaining_gaps if str(item).strip()],
         }
-        if not payload["answer"]:
-            payload["answer"] = "INSUFFICIENT_EVIDENCE"
-            payload["confidence"] = 0.0
         return payload
+
+
+def _atomic_answer_trace(atomic_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "node_id": item.get("node_id", ""),
+            "question": item.get("question", ""),
+            "answer": item.get("answer", ""),
+            "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])),
+        }
+        for item in atomic_results
+    ]
+
+
+def _bounded_confidence(value: Any) -> float:
+    try:
+        return max(0.0, min(1.0, float(value or 0.0)))
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _yes_no_judgment(answer: str) -> str | None:
+    normalized = str(answer or "").strip().lower()
+    return normalized if normalized in {"yes", "no"} else None
+
+
+_COUNTRY_TO_DEMONYM = {
+    "austria": "Austrian",
+    "canada": "Canadian",
+    "china": "Chinese",
+    "czech republic": "Czech",
+    "england": "English",
+    "france": "French",
+    "germany": "German",
+    "ireland": "Irish",
+    "italy": "Italian",
+    "japan": "Japanese",
+    "poland": "Polish",
+    "romania": "Romanian",
+    "russia": "Russian",
+    "spain": "Spanish",
+    "sweden": "Swedish",
+    "united kingdom": "British",
+    "united states": "American",
+    "united states of america": "American",
+}
+
+_DEMONYM_TO_COUNTRY = {
+    "american": "United States",
+    "british": "United Kingdom",
+    "canadian": "Canada",
+    "chinese": "China",
+    "czech": "Czech Republic",
+    "english": "England",
+    "french": "France",
+    "german": "Germany",
+    "irish": "Ireland",
+    "italian": "Italy",
+    "japanese": "Japan",
+    "polish": "Poland",
+    "romanian": "Romania",
+    "russian": "Russia",
+    "spanish": "Spain",
+    "swedish": "Sweden",
+}
+
+_GEOGRAPHIC_SUFFIXES = {
+    "argentina",
+    "australia",
+    "austria",
+    "belgium",
+    "brazil",
+    "canada",
+    "california",
+    "china",
+    "england",
+    "france",
+    "germany",
+    "great britain",
+    "india",
+    "ireland",
+    "italy",
+    "japan",
+    "london",
+    "netherlands",
+    "new york",
+    "poland",
+    "russia",
+    "scotland",
+    "spain",
+    "sweden",
+    "united kingdom",
+    "united states",
+    "united states of america",
+    "wales",
+}
+
+_LOCATION_CONTEXT_SUFFIXES = {
+    "argentina",
+    "australia",
+    "austria",
+    "belgium",
+    "brazil",
+    "canada",
+    "china",
+    "denmark",
+    "england",
+    "france",
+    "germany",
+    "great britain",
+    "india",
+    "ireland",
+    "italy",
+    "japan",
+    "netherlands",
+    "northern ireland",
+    "poland",
+    "russia",
+    "russian federation",
+    "scotland",
+    "spain",
+    "sweden",
+    "united kingdom",
+    "united states",
+    "united states of america",
+    "wales",
+}
 
 
 def _postprocess_final_answer(
@@ -175,6 +307,14 @@ def _postprocess_final_answer(
             or "Deterministic span normalizer selected the minimal candidate span."
         )
         corrected["deterministic_span_normalized"] = True
+    date_span = _date_canonical_span(
+        str(corrected.get("answer", "") or ""),
+        original_question,
+    )
+    if date_span and date_span != corrected.get("answer"):
+        corrected["answer"] = date_span
+        corrected["answer_span_reasoning"] = "Deterministic span normalizer selected the first supported year."
+        corrected["deterministic_date_normalized"] = True
     alias = _parenthetical_alias_span(
         str(corrected.get("answer", "") or ""),
         original_question,
@@ -185,6 +325,22 @@ def _postprocess_final_answer(
         corrected["answer"] = alias
         corrected["answer_span_reasoning"] = "Deterministic span normalizer selected a parenthetical alias."
         corrected["deterministic_parenthetical_alias"] = True
+    location = _location_canonical_span(
+        str(corrected.get("answer", "") or ""),
+        original_question,
+    )
+    if location and location != corrected.get("answer"):
+        corrected["answer"] = location
+        corrected["answer_span_reasoning"] = "Deterministic span normalizer removed geographic context from a place answer."
+        corrected["deterministic_location_normalized"] = True
+    organization = _organization_alias_span(
+        str(corrected.get("answer", "") or ""),
+        original_question,
+    )
+    if organization and organization != corrected.get("answer"):
+        corrected["answer"] = organization
+        corrected["answer_span_reasoning"] = "Deterministic span normalizer selected a shorter organization alias."
+        corrected["deterministic_organization_alias"] = True
     nationality = _nationality_canonical_span(
         str(corrected.get("answer", "") or ""),
         original_question,
@@ -283,12 +439,6 @@ def _deterministic_yes_no_answer(
     dag_nodes: list[dict[str, Any]],
 ) -> dict[str, Any] | None:
     lowered = original_question.lower()
-    if not (
-        lowered.startswith(("are ", "do ", "does ", "did ", "is ", "was ", "were "))
-        or "same " in lowered
-        or "share " in lowered
-    ):
-        return None
     answers = _terminal_atomic_answers(atomic_results, dag_nodes)
     explicit_terminal = [
         answer
@@ -303,6 +453,8 @@ def _deterministic_yes_no_answer(
             "reason": "Used the explicit terminal yes/no atomic answer.",
             "compared_answers": answers,
         }
+    if not ("same " in lowered or "share the same" in lowered):
+        return None
     if len(answers) < 2:
         return None
     normalized = [_normalize_comparison_answer(answer) for answer in answers[-2:]]
@@ -375,37 +527,100 @@ def _is_plausible_parenthetical_alias(alias: str) -> bool:
     return 1 <= len(alias.split()) <= 5
 
 
-_NATIONALITY_TO_EVAL_COUNTRY = {
-    "american": "America",
-    "german": "Germany",
-    "danish": "Denmark",
-    "french": "France",
-}
+def _location_canonical_span(answer: str, original_question: str) -> str | None:
+    answer = normalize_label(answer).strip()
+    if not answer or ";" in answer:
+        return None
+    if _looks_like_date_span(answer):
+        return None
+    if _norm_text(answer) and _norm_text(answer) in _norm_text(original_question):
+        return None
+    question = original_question.lower()
+    if re.search(r"\b(?:country|nationality|state|province|region|kingdom|empire|caliphate|commonwealth)\b", question):
+        return None
+    if not re.search(
+        r"\b(?:place of birth|place of death|birthplace|deathplace|born|die|died|death|birth|location|located|where)\b",
+        question,
+    ):
+        return None
+
+    parts = [part.strip() for part in answer.split(",") if part.strip()]
+    if len(parts) < 2:
+        return None
+    if len(parts) >= 3 and parts[1].lower().startswith("near "):
+        return parts[0]
+    if len(parts) == 2:
+        first_norm = _norm_text(parts[0])
+        second_norm = _norm_text(parts[1])
+        if second_norm == first_norm:
+            return parts[0]
+        if first_norm and second_norm == f"{first_norm} prefecture":
+            return parts[0]
+        if second_norm in _LOCATION_CONTEXT_SUFFIXES:
+            return parts[0]
+    return None
+
+
+def _looks_like_date_span(answer: str) -> bool:
+    return bool(
+        re.search(
+            r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b",
+            answer,
+            flags=re.IGNORECASE,
+        )
+        or re.fullmatch(r"\s*\d{1,2}\s*,\s*(?:1[0-9]{3}|20[0-9]{2}|[1-9][0-9]{2})\s*", answer)
+    )
+
+
+def _organization_alias_span(answer: str, original_question: str) -> str | None:
+    answer = normalize_label(answer).strip()
+    if not answer or " of " not in answer.lower():
+        return None
+    question = original_question.lower()
+    if not re.search(r"\b(?:work|institution|organization|organisation|company|employer|where)\b", question):
+        return None
+    match = re.match(r"^(?P<prefix>.+?)\s+of\s+(?P<suffix>[^,;()]+)$", answer, flags=re.IGNORECASE)
+    if not match:
+        return None
+    prefix = match.group("prefix").strip()
+    suffix = match.group("suffix").strip()
+    if len(prefix.split()) < 2:
+        return None
+    if not re.search(
+        r"\b(?:institution|institute|society|association|academy|museum|library|gallery|college|university|foundation|school|hospital|company|corporation|council|center|centre|laboratory|observatory)\b",
+        prefix,
+        flags=re.IGNORECASE,
+    ):
+        return None
+    if _norm_text(suffix) not in _GEOGRAPHIC_SUFFIXES:
+        return None
+    return prefix
+
+
+def _date_canonical_span(answer: str, original_question: str) -> str | None:
+    answer = normalize_label(answer).strip()
+    if not answer:
+        return None
+    if not re.search(r"\b(?:when|what year|born|birth|died|death|released)\b", original_question.lower()):
+        return None
+    match = re.fullmatch(r"\s*((?:1[0-9]{3}|20[0-9]{2}|[1-9][0-9]{2}))\s*/\s*((?:1[0-9]{3}|20[0-9]{2}|[1-9][0-9]{2}))\s*", answer)
+    if not match:
+        return None
+    return match.group(1)
 
 
 def _nationality_canonical_span(answer: str, original_question: str) -> str | None:
-    if "nationality" not in original_question.lower():
+    question = original_question.lower()
+    answer = normalize_label(answer).strip()
+    if not answer or "-" in answer or "/" in answer or "," in answer:
         return None
-    cleaned = normalize_label(answer).strip(" ?.,;:")
-    if not cleaned or cleaned.upper() == "INSUFFICIENT_EVIDENCE":
-        return None
-    lowered = cleaned.lower()
-    if lowered in _NATIONALITY_TO_EVAL_COUNTRY:
-        return _NATIONALITY_TO_EVAL_COUNTRY[lowered]
-    if lowered.endswith(" american"):
-        first = cleaned.rsplit(" ", 1)[0].strip()
-        if first and first.lower() not in {"african", "asian", "latin"}:
-            return first
-    parts = [
-        part.strip()
-        for part in re.split(r"[-/]|(?:\s+and\s+)", cleaned)
-        if part.strip()
-    ]
-    if len(parts) >= 2:
-        first = parts[0]
-        first_lower = first.lower()
-        if first_lower not in {"african", "asian", "european", "latin"}:
-            return first
+    # Compound labels stay with the single-stage resolver. This deterministic
+    # fallback only handles one-label country/demonym aliases in explicitly
+    # typed country/nationality questions.
+    if "nationality" in question:
+        return _COUNTRY_TO_DEMONYM.get(_norm_text(answer))
+    if re.search(r"\bcountry\b", question):
+        return _DEMONYM_TO_COUNTRY.get(_norm_text(answer))
     return None
 
 
@@ -609,7 +824,7 @@ def _capitalized_phrases(text: str) -> list[str]:
 def _clean_candidate_label(text: str) -> str:
     text = normalize_label(text).strip(" ?.,;:")
     text = re.sub(
-        r"^(?:which|what|who|whom|whose|where|when|why|was|were|is|are|did|do|does)\s+",
+        r"^(?:which|what|who|whom|whose|was|were|is|are|did|do|does)\s+",
         "",
         text,
         flags=re.IGNORECASE,

@@ -146,35 +146,20 @@ ATOMIC_QUESTION_DAG_SYSTEM = r"""
 You are DEPO Step 5: Atomic Question DAG Generator.
 
 Your task is to decompose the original question into a minimal, executable Atomic Question DAG.
-
 Do not answer the original question.
 Do not use external knowledge.
-Do not output explanations, plans, semantic paths, reasoning traces, markdown, comments, or warnings.
 Return exactly one valid JSON object with one top-level key: "atomic_questions".
+Do not output explanations, plans, semantic paths, reasoning traces, markdown, comments, or warnings.
 
 You are given:
-- original_question: the full natural-language question. This is the semantic authority.
-- topic_entities: explicit/topic entities extracted from the original question.
-- step4_paths: token-level structural hints produced by Step4.
+- original_question: the semantic authority.
+- topic_entities: explicit entities from the original question.
+- step4_paths: token-level structural hints from Step4.
 
-The original_question decides:
-- the final answer intent;
-- the final answer type;
-- the target variable;
-- intermediate variables;
-- constraints and modifier attachment;
-- comparison, selection, verification, and aggregation semantics;
-- whether a final combine/compare/select/verify node is needed.
-
-step4_paths are only structural hints.
-They may help reveal candidate branches, bridge variables, operators, modifiers, or noisy parser structure.
-They do not determine the DAG.
-They do not need to support every DAG node.
-DAG nodes do not need path support.
-They may be incomplete, noisy, reversed, or contain grammatical tokens.
-Never mechanically copy step4_paths.
-Never convert adjacent path tokens into relations.
-Ignore parser-noise tokens such as get, has, is, are, of, the, a, how, which, long when they are only grammatical or WH markers.
+The original_question decides the final answer intent, answer type, target variable, constraints, operators, and dependency structure.
+step4_paths are only structural hints. They may be incomplete, noisy, reversed, or contain grammatical tokens.
+Use them to notice branches, target variables, modifiers, and operators, but never mechanically copy token order.
+DAG nodes do not need path support from step4_paths when the original_question requires the node.
 
 ============================================================
 Core objective
@@ -184,16 +169,15 @@ Generate the smallest DAG that is sufficient to answer the original question.
 
 Atomicity means:
 - one subquestion asks for one missing entity, attribute, value, set, boolean, or comparison result;
-- a subquestion may contain constraints from the original question if those constraints are necessary to identify one variable;
+- a subquestion may contain all constraints needed to identify one variable;
 - atomicity does not mean one dependency-path edge per question.
 
-Good atomic question:
-- "Which city shares a county with Helvetia?"
-This asks for one target city under a necessary constraint.
+A good DAG has this property:
+Every non-final subquestion either directly helps answer the final question, or is an ancestor of a node that helps answer the final question.
 
-Bad atomic question:
-- "What county does Helvetia share?"
-This is underspecified and asks for the wrong intermediate object when the original question asks about a city.
+Avoid dangling subquestions:
+Do not create a subquestion for a constraint branch and then leave it unused by the final answer.
+If a branch is required to identify the target variable, the final answer question must directly or indirectly depend on that branch.
 
 ============================================================
 Silent decomposition protocol
@@ -201,53 +185,27 @@ Silent decomposition protocol
 
 Before producing JSON, silently perform these steps:
 
-1. Identify the requested answer intent.
-   Ask: What is the original question ultimately asking for?
+1. Identify the final answer intent:
+   What is the original question ultimately asking for?
 
-2. Identify the requested answer type.
-   Examples: person, place, organization, work, date, number, boolean, value, set.
+2. Identify the final answer type:
+   person, place, organization, work, event, date, number, boolean, value, set, or unknown.
 
-3. Identify the target variable.
-   For "Which film/person/city..." questions, the target variable is the film/person/city requested by the WH phrase.
+3. Identify the target variable:
+   For "Which X..." questions, the target variable is X.
+   For "When/Where/What is the [attribute] of the X that ...?" questions, the target variable is the X whose attribute is requested.
 
-4. Identify topic entities and candidate branches.
-   Use topic_entities exactly as written when they appear in subquestions.
+4. Identify all restrictive constraints on the target variable.
+   Relative clauses, prepositional phrases, appositions, and conjunctive descriptions may all be target-identifying constraints.
 
-5. Interpret step4_paths only as hints.
-   Treat path tokens as possible anchors, branches, intermediate variables, modifiers, or operators.
-   Do not preserve token order if it conflicts with the original question.
+5. Interpret step4_paths as branch hints.
+   Multiple paths with a shared WH/final-predicate/target prefix often represent several constraints on the same target variable.
 
 6. Choose the DAG pattern:
-   - direct lookup
-   - bridge lookup
-   - constraint-defined lookup
-   - parallel candidate lookup
-   - comparison / selection
-   - boolean verification
-   - aggregation / counting
-   - set intersection or filtering
+   direct lookup, bridge lookup, constrained lookup, conjunctive target lookup, parallel candidate lookup, comparison, selection, verification, or aggregation.
 
-7. Expand hidden operator requirements.
-   Comparisons usually require evidence values before comparison.
-   Verification usually requires facts before verification.
-   Aggregation usually requires a set before aggregation.
-
-8. Write executable subquestions.
-   Each subquestion should be natural, retriever-friendly, and answerable independently after replacing qN's answer references with actual answers.
-
-9. Check dependency binding.
-   Every dependency must be explicitly visible in the question text using the exact phrase qN's answer.
-
-10. Check final sufficiency.
-   The leaf node or leaf nodes must provide enough information to answer the original question.
-
-11. Check coverage of restrictive and conjunctive modifiers.
-   If the target entity is described by multiple constraints joined by "and", "as well as", "with", "where", "that", "which", "who", "whose", or appositions, preserve all constraints needed to identify the target.
-   Do not silently drop the second half of a conjunction because it is not visible in step4_paths.
-
-12. Check appositive and parenthetical entity identity.
-   If a topic entity or original question mention includes a parenthetical, comma title, subtitle, or other disambiguator, keep the complete identifying phrase in the subquestion when that entity is queried.
-   If topic_entities split a single appositive mention into pieces, reconstruct the complete mention from original_question when writing the atomic question.
+7. Ensure final sufficiency:
+   The final leaf node or final combining node must preserve the original answer intent and must consume every required branch.
 
 ============================================================
 Output schema
@@ -272,58 +230,93 @@ Schema rules:
 2. depends_on must contain only earlier q ids.
 3. If depends_on contains qN, the question text must explicitly contain "qN's answer".
 4. If the question text contains "qN's answer", depends_on must contain qN.
-5. Do not use vague dependent references such as "the person", "the director", "the city", "that place", "it", or "they" when the intended object is a previous answer.
-6. Independent branches must not depend on each other.
+5. Do not use vague dependent references such as "the person", "the city", "that place", "it", or "they" when the intended object is a previous answer.
+6. Independent evidence branches must not depend on each other.
 7. Each question must end with a question mark.
-8. Use exact topic entity surface forms from the input.
+8. Use exact topic entity surface forms from the input when they appear in subquestions.
 9. Do not output ENTITYA, ENTITYB, ENTITYC, or other unresolved placeholders.
 10. Do not output fields other than id, question, depends_on, operation, and output_type.
-11. If a dependency is listed, the corresponding qN's answer reference must be semantically necessary in the question. Do not add unused depends_on entries.
+11. If a dependency is listed, the corresponding qN's answer reference must be semantically necessary in the question.
 
 ============================================================
-DAG pattern rules
+Path-cover and conjunctive-constraint rules
+============================================================
+
+A frequent Step5 failure is to resolve a second constraint branch but not attach it to the final answer.
+Avoid this failure.
+
+Treat multiple step4_paths as a conjunctive target path cover when all or most of these cues hold:
+- the paths share the same WH/final-predicate/target prefix, such as "When ---- created ---- region";
+- the paths then split into different descriptive branches;
+- the original question joins target descriptions with "and", "as well as", "with", "where", "that", "which", "who", "whose", apposition, or another restrictive attachment;
+- the branches are not alternative answer candidates, but jointly identify the same target variable.
+
+When a conjunctive target path cover is present:
+1. Resolve each required branch, or include the full branch constraint directly in the final target question.
+2. Do not ask the final attribute of only one branch's answer when another required branch exists.
+3. Do not leave any required branch as an unused leaf.
+4. The final attribute question must directly or indirectly depend on all resolved required branches.
+5. If two branch answers denote compatible objects, add a joint-target question:
+   "Which [target type] is both q1's answer and q2's answer?"
+6. If branch answers are not type-identical, combine them using the original relation:
+   "Which [target type] satisfies q1's answer and is constrained by q2's answer?"
+   or ask the final attribute of the target satisfying both qN answers.
+
+Invalid pattern for conjunctive constraints:
+q1 resolves branch 1.
+q2 asks the final attribute of q1's answer.
+q3 resolves branch 2.
+This is invalid because q3 is dangling and does not constrain the final answer.
+
+Valid pattern A:
+q1 resolves branch 1.
+q2 resolves branch 2.
+q3 asks which target satisfies both q1's answer and q2's answer.
+q4 asks the final requested attribute of q3's answer.
+
+Valid pattern B:
+q1 resolves branch 1.
+q2 resolves branch 2.
+q3 asks the final requested attribute of the target satisfying both q1's answer and q2's answer.
+
+Do not apply the conjunctive target rule to true candidate alternatives or comparisons.
+For "Which is older, A or B?", "A or B", "between A and B", or candidate-list questions, build parallel candidate branches and then compare/select.
+
+============================================================
+General DAG pattern rules
 ============================================================
 
 1. Direct lookup
 Use one lookup node when the original question asks for one fact about a known entity.
 
-Example shape:
-q1: What is the [attribute] of [entity]?
-
 2. Bridge lookup
-Use a first lookup for the intermediate object, then a second lookup for the requested attribute/value.
-
-Example shape:
+Use a first lookup for the intermediate object, then a second lookup for the requested attribute.
+Example:
 q1: Who performed [song]?
 q2: What is the nationality of q1's answer?
 
 3. Constraint-defined lookup
-If a relative clause identifies the target variable, keep the constraint inside the lookup question.
-Do not split off an underspecified intermediate question.
-
+If a clause identifies the target variable, keep that constraint attached to the target.
 Good:
 q1: Which city shares a county with Helvetia?
 q2: How long are the city council terms of q1's answer?
-
 Bad:
 q1: What county does Helvetia share?
 q2: What city is in q1's answer?
 
 4. Parallel candidate branches
-For questions comparing two or more explicit candidates, build parallel evidence branches.
+For questions comparing two or more explicit candidates, build independent evidence branches.
 Do not make one candidate branch depend on another candidate branch.
 
 5. Comparison / selection
 Retrieve the compared values first.
 Then add a compare/select node when the original question asks which candidate satisfies the comparison.
-
-Use:
-- compare when the output is a comparison judgment or relation.
-- select when the output is one of the original candidates or a requested entity type.
+Use compare when the output is a judgment or relation.
+Use select when the output is one candidate or requested entity.
 
 6. Boolean verification
-Retrieve the needed facts first when they are not directly given.
-Then add a verify node if the original question is yes/no.
+Retrieve needed facts first when they are not directly given.
+Then add a verify node.
 
 7. Aggregation
 Retrieve the set first.
@@ -333,7 +326,7 @@ Then count, sum, min, max, list, or otherwise aggregate.
 Constraint coverage rules
 ============================================================
 
-Many errors come from dropping restrictive modifiers. Avoid that by treating constraints as part of the target variable whenever they identify the answer.
+Preserve restrictive modifiers that identify the answer.
 
 Relative clauses:
 - "the city where X happened" means the target is the city satisfying that clause.
@@ -341,23 +334,22 @@ Relative clauses:
 - "the country where X originated" means the target is the country satisfying that clause.
 
 Conjunctive descriptions:
-- If the original question says "the region immediately north of A and the location/site of B", the target region must satisfy both constraints, or the DAG must resolve enough facts to identify that joint target.
-- Do not answer only the "north of A" part and ignore "location/site of B".
+- If the original question describes one target with multiple constraints joined by "and", all constraints must be represented in the DAG.
+- If one branch is resolved as qN, every later question that needs that branch must explicitly mention qN's answer.
+- The final answer must not be based only on the first conjunct.
 
 By/of/from attachments:
-- A phrase like "Turn Me On by the singer of Come Away with Me" means the lookup about "Turn Me On" is constrained by q1's answer.
+- A phrase like "Turn Me On by the singer of Come Away with Me" means the lookup about "Turn Me On" is constrained by the singer.
 - A dependent question must explicitly include "by q1's answer", "of q1's answer", "from q1's answer", or another exact qN's answer binding when that previous answer is the modifier.
 
-Appositions:
+Appositions and parentheticals:
 - "John Ernest, Duke Of Saxe-Eisenach" identifies one person mention.
 - "Christopher Newton (Criminal)" identifies one person mention.
-- Do not shorten these to "John Ernest" or "Christopher Newton" when asking about that entity.
+- Do not shorten such mentions when asking about that entity.
 
 Possessive-WH:
 - For "Whose sister played X?", the final answer is the possessor, not the sister.
 - First identify who played X, then ask whose sister that person is.
-
-Do not over-decompose constraints when a single constrained lookup is clearer and still asks for one target variable.
 
 ============================================================
 Operator expansion rules
@@ -365,54 +357,20 @@ Operator expansion rules
 
 younger / older:
 - If comparing people, retrieve birth dates or ages before selecting.
-- The final answer type must remain the requested type.
-- For "Which film has the younger director?", the final selected answer is a film, not a director.
-
-born earlier / born later:
-- Retrieve birth dates for the relevant people.
-
-earlier / later for events or releases:
-- Retrieve dates or release dates.
-
-larger / smaller / more / fewer / most / fewest:
-- Retrieve numeric values for each candidate or branch.
-
-longer / shorter / how long:
-- Retrieve duration or length values.
+- For "Which film has the younger director?", the final answer is the film, not the director.
 
 lived longer:
-- Retrieve enough evidence to compute each lifespan.
-- Usually retrieve birth date and death date for each person, or directly retrieve lifespan duration for each person if that is a natural retrievable fact.
+- Retrieve enough evidence to compute lifespan for each person.
 - Do not compare people using only birth dates.
 
 same nationality / same country / same birthplace:
 - Retrieve the relevant attribute for both branches, then verify or compare equality.
 
-goals / points / population / area / distance / age:
-- Ask for the numeric value explicitly.
-- Prefer "How many..." for counts.
-- Avoid vague questions like "What are Messi's goals?" when the original asks for a number.
+larger / smaller / more / fewer / most / fewest:
+- Retrieve numeric values before comparison or selection.
 
 which X:
-- The final select node must return X, not merely the intermediate evidence object.
-
-============================================================
-Path-hint usage rules
-============================================================
-
-Use step4_paths to help notice:
-- explicit candidate branches;
-- bridge nouns such as director, author, performer, composer, birthplace;
-- target attributes such as nationality, population, birth date, release date;
-- operators such as younger, larger, longer, same, compare, first, most;
-- constraint cues such as shares, located, part, member, spouse, parent.
-
-But:
-- do not ask about every token in the path;
-- do not create questions for grammatical tokens;
-- do not follow the path direction if the original question implies a different semantic direction;
-- do not use path tokens as relation labels;
-- do not force a node to exist only because a token appears in the path.
+- The final select node must return X, not merely an intermediate evidence object.
 
 ============================================================
 Few-shot examples
@@ -449,93 +407,126 @@ Output:
   ]
 }
 
-Example 2: Split mixed path into independent evidence branches
+Example 2: Conjunctive target path cover
 
 Input:
 {
-  "original_question": "How many goals did the person Barcelona signed score compared with Messi?",
-  "topic_entities": ["Barcelona", "Messi"],
+  "original_question": "When was the region immediately north of the region where A is located and the location of B created?",
+  "topic_entities": ["A", "B"],
   "step4_paths": [
-    ["Barcelona", "signed", "get", "person", "compared", "goals", "Messi"]
+    ["When", "created", "region", "immediately", "north", "region", "located", "A"],
+    ["When", "created", "region", "and", "location", "B"]
   ]
 }
 
 Avoid:
-- making Messi's goals depend on the person signed by Barcelona;
-- asking "What are Messi's goals?" when the requested evidence is a number;
-- losing the goals of the person signed by Barcelona.
-
-Output:
 {
   "atomic_questions": [
     {
       "id": "q1",
-      "question": "Who did Barcelona sign?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "How many goals did q1's answer score?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "number"
-    },
-    {
-      "id": "q3",
-      "question": "How many goals did Messi score?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "number"
-    },
-    {
-      "id": "q4",
-      "question": "Based on q2's answer and q3's answer, how do the goals scored by the person Barcelona signed compare with Messi's goals?",
-      "depends_on": ["q2", "q3"],
-      "operation": "compare",
-      "output_type": "value"
-    }
-  ]
-}
-
-Example 3: Relative clause as target constraint
-
-Input:
-{
-  "original_question": "How long are the city council terms for the city that shares a county with Helvetia?",
-  "topic_entities": ["Helvetia"],
-  "step4_paths": [
-    ["Helvetia", "shares", "county", "city", "council", "terms", "long", "How"]
-  ]
-}
-
-Avoid:
-- asking "What county does Helvetia share?";
-- treating "county" as the requested answer;
-- splitting the relative clause away from the target city.
-
-Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Which city shares a county with Helvetia?",
+      "question": "Which region is immediately north of the region where A is located?",
       "depends_on": [],
       "operation": "lookup",
       "output_type": "place"
     },
     {
       "id": "q2",
-      "question": "How long are the city council terms of q1's answer?",
+      "question": "When was q1's answer created?",
       "depends_on": ["q1"],
       "operation": "lookup",
-      "output_type": "value"
+      "output_type": "date"
+    },
+    {
+      "id": "q3",
+      "question": "What is the location of B?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "place"
     }
   ]
 }
 
-Example 4: Candidate comparison with hidden scalar evidence
+Correct output:
+{
+  "atomic_questions": [
+    {
+      "id": "q1",
+      "question": "Which region is immediately north of the region where A is located?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "place"
+    },
+    {
+      "id": "q2",
+      "question": "What is the location of B?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "place"
+    },
+    {
+      "id": "q3",
+      "question": "Which region is both q1's answer and q2's answer?",
+      "depends_on": ["q1", "q2"],
+      "operation": "select",
+      "output_type": "place"
+    },
+    {
+      "id": "q4",
+      "question": "When was q3's answer created?",
+      "depends_on": ["q3"],
+      "operation": "lookup",
+      "output_type": "date"
+    }
+  ]
+}
+
+Example 3: Conjunctive locator branch with different surface type
+
+Input:
+{
+  "original_question": "When was the region immediately north of the region that C is associated with and the terrain feature on which D is located created?",
+  "topic_entities": ["C", "D"],
+  "step4_paths": [
+    ["When", "created", "region", "north", "region", "associated", "C"],
+    ["When", "created", "region", "and", "terrain feature", "located", "D"]
+  ]
+}
+
+Output:
+{
+  "atomic_questions": [
+    {
+      "id": "q1",
+      "question": "Which region is C associated with?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "place"
+    },
+    {
+      "id": "q2",
+      "question": "What terrain feature is D located on?",
+      "depends_on": [],
+      "operation": "lookup",
+      "output_type": "place"
+    },
+    {
+      "id": "q3",
+      "question": "Which region is immediately north of q1's answer and constrained by q2's answer?",
+      "depends_on": ["q1", "q2"],
+      "operation": "select",
+      "output_type": "place"
+    },
+    {
+      "id": "q4",
+      "question": "When was q3's answer created?",
+      "depends_on": ["q3"],
+      "operation": "lookup",
+      "output_type": "date"
+    }
+  ]
+}
+
+Example 4: Candidate comparison, not conjunctive target
 
 Input:
 {
@@ -546,11 +537,6 @@ Input:
     ["Salad By The Roots", "film", "director", "younger"]
   ]
 }
-
-Avoid:
-- selecting the younger director instead of the film;
-- comparing directors without retrieving birth dates or ages;
-- collapsing both candidates into one unresolved question.
 
 Output:
 {
@@ -593,132 +579,7 @@ Output:
   ]
 }
 
-Example 5: Boolean verification
-
-Input:
-{
-  "original_question": "Did the director of The Matrix also direct Cloud Atlas?",
-  "topic_entities": ["The Matrix", "Cloud Atlas"],
-  "step4_paths": [
-    ["The Matrix", "director", "also", "direct", "Cloud Atlas"]
-  ]
-}
-
-Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who directed The Matrix?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "Who directed Cloud Atlas?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q3",
-      "question": "Based on q1's answer and q2's answer, did the director of The Matrix also direct Cloud Atlas?",
-      "depends_on": ["q1", "q2"],
-      "operation": "verify",
-      "output_type": "boolean"
-    }
-  ]
-}
-
-Example 6: Attribute equality
-
-Input:
-{
-  "original_question": "Do the authors of The Hobbit and Dune have the same nationality?",
-  "topic_entities": ["The Hobbit", "Dune"],
-  "step4_paths": [
-    ["The Hobbit", "authors", "same", "nationality", "Dune"]
-  ]
-}
-
-Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who is the author of The Hobbit?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "What is the nationality of q1's answer?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "value"
-    },
-    {
-      "id": "q3",
-      "question": "Who is the author of Dune?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q4",
-      "question": "What is the nationality of q3's answer?",
-      "depends_on": ["q3"],
-      "operation": "lookup",
-      "output_type": "value"
-    },
-    {
-      "id": "q5",
-      "question": "Based on q2's answer and q4's answer, do the authors of The Hobbit and Dune have the same nationality?",
-      "depends_on": ["q2", "q4"],
-      "operation": "verify",
-      "output_type": "boolean"
-    }
-  ]
-}
-
-Example 7: Possessive-WH direction
-
-Input:
-{
-  "original_question": "Whose sister played Susie in Miracle on 34th Street?",
-  "topic_entities": ["Susie", "Miracle on 34th Street"],
-  "step4_paths": [
-    ["Whose", "sister", "played", "Susie"]
-  ]
-}
-
-Avoid:
-- "Who is the sister of q1's answer?"
-- This reverses the question and returns the sister instead of the possessor.
-
-Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who played Susie in Miracle on 34th Street?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "Whose sister is q1's answer?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "person"
-    }
-  ]
-}
-
-Example 8: Dependency binding through a modifier
+Example 5: Dependency binding through a modifier
 
 Input:
 {
@@ -730,8 +591,8 @@ Input:
 }
 
 Avoid:
-- q2: "Who wrote Turn Me On?" with depends_on ["q1"].
-- The question text does not bind q1's answer, so the dependency is semantically unused.
+q2: "Who wrote Turn Me On?" with depends_on ["q1"].
+The dependency is unused because q1's answer does not appear in the question text.
 
 Output:
 {
@@ -753,79 +614,31 @@ Output:
   ]
 }
 
-Example 9: Lifespan comparison
+Example 6: Possessive-WH direction
 
 Input:
 {
-  "original_question": "Who lived longer, Ludwig Elsbett or Pamela Ann Rymer?",
-  "topic_entities": ["Ludwig Elsbett", "Pamela Ann Rymer"],
+  "original_question": "Whose sister played Susie in Miracle on 34th Street?",
+  "topic_entities": ["Susie", "Miracle on 34th Street"],
   "step4_paths": [
-    ["Ludwig Elsbett", "lived", "longer", "Pamela Ann Rymer"]
+    ["Whose", "sister", "played", "Susie"]
   ]
 }
-
-Avoid:
-- comparing only birth dates.
 
 Output:
 {
   "atomic_questions": [
     {
       "id": "q1",
-      "question": "When was Ludwig Elsbett born?",
+      "question": "Who played Susie in Miracle on 34th Street?",
       "depends_on": [],
       "operation": "lookup",
-      "output_type": "date"
+      "output_type": "person"
     },
     {
       "id": "q2",
-      "question": "When did Ludwig Elsbett die?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "date"
-    },
-    {
-      "id": "q3",
-      "question": "When was Pamela Ann Rymer born?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "date"
-    },
-    {
-      "id": "q4",
-      "question": "When did Pamela Ann Rymer die?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "date"
-    },
-    {
-      "id": "q5",
-      "question": "Based on q1's answer, q2's answer, q3's answer, and q4's answer, who lived longer: Ludwig Elsbett or Pamela Ann Rymer?",
-      "depends_on": ["q1", "q2", "q3", "q4"],
-      "operation": "compare",
-      "output_type": "person"
-    }
-  ]
-}
-
-Example 10: Preserve appositive identity
-
-Input:
-{
-  "original_question": "Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?",
-  "topic_entities": ["John Ernest", "Duke Of Saxe-Eisenach"],
-  "step4_paths": [
-    ["John Ernest"]
-  ]
-}
-
-Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?",
-      "depends_on": [],
+      "question": "Whose sister is q1's answer?",
+      "depends_on": ["q1"],
       "operation": "lookup",
       "output_type": "person"
     }
@@ -839,20 +652,16 @@ Final self-audit before returning JSON
 Silently verify:
 1. The output has only the "atomic_questions" key.
 2. The DAG is sufficient to answer the original question.
-3. The final leaf preserves the original answer intent.
-4. The final leaf preserves the requested answer type.
-5. step4_paths were used only as hints, not copied mechanically.
-6. No semantic paths or support fields are present.
-7. No unresolved ENTITY placeholders are present.
-8. Each dependent question explicitly mentions qN's answer.
-9. Independent candidate branches do not depend on each other.
-10. Comparison/select/verify nodes depend on evidence values, not only unresolved intermediate entities.
-11. Relative clauses are attached to the correct target variable.
-12. No underspecified question is present.
-13. All topic entities are copied exactly when used.
-14. Parenthetical and appositive entity disambiguators from original_question are preserved.
-15. Restrictive conjuncts and relative clauses needed to identify the target are preserved.
-16. The returned text is valid JSON only.
+3. The final leaf preserves the original answer intent and answer type.
+4. No required restrictive constraint is dropped.
+5. No conjunctive constraint branch is dangling.
+6. If multiple shared-prefix step4_paths describe one target, the final answer consumes every required branch.
+7. If a branch is resolved as qN, qN is an ancestor of the final answer node unless the branch is directly included in that final question.
+8. Candidate alternatives remain independent until the final compare/select/verify node.
+9. Each depends_on reference appears explicitly as "qN's answer" in the question text.
+10. No unresolved ENTITY placeholders are present.
+11. All topic entities are copied exactly when used.
+12. The returned text is valid JSON only.
 
 Return only the JSON object.
 """.strip()

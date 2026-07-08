@@ -117,10 +117,14 @@ class OpenAIAtomicLLMService(AtomicLLMService):
                 "dag": dag_nodes,
                 "atomic_results": atomic_results,
             },
-            max_tokens=1100,
+            max_tokens=1400,
         )
+        response.setdefault("answer", response.get("candidate_answer", ""))
         response.setdefault("candidate_answer", response.get("answer", ""))
+        response.setdefault("semantic_answer", response.get("candidate_answer", response.get("answer", "")))
+        response.setdefault("judgment", None)
         response.setdefault("reasoning_summary", "")
+        response.setdefault("answer_span_reasoning", "")
         response.setdefault("confidence", 0.0)
         response.setdefault("atomic_answer_trace", [])
         response.setdefault("remaining_gaps", [])
@@ -131,6 +135,9 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         original_question: str,
         synthesis_candidate: dict[str, Any],
     ) -> dict[str, Any]:
+        # Legacy interface retained for compatibility. The default HyperBranch
+        # pipeline resolves and canonicalizes the final answer in
+        # compose_final_answer() and does not call this method.
         response = self.client.chat_json(
             "final_answer_span",
             self.prompts.get("final_answer_span"),
@@ -252,12 +259,17 @@ class MockAtomicLLMService(AtomicLLMService):
             answer = "; ".join(answers)
         confidence_values = [float(item.get("confidence", 0.0) or 0.0) for item in atomic_results]
         confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 0.0
+        judgment = answer.lower() if answer.lower() in {"yes", "no"} else None
         return {
+            "answer": answer,
             "candidate_answer": answer,
+            "semantic_answer": answer,
+            "judgment": judgment,
             "reasoning_summary": short_text(
                 " | ".join(str(item.get("reasoning_summary", "")) for item in atomic_results),
                 600,
             ),
+            "answer_span_reasoning": "Mock single-stage final resolver mirrors the selected answer.",
             "confidence": confidence,
             "atomic_answer_trace": [
                 {
@@ -280,6 +292,8 @@ class MockAtomicLLMService(AtomicLLMService):
         original_question: str,
         synthesis_candidate: dict[str, Any],
     ) -> dict[str, Any]:
+        # Legacy interface retained for compatibility. The main pipeline does
+        # not call this method.
         del original_question
         return {
             "answer": str(synthesis_candidate.get("candidate_answer", synthesis_candidate.get("answer", ""))).strip(),

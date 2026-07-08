@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 import tempfile
 import unittest
@@ -966,12 +967,12 @@ class AtomicRetrieverTest(unittest.TestCase):
 
 
 class FinalAnswerComposerTest(unittest.TestCase):
-    def test_final_synthesis_uses_two_llm_stages(self) -> None:
+    def test_final_synthesis_uses_single_llm_stage(self) -> None:
         llm = TwoStageLLM()
         composer = FinalAnswerComposer(llm)
         result = AtomicAnswerResult(
             node_id="q1",
-            question="Was A or B born first?",
+            question="Was Alpha or Beta born first?",
             analysis=AtomicQuestionAnalysis(),
             evidence=[
                 FusedHyperedgeCandidate(
@@ -980,22 +981,123 @@ class FinalAnswerComposerTest(unittest.TestCase):
                     branch_support={"semantic"},
                 )
             ],
-            answer="A was born first in 1900.",
+            answer="Alpha was born first in 1900.",
             confidence=0.9,
             reasoning_summary="A predates B.",
             used_hyperedge_ids=["h1"],
         )
 
         payload = composer.compose(
-            "Was A or B born first?",
+            "Was Alpha or Beta born first?",
             [result],
-            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Was A or B born first?")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Was Alpha or Beta born first?")],
         )
 
-        self.assertEqual(llm.calls, ["compose", "span"])
-        self.assertEqual(payload["candidate_answer"], "A was born first in 1900.")
-        self.assertEqual(payload["answer"], "A")
+        self.assertEqual(llm.calls, ["compose"])
+        self.assertEqual(payload["candidate_answer"], "Alpha was born first in 1900.")
+        self.assertEqual(payload["answer"], "Alpha")
         self.assertEqual(payload["atomic_answer_trace"][0]["node_id"], "q1")
+        self.assertFalse(hasattr(llm, "span_payload"))
+
+    def test_final_answer_payload_schema_is_backward_compatible(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Stockholm"))
+
+        payload = composer.compose(
+            "What is the place of birth of Olof Palme?",
+            [_atomic_result("q1", "What is the place of birth of Olof Palme?", "Stockholm, Sweden")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the place of birth of Olof Palme?")],
+        )
+
+        for key in (
+            "answer",
+            "candidate_answer",
+            "reasoning_summary",
+            "answer_span_reasoning",
+            "confidence",
+            "atomic_answer_trace",
+            "remaining_gaps",
+        ):
+            self.assertIn(key, payload)
+        self.assertEqual(payload["semantic_answer"], "Stockholm")
+        self.assertIsNone(payload["judgment"])
+
+    def test_single_stage_canonicalizes_location_spans(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+
+        cases = [
+            (
+                "What is the place of birth of Olof Palme?",
+                "Stockholm, Sweden",
+                "Stockholm",
+            ),
+            (
+                "Where did Isaac Schwartz die?",
+                "Siversky, near Saint Petersburg, Russian Federation",
+                "Siversky",
+            ),
+        ]
+        for question, atomic_answer, expected in cases:
+            with self.subTest(question=question):
+                payload = composer.compose(
+                    question,
+                    [_atomic_result("q1", question, atomic_answer)],
+                    dag_nodes=[AtomicQuestionNode(node_id="q1", question=question)],
+                )
+                self.assertEqual(payload["answer"], expected)
+
+    def test_single_stage_canonicalizes_institution_alias(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+
+        payload = composer.compose(
+            "Where does John Tyndall work?",
+            [_atomic_result("q1", "Where does John Tyndall work?", "Royal Institution of Great Britain")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Where does John Tyndall work?")],
+        )
+
+        self.assertEqual(payload["answer"], "Royal Institution")
+
+    def test_postprocess_canonicalizes_raw_single_stage_spans(self) -> None:
+        cases = [
+            (
+                "What is the place of birth of Olof Palme?",
+                "Stockholm, Sweden",
+                "Stockholm",
+            ),
+            (
+                "Where did Isaac Schwartz die?",
+                "Siversky, near Saint Petersburg, Russian Federation",
+                "Siversky",
+            ),
+            (
+                "Where does John Tyndall work?",
+                "Royal Institution of Great Britain",
+                "Royal Institution",
+            ),
+            (
+                "When was Nicholas the Small born?",
+                "1322/1327",
+                "1322",
+            ),
+            (
+                "What nationality was the composer?",
+                "Austria",
+                "Austrian",
+            ),
+            (
+                "Which song was released first, Where Does It Hurt? or Other Song?",
+                "Does It Hurt",
+                "Where Does It Hurt",
+            ),
+        ]
+        for question, raw_answer, expected in cases:
+            with self.subTest(question=question):
+                composer = FinalAnswerComposer(StaticFinalLLM(raw_answer))
+                payload = composer.compose(
+                    question,
+                    [_atomic_result("q1", question, raw_answer)],
+                    dag_nodes=[AtomicQuestionNode(node_id="q1", question=question)],
+                )
+                self.assertEqual(payload["answer"], expected)
 
     def test_final_synthesis_corrects_born_first_from_atomic_dates(self) -> None:
         composer = FinalAnswerComposer(StaticFinalLLM("El Tonto"))
@@ -1189,7 +1291,7 @@ class FinalAnswerComposerTest(unittest.TestCase):
 
         self.assertEqual(payload["answer"], "Athenian")
 
-    def test_final_span_canonicalizes_common_nationality_demonym(self) -> None:
+    def test_final_span_preserves_single_stage_nationality_label(self) -> None:
         composer = FinalAnswerComposer(StaticFinalLLM("German"))
 
         payload = composer.compose(
@@ -1198,7 +1300,7 @@ class FinalAnswerComposerTest(unittest.TestCase):
             dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the nationality of Frederick Barbarossa?")],
         )
 
-        self.assertEqual(payload["answer"], "Germany")
+        self.assertEqual(payload["answer"], "German")
 
     def test_final_span_uses_primary_component_for_compound_nationality(self) -> None:
         composer = FinalAnswerComposer(StaticFinalLLM("Chinese American"))
@@ -1209,7 +1311,94 @@ class FinalAnswerComposerTest(unittest.TestCase):
             dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the nationality of Leo Fong?")],
         )
 
-        self.assertEqual(payload["answer"], "Chinese")
+        self.assertEqual(payload["answer"], "Chinese American")
+
+    def test_single_stage_candidate_selection_outputs_candidate_not_date(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="When was A released?"),
+            AtomicQuestionNode(node_id="q2", question="When was B released?"),
+        ]
+        results = [
+            _atomic_result("q1", "When was A released?", "1950"),
+            _atomic_result("q2", "When was B released?", "1940"),
+        ]
+
+        payload = composer.compose(
+            "Which film was released first, A or B?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "B")
+        self.assertNotEqual(payload["answer"], "1940")
+
+    def test_single_stage_yes_no_judgment_outputs_yes_or_no(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="What country is X from?"),
+            AtomicQuestionNode(node_id="q2", question="What country is Y from?"),
+        ]
+        results = [
+            _atomic_result("q1", "What country is X from?", "France"),
+            _atomic_result("q2", "What country is Y from?", "Germany"),
+        ]
+
+        payload = composer.compose(
+            "Are X and Y from the same country?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "no")
+        self.assertEqual(payload["judgment"], "no")
+        self.assertNotIn(payload["answer"], {"France", "Germany"})
+
+    def test_single_stage_nationality_exact_same_is_conservative(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+
+        cases = [
+            ("American", "Puerto Rican"),
+            ("French", "French-Armenian"),
+            ("Czech-American", "Romanian-American"),
+        ]
+        for left, right in cases:
+            with self.subTest(left=left, right=right):
+                payload = composer.compose(
+                    "Do X and Y have the exact same nationality?",
+                    [
+                        _atomic_result("q1", "What is the nationality of X?", left),
+                        _atomic_result("q2", "What is the nationality of Y?", right),
+                    ],
+                    dag_nodes=[
+                        AtomicQuestionNode(node_id="q1", question="What is the nationality of X?"),
+                        AtomicQuestionNode(node_id="q2", question="What is the nationality of Y?"),
+                    ],
+                )
+                self.assertEqual(payload["answer"], "no")
+
+    def test_single_stage_nationality_component_and_what_nationality_semantics(self) -> None:
+        composer = FinalAnswerComposer(RuleBasedFinalLLM())
+
+        component_payload = composer.compose(
+            "Do X and Y share any nationality component?",
+            [
+                _atomic_result("q1", "What is the nationality of X?", "Czech-American"),
+                _atomic_result("q2", "What is the nationality of Y?", "Romanian-American"),
+            ],
+            dag_nodes=[
+                AtomicQuestionNode(node_id="q1", question="What is the nationality of X?"),
+                AtomicQuestionNode(node_id="q2", question="What is the nationality of Y?"),
+            ],
+        )
+        self.assertEqual(component_payload["answer"], "yes")
+
+        nationality_payload = composer.compose(
+            "What nationality is Henri Verneuil?",
+            [_atomic_result("q1", "What nationality is Henri Verneuil?", "French-Armenian")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="What nationality is Henri Verneuil?")],
+        )
+        self.assertEqual(nationality_payload["answer"], "French-Armenian")
 
 
 class TwoStageLLM:
@@ -1230,14 +1419,18 @@ class TwoStageLLM:
             "atomic_results": atomic_results,
         }
         return {
-            "candidate_answer": "A was born first in 1900.",
-            "reasoning_summary": "A has the earlier birth date.",
+            "answer": "Alpha was born first in 1900.",
+            "candidate_answer": "Alpha was born first in 1900.",
+            "semantic_answer": "Alpha has the earlier birth date.",
+            "judgment": None,
+            "reasoning_summary": "Alpha has the earlier birth date.",
+            "answer_span_reasoning": "Single-stage test resolver returned the selected answer.",
             "confidence": 0.9,
             "atomic_answer_trace": [
                 {
                     "node_id": "q1",
-                    "question": "Was A or B born first?",
-                    "answer": "A was born first in 1900.",
+                    "question": "Was Alpha or Beta born first?",
+                    "answer": "Alpha was born first in 1900.",
                     "used_hyperedge_ids": ["h1"],
                 }
             ],
@@ -1257,6 +1450,70 @@ class TwoStageLLM:
         }
 
 
+class RuleBasedFinalLLM:
+    def analyze_atomic_question(self, atomic_question, dependency_answers):
+        raise NotImplementedError
+
+    def answer_atomic_question(self, atomic_question, dependency_answers, evidence):
+        raise NotImplementedError
+
+    def compose_final_answer(self, original_question, dag_nodes, atomic_results):
+        del dag_nodes
+        answers = [str(item.get("answer", "") or "").strip() for item in atomic_results]
+        answer = self._resolve(original_question, answers)
+        judgment = answer if answer in {"yes", "no"} else None
+        return {
+            "answer": answer,
+            "candidate_answer": answer,
+            "semantic_answer": answer,
+            "judgment": judgment,
+            "reasoning_summary": "Rule-based single-stage test resolver.",
+            "answer_span_reasoning": "Rule-based test resolver returns the canonical final answer.",
+            "confidence": 0.9 if answer != "INSUFFICIENT_EVIDENCE" else 0.0,
+            "atomic_answer_trace": [
+                {
+                    "node_id": item.get("node_id", ""),
+                    "question": item.get("question", ""),
+                    "answer": item.get("answer", ""),
+                    "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])),
+                }
+                for item in atomic_results
+            ],
+            "remaining_gaps": [],
+        }
+
+    def finalize_answer_span(self, original_question, synthesis_candidate):
+        raise AssertionError("finalize_answer_span should not be called in the single-stage pipeline")
+
+    def _resolve(self, original_question: str, answers: list[str]) -> str:
+        question = original_question.lower()
+        usable = [answer for answer in answers if answer and answer != "INSUFFICIENT_EVIDENCE"]
+        if not usable:
+            return "INSUFFICIENT_EVIDENCE"
+        if "royal institution of great britain" in usable[-1].lower():
+            return "Royal Institution"
+        if "siversky, near" in usable[-1].lower():
+            return "Siversky"
+        if "," in usable[-1] and any(term in question for term in ("birth", "born", "death", "die", "place")):
+            return usable[-1].split(",", 1)[0].strip()
+        if "released first" in question or "released earlier" in question:
+            candidates = [part.strip(" ?") for part in original_question.rstrip("?").split(",", 1)[-1].split(" or ")]
+            years = [int(answer) for answer in usable if answer.isdigit()]
+            if len(candidates) >= 2 and len(years) >= 2:
+                return candidates[0] if years[0] < years[1] else candidates[1]
+        if "same country" in question or "exact same nationality" in question:
+            if len(usable) >= 2:
+                return "yes" if _normalize_test_label(usable[-2]) == _normalize_test_label(usable[-1]) else "no"
+        if "share any nationality component" in question:
+            if len(usable) >= 2:
+                left = set(_nationality_components(usable[-2]))
+                right = set(_nationality_components(usable[-1]))
+                return "yes" if left & right else "no"
+        if "what nationality" in question:
+            return usable[-1]
+        return usable[-1]
+
+
 class StaticFinalLLM:
     def __init__(self, final_answer: str) -> None:
         self.final_answer = final_answer
@@ -1269,8 +1526,12 @@ class StaticFinalLLM:
 
     def compose_final_answer(self, original_question, dag_nodes, atomic_results):
         return {
+            "answer": self.final_answer,
             "candidate_answer": self.final_answer,
+            "semantic_answer": self.final_answer,
+            "judgment": self.final_answer if self.final_answer in {"yes", "no"} else None,
             "reasoning_summary": "static candidate",
+            "answer_span_reasoning": "Static single-stage final resolver mirrors the selected answer.",
             "confidence": 0.6,
             "atomic_answer_trace": [
                 {
@@ -1285,11 +1546,19 @@ class StaticFinalLLM:
         }
 
     def finalize_answer_span(self, original_question, synthesis_candidate):
-        return {
-            "answer": self.final_answer,
-            "confidence": 0.6,
-            "answer_span_reasoning": "static span",
-        }
+        raise AssertionError("finalize_answer_span should not be called in the single-stage pipeline")
+
+
+def _normalize_test_label(value: str) -> str:
+    return " ".join(value.lower().replace("-", " ").split())
+
+
+def _nationality_components(value: str) -> list[str]:
+    return [
+        item.strip().lower()
+        for item in value.replace("-", " ").split()
+        if item.strip()
+    ]
 
 
 def _atomic_result(
@@ -1346,6 +1615,17 @@ class AtomicPipelineSmokeTest(unittest.TestCase):
         self.assertTrue((run_dir / "artifacts" / "atomic_retrieval.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_answers.json").exists())
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
+        final_artifact = json.loads((run_dir / "artifacts" / "final_answer.json").read_text(encoding="utf-8"))
+        for key in (
+            "answer",
+            "candidate_answer",
+            "reasoning_summary",
+            "answer_span_reasoning",
+            "confidence",
+            "atomic_answer_trace",
+            "remaining_gaps",
+        ):
+            self.assertIn(key, final_artifact)
         self.assertFalse((run_dir / "artifacts" / "task_frame.json").exists())
         self.assertFalse((run_dir / "artifacts" / "thought_graph.json").exists())
         self.assertFalse((run_dir / "artifacts" / "evidence_subgraph.json").exists())

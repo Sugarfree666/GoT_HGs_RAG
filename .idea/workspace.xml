@@ -7,8 +7,10 @@
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/tri_sdp_reasoning_compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/tri_sdp_reasoning_compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/composer.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/composer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/final_answer_composer.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/final_answer_composer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="56838" />
+    <option name="cachedIndexableFilesCount" value="56880" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,23 +39,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000226542474109" />
-      <entry key="MS500" value="1.148034533181055" />
-      <entry key="S2" value="2.4775456503761104" />
-      <entry key="S5" value="4.3414001929688" />
-      <entry key="S10" value="6.424494473885101" />
-      <entry key="S30" value="15.254244379689537" />
-      <entry key="S60" value="25.870800665448627" />
-      <entry key="M2" value="36.623213810343444" />
-      <entry key="M5" value="46.50329742688332" />
-      <entry key="M10" value="52.911125579451586" />
-      <entry key="M15" value="59.62388175501292" />
-      <entry key="M30" value="78.26211431104832" />
-      <entry key="H1" value="99.19316179062923" />
-      <entry key="H2" value="115.35880267454782" />
-      <entry key="H4" value="128.68041560659375" />
-      <entry key="D1" value="346.1903174715412" />
-      <entry key="W1" value="2105.3878951269485" />
+      <entry key="MS100" value="1.0000495759589056" />
+      <entry key="MS500" value="1.1445937753966602" />
+      <entry key="S2" value="2.484219109607838" />
+      <entry key="S5" value="5.4090315567959335" />
+      <entry key="S10" value="8.07091479612069" />
+      <entry key="S30" value="10.999110532306032" />
+      <entry key="S60" value="11.946506871983734" />
+      <entry key="M2" value="12.583816663276792" />
+      <entry key="M5" value="15.95863762448505" />
+      <entry key="M10" value="23.46949057805363" />
+      <entry key="M15" value="29.394745270875994" />
+      <entry key="M30" value="40.29115430277937" />
+      <entry key="H1" value="59.393757565959675" />
+      <entry key="H2" value="99.3515632477213" />
+      <entry key="H4" value="150.189729232975" />
+      <entry key="D1" value="413.6059796778407" />
+      <entry key="W1" value="2180.4867596965714" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -75,23 +77,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9395444806077476" />
-      <entry key="MS500" value="1.1343840919741977" />
-      <entry key="S2" value="2.4710697709477243" />
-      <entry key="S5" value="4.336916174213113" />
-      <entry key="S10" value="6.421167858657189" />
-      <entry key="S30" value="15.25158857437154" />
-      <entry key="S60" value="25.86853175348783" />
-      <entry key="M2" value="36.621601006751234" />
-      <entry key="M5" value="46.50247407465651" />
-      <entry key="M10" value="52.910626335021284" />
-      <entry key="M15" value="59.623463509663296" />
-      <entry key="M30" value="78.26177595665665" />
-      <entry key="H1" value="99.19291831292671" />
-      <entry key="H2" value="115.35865213988068" />
-      <entry key="H4" value="128.68032967501998" />
-      <entry key="D1" value="346.19028553659643" />
-      <entry key="W1" value="2105.3878701077033" />
+      <entry key="MS100" value="0.9526848997586848" />
+      <entry key="MS500" value="1.1332949310599296" />
+      <entry key="S2" value="2.477108116579751" />
+      <entry key="S5" value="5.402510028010008" />
+      <entry key="S10" value="8.065982257647418" />
+      <entry key="S30" value="10.996851520184263" />
+      <entry key="S60" value="11.94527772069075" />
+      <entry key="M2" value="12.583169548913366" />
+      <entry key="M5" value="15.958316056344872" />
+      <entry key="M10" value="23.469258651122693" />
+      <entry key="M15" value="29.394552432634605" />
+      <entry key="M30" value="40.291020233281074" />
+      <entry key="H1" value="59.39364487447499" />
+      <entry key="H2" value="99.35145092074829" />
+      <entry key="H4" value="150.18963617746638" />
+      <entry key="D1" value="413.6059401352911" />
+      <entry key="W1" value="2180.486733414332" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -132,7 +134,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -251,7 +253,12 @@
       <workItem from="1783478227750" duration="657000" />
       <workItem from="1783478947863" duration="1828000" />
       <workItem from="1783483047578" duration="1439000" />
-      <workItem from="1783485206688" duration="4797000" />
+      <workItem from="1783485206688" duration="7818000" />
+      <workItem from="1783493205754" duration="1383000" />
+      <workItem from="1783494678749" duration="150000" />
+      <workItem from="1783494889582" duration="188000" />
+      <workItem from="1783495331033" duration="9000" />
+      <workItem from="1783495392749" duration="21666000" />
     </task>
     <servers />
   </component>
