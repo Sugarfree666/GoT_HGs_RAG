@@ -176,46 +176,6 @@ def _yes_no_judgment(answer: str) -> str | None:
     return normalized if normalized in {"yes", "no"} else None
 
 
-_COUNTRY_TO_DEMONYM = {
-    "austria": "Austrian",
-    "canada": "Canadian",
-    "china": "Chinese",
-    "czech republic": "Czech",
-    "england": "English",
-    "france": "French",
-    "germany": "German",
-    "ireland": "Irish",
-    "italy": "Italian",
-    "japan": "Japanese",
-    "poland": "Polish",
-    "romania": "Romanian",
-    "russia": "Russian",
-    "spain": "Spanish",
-    "sweden": "Swedish",
-    "united kingdom": "British",
-    "united states": "American",
-    "united states of america": "American",
-}
-
-_DEMONYM_TO_COUNTRY = {
-    "american": "United States",
-    "british": "United Kingdom",
-    "canadian": "Canada",
-    "chinese": "China",
-    "czech": "Czech Republic",
-    "english": "England",
-    "french": "France",
-    "german": "Germany",
-    "irish": "Ireland",
-    "italian": "Italy",
-    "japanese": "Japan",
-    "polish": "Poland",
-    "romanian": "Romania",
-    "russian": "Russia",
-    "spanish": "Spain",
-    "swedish": "Sweden",
-}
-
 _GEOGRAPHIC_SUFFIXES = {
     "argentina",
     "australia",
@@ -265,6 +225,7 @@ _LOCATION_CONTEXT_SUFFIXES = {
     "italy",
     "japan",
     "netherlands",
+    "new york",
     "northern ireland",
     "poland",
     "russia",
@@ -296,59 +257,76 @@ def _postprocess_final_answer(
         corrected["deterministic_final_correction"] = deterministic
         return corrected
 
+    current_answer = str(corrected.get("answer", "") or corrected.get("candidate_answer", "") or "")
+    if _yes_no_judgment(current_answer) is not None:
+        return corrected
+
+    preserved_surface = _preserve_terminal_country_or_nationality_surface(
+        current_answer,
+        original_question,
+        atomic_results,
+        dag_nodes,
+    )
+    if preserved_surface and preserved_surface != current_answer:
+        corrected["answer"] = preserved_surface
+        corrected["candidate_answer"] = preserved_surface
+        corrected["answer_span_reasoning"] = "Deterministic safety guard preserved the terminal atomic answer surface."
+        corrected["deterministic_terminal_surface_preserved"] = True
+        return corrected
+
     span = _minimal_candidate_span(
-        str(corrected.get("answer", "") or corrected.get("candidate_answer", "") or ""),
+        current_answer,
         original_question,
     )
-    if span and span != corrected.get("answer"):
+    if span and span != corrected.get("answer") and _is_safe_postprocess_rewrite(current_answer, span, original_question):
         corrected["answer"] = span
         corrected["answer_span_reasoning"] = (
             str(corrected.get("answer_span_reasoning", "") or "").strip()
             or "Deterministic span normalizer selected the minimal candidate span."
         )
         corrected["deterministic_span_normalized"] = True
+        current_answer = span
     date_span = _date_canonical_span(
         str(corrected.get("answer", "") or ""),
         original_question,
     )
-    if date_span and date_span != corrected.get("answer"):
+    if date_span and date_span != corrected.get("answer") and _is_safe_postprocess_rewrite(current_answer, date_span, original_question):
         corrected["answer"] = date_span
         corrected["answer_span_reasoning"] = "Deterministic span normalizer selected the first supported year."
         corrected["deterministic_date_normalized"] = True
+        current_answer = date_span
     alias = _parenthetical_alias_span(
         str(corrected.get("answer", "") or ""),
         original_question,
         atomic_results,
         dag_nodes,
     )
-    if alias and alias != corrected.get("answer"):
+    if (
+        alias
+        and alias != corrected.get("answer")
+        and _is_supported_surface(alias, original_question, atomic_results)
+    ):
         corrected["answer"] = alias
         corrected["answer_span_reasoning"] = "Deterministic span normalizer selected a parenthetical alias."
         corrected["deterministic_parenthetical_alias"] = True
+        current_answer = alias
     location = _location_canonical_span(
         str(corrected.get("answer", "") or ""),
         original_question,
     )
-    if location and location != corrected.get("answer"):
+    if location and location != corrected.get("answer") and _is_safe_postprocess_rewrite(current_answer, location, original_question):
         corrected["answer"] = location
         corrected["answer_span_reasoning"] = "Deterministic span normalizer removed geographic context from a place answer."
         corrected["deterministic_location_normalized"] = True
+        current_answer = location
     organization = _organization_alias_span(
         str(corrected.get("answer", "") or ""),
         original_question,
     )
-    if organization and organization != corrected.get("answer"):
+    if organization and organization != corrected.get("answer") and _is_safe_postprocess_rewrite(current_answer, organization, original_question):
         corrected["answer"] = organization
         corrected["answer_span_reasoning"] = "Deterministic span normalizer selected a shorter organization alias."
         corrected["deterministic_organization_alias"] = True
-    nationality = _nationality_canonical_span(
-        str(corrected.get("answer", "") or ""),
-        original_question,
-    )
-    if nationality and nationality != corrected.get("answer"):
-        corrected["answer"] = nationality
-        corrected["answer_span_reasoning"] = "Deterministic span normalizer canonicalized a nationality answer."
-        corrected["deterministic_nationality_normalized"] = True
     return corrected
 
 
@@ -439,6 +417,10 @@ def _deterministic_yes_no_answer(
     dag_nodes: list[dict[str, Any]],
 ) -> dict[str, Any] | None:
     lowered = original_question.lower()
+    nationality = _deterministic_nationality_yes_no_answer(original_question, atomic_results, dag_nodes)
+    if nationality is not None:
+        return nationality
+
     answers = _terminal_atomic_answers(atomic_results, dag_nodes)
     explicit_terminal = [
         answer
@@ -466,6 +448,121 @@ def _deterministic_yes_no_answer(
         "reason": "Deterministic yes/no comparison over the final branch atomic answers.",
         "compared_answers": answers[-2:],
     }
+
+
+def _deterministic_nationality_yes_no_answer(
+    original_question: str,
+    atomic_results: list[dict[str, Any]],
+    dag_nodes: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    lowered = original_question.lower()
+    if "nationality" not in lowered:
+        return None
+    is_different = "different" in lowered
+    is_same = "same" in lowered or "share" in lowered
+    if not is_same and not is_different:
+        return None
+
+    answers = _nationality_branch_answers(atomic_results, dag_nodes)
+    if len(answers) < 2:
+        return None
+    left, right = answers[-2], answers[-1]
+    if not left or not right:
+        return None
+
+    if "exact same nationality" in lowered:
+        equivalent = _normalize_comparison_answer(left) == _normalize_comparison_answer(right)
+        reason = "Deterministic exact nationality comparison over final branch answers."
+    else:
+        equivalent = _nationality_labels_overlap(left, right)
+        reason = "Deterministic nationality component comparison over final branch answers."
+    answer = "no" if equivalent and is_different else "yes" if equivalent else "yes" if is_different else "no"
+    return {
+        "answer": answer,
+        "confidence": 0.92,
+        "reason": reason,
+        "compared_answers": [left, right],
+    }
+
+
+def _nationality_branch_answers(
+    atomic_results: list[dict[str, Any]],
+    dag_nodes: list[dict[str, Any]],
+) -> list[str]:
+    results_by_id = {str(item.get("node_id", "") or ""): item for item in atomic_results}
+    dag_by_id = {str(item.get("node_id", "") or ""): item for item in dag_nodes}
+    for result in reversed(atomic_results):
+        answer = _normalize_comparison_answer(str(result.get("answer", "") or ""))
+        if answer not in {"yes", "no"}:
+            continue
+        dependencies = _dependencies_for_node(result, dag_by_id.get(str(result.get("node_id", "") or ""), {}))
+        branch_answers: list[str] = []
+        for dependency in dependencies:
+            dependency_result = results_by_id.get(str(dependency), {})
+            dependency_answer = str(dependency_result.get("answer", "") or "").strip()
+            dependency_question = str(dependency_result.get("question", "") or "").lower()
+            if (
+                dependency_answer
+                and dependency_answer.upper() != "INSUFFICIENT_EVIDENCE"
+                and _normalize_comparison_answer(dependency_answer) not in {"yes", "no"}
+                and "nationality" in dependency_question
+            ):
+                branch_answers.append(dependency_answer)
+        if len(branch_answers) >= 2:
+            return branch_answers
+
+    return [
+        str(item.get("answer", "") or "").strip()
+        for item in atomic_results
+        if "nationality" in str(item.get("question", "") or "").lower()
+        and str(item.get("answer", "") or "").strip()
+        and str(item.get("answer", "") or "").strip().upper() != "INSUFFICIENT_EVIDENCE"
+        and _normalize_comparison_answer(str(item.get("answer", "") or "")) not in {"yes", "no"}
+    ]
+
+
+def _nationality_labels_overlap(left: str, right: str) -> bool:
+    left_components = _nationality_components(left)
+    right_components = _nationality_components(right)
+    return bool(left_components and right_components and left_components.intersection(right_components))
+
+
+def _nationality_components(label: str) -> set[str]:
+    text = normalize_label(label).lower()
+    text = re.sub(r"\([^)]*\)", " ", text)
+    parts = [
+        _normalize_comparison_answer(part)
+        for part in re.split(r"\s*(?:-|/|,|\band\b|\bor\b)\s*", text)
+        if _normalize_comparison_answer(part)
+    ]
+    components: set[str] = set()
+    for part in parts:
+        components.add(part)
+        components.update(_NATIONALITY_EQUIVALENCE.get(part, {part}))
+        if " " in part and part not in _NATIONALITY_EQUIVALENCE:
+            for token in part.split():
+                components.add(token)
+                components.update(_NATIONALITY_EQUIVALENCE.get(token, {token}))
+    return components
+
+
+_NATIONALITY_EQUIVALENCE = {
+    "american": {"american", "america", "united states", "united states of america", "us", "u s", "puerto rican"},
+    "puerto rican": {"puerto rican", "american", "america", "united states", "united states of america", "us", "u s"},
+    "america": {"america", "american", "united states", "united states of america", "us", "u s", "puerto rican"},
+    "united states": {"united states", "united states of america", "american", "america", "us", "u s", "puerto rican"},
+    "united states of america": {"united states", "united states of america", "american", "america", "us", "u s", "puerto rican"},
+    "french": {"french", "france"},
+    "france": {"french", "france"},
+    "german": {"german", "germany"},
+    "germany": {"german", "germany"},
+    "danish": {"danish", "denmark"},
+    "denmark": {"danish", "denmark"},
+    "romanian": {"romanian", "romania"},
+    "romania": {"romanian", "romania"},
+    "czech": {"czech", "czech republic"},
+    "czech republic": {"czech", "czech republic"},
+}
 
 
 def _terminal_atomic_answers(
@@ -609,19 +706,77 @@ def _date_canonical_span(answer: str, original_question: str) -> str | None:
     return match.group(1)
 
 
-def _nationality_canonical_span(answer: str, original_question: str) -> str | None:
-    question = original_question.lower()
+def _is_safe_postprocess_rewrite(answer: str, proposed: str, original_question: str) -> bool:
     answer = normalize_label(answer).strip()
-    if not answer or "-" in answer or "/" in answer or "," in answer:
+    proposed = normalize_label(proposed).strip()
+    if not answer or not proposed or answer == proposed:
+        return False
+    if _yes_no_judgment(answer) is not None:
+        return False
+    if _is_original_question_candidate(answer, original_question):
+        return False
+    if _is_original_question_candidate(proposed, original_question):
+        return True
+    return _is_surface_subspan(proposed, answer)
+
+
+def _preserve_terminal_country_or_nationality_surface(
+    answer: str,
+    original_question: str,
+    atomic_results: list[dict[str, Any]],
+    dag_nodes: list[dict[str, Any]],
+) -> str | None:
+    question = original_question.lower()
+    if not re.search(r"\b(?:country|nationality)\b", question):
         return None
-    # Compound labels stay with the single-stage resolver. This deterministic
-    # fallback only handles one-label country/demonym aliases in explicitly
-    # typed country/nationality questions.
-    if "nationality" in question:
-        return _COUNTRY_TO_DEMONYM.get(_norm_text(answer))
-    if re.search(r"\bcountry\b", question):
-        return _DEMONYM_TO_COUNTRY.get(_norm_text(answer))
-    return None
+    if _yes_no_judgment(answer) is not None or _comparison_mode(original_question) is not None:
+        return None
+    terminal_answers = _terminal_atomic_answers(atomic_results, dag_nodes)
+    if not terminal_answers:
+        return None
+    terminal = normalize_label(terminal_answers[-1]).strip()
+    answer = normalize_label(answer).strip()
+    if not terminal or terminal.upper() == "INSUFFICIENT_EVIDENCE" or not answer:
+        return None
+    if _norm_text(terminal) == _norm_text(answer):
+        return None
+    if _is_supported_surface(answer, original_question, atomic_results):
+        return None
+    if _is_surface_subspan(answer, terminal):
+        return None
+    if _is_surface_subspan(terminal, answer) and re.search(r"\b(?:and|or|;)\b|;", answer, flags=re.IGNORECASE):
+        return None
+    return terminal
+
+
+def _is_original_question_candidate(answer: str, original_question: str) -> bool:
+    normalized_answer = _norm_text(answer)
+    if not normalized_answer:
+        return False
+    return any(normalized_answer == _norm_text(candidate) for candidate in _explicit_candidate_phrases_from_question(original_question))
+
+
+def _is_supported_surface(answer: str, original_question: str, atomic_results: list[dict[str, Any]]) -> bool:
+    if _is_surface_subspan(answer, original_question):
+        return True
+    for item in atomic_results:
+        if _is_surface_subspan(answer, str(item.get("answer", "") or "")):
+            return True
+        for evidence in item.get("top_evidence", []):
+            if _is_surface_subspan(answer, str(evidence.get("hyperedge_text", "") or "")):
+                return True
+            if any(_is_surface_subspan(answer, str(text or "")) for text in evidence.get("evidence_texts", [])):
+                return True
+    return False
+
+
+def _is_surface_subspan(span: str, source: str) -> bool:
+    span = normalize_label(span).strip()
+    source = normalize_label(source).strip()
+    if not span or not source:
+        return False
+    pattern = rf"(?<!\w){re.escape(span)}(?!\w)"
+    return re.search(pattern, source, flags=re.IGNORECASE) is not None
 
 
 def _comparable_records(
@@ -798,6 +953,32 @@ def _candidate_phrases_from_question(question: str) -> list[str]:
     if both:
         candidates.extend(_split_candidate_tail(both.group(1)))
     candidates.extend(_capitalized_phrases(cleaned))
+    result: list[str] = []
+    for candidate in candidates:
+        candidate = _clean_candidate_label(candidate)
+        if candidate and candidate not in result and len(candidate) > 1:
+            result.append(candidate)
+    return result
+
+
+def _explicit_candidate_phrases_from_question(question: str) -> list[str]:
+    cleaned = question.strip().rstrip("? ")
+    candidates: list[str] = []
+    if "," in cleaned:
+        candidates.extend(_split_candidate_tail(cleaned.split(",", 1)[-1]))
+    out_of = re.search(r"\bout of\s+(.+)$", cleaned, flags=re.IGNORECASE)
+    if out_of:
+        candidates.extend(_split_candidate_tail(out_of.group(1)))
+    subject_choices = re.search(
+        r"^(?:was|were|is|are|did|do|does)\s+(.+?)\s+\b(?:born|released|died|die|live|lived)\b",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    if subject_choices:
+        candidates.extend(_split_candidate_tail(subject_choices.group(1)))
+    both = re.search(r"\bboth\s+(.+?)\s+(?:located|from|born|of|share|in)\b", cleaned, flags=re.IGNORECASE)
+    if both:
+        candidates.extend(_split_candidate_tail(both.group(1)))
     result: list[str] = []
     for candidate in candidates:
         candidate = _clean_candidate_label(candidate)

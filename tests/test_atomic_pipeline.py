@@ -1069,6 +1069,11 @@ class FinalAnswerComposerTest(unittest.TestCase):
                 "Siversky",
             ),
             (
+                "Where was Corina from?",
+                "Manhattan, New York",
+                "Manhattan",
+            ),
+            (
                 "Where does John Tyndall work?",
                 "Royal Institution of Great Britain",
                 "Royal Institution",
@@ -1081,7 +1086,7 @@ class FinalAnswerComposerTest(unittest.TestCase):
             (
                 "What nationality was the composer?",
                 "Austria",
-                "Austrian",
+                "Austria",
             ),
             (
                 "Which song was released first, Where Does It Hurt? or Other Song?",
@@ -1098,6 +1103,38 @@ class FinalAnswerComposerTest(unittest.TestCase):
                     dag_nodes=[AtomicQuestionNode(node_id="q1", question=question)],
                 )
                 self.assertEqual(payload["answer"], expected)
+
+    def test_postprocess_preserves_country_surface_for_nationality_questions(self) -> None:
+        cases = [
+            ("What nationality is Beatrice I's husband?", "Germany", "German"),
+            ("What nationality is the performer?", "France", "French"),
+        ]
+        for question, atomic_answer, llm_answer in cases:
+            with self.subTest(question=question):
+                composer = FinalAnswerComposer(StaticFinalLLM(llm_answer))
+                payload = composer.compose(
+                    question,
+                    [_atomic_result("q1", question, atomic_answer)],
+                    dag_nodes=[AtomicQuestionNode(node_id="q1", question=question)],
+                )
+                self.assertEqual(payload["answer"], atomic_answer)
+                self.assertTrue(payload["deterministic_terminal_surface_preserved"])
+
+    def test_postprocess_does_not_create_unseen_country_or_demonym_surface(self) -> None:
+        cases = [
+            ("What nationality is Beatrice I's husband?", "Germany"),
+            ("What nationality is the performer?", "France"),
+        ]
+        for question, raw_answer in cases:
+            with self.subTest(question=question):
+                composer = FinalAnswerComposer(StaticFinalLLM(raw_answer))
+                payload = composer.compose(
+                    question,
+                    [_atomic_result("q1", question, raw_answer)],
+                    dag_nodes=[AtomicQuestionNode(node_id="q1", question=question)],
+                )
+                self.assertEqual(payload["answer"], raw_answer)
+                self.assertNotIn("deterministic_nationality_normalized", payload)
 
     def test_final_synthesis_corrects_born_first_from_atomic_dates(self) -> None:
         composer = FinalAnswerComposer(StaticFinalLLM("El Tonto"))
@@ -1179,6 +1216,44 @@ class FinalAnswerComposerTest(unittest.TestCase):
         )
 
         self.assertEqual(payload["answer"], "no")
+
+    def test_final_synthesis_overrides_terminal_no_for_shared_nationality_components(self) -> None:
+        cases = [
+            ("American", "Puerto Rican"),
+            ("French", "French-Armenian"),
+            ("Czech-American", "Romanian-American"),
+        ]
+        for left, right in cases:
+            with self.subTest(left=left, right=right):
+                composer = FinalAnswerComposer(StaticFinalLLM("no"))
+                dag_nodes = [
+                    AtomicQuestionNode(node_id="q1", question="What is the nationality of X?"),
+                    AtomicQuestionNode(node_id="q2", question="What is the nationality of Y?"),
+                    AtomicQuestionNode(
+                        node_id="q3",
+                        question="Based on q1's answer and q2's answer, do X and Y share the same nationality?",
+                        dependencies=["q1", "q2"],
+                    ),
+                ]
+                results = [
+                    _atomic_result("q1", "What is the nationality of X?", left),
+                    _atomic_result("q2", "What is the nationality of Y?", right),
+                    _atomic_result(
+                        "q3",
+                        f"Based on {left} and {right}, do X and Y share the same nationality?",
+                        "no",
+                        dependencies=["q1", "q2"],
+                    ),
+                ]
+
+                payload = composer.compose(
+                    "Do X and Y share the same nationality?",
+                    results,
+                    dag_nodes=dag_nodes,
+                )
+
+                self.assertEqual(payload["answer"], "yes")
+                self.assertIn("nationality component", payload["answer_span_reasoning"])
 
     def test_final_synthesis_uses_explicit_terminal_yes_no_answer(self) -> None:
         composer = FinalAnswerComposer(StaticFinalLLM("no"))

@@ -59,6 +59,19 @@ Primary evidence policy:
   - confidence = 0.0
   - remaining_gaps = the missing essential node IDs or issues.
 
+Extractive canonicalization policy:
+- The final answer must be extractive or conservatively normalized.
+- The answer should normally be copied from one of:
+  1. explicit candidates in the original question;
+  2. atomic answers;
+  3. evidence spans;
+  4. a conservative substring of an atomic answer or evidence span.
+- Do not generate a new surface form that does not appear in the original question, atomic answers, or evidence, unless it is required for a yes/no judgment or simple numeric/date normalization.
+- Conservative substring shortening is allowed only when the shorter span is continuous in the source string and still directly answers the original question.
+- If the supported atomic answer is already short, factual, and type-compatible with the original question, preserve its surface form instead of rewriting it to a semantic equivalent.
+- Do not convert country names into demonyms for evaluation formatting.
+- Do not convert demonyms into country names for evaluation formatting.
+
 Final reasoning rules:
 - Use the original question to determine the required final answer type.
 - Use the DAG dependencies to determine which atomic answers are intermediate and which answer actually satisfies the original question.
@@ -96,28 +109,29 @@ Yes/no judgment rules:
 - Do not answer with the attribute values themselves for yes/no questions.
 
 Nationality and demonym rules:
-- Normalize obvious country/demonym pairs when the question asks for nationality or country, such as:
-  - United States / American
-  - United Kingdom / British
-  - France / French
-  - Germany / German
-  - Italy / Italian
-  - Spain / Spanish
-  - Russia / Russian
-  - Romania / Romanian
-  - Czech Republic / Czech
+- Preserve the supported surface form for country and nationality answers unless the original question explicitly requires a yes/no judgment.
+- Do not rewrite country names into demonyms for final answer formatting:
+  - Preserve "Germany" rather than rewriting it as "German".
+  - Preserve "France" rather than rewriting it as "French".
+  - Preserve "Romania" rather than rewriting it as "Romanian".
+  - Preserve "United States" or "United States of America" rather than rewriting it as "American", unless the atomic answer or evidence explicitly gives "American" and the question specifically requires a demonym.
+- For "what nationality" questions, prefer the supported atomic answer surface form. Do not assume the benchmark expects a demonym.
 - Do not freely collapse related but non-identical labels unless the question wording supports it.
 - Treat compound or hyphenated nationalities as component sets only when component-level comparison is required by the question.
 - For exact "same nationality" questions, compare the normalized intended labels. Do not assume that a partial overlap is enough unless the question asks whether they share any nationality component.
+- For non-exact "same nationality" or "share the same nationality" yes/no questions, compare component overlap over supported nationality labels.
+- A compound nationality can satisfy a same/share nationality judgment when it shares a supported component with the other branch, such as French vs French-Armenian or Czech-American vs Romanian-American.
+- For this yes/no judgment only, Puerto Rican may satisfy an American/United States nationality component relation when the evidence supports Puerto Rican as the branch nationality.
 - For broad "is X [nationality]?" questions, a compound nationality containing that component may satisfy the judgment.
 - Preserve the full nationality label when the question asks "what nationality" and the evidence supports the compound label.
 - Be especially careful with labels such as American vs Puerto Rican, French vs French-Armenian, Czech-American vs Romanian-American. Decide from the original question wording and the supported atomic answers, not from loose association.
+- For yes/no nationality comparison questions, country/demonym normalization may be used internally for the judgment, but the final answer must still be exactly "yes" or "no".
 
 Answer canonicalization objective:
 - The answer field must be the shortest canonical answer string that directly satisfies the original question.
 - Do not include explanatory text, evidence descriptions, "because", dates attached to a selected candidate, or full sentences.
 - Prefer canonical entity names over long descriptive evidence spans.
-- Prefer the shortest unambiguous alias when evidence or stable naming convention supports it.
+- Prefer the shortest unambiguous alias only when it appears in the original question, atomic answer, or evidence, or is a clear leading canonical substring of the supported answer.
 - Remove leading articles such as "the" unless they are part of an official title.
 - Remove parenthetical descriptions unless they are required to disambiguate the answer.
 - Remove role descriptions such as "the composer", "the director", "the city", "the institution", unless the role phrase is part of the entity name.
@@ -125,8 +139,9 @@ Answer canonicalization objective:
 
 Location canonicalization:
 - If the original question asks for a city, town, village, settlement, place, birthplace, deathplace, location, or similar entity, output the minimal named place that directly answers the question.
-- If the evidence gives a location as "X, Country" or "X, Region, Country", output "X" when X is itself the named place being asked for and the remaining phrase is only geographic context.
-- If the evidence gives "X, near Y, Country", output "X" when X is the named place being asked for.
+- Conservative shortening is allowed only when the shorter place name is a leading named span in the answer or evidence.
+- If the evidence gives a location as "X, Country" or "X, Region, Country", output "X" only when X is itself the named place being asked for and the remaining phrase is only geographic context.
+- If the evidence gives "X, near Y, Country", output "X" only when X is the named place being asked for.
 - Preserve country, state, or region qualifiers when:
   - the original question asks for a country, state, province, region, or larger administrative unit;
   - the qualifier is part of the standard entity name;
@@ -138,8 +153,9 @@ Location canonicalization:
 
 Organization / institution / work canonicalization:
 - Prefer the canonical title or shortest standard name of the organization, institution, creative work, or publication.
-- If evidence gives a longer official name but the question/evidence supports a shorter canonical alias, output the shorter canonical alias.
+- If evidence gives a longer official name but the question/evidence supports a shorter canonical alias, output the shorter canonical alias only when it is present in the original question, atomic answer, or evidence, or is clearly the leading canonical name.
 - Do not output legal suffixes, descriptions, or expanded context unless they are part of the canonical title.
+- Avoid aggressive rewriting for organizations, works, and persons. Prefer conservative substring shortening over generating a new alias.
 - Example:
   candidate/evidence: "Royal Institution of Great Britain"
   if the canonical entity asked by the question is "Royal Institution", answer: "Royal Institution"
