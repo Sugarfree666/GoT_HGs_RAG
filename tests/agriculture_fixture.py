@@ -20,14 +20,8 @@ runtime:
   log_level: INFO
 
 retrieval:
-  relation_top_k: 3
-  semantic_top_k: 3
-  semantic_chunk_top_k: 3
-  evidence_top_k: 2
-  max_anchor_hyperedges_per_entity: null
-  anchor_weight: 0.4
-  relation_weight: 0.4
-  semantic_weight: 0.2
+  branch_top_k: 15
+  evidence_top_k: 5
 
 llm:
   api_key_env: OPENAI_API_KEY

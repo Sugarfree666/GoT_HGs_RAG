@@ -265,6 +265,68 @@ class AtomicDagAdapterTest(unittest.TestCase):
         self.assertEqual(rewrite["retrieval_question"], "Where is Lothair II buried?")
 
 
+class RetrievalConfigTest(unittest.TestCase):
+    def test_load_config_uses_public_branch_and_evidence_top_k_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            project_root = Path(tmp_dir)
+            config_path = project_root / "config.yaml"
+            config_path.write_text(
+                """
+dataset:
+  root: dataset
+runtime:
+  base_run_dir: runs
+retrieval:
+  branch_top_k: 7
+  evidence_top_k: 3
+llm:
+  use_mock: true
+prompts:
+  dir: prompts
+""".strip(),
+                encoding="utf-8",
+            )
+
+            config = load_config(config_path, project_root)
+
+        self.assertEqual(config.retrieval.branch_top_k, 7)
+        self.assertEqual(config.retrieval.evidence_top_k, 3)
+        self.assertFalse(hasattr(config.retrieval, "anchor_weight"))
+        self.assertFalse(hasattr(config.retrieval, "relation_weight"))
+        self.assertFalse(hasattr(config.retrieval, "semantic_weight"))
+
+    def test_load_config_tolerates_legacy_branch_top_k_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            project_root = Path(tmp_dir)
+            config_path = project_root / "config.yaml"
+            config_path.write_text(
+                """
+dataset:
+  root: dataset
+runtime:
+  base_run_dir: runs
+retrieval:
+  relation_top_k: 4
+  semantic_top_k: 6
+  semantic_chunk_top_k: 5
+  evidence_top_k: 2
+  anchor_weight: 0.4
+  relation_weight: 0.4
+  semantic_weight: 0.2
+llm:
+  use_mock: true
+prompts:
+  dir: prompts
+""".strip(),
+                encoding="utf-8",
+            )
+
+            config = load_config(config_path, project_root)
+
+        self.assertEqual(config.retrieval.branch_top_k, 6)
+        self.assertEqual(config.retrieval.evidence_top_k, 2)
+
+
 class RecordingAnalyzer:
     def __init__(self) -> None:
         self.questions: list[str] = []
@@ -363,22 +425,47 @@ class AtomicFusionTest(unittest.TestCase):
         self.assertEqual(candidates[0].entity_ids, ["Entity A", "Entity B"])
         self.assertEqual(candidates[0].chunk_ids, ["c1", "c2"])
 
-    def test_fusion_score_precedes_branch_support_in_sorting(self) -> None:
+    def test_consensus_bucket_order_prioritizes_multi_branch_support(self) -> None:
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=None)
-        analysis = AtomicQuestionAnalysis(relation_query="no lexical overlap")
+        analysis = AtomicQuestionAnalysis(entities=["Entity A"], relations=["relation"], relation_query="relation")
         hits = [
-            BranchHit("double", "anchor", 0.0, "nothing useful"),
-            BranchHit("double", "relation", 0.0, "nothing useful"),
-            BranchHit("single", "semantic", 0.0, "no lexical overlap"),
+            BranchHit("ar", "anchor", 1.0, "Entity A relation", entity_ids=["Entity A"]),
+            BranchHit("ar", "relation", 1.0, "Entity A relation"),
+            BranchHit("rs", "relation", 1.0, "Entity A relation"),
+            BranchHit("rs", "semantic", 1.0, "Entity A relation"),
+            BranchHit("as", "anchor", 1.0, "Entity A relation", entity_ids=["Entity A"]),
+            BranchHit("as", "semantic", 1.0, "Entity A relation"),
+            BranchHit("ars", "anchor", 1.0, "Entity A relation", entity_ids=["Entity A"]),
+            BranchHit("ars", "relation", 1.0, "Entity A relation"),
+            BranchHit("ars", "semantic", 1.0, "Entity A relation"),
         ]
 
-        candidates = fusion.fuse("question", analysis, hits, top_k=5)
+        candidates = fusion.fuse("question relation", analysis, hits, top_k=4)
 
-        self.assertEqual(candidates[0].hyperedge_id, "single")
-        self.assertEqual(len(candidates[1].branch_support), 2)
-        self.assertGreater(candidates[0].fusion_score, candidates[1].fusion_score)
+        self.assertEqual([candidate.hyperedge_id for candidate in candidates], ["ars", "ar", "as", "rs"])
+        self.assertEqual([candidate.score_breakdown["selection_bucket"] for candidate in candidates], ["A_R_S", "A_R", "A_S", "R_S"])
 
-    def test_fusion_score_formula(self) -> None:
+    def test_anchor_residual_completion_ignores_single_non_anchor_branches(self) -> None:
+        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=None)
+        analysis = AtomicQuestionAnalysis(entities=["Entity A"], relations=["born"], relation_query="born")
+        hits = [
+            BranchHit("rs", "relation", 1.0, "Entity A born in city"),
+            BranchHit("rs", "semantic", 1.0, "Entity A born in city"),
+            BranchHit("a_low", "anchor", 1.0, "Entity A unrelated", entity_ids=["Entity A"]),
+            BranchHit("a_high", "anchor", 1.0, "Entity A born in city", entity_ids=["Entity A"]),
+            BranchHit("relation_only", "relation", 1.0, "Entity A born in city"),
+            BranchHit("semantic_only", "semantic", 1.0, "Entity A born in city"),
+        ]
+
+        candidates = fusion.fuse("Who was born in city?", analysis, hits, top_k=5)
+
+        self.assertEqual([candidate.hyperedge_id for candidate in candidates], ["rs", "a_high", "a_low"])
+        self.assertNotIn("relation_only", {candidate.hyperedge_id for candidate in candidates})
+        self.assertNotIn("semantic_only", {candidate.hyperedge_id for candidate in candidates})
+        self.assertEqual(candidates[1].score_breakdown["selection_bucket"], "A_residual")
+        self.assertEqual(candidates[2].score_breakdown["selection_bucket"], "A_residual")
+
+    def test_score_breakdown_uses_selection_metadata_not_weights(self) -> None:
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=None)
         analysis = AtomicQuestionAnalysis(
             entities=["Entity A"],
@@ -402,7 +489,11 @@ class AtomicFusionTest(unittest.TestCase):
         self.assertAlmostEqual(candidate.anchor_score, 1.0)
         self.assertAlmostEqual(candidate.relation_score, 1.0)
         self.assertAlmostEqual(candidate.semantic_score, 1.0)
-        self.assertAlmostEqual(candidate.fusion_score, 1.0)
+        self.assertEqual(candidate.score_breakdown["selection_bucket"], "A_R_S")
+        self.assertEqual(candidate.score_breakdown["branch_support_count"], 3)
+        self.assertNotIn("anchor_weight", candidate.score_breakdown)
+        self.assertNotIn("relation_weight", candidate.score_breakdown)
+        self.assertNotIn("semantic_weight", candidate.score_breakdown)
 
     def test_fusion_does_not_reuse_branch_raw_scores(self) -> None:
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=None)
@@ -466,6 +557,13 @@ class AtomicFusionTest(unittest.TestCase):
         hits = [
             BranchHit(
                 "h1",
+                "anchor",
+                0.9,
+                "Apple appears in text.",
+                entity_ids=["Apple tree"],
+            ),
+            BranchHit(
+                "h1",
                 "relation",
                 0.9,
                 "Apple appears in text.",
@@ -483,6 +581,12 @@ class AtomicFusionTest(unittest.TestCase):
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder, hyperedge_store=store)
         analysis = AtomicQuestionAnalysis(relations=["directed by"], relation_query="directed by")
         hits = [
+            BranchHit(
+                hyperedge_id="h1",
+                branch="semantic",
+                raw_score=0.9,
+                hyperedge_text="unrelated",
+            ),
             BranchHit(
                 hyperedge_id="h1",
                 branch="relation",
@@ -503,6 +607,7 @@ class AtomicFusionTest(unittest.TestCase):
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder, chunk_store=chunk_store)
         analysis = AtomicQuestionAnalysis()
         hits = [
+            BranchHit("h1", "anchor", 0.9, "unrelated", entity_ids=["Entity A"]),
             BranchHit("h1", "semantic", 0.9, "unrelated", chunk_ids=["chunk-1"]),
         ]
 
@@ -706,7 +811,157 @@ class RetrieverGraph:
         }
 
 
+class RelationGraph:
+    def __init__(self, relation_texts_by_hyperedge: dict[str, str]) -> None:
+        self.nodes = {
+            hyperedge_id: GraphNode(
+                node_id=hyperedge_id,
+                role="hyperedge",
+                description=relation_text,
+            )
+            for hyperedge_id, relation_text in relation_texts_by_hyperedge.items()
+        }
+        self.adjacency: dict[str, list[str]] = {}
+        self.edges: dict[str, object] = {}
+        self._relation_texts_by_hyperedge = dict(relation_texts_by_hyperedge)
+
+    def entity_hyperedge_ids(self, entity_id: str) -> list[str]:
+        del entity_id
+        return []
+
+    def describe_hyperedge(self, hyperedge_id: str) -> dict[str, object]:
+        return {
+            "hyperedge_id": hyperedge_id,
+            "hyperedge_text": self._relation_texts_by_hyperedge.get(hyperedge_id, hyperedge_id),
+            "entity_ids": [],
+            "chunk_ids": [],
+        }
+
+
+def _relation_retriever(
+    *,
+    relation_texts_by_hyperedge: dict[str, str],
+    matches_by_query: dict[str, list[VectorMatch]],
+    branch_top_k: int = 10,
+) -> AtomicHyperedgeRetriever:
+    dataset = SimpleNamespace(
+        graph=RelationGraph(relation_texts_by_hyperedge),
+        hyperedge_store=MappingHyperedgeStore(matches_by_query),
+        chunk_store=MappingChunkStore({}),
+        text_chunks={},
+        get_chunk_text=lambda chunk_id: "",
+    )
+    return AtomicHyperedgeRetriever(
+        dataset=dataset,
+        embedder=TextEmbedder(),
+        config=RetrievalConfig(branch_top_k=branch_top_k),
+        logger=logging.getLogger("test.atomic_retriever"),
+    )
+
+
 class AtomicRetrieverTest(unittest.TestCase):
+    def test_atomic_analysis_prompt_defines_relation_query_as_signature(self) -> None:
+        prompt = Path("prompts/atomic_question_analysis.md").read_text(encoding="utf-8")
+
+        self.assertIn("relation_query is a compact predicate signature", prompt)
+        self.assertIn("relation_query is not a natural-language question", prompt)
+        self.assertIn("Do not include question words", prompt)
+        self.assertIn("mother parent female parent", prompt)
+        self.assertIn("date of death death date died on", prompt)
+
+    def test_relation_signature_seeds_use_relations_before_relation_query(self) -> None:
+        retriever = _relation_retriever(
+            relation_texts_by_hyperedge={},
+            matches_by_query={},
+        )
+
+        seeds = retriever._relation_signature_seeds(
+            AtomicQuestionAnalysis(
+                relations=["mother", "parent"],
+                relation_query="who was the mother of a historical figure",
+            )
+        )
+
+        self.assertEqual(seeds, ["mother", "parent"])
+
+    def test_relation_signature_seeds_deduplicate_preserving_order(self) -> None:
+        retriever = _relation_retriever(
+            relation_texts_by_hyperedge={},
+            matches_by_query={},
+        )
+
+        seeds = retriever._relation_signature_seeds(
+            AtomicQuestionAnalysis(
+                relations=["mother", "mother ", "Parent", "parent", "female parent"],
+                relation_query="mother parent female parent",
+            )
+        )
+
+        self.assertEqual(seeds, ["mother", "Parent", "female parent"])
+
+    def test_relation_branch_retrieves_from_multiple_relation_seeds(self) -> None:
+        retriever = _relation_retriever(
+            relation_texts_by_hyperedge={
+                "H_DEATH": "date of death",
+                "H_MOTHER": "mother parent",
+            },
+            matches_by_query={
+                "date of death": [VectorMatch(item_id="H_DEATH", label="H_DEATH", score=0.4)],
+                "mother": [VectorMatch(item_id="H_MOTHER", label="H_MOTHER", score=0.3)],
+            },
+        )
+
+        hits = retriever.retrieve_relation_branch(
+            AtomicQuestionAnalysis(relations=["date of death", "mother"], relation_query="ignored query")
+        )
+
+        self.assertEqual({hit.hyperedge_id for hit in hits}, {"H_DEATH", "H_MOTHER"})
+        self.assertEqual({hit.branch for hit in hits}, {"relation"})
+        self.assertEqual(retriever.dataset.hyperedge_store.calls, [("date of death", 10), ("mother", 10)])
+
+    def test_relation_branch_ranks_date_of_death_relation_text_above_weak_vector_match(self) -> None:
+        retriever = _relation_retriever(
+            relation_texts_by_hyperedge={
+                "H_WEAK": "film release date",
+                "H_DEATH": "date of death death date died on",
+            },
+            matches_by_query={
+                "date of death": [
+                    VectorMatch(item_id="H_WEAK", label="H_WEAK", score=0.99),
+                    VectorMatch(item_id="H_DEATH", label="H_DEATH", score=0.2),
+                ]
+            },
+        )
+
+        hits = retriever.retrieve_relation_branch(
+            AtomicQuestionAnalysis(relations=["date of death"], relation_query="date of death death date died on")
+        )
+
+        self.assertEqual(hits[0].hyperedge_id, "H_DEATH")
+        self.assertEqual(hits[0].branch, "relation")
+        self.assertEqual(hits[0].metadata["best_relation_seed"], "date of death")
+        self.assertGreater(hits[0].metadata["lexical_relation_score"], hits[1].metadata["lexical_relation_score"])
+
+    def test_relation_branch_ranks_mother_parent_relation_text_above_unrelated_candidate(self) -> None:
+        retriever = _relation_retriever(
+            relation_texts_by_hyperedge={
+                "H_UNRELATED": "director film director",
+                "H_PARENT": "mother parent female parent",
+            },
+            matches_by_query={
+                "mother": [VectorMatch(item_id="H_UNRELATED", label="H_UNRELATED", score=0.99)],
+                "parent": [VectorMatch(item_id="H_PARENT", label="H_PARENT", score=0.1)],
+            },
+        )
+
+        hits = retriever.retrieve_relation_branch(
+            AtomicQuestionAnalysis(relations=["mother", "parent"], relation_query="mother parent female parent")
+        )
+
+        self.assertEqual(hits[0].hyperedge_id, "H_PARENT")
+        self.assertEqual(hits[0].branch, "relation")
+        self.assertEqual(hits[0].metadata["relation_retrieval_mode"], "signature")
+
     def test_semantic_branch_uses_chunk_store_and_maps_chunks_to_hyperedges(self) -> None:
         chunk_store = MappingChunkStore(
             {
@@ -725,7 +980,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         retriever = AtomicHyperedgeRetriever(
             dataset=dataset,
             embedder=TextEmbedder(),
-            config=RetrievalConfig(semantic_chunk_top_k=10),
+            config=RetrievalConfig(branch_top_k=10),
             logger=logging.getLogger("test.atomic_retriever"),
         )
 
@@ -740,7 +995,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         self.assertEqual(hits[0].metadata["matched_chunk_texts"], ["matched chunk text"])
         self.assertEqual(chunk_store.calls, [("semantic question", 10)])
 
-    def test_semantic_branch_limits_chunk_to_hyperedge_expansion(self) -> None:
+    def test_semantic_branch_caps_final_hyperedges_by_branch_top_k(self) -> None:
         chunk_store = MappingChunkStore(
             {
                 "semantic question": [
@@ -758,7 +1013,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         retriever = AtomicHyperedgeRetriever(
             dataset=dataset,
             embedder=TextEmbedder(),
-            config=RetrievalConfig(semantic_chunk_top_k=10, max_semantic_hyperedges_per_chunk=2),
+            config=RetrievalConfig(branch_top_k=2),
             logger=logging.getLogger("test.atomic_retriever"),
         )
 
@@ -819,6 +1074,23 @@ class AtomicRetrieverTest(unittest.TestCase):
         self.assertEqual(hits[0].hyperedge_id, "h_china")
         self.assertAlmostEqual(hits[0].raw_score, 1.0)
 
+    def test_anchor_branch_caps_final_hyperedges_by_branch_top_k(self) -> None:
+        dataset = SimpleNamespace(
+            graph=AnchorGraph({"h3": ["China"], "h1": ["China"], "h2": ["China"]}),
+            hyperedge_store=MappingHyperedgeStore({}),
+            get_chunk_text=lambda chunk_id: "",
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=None,
+            config=RetrievalConfig(branch_top_k=2),
+            logger=logging.getLogger("test.atomic_retriever"),
+        )
+
+        hits = retriever.retrieve_anchor_branch("What is China?", AtomicQuestionAnalysis(entities=["China"]))
+
+        self.assertEqual([hit.hyperedge_id for hit in hits], ["h1", "h2"])
+
     def test_anchor_vector_llm_match_uses_vector_score_in_raw_score(self) -> None:
         entity_store = MappingEntityStore(
             {
@@ -846,7 +1118,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         retriever = AtomicHyperedgeRetriever(
             dataset=dataset,
             embedder=TextEmbedder(),
-            config=RetrievalConfig(anchor_entity_top_k=3),
+            config=RetrievalConfig(),
             llm_service=MockAtomicLLMService(),
             logger=logging.getLogger("test.atomic_retriever"),
         )
@@ -878,13 +1150,13 @@ class AtomicRetrieverTest(unittest.TestCase):
 
         self.assertAlmostEqual(candidate.anchor_score, 0.0)
 
-    def test_non_anchor_anchor_score_uses_only_exact_entity_id_coverage(self) -> None:
+    def test_anchor_score_uses_only_exact_entity_id_coverage(self) -> None:
         fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=None)
         analysis = AtomicQuestionAnalysis(entities=["Apple"], relation_query="contains Apple")
         hits = [
             BranchHit(
                 hyperedge_id="h1",
-                branch="relation",
+                branch="anchor",
                 raw_score=0.9,
                 hyperedge_text="Apple appears in text.",
                 entity_ids=["Apple tree"],
@@ -919,7 +1191,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         retriever = AtomicHyperedgeRetriever(
             dataset=dataset,
             embedder=TextEmbedder(),
-            config=RetrievalConfig(relation_top_k=10, semantic_top_k=10),
+            config=RetrievalConfig(branch_top_k=10),
             logger=logging.getLogger("test.atomic_retriever"),
         )
 
@@ -930,7 +1202,7 @@ class AtomicRetrieverTest(unittest.TestCase):
 
         self.assertEqual({hit.branch for hit in hits}, {"anchor", "relation", "semantic"})
 
-    def test_relation_and_semantic_branches_use_top_10(self) -> None:
+    def test_relation_and_semantic_branches_use_branch_top_k(self) -> None:
         hyperedge_ids = [f"h{index}" for index in range(12)]
         relation_matches = [VectorMatch(item_id=item, label=item, score=1.0 - (index * 0.01)) for index, item in enumerate(hyperedge_ids)]
         semantic_matches = [
@@ -953,7 +1225,7 @@ class AtomicRetrieverTest(unittest.TestCase):
         retriever = AtomicHyperedgeRetriever(
             dataset=dataset,
             embedder=TextEmbedder(),
-            config=RetrievalConfig(relation_top_k=10, semantic_chunk_top_k=10),
+            config=RetrievalConfig(branch_top_k=10),
             logger=logging.getLogger("test.atomic_retriever"),
         )
 
@@ -1119,6 +1391,19 @@ class FinalAnswerComposerTest(unittest.TestCase):
                 )
                 self.assertEqual(payload["answer"], atomic_answer)
                 self.assertTrue(payload["deterministic_terminal_surface_preserved"])
+
+    def test_postprocess_preserves_supported_terminal_surface_for_unseen_alias(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("John Smith"))
+
+        payload = composer.compose(
+            "Who founded Example Institute?",
+            [_atomic_result("q1", "Who founded Example Institute?", "Jonathan Smith")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Who founded Example Institute?")],
+        )
+
+        self.assertEqual(payload["answer"], "Jonathan Smith")
+        self.assertEqual(payload["candidate_answer"], "Jonathan Smith")
+        self.assertTrue(payload["deterministic_terminal_surface_preserved"])
 
     def test_postprocess_does_not_create_unseen_country_or_demonym_surface(self) -> None:
         cases = [

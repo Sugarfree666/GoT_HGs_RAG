@@ -16,8 +16,8 @@ Your job is not to answer the question. Your job is to make retrieval easier, st
 
 Core principles:
 - Extract anchors that must remain fixed during retrieval.
-- Extract the relation or intent that connects the anchors to the missing answer.
-- Rewrite the relation query so it can retrieve structurally relevant hyperedges without overfitting to the original entity names.
+- Extract compact relation signatures that connect the anchors to the missing answer.
+- Build relation_query as a predicate-centric signature for relation-level hyperedge retrieval, not as a natural-language question.
 - Use dependency answers only to resolve variables, placeholders, or references when they are clearly connected to the current question.
 
 Entity extraction rules:
@@ -30,23 +30,61 @@ Entity extraction rules:
 - Deduplicate entities.
 
 Relation extraction rules:
-- relations should capture the semantic predicate, action, attribute, comparison, membership, causality, temporal relation, spatial relation, or selection criterion in the question.
-- Relations may be short phrases, not full sentences.
-- Keep relation phrases general enough to match paraphrases in evidence.
+- relations should capture compact predicate labels, attribute names, and short paraphrases likely to appear in hyperedge relation text.
+- Prefer 2-5 compact predicate paraphrases.
+- Relations must be short phrases, not full sentences.
+- Keep relation phrases general enough to match paraphrases in evidence, but specific enough to name the target predicate.
 - Include important constraints, such as temporal direction, ranking direction, equality, containment, authorship, affiliation, birthplace, release, publication, award, location, parent organization, nationality, genre, or comparison target.
 - Do not include concrete entity names in relations unless the relation itself is a named relation.
 
-Relation query rewriting rules:
-- relation_query should mask or generalize concrete entities while preserving:
-  1. the relation or action,
-  2. the expected answer type,
-  3. essential constraints,
-  4. comparison direction if present.
-- Replace specific entities with generic roles, such as "a person", "an organization", "a work", "a place", "an event", "a date", or "an entity".
-- Do not include the original concrete entity names in relation_query.
-- The relation_query should be a natural sentence or phrase suitable for semantic retrieval.
-- If the atomic question is a comparison or selection, relation_query should express the operation, for example choosing the earlier/later/larger/smaller/matching candidate.
-- If dependency answers resolve variables in the question, relation_query may include the resolved answer type or value category, but should still avoid unnecessary concrete anchors.
+Relation signature query rules:
+- relation_query is a compact predicate signature for relation-level hyperedge retrieval.
+- relation_query is not a natural-language question.
+- Put the compact predicate paraphrases in relations, then make relation_query a compact space-separated concatenation of them.
+- Do not include question words such as "who", "what", "when", "where", or "which".
+- Do not include generic fillers such as "a person", "an entity", "a historical figure", or "a work".
+- Do not include concrete entity names.
+- Prefer relation labels, attribute names, and short paraphrases likely to appear in hyperedge relation text.
+- If the atomic question is a comparison or selection, relation_query should still be predicate-centric, preserving the compared attribute and direction, for example "birth date born earlier born first" or "release date released first earlier release".
+- If dependency answers resolve variables in the question, use them only as entities when needed; do not copy them into relation_query.
+
+Good examples:
+{
+  "entities": ["ENTITYA"],
+  "relations": ["mother", "parent", "female parent"],
+  "relation_query": "mother parent female parent",
+  "answer_type": "person"
+}
+
+{
+  "entities": ["ENTITYA"],
+  "relations": ["date of death", "death date", "died on"],
+  "relation_query": "date of death death date died on",
+  "answer_type": "date"
+}
+
+{
+  "entities": ["ENTITYA"],
+  "relations": ["place of birth", "birthplace", "born in"],
+  "relation_query": "place of birth birthplace born in",
+  "answer_type": "location"
+}
+
+{
+  "entities": ["ENTITYA"],
+  "relations": ["director", "directed by", "film director"],
+  "relation_query": "director directed by film director",
+  "answer_type": "person"
+}
+
+Bad examples:
+{
+  "relation_query": "who was the mother of a historical figure"
+}
+
+{
+  "relation_query": "What is the date of death of a person?"
+}
 
 Answer type rules:
 - answer_type should describe the expected answer category as specifically as possible.

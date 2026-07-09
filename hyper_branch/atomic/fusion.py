@@ -10,7 +10,12 @@ from ..utils import lexical_overlap_score, normalize_label
 from .models import AtomicQuestionAnalysis, BranchHit, FusedHyperedgeCandidate
 
 
-DEFAULT_FUSION_WEIGHTS = {"anchor": 0.4, "relation": 0.4, "semantic": 0.2}
+_BUCKET_ORDER = [
+    ("A_R_S", {"anchor", "relation", "semantic"}, 4.0),
+    ("A_R", {"anchor", "relation"}, 3.0),
+    ("A_S", {"anchor", "semantic"}, 2.0),
+    ("R_S", {"relation", "semantic"}, 1.0),
+]
 
 
 class AtomicEvidenceFusion:
@@ -25,15 +30,6 @@ class AtomicEvidenceFusion:
         self.embedder = embedder
         self.hyperedge_store = hyperedge_store
         self.chunk_store = chunk_store
-        self.weights = dict(DEFAULT_FUSION_WEIGHTS)
-        if config is not None:
-            self.weights.update(
-                {
-                    "anchor": float(getattr(config, "anchor_weight", self.weights["anchor"])),
-                    "relation": float(getattr(config, "relation_weight", self.weights["relation"])),
-                    "semantic": float(getattr(config, "semantic_weight", self.weights["semantic"])),
-                }
-            )
 
     def fuse(
         self,
@@ -42,6 +38,11 @@ class AtomicEvidenceFusion:
         hits: list[BranchHit],
         top_k: int | None = None,
     ) -> list[FusedHyperedgeCandidate]:
+        original_ranks: dict[str, int] = {}
+        for index, hit in enumerate(hits):
+            if hit.hyperedge_id and hit.hyperedge_id not in original_ranks:
+                original_ranks[hit.hyperedge_id] = index
+
         grouped = self._group_hits(hits)
         scored_items: list[tuple[FusedHyperedgeCandidate, list[BranchHit]]] = []
         for hyperedge_id, group_hits in grouped.items():
@@ -50,31 +51,12 @@ class AtomicEvidenceFusion:
 
         self._score_candidates(question, analysis, scored_items)
 
-        candidates: list[FusedHyperedgeCandidate] = []
-        for candidate, _ in scored_items:
-            candidate.fusion_score = (
-                (self.weights["anchor"] * candidate.anchor_score)
-                + (self.weights["relation"] * candidate.relation_score)
-                + (self.weights["semantic"] * candidate.semantic_score)
-            )
-            candidate.score_breakdown = {
-                "A": round(candidate.anchor_score, 6),
-                "R": round(candidate.relation_score, 6),
-                "S": round(candidate.semantic_score, 6),
-                "anchor_weight": self.weights["anchor"],
-                "relation_weight": self.weights["relation"],
-                "semantic_weight": self.weights["semantic"],
-                "fusion_score": round(candidate.fusion_score, 6),
-            }
-            candidates.append(candidate)
-
-        candidates.sort(key=lambda item: (item.fusion_score, len(item.branch_support)), reverse=True)
         limit = top_k
         if limit is None and self.config is not None:
             limit = int(getattr(self.config, "evidence_top_k", 5))
         if limit is None:
             limit = 5
-        return candidates[:limit]
+        return self._select_consensus_first(scored_items, max(0, int(limit)), original_ranks)
 
     def anchor_score(
         self,
@@ -142,6 +124,110 @@ class AtomicEvidenceFusion:
             if hit.hyperedge_id:
                 grouped[hit.hyperedge_id].append(hit)
         return dict(grouped)
+
+    def _select_consensus_first(
+        self,
+        scored_items: list[tuple[FusedHyperedgeCandidate, list[BranchHit]]],
+        top_k: int,
+        original_ranks: dict[str, int],
+    ) -> list[FusedHyperedgeCandidate]:
+        if top_k <= 0:
+            return []
+
+        items_by_id = {candidate.hyperedge_id: candidate for candidate, _ in scored_items}
+        selected_ids: set[str] = set()
+        selected: list[FusedHyperedgeCandidate] = []
+
+        for bucket_name, required_branches, bucket_base in _BUCKET_ORDER:
+            bucket_candidates = [
+                candidate
+                for candidate, _ in scored_items
+                if candidate.hyperedge_id not in selected_ids and required_branches.issubset(candidate.branch_support)
+            ]
+            bucket_candidates.sort(key=lambda candidate: self._consensus_sort_key(candidate, original_ranks))
+            self._append_bucket_candidates(
+                selected=selected,
+                selected_ids=selected_ids,
+                candidates=bucket_candidates,
+                top_k=top_k,
+                bucket_name=bucket_name,
+                bucket_base=bucket_base,
+                original_ranks=original_ranks,
+            )
+            if len(selected) >= top_k:
+                return selected[:top_k]
+
+        residual_candidates = [
+            candidate
+            for candidate in items_by_id.values()
+            if candidate.hyperedge_id not in selected_ids and "anchor" in candidate.branch_support
+        ]
+        residual_candidates.sort(key=lambda candidate: self._anchor_residual_sort_key(candidate, original_ranks))
+        self._append_bucket_candidates(
+            selected=selected,
+            selected_ids=selected_ids,
+            candidates=residual_candidates,
+            top_k=top_k,
+            bucket_name="A_residual",
+            bucket_base=0.0,
+            original_ranks=original_ranks,
+        )
+        return selected[:top_k]
+
+    def _append_bucket_candidates(
+        self,
+        *,
+        selected: list[FusedHyperedgeCandidate],
+        selected_ids: set[str],
+        candidates: list[FusedHyperedgeCandidate],
+        top_k: int,
+        bucket_name: str,
+        bucket_base: float,
+        original_ranks: dict[str, int],
+    ) -> None:
+        for candidate in candidates:
+            if len(selected) >= top_k:
+                return
+            selected_ids.add(candidate.hyperedge_id)
+            selection_rank = len(selected) + 1
+            candidate.fusion_score = round(bucket_base + (1.0 / (selection_rank + 1)), 6)
+            candidate.score_breakdown = {
+                "A": round(candidate.anchor_score, 6),
+                "R": round(candidate.relation_score, 6),
+                "S": round(candidate.semantic_score, 6),
+                "branch_support_count": len(candidate.branch_support),
+                "selection_bucket": bucket_name,
+                "selection_rank": selection_rank,
+                "original_rank": original_ranks.get(candidate.hyperedge_id, selection_rank),
+            }
+            selected.append(candidate)
+
+    def _consensus_sort_key(
+        self,
+        candidate: FusedHyperedgeCandidate,
+        original_ranks: dict[str, int],
+    ) -> tuple[int, float, float, float, int, str]:
+        return (
+            -len(candidate.branch_support),
+            -candidate.anchor_score,
+            -candidate.relation_score,
+            -candidate.semantic_score,
+            original_ranks.get(candidate.hyperedge_id, 10**9),
+            candidate.hyperedge_id,
+        )
+
+    def _anchor_residual_sort_key(
+        self,
+        candidate: FusedHyperedgeCandidate,
+        original_ranks: dict[str, int],
+    ) -> tuple[float, float, float, int, str]:
+        return (
+            -candidate.relation_score,
+            -candidate.semantic_score,
+            -candidate.anchor_score,
+            original_ranks.get(candidate.hyperedge_id, 10**9),
+            candidate.hyperedge_id,
+        )
 
     def _candidate_from_hits(self, hyperedge_id: str, hits: list[BranchHit]) -> FusedHyperedgeCandidate:
         first = hits[0]

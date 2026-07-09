@@ -73,7 +73,7 @@ class FusedHyperedgeCandidate:
     entity_ids: list[str] = field(default_factory=list)
     chunk_ids: list[str] = field(default_factory=list)
     evidence_texts: list[str] = field(default_factory=list)
-    score_breakdown: dict[str, float] = field(default_factory=dict)
+    score_breakdown: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {

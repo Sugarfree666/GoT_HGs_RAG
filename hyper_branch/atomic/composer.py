@@ -261,6 +261,19 @@ def _postprocess_final_answer(
     if _yes_no_judgment(current_answer) is not None:
         return corrected
 
+    preserved_terminal = _preserve_supported_terminal_answer_surface(
+        current_answer,
+        original_question,
+        atomic_results,
+        dag_nodes,
+    )
+    if preserved_terminal and preserved_terminal != current_answer:
+        corrected["answer"] = preserved_terminal
+        corrected["candidate_answer"] = preserved_terminal
+        corrected["answer_span_reasoning"] = "Deterministic safety guard preserved the supported terminal atomic answer surface."
+        corrected["deterministic_terminal_surface_preserved"] = True
+        return corrected
+
     preserved_surface = _preserve_terminal_country_or_nationality_surface(
         current_answer,
         original_question,
@@ -328,6 +341,34 @@ def _postprocess_final_answer(
         corrected["answer_span_reasoning"] = "Deterministic span normalizer selected a shorter organization alias."
         corrected["deterministic_organization_alias"] = True
     return corrected
+
+
+def _preserve_supported_terminal_answer_surface(
+    answer: str,
+    original_question: str,
+    atomic_results: list[dict[str, Any]],
+    dag_nodes: list[dict[str, Any]],
+) -> str | None:
+    answer = normalize_label(answer).strip()
+    if not answer or answer.upper() == "INSUFFICIENT_EVIDENCE":
+        return None
+    if _yes_no_judgment(answer) is not None or _comparison_mode(original_question) is not None:
+        return None
+    if _is_original_question_candidate(answer, original_question):
+        return None
+    if _is_supported_surface(answer, original_question, atomic_results):
+        return None
+    terminal_answers = _terminal_atomic_answers(atomic_results, dag_nodes)
+    if not terminal_answers:
+        return None
+    terminal = normalize_label(terminal_answers[-1]).strip()
+    if not terminal or terminal.upper() == "INSUFFICIENT_EVIDENCE":
+        return None
+    if terminal == answer or _is_surface_subspan(answer, terminal):
+        return None
+    if not _is_supported_surface(terminal, original_question, atomic_results):
+        return None
+    return terminal
 
 
 def _deterministic_comparison_answer(

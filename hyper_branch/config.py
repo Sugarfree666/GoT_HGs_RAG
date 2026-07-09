@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 import yaml
 
@@ -27,17 +26,8 @@ class RuntimeConfig:
 
 @dataclass(slots=True)
 class RetrievalConfig:
-    relation_top_k: int = 10
-    semantic_top_k: int = 10
-    semantic_chunk_top_k: int = 10
-    max_semantic_hyperedges_per_chunk: int | None = 20
+    branch_top_k: int = 15
     evidence_top_k: int = 5
-    max_anchor_hyperedges_per_entity: int | None = None
-    anchor_entity_top_k: int = 3
-    anchor_entity_llm_min_confidence: float = 0.6
-    anchor_weight: float = 0.4
-    relation_weight: float = 0.4
-    semantic_weight: float = 0.2
 
 
 @dataclass(slots=True)
@@ -90,18 +80,18 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         base_run_dir=_resolve_path(project_root, runtime.get("base_run_dir", "runs")),
         log_level=str(runtime.get("log_level", "INFO")).upper(),
     )
+    branch_top_k = retrieval.get("branch_top_k")
+    if branch_top_k is None:
+        legacy_top_ks = [
+            retrieval.get("relation_top_k"),
+            retrieval.get("semantic_top_k"),
+            retrieval.get("semantic_chunk_top_k"),
+        ]
+        legacy_top_ks = [int(value) for value in legacy_top_ks if value not in (None, "")]
+        branch_top_k = max(legacy_top_ks) if legacy_top_ks else 15
     retrieval_cfg = RetrievalConfig(
-        relation_top_k=int(retrieval.get("relation_top_k", 10)),
-        semantic_top_k=int(retrieval.get("semantic_top_k", 10)),
-        semantic_chunk_top_k=int(retrieval.get("semantic_chunk_top_k", 10)),
-        max_semantic_hyperedges_per_chunk=_optional_int(retrieval.get("max_semantic_hyperedges_per_chunk", 20)),
+        branch_top_k=int(branch_top_k),
         evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
-        max_anchor_hyperedges_per_entity=_optional_int(retrieval.get("max_anchor_hyperedges_per_entity")),
-        anchor_entity_top_k=int(retrieval.get("anchor_entity_top_k", 3)),
-        anchor_entity_llm_min_confidence=float(retrieval.get("anchor_entity_llm_min_confidence", 0.6)),
-        anchor_weight=float(retrieval.get("anchor_weight", _nested_weight(retrieval, "anchor", 0.4))),
-        relation_weight=float(retrieval.get("relation_weight", _nested_weight(retrieval, "relation", 0.4))),
-        semantic_weight=float(retrieval.get("semantic_weight", _nested_weight(retrieval, "semantic", 0.2))),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
@@ -130,16 +120,3 @@ def _resolve_path(project_root: Path, value: str | Path) -> Path:
     if candidate.is_absolute():
         return candidate
     return (project_root / candidate).resolve()
-
-
-def _optional_int(value: Any) -> int | None:
-    if value is None or value == "":
-        return None
-    return int(value)
-
-
-def _nested_weight(retrieval: dict[str, Any], key: str, default: float) -> float:
-    weights = retrieval.get("fusion_weights", {})
-    if isinstance(weights, dict):
-        return float(weights.get(key, default))
-    return default
