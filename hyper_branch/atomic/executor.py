@@ -427,7 +427,7 @@ class AtomicDagExecutor:
     ) -> dict[str, Any]:
         retrieval_payload = retrieval_result.to_artifact()
         return {
-            "method": "single_hop_primary_anchor_top3",
+            "method": "two_hop_primary_anchor_topk",
             "node_id": node.node_id,
             "original_question": node.question,
             "resolved_question": resolved_question,
@@ -441,6 +441,10 @@ class AtomicDagExecutor:
             "linked_entity_id": retrieval_payload["linked_entity_id"],
             "anchor_match": retrieval_payload["anchor_match"],
             "adjacent_hyperedge_ids": retrieval_payload["adjacent_hyperedge_ids"],
+            "expansion_entity_ids": retrieval_payload["expansion_entity_ids"],
+            "second_hop_hyperedge_ids": retrieval_payload["second_hop_hyperedge_ids"],
+            "candidate_hyperedge_ids": retrieval_payload["candidate_hyperedge_ids"],
+            "candidate_sources": retrieval_payload["candidate_sources"],
             "top_hyperedges": retrieval_payload["top_hyperedges"],
             "answerer_evidence": retrieval_payload["evidence"],
             "top_evidence": retrieval_payload["evidence"],

@@ -34,6 +34,7 @@ runtime:
   base_run_dir: runs/test
 retrieval:
   local_hyperedge_top_k: 4
+  local_hyperedge_hops: 2
 llm:
   use_mock: true
 prompts:
@@ -45,12 +46,14 @@ prompts:
             config = load_config(config_path, project_root)
 
         self.assertEqual(config.retrieval.local_hyperedge_top_k, 4)
+        self.assertEqual(config.retrieval.local_hyperedge_hops, 2)
 
-    def test_retrieval_config_defaults_to_top3(self) -> None:
+    def test_retrieval_config_defaults_to_top3_two_hop(self) -> None:
         self.assertEqual(RetrievalConfig().local_hyperedge_top_k, 3)
+        self.assertEqual(RetrievalConfig().local_hyperedge_hops, 2)
 
 
-class SingleHopAtomicExecutorTest(unittest.TestCase):
+class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
     def test_dag_runs_topologically_and_rewrites_dependency_question(self) -> None:
         graph = LocalGraph(
             entity_edges={
@@ -127,16 +130,18 @@ class SingleHopAtomicExecutorTest(unittest.TestCase):
         self.assertFalse(hasattr(llm, "answer_atomic_question_from_paths"))
 
         second_retrieval = result.artifacts["atomic_retrieval"][1]
-        self.assertEqual(second_retrieval["method"], "single_hop_primary_anchor_top3")
+        self.assertEqual(second_retrieval["method"], "two_hop_primary_anchor_topk")
         self.assertEqual(second_retrieval["primary_anchor_mention"], "Meek Mill")
         self.assertEqual(second_retrieval["linked_entity_id"], "Meek Mill")
         self.assertEqual(second_retrieval["adjacent_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
+        self.assertEqual(second_retrieval["candidate_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
         self.assertEqual([item["hyperedge_id"] for item in second_retrieval["top_hyperedges"]], ["H_DETAINED", "H_PERFORMER"])
 
-    def test_retrieval_is_primary_anchor_local_top3_and_stably_sorted(self) -> None:
+    def test_retrieval_uses_primary_anchor_two_hop_pool_top3_and_stable_sort(self) -> None:
         graph = LocalGraph(
             entity_edges={
                 "Anchor": ["H1", "H2", "H3", "H4"],
+                "A2": ["H2", "H_SECOND"],
                 "Other": ["H_GLOBAL"],
             },
             hyperedge_entities={
@@ -144,6 +149,7 @@ class SingleHopAtomicExecutorTest(unittest.TestCase):
                 "H2": ["Anchor", "A2"],
                 "H3": ["Anchor", "A3"],
                 "H4": ["Anchor", "A4"],
+                "H_SECOND": ["A2", "Second Hop Answer"],
                 "H_GLOBAL": ["Other", "Wrong"],
             },
             hyperedge_chunks={
@@ -151,6 +157,7 @@ class SingleHopAtomicExecutorTest(unittest.TestCase):
                 "H2": ["C2"],
                 "H3": ["C3"],
                 "H4": ["C4", "C4B"],
+                "H_SECOND": ["C_SECOND"],
                 "H_GLOBAL": ["CG"],
             },
             chunk_texts={
@@ -159,10 +166,11 @@ class SingleHopAtomicExecutorTest(unittest.TestCase):
                 "C3": "chunk three",
                 "C4": "full chunk four text " * 30,
                 "C4B": "second full chunk for four",
+                "C_SECOND": "second hop chunk",
                 "CG": "global chunk",
             },
         )
-        store = ScoreHyperedgeStore({"H1": 0.1, "H2": 0.7, "H3": 0.7, "H4": 0.9, "H_GLOBAL": 1.0})
+        store = ScoreHyperedgeStore({"H1": 0.1, "H2": 0.7, "H3": 0.7, "H4": 0.9, "H_SECOND": 1.0, "H_GLOBAL": 0.99})
         retriever = AtomicHyperedgeRetriever(
             dataset=_dataset(graph, store),
             embedder=CountingEmbedder(),
@@ -177,16 +185,22 @@ class SingleHopAtomicExecutorTest(unittest.TestCase):
             primary_anchor_mention="Anchor",
         )
 
-        self.assertEqual(store.calls, [["H1", "H2", "H3", "H4"]])
-        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges], ["H4", "H2", "H3"])
+        self.assertEqual(store.calls, [["H1", "H2", "H3", "H4", "H_SECOND"]])
+        self.assertEqual(result.adjacent_hyperedge_ids, ["H1", "H2", "H3", "H4"])
+        self.assertEqual(result.expansion_entity_ids, ["A1", "A2", "A3", "A4"])
+        self.assertEqual(result.second_hop_hyperedge_ids, ["H_SECOND"])
+        self.assertEqual(result.candidate_hyperedge_ids, ["H1", "H2", "H3", "H4", "H_SECOND"])
+        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges], ["H_SECOND", "H4", "H2"])
         self.assertEqual([item.rank for item in result.evidence], [1, 2, 3])
         self.assertNotIn("H_GLOBAL", [item.hyperedge_id for item in result.evidence])
         first = result.evidence[0].to_dict()
-        self.assertEqual(first["hyperedge_id"], "H4")
-        self.assertEqual(first["entity_ids"], ["Anchor", "A4"])
-        self.assertEqual(first["entity_records"][0]["entity_id"], "Anchor")
-        self.assertEqual(first["chunk_ids"], ["C4", "C4B"])
-        self.assertEqual(first["chunk_texts"][0], "full chunk four text " * 30)
+        self.assertEqual(first["hyperedge_id"], "H_SECOND")
+        self.assertEqual(first["entity_ids"], ["A2", "Second Hop Answer"])
+        self.assertEqual(first["entity_records"][0]["entity_id"], "A2")
+        self.assertEqual(first["chunk_ids"], ["C_SECOND"])
+        self.assertEqual(first["chunk_texts"][0], "second hop chunk")
+        self.assertEqual(first["score_breakdown"]["candidate_hop"], 2)
+        self.assertEqual(first["score_breakdown"]["via_entity_ids"], ["A2"])
 
     def test_answerer_receives_complete_top3_evidence_once(self) -> None:
         graph = LocalGraph(
@@ -378,14 +392,14 @@ def _executor(
         embedder=CountingEmbedder(),
         config=RetrievalConfig(local_hyperedge_top_k=3),
         llm_service=llm,
-        logger=logging.getLogger("test.single_hop_executor"),
+        logger=logging.getLogger("test.two_hop_executor"),
     )
     return AtomicDagExecutor(
         analyzer=analyzer,  # type: ignore[arg-type]
         retriever=retriever,
         composer=StaticComposer(),
         llm_service=llm,
-        logger=logging.getLogger("test.single_hop_executor"),
+        logger=logging.getLogger("test.two_hop_executor"),
     )
 
 

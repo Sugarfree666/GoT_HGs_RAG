@@ -17,6 +17,7 @@ from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 
 _ANCHOR_ENTITY_TOP_K = 3
 _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
+_LOCAL_RETRIEVAL_METHOD = "two_hop_primary_anchor_topk"
 
 
 @dataclass(slots=True)
@@ -50,6 +51,10 @@ class LocalHyperedgeRetrievalResult:
     linked_entity_id: str = ""
     anchor_match: dict[str, Any] = field(default_factory=dict)
     adjacent_hyperedge_ids: list[str] = field(default_factory=list)
+    expansion_entity_ids: list[str] = field(default_factory=list)
+    second_hop_hyperedge_ids: list[str] = field(default_factory=list)
+    candidate_hyperedge_ids: list[str] = field(default_factory=list)
+    candidate_sources: list[dict[str, Any]] = field(default_factory=list)
     top_hyperedges: list[dict[str, Any]] = field(default_factory=list)
     evidence: list[FusedHyperedgeCandidate] = field(default_factory=list)
     insufficient_reason: str = ""
@@ -64,6 +69,10 @@ class LocalHyperedgeRetrievalResult:
             "linked_entity_id": self.linked_entity_id,
             "anchor_match": dict(self.anchor_match),
             "adjacent_hyperedge_ids": list(self.adjacent_hyperedge_ids),
+            "expansion_entity_ids": list(self.expansion_entity_ids),
+            "second_hop_hyperedge_ids": list(self.second_hop_hyperedge_ids),
+            "candidate_hyperedge_ids": list(self.candidate_hyperedge_ids),
+            "candidate_sources": [dict(item) for item in self.candidate_sources],
             "top_hyperedges": [dict(item) for item in self.top_hyperedges],
             "evidence": [item.to_dict() for item in self.evidence],
             "insufficient_reason": self.insufficient_reason,
@@ -119,14 +128,31 @@ class AtomicHyperedgeRetriever:
             result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
             return result
 
-        scores = self._hyperedge_similarity_scores(question, adjacent_ids)
+        candidate_pool = self._local_candidate_pool(match.entity_id, adjacent_ids)
+        result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
+        result.second_hop_hyperedge_ids = list(candidate_pool["second_hop_hyperedge_ids"])
+        result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
+        result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
+        if not result.candidate_hyperedge_ids:
+            result.insufficient_reason = "no_local_candidate_hyperedges"
+            return result
+
+        source_by_id = {
+            str(item["hyperedge_id"]): item
+            for item in result.candidate_sources
+            if str(item.get("hyperedge_id", "")).strip()
+        }
+        scores = self._hyperedge_similarity_scores(question, result.candidate_hyperedge_ids)
         ranked = [
             {
                 "hyperedge_id": hyperedge_id,
                 "semantic_score": float(scores.get(hyperedge_id, 0.0)),
                 "rank": 0,
+                "hop": int(source_by_id.get(hyperedge_id, {}).get("hop", 1)),
+                "via_entity_ids": list(source_by_id.get(hyperedge_id, {}).get("via_entity_ids", [])),
+                "via_first_hyperedge_ids": list(source_by_id.get(hyperedge_id, {}).get("via_first_hyperedge_ids", [])),
             }
-            for hyperedge_id in adjacent_ids
+            for hyperedge_id in result.candidate_hyperedge_ids
         ]
         ranked.sort(key=lambda item: (-float(item["semantic_score"]), str(item["hyperedge_id"])))
         top_k = max(0, int(getattr(self.config, "local_hyperedge_top_k", 3)))
@@ -142,6 +168,7 @@ class AtomicHyperedgeRetriever:
                 rank=int(item["rank"]),
                 primary_anchor_mention=mention,
                 primary_anchor_entity_id=match.entity_id,
+                candidate_source=source_by_id.get(str(item["hyperedge_id"]), {}),
             )
             for item in selected
         ]
@@ -179,6 +206,67 @@ class AtomicHyperedgeRetriever:
             return []
         return _dedupe_strings([str(item) for item in self.dataset.graph.entity_hyperedge_ids(entity_id)])
 
+    def _local_candidate_pool(self, primary_anchor_entity_id: str, first_hop_ids: list[str]) -> dict[str, Any]:
+        candidate_ids = _dedupe_strings(list(first_hop_ids))
+        expansion_entity_ids: list[str] = []
+        second_hop_ids: list[str] = []
+        source_by_id: dict[str, dict[str, Any]] = {}
+        for hyperedge_id in first_hop_ids:
+            source_by_id[hyperedge_id] = {
+                "hyperedge_id": hyperedge_id,
+                "hop": 1,
+                "via_entity_ids": [primary_anchor_entity_id],
+                "via_first_hyperedge_ids": [],
+            }
+
+        max_hops = max(1, int(getattr(self.config, "local_hyperedge_hops", 2)))
+        if max_hops >= 2:
+            for first_hop_id in first_hop_ids:
+                for entity_id in self._hyperedge_entity_ids(first_hop_id):
+                    if entity_id == primary_anchor_entity_id:
+                        continue
+                    if entity_id not in expansion_entity_ids:
+                        expansion_entity_ids.append(entity_id)
+                    for second_hop_id in self._adjacent_hyperedge_ids(entity_id):
+                        if second_hop_id in first_hop_ids:
+                            continue
+                        if second_hop_id not in candidate_ids:
+                            candidate_ids.append(second_hop_id)
+                        if second_hop_id not in second_hop_ids:
+                            second_hop_ids.append(second_hop_id)
+                        source = source_by_id.setdefault(
+                            second_hop_id,
+                            {
+                                "hyperedge_id": second_hop_id,
+                                "hop": 2,
+                                "via_entity_ids": [],
+                                "via_first_hyperedge_ids": [],
+                            },
+                        )
+                        if int(source.get("hop", 2)) > 1:
+                            source["hop"] = 2
+                        if entity_id not in source["via_entity_ids"]:
+                            source["via_entity_ids"].append(entity_id)
+                        if first_hop_id not in source["via_first_hyperedge_ids"]:
+                            source["via_first_hyperedge_ids"].append(first_hop_id)
+
+        return {
+            "expansion_entity_ids": expansion_entity_ids,
+            "second_hop_hyperedge_ids": second_hop_ids,
+            "candidate_hyperedge_ids": candidate_ids,
+            "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
+        }
+
+    def _hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
+        if hasattr(self.dataset.graph, "hyperedge_entity_ids"):
+            entity_ids = self.dataset.graph.hyperedge_entity_ids(hyperedge_id)
+            if entity_ids:
+                return _dedupe_strings([str(item) for item in entity_ids])
+        if hasattr(self.dataset.graph, "describe_hyperedge"):
+            description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+            return _dedupe_strings([str(item) for item in description.get("entity_ids", [])])
+        return []
+
     def _hyperedge_similarity_scores(self, query: str, hyperedge_ids: list[str]) -> dict[str, float]:
         if not query.strip() or not hyperedge_ids:
             return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
@@ -205,6 +293,7 @@ class AtomicHyperedgeRetriever:
         rank: int,
         primary_anchor_mention: str,
         primary_anchor_entity_id: str,
+        candidate_source: dict[str, Any],
     ) -> FusedHyperedgeCandidate:
         description = self.dataset.graph.describe_hyperedge(hyperedge_id)
         hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
@@ -214,10 +303,11 @@ class AtomicHyperedgeRetriever:
         chunk_ids = _dedupe_strings([str(item) for item in description.get("chunk_ids", [])])
         chunk_texts = [self.dataset.get_chunk_text(chunk_id) for chunk_id in chunk_ids]
         entity_records = [self._entity_payload(entity_id) for entity_id in entity_ids]
+        candidate_hop = int(candidate_source.get("hop", 1) or 1)
         return FusedHyperedgeCandidate(
             hyperedge_id=hyperedge_id,
             hyperedge_text=hyperedge_text,
-            branch_support={"local_primary_anchor"},
+            branch_support={"local_primary_anchor", f"hop{candidate_hop}"},
             semantic_score=float(semantic_score),
             fusion_score=float(semantic_score),
             entity_ids=entity_ids,
@@ -227,11 +317,14 @@ class AtomicHyperedgeRetriever:
             evidence_texts=[text for text in [hyperedge_text, *chunk_texts] if text],
             rank=int(rank),
             score_breakdown={
-                "selection_source": "single_hop_primary_anchor_top3",
+                "selection_source": _LOCAL_RETRIEVAL_METHOD,
                 "semantic_rank": int(rank),
                 "semantic_score": float(semantic_score),
                 "primary_anchor_mention": primary_anchor_mention,
                 "primary_anchor_entity_id": primary_anchor_entity_id,
+                "candidate_hop": candidate_hop,
+                "via_entity_ids": list(candidate_source.get("via_entity_ids", [])),
+                "via_first_hyperedge_ids": list(candidate_source.get("via_first_hyperedge_ids", [])),
             },
         )
 

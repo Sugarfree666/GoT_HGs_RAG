@@ -27,6 +27,7 @@ class RuntimeConfig:
 @dataclass(slots=True)
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
+    local_hyperedge_hops: int = 2
 
 
 @dataclass(slots=True)
@@ -81,6 +82,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     )
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
+        local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
