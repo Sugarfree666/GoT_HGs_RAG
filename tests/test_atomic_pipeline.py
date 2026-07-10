@@ -20,6 +20,8 @@ from hyper_branch.atomic import (
     DagCycleError,
     FinalAnswerComposer,
     FusedHyperedgeCandidate,
+    HypergraphReasoningPath,
+    RoutedHypergraphWalker,
 )
 from hyper_branch.atomic.dependency_rewrite import resolve_dependency_question
 from hyper_branch.config import RetrievalConfig, load_config
@@ -277,6 +279,7 @@ dataset:
 runtime:
   base_run_dir: runs
 retrieval:
+  walk_top_k: 9
   branch_top_k: 7
   evidence_top_k: 3
 llm:
@@ -291,6 +294,7 @@ prompts:
 
         self.assertEqual(config.retrieval.branch_top_k, 7)
         self.assertEqual(config.retrieval.evidence_top_k, 3)
+        self.assertEqual(config.retrieval.walk_top_k, 9)
         self.assertFalse(hasattr(config.retrieval, "anchor_weight"))
         self.assertFalse(hasattr(config.retrieval, "relation_weight"))
         self.assertFalse(hasattr(config.retrieval, "semantic_weight"))
@@ -325,6 +329,509 @@ prompts:
 
         self.assertEqual(config.retrieval.branch_top_k, 6)
         self.assertEqual(config.retrieval.evidence_top_k, 2)
+        self.assertEqual(config.retrieval.walk_top_k, 5)
+
+
+class RoutedHypergraphWalkerTest(unittest.TestCase):
+    def test_local_semantic_top_k_uses_only_adjacent_hyperedges_and_stable_sort(self) -> None:
+        graph = WalkGraph(
+            entity_edges={
+                "E": ["H1", "H2", "H3", "H4", "H5", "H6"],
+                "Z": ["H_GLOBAL"],
+            },
+            hyperedge_entities={
+                "H1": ["E", "A"],
+                "H2": ["E", "B"],
+                "H3": ["E", "C"],
+                "H4": ["E", "D"],
+                "H5": ["E", "F"],
+                "H6": ["E", "G"],
+                "H_GLOBAL": ["Z", "A"],
+            },
+        )
+        store = WalkHyperedgeStore(
+            {
+                "H1": 0.5,
+                "H2": 0.8,
+                "H3": 0.8,
+                "H4": 0.9,
+                "H5": 0.2,
+                "H6": 0.1,
+                "H_GLOBAL": 1.0,
+            }
+        )
+        embedder = CountingEmbedder()
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, store),
+            embedder,
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+        )
+
+        top = walker.local_semantic_top_hyperedges("question about E", "E")
+
+        self.assertEqual([item["hyperedge_id"] for item in top], ["H4", "H2", "H3", "H1", "H5"])
+        self.assertNotIn("H_GLOBAL", {item["hyperedge_id"] for item in top})
+        self.assertEqual(store.calls, [["H1", "H2", "H3", "H4", "H5", "H6"]])
+        self.assertEqual(len(embedder.calls), 1)
+
+        graph.entity_edges["A"] = ["H7", "H8"]
+        graph.hyperedge_entities["H7"] = ["A", "K"]
+        graph.hyperedge_entities["H8"] = ["A", "L"]
+        store.scores.update({"H7": 0.3, "H8": 0.4})
+
+        short_top = walker.local_semantic_top_hyperedges("new query", "A")
+
+        self.assertEqual([item["hyperedge_id"] for item in short_top], ["H8", "H7"])
+
+    def test_path_construction_expands_each_tail_and_preserves_order_and_chunks(self) -> None:
+        graph = WalkGraph(
+            entity_edges={
+                "E": ["H1"],
+                "A": ["H1", "H2"],
+            },
+            hyperedge_entities={
+                "H1": ["E", "A", "B"],
+                "H2": ["A", "E", "C"],
+            },
+            hyperedge_chunks={
+                "H1": ["C1"],
+                "H2": ["C2"],
+            },
+            chunk_texts={
+                "C1": "E connects to A and B.",
+                "C2": "A connects to C.",
+            },
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 0.9, "H2": 0.8})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+        )
+        root = HypergraphReasoningPath(
+            path_id=walker._path_id(["E"], []),
+            anchor_entity_id="E",
+            entity_ids=["E"],
+            hyperedge_ids=[],
+            steps=[],
+            hop_count=0,
+        )
+
+        one_hop, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[root], hop=1)
+
+        self.assertEqual({path.tail_entity_id for path in one_hop}, {"A", "B"})
+        self.assertNotIn("E", {path.tail_entity_id for path in one_hop})
+        path_to_a = next(path for path in one_hop if path.tail_entity_id == "A")
+        self.assertEqual(path_to_a.entity_ids, ["E", "A"])
+        self.assertEqual(path_to_a.hyperedge_ids, ["H1"])
+        self.assertEqual(path_to_a.steps[0].chunk_ids, ["C1"])
+        self.assertEqual(path_to_a.steps[0].chunk_texts, ["E connects to A and B."])
+
+        two_hop, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[path_to_a], hop=2)
+
+        self.assertEqual(len(two_hop), 1)
+        self.assertEqual(two_hop[0].entity_ids, ["E", "A", "C"])
+        self.assertEqual(two_hop[0].hyperedge_ids, ["H1", "H2"])
+        self.assertEqual(two_hop[0].steps[1].chunk_ids, ["C2"])
+        self.assertEqual(two_hop[0].path_id, walker._path_id(["E", "A", "C"], ["H1", "H2"]))
+
+    def test_first_hop_answer_stops_without_answer_generation_inside_walker(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"E": ["H1", "H2"], "A": ["H3"]},
+            hyperedge_entities={"H1": ["E", "A"], "H2": ["E", "X"], "H3": ["A", "B"]},
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 1.0, "H2": 0.9, "H3": 0.8})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+            llm_service=MockAtomicLLMService(
+                route_responses=[
+                    {
+                        "labels": [
+                            {
+                                "path_id": walker_path_id(["E", "A"], ["H1"]),
+                                "label": "ANSWER",
+                                "answer_entity_ids": ["A"],
+                                "reason": "H1 answers.",
+                            },
+                            {
+                                "path_id": walker_path_id(["E", "X"], ["H2"]),
+                                "label": "EXPAND",
+                                "answer_entity_ids": [],
+                                "reason": "H2 is a prefix.",
+                            },
+                        ]
+                    }
+                ],
+                path_answer_responses=[{"answer": "should not be used"}],
+            ),
+        )
+
+        result = walker.run_atomic_walk("Who is connected to E?", AtomicQuestionAnalysis(entities=["E"]), [], node_id="q1")
+
+        self.assertEqual(result.evidence_mode, "routed_answer")
+        self.assertEqual([path.path_id for path in result.selected_paths], [walker_path_id(["E", "A"], ["H1"])])
+        self.assertEqual(len(walker.llm_service.route_calls), 1)
+        self.assertEqual(walker.llm_service.path_answer_calls, [])
+
+    def test_first_hop_expand_only_drives_second_hop_and_drop_does_not_expand(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"E": ["H1", "H2"], "A": ["H1", "H3"], "X": ["H2", "H4"]},
+            hyperedge_entities={"H1": ["E", "A"], "H2": ["E", "X"], "H3": ["A", "B"], "H4": ["X", "Y"]},
+        )
+        llm = MockAtomicLLMService(
+            route_responses=[
+                {
+                    "labels": [
+                        {
+                            "path_id": walker_path_id(["E", "A"], ["H1"]),
+                            "label": "EXPAND",
+                            "answer_entity_ids": [],
+                            "reason": "A may lead to answer.",
+                        },
+                        {
+                            "path_id": walker_path_id(["E", "X"], ["H2"]),
+                            "label": "DROP",
+                            "answer_entity_ids": [],
+                            "reason": "X is irrelevant.",
+                        },
+                    ]
+                },
+                {
+                    "labels": [
+                        {
+                            "path_id": walker_path_id(["E", "A", "B"], ["H1", "H3"]),
+                            "label": "ANSWER",
+                            "answer_entity_ids": ["B"],
+                            "reason": "Two-hop path answers.",
+                        }
+                    ]
+                },
+            ]
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 1.0, "H2": 0.9, "H3": 0.8, "H4": 0.99})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+            llm_service=llm,
+        )
+
+        result = walker.run_atomic_walk("Where is the answer for E?", AtomicQuestionAnalysis(entities=["E"]), [], node_id="q1")
+
+        self.assertEqual(result.evidence_mode, "routed_answer")
+        self.assertEqual([path.path_id for path in result.selected_paths], [walker_path_id(["E", "A", "B"], ["H1", "H3"])])
+        self.assertEqual(len(llm.route_calls), 2)
+        second_hop_ids = {
+            path["path_id"]
+            for path in llm.route_calls[1]["candidate_paths"]
+        }
+        self.assertEqual(second_hop_ids, {walker_path_id(["E", "A", "B"], ["H1", "H3"])})
+        self.assertNotIn(walker_path_id(["E", "X", "Y"], ["H2", "H4"]), second_hop_ids)
+
+    def test_second_hop_expand_fallback_and_all_drop_states(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"E": ["H1"], "A": ["H1", "H2"]},
+            hyperedge_entities={"H1": ["E", "A"], "H2": ["A", "B"]},
+        )
+
+        fallback_walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 1.0, "H2": 0.8})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+            llm_service=MockAtomicLLMService(
+                route_responses=[
+                    {"labels": [{"path_id": walker_path_id(["E", "A"], ["H1"]), "label": "EXPAND", "answer_entity_ids": [], "reason": ""}]},
+                    {"labels": [{"path_id": walker_path_id(["E", "A", "B"], ["H1", "H2"]), "label": "EXPAND", "answer_entity_ids": [], "reason": ""}]},
+                ]
+            ),
+        )
+
+        fallback = fallback_walker.run_atomic_walk("Find B from E", AtomicQuestionAnalysis(entities=["E"]), [], node_id="q1")
+
+        self.assertEqual(fallback.evidence_mode, "second_hop_expand_fallback")
+        self.assertFalse(fallback.insufficient)
+        self.assertEqual(fallback.selected_paths[0].path_id, walker_path_id(["E", "A", "B"], ["H1", "H2"]))
+
+        drop_walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 1.0, "H2": 0.8})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+            llm_service=MockAtomicLLMService(
+                route_responses=[
+                    {"labels": [{"path_id": walker_path_id(["E", "A"], ["H1"]), "label": "EXPAND", "answer_entity_ids": [], "reason": ""}]},
+                    {"labels": [{"path_id": walker_path_id(["E", "A", "B"], ["H1", "H2"]), "label": "DROP", "answer_entity_ids": [], "reason": ""}]},
+                ]
+            ),
+        )
+
+        dropped = drop_walker.run_atomic_walk("Find B from E", AtomicQuestionAnalysis(entities=["E"]), [], node_id="q1")
+
+        self.assertTrue(dropped.insufficient)
+        self.assertEqual(dropped.evidence_mode, "insufficient")
+        self.assertEqual(dropped.selected_paths, [])
+
+    def test_router_validation_falls_back_to_expand_and_records_errors(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"E": ["H1", "H2"]},
+            hyperedge_entities={"H1": ["E", "A"], "H2": ["E", "B"]},
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H1": 1.0, "H2": 0.9})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["E"],
+        )
+        root = HypergraphReasoningPath(
+            path_id=walker_path_id(["E"], []),
+            anchor_entity_id="E",
+            entity_ids=["E"],
+            hyperedge_ids=[],
+            steps=[],
+            hop_count=0,
+        )
+        candidates, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[root], hop=1)
+
+        routed, labels, errors = walker._apply_router_labels(
+            candidates,
+            {
+                "labels": [
+                    {"path_id": walker_path_id(["E", "A"], ["H1"]), "label": "BAD", "answer_entity_ids": [], "reason": "bad"},
+                    {"path_id": walker_path_id(["E", "B"], ["H2"]), "label": "ANSWER", "answer_entity_ids": ["OUTSIDE"], "reason": "bad"},
+                    {"path_id": "UNKNOWN", "label": "DROP", "answer_entity_ids": [], "reason": "bad"},
+                ]
+            },
+        )
+
+        self.assertEqual({path.label for path in routed}, {"EXPAND"})
+        self.assertEqual({item["label"] for item in labels}, {"EXPAND"})
+        self.assertGreaterEqual(len(errors), 3)
+        self.assertTrue(any(error["error"] == "answer_entity_outside_path" for error in errors))
+
+    def test_executor_uses_dependency_answer_as_downstream_anchor_with_walker(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"B Boy": ["H_PERFORMER"], "Meek Mill": ["H_PERFORMER", "H_DETAINED"]},
+            hyperedge_entities={
+                "H_PERFORMER": ["B Boy", "Meek Mill"],
+                "H_DETAINED": ["Meek Mill", "Police Station"],
+            },
+            hyperedge_texts={
+                "H_PERFORMER": "B Boy was performed by Meek Mill.",
+                "H_DETAINED": "Meek Mill was detained at Police Station.",
+            },
+        )
+        llm = MockAtomicLLMService(
+            route_responses=[
+                {
+                    "labels": [
+                        {
+                            "path_id": walker_path_id(["B Boy", "Meek Mill"], ["H_PERFORMER"]),
+                            "label": "ANSWER",
+                            "answer_entity_ids": ["Meek Mill"],
+                            "reason": "Performer path answers.",
+                        }
+                    ]
+                },
+                {
+                    "labels": [
+                        {
+                            "path_id": walker_path_id(["Meek Mill", "Police Station"], ["H_DETAINED"]),
+                            "label": "ANSWER",
+                            "answer_entity_ids": ["Police Station"],
+                            "reason": "Detention path answers.",
+                        }
+                    ]
+                },
+            ],
+            path_answer_responses=[
+                {
+                    "answer": "Meek Mill",
+                    "confidence": 0.9,
+                    "reasoning_summary": "B Boy was performed by Meek Mill.",
+                    "used_path_ids": [walker_path_id(["B Boy", "Meek Mill"], ["H_PERFORMER"])],
+                    "used_hyperedge_ids": ["H_PERFORMER"],
+                    "insufficient": False,
+                },
+                {
+                    "answer": "Police Station",
+                    "confidence": 0.9,
+                    "reasoning_summary": "Meek Mill was detained at Police Station.",
+                    "used_path_ids": [walker_path_id(["Meek Mill", "Police Station"], ["H_DETAINED"])],
+                    "used_hyperedge_ids": ["H_DETAINED"],
+                    "insufficient": False,
+                },
+            ],
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H_PERFORMER": 1.0, "H_DETAINED": 1.0})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=[],
+            llm_service=llm,
+        )
+        executor = AtomicDagExecutor(
+            analyzer=DependencyAnchorAnalyzer(),
+            retriever=None,
+            fusion=None,
+            composer=StaticComposer(),
+            llm_service=llm,
+            walker=walker,
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who performed the song B Boy?", "dependencies": []},
+                {"node_id": "q2", "question": "Where was q1's answer detained?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("Where was the performer of B Boy detained?", dag)
+
+        self.assertEqual(result.atomic_results[1].question, "Where was Meek Mill detained?")
+        self.assertEqual(result.atomic_results[1].answer, "Police Station")
+        self.assertEqual(result.artifacts["atomic_question_analyses"][1]["primary_anchor_entities"], ["Meek Mill"])
+        self.assertEqual(result.artifacts["atomic_retrieval"][1]["resolved_anchor_entity_ids"], ["Meek Mill"])
+        self.assertEqual(len(llm.path_answer_calls), 2)
+
+
+class WalkGraph:
+    def __init__(
+        self,
+        *,
+        entity_edges: dict[str, list[str]],
+        hyperedge_entities: dict[str, list[str]],
+        hyperedge_texts: dict[str, str] | None = None,
+        hyperedge_chunks: dict[str, list[str]] | None = None,
+        chunk_texts: dict[str, str] | None = None,
+    ) -> None:
+        self.entity_edges = {entity_id: list(ids) for entity_id, ids in entity_edges.items()}
+        self.hyperedge_entities = {hyperedge_id: list(ids) for hyperedge_id, ids in hyperedge_entities.items()}
+        self.hyperedge_texts = dict(hyperedge_texts or {})
+        self.hyperedge_chunks = {
+            hyperedge_id: list(chunk_ids)
+            for hyperedge_id, chunk_ids in (hyperedge_chunks or {}).items()
+        }
+        self.chunk_texts = dict(chunk_texts or {})
+        entity_ids = set(self.entity_edges)
+        for values in self.hyperedge_entities.values():
+            entity_ids.update(values)
+        self.nodes = {
+            entity_id: GraphNode(node_id=entity_id, role="entity", entity_type="entity", description=entity_id)
+            for entity_id in entity_ids
+        }
+        self.nodes.update(
+            {
+                hyperedge_id: GraphNode(
+                    node_id=hyperedge_id,
+                    role="hyperedge",
+                    source_ids=list(self.hyperedge_chunks.get(hyperedge_id, [])),
+                    description=self.hyperedge_texts.get(hyperedge_id, hyperedge_id),
+                )
+                for hyperedge_id in self.hyperedge_entities
+            }
+        )
+
+    def entity_hyperedge_ids(self, entity_id: str) -> list[str]:
+        return list(self.entity_edges.get(entity_id, []))
+
+    def hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
+        return list(self.hyperedge_entities.get(hyperedge_id, []))
+
+    def describe_hyperedge(self, hyperedge_id: str) -> dict[str, object]:
+        chunk_ids = self.hyperedge_chunks.get(hyperedge_id, [f"chunk-{hyperedge_id}"])
+        return {
+            "hyperedge_id": hyperedge_id,
+            "hyperedge_text": self.hyperedge_texts.get(hyperedge_id, hyperedge_id),
+            "entity_ids": list(self.hyperedge_entities.get(hyperedge_id, [])),
+            "chunk_ids": list(chunk_ids),
+        }
+
+
+class WalkHyperedgeStore:
+    def __init__(self, scores: dict[str, float]) -> None:
+        self.scores = dict(scores)
+        self.calls: list[list[str]] = []
+
+    def similarities(self, query_vector, row_ids: list[str]) -> list[tuple[str, float]]:
+        del query_vector
+        self.calls.append(list(row_ids))
+        return [(row_id, float(self.scores.get(row_id, 0.0))) for row_id in row_ids]
+
+
+class CountingEmbedder:
+    def __init__(self) -> None:
+        self.calls: list[tuple[list[str], str | None]] = []
+
+    def embed_texts(self, texts: list[str], stage: str | None = None):
+        self.calls.append((list(texts), stage))
+        return [np.ones(3, dtype=np.float32) for _ in texts]
+
+
+class FixedAnchorWalker(RoutedHypergraphWalker):
+    def __init__(self, dataset, embedder, config, *, anchors: list[str], llm_service=None) -> None:
+        self.fixed_anchors = list(anchors)
+        super().__init__(
+            dataset=dataset,
+            embedder=embedder,
+            config=config,
+            llm_service=llm_service,
+            logger=logging.getLogger("test.routed_walker"),
+        )
+
+    def _resolve_anchor_entities(self, question: str, analysis: AtomicQuestionAnalysis) -> list[dict[str, object]]:
+        del question
+        source_entities = self.fixed_anchors or list(analysis.entities)
+        anchors: list[dict[str, object]] = []
+        for index, entity_id in enumerate(source_entities):
+            if not self.dataset.graph.entity_hyperedge_ids(entity_id):
+                continue
+            anchors.append(
+                {
+                    "query_index": index,
+                    "mention": entity_id,
+                    "entity_id": entity_id,
+                    "label": entity_id,
+                    "match_type": "test_exact",
+                    "link_score": 1.0,
+                    "vector_score": 1.0,
+                    "llm_confidence": 0.0,
+                }
+            )
+        return anchors
+
+
+class DependencyAnchorAnalyzer:
+    def analyze(self, atomic_question: str, dependency_answers=None) -> AtomicQuestionAnalysis:
+        del dependency_answers
+        if "B Boy" in atomic_question:
+            return AtomicQuestionAnalysis(entities=["B Boy"], relations=["performed"], answer_type="person")
+        if "Meek Mill" in atomic_question:
+            return AtomicQuestionAnalysis(entities=[], relations=["detained"], answer_type="place")
+        return AtomicQuestionAnalysis()
+
+
+def _walk_dataset(graph: WalkGraph, store: WalkHyperedgeStore):
+    return SimpleNamespace(
+        graph=graph,
+        hyperedge_store=store,
+        entity_store=None,
+        chunk_store=None,
+        text_chunks={chunk_id: {"content": text} for chunk_id, text in graph.chunk_texts.items()},
+        full_docs={},
+        summary={},
+        get_chunk_text=lambda chunk_id: graph.chunk_texts.get(chunk_id, f"text for {chunk_id}"),
+    )
+
+
+def walker_path_id(entity_ids: list[str], hyperedge_ids: list[str]) -> str:
+    import hashlib
+
+    signature = "|".join([*entity_ids, "=>", *hyperedge_ids])
+    digest = hashlib.sha1(signature.encode("utf-8")).hexdigest()[:14]
+    return f"p{len(hyperedge_ids)}_{digest}"
 
 
 class RecordingAnalyzer:

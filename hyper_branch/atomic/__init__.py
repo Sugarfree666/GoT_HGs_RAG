@@ -6,11 +6,16 @@ from .models import (
     AtomicAnswerResult,
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
+    AtomicWalkResult,
     BranchHit,
     DagExecutionResult,
     FusedHyperedgeCandidate,
+    HypergraphPathStep,
+    HypergraphReasoningPath,
+    PathLabel,
 )
 from .retriever import AtomicHyperedgeRetriever
+from .walker import RoutedHypergraphWalker
 
 __all__ = [
     "AtomicAnswerResult",
@@ -20,9 +25,14 @@ __all__ = [
     "AtomicQuestionAnalysis",
     "AtomicQuestionAnalyzer",
     "AtomicQuestionNode",
+    "AtomicWalkResult",
     "BranchHit",
     "DagCycleError",
     "DagExecutionResult",
     "FinalAnswerComposer",
     "FusedHyperedgeCandidate",
+    "HypergraphPathStep",
+    "HypergraphReasoningPath",
+    "PathLabel",
+    "RoutedHypergraphWalker",
 ]

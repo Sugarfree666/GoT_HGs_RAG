@@ -14,10 +14,13 @@ from .models import (
     AtomicAnswerResult,
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
+    AtomicWalkResult,
     DagExecutionResult,
     FusedHyperedgeCandidate,
+    HypergraphReasoningPath,
 )
 from .retriever import AtomicHyperedgeRetriever
+from .walker import RoutedHypergraphWalker
 
 
 class DagCycleError(ValueError):
@@ -28,11 +31,12 @@ class AtomicDagExecutor:
     def __init__(
         self,
         analyzer: AtomicQuestionAnalyzer,
-        retriever: AtomicHyperedgeRetriever,
-        fusion: AtomicEvidenceFusion,
+        retriever: AtomicHyperedgeRetriever | None,
+        fusion: AtomicEvidenceFusion | None,
         composer: FinalAnswerComposer,
         llm_service: AtomicLLMService | None = None,
         logger: logging.Logger | None = None,
+        walker: RoutedHypergraphWalker | None = None,
     ) -> None:
         self.analyzer = analyzer
         self.retriever = retriever
@@ -40,6 +44,7 @@ class AtomicDagExecutor:
         self.composer = composer
         self.llm_service = llm_service
         self.logger = logger or logging.getLogger(__name__)
+        self.walker = walker
 
     def run(self, original_question: str, dag_payload: Any | None = None) -> DagExecutionResult:
         nodes = self.normalize_dag_payload(dag_payload, original_question=original_question)
@@ -63,15 +68,39 @@ class AtomicDagExecutor:
                 )
             analysis = self.analyzer.analyze(resolved_question, dependency_answers)
             _prepend_primary_anchor_entities(analysis, dependency_rewrite.primary_anchor_entities)
-            branch_hits = self.retriever.retrieve(resolved_question, analysis)
-            fused_evidence = self.fusion.fuse(resolved_question, analysis, branch_hits)
-            answer_payload = self._answer_atomic_question(
-                node=node,
-                atomic_question=resolved_question,
-                analysis=analysis,
-                evidence=fused_evidence,
-                dependency_answers=dependency_answers,
-            )
+            branch_hits: list[Any] = []
+            walk_result: AtomicWalkResult | None = None
+            if self.walker is not None:
+                walk_result = self.walker.run_atomic_walk(
+                    resolved_question,
+                    analysis,
+                    dependency_answers,
+                    node_id=node.node_id,
+                )
+                fused_evidence = self._evidence_from_paths(walk_result.selected_paths)
+                answer_payload = self._answer_atomic_question_from_paths(
+                    node=node,
+                    atomic_question=resolved_question,
+                    analysis=analysis,
+                    walk_result=walk_result,
+                    dependency_answers=dependency_answers,
+                )
+                used_hyperedge_ids = self._used_hyperedge_ids_from_paths(answer_payload, walk_result.selected_paths)
+                used_path_ids = self._used_path_ids(answer_payload, walk_result.selected_paths)
+            else:
+                if self.retriever is None or self.fusion is None:
+                    raise ValueError("AtomicDagExecutor requires either a walker or both retriever and fusion.")
+                branch_hits = self.retriever.retrieve(resolved_question, analysis)
+                fused_evidence = self.fusion.fuse(resolved_question, analysis, branch_hits)
+                answer_payload = self._answer_atomic_question(
+                    node=node,
+                    atomic_question=resolved_question,
+                    analysis=analysis,
+                    evidence=fused_evidence,
+                    dependency_answers=dependency_answers,
+                )
+                used_hyperedge_ids = self._used_hyperedge_ids(answer_payload, fused_evidence)
+                used_path_ids = []
             result = AtomicAnswerResult(
                 node_id=node.node_id,
                 question=resolved_question,
@@ -81,7 +110,10 @@ class AtomicDagExecutor:
                 confidence=max(0.0, min(1.0, float(answer_payload.get("confidence", 0.0) or 0.0))),
                 reasoning_summary=str(answer_payload.get("reasoning_summary", "") or ""),
                 used_dependencies=list(node.dependencies),
-                used_hyperedge_ids=self._used_hyperedge_ids(answer_payload, fused_evidence),
+                used_hyperedge_ids=used_hyperedge_ids,
+                paths=list(walk_result.selected_paths) if walk_result is not None else [],
+                used_path_ids=used_path_ids,
+                walk_artifacts=walk_result.to_dict() if walk_result is not None else {},
             )
             results_by_id[node.node_id] = result
             analyses_artifact.append(
@@ -100,22 +132,32 @@ class AtomicDagExecutor:
                     "analysis": analysis.to_dict(),
                 }
             )
-            retrieval_artifact.append(
-                {
-                    "node_id": node.node_id,
-                    "question": resolved_question,
-                    "original_question": node.question,
-                    "resolved_question": resolved_question,
-                    "retrieval_question": resolved_question,
-                    "dependency_question_rewrite": dependency_rewrite.to_dict(),
-                    "dependency_replacements": dependency_rewrite.to_dict()["dependency_replacements"],
-                    "dependency_answers_used": dependency_rewrite.dependency_answers_used,
-                    "unresolved_dependency": dependency_rewrite.unresolved_dependencies,
-                    "primary_anchor_entities": dependency_rewrite.primary_anchor_entities,
-                    "branch_hits": [hit.to_dict() for hit in branch_hits],
-                    "top_evidence": [candidate.to_dict() for candidate in fused_evidence],
-                }
-            )
+            retrieval_record = {
+                "node_id": node.node_id,
+                "question": resolved_question,
+                "original_question": node.question,
+                "resolved_question": resolved_question,
+                "retrieval_question": resolved_question,
+                "dependency_question_rewrite": dependency_rewrite.to_dict(),
+                "dependency_replacements": dependency_rewrite.to_dict()["dependency_replacements"],
+                "dependency_answers_used": dependency_rewrite.dependency_answers_used,
+                "unresolved_dependency": dependency_rewrite.unresolved_dependencies,
+                "primary_anchor_entities": dependency_rewrite.primary_anchor_entities,
+                "branch_hits": [hit.to_dict() for hit in branch_hits],
+                "top_evidence": [candidate.to_dict() for candidate in fused_evidence],
+            }
+            if walk_result is not None:
+                retrieval_record.update(
+                    {
+                        "method": "routed_hypergraph_walk",
+                        "anchor_entities": walk_result.anchor_entities,
+                        "resolved_anchor_entity_ids": walk_result.resolved_anchor_entity_ids,
+                        "hops": walk_result.hop_artifacts,
+                        "selected_path_ids": [path.path_id for path in walk_result.selected_paths],
+                        "evidence_mode": walk_result.evidence_mode,
+                    }
+                )
+            retrieval_artifact.append(retrieval_record)
             answer_artifact.append(result.to_dict())
 
         atomic_results = [results_by_id[node.node_id] for node in order]
@@ -299,6 +341,7 @@ class AtomicDagExecutor:
                     "answer_type": result.analysis.answer_type,
                     "reasoning_summary": result.reasoning_summary,
                     "used_hyperedge_ids": list(result.used_hyperedge_ids),
+                    "used_path_ids": list(result.used_path_ids),
                     "evidence_summary": [
                         {
                             "hyperedge_id": evidence.hyperedge_id,
@@ -308,9 +351,58 @@ class AtomicDagExecutor:
                         }
                         for evidence in result.evidence[:3]
                     ],
+                    "path_summary": [
+                        {
+                            "path_id": path.path_id,
+                            "entity_ids": list(path.entity_ids),
+                            "hyperedge_ids": list(path.hyperedge_ids),
+                            "label": path.label,
+                        }
+                        for path in result.paths[:3]
+                    ],
                 }
             )
         return context
+
+    def _answer_atomic_question_from_paths(
+        self,
+        node: AtomicQuestionNode,
+        atomic_question: str,
+        analysis: AtomicQuestionAnalysis,
+        walk_result: AtomicWalkResult,
+        dependency_answers: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        del node
+        if walk_result.insufficient or not walk_result.selected_paths:
+            return {
+                "answer": "INSUFFICIENT_EVIDENCE",
+                "confidence": 0.0,
+                "reasoning_summary": "No routed reasoning path survived the two-hop walk.",
+                "used_path_ids": [],
+                "used_hyperedge_ids": [],
+                "insufficient": True,
+            }
+
+        path_payload = [
+            self.walker.path_payload(path) if self.walker is not None else path.to_dict()
+            for path in walk_result.selected_paths
+        ]
+        if self.llm_service is not None and hasattr(self.llm_service, "answer_atomic_question_from_paths"):
+            payload = self.llm_service.answer_atomic_question_from_paths(
+                atomic_question=atomic_question,
+                dependency_answers=dependency_answers,
+                paths=path_payload,
+                evidence_mode=walk_result.evidence_mode,
+            )
+        else:
+            payload = self._fallback_path_answer(
+                question=atomic_question,
+                analysis=analysis,
+                paths=walk_result.selected_paths,
+                dependency_answers=dependency_answers,
+                evidence_mode=walk_result.evidence_mode,
+            )
+        return self._coerce_path_answer_payload(payload, atomic_question, analysis, walk_result.selected_paths, dependency_answers)
 
     def _answer_atomic_question(
         self,
@@ -330,6 +422,45 @@ class AtomicDagExecutor:
         else:
             payload = self._fallback_answer(atomic_question, analysis, evidence, dependency_answers)
         return self._coerce_answer_payload(payload, atomic_question, analysis, evidence, dependency_answers)
+
+    def _fallback_path_answer(
+        self,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        paths: list[HypergraphReasoningPath],
+        dependency_answers: list[dict[str, Any]],
+        evidence_mode: str,
+    ) -> dict[str, Any]:
+        del dependency_answers, evidence_mode
+        if not paths:
+            return {
+                "answer": "INSUFFICIENT_EVIDENCE",
+                "confidence": 0.0,
+                "reasoning_summary": "No reasoning paths were provided for the atomic question.",
+                "used_path_ids": [],
+                "used_hyperedge_ids": [],
+                "insufficient": True,
+            }
+
+        query_entities = {normalize_label(entity).lower() for entity in analysis.entities}
+        selected = paths[0]
+        answer = ""
+        for entity_id in selected.answer_entity_ids or list(reversed(selected.entity_ids)):
+            label = normalize_label(entity_id)
+            if label and label.lower() not in query_entities:
+                answer = label
+                break
+        if not answer and selected.steps:
+            answer = short_text(selected.steps[-1].hyperedge_text, 180)
+
+        return {
+            "answer": answer or "INSUFFICIENT_EVIDENCE",
+            "confidence": 0.7 if answer else 0.0,
+            "reasoning_summary": short_text(" ".join(step.hyperedge_text for step in selected.steps), 420),
+            "used_path_ids": [selected.path_id] if answer else [],
+            "used_hyperedge_ids": list(selected.hyperedge_ids) if answer else [],
+            "insufficient": not bool(answer),
+        }
 
     def _fallback_answer(
         self,
@@ -390,6 +521,30 @@ class AtomicDagExecutor:
         payload["confidence"] = max(0.0, min(1.0, float(payload.get("confidence", 0.0) or 0.0)))
         return payload
 
+    def _coerce_path_answer_payload(
+        self,
+        payload: Any,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        paths: list[HypergraphReasoningPath],
+        dependency_answers: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            payload = self._fallback_path_answer(question, analysis, paths, dependency_answers, "routed_answer")
+        payload.setdefault("answer", "")
+        payload.setdefault("confidence", 0.0)
+        payload.setdefault("reasoning_summary", "")
+        payload.setdefault("used_path_ids", [])
+        payload.setdefault("used_hyperedge_ids", [])
+        payload.setdefault("insufficient", False)
+        insufficient = bool(payload.get("insufficient", False))
+        if insufficient and not str(payload.get("answer", "")).strip():
+            payload["answer"] = "INSUFFICIENT_EVIDENCE"
+        payload["confidence"] = max(0.0, min(1.0, float(payload.get("confidence", 0.0) or 0.0)))
+        payload["used_path_ids"] = self._used_path_ids(payload, paths)
+        payload["used_hyperedge_ids"] = self._used_hyperedge_ids_from_paths(payload, paths)
+        return payload
+
     @staticmethod
     def _used_hyperedge_ids(payload: dict[str, Any], evidence: list[FusedHyperedgeCandidate]) -> list[str]:
         evidence_ids = {item.hyperedge_id for item in evidence}
@@ -402,6 +557,66 @@ class AtomicDagExecutor:
             return used
         return [item.hyperedge_id for item in evidence[:1]]
 
+    @staticmethod
+    def _used_path_ids(payload: dict[str, Any], paths: list[HypergraphReasoningPath]) -> list[str]:
+        path_ids = {path.path_id for path in paths}
+        used = [
+            str(item).strip()
+            for item in ensure_list(payload.get("used_path_ids", []))
+            if str(item).strip() and str(item).strip() in path_ids
+        ]
+        if used:
+            return _dedupe_strings(used)
+        if bool(payload.get("insufficient", False)):
+            return []
+        return [path.path_id for path in paths[:1]]
+
+    @staticmethod
+    def _used_hyperedge_ids_from_paths(payload: dict[str, Any], paths: list[HypergraphReasoningPath]) -> list[str]:
+        allowed = {hyperedge_id for path in paths for hyperedge_id in path.hyperedge_ids}
+        used = [
+            str(item).strip()
+            for item in ensure_list(payload.get("used_hyperedge_ids", []))
+            if str(item).strip() and str(item).strip() in allowed
+        ]
+        if used:
+            return _dedupe_strings(used)
+        if bool(payload.get("insufficient", False)):
+            return []
+        for path in paths[:1]:
+            return list(path.hyperedge_ids)
+        return []
+
+    @staticmethod
+    def _evidence_from_paths(paths: list[HypergraphReasoningPath]) -> list[FusedHyperedgeCandidate]:
+        evidence: list[FusedHyperedgeCandidate] = []
+        seen: set[str] = set()
+        for path in paths:
+            for step in path.steps:
+                if step.hyperedge_id in seen:
+                    continue
+                seen.add(step.hyperedge_id)
+                evidence.append(
+                    FusedHyperedgeCandidate(
+                        hyperedge_id=step.hyperedge_id,
+                        hyperedge_text=step.hyperedge_text,
+                        branch_support={"path"},
+                        semantic_score=step.semantic_score,
+                        fusion_score=step.semantic_score,
+                        entity_ids=list(step.entity_ids),
+                        chunk_ids=list(step.chunk_ids),
+                        evidence_texts=list(step.chunk_texts),
+                        score_breakdown={
+                            "selection_source": "routed_hypergraph_walk",
+                            "path_id": path.path_id,
+                            "hop_count": path.hop_count,
+                            "semantic_rank": step.semantic_rank,
+                            "path_label": path.label,
+                        },
+                    )
+                )
+        return evidence
+
 
 def _prepend_primary_anchor_entities(
     analysis: AtomicQuestionAnalysis,
@@ -411,6 +626,15 @@ def _prepend_primary_anchor_entities(
         existing = {normalize_label(item).lower() for item in analysis.entities}
         if normalize_label(entity).lower() not in existing:
             analysis.entities.insert(0, entity)
+
+
+def _dedupe_strings(values: Iterable[str]) -> list[str]:
+    result: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in result:
+            result.append(text)
+    return result
 
 
 def _to_plain_payload(payload: Any) -> Any:

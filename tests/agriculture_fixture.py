@@ -20,6 +20,7 @@ runtime:
   log_level: INFO
 
 retrieval:
+  walk_top_k: 5
   branch_top_k: 15
   evidence_top_k: 5
 

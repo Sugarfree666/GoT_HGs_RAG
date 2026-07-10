@@ -28,6 +28,7 @@ class RuntimeConfig:
 class RetrievalConfig:
     branch_top_k: int = 15
     evidence_top_k: int = 5
+    walk_top_k: int = 5
 
 
 @dataclass(slots=True)
@@ -90,6 +91,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         legacy_top_ks = [int(value) for value in legacy_top_ks if value not in (None, "")]
         branch_top_k = max(legacy_top_ks) if legacy_top_ks else 15
     retrieval_cfg = RetrievalConfig(
+        walk_top_k=int(retrieval.get("walk_top_k", 5)),
         branch_top_k=int(branch_top_k),
         evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
     )

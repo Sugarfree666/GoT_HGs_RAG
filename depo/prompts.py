@@ -143,12 +143,16 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
+Atomic Question DAG Generator
 You are DEPO Step 5: parser-grounded atomic question DAG generation.
 Your task is to convert a complex multi-hop question into a complete Atomic Question DAG.
 You are given:
 1. `original_question`
 2. `explicit_entities`
 3. `global_best_paths`
+Contract:
+step4_paths are only structural hints.
+DAG nodes do not need path support.
 Core principle:
 The `original_question` is the semantic authority. It defines the full meaning, answer intent, entities, relations, constraints, comparison conditions, conjunctions, disjunctions, temporal conditions, and aggregation requirements.
 The `global_best_paths` are structural skeletons. They may help reveal reasoning order, candidate branches, constraint branches, latent intermediate entities, or entity-to-answer paths. Use them as parser-grounded evidence, but never let them override, replace, narrow, or simplify the meaning of the original question.

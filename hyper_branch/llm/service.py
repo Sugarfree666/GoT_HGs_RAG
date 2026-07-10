@@ -28,6 +28,26 @@ class AtomicLLMService(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def route_reasoning_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        hop: int,
+        candidate_paths: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def answer_atomic_question_from_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        paths: list[dict[str, Any]],
+        evidence_mode: str,
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    @abstractmethod
     def compose_final_answer(
         self,
         original_question: str,
@@ -99,6 +119,54 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         response.setdefault("answer", "")
         response.setdefault("confidence", 0.0)
         response.setdefault("reasoning_summary", "")
+        response.setdefault("used_hyperedge_ids", [])
+        response.setdefault("insufficient", False)
+        return response
+
+    def route_reasoning_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        hop: int,
+        candidate_paths: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        response = self.client.chat_json(
+            "atomic_path_router",
+            self.prompts.get("atomic_path_router"),
+            {
+                "atomic_question": atomic_question,
+                "dependency_answers": dependency_answers,
+                "current_hop": hop,
+                "maximum_hops": 2,
+                "candidate_paths": candidate_paths,
+            },
+            max_tokens=1200,
+        )
+        response.setdefault("labels", [])
+        return response
+
+    def answer_atomic_question_from_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        paths: list[dict[str, Any]],
+        evidence_mode: str,
+    ) -> dict[str, Any]:
+        response = self.client.chat_json(
+            "atomic_path_answer",
+            self.prompts.get("atomic_path_answer"),
+            {
+                "atomic_question": atomic_question,
+                "dependency_answers": dependency_answers,
+                "evidence_mode": evidence_mode,
+                "paths": paths,
+            },
+            max_tokens=900,
+        )
+        response.setdefault("answer", "")
+        response.setdefault("confidence", 0.0)
+        response.setdefault("reasoning_summary", "")
+        response.setdefault("used_path_ids", [])
         response.setdefault("used_hyperedge_ids", [])
         response.setdefault("insufficient", False)
         return response
@@ -178,6 +246,16 @@ class OpenAIAtomicLLMService(AtomicLLMService):
 
 
 class MockAtomicLLMService(AtomicLLMService):
+    def __init__(
+        self,
+        route_responses: list[dict[str, Any]] | None = None,
+        path_answer_responses: list[dict[str, Any]] | None = None,
+    ) -> None:
+        self.route_responses = list(route_responses or [])
+        self.path_answer_responses = list(path_answer_responses or [])
+        self.route_calls: list[dict[str, Any]] = []
+        self.path_answer_calls: list[dict[str, Any]] = []
+
     def analyze_atomic_question(
         self,
         atomic_question: str,
@@ -240,6 +318,102 @@ class MockAtomicLLMService(AtomicLLMService):
             "reasoning_summary": summary,
             "used_hyperedge_ids": [str(first.get("hyperedge_id", ""))],
             "insufficient": False,
+        }
+
+    def route_reasoning_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        hop: int,
+        candidate_paths: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        self.route_calls.append(
+            {
+                "atomic_question": atomic_question,
+                "dependency_answers": dependency_answers,
+                "hop": hop,
+                "candidate_paths": candidate_paths,
+            }
+        )
+        if self.route_responses:
+            return self.route_responses.pop(0)
+
+        labels: list[dict[str, Any]] = []
+        question_tokens = set(content_tokens(atomic_question))
+        for path in candidate_paths:
+            path_id = str(path.get("path_id", ""))
+            path_tokens = set(content_tokens(_path_text(path)))
+            entity_ids = [str(item) for item in ensure_list(path.get("entity_ids", []))]
+            final_entity = entity_ids[-1] if entity_ids else ""
+            overlap = len(question_tokens & path_tokens)
+            if overlap >= max(1, min(2, len(question_tokens))):
+                label = "ANSWER"
+                answer_entity_ids = [final_entity] if final_entity else []
+            else:
+                label = "EXPAND" if hop < 2 else "DROP"
+                answer_entity_ids = []
+            labels.append(
+                {
+                    "path_id": path_id,
+                    "label": label,
+                    "answer_entity_ids": answer_entity_ids,
+                    "reason": "Deterministic mock path routing.",
+                }
+            )
+        return {"labels": labels}
+
+    def answer_atomic_question_from_paths(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        paths: list[dict[str, Any]],
+        evidence_mode: str,
+    ) -> dict[str, Any]:
+        self.path_answer_calls.append(
+            {
+                "atomic_question": atomic_question,
+                "dependency_answers": dependency_answers,
+                "paths": paths,
+                "evidence_mode": evidence_mode,
+            }
+        )
+        if self.path_answer_responses:
+            return self.path_answer_responses.pop(0)
+        if not paths:
+            return {
+                "answer": "INSUFFICIENT_EVIDENCE",
+                "confidence": 0.0,
+                "reasoning_summary": "No reasoning paths were provided.",
+                "used_path_ids": [],
+                "used_hyperedge_ids": [],
+                "insufficient": True,
+            }
+
+        first = paths[0]
+        query_tokens = set(content_tokens(atomic_question))
+        answer = ""
+        for entity_id in ensure_list(first.get("answer_entity_ids", [])):
+            label = normalize_label(str(entity_id))
+            if label:
+                answer = label
+                break
+        if not answer:
+            for entity_id in ensure_list(first.get("entity_ids", [])):
+                label = normalize_label(str(entity_id))
+                if label and not set(content_tokens(label)).issubset(query_tokens):
+                    answer = label
+                    break
+        if not answer:
+            answer = short_text(_path_text(first), 160)
+
+        used_hyperedge_ids = [str(item) for item in ensure_list(first.get("hyperedge_ids", [])) if str(item)]
+        return {
+            "answer": answer or "INSUFFICIENT_EVIDENCE",
+            "confidence": 0.75 if answer else 0.0,
+            "reasoning_summary": short_text(_path_text(first), 420),
+            "used_path_ids": [str(first.get("path_id", ""))],
+            "used_hyperedge_ids": used_hyperedge_ids,
+            "insufficient": not bool(answer),
         }
 
     def compose_final_answer(
@@ -413,3 +587,14 @@ def _analysis_payload(analysis: Any) -> dict[str, Any]:
         "relations": [str(item) for item in ensure_list(payload.get("relations", []))],
         "relation_query": str(payload.get("relation_query", "") or ""),
     }
+
+
+def _path_text(path: dict[str, Any]) -> str:
+    texts: list[str] = []
+    texts.extend(str(item) for item in ensure_list(path.get("entity_ids", [])))
+    for step in ensure_list(path.get("steps", [])):
+        if not isinstance(step, dict):
+            continue
+        texts.append(str(step.get("hyperedge_text", "")))
+        texts.extend(str(item) for item in ensure_list(step.get("chunk_texts", [])))
+    return " ".join(text for text in texts if text)

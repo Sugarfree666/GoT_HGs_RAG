@@ -6,10 +6,9 @@ from typing import Any
 
 from .atomic import (
     AtomicDagExecutor,
-    AtomicEvidenceFusion,
-    AtomicHyperedgeRetriever,
     AtomicQuestionAnalyzer,
     FinalAnswerComposer,
+    RoutedHypergraphWalker,
 )
 from .config import Config
 from .data.loaders import HypergraphDatasetLoader
@@ -44,27 +43,25 @@ class HyperBranchPipeline:
             self.llm_service = OpenAIAtomicLLMService(client=client, prompts=prompts)
 
         analyzer = AtomicQuestionAnalyzer(llm_service=self.llm_service)
-        retriever = AtomicHyperedgeRetriever(
+        walker = RoutedHypergraphWalker(
             dataset=self.dataset,
             embedder=self.embedder,
             config=config.retrieval,
             llm_service=self.llm_service,
             logger=logger,
         )
-        fusion = AtomicEvidenceFusion(
-            config=config.retrieval,
-            embedder=self.embedder,
-            hyperedge_store=self.dataset.hyperedge_store,
-            chunk_store=self.dataset.chunk_store,
-        )
         composer = FinalAnswerComposer(llm_service=self.llm_service)
+        self.walker = walker
+        self.retriever = None
+        self.fusion = None
         self.executor = AtomicDagExecutor(
             analyzer=analyzer,
-            retriever=retriever,
-            fusion=fusion,
+            retriever=None,
+            fusion=None,
             composer=composer,
             llm_service=self.llm_service,
             logger=logger,
+            walker=walker,
         )
 
     def run(self, question: str, dag_payload: Any | None = None) -> dict[str, Any]:

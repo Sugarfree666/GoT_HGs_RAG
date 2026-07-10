@@ -351,7 +351,15 @@ class _ReusableHyperBranchRunner:
         self.pipeline.logger = logger
         self.pipeline.trace_store = trace_store
         self.pipeline.executor.logger = logger
-        self.pipeline.executor.retriever.logger = logger
+        retriever = getattr(self.pipeline.executor, "retriever", None)
+        if retriever is not None and hasattr(retriever, "logger"):
+            retriever.logger = logger
+        walker = getattr(self.pipeline.executor, "walker", None)
+        if walker is not None and hasattr(walker, "logger"):
+            walker.logger = logger
+            anchor_resolver = getattr(walker, "_anchor_resolver", None)
+            if anchor_resolver is not None and hasattr(anchor_resolver, "logger"):
+                anchor_resolver.logger = logger
         _set_trace_store(self.pipeline.embedder, trace_store)
         llm_client = getattr(self.pipeline.llm_service, "client", None)
         _set_trace_store(llm_client, trace_store)
