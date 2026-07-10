@@ -2,20 +2,21 @@ from __future__ import annotations
 
 import logging
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
+
+import numpy as np
 
 from ..config import RetrievalConfig
 from ..data.loaders import DatasetBundle
 from ..llm.service import AtomicLLMService
 from ..models import VectorMatch
-from ..utils import lexical_overlap_score, normalize_label, short_text
-from .models import AtomicQuestionAnalysis, BranchHit
+from ..utils import normalize_label, short_text
+from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 
 
 _ANCHOR_ENTITY_TOP_K = 3
 _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
-_MAX_SEMANTIC_HYPEREDGES_PER_CHUNK = 20
 
 
 @dataclass(slots=True)
@@ -43,6 +44,32 @@ class AnchorEntityMatch:
         }
 
 
+@dataclass(slots=True)
+class LocalHyperedgeRetrievalResult:
+    primary_anchor_mention: str = ""
+    linked_entity_id: str = ""
+    anchor_match: dict[str, Any] = field(default_factory=dict)
+    adjacent_hyperedge_ids: list[str] = field(default_factory=list)
+    top_hyperedges: list[dict[str, Any]] = field(default_factory=list)
+    evidence: list[FusedHyperedgeCandidate] = field(default_factory=list)
+    insufficient_reason: str = ""
+
+    @property
+    def insufficient(self) -> bool:
+        return bool(self.insufficient_reason) or not self.evidence
+
+    def to_artifact(self) -> dict[str, Any]:
+        return {
+            "primary_anchor_mention": self.primary_anchor_mention,
+            "linked_entity_id": self.linked_entity_id,
+            "anchor_match": dict(self.anchor_match),
+            "adjacent_hyperedge_ids": list(self.adjacent_hyperedge_ids),
+            "top_hyperedges": [dict(item) for item in self.top_hyperedges],
+            "evidence": [item.to_dict() for item in self.evidence],
+            "insufficient_reason": self.insufficient_reason,
+        }
+
+
 class AtomicHyperedgeRetriever:
     def __init__(
         self,
@@ -60,228 +87,166 @@ class AtomicHyperedgeRetriever:
         self._entity_ids = [
             node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "entity"
         ]
-        self._hyperedge_ids = [
-            node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "hyperedge"
-        ]
         self._entity_lookup = self._normalized_lookup(self._entity_ids)
-        self._hyperedge_lookup = self._normalized_lookup(self._hyperedge_ids)
-        self._chunk_to_hyperedge_ids = self._build_chunk_to_hyperedge_index()
-        self._chunk_ids = self._collect_chunk_ids()
-        self._chunk_lookup = self._normalized_lookup(self._chunk_ids)
 
-    def retrieve(self, question: str, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
-        hits = [
-            *self.retrieve_anchor_branch(question, analysis),
-            *self.retrieve_relation_branch(analysis),
-            *self.retrieve_semantic_branch(question),
-        ]
-        self.logger.info(
-            "Atomic retrieval returned %s hits for question=%s",
-            len(hits),
-            short_text(question, 90),
+    def retrieve_primary_anchor_local(
+        self,
+        *,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        primary_anchor_mention: str,
+    ) -> LocalHyperedgeRetrievalResult:
+        mention = normalize_label(str(primary_anchor_mention or "").strip())
+        result = LocalHyperedgeRetrievalResult(primary_anchor_mention=mention)
+        if not mention:
+            result.insufficient_reason = "missing_primary_anchor"
+            return result
+
+        match = self.link_primary_anchor(
+            question=question,
+            mention=mention,
+            analysis=analysis,
         )
-        return hits
+        if match is None:
+            result.insufficient_reason = "unlinked_primary_anchor"
+            return result
 
-    def retrieve_anchor_branch(self, question: str, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
-        if not analysis.entities:
-            return []
+        result.linked_entity_id = match.entity_id
+        result.anchor_match = match.to_metadata()
+        adjacent_ids = self._adjacent_hyperedge_ids(match.entity_id)
+        result.adjacent_hyperedge_ids = list(adjacent_ids)
+        if not adjacent_ids:
+            result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
+            return result
 
-        query_entities = [
-            (index, normalize_label(str(entity)))
-            for index, entity in enumerate(analysis.entities)
-            if normalize_label(str(entity))
+        scores = self._hyperedge_similarity_scores(question, adjacent_ids)
+        ranked = [
+            {
+                "hyperedge_id": hyperedge_id,
+                "semantic_score": float(scores.get(hyperedge_id, 0.0)),
+                "rank": 0,
+            }
+            for hyperedge_id in adjacent_ids
         ]
-        if not query_entities:
-            return []
+        ranked.sort(key=lambda item: (-float(item["semantic_score"]), str(item["hyperedge_id"])))
+        top_k = max(0, int(getattr(self.config, "local_hyperedge_top_k", 3)))
+        selected = ranked[:top_k]
+        for rank, item in enumerate(selected, start=1):
+            item["rank"] = rank
 
-        hyperedge_scores: dict[str, dict[int, float]] = defaultdict(dict)
-        hyperedge_matches: dict[str, dict[int, dict[str, Any]]] = defaultdict(dict)
-        max_per_entity: int | None = None
-
-        for query_index, entity in query_entities:
-            matches = self._resolve_anchor_entity_matches(
-                question=question,
-                entity=entity,
-                analysis=analysis,
-                query_index=query_index,
+        result.top_hyperedges = selected
+        result.evidence = [
+            self._evidence_from_hyperedge(
+                hyperedge_id=str(item["hyperedge_id"]),
+                semantic_score=float(item["semantic_score"]),
+                rank=int(item["rank"]),
+                primary_anchor_mention=mention,
+                primary_anchor_entity_id=match.entity_id,
             )
-            for match in matches:
-                hyperedge_ids = self.dataset.graph.entity_hyperedge_ids(match.entity_id)
-                if isinstance(max_per_entity, int) and max_per_entity > 0:
-                    hyperedge_ids = hyperedge_ids[:max_per_entity]
-                for hyperedge_id in hyperedge_ids:
-                    current_score = hyperedge_scores[hyperedge_id].get(query_index)
-                    if current_score is None or match.link_score > current_score:
-                        hyperedge_scores[hyperedge_id][query_index] = match.link_score
-                        hyperedge_matches[hyperedge_id][query_index] = match.to_metadata()
+            for item in selected
+        ]
+        result.evidence = [item for item in result.evidence if item.hyperedge_id]
+        if not result.evidence:
+            result.insufficient_reason = "no_valid_local_evidence"
+        return result
 
-        denominator = len(query_entities)
-        hits: list[BranchHit] = []
-        for hyperedge_id, scores_by_query in hyperedge_scores.items():
-            raw_score = sum(scores_by_query.values()) / max(denominator, 1)
-            anchor_matches = [
-                hyperedge_matches[hyperedge_id][query_index]
-                for query_index in sorted(hyperedge_matches[hyperedge_id])
-            ]
-            hits.append(
-                self._hit_from_hyperedge(
-                    hyperedge_id=hyperedge_id,
-                    branch="anchor",
-                    raw_score=raw_score,
-                    extra_metadata={"anchor_matches": anchor_matches},
-                )
-            )
-        hits.sort(key=lambda hit: (-hit.raw_score, hit.hyperedge_id))
-        return hits[: self._branch_top_k()]
-
-    def retrieve_relation_branch(self, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
-        seeds = self._relation_signature_seeds(analysis)
-        top_k = self._relation_top_k()
-        if not seeds or top_k <= 0:
-            return []
-
-        candidates: dict[str, dict[str, Any]] = {}
-        for seed_rank, seed in enumerate(seeds):
-            vector_matches = self._query_hyperedge_store(seed, top_k)
-            lexical_matches = self._relation_lexical_hyperedge_matches(seed, top_k)
-
-            for match in vector_matches:
-                hyperedge_id = self._resolve_hyperedge_id(match)
-                if not hyperedge_id:
-                    continue
-                self._merge_relation_candidate(
-                    candidates=candidates,
-                    hyperedge_id=hyperedge_id,
-                    seed=seed,
-                    seed_rank=seed_rank,
-                    vector_score=float(match.score),
-                    seeds=seeds,
-                )
-
-            for hyperedge_id, lexical_score in lexical_matches:
-                self._merge_relation_candidate(
-                    candidates=candidates,
-                    hyperedge_id=hyperedge_id,
-                    seed=seed,
-                    seed_rank=seed_rank,
-                    vector_score=0.0,
-                    lexical_score=lexical_score,
-                    seeds=seeds,
-                )
-
-        ranked = sorted(
-            candidates.items(),
+    def link_primary_anchor(
+        self,
+        *,
+        question: str,
+        mention: str,
+        analysis: AtomicQuestionAnalysis,
+    ) -> AnchorEntityMatch | None:
+        matches = self._resolve_anchor_entity_matches(
+            question=question,
+            entity=mention,
+            analysis=analysis,
+            query_index=0,
+        )
+        if not matches:
+            return None
+        matches.sort(
             key=lambda item: (
-                -float(item[1]["lexical_relation_score"]),
-                -float(item[1]["vector_relation_score"]),
-                int(item[1]["best_relation_seed_rank"]),
-                item[0],
-            ),
+                -float(item.link_score),
+                int(item.candidate_rank if item.candidate_rank is not None else 0),
+                str(item.entity_id),
+            )
+        )
+        return matches[0]
+
+    def _adjacent_hyperedge_ids(self, entity_id: str) -> list[str]:
+        if not entity_id or not hasattr(self.dataset.graph, "entity_hyperedge_ids"):
+            return []
+        return _dedupe_strings([str(item) for item in self.dataset.graph.entity_hyperedge_ids(entity_id)])
+
+    def _hyperedge_similarity_scores(self, query: str, hyperedge_ids: list[str]) -> dict[str, float]:
+        if not query.strip() or not hyperedge_ids:
+            return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
+        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
+            return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
+        store = getattr(self.dataset, "hyperedge_store", None)
+        if store is None or not hasattr(store, "similarities"):
+            return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
+        try:
+            vectors = self.embedder.embed_texts([query], stage="atomic_local_hyperedge_retrieval")
+            if not vectors:
+                return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
+            query_vector = np.asarray(vectors[0], dtype=np.float32)
+            scores = dict(store.similarities(query_vector, list(hyperedge_ids)))
+        except (TypeError, ValueError, AttributeError):
+            return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
+        return {hyperedge_id: float(scores.get(hyperedge_id, 0.0)) for hyperedge_id in hyperedge_ids}
+
+    def _evidence_from_hyperedge(
+        self,
+        *,
+        hyperedge_id: str,
+        semantic_score: float,
+        rank: int,
+        primary_anchor_mention: str,
+        primary_anchor_entity_id: str,
+    ) -> FusedHyperedgeCandidate:
+        description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+        hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
+        entity_ids = _dedupe_strings([str(item) for item in description.get("entity_ids", [])])
+        if not entity_ids and hasattr(self.dataset.graph, "hyperedge_entity_ids"):
+            entity_ids = _dedupe_strings([str(item) for item in self.dataset.graph.hyperedge_entity_ids(hyperedge_id)])
+        chunk_ids = _dedupe_strings([str(item) for item in description.get("chunk_ids", [])])
+        chunk_texts = [self.dataset.get_chunk_text(chunk_id) for chunk_id in chunk_ids]
+        entity_records = [self._entity_payload(entity_id) for entity_id in entity_ids]
+        return FusedHyperedgeCandidate(
+            hyperedge_id=hyperedge_id,
+            hyperedge_text=hyperedge_text,
+            branch_support={"local_primary_anchor"},
+            semantic_score=float(semantic_score),
+            fusion_score=float(semantic_score),
+            entity_ids=entity_ids,
+            entity_records=entity_records,
+            chunk_ids=chunk_ids,
+            chunk_texts=chunk_texts,
+            evidence_texts=[text for text in [hyperedge_text, *chunk_texts] if text],
+            rank=int(rank),
+            score_breakdown={
+                "selection_source": "single_hop_primary_anchor_top3",
+                "semantic_rank": int(rank),
+                "semantic_score": float(semantic_score),
+                "primary_anchor_mention": primary_anchor_mention,
+                "primary_anchor_entity_id": primary_anchor_entity_id,
+            },
         )
 
-        hits: list[BranchHit] = []
-        for hyperedge_id, payload in ranked[:top_k]:
-            hit = self._hit_from_hyperedge(
-                hyperedge_id=hyperedge_id,
-                branch="relation",
-                raw_score=float(payload["raw_score"]),
-                extra_metadata={
-                    "relation_signature_seeds": list(seeds),
-                    "best_relation_seed": payload["best_relation_seed"],
-                    "best_relation_seed_rank": payload["best_relation_seed_rank"],
-                    "lexical_relation_score": payload["lexical_relation_score"],
-                    "vector_relation_score": payload["vector_relation_score"],
-                    "relation_retrieval_mode": "signature",
-                },
-            )
-            hits.append(hit)
-        return hits
-
-    def retrieve_semantic_branch(self, question: str) -> list[BranchHit]:
-        query = str(question or "").strip()
-        top_k = self._branch_top_k()
-        if not query or top_k <= 0:
-            return []
-
-        matches = self._query_chunk_store(query, top_k)
-        hits_by_hyperedge: dict[str, dict[str, Any]] = {}
-        max_per_chunk = _MAX_SEMANTIC_HYPEREDGES_PER_CHUNK
-        for match in matches:
-            chunk_id = self._resolve_chunk_id_from_vector_match(match)
-            if not chunk_id:
-                continue
-            hyperedge_ids = list(self._chunk_to_hyperedge_ids.get(chunk_id, []))
-            if isinstance(max_per_chunk, int) and max_per_chunk > 0:
-                hyperedge_ids = hyperedge_ids[:max_per_chunk]
-            chunk_score = float(match.score)
-            chunk_text = self.dataset.get_chunk_text(chunk_id)
-            for hyperedge_id in hyperedge_ids:
-                payload = hits_by_hyperedge.setdefault(
-                    hyperedge_id,
-                    {
-                        "raw_score": chunk_score,
-                        "matched_chunk_ids": [],
-                        "matched_chunk_scores": {},
-                        "matched_chunk_texts": [],
-                    },
-                )
-                payload["raw_score"] = max(float(payload["raw_score"]), chunk_score)
-                if chunk_id not in payload["matched_chunk_ids"]:
-                    payload["matched_chunk_ids"].append(chunk_id)
-                scores = payload["matched_chunk_scores"]
-                scores[chunk_id] = max(float(scores.get(chunk_id, 0.0)), chunk_score)
-                if chunk_text and chunk_text not in payload["matched_chunk_texts"]:
-                    payload["matched_chunk_texts"].append(chunk_text)
-
-        hits: list[BranchHit] = []
-        for hyperedge_id, payload in hits_by_hyperedge.items():
-            matched_chunk_ids = [str(item) for item in payload["matched_chunk_ids"]]
-            matched_chunk_texts = [str(item) for item in payload["matched_chunk_texts"]]
-            description = self.dataset.graph.describe_hyperedge(hyperedge_id)
-            default_chunk_ids = [str(item) for item in description.get("chunk_ids", [])]
-            default_hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
-            default_evidence = self._evidence_texts(default_hyperedge_text, default_chunk_ids)
-            evidence_texts = self._dedupe([*matched_chunk_texts, *default_evidence])
-            chunk_ids = self._dedupe([*matched_chunk_ids, *default_chunk_ids])
-            hits.append(
-                self._hit_from_hyperedge(
-                    hyperedge_id=hyperedge_id,
-                    branch="semantic",
-                    raw_score=float(payload["raw_score"]),
-                    extra_metadata={
-                        "semantic_source": "chunk_store",
-                        "matched_chunk_ids": matched_chunk_ids,
-                        "matched_chunk_scores": dict(payload["matched_chunk_scores"]),
-                        "matched_chunk_texts": matched_chunk_texts,
-                        "evidence_texts": evidence_texts,
-                    },
-                    chunk_ids_override=chunk_ids,
-                )
-            )
-        hits.sort(key=lambda hit: (-hit.raw_score, hit.hyperedge_id))
-        return hits[:top_k]
-
-    def _anchor_hyperedges_for_entity(self, entity: str) -> list[str]:
-        entity_ids = self._resolve_entity_ids(entity)
-        seen: set[str] = set()
-        hyperedge_ids: list[str] = []
-        for entity_id in entity_ids:
-            for hyperedge_id in self.dataset.graph.entity_hyperedge_ids(entity_id):
-                if hyperedge_id not in seen:
-                    seen.add(hyperedge_id)
-                    hyperedge_ids.append(hyperedge_id)
-        return hyperedge_ids
-
-    def _resolve_entity_ids(self, entity: str) -> list[str]:
-        normalized = normalize_label(entity).lower()
-        if not normalized:
-            return []
-
-        exact = self._entity_lookup.get(normalized, [])
-        if exact:
-            return list(exact)
-
-        return []
+    def _entity_payload(self, entity_id: str) -> dict[str, Any]:
+        nodes = getattr(self.dataset.graph, "nodes", {})
+        node = nodes.get(entity_id) if hasattr(nodes, "get") else None
+        payload = {
+            "entity_id": entity_id,
+            "label": normalize_label(entity_id),
+            "entity_type": getattr(node, "entity_type", None),
+            "description": str(getattr(node, "description", "") or ""),
+        }
+        if node is not None and hasattr(node, "to_dict"):
+            payload["metadata"] = node.to_dict()
+        return payload
 
     def _resolve_anchor_entity_matches(
         self,
@@ -328,6 +293,13 @@ class AtomicHyperedgeRetriever:
                 candidate_rank=int(selected["candidate_rank"]),
             )
         ]
+
+    def _resolve_entity_ids(self, entity: str) -> list[str]:
+        normalized = normalize_label(entity).lower()
+        if not normalized:
+            return []
+        exact = self._entity_lookup.get(normalized, [])
+        return list(exact) if exact else []
 
     def _anchor_entity_vector_candidates(self, entity: str) -> list[dict[str, Any]]:
         matches = self._query_entity_store(entity, _ANCHOR_ENTITY_TOP_K)
@@ -415,8 +387,7 @@ class AtomicHyperedgeRetriever:
             confidence = float(response.get("confidence", 0.0) or 0.0)
         except (TypeError, ValueError):
             return None
-        min_confidence = _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE
-        if confidence < min_confidence:
+        if confidence < _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE:
             return None
 
         candidates_by_id = {str(candidate["entity_id"]): candidate for candidate in candidates}
@@ -431,250 +402,6 @@ class AtomicHyperedgeRetriever:
             "candidate_rank": int(selected["candidate_rank"]),
         }
 
-    def _vector_or_lexical_hyperedge_hits(self, query: str, branch: str, top_k: int) -> list[BranchHit]:
-        query = str(query or "").strip()
-        if not query or top_k <= 0:
-            return []
-
-        matches = self._query_hyperedge_store(query, top_k)
-        if not matches:
-            matches = self._lexical_hyperedge_matches(query, top_k)
-
-        hits: list[BranchHit] = []
-        seen: set[str] = set()
-        for match in matches[:top_k]:
-            hyperedge_id = self._resolve_hyperedge_id(match)
-            if not hyperedge_id or hyperedge_id in seen:
-                continue
-            seen.add(hyperedge_id)
-            hit = self._hit_from_hyperedge(
-                hyperedge_id=hyperedge_id,
-                branch=branch,
-                raw_score=float(match.score),
-                match_metadata=dict(match.metadata),
-            )
-            hits.append(hit)
-        return hits
-
-    def _query_hyperedge_store(self, query: str, top_k: int) -> list[VectorMatch]:
-        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
-            return []
-        store = getattr(self.dataset, "hyperedge_store", None)
-        if store is None or not hasattr(store, "query"):
-            return []
-        vectors = self.embedder.embed_texts([query], stage="atomic_hyperedge_retrieval")
-        if not vectors:
-            return []
-        return list(store.query(vectors[0], top_k=top_k))
-
-    def _relation_signature_seeds(self, analysis: AtomicQuestionAnalysis) -> list[str]:
-        seeds: list[str] = []
-        for relation in analysis.relations or []:
-            text = normalize_label(str(relation or "").strip())
-            if text:
-                seeds.append(text)
-
-        if not seeds and analysis.relation_query:
-            text = normalize_label(str(analysis.relation_query or "").strip())
-            if text:
-                seeds.append(text)
-
-        return self._dedupe_casefold(seeds)
-
-    def _merge_relation_candidate(
-        self,
-        *,
-        candidates: dict[str, dict[str, Any]],
-        hyperedge_id: str,
-        seed: str,
-        seed_rank: int,
-        vector_score: float,
-        seeds: list[str],
-        lexical_score: float | None = None,
-    ) -> None:
-        relation_texts = self._relation_texts_for_hyperedge(hyperedge_id, self._hyperedge_text_for_scoring(hyperedge_id))
-        if lexical_score is None:
-            lexical_score = self._relation_lexical_score(seed, relation_texts)
-
-        payload = candidates.get(hyperedge_id)
-        current_key = (
-            float(payload["lexical_relation_score"]),
-            float(payload["vector_relation_score"]),
-            -int(payload["best_relation_seed_rank"]),
-        ) if payload is not None else None
-        candidate_key = (float(lexical_score), float(vector_score), -int(seed_rank))
-
-        if payload is None or candidate_key > current_key:
-            candidates[hyperedge_id] = {
-                "relation_signature_seeds": list(seeds),
-                "best_relation_seed": seed,
-                "best_relation_seed_rank": int(seed_rank),
-                "lexical_relation_score": float(lexical_score),
-                "vector_relation_score": float(vector_score),
-                "raw_score": float(lexical_score) if float(lexical_score) > 0.0 else float(vector_score),
-            }
-            return
-
-        payload["vector_relation_score"] = max(float(payload["vector_relation_score"]), float(vector_score))
-        payload["raw_score"] = (
-            float(payload["lexical_relation_score"])
-            if float(payload["lexical_relation_score"]) > 0.0
-            else float(payload["vector_relation_score"])
-        )
-
-    def _relation_lexical_hyperedge_matches(self, seed: str, top_k: int) -> list[tuple[str, float]]:
-        if top_k <= 0:
-            return []
-        scored: list[tuple[str, float]] = []
-        for hyperedge_id in self._hyperedge_ids:
-            relation_texts = self._relation_texts_for_hyperedge(hyperedge_id, self._hyperedge_text_for_scoring(hyperedge_id))
-            score = self._relation_lexical_score(seed, relation_texts)
-            if score <= 0.0:
-                continue
-            scored.append((hyperedge_id, score))
-        scored.sort(key=lambda item: (-item[1], item[0]))
-        return scored[:top_k]
-
-    def _relation_lexical_score(self, seed: str, relation_texts: list[str]) -> float:
-        return lexical_overlap_score([seed], " ".join(relation_texts))
-
-    def _hyperedge_text_for_scoring(self, hyperedge_id: str) -> str:
-        description = self.dataset.graph.describe_hyperedge(hyperedge_id)
-        return normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
-
-    def _query_chunk_store(self, query: str, top_k: int) -> list[VectorMatch]:
-        if top_k <= 0:
-            return []
-        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
-            return []
-        store = getattr(self.dataset, "chunk_store", None)
-        if store is None or not hasattr(store, "query"):
-            return []
-        try:
-            vectors = self.embedder.embed_texts([query], stage="atomic_chunk_semantic_retrieval")
-            if not vectors:
-                return []
-            return list(store.query(vectors[0], top_k=top_k))
-        except (TypeError, ValueError):
-            return []
-
-    def _branch_top_k(self) -> int:
-        return max(0, int(getattr(self.config, "branch_top_k", 15)))
-
-    def _relation_top_k(self) -> int:
-        return max(0, int(getattr(self.config, "branch_top_k", getattr(self.config, "relation_top_k", 10))))
-
-    def _resolve_chunk_id_from_vector_match(self, match: VectorMatch) -> str | None:
-        metadata = match.metadata if isinstance(match.metadata, dict) else {}
-        raw_candidates = [
-            match.item_id,
-            match.label,
-            metadata.get("__id__"),
-            metadata.get("chunk_id"),
-            metadata.get("id"),
-        ]
-        for raw_candidate in raw_candidates:
-            if raw_candidate is None:
-                continue
-            candidate = str(raw_candidate).strip()
-            if not candidate:
-                continue
-            if candidate in self._chunk_ids:
-                return candidate
-            normalized = normalize_label(candidate).lower()
-            mapped = self._chunk_lookup.get(normalized, [])
-            if mapped:
-                return mapped[0]
-        return None
-
-    def _lexical_hyperedge_matches(self, query: str, top_k: int) -> list[VectorMatch]:
-        scored: list[VectorMatch] = []
-        for hyperedge_id in self._hyperedge_ids:
-            score = lexical_overlap_score([query], normalize_label(hyperedge_id))
-            if score <= 0:
-                continue
-            scored.append(
-                VectorMatch(
-                    item_id=hyperedge_id,
-                    label=hyperedge_id,
-                    score=score,
-                    metadata={"source": "lexical_fallback"},
-                )
-            )
-        scored.sort(key=lambda item: item.score, reverse=True)
-        return scored[:top_k]
-
-    def _resolve_hyperedge_id(self, match: VectorMatch) -> str:
-        for candidate in (match.label, match.item_id):
-            if candidate in self.dataset.graph.nodes:
-                return candidate
-            normalized = normalize_label(candidate).lower()
-            mapped = self._hyperedge_lookup.get(normalized, [])
-            if mapped:
-                return mapped[0]
-        return match.label or match.item_id
-
-    def _hit_from_hyperedge(
-        self,
-        hyperedge_id: str,
-        branch: str,
-        raw_score: float,
-        match_metadata: dict[str, Any] | None = None,
-        extra_metadata: dict[str, Any] | None = None,
-        chunk_ids_override: list[str] | None = None,
-    ) -> BranchHit:
-        description = self.dataset.graph.describe_hyperedge(hyperedge_id)
-        hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
-        entity_ids = [str(item) for item in description.get("entity_ids", [])]
-        chunk_ids = list(chunk_ids_override) if chunk_ids_override is not None else [str(item) for item in description.get("chunk_ids", [])]
-        evidence_texts = self._evidence_texts(hyperedge_text, chunk_ids)
-        metadata = {
-            "evidence_texts": evidence_texts,
-            "relation_texts": self._relation_texts_for_hyperedge(hyperedge_id, hyperedge_text),
-        }
-        if match_metadata:
-            metadata["vector_metadata"] = match_metadata
-        if extra_metadata:
-            metadata.update(extra_metadata)
-        return BranchHit(
-            hyperedge_id=hyperedge_id,
-            branch=branch,  # type: ignore[arg-type]
-            raw_score=float(raw_score),
-            hyperedge_text=hyperedge_text,
-            entity_ids=entity_ids,
-            chunk_ids=chunk_ids,
-            metadata=metadata,
-        )
-
-    def _evidence_texts(self, hyperedge_text: str, chunk_ids: list[str]) -> list[str]:
-        texts = [hyperedge_text] if hyperedge_text else []
-        for chunk_id in chunk_ids[:3]:
-            chunk_text = self.dataset.get_chunk_text(chunk_id)
-            if chunk_text:
-                texts.append(short_text(chunk_text, 900))
-        return self._dedupe(texts)
-
-    def _relation_texts_for_hyperedge(self, hyperedge_id: str, hyperedge_text: str) -> list[str]:
-        texts = [hyperedge_text]
-        node = self.dataset.graph.nodes.get(hyperedge_id)
-        description = getattr(node, "description", None)
-        if description:
-            texts.append(str(description))
-
-        adjacency = getattr(self.dataset.graph, "adjacency", {})
-        edges = getattr(self.dataset.graph, "edges", {})
-        for edge_id in adjacency.get(hyperedge_id, []):
-            edge = edges.get(edge_id)
-            if edge is None:
-                continue
-            role = normalize_label(str(getattr(edge, "role", "") or ""))
-            if role:
-                texts.append(role)
-            other_id = getattr(edge, "target", "") if getattr(edge, "source", "") == hyperedge_id else getattr(edge, "source", "")
-            if other_id:
-                texts.append(normalize_label(str(other_id)))
-        return self._dedupe(texts)
-
     @staticmethod
     def _normalized_lookup(values: list[str]) -> dict[str, list[str]]:
         lookup: dict[str, list[str]] = defaultdict(list)
@@ -684,55 +411,11 @@ class AtomicHyperedgeRetriever:
                 lookup[normalized].append(value)
         return lookup
 
-    def _build_chunk_to_hyperedge_index(self) -> dict[str, list[str]]:
-        lookup: dict[str, list[str]] = defaultdict(list)
-        for hyperedge_id in self._hyperedge_ids:
-            chunk_ids = self._hyperedge_chunk_ids(hyperedge_id)
-            for chunk_id in chunk_ids:
-                if hyperedge_id not in lookup[chunk_id]:
-                    lookup[chunk_id].append(hyperedge_id)
-        return dict(lookup)
 
-    def _collect_chunk_ids(self) -> list[str]:
-        seen: set[str] = set()
-        chunk_ids: list[str] = []
-        text_chunks = getattr(self.dataset, "text_chunks", {})
-        if isinstance(text_chunks, dict):
-            for chunk_id in text_chunks:
-                text = str(chunk_id)
-                if text and text not in seen:
-                    seen.add(text)
-                    chunk_ids.append(text)
-        for values in self._chunk_to_hyperedge_ids:
-            if values and values not in seen:
-                seen.add(values)
-                chunk_ids.append(values)
-        return chunk_ids
-
-    def _hyperedge_chunk_ids(self, hyperedge_id: str) -> list[str]:
-        graph = self.dataset.graph
-        if hasattr(graph, "hyperedge_chunk_ids"):
-            return [str(item) for item in graph.hyperedge_chunk_ids(hyperedge_id)]
-        description = graph.describe_hyperedge(hyperedge_id)
-        return [str(item) for item in description.get("chunk_ids", [])]
-
-    @staticmethod
-    def _dedupe(values: list[str]) -> list[str]:
-        deduped: list[str] = []
-        for value in values:
-            text = normalize_label(str(value).strip())
-            if text and text not in deduped:
-                deduped.append(text)
-        return deduped
-
-    @staticmethod
-    def _dedupe_casefold(values: list[str]) -> list[str]:
-        deduped: list[str] = []
-        seen: set[str] = set()
-        for value in values:
-            text = normalize_label(str(value).strip())
-            key = text.lower()
-            if text and key not in seen:
-                seen.add(key)
-                deduped.append(text)
-        return deduped
+def _dedupe_strings(values: list[str]) -> list[str]:
+    result: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in result:
+            result.append(text)
+    return result

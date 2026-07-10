@@ -47,17 +47,8 @@ class FinalAnswerComposer:
             "reasoning_summary": result.reasoning_summary,
             "used_dependencies": list(result.used_dependencies),
             "used_hyperedge_ids": list(result.used_hyperedge_ids),
-            "used_path_ids": list(result.used_path_ids),
-            "paths": [path.to_dict() for path in result.paths],
-            "walk_artifacts": dict(result.walk_artifacts),
             "top_evidence": [
-                {
-                    "hyperedge_id": evidence.hyperedge_id,
-                    "hyperedge_text": evidence.hyperedge_text,
-                    "branch_support": sorted(evidence.branch_support),
-                    "score_breakdown": dict(evidence.score_breakdown),
-                    "evidence_texts": list(evidence.evidence_texts),
-                }
+                evidence.to_dict()
                 for evidence in result.evidence
             ],
         }

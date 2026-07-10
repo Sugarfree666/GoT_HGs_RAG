@@ -26,9 +26,7 @@ class RuntimeConfig:
 
 @dataclass(slots=True)
 class RetrievalConfig:
-    branch_top_k: int = 15
-    evidence_top_k: int = 5
-    walk_top_k: int = 5
+    local_hyperedge_top_k: int = 3
 
 
 @dataclass(slots=True)
@@ -81,19 +79,8 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         base_run_dir=_resolve_path(project_root, runtime.get("base_run_dir", "runs")),
         log_level=str(runtime.get("log_level", "INFO")).upper(),
     )
-    branch_top_k = retrieval.get("branch_top_k")
-    if branch_top_k is None:
-        legacy_top_ks = [
-            retrieval.get("relation_top_k"),
-            retrieval.get("semantic_top_k"),
-            retrieval.get("semantic_chunk_top_k"),
-        ]
-        legacy_top_ks = [int(value) for value in legacy_top_ks if value not in (None, "")]
-        branch_top_k = max(legacy_top_ks) if legacy_top_ks else 15
     retrieval_cfg = RetrievalConfig(
-        walk_top_k=int(retrieval.get("walk_top_k", 5)),
-        branch_top_k=int(branch_top_k),
-        evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
+        local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
