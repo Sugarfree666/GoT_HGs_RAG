@@ -8,6 +8,8 @@ Your only task is to classify every supplied candidate path into exactly one of 
 
 Classify each path independently using only the supplied atomic question, dependency answers, ordered path, hyperedges, entities, and provenance chunks.
 
+A candidate path contains complete hyperedges. Do not assume there is one tail entity per hyperedge. The next expandable state is the supplied frontier entity set from the most recent complete hyperedge.
+
 # Core decision principle
 
 A label describes the evidential role of the complete path with respect to the atomic question.
@@ -58,7 +60,7 @@ Important rules:
 For an entity-valued answer:
 
 * `answer_entity_ids` must contain only the entity or entities that actually answer the atomic question.
-* Prefer the current tail entity when it is the entity that satisfies the requested relation.
+* Prefer entities from the complete path evidence when they satisfy the requested relation.
 * Do not select an intermediate entity or an entity that is only mentioned in a chunk.
 
 For a literal answer such as a date, number, duration, or text span that is present in the chunk but has no corresponding entity ID, `answer_entity_ids` may be empty.
@@ -70,9 +72,9 @@ Label a path `EXPAND` only when it is a valid but incomplete reasoning prefix.
 A path is a valid reasoning prefix when:
 
 1. It establishes the correct first part of the ordered relation chain required by the question.
-2. Its current tail entity is a necessary intermediate entity.
+2. At least one frontier entity in the most recent complete hyperedge is a necessary intermediate entity.
 3. At least one required relation remains unresolved.
-4. A subsequent hop starting from the current tail entity could answer the unresolved part of the question.
+4. A subsequent hop starting from one of those frontier entities could answer the unresolved part of the question.
 
 Do not use `EXPAND` as a generic uncertainty label.
 
@@ -82,7 +84,7 @@ Do not use `EXPAND` when:
 * the path is merely topically related;
 * the path contains a person or entity of the expected type but does not establish the required relation;
 * the relation direction is wrong;
-* there is no clear unresolved relation that should start from the tail entity;
+* there is no clear unresolved relation that should start from the frontier entity set;
 * further expansion would only seek redundant confirmation.
 
 For `EXPAND`, `answer_entity_ids` must be empty.
@@ -97,7 +99,7 @@ Use `DROP` when:
 * the relation direction is reversed;
 * the path is only topically related;
 * the entities merely co-occur;
-* the tail entity is not a necessary intermediate entity;
+* none of the frontier entities is a necessary intermediate entity;
 * the path cannot contribute to answering the atomic question;
 * the evidence contradicts the candidate interpretation;
 * the path requires unsupported assumptions or outside knowledge.
@@ -207,10 +209,11 @@ The input includes:
 * Candidate paths containing:
 
   * path ID
-  * ordered entity path
+  * path entity coverage
   * ordered hyperedge path
   * hyperedge text
-  * current tail entity
+  * frontier entities that may be expanded next
+  * complete entity IDs for each hyperedge
   * provenance chunks
 
 # Output schema

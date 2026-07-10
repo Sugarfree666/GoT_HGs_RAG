@@ -103,6 +103,8 @@ class HypergraphPathStep:
     entity_ids: list[str] = field(default_factory=list)
     chunk_ids: list[str] = field(default_factory=list)
     chunk_texts: list[str] = field(default_factory=list)
+    source_entity_ids: list[str] = field(default_factory=list)
+    to_entity_ids: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -115,6 +117,8 @@ class HypergraphPathStep:
             "entity_ids": list(self.entity_ids),
             "chunk_ids": list(self.chunk_ids),
             "chunk_texts": list(self.chunk_texts),
+            "source_entity_ids": list(self.source_entity_ids),
+            "to_entity_ids": list(self.to_entity_ids),
         }
 
 
@@ -126,6 +130,7 @@ class HypergraphReasoningPath:
     hyperedge_ids: list[str]
     steps: list[HypergraphPathStep]
     hop_count: int
+    expand_from_entity_ids: list[str] = field(default_factory=list)
     label: PathLabel | None = None
     label_reason: str = ""
     answer_entity_ids: list[str] = field(default_factory=list)
@@ -138,6 +143,7 @@ class HypergraphReasoningPath:
             "hyperedge_ids": list(self.hyperedge_ids),
             "steps": [step.to_dict() for step in self.steps],
             "hop_count": self.hop_count,
+            "expand_from_entity_ids": list(self.expand_from_entity_ids),
             "label": self.label,
             "label_reason": self.label_reason,
             "answer_entity_ids": list(self.answer_entity_ids),

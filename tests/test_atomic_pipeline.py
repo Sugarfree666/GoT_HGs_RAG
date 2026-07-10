@@ -384,7 +384,7 @@ class RoutedHypergraphWalkerTest(unittest.TestCase):
 
         self.assertEqual([item["hyperedge_id"] for item in short_top], ["H8", "H7"])
 
-    def test_path_construction_expands_each_tail_and_preserves_order_and_chunks(self) -> None:
+    def test_path_construction_keeps_complete_hyperedges_and_preserves_chunks(self) -> None:
         graph = WalkGraph(
             entity_edges={
                 "E": ["H1"],
@@ -420,21 +420,29 @@ class RoutedHypergraphWalkerTest(unittest.TestCase):
 
         one_hop, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[root], hop=1)
 
-        self.assertEqual({path.tail_entity_id for path in one_hop}, {"A", "B"})
-        self.assertNotIn("E", {path.tail_entity_id for path in one_hop})
-        path_to_a = next(path for path in one_hop if path.tail_entity_id == "A")
-        self.assertEqual(path_to_a.entity_ids, ["E", "A"])
-        self.assertEqual(path_to_a.hyperedge_ids, ["H1"])
-        self.assertEqual(path_to_a.steps[0].chunk_ids, ["C1"])
-        self.assertEqual(path_to_a.steps[0].chunk_texts, ["E connects to A and B."])
+        self.assertEqual(len(one_hop), 1)
+        path_h1 = one_hop[0]
+        self.assertEqual(path_h1.entity_ids, ["E", "A", "B"])
+        self.assertEqual(path_h1.expand_from_entity_ids, ["A", "B"])
+        self.assertEqual(path_h1.hyperedge_ids, ["H1"])
+        self.assertEqual(path_h1.steps[0].entity_ids, ["E", "A", "B"])
+        self.assertEqual(path_h1.steps[0].to_entity_ids, ["A", "B"])
+        self.assertEqual(path_h1.steps[0].chunk_ids, ["C1"])
+        self.assertEqual(path_h1.steps[0].chunk_texts, ["E connects to A and B."])
+        path_h1_payload = walker.path_payload(path_h1)
+        self.assertIsNone(path_h1_payload["current_tail_entity"])
+        self.assertEqual(path_h1_payload["frontier_entity_ids"], ["A", "B"])
+        self.assertEqual(path_h1_payload["hyperedges"][0]["to_entity_id"], "")
+        self.assertEqual(path_h1_payload["hyperedges"][0]["to_entity_ids"], ["A", "B"])
 
-        two_hop, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[path_to_a], hop=2)
+        two_hop, _, _, _ = walker._expand_frontier(atomic_question="question", frontier=[path_h1], hop=2)
 
         self.assertEqual(len(two_hop), 1)
-        self.assertEqual(two_hop[0].entity_ids, ["E", "A", "C"])
+        self.assertEqual(two_hop[0].entity_ids, ["E", "A", "B", "C"])
         self.assertEqual(two_hop[0].hyperedge_ids, ["H1", "H2"])
+        self.assertEqual(two_hop[0].expand_from_entity_ids, ["C"])
         self.assertEqual(two_hop[0].steps[1].chunk_ids, ["C2"])
-        self.assertEqual(two_hop[0].path_id, walker._path_id(["E", "A", "C"], ["H1", "H2"]))
+        self.assertEqual(two_hop[0].path_id, walker._path_id(["E", "A", "B", "C"], ["H1", "H2"]))
 
     def test_first_hop_answer_stops_without_answer_generation_inside_walker(self) -> None:
         graph = WalkGraph(
@@ -760,6 +768,8 @@ class RoutedHypergraphWalkerTest(unittest.TestCase):
         self.assertEqual(hyperedge["chunk_ids"], ["C_ANSWER"])
         self.assertEqual(hyperedge["chunk_texts"], ["Subject was connected to Answer Entity in the source chunk."])
         self.assertEqual(hyperedge["to_entity_id"], "Answer Entity")
+        self.assertEqual(hyperedge["to_entity_ids"], ["Answer Entity"])
+        self.assertEqual(path_payload["frontier_entity_ids"], ["Answer Entity"])
 
 
 class WalkGraph:

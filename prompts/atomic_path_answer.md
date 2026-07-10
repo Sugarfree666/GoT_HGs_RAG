@@ -8,12 +8,13 @@ You will receive a JSON payload with:
 
 Each path may contain one or two ordered hops:
 
-entity -> hyperedge -> entity
+complete hyperedge -> optional next complete hyperedge
 
 Each path may include:
 - path_id.
-- entity_ids and ordered entity path.
+- entity_ids and path entity coverage.
 - hyperedge_ids and ordered hyperedge path.
+- frontier entities that were available for expansion.
 - entity records with IDs, names, labels, types, and descriptions.
 - hyperedge IDs and hyperedge text.
 - provenance chunk IDs and chunk text for each hyperedge.

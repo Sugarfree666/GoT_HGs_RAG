@@ -89,6 +89,7 @@ class RoutedHypergraphWalker:
                 hyperedge_ids=[],
                 steps=[],
                 hop_count=0,
+                expand_from_entity_ids=[str(anchor["entity_id"])],
             )
             for anchor in anchor_entities
         ]
@@ -213,20 +214,46 @@ class RoutedHypergraphWalker:
     ) -> list[dict[str, Any]]:
         """Return semantic top-k hyperedges from the current entity adjacency only."""
 
+        return self._local_semantic_top_hyperedges(
+            query,
+            [current_entity_id],
+            exclude_hyperedge_ids=exclude_hyperedge_ids,
+        )
+
+    def _local_semantic_top_hyperedges(
+        self,
+        query: str,
+        current_entity_ids: list[str],
+        *,
+        exclude_hyperedge_ids: set[str] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Return semantic top-k hyperedges from the union of local entity adjacency."""
+
         exclude_hyperedge_ids = exclude_hyperedge_ids or set()
-        adjacent_ids = self._adjacent_hyperedge_ids(current_entity_id, exclude_hyperedge_ids)
+        current_entity_ids = _dedupe([str(entity_id) for entity_id in current_entity_ids])
+        if not current_entity_ids:
+            return []
+        adjacent_by_entity: dict[str, list[str]] = {
+            entity_id: self._adjacent_hyperedge_ids(entity_id, exclude_hyperedge_ids)
+            for entity_id in current_entity_ids
+        }
+        adjacent_ids = _dedupe([hyperedge_id for ids in adjacent_by_entity.values() for hyperedge_id in ids])
         if not adjacent_ids or self.walk_top_k <= 0:
             return []
         scores = self._hyperedge_similarity_scores(query, adjacent_ids)
-        ranked = [
-            {
-                "current_entity_id": current_entity_id,
-                "hyperedge_id": hyperedge_id,
-                "semantic_score": float(scores.get(hyperedge_id, 0.0)),
-                "rank": 0,
-            }
-            for hyperedge_id in adjacent_ids
-        ]
+        ranked: list[dict[str, Any]] = []
+        for hyperedge_id in adjacent_ids:
+            source_entity_ids = _source_entity_ids_for_hyperedge(hyperedge_id, adjacent_by_entity)
+            ranked.append(
+                {
+                    "current_entity_id": source_entity_ids[0] if source_entity_ids else current_entity_ids[0],
+                    "current_entity_ids": list(current_entity_ids),
+                    "source_entity_ids": source_entity_ids,
+                    "hyperedge_id": hyperedge_id,
+                    "semantic_score": float(scores.get(hyperedge_id, 0.0)),
+                    "rank": 0,
+                }
+            )
         ranked.sort(key=lambda item: (-float(item["semantic_score"]), str(item["hyperedge_id"])))
         selected = ranked[: self.walk_top_k]
         for index, item in enumerate(selected, start=1):
@@ -235,22 +262,36 @@ class RoutedHypergraphWalker:
 
     def path_payload(self, path: HypergraphReasoningPath) -> dict[str, Any]:
         payload = path.to_dict()
+        frontier_entity_ids = list(self._frontier_entity_ids(path))
         payload["entity_path"] = [self._entity_payload(entity_id) for entity_id in path.entity_ids]
+        payload["frontier_entity_ids"] = frontier_entity_ids
+        payload["frontier_entities"] = [
+            self._entity_payload(entity_id)
+            for entity_id in frontier_entity_ids
+        ]
         payload["hyperedges"] = [
             {
                 "hyperedge_id": step.hyperedge_id,
                 "hyperedge_text": step.hyperedge_text,
                 "from_entity_id": step.from_entity_id,
+                "source_entity_ids": list(step.source_entity_ids),
                 "to_entity_id": step.to_entity_id,
+                "to_entity_ids": list(step.to_entity_ids),
                 "semantic_score": step.semantic_score,
                 "semantic_rank": step.semantic_rank,
                 "entity_ids": list(step.entity_ids),
+                "entities": [self._entity_payload(entity_id) for entity_id in step.entity_ids],
                 "chunk_ids": list(step.chunk_ids),
                 "chunk_texts": list(step.chunk_texts),
             }
             for step in path.steps
         ]
-        payload["current_tail_entity"] = self._entity_payload(path.tail_entity_id)
+        payload["last_hyperedge_entity_ids"] = list(path.steps[-1].entity_ids) if path.steps else []
+        payload["current_tail_entity"] = (
+            self._entity_payload(frontier_entity_ids[0])
+            if len(frontier_entity_ids) == 1
+            else None
+        )
         return payload
 
     def _resolve_anchor_entities(self, question: str, analysis: AtomicQuestionAnalysis) -> list[dict[str, Any]]:
@@ -298,21 +339,21 @@ class RoutedHypergraphWalker:
         semantic_top_k: list[dict[str, Any]] = []
 
         for path in frontier:
-            current_entity_id = path.tail_entity_id
+            current_entity_ids = self._frontier_entity_ids(path)
             query = atomic_question if hop == 1 else self._path_conditioned_query(atomic_question, path)
-            adjacent = self._adjacent_hyperedge_ids(current_entity_id, set(path.hyperedge_ids))
+            adjacent = self._adjacent_hyperedge_ids_for_entities(current_entity_ids, set(path.hyperedge_ids))
             _append_unique(adjacent_hyperedge_ids, adjacent)
-            top_hyperedges = self.local_semantic_top_hyperedges(
+            top_hyperedges = self._local_semantic_top_hyperedges(
                 query,
-                current_entity_id,
+                current_entity_ids,
                 exclude_hyperedge_ids=set(path.hyperedge_ids),
             )
             semantic_top_k.extend(top_hyperedges)
             expansion_sources.append(
                 {
                     "path_id": path.path_id,
-                    "current_entity_id": current_entity_id,
-                    "current_entity": normalize_label(current_entity_id),
+                    "current_entity_ids": list(current_entity_ids),
+                    "current_entities": [normalize_label(entity_id) for entity_id in current_entity_ids],
                     "query": query,
                     "adjacent_hyperedge_count": len(adjacent),
                     "semantic_top_k_count": len(top_hyperedges),
@@ -320,26 +361,31 @@ class RoutedHypergraphWalker:
             )
             for hyperedge_record in top_hyperedges:
                 hyperedge_id = str(hyperedge_record["hyperedge_id"])
-                for tail_entity_id in self._tail_entity_ids(hyperedge_id, current_entity_id, path.entity_ids):
-                    step = self._path_step(
-                        from_entity_id=current_entity_id,
-                        hyperedge_id=hyperedge_id,
-                        to_entity_id=tail_entity_id,
-                        semantic_score=float(hyperedge_record["semantic_score"]),
-                        semantic_rank=int(hyperedge_record["rank"]),
+                source_entity_ids = [
+                    str(entity_id)
+                    for entity_id in ensure_list(hyperedge_record.get("source_entity_ids", []))
+                    if str(entity_id)
+                ]
+                step = self._path_step(
+                    from_entity_ids=source_entity_ids,
+                    hyperedge_id=hyperedge_id,
+                    previous_entity_ids=path.entity_ids,
+                    semantic_score=float(hyperedge_record["semantic_score"]),
+                    semantic_rank=int(hyperedge_record["rank"]),
+                )
+                new_entity_ids = _merge_unique(path.entity_ids, step.entity_ids)
+                new_hyperedge_ids = [*path.hyperedge_ids, hyperedge_id]
+                candidate_paths.append(
+                    HypergraphReasoningPath(
+                        path_id=self._path_id(new_entity_ids, new_hyperedge_ids),
+                        anchor_entity_id=path.anchor_entity_id,
+                        entity_ids=new_entity_ids,
+                        hyperedge_ids=new_hyperedge_ids,
+                        steps=[*path.steps, step],
+                        hop_count=hop,
+                        expand_from_entity_ids=list(step.to_entity_ids),
                     )
-                    new_entity_ids = [*path.entity_ids, tail_entity_id]
-                    new_hyperedge_ids = [*path.hyperedge_ids, hyperedge_id]
-                    candidate_paths.append(
-                        HypergraphReasoningPath(
-                            path_id=self._path_id(new_entity_ids, new_hyperedge_ids),
-                            anchor_entity_id=path.anchor_entity_id,
-                            entity_ids=new_entity_ids,
-                            hyperedge_ids=new_hyperedge_ids,
-                            steps=[*path.steps, step],
-                            hop_count=hop,
-                        )
-                    )
+                )
         return candidate_paths, expansion_sources, adjacent_hyperedge_ids, semantic_top_k
 
     def _route_paths(
@@ -476,6 +522,16 @@ class RoutedHypergraphWalker:
             result.append(text)
         return result
 
+    def _adjacent_hyperedge_ids_for_entities(
+        self,
+        current_entity_ids: list[str],
+        exclude_hyperedge_ids: set[str],
+    ) -> list[str]:
+        result: list[str] = []
+        for entity_id in _dedupe([str(item) for item in current_entity_ids]):
+            _append_unique(result, self._adjacent_hyperedge_ids(entity_id, exclude_hyperedge_ids))
+        return result
+
     def _hyperedge_similarity_scores(self, query: str, hyperedge_ids: list[str]) -> dict[str, float]:
         if not query.strip() or not hyperedge_ids:
             return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
@@ -498,34 +554,36 @@ class RoutedHypergraphWalker:
             return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
         return {hyperedge_id: float(scores.get(hyperedge_id, 0.0)) for hyperedge_id in hyperedge_ids}
 
-    def _tail_entity_ids(
-        self,
-        hyperedge_id: str,
-        current_entity_id: str,
-        visited_entity_ids: list[str],
-    ) -> list[str]:
+    def _hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
         if not hasattr(self.dataset.graph, "hyperedge_entity_ids"):
             return []
-        visited = set(visited_entity_ids)
-        tail_ids: list[str] = []
+        entity_ids: list[str] = []
         for entity_id in self.dataset.graph.hyperedge_entity_ids(hyperedge_id):
             text = str(entity_id)
-            if not text or text == current_entity_id or text in visited:
+            if not text or text in entity_ids:
                 continue
-            if text not in tail_ids:
-                tail_ids.append(text)
-        return tail_ids
+            entity_ids.append(text)
+        return entity_ids
 
     def _path_step(
         self,
         *,
-        from_entity_id: str,
+        from_entity_ids: list[str],
         hyperedge_id: str,
-        to_entity_id: str,
+        previous_entity_ids: list[str],
         semantic_score: float,
         semantic_rank: int,
     ) -> HypergraphPathStep:
         description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+        source_entity_ids = _dedupe([str(item) for item in from_entity_ids])
+        entity_ids = [str(item) for item in description.get("entity_ids", []) if str(item)]
+        if not entity_ids:
+            entity_ids = self._hyperedge_entity_ids(hyperedge_id)
+        to_entity_ids = _next_frontier_entity_ids(
+            hyperedge_entity_ids=entity_ids,
+            previous_entity_ids=previous_entity_ids,
+            source_entity_ids=source_entity_ids,
+        )
         chunk_ids = [str(item) for item in description.get("chunk_ids", []) if str(item)]
         chunk_pairs = _dedupe_chunk_pairs(
             [
@@ -534,36 +592,46 @@ class RoutedHypergraphWalker:
             ]
         )
         return HypergraphPathStep(
-            from_entity_id=from_entity_id,
+            from_entity_id=source_entity_ids[0] if source_entity_ids else "",
             hyperedge_id=hyperedge_id,
             hyperedge_text=normalize_label(str(description.get("hyperedge_text") or hyperedge_id)),
-            to_entity_id=to_entity_id,
+            to_entity_id=to_entity_ids[0] if len(to_entity_ids) == 1 else "",
             semantic_score=float(semantic_score),
             semantic_rank=int(semantic_rank),
-            entity_ids=[str(item) for item in description.get("entity_ids", [])],
+            entity_ids=entity_ids,
             chunk_ids=[chunk_id for chunk_id, _ in chunk_pairs],
             chunk_texts=[text for _, text in chunk_pairs],
+            source_entity_ids=source_entity_ids,
+            to_entity_ids=to_entity_ids,
         )
 
     def _path_conditioned_query(self, atomic_question: str, path: HypergraphReasoningPath) -> str:
-        known_path_parts: list[str] = []
-        for index, entity_id in enumerate(path.entity_ids):
-            if index > 0:
-                step = path.steps[index - 1]
-                known_path_parts.append(f"[{step.hyperedge_text}]")
-            known_path_parts.append(normalize_label(entity_id))
+        known_hyperedges: list[str] = []
+        for index, step in enumerate(path.steps, start=1):
+            entities = ", ".join(normalize_label(entity_id) for entity_id in step.entity_ids)
+            known_hyperedges.append(f"{index}. [{step.hyperedge_text}] entities: {entities}")
+        frontier_entities = ", ".join(
+            normalize_label(entity_id)
+            for entity_id in self._frontier_entity_ids(path)
+        )
         return "\n".join(
             [
                 "Original atomic question:",
                 atomic_question,
                 "",
-                "Known path:",
-                " -> ".join(known_path_parts),
+                "Known complete hyperedge path:",
+                "\n".join(known_hyperedges),
                 "",
-                "Current entity:",
-                normalize_label(path.tail_entity_id),
+                "Current frontier entities for possible expansion:",
+                frontier_entities,
             ]
         )
+
+    def _frontier_entity_ids(self, path: HypergraphReasoningPath) -> list[str]:
+        frontier = _dedupe([str(entity_id) for entity_id in path.expand_from_entity_ids])
+        if frontier:
+            return frontier
+        return [path.tail_entity_id] if path.tail_entity_id else []
 
     def _entity_payload(self, entity_id: str) -> dict[str, Any]:
         nodes = getattr(self.dataset.graph, "nodes", {})
@@ -617,6 +685,38 @@ def _dedupe(values: list[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _merge_unique(left: list[str], right: list[str]) -> list[str]:
+    return _dedupe([*left, *right])
+
+
+def _source_entity_ids_for_hyperedge(
+    hyperedge_id: str,
+    adjacent_by_entity: dict[str, list[str]],
+) -> list[str]:
+    return [
+        entity_id
+        for entity_id, hyperedge_ids in adjacent_by_entity.items()
+        if hyperedge_id in hyperedge_ids
+    ]
+
+
+def _next_frontier_entity_ids(
+    *,
+    hyperedge_entity_ids: list[str],
+    previous_entity_ids: list[str],
+    source_entity_ids: list[str],
+) -> list[str]:
+    previous = set(previous_entity_ids)
+    source = set(source_entity_ids)
+    frontier = [entity_id for entity_id in hyperedge_entity_ids if entity_id not in previous]
+    if frontier:
+        return _dedupe(frontier)
+    frontier = [entity_id for entity_id in hyperedge_entity_ids if entity_id not in source]
+    if frontier:
+        return _dedupe(frontier)
+    return _dedupe(hyperedge_entity_ids)
 
 
 def _dedupe_chunk_pairs(values: list[tuple[str, str]]) -> list[tuple[str, str]]:

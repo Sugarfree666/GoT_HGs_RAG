@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/walker.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/walker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prompts/atomic_path_answer.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_path_answer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prompts/atomic_path_router.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_path_router.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
@@ -16,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="57768" />
+    <option name="cachedIndexableFilesCount" value="57786" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000099392" />
-      <entry key="MS500" value="1.0063018887439228" />
-      <entry key="S2" value="1.2817524381592365" />
-      <entry key="S5" value="1.6024861574973932" />
-      <entry key="S10" value="1.7761998180220047" />
-      <entry key="S30" value="1.9190190465902142" />
-      <entry key="S60" value="1.9586548109879665" />
-      <entry key="M2" value="1.9791299302381813" />
-      <entry key="M5" value="2.086706111240895" />
-      <entry key="M10" value="3.9089098151347015" />
-      <entry key="M15" value="7.597299497602463" />
-      <entry key="M30" value="20.622906585456096" />
-      <entry key="H1" value="54.42539889082768" />
-      <entry key="H2" value="145.8521604564728" />
-      <entry key="H4" value="300.6648589887586" />
-      <entry key="D1" value="846.6954037991768" />
-      <entry key="W1" value="2721.5647558050564" />
+      <entry key="MS100" value="1.0000000064861072" />
+      <entry key="MS500" value="1.0230404988471047" />
+      <entry key="S2" value="1.5121766141867432" />
+      <entry key="S5" value="3.066613930473881" />
+      <entry key="S10" value="5.781972673641988" />
+      <entry key="S30" value="14.686220326300123" />
+      <entry key="S60" value="24.386391460110058" />
+      <entry key="M2" value="39.87350856919385" />
+      <entry key="M5" value="72.52338444987198" />
+      <entry key="M10" value="98.93041011444318" />
+      <entry key="M15" value="112.93599837840792" />
+      <entry key="M30" value="137.1674924222337" />
+      <entry key="H1" value="175.10601014047234" />
+      <entry key="H2" value="265.1637219785618" />
+      <entry key="H4" value="421.11162227141756" />
+      <entry key="D1" value="980.6385425327021" />
+      <entry key="W1" value="2861.6021105736254" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -75,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9526379980504948" />
-      <entry key="MS500" value="0.9961417921307943" />
-      <entry key="S2" value="1.2735309820922158" />
-      <entry key="S5" value="1.5965256670672945" />
-      <entry key="S10" value="1.7724933117947375" />
-      <entry key="S30" value="1.9175841770873354" />
-      <entry key="S60" value="1.9579096884483054" />
-      <entry key="M2" value="1.978750221994137" />
-      <entry key="M5" value="2.0865508469470213" />
-      <entry key="M10" value="3.90881621341355" />
-      <entry key="M15" value="7.597215830587608" />
-      <entry key="M30" value="20.622826887573652" />
-      <entry key="H1" value="54.42530847892634" />
-      <entry key="H2" value="145.852048433512" />
-      <entry key="H4" value="300.66474738954076" />
-      <entry key="D1" value="846.6953456764298" />
-      <entry key="W1" value="2721.564725593309" />
+      <entry key="MS100" value="0.9659363351900122" />
+      <entry key="MS500" value="1.0159738418736959" />
+      <entry key="S2" value="1.5095406811562693" />
+      <entry key="S5" value="3.0642166778935924" />
+      <entry key="S10" value="5.7794364097420825" />
+      <entry key="S30" value="14.683977290278508" />
+      <entry key="S60" value="24.38455407082885" />
+      <entry key="M2" value="39.872003840292614" />
+      <entry key="M5" value="72.52223097144618" />
+      <entry key="M10" value="98.92954032376116" />
+      <entry key="M15" value="112.93529070275794" />
+      <entry key="M30" value="137.16702447078026" />
+      <entry key="H1" value="175.10570276260404" />
+      <entry key="H2" value="265.1634970289815" />
+      <entry key="H4" value="421.1114521956746" />
+      <entry key="D1" value="980.6384737028122" />
+      <entry key="W1" value="2861.6020787741927" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -146,8 +149,8 @@
       <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\GitHub\HyperBranch\sample" />
       <recent name="D:\GitHub\HyperBranch\error_sample" />
+      <recent name="D:\GitHub\HyperBranch\sample" />
       <recent name="D:\GitHub\HyperBranch\error" />
       <recent name="D:\GitHub\HyperBranch\runs" />
       <recent name="D:\GitHub\HyperBranch\runs\depo_decomposition\hotpotqa" />
@@ -261,7 +264,9 @@
       <workItem from="1783611121626" duration="5875000" />
       <workItem from="1783646759898" duration="51000" />
       <workItem from="1783646835627" duration="14316000" />
-      <workItem from="1783663148533" duration="1011000" />
+      <workItem from="1783663148533" duration="4826000" />
+      <workItem from="1783668578156" duration="1133000" />
+      <workItem from="1783669951584" duration="3393000" />
     </task>
     <servers />
   </component>

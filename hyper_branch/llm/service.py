@@ -344,11 +344,11 @@ class MockAtomicLLMService(AtomicLLMService):
             path_id = str(path.get("path_id", ""))
             path_tokens = set(content_tokens(_path_text(path)))
             entity_ids = [str(item) for item in ensure_list(path.get("entity_ids", []))]
-            final_entity = entity_ids[-1] if entity_ids else ""
+            answer_entity = _first_non_query_entity(entity_ids, question_tokens)
             overlap = len(question_tokens & path_tokens)
             if overlap >= max(1, min(2, len(question_tokens))):
                 label = "ANSWER"
-                answer_entity_ids = [final_entity] if final_entity else []
+                answer_entity_ids = [answer_entity] if answer_entity else []
             else:
                 label = "EXPAND" if hop < 2 else "DROP"
                 answer_entity_ids = []
@@ -569,6 +569,14 @@ def _dedupe_texts(values: list[str]) -> list[str]:
         if text and text not in deduped:
             deduped.append(text)
     return deduped
+
+
+def _first_non_query_entity(entity_ids: list[str], question_tokens: set[str]) -> str:
+    for entity_id in entity_ids:
+        label = normalize_label(entity_id)
+        if label and not set(content_tokens(label)).issubset(question_tokens):
+            return entity_id
+    return entity_ids[-1] if entity_ids else ""
 
 
 def _analysis_payload(analysis: Any) -> dict[str, Any]:
