@@ -1,0 +1,162 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Aas Ka Panchhi released?",
+    "original_question": "When was Aas Ka Panchhi released?",
+    "resolved_question": "When was Aas Ka Panchhi released?",
+    "retrieval_question": "When was Aas Ka Panchhi released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Aas Ka Panchhi released?",
+      "resolved_question": "When was Aas Ka Panchhi released?",
+      "retrieval_question": "When was Aas Ka Panchhi released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": [],
+      "dependency_replacements": [],
+      "unresolved_dependencies": [],
+      "primary_anchor_entities": [],
+      "dependency_answers_used": []
+    },
+    "dependency_replacements": [],
+    "dependency_answers": [],
+    "dependency_answers_used": [],
+    "unresolved_dependency": [],
+    "primary_anchor_entities": [],
+    "analysis": {
+      "entities": [
+        "Aas Ka Panchhi"
+      ],
+      "relations": [
+        "release date",
+        "released on",
+        "date of release"
+      ],
+      "relation_query": "release date released on date of release",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Phoolwari released?",
+    "original_question": "When was Phoolwari released?",
+    "resolved_question": "When was Phoolwari released?",
+    "retrieval_question": "When was Phoolwari released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Phoolwari released?",
+      "resolved_question": "When was Phoolwari released?",
+      "retrieval_question": "When was Phoolwari released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": [],
+      "dependency_replacements": [],
+      "unresolved_dependencies": [],
+      "primary_anchor_entities": [],
+      "dependency_answers_used": []
+    },
+    "dependency_replacements": [],
+    "dependency_answers": [],
+    "dependency_answers_used": [],
+    "unresolved_dependency": [],
+    "primary_anchor_entities": [],
+    "analysis": {
+      "entities": [
+        "Phoolwari"
+      ],
+      "relations": [
+        "release date",
+        "released on",
+        "date of release"
+      ],
+      "relation_query": "release date released on date of release",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Which film was released first, q1's answer or q2's answer?",
+    "original_question": "Which film was released first, q1's answer or q2's answer?",
+    "resolved_question": "Which film was released first, q1's answer or q2's answer?",
+    "retrieval_question": "Which film was released first, q1's answer or q2's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "Which film was released first, q1's answer or q2's answer?",
+      "resolved_question": "Which film was released first, q1's answer or q2's answer?",
+      "retrieval_question": "Which film was released first, q1's answer or q2's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": [],
+      "dependency_replacements": [],
+      "unresolved_dependencies": [
+        {
+          "node_id": "q1",
+          "reason": "missing_or_low_confidence_answer",
+          "answer": "INSUFFICIENT_EVIDENCE",
+          "confidence": 0.0
+        },
+        {
+          "node_id": "q2",
+          "reason": "missing_or_low_confidence_answer",
+          "answer": "INSUFFICIENT_EVIDENCE",
+          "confidence": 0.0
+        }
+      ],
+      "primary_anchor_entities": [],
+      "dependency_answers_used": []
+    },
+    "dependency_replacements": [],
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Aas Ka Panchhi released?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "date",
+        "reasoning_summary": "No routed reasoning path survived the two-hop walk.",
+        "used_hyperedge_ids": [],
+        "used_path_ids": [],
+        "evidence_summary": [],
+        "path_summary": []
+      },
+      {
+        "node_id": "q2",
+        "question": "When was Phoolwari released?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "date",
+        "reasoning_summary": "No routed reasoning path survived the two-hop walk.",
+        "used_hyperedge_ids": [],
+        "used_path_ids": [],
+        "evidence_summary": [],
+        "path_summary": []
+      }
+    ],
+    "dependency_answers_used": [],
+    "unresolved_dependency": [
+      {
+        "node_id": "q1",
+        "reason": "missing_or_low_confidence_answer",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0
+      },
+      {
+        "node_id": "q2",
+        "reason": "missing_or_low_confidence_answer",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0
+      }
+    ],
+    "primary_anchor_entities": [],
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "release date",
+        "released",
+        "film release"
+      ],
+      "relation_query": "release date released film release",
+      "answer_type": "candidate selection"
+    }
+  }
+]

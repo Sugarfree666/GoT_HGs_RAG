@@ -696,6 +696,71 @@ class RoutedHypergraphWalkerTest(unittest.TestCase):
         self.assertEqual(result.artifacts["atomic_retrieval"][1]["resolved_anchor_entity_ids"], ["Meek Mill"])
         self.assertEqual(len(llm.path_answer_calls), 2)
 
+    def test_path_answerer_receives_prompt_contract_payload(self) -> None:
+        graph = WalkGraph(
+            entity_edges={"Subject": ["H_ANSWER"]},
+            hyperedge_entities={"H_ANSWER": ["Subject", "Answer Entity"]},
+            hyperedge_texts={"H_ANSWER": "Subject was connected to Answer Entity."},
+            hyperedge_chunks={"H_ANSWER": ["C_ANSWER"]},
+            chunk_texts={"C_ANSWER": "Subject was connected to Answer Entity in the source chunk."},
+        )
+        llm = MockAtomicLLMService(
+            route_responses=[
+                {
+                    "labels": [
+                        {
+                            "path_id": walker_path_id(["Subject", "Answer Entity"], ["H_ANSWER"]),
+                            "label": "ANSWER",
+                            "answer_entity_ids": ["Answer Entity"],
+                            "reason": "The path answers.",
+                        }
+                    ]
+                }
+            ],
+            path_answer_responses=[
+                {
+                    "answer": "Answer Entity",
+                    "confidence": 0.91,
+                    "reasoning_summary": "The selected path supports Answer Entity.",
+                    "used_path_ids": [walker_path_id(["Subject", "Answer Entity"], ["H_ANSWER"])],
+                    "used_hyperedge_ids": ["H_ANSWER"],
+                    "insufficient": False,
+                }
+            ],
+        )
+        walker = FixedAnchorWalker(
+            _walk_dataset(graph, WalkHyperedgeStore({"H_ANSWER": 1.0})),
+            CountingEmbedder(),
+            RetrievalConfig(walk_top_k=5),
+            anchors=["Subject"],
+            llm_service=llm,
+        )
+        executor = AtomicDagExecutor(
+            analyzer=StaticAnalyzer(["Subject"]),
+            retriever=None,
+            fusion=None,
+            composer=StaticComposer(),
+            llm_service=llm,
+            walker=walker,
+        )
+
+        result = executor.run("Who is connected to Subject?", None)
+
+        self.assertEqual(result.atomic_results[0].answer, "Answer Entity")
+        path_payload = llm.path_answer_calls[0]["paths"][0]
+        self.assertEqual(path_payload["label"], "ANSWER")
+        self.assertEqual(path_payload["answer_entity_ids"], ["Answer Entity"])
+        self.assertIn("entity_path", path_payload)
+        answer_entity = next(entity for entity in path_payload["entity_path"] if entity["entity_id"] == "Answer Entity")
+        self.assertEqual(answer_entity["label"], "Answer Entity")
+        self.assertIn("entity_type", answer_entity)
+        self.assertIn("description", answer_entity)
+        hyperedge = path_payload["hyperedges"][0]
+        self.assertEqual(hyperedge["hyperedge_id"], "H_ANSWER")
+        self.assertEqual(hyperedge["chunk_ids"], ["C_ANSWER"])
+        self.assertEqual(hyperedge["chunk_texts"], ["Subject was connected to Answer Entity in the source chunk."])
+        self.assertEqual(hyperedge["to_entity_id"], "Answer Entity")
+
 
 class WalkGraph:
     def __init__(
@@ -811,6 +876,15 @@ class DependencyAnchorAnalyzer:
         if "Meek Mill" in atomic_question:
             return AtomicQuestionAnalysis(entities=[], relations=["detained"], answer_type="place")
         return AtomicQuestionAnalysis()
+
+
+class StaticAnalyzer:
+    def __init__(self, entities: list[str]) -> None:
+        self.entities = list(entities)
+
+    def analyze(self, atomic_question: str, dependency_answers=None) -> AtomicQuestionAnalysis:
+        del atomic_question, dependency_answers
+        return AtomicQuestionAnalysis(entities=list(self.entities), relations=["relation"], answer_type="entity")
 
 
 def _walk_dataset(graph: WalkGraph, store: WalkHyperedgeStore):
