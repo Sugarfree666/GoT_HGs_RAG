@@ -18,6 +18,53 @@ from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 _ANCHOR_ENTITY_TOP_K = 3
 _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
 _LOCAL_RETRIEVAL_METHOD = "two_hop_multi_anchor_topk"
+_CHUNK_ENTITY_EXCLUDED_TYPES = {
+    "CATEGORY",
+    "CONCEPT",
+    "CONDITION",
+    "DATE",
+    "NUMBER",
+    "RELATION",
+    "ROLE",
+    "TITLE",
+    "TYPE",
+}
+_CHUNK_ENTITY_GENERIC_LABELS = {
+    "ACTOR",
+    "ACTRESS",
+    "ALBUM",
+    "ARTIST",
+    "AUTHOR",
+    "BAND",
+    "CHILD",
+    "CITY",
+    "COMPANY",
+    "COMPOSER",
+    "COUNTRY",
+    "DAUGHTER",
+    "DIRECTOR",
+    "FATHER",
+    "FILM",
+    "HUSBAND",
+    "LOCATION",
+    "MAN",
+    "MOTHER",
+    "ORGANIZATION",
+    "PEOPLE",
+    "PERSON",
+    "PLACE",
+    "PRODUCER",
+    "SINGER",
+    "SON",
+    "SONG",
+    "SONGWRITER",
+    "SPOUSE",
+    "UNIVERSITY",
+    "WIFE",
+    "WOMAN",
+    "WORK",
+    "WRITER",
+}
 
 
 @dataclass(slots=True)
@@ -185,6 +232,8 @@ class AtomicHyperedgeRetriever:
                 "hop": int(source_by_id.get(hyperedge_id, {}).get("hop", 1)),
                 "via_entity_ids": list(source_by_id.get(hyperedge_id, {}).get("via_entity_ids", [])),
                 "via_first_hyperedge_ids": list(source_by_id.get(hyperedge_id, {}).get("via_first_hyperedge_ids", [])),
+                "expansion_sources": list(source_by_id.get(hyperedge_id, {}).get("expansion_sources", [])),
+                "via_chunk_ids": list(source_by_id.get(hyperedge_id, {}).get("via_chunk_ids", [])),
             }
             for hyperedge_id in result.candidate_hyperedge_ids
         ]
@@ -321,30 +370,30 @@ class AtomicHyperedgeRetriever:
                 for entity_id in self._hyperedge_entity_ids(first_hop_id):
                     if entity_id == primary_anchor_entity_id:
                         continue
-                    if entity_id not in expansion_entity_ids:
-                        expansion_entity_ids.append(entity_id)
-                    for second_hop_id in self._adjacent_hyperedge_ids(entity_id):
-                        if second_hop_id in first_hop_ids:
-                            continue
-                        if second_hop_id not in candidate_ids:
-                            candidate_ids.append(second_hop_id)
-                        if second_hop_id not in second_hop_ids:
-                            second_hop_ids.append(second_hop_id)
-                        source = source_by_id.setdefault(
-                            second_hop_id,
-                            {
-                                "hyperedge_id": second_hop_id,
-                                "hop": 2,
-                                "via_entity_ids": [],
-                                "via_first_hyperedge_ids": [],
-                            },
-                        )
-                        if int(source.get("hop", 2)) > 1:
-                            source["hop"] = 2
-                        if entity_id not in source["via_entity_ids"]:
-                            source["via_entity_ids"].append(entity_id)
-                        if first_hop_id not in source["via_first_hyperedge_ids"]:
-                            source["via_first_hyperedge_ids"].append(first_hop_id)
+                    self._add_second_hop_candidates(
+                        entity_id=entity_id,
+                        first_hop_id=first_hop_id,
+                        first_hop_ids=first_hop_ids,
+                        candidate_ids=candidate_ids,
+                        expansion_entity_ids=expansion_entity_ids,
+                        second_hop_ids=second_hop_ids,
+                        source_by_id=source_by_id,
+                        expansion_source="hyperedge_entity",
+                    )
+                for entity_id in self._chunk_entity_ids_for_hyperedge(first_hop_id):
+                    if entity_id == primary_anchor_entity_id:
+                        continue
+                    self._add_second_hop_candidates(
+                        entity_id=entity_id,
+                        first_hop_id=first_hop_id,
+                        first_hop_ids=first_hop_ids,
+                        candidate_ids=candidate_ids,
+                        expansion_entity_ids=expansion_entity_ids,
+                        second_hop_ids=second_hop_ids,
+                        source_by_id=source_by_id,
+                        expansion_source="chunk_entity",
+                        via_chunk_ids=self._hyperedge_chunk_ids(first_hop_id),
+                    )
 
         return {
             "expansion_entity_ids": expansion_entity_ids,
@@ -352,6 +401,51 @@ class AtomicHyperedgeRetriever:
             "candidate_hyperedge_ids": candidate_ids,
             "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
         }
+
+    def _add_second_hop_candidates(
+        self,
+        *,
+        entity_id: str,
+        first_hop_id: str,
+        first_hop_ids: list[str],
+        candidate_ids: list[str],
+        expansion_entity_ids: list[str],
+        second_hop_ids: list[str],
+        source_by_id: dict[str, dict[str, Any]],
+        expansion_source: str,
+        via_chunk_ids: list[str] | None = None,
+    ) -> None:
+        if entity_id not in expansion_entity_ids:
+            expansion_entity_ids.append(entity_id)
+        for second_hop_id in self._adjacent_hyperedge_ids(entity_id):
+            if second_hop_id in first_hop_ids:
+                continue
+            if second_hop_id not in candidate_ids:
+                candidate_ids.append(second_hop_id)
+            if second_hop_id not in second_hop_ids:
+                second_hop_ids.append(second_hop_id)
+            source = source_by_id.setdefault(
+                second_hop_id,
+                {
+                    "hyperedge_id": second_hop_id,
+                    "hop": 2,
+                    "via_entity_ids": [],
+                    "via_first_hyperedge_ids": [],
+                    "expansion_sources": [],
+                    "via_chunk_ids": [],
+                },
+            )
+            if int(source.get("hop", 2)) > 1:
+                source["hop"] = 2
+            if entity_id not in source["via_entity_ids"]:
+                source["via_entity_ids"].append(entity_id)
+            if first_hop_id not in source["via_first_hyperedge_ids"]:
+                source["via_first_hyperedge_ids"].append(first_hop_id)
+            if expansion_source not in source["expansion_sources"]:
+                source["expansion_sources"].append(expansion_source)
+            for chunk_id in via_chunk_ids or []:
+                if chunk_id not in source["via_chunk_ids"]:
+                    source["via_chunk_ids"].append(chunk_id)
 
     @staticmethod
     def _merge_candidate_source(source_by_id: dict[str, dict[str, Any]], source: dict[str, Any]) -> None:
@@ -365,13 +459,22 @@ class AtomicHyperedgeRetriever:
                 "hop": int(source.get("hop", 1) or 1),
                 "via_entity_ids": [],
                 "via_first_hyperedge_ids": [],
+                "expansion_sources": [],
+                "via_chunk_ids": [],
                 "anchor_mentions": [],
                 "anchor_entity_ids": [],
                 "anchor_query_indices": [],
             },
         )
         existing["hop"] = min(int(existing.get("hop", 1) or 1), int(source.get("hop", 1) or 1))
-        for key in ("via_entity_ids", "via_first_hyperedge_ids", "anchor_mentions", "anchor_entity_ids"):
+        for key in (
+            "via_entity_ids",
+            "via_first_hyperedge_ids",
+            "expansion_sources",
+            "via_chunk_ids",
+            "anchor_mentions",
+            "anchor_entity_ids",
+        ):
             for value in source.get(key, []):
                 if value not in existing[key]:
                     existing[key].append(value)
@@ -388,6 +491,45 @@ class AtomicHyperedgeRetriever:
             description = self.dataset.graph.describe_hyperedge(hyperedge_id)
             return _dedupe_strings([str(item) for item in description.get("entity_ids", [])])
         return []
+
+    def _hyperedge_chunk_ids(self, hyperedge_id: str) -> list[str]:
+        if hasattr(self.dataset.graph, "hyperedge_chunk_ids"):
+            chunk_ids = self.dataset.graph.hyperedge_chunk_ids(hyperedge_id)
+            if chunk_ids:
+                return _dedupe_strings([str(item) for item in chunk_ids])
+        if hasattr(self.dataset.graph, "describe_hyperedge"):
+            description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+            return _dedupe_strings([str(item) for item in description.get("chunk_ids", [])])
+        return []
+
+    def _chunk_entity_ids_for_hyperedge(self, hyperedge_id: str) -> list[str]:
+        source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
+        if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
+            return []
+        nodes = getattr(self.dataset.graph, "nodes", {})
+        entity_ids: list[str] = []
+        for chunk_id in self._hyperedge_chunk_ids(hyperedge_id):
+            for node_id in source_to_nodes.get(chunk_id, []):
+                entity_id = str(node_id)
+                node = nodes.get(entity_id) if hasattr(nodes, "get") else None
+                if node is None or getattr(node, "role", "") != "entity":
+                    continue
+                if not self._is_concrete_chunk_entity(entity_id):
+                    continue
+                if entity_id not in entity_ids:
+                    entity_ids.append(entity_id)
+        return entity_ids
+
+    def _is_concrete_chunk_entity(self, entity_id: str) -> bool:
+        nodes = getattr(self.dataset.graph, "nodes", {})
+        node = nodes.get(entity_id) if hasattr(nodes, "get") else None
+        label = normalize_label(entity_id).upper()
+        if label in _CHUNK_ENTITY_GENERIC_LABELS:
+            return False
+        entity_type = normalize_label(str(getattr(node, "entity_type", "") or "")).upper()
+        if entity_type in _CHUNK_ENTITY_EXCLUDED_TYPES:
+            return False
+        return True
 
     def _hyperedge_similarity_scores(self, query: str, hyperedge_ids: list[str]) -> dict[str, float]:
         if not query.strip() or not hyperedge_ids:
@@ -447,6 +589,8 @@ class AtomicHyperedgeRetriever:
                 "candidate_hop": candidate_hop,
                 "via_entity_ids": list(candidate_source.get("via_entity_ids", [])),
                 "via_first_hyperedge_ids": list(candidate_source.get("via_first_hyperedge_ids", [])),
+                "expansion_sources": list(candidate_source.get("expansion_sources", [])),
+                "via_chunk_ids": list(candidate_source.get("via_chunk_ids", [])),
                 "anchor_mentions": list(candidate_source.get("anchor_mentions", [])),
                 "anchor_entity_ids": list(candidate_source.get("anchor_entity_ids", [])),
                 "anchor_query_indices": list(candidate_source.get("anchor_query_indices", [])),

@@ -57,7 +57,10 @@ class AtomicDagExecutor:
                     resolved_question,
                 )
 
-            analysis = self.analyzer.analyze(resolved_question, dependency_answers)
+            analysis = self.analyzer.analyze(
+                resolved_question,
+                self._analysis_dependency_context(dependency_answers),
+            )
             primary_anchor_mention = _primary_anchor_mention(
                 dependency_rewrite.primary_anchor_entities,
                 analysis,
@@ -349,7 +352,7 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        answer_contract = self._answer_contract(analysis, atomic_question)
+        answer_contract = self._answer_contract(atomic_question)
         answer_dependency_answers = self._answer_dependency_context(dependency_answers)
         evidence_payload = self._answer_evidence_payload(evidence)
         if self.llm_service is not None:
@@ -364,6 +367,21 @@ class AtomicDagExecutor:
         return self._coerce_answer_payload(payload, atomic_question, analysis, evidence, dependency_answers)
 
     @staticmethod
+    def _analysis_dependency_context(dependency_answers: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        compact: list[dict[str, Any]] = []
+        for item in dependency_answers:
+            compact.append(
+                {
+                    "node_id": str(item.get("node_id", "") or ""),
+                    "question": str(item.get("question", "") or ""),
+                    "resolved_question": str(item.get("resolved_question") or item.get("question", "") or ""),
+                    "answer": str(item.get("answer", "") or ""),
+                    "insufficient": bool(item.get("insufficient", False)),
+                }
+            )
+        return compact
+
+    @staticmethod
     def _answer_dependency_context(dependency_answers: list[dict[str, Any]]) -> list[dict[str, Any]]:
         compact: list[dict[str, Any]] = []
         for item in dependency_answers:
@@ -373,8 +391,6 @@ class AtomicDagExecutor:
                     "question": str(item.get("question", "") or ""),
                     "resolved_question": str(item.get("resolved_question") or item.get("question", "") or ""),
                     "answer": str(item.get("answer", "") or ""),
-                    "answer_type": str(item.get("answer_type", "") or ""),
-                    "confidence": max(0.0, min(1.0, float(item.get("confidence", 0.0) or 0.0))),
                     "insufficient": bool(item.get("insufficient", False)),
                 }
             )
@@ -403,26 +419,9 @@ class AtomicDagExecutor:
         return payload
 
     @staticmethod
-    def _answer_contract(analysis: AtomicQuestionAnalysis, question: str) -> dict[str, str]:
-        answer_type = _normalized_answer_type(analysis.answer_type, question)
-        output_formats = {
-            "person": "person name only",
-            "work": "work title only",
-            "organization": "organization name only",
-            "country": "country name only",
-            "nationality": "full supported nationality expression",
-            "city": "city name only",
-            "location": "minimal supported place",
-            "year": "year only",
-            "date": "supported date granularity",
-            "number/count": "number only",
-            "boolean": "yes or no",
-            "candidate selection": "exact candidate surface from the question",
-        }
-        return {
-            "answer_type": answer_type,
-            "output_format": output_formats.get(answer_type, "short answer only"),
-        }
+    def _answer_contract(question: str) -> dict[str, str]:
+        output_format = _answer_output_format(question)
+        return {"output_format": output_format} if output_format else {}
 
     def _fallback_answer(
         self,
@@ -796,37 +795,21 @@ def _can_reach_terminal(start_id: str, terminal_id: str, dependents: dict[str, l
     return False
 
 
-def _normalized_answer_type(answer_type: str, question: str) -> str:
-    raw = normalize_label(str(answer_type or "")).lower()
+def _answer_output_format(question: str) -> str:
     lowered = normalize_label(str(question or "")).lower()
-
     if _looks_like_candidate_selection(lowered):
-        return "candidate selection"
+        return "exact candidate surface from the question"
     if lowered.startswith(("is ", "are ", "was ", "were ", "do ", "does ", "did ")):
-        return "boolean"
-    if "nationality" in lowered or "nationality" in raw:
-        return "nationality"
-    if "which country" in lowered or "what country" in lowered or raw == "country" or "country" in raw:
-        return "country"
-    if "how many" in lowered or "count" in raw or "number" in raw:
-        return "number/count"
-    if "year" in raw or lowered.startswith("what year"):
-        return "year"
-    if "date" in raw or lowered.startswith("when") or "birthday" in lowered:
-        return "date"
-    if "city" in raw:
-        return "city"
-    if "place" in raw or "location" in raw or lowered.startswith("where"):
-        return "location"
-    if any(marker in raw for marker in ("organization", "institution", "school", "employer", "workplace")):
-        return "organization"
-    if any(marker in raw for marker in ("work", "film", "movie", "song", "album", "book", "magazine")):
-        return "work"
-    if "person" in raw or lowered.startswith("who"):
-        return "person"
-    if raw:
-        return raw
-    return "short answer"
+        return "yes or no"
+    if "how many" in lowered or lowered.startswith("number of ") or " count " in f" {lowered} ":
+        return "number only"
+    if lowered.startswith("what year"):
+        return "year only"
+    if lowered.startswith("when") or "date of" in lowered or "birthday" in lowered:
+        return "supported date granularity"
+    if "nationality" in lowered:
+        return "full supported nationality expression"
+    return "short answer only"
 
 
 def _looks_like_candidate_selection(question: str) -> bool:

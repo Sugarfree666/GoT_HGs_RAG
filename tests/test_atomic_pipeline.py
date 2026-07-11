@@ -60,6 +60,7 @@ prompts:
         self.assertIn('"answer": "..."', prompt)
         self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
         self.assertIn('The only allowed key is "answer".', prompt)
+        self.assertNotIn("answer_type", prompt)
         self.assertNotIn('"confidence"', prompt)
         self.assertNotIn('"reasoning_summary"', prompt)
         self.assertNotIn('"used_evidence_ids"', prompt)
@@ -165,16 +166,17 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(llm.answer_calls[1]["atomic_question"], "Where was Meek Mill detained?")
         self.assertEqual(
             llm.answer_calls[1]["answer_contract"],
-            {"answer_type": "location", "output_format": "minimal supported place"},
+            {"output_format": "short answer only"},
         )
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "Meek Mill")
-        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["confidence"], 1.0)
-        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer_type"], "person")
         self.assertFalse(llm.answer_calls[1]["dependency_answers"][0]["insufficient"])
         self.assertEqual(
             set(llm.answer_calls[1]["dependency_answers"][0]),
-            {"node_id", "question", "resolved_question", "answer", "answer_type", "confidence", "insufficient"},
+            {"node_id", "question", "resolved_question", "answer", "insufficient"},
         )
+        self.assertNotIn("answer_type", llm.answer_calls[1]["answer_contract"])
+        self.assertNotIn("answer_type", llm.answer_calls[1]["dependency_answers"][0])
+        self.assertNotIn("confidence", llm.answer_calls[1]["dependency_answers"][0])
         self.assertNotIn("evidence_summary", llm.answer_calls[1]["dependency_answers"][0])
         self.assertNotIn("used_hyperedge_ids", llm.answer_calls[1]["dependency_answers"][0])
         self.assertNotIn("reasoning_summary", llm.answer_calls[1]["dependency_answers"][0])
@@ -406,6 +408,77 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(first["score_breakdown"]["candidate_hop"], 2)
         self.assertEqual(first["score_breakdown"]["via_entity_ids"], ["A2"])
 
+    def test_retrieval_expands_from_concrete_entities_in_first_hop_chunks(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Anchor": ["H_BRIDGE"],
+                "Bridge Person": ["H_ANSWER"],
+                "Generic Role": ["H_ROLE_NOISE"],
+                "Generic Concept": ["H_CONCEPT_NOISE"],
+            },
+            hyperedge_entities={
+                "H_BRIDGE": ["Anchor"],
+                "H_ANSWER": ["Bridge Person", "Answer University"],
+                "H_ROLE_NOISE": ["Generic Role", "Wrong Role Answer"],
+                "H_CONCEPT_NOISE": ["Generic Concept", "Wrong Concept Answer"],
+            },
+            hyperedge_texts={
+                "H_BRIDGE": "Anchor is related to a person named Bridge Person.",
+                "H_ANSWER": "Bridge Person studied at Answer University.",
+                "H_ROLE_NOISE": "A generic role points to the wrong answer.",
+                "H_CONCEPT_NOISE": "A generic concept points to the wrong answer.",
+            },
+            hyperedge_chunks={"H_BRIDGE": ["C_BRIDGE"], "H_ANSWER": ["C_ANSWER"]},
+            chunk_texts={
+                "C_BRIDGE": "Anchor was the child of Bridge Person. Generic Role and Generic Concept are labels.",
+                "C_ANSWER": "Bridge Person studied at Answer University.",
+            },
+            chunk_entities={"C_BRIDGE": ["Anchor", "Bridge Person", "Generic Role", "Generic Concept"]},
+            entity_types={
+                "Anchor": "PERSON",
+                "Bridge Person": "PERSON",
+                "Answer University": "ORGANIZATION",
+                "Generic Role": "ROLE",
+                "Generic Concept": "CONCEPT",
+            },
+        )
+        store = ScoreHyperedgeStore(
+            {
+                "H_BRIDGE": 0.1,
+                "H_ANSWER": 0.9,
+                "H_ROLE_NOISE": 1.0,
+                "H_CONCEPT_NOISE": 1.0,
+            }
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, store),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=3),
+            llm_service=MockAtomicLLMService(),
+            logger=logging.getLogger("test.chunk_entity_retriever"),
+        )
+
+        result = retriever.retrieve_primary_anchor_local(
+            question="Where did Anchor's parent study?",
+            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
+            primary_anchor_mention="Anchor",
+        )
+
+        self.assertEqual(store.calls, [["H_BRIDGE", "H_ANSWER"]])
+        self.assertEqual(result.adjacent_hyperedge_ids, ["H_BRIDGE"])
+        self.assertEqual(result.expansion_entity_ids, ["Bridge Person"])
+        self.assertEqual(result.candidate_hyperedge_ids, ["H_BRIDGE", "H_ANSWER"])
+        self.assertNotIn("H_ROLE_NOISE", result.candidate_hyperedge_ids)
+        self.assertNotIn("H_CONCEPT_NOISE", result.candidate_hyperedge_ids)
+        self.assertEqual(result.top_hyperedges[0]["hyperedge_id"], "H_ANSWER")
+        self.assertEqual(result.top_hyperedges[0]["expansion_sources"], ["chunk_entity"])
+        self.assertEqual(result.top_hyperedges[0]["via_chunk_ids"], ["C_BRIDGE"])
+        answer_source = next(item for item in result.candidate_sources if item["hyperedge_id"] == "H_ANSWER")
+        self.assertEqual(answer_source["via_entity_ids"], ["Bridge Person"])
+        self.assertEqual(answer_source["via_first_hyperedge_ids"], ["H_BRIDGE"])
+        self.assertEqual(answer_source["expansion_sources"], ["chunk_entity"])
+        self.assertEqual(answer_source["via_chunk_ids"], ["C_BRIDGE"])
+
     def test_retrieval_merges_two_hop_pool_from_all_detected_entities(self) -> None:
         graph = LocalGraph(
             entity_edges={
@@ -611,13 +684,14 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         compact_evidence = AtomicDagExecutor._answer_evidence_payload(candidates)
         compact_payload = {
             "atomic_question": "What country is Perry Bhandal from?",
-            "answer_contract": {"answer_type": "country", "output_format": "country name only"},
+            "answer_contract": AtomicDagExecutor._answer_contract("What country is Perry Bhandal from?"),
             "dependency_answers": AtomicDagExecutor._answer_dependency_context(full_payload["dependency_answers"]),
             "evidence": compact_evidence,
         }
 
         full_size = len(json.dumps(full_payload, ensure_ascii=False))
         compact_size = len(json.dumps(compact_payload, ensure_ascii=False))
+        self.assertNotIn("answer_type", json.dumps(compact_payload, ensure_ascii=False))
         self.assertLess(compact_size, full_size * 0.2)
 
     def test_missing_anchor_and_missing_evidence_still_call_answerer_once(self) -> None:
@@ -798,17 +872,29 @@ class LocalGraph:
         hyperedge_texts: dict[str, str] | None = None,
         hyperedge_chunks: dict[str, list[str]] | None = None,
         chunk_texts: dict[str, str] | None = None,
+        chunk_entities: dict[str, list[str]] | None = None,
+        entity_types: dict[str, str] | None = None,
     ) -> None:
         self.entity_edges = {entity_id: list(ids) for entity_id, ids in entity_edges.items()}
         self.hyperedge_entities = {hyperedge_id: list(ids) for hyperedge_id, ids in hyperedge_entities.items()}
         self.hyperedge_texts = dict(hyperedge_texts or {})
         self.hyperedge_chunks = {hyperedge_id: list(ids) for hyperedge_id, ids in (hyperedge_chunks or {}).items()}
         self.chunk_texts = dict(chunk_texts or {})
+        self.chunk_entities = {chunk_id: list(ids) for chunk_id, ids in (chunk_entities or {}).items()}
+        self.source_to_nodes = {chunk_id: list(ids) for chunk_id, ids in self.chunk_entities.items()}
+        self.entity_types = dict(entity_types or {})
         entity_ids = set(self.entity_edges)
         for values in self.hyperedge_entities.values():
             entity_ids.update(values)
+        for values in self.chunk_entities.values():
+            entity_ids.update(values)
         self.nodes = {
-            entity_id: GraphNode(node_id=entity_id, role="entity", entity_type="entity", description=f"{entity_id} description")
+            entity_id: GraphNode(
+                node_id=entity_id,
+                role="entity",
+                entity_type=self.entity_types.get(entity_id, "entity"),
+                description=f"{entity_id} description",
+            )
             for entity_id in entity_ids
         }
         self.nodes.update(
