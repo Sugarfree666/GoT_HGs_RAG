@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 import tempfile
 import unittest
@@ -14,7 +15,7 @@ from hyper_branch.atomic import (
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
     DagCycleError,
-    FinalAnswerComposer,
+    FusedHyperedgeCandidate,
 )
 from hyper_branch.config import RetrievalConfig, load_config
 from hyper_branch.llm import MockAtomicLLMService
@@ -88,14 +89,14 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
                     "answer": "Meek Mill",
                     "confidence": 0.9,
                     "reasoning_summary": "B Boy was performed by Meek Mill.",
-                    "used_hyperedge_ids": ["H_PERFORMER"],
+                    "used_evidence_ids": ["E2"],
                     "insufficient": False,
                 },
                 {
                     "answer": "Police Station",
                     "confidence": 0.9,
                     "reasoning_summary": "Meek Mill was detained at Police Station.",
-                    "used_hyperedge_ids": ["H_DETAINED"],
+                    "used_evidence_ids": ["E1"],
                     "insufficient": False,
                 },
             ]
@@ -123,9 +124,28 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(result.artifacts["execution_order"], ["q1", "q2"])
         self.assertEqual([item.question for item in result.atomic_results], ["Who performed the song B Boy?", "Where was Meek Mill detained?"])
         self.assertEqual(result.atomic_results[1].answer, "Police Station")
+        self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
+        self.assertEqual(result.final_answer["source_node_id"], "q2")
+        self.assertFalse(result.final_answer["insufficient"])
         self.assertEqual(len(llm.answer_calls), 2)
         self.assertEqual(llm.answer_calls[1]["atomic_question"], "Where was Meek Mill detained?")
+        self.assertEqual(
+            llm.answer_calls[1]["answer_contract"],
+            {"answer_type": "location", "output_format": "minimal supported place"},
+        )
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "Meek Mill")
+        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["confidence"], 0.9)
+        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer_type"], "person")
+        self.assertFalse(llm.answer_calls[1]["dependency_answers"][0]["insufficient"])
+        self.assertEqual(
+            set(llm.answer_calls[1]["dependency_answers"][0]),
+            {"node_id", "question", "resolved_question", "answer", "answer_type", "confidence", "insufficient"},
+        )
+        self.assertNotIn("evidence_summary", llm.answer_calls[1]["dependency_answers"][0])
+        self.assertNotIn("used_hyperedge_ids", llm.answer_calls[1]["dependency_answers"][0])
+        self.assertNotIn("reasoning_summary", llm.answer_calls[1]["dependency_answers"][0])
+        self.assertFalse(hasattr(llm, "compose_final_answer"))
+        self.assertFalse(hasattr(llm, "finalize_answer_span"))
         self.assertFalse(hasattr(llm, "route_reasoning_paths"))
         self.assertFalse(hasattr(llm, "answer_atomic_question_from_paths"))
 
@@ -136,6 +156,156 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(second_retrieval["adjacent_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
         self.assertEqual(second_retrieval["candidate_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
         self.assertEqual([item["hyperedge_id"] for item in second_retrieval["top_hyperedges"]], ["H_DETAINED", "H_PERFORMER"])
+
+    def test_dependency_rewrite_injects_natural_language_role_reference_for_retrieval(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Changed It": ["H_SONG"],
+                "Nicki Minaj": ["H_SONG", "H_BIRTH"],
+                "Lil Wayne": ["H_SONG", "H_OTHER"],
+            },
+            hyperedge_entities={
+                "H_SONG": ["Changed It", "Nicki Minaj", "Lil Wayne"],
+                "H_BIRTH": ["Nicki Minaj", "Port of Spain"],
+                "H_OTHER": ["Lil Wayne", "New Orleans"],
+            },
+            hyperedge_texts={
+                "H_SONG": "Changed It is a song by Nicki Minaj and Lil Wayne.",
+                "H_BIRTH": "Nicki Minaj was born in Port of Spain.",
+                "H_OTHER": "Lil Wayne was born in New Orleans.",
+            },
+            hyperedge_chunks={
+                "H_SONG": ["C_SONG"],
+                "H_BIRTH": ["C_BIRTH"],
+                "H_OTHER": ["C_OTHER"],
+            },
+            chunk_texts={
+                "C_SONG": "Changed It is a song by Nicki Minaj and Lil Wayne.",
+                "C_BIRTH": "Nicki Minaj was born in Port of Spain, Trinidad and Tobago.",
+                "C_OTHER": "Lil Wayne was born in New Orleans.",
+            },
+        )
+        llm = MockAtomicLLMService(
+            answer_responses=[
+                {
+                    "answer": "Nicki Minaj and Lil Wayne",
+                    "confidence": 0.95,
+                    "reasoning_summary": "The song evidence names both performers.",
+                    "used_evidence_ids": ["E3"],
+                    "insufficient": False,
+                },
+                {
+                    "answer": "Port of Spain",
+                    "confidence": 0.9,
+                    "reasoning_summary": "Nicki Minaj was born in Port of Spain.",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                },
+            ]
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_SONG": 0.4, "H_BIRTH": 0.95, "H_OTHER": 0.7},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Who performed the song Changed It?": AtomicQuestionAnalysis(entities=["Changed It"], answer_type="person"),
+                    "What is the place of birth of Nicki Minaj and Lil Wayne?": AtomicQuestionAnalysis(
+                        entities=["Nicki Minaj", "Lil Wayne"],
+                        answer_type="place",
+                    ),
+                }
+            ),
+            llm=llm,
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who performed the song Changed It?"},
+                {
+                    "node_id": "q2",
+                    "question": "What is the place of birth of the performer of song Changed It?",
+                    "dependencies": ["q1"],
+                },
+            ]
+        }
+
+        result = executor.run("What is the place of birth of the performer of song Changed It?", dag)
+
+        self.assertEqual(result.atomic_results[1].question, "What is the place of birth of Nicki Minaj and Lil Wayne?")
+        second_retrieval = result.artifacts["atomic_retrieval"][1]
+        self.assertEqual(second_retrieval["primary_anchor_mention"], "Nicki Minaj")
+        self.assertEqual(second_retrieval["linked_entity_id"], "Nicki Minaj")
+        self.assertEqual(second_retrieval["dependency_replacements"][0]["replacement_span"], "the performer of song Changed It")
+        self.assertEqual([item["hyperedge_id"] for item in second_retrieval["top_hyperedges"][:2]], ["H_BIRTH", "H_OTHER"])
+        self.assertEqual(result.final_answer["answer"], "Port of Spain")
+
+    def test_dependency_rewrite_injects_generic_role_reference_for_retrieval(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Talk About A Stranger": ["H_FILM"],
+                "David Bradley": ["H_FILM", "H_WORK"],
+            },
+            hyperedge_entities={
+                "H_FILM": ["Talk About A Stranger", "David Bradley"],
+                "H_WORK": ["David Bradley", "UCLA"],
+            },
+            hyperedge_texts={
+                "H_FILM": "Talk About a Stranger was directed by David Bradley.",
+                "H_WORK": "David Bradley worked at UCLA.",
+            },
+            hyperedge_chunks={"H_FILM": ["C_FILM"], "H_WORK": ["C_WORK"]},
+            chunk_texts={
+                "C_FILM": "Talk About a Stranger was directed by David Bradley.",
+                "C_WORK": "David Bradley worked at UCLA.",
+            },
+        )
+        llm = MockAtomicLLMService(
+            answer_responses=[
+                {
+                    "answer": "David Bradley",
+                    "confidence": 0.95,
+                    "reasoning_summary": "The film evidence names David Bradley.",
+                    "used_evidence_ids": ["E2"],
+                    "insufficient": False,
+                },
+                {
+                    "answer": "UCLA",
+                    "confidence": 0.9,
+                    "reasoning_summary": "David Bradley worked at UCLA.",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                },
+            ]
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_FILM": 0.6, "H_WORK": 0.95},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Who is the director of the film Talk About A Stranger?": AtomicQuestionAnalysis(
+                        entities=["Talk About A Stranger"],
+                        answer_type="person",
+                    ),
+                    "Where does David Bradley work?": AtomicQuestionAnalysis(entities=["David Bradley"], answer_type="organization"),
+                }
+            ),
+            llm=llm,
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who is the director of the film Talk About A Stranger?"},
+                {"node_id": "q2", "question": "Where does the director work?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("Where does the director of film Talk About A Stranger work at?", dag)
+
+        self.assertEqual(result.atomic_results[1].question, "Where does David Bradley work?")
+        second_retrieval = result.artifacts["atomic_retrieval"][1]
+        self.assertEqual(second_retrieval["primary_anchor_mention"], "David Bradley")
+        self.assertEqual(second_retrieval["linked_entity_id"], "David Bradley")
+        self.assertEqual(second_retrieval["dependency_replacements"][0]["replacement_span"], "the director")
+        self.assertEqual([item["hyperedge_id"] for item in second_retrieval["top_hyperedges"]], ["H_WORK", "H_FILM"])
+        self.assertEqual(result.final_answer["answer"], "UCLA")
 
     def test_retrieval_uses_primary_anchor_two_hop_pool_top3_and_stable_sort(self) -> None:
         graph = LocalGraph(
@@ -220,7 +390,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
                     "answer": "Answer Two",
                     "confidence": 0.8,
                     "reasoning_summary": "Selected from evidence.",
-                    "used_hyperedge_ids": ["H2"],
+                    "used_evidence_ids": ["E1", "E999"],
                     "insufficient": False,
                 }
             ]
@@ -236,12 +406,141 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
 
         self.assertEqual(len(llm.answer_calls), 1)
         evidence = llm.answer_calls[0]["evidence"]
-        self.assertEqual([item["hyperedge_id"] for item in evidence], ["H2", "H3", "H4"])
-        self.assertIn("entity_records", evidence[0])
-        self.assertIn("chunk_texts", evidence[0])
+        payload_text = json.dumps(llm.answer_calls[0], ensure_ascii=False)
+        self.assertEqual([item["evidence_id"] for item in evidence], ["E1", "E2", "E3"])
+        self.assertEqual([item["hyperedge_text"] for item in evidence], ["H2", "H3", "H4"])
+        self.assertEqual(evidence[0]["chunk_texts"], ["two"])
+        self.assertNotIn("hyperedge_id", evidence[0])
+        self.assertNotIn("entity_records", evidence[0])
+        self.assertNotIn("score_breakdown", evidence[0])
+        self.assertNotIn("chunk_ids", evidence[0])
+        for forbidden in (
+            "source_ids",
+            "entity_records",
+            "metadata",
+            "score_breakdown",
+            "chunk_ids",
+            "via_entity_ids",
+            "via_first_hyperedge_ids",
+            "evidence_summary",
+            "evidence_texts",
+            "semantic_score",
+            "fusion_score",
+        ):
+            self.assertNotIn(forbidden, payload_text)
         self.assertEqual(result.atomic_results[0].used_hyperedge_ids, ["H2"])
+        self.assertEqual(result.final_answer["answer"], "Answer Two")
+        self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
+        artifact_evidence = result.artifacts["atomic_retrieval"][0]["answerer_evidence"][0]
+        self.assertIn("entity_records", artifact_evidence)
+        self.assertIn("chunk_ids", artifact_evidence)
+        self.assertIn("score_breakdown", artifact_evidence)
 
-    def test_missing_anchor_and_missing_evidence_return_insufficient_without_answerer(self) -> None:
+    def test_answerer_payload_deduplicates_repeated_chunk_texts_without_changing_artifact(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Subject": ["H1", "H2", "H3"]},
+            hyperedge_entities={
+                "H1": ["Subject", "Answer One"],
+                "H2": ["Subject", "Answer Two"],
+                "H3": ["Subject", "Answer Three"],
+            },
+            hyperedge_texts={
+                "H1": "Subject is linked to Answer One.",
+                "H2": "Subject is also linked to Answer Two.",
+                "H3": "Subject is linked to Answer Three.",
+            },
+            hyperedge_chunks={"H1": ["C_SHARED"], "H2": ["C_SHARED"], "H3": ["C_UNIQUE"]},
+            chunk_texts={
+                "C_SHARED": "The same source chunk mentions Subject and two answers.",
+                "C_UNIQUE": "A separate source chunk mentions Answer Three.",
+            },
+        )
+        llm = MockAtomicLLMService(
+            answer_responses=[
+                {
+                    "answer": "Answer One",
+                    "confidence": 0.8,
+                    "reasoning_summary": "Selected from E1.",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                }
+            ]
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H1": 0.9, "H2": 0.8, "H3": 0.7},
+            analyzer=QuestionAnalyzer({"Who is linked to Subject?": AtomicQuestionAnalysis(entities=["Subject"])}),
+            llm=llm,
+        )
+
+        result = executor.run("Who is linked to Subject?")
+
+        evidence = llm.answer_calls[0]["evidence"]
+        all_chunk_texts = [text for item in evidence for text in item["chunk_texts"]]
+        self.assertEqual(all_chunk_texts.count("The same source chunk mentions Subject and two answers."), 1)
+        self.assertEqual(evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+        self.assertEqual(evidence[1]["chunk_texts"], [])
+        artifact_evidence = result.artifacts["atomic_retrieval"][0]["answerer_evidence"]
+        self.assertEqual(artifact_evidence[0]["chunk_ids"], ["C_SHARED"])
+        self.assertEqual(artifact_evidence[1]["chunk_ids"], ["C_SHARED"])
+        self.assertEqual(artifact_evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+        self.assertEqual(artifact_evidence[1]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+
+    def test_compact_answer_payload_is_much_smaller_than_full_candidate_dicts(self) -> None:
+        long_description = "role metadata description " * 200
+        chunk_text = "Perry Bhandal is a British film director, screenwriter, and producer. " * 40
+        candidates = [
+            FusedHyperedgeCandidate(
+                hyperedge_id=f"H{i}",
+                hyperedge_text=f"Hyperedge {i}: Perry Bhandal is British.",
+                branch_support={"local_primary_anchor", "hop2"},
+                semantic_score=0.9 - (i * 0.01),
+                fusion_score=0.9 - (i * 0.01),
+                entity_ids=["Perry Bhandal", "DIRECTOR", "PRODUCER"],
+                entity_records=[
+                    {
+                        "entity_id": "DIRECTOR",
+                        "label": "DIRECTOR",
+                        "description": long_description,
+                        "metadata": {"description": long_description, "source_ids": ["S1"]},
+                    }
+                ],
+                chunk_ids=[f"C{i}"],
+                chunk_texts=[chunk_text],
+                evidence_texts=[f"Hyperedge {i}: Perry Bhandal is British.", chunk_text, long_description],
+                rank=i + 1,
+                score_breakdown={"semantic_score": 0.9, "via_entity_ids": ["Perry Bhandal"]},
+            )
+            for i in range(5)
+        ]
+
+        full_payload = {
+            "atomic_question": "What country is Perry Bhandal from?",
+            "dependency_answers": [
+                {
+                    "node_id": "q1",
+                    "question": "Who directed Interview With A Hitman?",
+                    "answer": "Perry Bhandal",
+                    "confidence": 1.0,
+                    "answer_type": "person",
+                    "evidence_summary": [candidates[0].to_dict()],
+                }
+            ],
+            "top_evidence": [item.to_dict() for item in candidates],
+        }
+        compact_evidence, _ = AtomicDagExecutor._answer_evidence_payload(candidates)
+        compact_payload = {
+            "atomic_question": "What country is Perry Bhandal from?",
+            "answer_contract": {"answer_type": "country", "output_format": "country name only"},
+            "dependency_answers": AtomicDagExecutor._answer_dependency_context(full_payload["dependency_answers"]),
+            "evidence": compact_evidence,
+        }
+
+        full_size = len(json.dumps(full_payload, ensure_ascii=False))
+        compact_size = len(json.dumps(compact_payload, ensure_ascii=False))
+        self.assertLess(compact_size, full_size * 0.2)
+
+    def test_missing_anchor_and_missing_evidence_still_call_answerer_once(self) -> None:
         no_anchor_llm = MockAtomicLLMService()
         no_anchor_executor = _executor(
             graph=LocalGraph(entity_edges={}, hyperedge_entities={}),
@@ -254,8 +553,12 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
 
         self.assertEqual(no_anchor.atomic_results[0].answer, "INSUFFICIENT_EVIDENCE")
         self.assertEqual(no_anchor.atomic_results[0].confidence, 0.0)
-        self.assertEqual(no_anchor_llm.answer_calls, [])
+        self.assertTrue(no_anchor.atomic_results[0].insufficient)
+        self.assertEqual(len(no_anchor_llm.answer_calls), 1)
+        self.assertEqual(no_anchor_llm.answer_calls[0]["evidence"], [])
         self.assertEqual(no_anchor.artifacts["atomic_retrieval"][0]["insufficient_reason"], "missing_primary_anchor")
+        self.assertEqual(no_anchor.final_answer["answer"], no_anchor.atomic_results[-1].answer)
+        self.assertTrue(no_anchor.final_answer["insufficient"])
 
         no_edges_llm = MockAtomicLLMService()
         no_edges_executor = _executor(
@@ -268,8 +571,122 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         no_edges = no_edges_executor.run("Question?")
 
         self.assertEqual(no_edges.atomic_results[0].answer, "INSUFFICIENT_EVIDENCE")
-        self.assertEqual(no_edges_llm.answer_calls, [])
+        self.assertTrue(no_edges.atomic_results[0].insufficient)
+        self.assertEqual(len(no_edges_llm.answer_calls), 1)
+        self.assertEqual(no_edges_llm.answer_calls[0]["evidence"], [])
         self.assertEqual(no_edges.artifacts["atomic_retrieval"][0]["insufficient_reason"], "primary_anchor_has_no_adjacent_hyperedges")
+        self.assertEqual(no_edges.final_answer["answer"], no_edges.atomic_results[-1].answer)
+
+    def test_dependency_only_comparison_node_calls_answerer_and_becomes_final_answer(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Film A": ["H_A"], "Film B": ["H_B"]},
+            hyperedge_entities={
+                "H_A": ["Film A", "1960"],
+                "H_B": ["Film B", "1960"],
+            },
+            hyperedge_texts={
+                "H_A": "Film A was released in 1960.",
+                "H_B": "Film B was released in 1960.",
+            },
+            hyperedge_chunks={"H_A": ["C_A"], "H_B": ["C_B"]},
+            chunk_texts={
+                "C_A": "The original source says Film A was released in 1960.",
+                "C_B": "The original source says Film B was released in 1960.",
+            },
+        )
+        llm = MockAtomicLLMService(
+            answer_responses=[
+                {
+                    "answer": "1960",
+                    "confidence": 0.91,
+                    "reasoning_summary": "Film A release year.",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                },
+                {
+                    "answer": "1960",
+                    "confidence": 0.92,
+                    "reasoning_summary": "Film B release year.",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                },
+                {
+                    "answer": "yes",
+                    "confidence": 0.86,
+                    "reasoning_summary": "Both dependency answers are 1960.",
+                    "used_evidence_ids": [],
+                    "insufficient": False,
+                },
+            ]
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_A": 0.8, "H_B": 0.8},
+            analyzer=QuestionAnalyzer(
+                {
+                    "When was Film A released?": AtomicQuestionAnalysis(entities=["Film A"], answer_type="date"),
+                    "When was Film B released?": AtomicQuestionAnalysis(entities=["Film B"], answer_type="date"),
+                }
+            ),
+            llm=llm,
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "When was Film A released?"},
+                {"node_id": "q2", "question": "When was Film B released?"},
+                {
+                    "node_id": "q3",
+                    "question": "Were q1's answer and q2's answer the same?",
+                    "dependencies": ["q1", "q2"],
+                },
+            ]
+        }
+
+        result = executor.run("Were Film A and Film B released in the same year?", dag)
+
+        self.assertEqual(len(llm.answer_calls), 3)
+        self.assertEqual(llm.answer_calls[2]["evidence"], [])
+        self.assertEqual([item["answer"] for item in llm.answer_calls[2]["dependency_answers"]], ["1960", "1960"])
+        self.assertEqual(result.atomic_results[-1].answer, "yes")
+        self.assertEqual(result.final_answer["answer"], "yes")
+        self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
+        self.assertEqual(result.final_answer["used_hyperedge_ids"], [])
+        self.assertFalse(result.final_answer["insufficient"])
+
+    def test_dag_requires_unique_terminal_leaf(self) -> None:
+        executor = _executor(
+            graph=LocalGraph(entity_edges={}, hyperedge_entities={}),
+            scores={},
+            analyzer=QuestionAnalyzer({}),
+            llm=MockAtomicLLMService(),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Question one?"},
+                {"node_id": "q2", "question": "Question two?"},
+            ]
+        }
+
+        with self.assertRaisesRegex(ValueError, "exactly one leaf"):
+            executor.run("Original?", dag)
+
+    def test_terminal_leaf_must_be_final_topological_node(self) -> None:
+        nodes = [
+            AtomicQuestionNode(node_id="q2", question="final", dependencies=["q1"]),
+            AtomicQuestionNode(node_id="q1", question="dependency"),
+        ]
+
+        with self.assertRaisesRegex(ValueError, "terminal leaf must be the final"):
+            AtomicDagExecutor.validate_terminal_leaf(nodes)
+
+    def test_all_non_final_nodes_can_reach_terminal_node(self) -> None:
+        nodes = [
+            AtomicQuestionNode(node_id="q1", question="left"),
+            AtomicQuestionNode(node_id="q2", question="right"),
+            AtomicQuestionNode(node_id="q3", question="final", dependencies=["q1", "q2"]),
+        ]
+
+        AtomicDagExecutor.validate_terminal_leaf(nodes)
 
     def test_topological_sort_rejects_cycles(self) -> None:
         nodes = [
@@ -290,11 +707,6 @@ class QuestionAnalyzer:
         del dependency_answers
         self.calls.append(atomic_question)
         return self.responses.get(atomic_question, AtomicQuestionAnalysis())
-
-
-class StaticComposer(FinalAnswerComposer):
-    def __init__(self) -> None:
-        super().__init__(llm_service=None)
 
 
 class LocalGraph:
@@ -397,7 +809,6 @@ def _executor(
     return AtomicDagExecutor(
         analyzer=analyzer,  # type: ignore[arg-type]
         retriever=retriever,
-        composer=StaticComposer(),
         llm_service=llm,
         logger=logging.getLogger("test.two_hop_executor"),
     )

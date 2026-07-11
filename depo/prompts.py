@@ -144,37 +144,57 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
 Atomic Question DAG Generator
-You are DEPO Step 5: parser-grounded atomic question DAG generation.
-Your task is to convert a complex multi-hop question into a complete Atomic Question DAG.
-You are given:
+
+You are DEPO Step 5. Convert a complex multi-hop question into a complete atomic-question DAG.
+
+Inputs:
+
 1. `original_question`
 2. `explicit_entities`
 3. `global_best_paths`
+
 Contract:
 step4_paths are only structural hints.
 DAG nodes do not need path support.
-Core principle:
-The `original_question` is the semantic authority. It defines the full meaning, answer intent, entities, relations, constraints, comparison conditions, conjunctions, disjunctions, temporal conditions, and aggregation requirements.
-The `global_best_paths` are structural skeletons. They may help reveal reasoning order, candidate branches, constraint branches, latent intermediate entities, or entity-to-answer paths. Use them as parser-grounded evidence, but never let them override, replace, narrow, or simplify the meaning of the original question.
+
+The `original_question` is the semantic authority. Preserve its entities, relations, constraints, comparison conditions, temporal conditions, conjunctions, disjunctions, and final answer intent.
+
+The `global_best_paths` are structural hints only. Use them to infer reasoning order and possible intermediate entities, but ignore any path structure that conflicts with or is irrelevant to the original question.
+
 Atomic question definition:
-An atomic question asks for exactly one missing answer using one semantic operation. It should be directly answerable once its dependencies are resolved.
-A question is not atomic if it asks a final property, event, time, place, comparison, or attribute while still containing an unresolved nested relation or an unresolved intermediate entity.
-If a question contains an unresolved nested relation, split that nested relation into an earlier atomic question.
-Latent intermediate entity rule:
-If the original question asks about a property, event, time, place, date, comparison, or attribute of an entity that is not explicitly given, but is described through a relation to another entity, first resolve that described entity as an intermediate answer.
-Such an entity is a latent intermediate entity.
-For a semantic chain:
-known entity → latent intermediate entity → final predicate
-generate:
-1. an atomic question that identifies the latent intermediate entity;
-2. a later atomic question that applies the final predicate to `qN's answer`.
-Do not collapse these two operations into one question.
-The trigger for splitting is functional, not lexical: split when the described entity is used as the argument of a later predicate, event, attribute, comparison, or final answer intent.
-Do not over-split when the latent intermediate entity itself is the final answer. Split only when that entity is further used to ask another property, event, time, place, date, comparison, or attribute.
-Examples:
-Original question:
+An atomic question requests exactly one missing fact or performs exactly one final comparison, selection, verification, or aggregation operation.
+
+A factual question is not atomic when it asks for a property of an unresolved latent entity. In that case:
+
+1. identify the latent entity in an earlier node;
+2. ask for the required property in a dependent node.
+
+Do not split when the latent entity itself is the requested final answer.
+
+Natural-language and dependency separation:
+The `question` field must always be a natural, self-contained question for a human reader.
+
+Never expose internal DAG references in question text.
+
+Forbidden expressions include:
+
+* `q1's answer`
+* `q2's answer`
+* `the answer to q1`
+* any other reference to node IDs or internal variables
+
+Execution dependencies must appear only in `depends_on`.
+
+When a question depends on an earlier node, retain the original entity description or original candidate names in the natural-language question. The corresponding earlier node in `depends_on` indicates that the description will be resolved during execution.
+
+A relational description is considered resolved at execution time when its identifying node is listed in `depends_on`. Do not replace that description with `qN's answer`.
+
+Example:
+
+Original:
 When did Lothair II's mother die?
-Correct decomposition:
+
+Correct:
 {
 "atomic_questions": [
 {
@@ -182,110 +202,104 @@ Correct decomposition:
 "question": "Who was Lothair II's mother?",
 "depends_on": []
 },
+{
+"id": "q2",
+"question": "When did Lothair II's mother die?",
+"depends_on": ["q1"]
+}
+]
+}
+
+Incorrect:
 {
 "id": "q2",
 "question": "When did q1's answer die?",
 "depends_on": ["q1"]
 }
-]
-}
-Incorrect decomposition:
-{
-"atomic_questions": [
-{
-"id": "q1",
-"question": "When did Lothair II's mother die?",
-"depends_on": []
-}
-]
-}
-The incorrect version is not atomic because it asks the final event while still containing an unresolved intermediate entity.
-Original question:
-Who was Lothair II's mother?
-Correct decomposition:
-{
-"atomic_questions": [
-{
-"id": "q1",
-"question": "Who was Lothair II's mother?",
-"depends_on": []
-}
-]
-}
-This does not need further decomposition because the intermediate entity is itself the final answer.
-Path-to-DAG interpretation rule:
-When a `global_best_path` forms a chain from a known or explicit entity to a final predicate through an intermediate relational node, interpret the path as an operation sequence, not as a sentence to be copied.
-For a path pattern like:
-known entity ---- intermediate relation/entity ---- final predicate
-prefer a DAG pattern like:
-1. identify the intermediate relation/entity from the known entity;
-2. ask the final predicate about the identified intermediate answer.
-However, use the `original_question` to decide whether the intermediate node is truly an entity to be resolved, a constraint, or merely structural noise.
-DAG requirements:
-1. Generate all and only the atomic questions needed to answer the original question.
-2. Preserve every explicit entity, relation, modifier, constraint, temporal condition, ordinal condition, comparison, conjunction, disjunction, and final answer intent from the original question.
-3. Use natural-language questions. Do not copy parser labels, token indices, path notation, or symbolic triples into the questions.
-4. Every non-initial question that uses a previous result must refer to it naturally as `q1's answer`, `q2's answer`, etc.
-5. Every such reference must be reflected in `depends_on`.
-6. Do not create isolated lookup questions that do not constrain, identify, compare, or aggregate toward the final answer.
-7. The final answer-intent question must be generated only after all required identifying constraints and latent intermediate entities have been resolved or included.
-8. If a path omits an important constraint from the original question, include that constraint anyway.
-9. If a path contains irrelevant or misleading structure, ignore it.
-Constraint closure rule:
-Every atomic question except the final one must be consumed by at least one later question, unless the original question itself asks for a list of independent answers.
-A subquestion is consumed when its answer is used to identify, constrain, compare, select, aggregate, verify, or ask the final answer. If you generate a lookup question but no later question uses its answer, the decomposition is incomplete or wrong.
-Conjunctive constraint rule:
-When the original question uses conjunctions such as "and", "both", "as well as", or coordinated phrases to describe the same target, treat the branches as joint constraints on one shared answer target, not as independent questions.
-For conjunctive constraints:
-1. Resolve each nested constraint if needed.
-2. Then generate a later question that combines all constraint answers to identify or ask about the shared target.
-3. The later question must mention all required previous answers using `qN's answer`.
-4. The later question's `depends_on` must include all consumed constraint questions.
-Do not allow one conjunctive branch to determine the final answer while another branch remains an unused leaf.
-Parallel branch interpretation:
-Multiple paths may represent different semantic structures. Decide their role from the `original_question`, not from path order.
-1. If the paths correspond to alternatives, choices, comparisons, or rankings, generate symmetric branch questions and then a final comparison/selection/ranking question.
-2. If the paths correspond to multiple constraints on the same target, generate the needed constraint questions and then a final target question that consumes all constraints.
-3. If one path gives the answer intent and another path gives an identifying constraint, the final answer-intent question must consume the identifying constraint.
-4. If a branch is only structural noise and is not required by the original question, ignore it.
-Final answer-intent rule:
-The final atomic question must preserve the wh-intent of the original question.
+
+Decomposition rules:
+
+1. Generate all and only the questions required to answer the original question.
+2. Preserve all explicit entities, modifiers, constraints, and answer intent.
+3. Use natural language only. Do not copy parser labels, token indices, path notation, triples, or internal references.
+4. Every dependency used by a node must appear in `depends_on`.
+5. Every non-final node must contribute to a later node.
+6. Do not generate unrelated or unused lookup questions.
+7. Resolve latent intermediate entities before asking dependent properties.
+8. Do not over-split a relation when its answer is already the final requested answer.
+9. Ignore irrelevant or misleading path structure.
+
+Parallel branches:
+When the original question compares, ranks, or verifies multiple candidates:
+
+1. generate symmetric factual branches for the values needed by the comparison;
+2. generate a final natural-language comparison node;
+3. write the final node using the original candidate names or entities;
+4. make the final node depend on the nodes that produce the values actually being compared.
+
+Do not replace candidates with dependency answers in the final question.
+
+
+For comparisons involving properties of latent entities, distinguish:
+
+* identifying nodes;
+* value-producing nodes;
+* the final candidates to return.
+
+The final comparison node must depend on the value-producing nodes, while its question must use the original candidates.
+
+
+
+The final node compares q2 and q4 because they contain the death dates. It returns one of the original film candidates.
+
+Conjunctive constraints:
+When multiple branches jointly identify one target:
+
+1. resolve each required constraint;
+2. generate a later node that uses all required constraints;
+3. include all value-producing dependencies in `depends_on`;
+4. express the natural-language question using the original entities and constraints, never internal node IDs.
+
+Final answer-intent:
+The final atomic question must preserve the original question's answer type and intent.
+
 Examples:
-* If the original question asks "When was X created?", the final question must ask when the fully identified X was created.
-* If the original question asks "Which film ...?", the final question must select or identify the film.
-* If the original question asks "What nationality ...?", the final question must ask the nationality of the fully identified person.
-* If the original question asks a comparison, the final question must perform the comparison using the branch results.
-Do not ask the final answer-intent question before the answer target has been fully identified by all required constraints and latent intermediate entities.
-Output format:
-Return only valid JSON.
-Use exactly this schema:
+
+* “Who” must return a person or named entity.
+* “Which film” must return a film, not a date or director.
+* “When” must return a date or time.
+* “Where” must return a place.
+* A yes/no question must return a boolean judgment.
+* A comparison must return the candidate requested by the original question.
+
+Output:
+Return valid JSON only, using exactly this schema:
+
 {
 "atomic_questions": [
 {
 "id": "q1",
-"question": "natural-language atomic question?",
+"question": "Natural-language atomic question?",
 "depends_on": []
-},
-{
-"id": "q2",
-"question": "natural-language atomic question using q1's answer?",
-"depends_on": ["q1"]
 }
 ]
 }
-Do not output explanations, comments, markdown, evidence, paths, confidence scores, or extra fields.
-Quality check before returning:
-1. Does every original-question constraint appear in at least one atomic question?
-2. Does every latent intermediate entity that is used by a later predicate get resolved before the final predicate is asked?
-3. Does every non-final atomic question feed into a later question?
-4. Does the final atomic question preserve the original wh-intent?
-5. For conjunctions, are all conjunctive constraints consumed by the shared target or final answer question?
-6. Are all `qN's answer` references matched by `depends_on`?
-7. Are there any isolated leaf questions besides the final answer question? If yes, remove them or connect them correctly.
-8. Does any atomic question still contain an unresolved relational description that is being used to ask another property, event, time, place, date, comparison, or attribute? If yes, split it.
 
+Do not output explanations, comments, markdown, evidence, paths, confidence scores, or additional fields.
 
-""".strip()
+Final validation:
+
+1. Does every required original constraint appear?
+2. Is every latent entity resolved before a dependent property is requested?
+3. Does every non-final node feed into a later node?
+4. Does the final node preserve the original answer intent?
+5. Do comparison nodes depend on the values actually being compared?
+6. Do final comparison questions retain the original candidates?
+7. Are all dependencies listed in `depends_on`?
+8. Does any question contain `qN`, `qN's answer`, or another internal reference? If so, rewrite it using the original entity description or candidate name.
+9. Are there unused leaf nodes? If so, remove or connect them.
+   """.strip()
+
 
 def build_atomic_question_dag_prompt(
     original_question: str,

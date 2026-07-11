@@ -159,8 +159,7 @@ def resolve_dependency_question(
                     replacement_answer=answer,
                 ),
             )
-        if answer not in primary_anchor_entities:
-            primary_anchor_entities.append(answer)
+        _append_anchor_mentions(primary_anchor_entities, answer)
         dependency_answers_used.append(_dependency_answer_summary(dependency))
 
     if replacements:
@@ -184,10 +183,8 @@ def resolve_dependency_question(
             continue
         if not is_entity_like_answer(answer, dependency.get("answer_type")):
             continue
-        span = _resolved_intermediate_span(str(dependency.get("question", "") or ""))
-        if not span:
-            continue
-        match = _find_span_match(retrieval_question, span)
+        dependency_question = str(dependency.get("question", "") or "")
+        match = _find_dependency_reference_match(retrieval_question, dependency_question)
         if match is None:
             continue
         retrieval_question = (
@@ -202,8 +199,7 @@ def resolve_dependency_question(
                 replacement_answer=answer,
             )
         )
-        if answer not in primary_anchor_entities:
-            primary_anchor_entities.append(answer)
+        _append_anchor_mentions(primary_anchor_entities, answer)
         dependency_answers_used.append(_dependency_answer_summary(dependency))
 
     first_replacement = replacements[0] if replacements else None
@@ -218,6 +214,14 @@ def resolve_dependency_question(
         primary_anchor_entities=primary_anchor_entities,
         dependency_answers_used=dependency_answers_used,
     )
+
+
+def _find_dependency_reference_match(question: str, dependency_question: str) -> re.Match[str] | None:
+    for span in _dependency_reference_spans(dependency_question):
+        match = _find_span_match(question, span)
+        if match is not None:
+            return match
+    return _find_generic_role_match(question, dependency_question)
 
 
 def _find_dependency_variable_matches(question: str, dependency_node_id: str) -> list[re.Match[str]]:
@@ -292,6 +296,79 @@ def _resolved_intermediate_span(dependency_question: str) -> str:
     return ""
 
 
+def _dependency_reference_spans(dependency_question: str) -> list[str]:
+    text = normalize_label(dependency_question).strip().rstrip("?")
+    spans: list[str] = []
+    base_span = _resolved_intermediate_span(text)
+    if base_span:
+        spans.append(base_span)
+
+    role_object_patterns = (
+        r"^(?:who|what) (?:is|was|are|were) (?P<span>(?:the\s+)?(?:paternal\s+grandfather|maternal\s+grandfather|father-in-law|mother-in-law|director|composer|performer|author|writer|producer|father|mother|husband|wife|spouse|child|son|daughter|parent|grandfather|grandmother) of .+)$",
+        r"^(?:who|what) (?:is|was|are|were) (?P<object>.+?)(?:'s|’s|鈥檚|鈥橲) (?P<role>paternal grandfather|maternal grandfather|father-in-law|mother-in-law|father|mother|husband|wife|spouse|child|son|daughter|parent|grandfather|grandmother)$",
+    )
+    for pattern in role_object_patterns:
+        match = re.match(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+        if "span" in match.groupdict():
+            spans.append(match.group("span"))
+        else:
+            obj = match.group("object").strip()
+            role = match.group("role").strip()
+            spans.append(f"{obj}'s {role}")
+
+    action_patterns = (
+        (r"^who (?:directed|directs) (?P<object>.+)$", "director"),
+        (r"^who (?:composed|composes|scored|scores) (?P<object>.+)$", "composer"),
+        (r"^who (?:performed|performs|sang|sings) (?P<object>.+)$", "performer"),
+        (r"^who (?:wrote|writes|authored|authors) (?P<object>.+)$", "writer"),
+        (r"^who (?:produced|produces) (?P<object>.+)$", "producer"),
+    )
+    for pattern, role in action_patterns:
+        match = re.match(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+        obj = match.group("object").strip()
+        spans.extend(
+            [
+                f"{role} of {obj}",
+                f"the {role} of {obj}",
+            ]
+        )
+
+    return _dedupe_by_lowercase(spans)
+
+
+def _dependency_roles(dependency_question: str) -> list[str]:
+    roles: list[str] = []
+    for span in _dependency_reference_spans(dependency_question):
+        lowered = span.lower()
+        role_match = re.match(
+            r"^(?:the\s+)?(?P<role>paternal\s+grandfather|maternal\s+grandfather|father-in-law|mother-in-law|director|composer|performer|author|writer|producer|father|mother|husband|wife|spouse|child|son|daughter|parent|grandfather|grandmother)\b",
+            lowered,
+        )
+        if role_match:
+            roles.append(role_match.group("role"))
+            continue
+        possessive_match = re.search(
+            r"(?:'s|’s|鈥檚|鈥橲) (?P<role>paternal grandfather|maternal grandfather|father-in-law|mother-in-law|father|mother|husband|wife|spouse|child|son|daughter|parent|grandfather|grandmother)$",
+            lowered,
+        )
+        if possessive_match:
+            roles.append(possessive_match.group("role"))
+    return _dedupe_by_lowercase(roles)
+
+
+def _find_generic_role_match(question: str, dependency_question: str) -> re.Match[str] | None:
+    for role in _dependency_roles(dependency_question):
+        pattern = rf"\b(?:the\s+)?{re.escape(role)}\b(?!\s+of\b)"
+        match = re.search(pattern, question, flags=re.IGNORECASE)
+        if match:
+            return match
+    return None
+
+
 def _is_intermediate_span(span: str) -> bool:
     lowered = span.lower()
     if " of " in lowered:
@@ -313,23 +390,71 @@ def _find_span_match(question: str, span: str) -> re.Match[str] | None:
 def _span_variants(span: str) -> list[str]:
     variants = [normalize_label(span).strip()]
     replacements = (
+        (" of the song ", " of song "),
         (" of the song ", " of "),
         (" of song ", " of "),
+        (" of the film ", " of film "),
         (" of the film ", " of "),
         (" of film ", " of "),
+        (" of the movie ", " of movie "),
         (" of the movie ", " of "),
         (" of movie ", " of "),
     )
-    for source, target in replacements:
-        variant = re.sub(
-            re.escape(source.strip()),
-            target.strip(),
-            variants[0],
-            flags=re.IGNORECASE,
-        )
-        if variant != variants[0]:
-            variants.append(normalize_label(variant))
-    return [variant for index, variant in enumerate(variants) if variant and variant not in variants[:index]]
+    queue = list(variants)
+    while queue:
+        current = queue.pop(0)
+        article_variant = current[4:] if current.lower().startswith("the ") else f"the {current}"
+        if article_variant not in variants:
+            variants.append(article_variant)
+            queue.append(article_variant)
+        for source, target in replacements:
+            variant = re.sub(
+                re.escape(source.strip()),
+                target.strip(),
+                current,
+                flags=re.IGNORECASE,
+            )
+            if variant != current and variant not in variants:
+                variant = normalize_label(variant)
+                variants.append(variant)
+                queue.append(variant)
+    return sorted(
+        [variant for index, variant in enumerate(variants) if variant and variant not in variants[:index]],
+        key=len,
+        reverse=True,
+    )
+
+
+def _append_anchor_mentions(target: list[str], answer: str) -> None:
+    for mention in _anchor_mentions_from_answer(answer):
+        if mention not in target:
+            target.append(mention)
+
+
+def _anchor_mentions_from_answer(answer: str) -> list[str]:
+    text = normalize_label(answer).strip()
+    if not text:
+        return []
+    parts = [
+        part.strip(" ,;")
+        for part in re.split(r"\s+(?:and|or)\s+|;", text)
+        if part.strip(" ,;")
+    ]
+    if len(parts) > 1:
+        return _dedupe_by_lowercase(parts + [text])
+    return [text]
+
+
+def _dedupe_by_lowercase(values: list[str]) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        text = normalize_label(value).strip()
+        key = text.lower()
+        if text and key not in seen:
+            result.append(text)
+            seen.add(key)
+    return result
 
 
 def _safe_float(value: Any) -> float:

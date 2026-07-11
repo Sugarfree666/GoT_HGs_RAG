@@ -7,7 +7,6 @@ from typing import Any, Iterable
 from ..llm.service import AtomicLLMService
 from ..utils import ensure_list, normalize_label, short_text
 from .analyzer import AtomicQuestionAnalyzer
-from .composer import FinalAnswerComposer
 from .dependency_rewrite import resolve_dependency_question
 from .models import (
     AtomicAnswerResult,
@@ -28,19 +27,18 @@ class AtomicDagExecutor:
         self,
         analyzer: AtomicQuestionAnalyzer,
         retriever: AtomicHyperedgeRetriever,
-        composer: FinalAnswerComposer,
         llm_service: AtomicLLMService | None = None,
         logger: logging.Logger | None = None,
     ) -> None:
         self.analyzer = analyzer
         self.retriever = retriever
-        self.composer = composer
         self.llm_service = llm_service
         self.logger = logger or logging.getLogger(__name__)
 
     def run(self, original_question: str, dag_payload: Any | None = None) -> DagExecutionResult:
         nodes = self.normalize_dag_payload(dag_payload, original_question=original_question)
         order = self.topological_sort(nodes)
+        self.validate_terminal_leaf(order)
         results_by_id: dict[str, AtomicAnswerResult] = {}
         analyses_artifact: list[dict[str, Any]] = []
         retrieval_artifact: list[dict[str, Any]] = []
@@ -70,15 +68,12 @@ class AtomicDagExecutor:
                 primary_anchor_mention=primary_anchor_mention,
             )
             evidence = retrieval_result.evidence
-            if retrieval_result.insufficient:
-                answer_payload = self._insufficient_answer_payload(retrieval_result.insufficient_reason)
-            else:
-                answer_payload = self._answer_atomic_question(
-                    atomic_question=resolved_question,
-                    analysis=analysis,
-                    evidence=evidence,
-                    dependency_answers=dependency_answers,
-                )
+            answer_payload = self._answer_atomic_question(
+                atomic_question=resolved_question,
+                analysis=analysis,
+                evidence=evidence,
+                dependency_answers=dependency_answers,
+            )
 
             used_hyperedge_ids = self._used_hyperedge_ids(answer_payload, evidence)
             result = AtomicAnswerResult(
@@ -91,6 +86,7 @@ class AtomicDagExecutor:
                 reasoning_summary=str(answer_payload.get("reasoning_summary", "") or ""),
                 used_dependencies=list(node.dependencies),
                 used_hyperedge_ids=used_hyperedge_ids,
+                insufficient=bool(answer_payload.get("insufficient", False)),
             )
             results_by_id[node.node_id] = result
 
@@ -123,7 +119,7 @@ class AtomicDagExecutor:
             answer_artifact.append(result.to_dict())
 
         atomic_results = [results_by_id[node.node_id] for node in order]
-        final_answer = self.composer.compose(original_question, atomic_results, dag_nodes=order)
+        final_answer = self._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
         artifacts = {
             "dag_input": [node.to_dict() for node in nodes],
             "execution_order": [node.node_id for node in order],
@@ -213,6 +209,34 @@ class AtomicDagExecutor:
         return order
 
     @staticmethod
+    def validate_terminal_leaf(nodes: list[AtomicQuestionNode]) -> None:
+        if not nodes:
+            raise ValueError("Atomic DAG did not contain any executable nodes.")
+
+        dependents: dict[str, list[str]] = {node.node_id: [] for node in nodes}
+        for node in nodes:
+            for dependency in node.dependencies:
+                dependents[dependency].append(node.node_id)
+
+        leaf_ids = [node.node_id for node in nodes if not dependents[node.node_id]]
+        if len(leaf_ids) != 1:
+            raise ValueError(f"Atomic DAG must contain exactly one leaf node, found: {leaf_ids}")
+
+        terminal_id = nodes[-1].node_id
+        if leaf_ids[0] != terminal_id:
+            raise ValueError(
+                f"Atomic DAG terminal leaf must be the final topological node: leaf={leaf_ids[0]}, final={terminal_id}"
+            )
+
+        unreachable = [
+            node.node_id
+            for node in nodes
+            if node.node_id != terminal_id and not _can_reach_terminal(node.node_id, terminal_id, dependents)
+        ]
+        if unreachable:
+            raise ValueError(f"Every non-final atomic node must reach the terminal node: {unreachable}")
+
+    @staticmethod
     def _coerce_nodes(
         nodes_payload: Any,
         variable_to_question: dict[str, str] | None = None,
@@ -298,11 +322,13 @@ class AtomicDagExecutor:
                 {
                     "node_id": result.node_id,
                     "question": result.question,
+                    "resolved_question": result.question,
                     "answer": result.answer,
                     "confidence": result.confidence,
                     "answer_type": result.analysis.answer_type,
                     "reasoning_summary": result.reasoning_summary,
                     "used_hyperedge_ids": list(result.used_hyperedge_ids),
+                    "insufficient": result.insufficient,
                     "evidence_summary": [
                         {
                             "hyperedge_id": evidence.hyperedge_id,
@@ -323,16 +349,97 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        evidence_payload = [item.to_dict() for item in evidence]
+        answer_contract = self._answer_contract(analysis, atomic_question)
+        answer_dependency_answers = self._answer_dependency_context(dependency_answers)
+        evidence_payload, evidence_id_map = self._answer_evidence_payload(evidence)
         if self.llm_service is not None:
             payload = self.llm_service.answer_atomic_question(
                 atomic_question=atomic_question,
-                dependency_answers=dependency_answers,
+                answer_contract=answer_contract,
+                dependency_answers=answer_dependency_answers,
                 evidence=evidence_payload,
             )
+            payload = self._with_mapped_used_evidence_ids(payload, evidence_id_map)
         else:
             payload = self._fallback_answer(atomic_question, analysis, evidence, dependency_answers)
         return self._coerce_answer_payload(payload, atomic_question, analysis, evidence, dependency_answers)
+
+    @staticmethod
+    def _answer_dependency_context(dependency_answers: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        compact: list[dict[str, Any]] = []
+        for item in dependency_answers:
+            compact.append(
+                {
+                    "node_id": str(item.get("node_id", "") or ""),
+                    "question": str(item.get("question", "") or ""),
+                    "resolved_question": str(item.get("resolved_question") or item.get("question", "") or ""),
+                    "answer": str(item.get("answer", "") or ""),
+                    "answer_type": str(item.get("answer_type", "") or ""),
+                    "confidence": max(0.0, min(1.0, float(item.get("confidence", 0.0) or 0.0))),
+                    "insufficient": bool(item.get("insufficient", False)),
+                }
+            )
+        return compact
+
+    @staticmethod
+    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> tuple[list[dict[str, Any]], dict[str, str]]:
+        payload: list[dict[str, Any]] = []
+        evidence_id_map: dict[str, str] = {}
+        seen_chunk_texts: set[str] = set()
+        for index, item in enumerate(evidence, start=1):
+            evidence_id = f"E{index}"
+            evidence_id_map[evidence_id] = item.hyperedge_id
+            chunk_texts: list[str] = []
+            for raw_text in item.chunk_texts:
+                text = str(raw_text or "").strip()
+                if not text or text in seen_chunk_texts:
+                    continue
+                seen_chunk_texts.add(text)
+                chunk_texts.append(text)
+            payload.append(
+                {
+                    "evidence_id": evidence_id,
+                    "hyperedge_text": str(item.hyperedge_text or "").strip(),
+                    "chunk_texts": chunk_texts,
+                }
+            )
+        return payload, evidence_id_map
+
+    @staticmethod
+    def _answer_contract(analysis: AtomicQuestionAnalysis, question: str) -> dict[str, str]:
+        answer_type = _normalized_answer_type(analysis.answer_type, question)
+        output_formats = {
+            "person": "person name only",
+            "work": "work title only",
+            "organization": "organization name only",
+            "country": "country name only",
+            "nationality": "full supported nationality expression",
+            "city": "city name only",
+            "location": "minimal supported place",
+            "year": "year only",
+            "date": "supported date granularity",
+            "number/count": "number only",
+            "boolean": "yes or no",
+            "candidate selection": "exact candidate surface from the question",
+        }
+        return {
+            "answer_type": answer_type,
+            "output_format": output_formats.get(answer_type, "short answer only"),
+        }
+
+    @staticmethod
+    def _with_mapped_used_evidence_ids(payload: Any, evidence_id_map: dict[str, str]) -> Any:
+        if not isinstance(payload, dict):
+            return payload
+        used_hyperedge_ids: list[str] = []
+        valid_evidence_ids = set(evidence_id_map)
+        for evidence_id in ensure_list(payload.get("used_evidence_ids", [])):
+            text = str(evidence_id or "").strip()
+            if text in valid_evidence_ids:
+                used_hyperedge_ids.append(evidence_id_map[text])
+        payload["used_hyperedge_ids"] = _dedupe_strings(used_hyperedge_ids)
+        payload["_used_evidence_ids_validated"] = True
+        return payload
 
     def _fallback_answer(
         self,
@@ -341,8 +448,10 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        del dependency_answers
         if not evidence:
+            dependency_payload = self._answer_from_dependencies(question, dependency_answers)
+            if dependency_payload is not None:
+                return dependency_payload
             return self._insufficient_answer_payload("no_local_evidence")
 
         query_entities = {normalize_label(entity).lower() for entity in analysis.entities}
@@ -366,6 +475,49 @@ class AtomicDagExecutor:
             "insufficient": not bool(answer),
         }
 
+    @staticmethod
+    def _answer_from_dependencies(question: str, dependency_answers: list[dict[str, Any]]) -> dict[str, Any] | None:
+        usable = [
+            item
+            for item in dependency_answers
+            if str(item.get("answer", "") or "").strip()
+            and str(item.get("answer", "") or "").strip().upper() != "INSUFFICIENT_EVIDENCE"
+            and not bool(item.get("insufficient", False))
+        ]
+        if not usable:
+            return None
+
+        lowered = question.lower()
+        if lowered.startswith(("is ", "are ", "was ", "were ", "do ", "does ", "did ")):
+            if len(usable) >= 2:
+                left = normalize_label(str(usable[-2].get("answer", ""))).lower()
+                right = normalize_label(str(usable[-1].get("answer", ""))).lower()
+                same_question = "same" in lowered or "share" in lowered or "both" in lowered
+                different_question = "different" in lowered
+                if same_question or different_question:
+                    same = bool(left and right and left == right)
+                    answer = "no" if same == different_question else "yes"
+                    return {
+                        "answer": answer,
+                        "confidence": min(
+                            0.85,
+                            max(float(item.get("confidence", 0.0) or 0.0) for item in usable[-2:]),
+                        ),
+                        "reasoning_summary": "Answered from direct dependency answers.",
+                        "used_hyperedge_ids": [],
+                        "insufficient": False,
+                    }
+            if len(usable) == 1 and str(usable[-1].get("answer", "")).strip().lower() in {"yes", "no"}:
+                return {
+                    "answer": str(usable[-1]["answer"]).strip().lower(),
+                    "confidence": max(0.0, min(0.85, float(usable[-1].get("confidence", 0.0) or 0.0))),
+                    "reasoning_summary": "Mirrored the direct dependency yes/no answer.",
+                    "used_hyperedge_ids": [],
+                    "insufficient": False,
+                }
+
+        return None
+
     def _coerce_answer_payload(
         self,
         payload: Any,
@@ -380,6 +532,7 @@ class AtomicDagExecutor:
         payload.setdefault("confidence", 0.0)
         payload.setdefault("reasoning_summary", "")
         payload.setdefault("used_hyperedge_ids", [])
+        payload.setdefault("used_evidence_ids", [])
         payload.setdefault("insufficient", False)
         insufficient = bool(payload.get("insufficient", False))
         if insufficient and not str(payload.get("answer", "")).strip():
@@ -403,6 +556,14 @@ class AtomicDagExecutor:
 
     @staticmethod
     def _used_hyperedge_ids(payload: dict[str, Any], evidence: list[FusedHyperedgeCandidate]) -> list[str]:
+        if bool(payload.get("_used_evidence_ids_validated", False)):
+            return _dedupe_strings(
+                [
+                    str(item).strip()
+                    for item in ensure_list(payload.get("used_hyperedge_ids", []))
+                    if str(item).strip()
+                ]
+            )
         evidence_ids = {item.hyperedge_id for item in evidence}
         used = [
             str(item).strip()
@@ -450,6 +611,41 @@ class AtomicDagExecutor:
             "top_evidence": retrieval_payload["evidence"],
             "insufficient_reason": retrieval_payload["insufficient_reason"],
             "atomic_answer": answer_payload,
+        }
+
+    @staticmethod
+    def _final_answer_from_terminal_node(
+        terminal: AtomicAnswerResult,
+        atomic_results: list[AtomicAnswerResult],
+    ) -> dict[str, Any]:
+        answer = terminal.answer
+        return {
+            "answer": answer,
+            "candidate_answer": answer,
+            "semantic_answer": answer,
+            "judgment": _yes_no_judgment(answer),
+            "confidence": terminal.confidence,
+            "reasoning_summary": terminal.reasoning_summary,
+            "source_node_id": terminal.node_id,
+            "used_hyperedge_ids": list(terminal.used_hyperedge_ids),
+            "insufficient": terminal.insufficient,
+            "atomic_answer_trace": [
+                {
+                    "node_id": result.node_id,
+                    "question": result.question,
+                    "answer": result.answer,
+                    "confidence": result.confidence,
+                    "answer_type": result.analysis.answer_type,
+                    "used_hyperedge_ids": list(result.used_hyperedge_ids),
+                    "insufficient": result.insufficient,
+                }
+                for result in atomic_results
+            ],
+            "remaining_gaps": [
+                result.node_id
+                for result in atomic_results
+                if result.insufficient or result.answer.strip().upper() == "INSUFFICIENT_EVIDENCE"
+            ],
         }
 
 
@@ -599,3 +795,78 @@ def _dedupe_strings(values: Iterable[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _can_reach_terminal(start_id: str, terminal_id: str, dependents: dict[str, list[str]]) -> bool:
+    stack = list(dependents.get(start_id, []))
+    seen: set[str] = set()
+    while stack:
+        node_id = stack.pop()
+        if node_id == terminal_id:
+            return True
+        if node_id in seen:
+            continue
+        seen.add(node_id)
+        stack.extend(dependents.get(node_id, []))
+    return False
+
+
+def _normalized_answer_type(answer_type: str, question: str) -> str:
+    raw = normalize_label(str(answer_type or "")).lower()
+    lowered = normalize_label(str(question or "")).lower()
+
+    if _looks_like_candidate_selection(lowered):
+        return "candidate selection"
+    if lowered.startswith(("is ", "are ", "was ", "were ", "do ", "does ", "did ")):
+        return "boolean"
+    if "nationality" in lowered or "nationality" in raw:
+        return "nationality"
+    if "which country" in lowered or "what country" in lowered or raw == "country" or "country" in raw:
+        return "country"
+    if "how many" in lowered or "count" in raw or "number" in raw:
+        return "number/count"
+    if "year" in raw or lowered.startswith("what year"):
+        return "year"
+    if "date" in raw or lowered.startswith("when") or "birthday" in lowered:
+        return "date"
+    if "city" in raw:
+        return "city"
+    if "place" in raw or "location" in raw or lowered.startswith("where"):
+        return "location"
+    if any(marker in raw for marker in ("organization", "institution", "school", "employer", "workplace")):
+        return "organization"
+    if any(marker in raw for marker in ("work", "film", "movie", "song", "album", "book", "magazine")):
+        return "work"
+    if "person" in raw or lowered.startswith("who"):
+        return "person"
+    if raw:
+        return raw
+    return "short answer"
+
+
+def _looks_like_candidate_selection(question: str) -> bool:
+    if " or " not in question:
+        return False
+    selection_markers = (
+        "which ",
+        "who ",
+        "born first",
+        "born later",
+        "born earlier",
+        "died first",
+        "died later",
+        "released first",
+        "released earlier",
+        "came out first",
+        "came out earlier",
+        "older",
+        "younger",
+        "longer",
+        "more recently",
+    )
+    return any(marker in question for marker in selection_markers)
+
+
+def _yes_no_judgment(answer: str) -> str | None:
+    normalized = str(answer or "").strip().lower()
+    return normalized if normalized in {"yes", "no"} else None

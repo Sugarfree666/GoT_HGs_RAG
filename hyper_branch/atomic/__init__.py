@@ -1,5 +1,4 @@
 from .analyzer import AtomicQuestionAnalyzer
-from .composer import FinalAnswerComposer
 from .executor import AtomicDagExecutor, DagCycleError
 from .models import (
     AtomicAnswerResult,
@@ -19,6 +18,5 @@ __all__ = [
     "AtomicQuestionNode",
     "DagCycleError",
     "DagExecutionResult",
-    "FinalAnswerComposer",
     "FusedHyperedgeCandidate",
 ]

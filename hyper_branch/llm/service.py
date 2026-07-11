@@ -22,25 +22,9 @@ class AtomicLLMService(ABC):
     def answer_atomic_question(
         self,
         atomic_question: str,
+        answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-    @abstractmethod
-    def compose_final_answer(
-        self,
-        original_question: str,
-        dag_nodes: list[dict[str, Any]],
-        atomic_results: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-    @abstractmethod
-    def finalize_answer_span(
-        self,
-        original_question: str,
-        synthesis_candidate: dict[str, Any],
     ) -> dict[str, Any]:
         raise NotImplementedError
 
@@ -83,6 +67,7 @@ class OpenAIAtomicLLMService(AtomicLLMService):
     def answer_atomic_question(
         self,
         atomic_question: str,
+        answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
     ) -> dict[str, Any]:
@@ -91,66 +76,17 @@ class OpenAIAtomicLLMService(AtomicLLMService):
             self.prompts.get("atomic_answer"),
             {
                 "atomic_question": atomic_question,
+                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
-                "top_evidence": evidence,
+                "evidence": evidence,
             },
             max_tokens=900,
         )
         response.setdefault("answer", "")
         response.setdefault("confidence", 0.0)
         response.setdefault("reasoning_summary", "")
-        response.setdefault("used_hyperedge_ids", [])
+        response.setdefault("used_evidence_ids", [])
         response.setdefault("insufficient", False)
-        return response
-
-    def compose_final_answer(
-        self,
-        original_question: str,
-        dag_nodes: list[dict[str, Any]],
-        atomic_results: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        response = self.client.chat_json(
-            "final_answer_composer",
-            self.prompts.get("final_answer_composer"),
-            {
-                "original_question": original_question,
-                "dag": dag_nodes,
-                "atomic_results": atomic_results,
-            },
-            max_tokens=1400,
-        )
-        response.setdefault("answer", response.get("candidate_answer", ""))
-        response.setdefault("candidate_answer", response.get("answer", ""))
-        response.setdefault("semantic_answer", response.get("candidate_answer", response.get("answer", "")))
-        response.setdefault("judgment", None)
-        response.setdefault("reasoning_summary", "")
-        response.setdefault("answer_span_reasoning", "")
-        response.setdefault("confidence", 0.0)
-        response.setdefault("atomic_answer_trace", [])
-        response.setdefault("remaining_gaps", [])
-        return response
-
-    def finalize_answer_span(
-        self,
-        original_question: str,
-        synthesis_candidate: dict[str, Any],
-    ) -> dict[str, Any]:
-        # Legacy interface retained for compatibility. The default HyperBranch
-        # pipeline resolves and canonicalizes the final answer in
-        # compose_final_answer() and does not call this method.
-        response = self.client.chat_json(
-            "final_answer_span",
-            self.prompts.get("final_answer_span"),
-            {
-                "original_question": original_question,
-                "candidate_answer": synthesis_candidate.get("candidate_answer", synthesis_candidate.get("answer", "")),
-                "reasoning_summary": synthesis_candidate.get("reasoning_summary", ""),
-            },
-            max_tokens=400,
-        )
-        response.setdefault("answer", "")
-        response.setdefault("confidence", synthesis_candidate.get("confidence", 0.0))
-        response.setdefault("answer_span_reasoning", "")
         return response
 
     def select_anchor_entity(
@@ -207,12 +143,14 @@ class MockAtomicLLMService(AtomicLLMService):
     def answer_atomic_question(
         self,
         atomic_question: str,
+        answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
     ) -> dict[str, Any]:
         self.answer_calls.append(
             {
                 "atomic_question": atomic_question,
+                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
                 "evidence": evidence,
             }
@@ -224,7 +162,7 @@ class MockAtomicLLMService(AtomicLLMService):
                 "answer": "INSUFFICIENT_EVIDENCE",
                 "confidence": 0.0,
                 "reasoning_summary": "No top evidence was provided.",
-                "used_hyperedge_ids": [],
+                "used_evidence_ids": [],
                 "insufficient": True,
             }
 
@@ -232,19 +170,23 @@ class MockAtomicLLMService(AtomicLLMService):
         answer = ""
         first = evidence[0]
         for item in evidence:
-            for entity_id in ensure_list(item.get("entity_ids", [])):
-                label = normalize_label(str(entity_id))
-                label_tokens = set(content_tokens(label))
-                if label and not label_tokens.issubset(query_tokens):
-                    answer = label
+            text = " ".join(
+                [
+                    str(item.get("hyperedge_text", "") or ""),
+                    *[str(chunk) for chunk in ensure_list(item.get("chunk_texts", []))],
+                ]
+            )
+            for token in content_tokens(text):
+                if token not in query_tokens:
+                    answer = normalize_label(token)
                     break
             if answer:
                 break
         if not answer:
             answer = short_text(str(first.get("hyperedge_text", "")), 160)
 
-        confidence = min(0.95, 0.35 + (0.1 * len(first.get("branch_support", []))) + (0.03 * len(evidence)))
-        evidence_texts = ensure_list(first.get("evidence_texts", []))
+        confidence = min(0.95, 0.35 + (0.03 * len(evidence)))
+        evidence_texts = ensure_list(first.get("chunk_texts", []))
         summary = short_text(
             " ".join(str(item) for item in evidence_texts) or str(first.get("hyperedge_text", "")),
             420,
@@ -253,67 +195,8 @@ class MockAtomicLLMService(AtomicLLMService):
             "answer": answer,
             "confidence": confidence,
             "reasoning_summary": summary,
-            "used_hyperedge_ids": [str(first.get("hyperedge_id", ""))],
+            "used_evidence_ids": [str(first.get("evidence_id", ""))],
             "insufficient": False,
-        }
-
-    def compose_final_answer(
-        self,
-        original_question: str,
-        dag_nodes: list[dict[str, Any]],
-        atomic_results: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        del original_question, dag_nodes
-        answers = [
-            str(item.get("answer", "")).strip()
-            for item in atomic_results
-            if str(item.get("answer", "")).strip() and str(item.get("answer", "")).strip() != "INSUFFICIENT_EVIDENCE"
-        ]
-        answer = answers[-1] if answers else "INSUFFICIENT_EVIDENCE"
-        if len(answers) > 1:
-            answer = "; ".join(answers)
-        confidence_values = [float(item.get("confidence", 0.0) or 0.0) for item in atomic_results]
-        confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 0.0
-        judgment = answer.lower() if answer.lower() in {"yes", "no"} else None
-        return {
-            "answer": answer,
-            "candidate_answer": answer,
-            "semantic_answer": answer,
-            "judgment": judgment,
-            "reasoning_summary": short_text(
-                " | ".join(str(item.get("reasoning_summary", "")) for item in atomic_results),
-                600,
-            ),
-            "answer_span_reasoning": "Mock single-stage final resolver mirrors the selected answer.",
-            "confidence": confidence,
-            "atomic_answer_trace": [
-                {
-                    "node_id": item.get("node_id", ""),
-                    "question": item.get("question", ""),
-                    "answer": item.get("answer", ""),
-                    "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])),
-                }
-                for item in atomic_results
-            ],
-            "remaining_gaps": [
-                item.get("node_id", "")
-                for item in atomic_results
-                if str(item.get("answer", "")).strip() in {"", "INSUFFICIENT_EVIDENCE"}
-            ],
-        }
-
-    def finalize_answer_span(
-        self,
-        original_question: str,
-        synthesis_candidate: dict[str, Any],
-    ) -> dict[str, Any]:
-        # Legacy interface retained for compatibility. The main pipeline does
-        # not call this method.
-        del original_question
-        return {
-            "answer": str(synthesis_candidate.get("candidate_answer", synthesis_candidate.get("answer", ""))).strip(),
-            "confidence": float(synthesis_candidate.get("confidence", 0.0) or 0.0),
-            "answer_span_reasoning": "Mock final span mirrors the candidate answer.",
         }
 
     def select_anchor_entity(

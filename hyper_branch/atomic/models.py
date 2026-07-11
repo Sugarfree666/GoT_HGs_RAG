@@ -82,6 +82,7 @@ class AtomicAnswerResult:
     reasoning_summary: str
     used_dependencies: list[str] = field(default_factory=list)
     used_hyperedge_ids: list[str] = field(default_factory=list)
+    insufficient: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -94,6 +95,7 @@ class AtomicAnswerResult:
             "reasoning_summary": self.reasoning_summary,
             "used_dependencies": list(self.used_dependencies),
             "used_hyperedge_ids": list(self.used_hyperedge_ids),
+            "insufficient": self.insufficient,
         }
 
 

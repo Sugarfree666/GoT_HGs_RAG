@@ -7,13 +7,18 @@
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/2wikimultihopqa.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/2wikimultihopqa.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/agriculture.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/agriculture.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/hotpotqa.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/hotpotqa.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/musique.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/musique.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/composer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/dependency_rewrite.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/dependency_rewrite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/agriculture_fixture.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agriculture_fixture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/atomic_answer.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_answer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/final_answer_composer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/final_answer_span.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,23 +48,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0003889249121263" />
-      <entry key="S5" value="1.1649497728856308" />
-      <entry key="S10" value="2.318828656481208" />
-      <entry key="S30" value="6.396662509377697" />
-      <entry key="S60" value="8.702241980504233" />
-      <entry key="M2" value="10.378159753129326" />
-      <entry key="M5" value="14.36244292837761" />
-      <entry key="M10" value="22.17732736830889" />
-      <entry key="M15" value="30.053909526999718" />
-      <entry key="M30" value="51.49239403351072" />
-      <entry key="H1" value="91.19147766502921" />
-      <entry key="H2" value="177.53921771076156" />
-      <entry key="H4" value="343.77731102741654" />
-      <entry key="D1" value="1008.6539965640884" />
-      <entry key="W1" value="2941.3633691425985" />
+      <entry key="MS100" value="1.1961557486000676" />
+      <entry key="MS500" value="1.8217892257652486" />
+      <entry key="S2" value="2.6362172283964993" />
+      <entry key="S5" value="3.7074979495162097" />
+      <entry key="S10" value="5.252286331959747" />
+      <entry key="S30" value="8.540594487388713" />
+      <entry key="S60" value="12.286514542396365" />
+      <entry key="M2" value="18.8978592092807" />
+      <entry key="M5" value="33.72898992331277" />
+      <entry key="M10" value="45.88038462495207" />
+      <entry key="M15" value="54.51225302289696" />
+      <entry key="M30" value="83.30517654343573" />
+      <entry key="H1" value="132.4672873873108" />
+      <entry key="H2" value="191.94015097828688" />
+      <entry key="H4" value="287.39499071362565" />
+      <entry key="D1" value="1092.4802658436195" />
+      <entry key="W1" value="3270.4692653446446" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -81,23 +86,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592641193252643" />
-      <entry key="MS500" value="0.9917167307382933" />
-      <entry key="S2" value="0.9983108525753747" />
-      <entry key="S5" value="1.163980828157886" />
-      <entry key="S10" value="2.3178558601514694" />
-      <entry key="S30" value="6.395756835018818" />
-      <entry key="S60" value="8.701623939942571" />
-      <entry key="M2" value="10.377790023662467" />
-      <entry key="M5" value="14.362232423047885" />
-      <entry key="M10" value="22.177158029865687" />
-      <entry key="M15" value="30.05375291565418" />
-      <entry key="M30" value="51.49225378404801" />
-      <entry key="H1" value="91.19134220690302" />
-      <entry key="H2" value="177.53907616403757" />
-      <entry key="H4" value="343.77717344311486" />
-      <entry key="D1" value="1008.653925942931" />
-      <entry key="W1" value="2941.363336598337" />
+      <entry key="MS100" value="1.1500558484503827" />
+      <entry key="MS500" value="1.808686214189322" />
+      <entry key="S2" value="2.6313345529779184" />
+      <entry key="S5" value="3.704664900246537" />
+      <entry key="S10" value="5.250259587118151" />
+      <entry key="S30" value="8.539474167433065" />
+      <entry key="S60" value="12.28567592914646" />
+      <entry key="M2" value="18.8972002580389" />
+      <entry key="M5" value="33.72852809433517" />
+      <entry key="M10" value="45.880075356574395" />
+      <entry key="M15" value="54.51200942189906" />
+      <entry key="M30" value="83.30498976515567" />
+      <entry key="H1" value="132.46713682229657" />
+      <entry key="H2" value="191.94003996912983" />
+      <entry key="H4" value="287.3949035120519" />
+      <entry key="D1" value="1092.4801979633328" />
+      <entry key="W1" value="3270.469231083477" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -269,7 +274,7 @@
       <workItem from="1783646835627" duration="14316000" />
       <workItem from="1783663148533" duration="4826000" />
       <workItem from="1783668578156" duration="1133000" />
-      <workItem from="1783669951584" duration="15150000" />
+      <workItem from="1783669951584" duration="44398000" />
     </task>
     <servers />
   </component>

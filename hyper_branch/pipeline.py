@@ -8,7 +8,6 @@ from .atomic import (
     AtomicDagExecutor,
     AtomicHyperedgeRetriever,
     AtomicQuestionAnalyzer,
-    FinalAnswerComposer,
 )
 from .config import Config
 from .data.loaders import HypergraphDatasetLoader
@@ -50,12 +49,10 @@ class HyperBranchPipeline:
             llm_service=self.llm_service,
             logger=logger,
         )
-        composer = FinalAnswerComposer(llm_service=self.llm_service)
         self.retriever = retriever
         self.executor = AtomicDagExecutor(
             analyzer=analyzer,
             retriever=retriever,
-            composer=composer,
             llm_service=self.llm_service,
             logger=logger,
         )
