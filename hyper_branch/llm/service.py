@@ -82,12 +82,9 @@ class OpenAIAtomicLLMService(AtomicLLMService):
             },
             max_tokens=900,
         )
-        response.setdefault("answer", "")
-        response.setdefault("confidence", 0.0)
-        response.setdefault("reasoning_summary", "")
-        response.setdefault("used_evidence_ids", [])
-        response.setdefault("insufficient", False)
-        return response
+        if not isinstance(response, dict):
+            return {"answer": ""}
+        return {"answer": str(response.get("answer", "") or "")}
 
     def select_anchor_entity(
         self,
@@ -156,15 +153,10 @@ class MockAtomicLLMService(AtomicLLMService):
             }
         )
         if self.answer_responses:
-            return self.answer_responses.pop(0)
+            response = self.answer_responses.pop(0)
+            return {"answer": str(response.get("answer", "") or "")} if isinstance(response, dict) else {"answer": ""}
         if not evidence:
-            return {
-                "answer": "INSUFFICIENT_EVIDENCE",
-                "confidence": 0.0,
-                "reasoning_summary": "No top evidence was provided.",
-                "used_evidence_ids": [],
-                "insufficient": True,
-            }
+            return {"answer": "INSUFFICIENT_EVIDENCE"}
 
         query_tokens = set(content_tokens(atomic_question))
         answer = ""
@@ -185,19 +177,7 @@ class MockAtomicLLMService(AtomicLLMService):
         if not answer:
             answer = short_text(str(first.get("hyperedge_text", "")), 160)
 
-        confidence = min(0.95, 0.35 + (0.03 * len(evidence)))
-        evidence_texts = ensure_list(first.get("chunk_texts", []))
-        summary = short_text(
-            " ".join(str(item) for item in evidence_texts) or str(first.get("hyperedge_text", "")),
-            420,
-        )
-        return {
-            "answer": answer,
-            "confidence": confidence,
-            "reasoning_summary": summary,
-            "used_evidence_ids": [str(first.get("evidence_id", ""))],
-            "insufficient": False,
-        }
+        return {"answer": answer}
 
     def select_anchor_entity(
         self,

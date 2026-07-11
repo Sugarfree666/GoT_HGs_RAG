@@ -53,6 +53,40 @@ prompts:
         self.assertEqual(RetrievalConfig().local_hyperedge_top_k, 3)
         self.assertEqual(RetrievalConfig().local_hyperedge_hops, 2)
 
+    def test_atomic_answer_prompt_allows_only_answer_key(self) -> None:
+        project_root = Path(__file__).resolve().parents[1]
+        prompt = (project_root / "prompts" / "atomic_answer.md").read_text(encoding="utf-8")
+
+        self.assertIn('"answer": "..."', prompt)
+        self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
+        self.assertIn('The only allowed key is "answer".', prompt)
+        self.assertNotIn('"confidence"', prompt)
+        self.assertNotIn('"reasoning_summary"', prompt)
+        self.assertNotIn('"used_evidence_ids"', prompt)
+        self.assertNotIn('"insufficient"', prompt)
+
+    def test_mock_answer_service_returns_only_answer_key(self) -> None:
+        llm = MockAtomicLLMService(
+            answer_responses=[
+                {
+                    "answer": "Answer",
+                    "confidence": 0.4,
+                    "reasoning_summary": "ignored",
+                    "used_evidence_ids": ["E1"],
+                    "insufficient": False,
+                }
+            ]
+        )
+
+        response = llm.answer_atomic_question(
+            atomic_question="Question?",
+            answer_contract={},
+            dependency_answers=[],
+            evidence=[],
+        )
+
+        self.assertEqual(response, {"answer": "Answer"})
+
 
 class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
     def test_dag_runs_topologically_and_rewrites_dependency_question(self) -> None:
@@ -134,7 +168,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             {"answer_type": "location", "output_format": "minimal supported place"},
         )
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "Meek Mill")
-        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["confidence"], 0.9)
+        self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["confidence"], 1.0)
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer_type"], "person")
         self.assertFalse(llm.answer_calls[1]["dependency_answers"][0]["insufficient"])
         self.assertEqual(
@@ -150,7 +184,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertFalse(hasattr(llm, "answer_atomic_question_from_paths"))
 
         second_retrieval = result.artifacts["atomic_retrieval"][1]
-        self.assertEqual(second_retrieval["method"], "two_hop_primary_anchor_topk")
+        self.assertEqual(second_retrieval["method"], "two_hop_multi_anchor_topk")
         self.assertEqual(second_retrieval["primary_anchor_mention"], "Meek Mill")
         self.assertEqual(second_retrieval["linked_entity_id"], "Meek Mill")
         self.assertEqual(second_retrieval["adjacent_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
@@ -372,6 +406,52 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(first["score_breakdown"]["candidate_hop"], 2)
         self.assertEqual(first["score_breakdown"]["via_entity_ids"], ["A2"])
 
+    def test_retrieval_merges_two_hop_pool_from_all_detected_entities(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Messi": ["H_MSN"],
+                "Copa del Rey": ["H_COMPARED"],
+                "Barcelona": ["H_MSN"],
+                "Neymar": ["H_MSN", "H_WORLD_CUP"],
+                "Diego Maradona's goal of the century": ["H_COMPARED", "H_GOAL"],
+            },
+            hyperedge_entities={
+                "H_MSN": ["Messi", "Neymar", "Barcelona"],
+                "H_WORLD_CUP": ["Neymar", "World Cup"],
+                "H_COMPARED": ["Copa del Rey", "Goal from Messi", "Diego Maradona's goal of the century", "Getafe"],
+                "H_GOAL": ["Diego Maradona's goal of the century", "Diego Maradona"],
+            },
+            hyperedge_texts={
+                "H_MSN": "Barcelona's attacking trio of Messi, Suarez and Neymar scored 122 goals.",
+                "H_WORLD_CUP": "Neymar scored five goals in the 2014 World Cup.",
+                "H_COMPARED": "A goal from Messi in the Copa del Rey brought comparison to Diego Maradona's goal of the century.",
+                "H_GOAL": "Diego Maradona's goal of the century refers to Diego Maradona.",
+            },
+        )
+        store = ScoreHyperedgeStore({"H_MSN": 0.2, "H_WORLD_CUP": 0.1, "H_COMPARED": 0.99, "H_GOAL": 0.8})
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, store),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=3),
+            llm_service=MockAtomicLLMService(),
+            logger=logging.getLogger("test.multi_anchor_retriever"),
+        )
+
+        result = retriever.retrieve_primary_anchor_local(
+            question="Who is the person that Messi's goals in Copa del Rey were compared to for getting signed by Barcelona?",
+            analysis=AtomicQuestionAnalysis(entities=["Messi", "Copa del Rey", "Barcelona"], answer_type="person"),
+            primary_anchor_mention="Messi",
+        )
+
+        self.assertEqual(result.primary_anchor_mention, "Messi")
+        self.assertEqual([item["mention"] for item in result.linked_entities], ["Messi", "Copa del Rey", "Barcelona"])
+        self.assertIn("H_COMPARED", result.candidate_hyperedge_ids)
+        self.assertIn("H_GOAL", result.candidate_hyperedge_ids)
+        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges[:2]], ["H_COMPARED", "H_GOAL"])
+        compared = next(item for item in result.evidence if item.hyperedge_id == "H_COMPARED")
+        self.assertIn("Copa del Rey", compared.score_breakdown["anchor_mentions"])
+        self.assertIn("Copa del Rey", compared.score_breakdown["anchor_entity_ids"])
+
     def test_answerer_receives_complete_top3_evidence_once(self) -> None:
         graph = LocalGraph(
             entity_edges={"Subject": ["H1", "H2", "H3", "H4"]},
@@ -528,7 +608,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             ],
             "top_evidence": [item.to_dict() for item in candidates],
         }
-        compact_evidence, _ = AtomicDagExecutor._answer_evidence_payload(candidates)
+        compact_evidence = AtomicDagExecutor._answer_evidence_payload(candidates)
         compact_payload = {
             "atomic_question": "What country is Perry Bhandal from?",
             "answer_contract": {"answer_type": "country", "output_format": "country name only"},

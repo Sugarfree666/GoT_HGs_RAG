@@ -17,7 +17,7 @@ from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 
 _ANCHOR_ENTITY_TOP_K = 3
 _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
-_LOCAL_RETRIEVAL_METHOD = "two_hop_primary_anchor_topk"
+_LOCAL_RETRIEVAL_METHOD = "two_hop_multi_anchor_topk"
 
 
 @dataclass(slots=True)
@@ -50,6 +50,10 @@ class LocalHyperedgeRetrievalResult:
     primary_anchor_mention: str = ""
     linked_entity_id: str = ""
     anchor_match: dict[str, Any] = field(default_factory=dict)
+    anchor_mentions: list[str] = field(default_factory=list)
+    linked_entities: list[dict[str, Any]] = field(default_factory=list)
+    anchor_matches: list[dict[str, Any]] = field(default_factory=list)
+    unlinked_anchor_mentions: list[str] = field(default_factory=list)
     adjacent_hyperedge_ids: list[str] = field(default_factory=list)
     expansion_entity_ids: list[str] = field(default_factory=list)
     second_hop_hyperedge_ids: list[str] = field(default_factory=list)
@@ -68,6 +72,10 @@ class LocalHyperedgeRetrievalResult:
             "primary_anchor_mention": self.primary_anchor_mention,
             "linked_entity_id": self.linked_entity_id,
             "anchor_match": dict(self.anchor_match),
+            "anchor_mentions": list(self.anchor_mentions),
+            "linked_entities": [dict(item) for item in self.linked_entities],
+            "anchor_matches": [dict(item) for item in self.anchor_matches],
+            "unlinked_anchor_mentions": list(self.unlinked_anchor_mentions),
             "adjacent_hyperedge_ids": list(self.adjacent_hyperedge_ids),
             "expansion_entity_ids": list(self.expansion_entity_ids),
             "second_hop_hyperedge_ids": list(self.second_hop_hyperedge_ids),
@@ -105,30 +113,56 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str,
     ) -> LocalHyperedgeRetrievalResult:
-        mention = normalize_label(str(primary_anchor_mention or "").strip())
-        result = LocalHyperedgeRetrievalResult(primary_anchor_mention=mention)
-        if not mention:
+        anchor_mentions = self._anchor_mentions(primary_anchor_mention, analysis)
+        primary_mention = anchor_mentions[0] if anchor_mentions else ""
+        result = LocalHyperedgeRetrievalResult(
+            primary_anchor_mention=primary_mention,
+            anchor_mentions=list(anchor_mentions),
+        )
+        if not anchor_mentions:
             result.insufficient_reason = "missing_primary_anchor"
             return result
 
-        match = self.link_primary_anchor(
-            question=question,
-            mention=mention,
-            analysis=analysis,
-        )
-        if match is None:
+        linked_matches: list[AnchorEntityMatch] = []
+        seen_linked_entity_ids: set[str] = set()
+        for query_index, mention in enumerate(anchor_mentions):
+            match = self.link_anchor_entity(
+                question=question,
+                mention=mention,
+                analysis=analysis,
+                query_index=query_index,
+            )
+            if match is None:
+                result.unlinked_anchor_mentions.append(mention)
+                continue
+            if match.entity_id in seen_linked_entity_ids:
+                continue
+            seen_linked_entity_ids.add(match.entity_id)
+            linked_matches.append(match)
+
+        if not linked_matches:
             result.insufficient_reason = "unlinked_primary_anchor"
             return result
 
-        result.linked_entity_id = match.entity_id
-        result.anchor_match = match.to_metadata()
-        adjacent_ids = self._adjacent_hyperedge_ids(match.entity_id)
-        result.adjacent_hyperedge_ids = list(adjacent_ids)
-        if not adjacent_ids:
+        result.linked_entity_id = linked_matches[0].entity_id
+        result.anchor_match = linked_matches[0].to_metadata()
+        result.anchor_matches = [match.to_metadata() for match in linked_matches]
+        result.linked_entities = [
+            {
+                "mention": match.query_entity,
+                "entity_id": match.entity_id,
+                "match_type": match.match_type,
+                "link_score": match.link_score,
+            }
+            for match in linked_matches
+        ]
+
+        candidate_pool = self._multi_anchor_candidate_pool(linked_matches)
+        result.adjacent_hyperedge_ids = list(candidate_pool["adjacent_hyperedge_ids"])
+        if not result.adjacent_hyperedge_ids:
             result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
             return result
 
-        candidate_pool = self._local_candidate_pool(match.entity_id, adjacent_ids)
         result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
         result.second_hop_hyperedge_ids = list(candidate_pool["second_hop_hyperedge_ids"])
         result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
@@ -166,8 +200,8 @@ class AtomicHyperedgeRetriever:
                 hyperedge_id=str(item["hyperedge_id"]),
                 semantic_score=float(item["semantic_score"]),
                 rank=int(item["rank"]),
-                primary_anchor_mention=mention,
-                primary_anchor_entity_id=match.entity_id,
+                primary_anchor_mention=primary_mention,
+                primary_anchor_entity_id=result.linked_entity_id,
                 candidate_source=source_by_id.get(str(item["hyperedge_id"]), {}),
             )
             for item in selected
@@ -177,6 +211,19 @@ class AtomicHyperedgeRetriever:
             result.insufficient_reason = "no_valid_local_evidence"
         return result
 
+    @staticmethod
+    def _anchor_mentions(primary_anchor_mention: str, analysis: AtomicQuestionAnalysis) -> list[str]:
+        raw_mentions = [primary_anchor_mention, *analysis.entities]
+        mentions: list[str] = []
+        seen: set[str] = set()
+        for raw_mention in raw_mentions:
+            mention = normalize_label(str(raw_mention or "").strip())
+            key = mention.lower()
+            if mention and key not in seen:
+                seen.add(key)
+                mentions.append(mention)
+        return mentions
+
     def link_primary_anchor(
         self,
         *,
@@ -184,11 +231,21 @@ class AtomicHyperedgeRetriever:
         mention: str,
         analysis: AtomicQuestionAnalysis,
     ) -> AnchorEntityMatch | None:
+        return self.link_anchor_entity(question=question, mention=mention, analysis=analysis, query_index=0)
+
+    def link_anchor_entity(
+        self,
+        *,
+        question: str,
+        mention: str,
+        analysis: AtomicQuestionAnalysis,
+        query_index: int,
+    ) -> AnchorEntityMatch | None:
         matches = self._resolve_anchor_entity_matches(
             question=question,
             entity=mention,
             analysis=analysis,
-            query_index=0,
+            query_index=query_index,
         )
         if not matches:
             return None
@@ -205,6 +262,45 @@ class AtomicHyperedgeRetriever:
         if not entity_id or not hasattr(self.dataset.graph, "entity_hyperedge_ids"):
             return []
         return _dedupe_strings([str(item) for item in self.dataset.graph.entity_hyperedge_ids(entity_id)])
+
+    def _multi_anchor_candidate_pool(self, matches: list[AnchorEntityMatch]) -> dict[str, Any]:
+        adjacent_ids: list[str] = []
+        expansion_entity_ids: list[str] = []
+        second_hop_ids: list[str] = []
+        candidate_ids: list[str] = []
+        source_by_id: dict[str, dict[str, Any]] = {}
+
+        for match in matches:
+            first_hop_ids = self._adjacent_hyperedge_ids(match.entity_id)
+            adjacent_ids.extend(hyperedge_id for hyperedge_id in first_hop_ids if hyperedge_id not in adjacent_ids)
+            candidate_pool = self._local_candidate_pool(match.entity_id, first_hop_ids)
+            expansion_entity_ids.extend(
+                entity_id
+                for entity_id in candidate_pool["expansion_entity_ids"]
+                if entity_id not in expansion_entity_ids
+            )
+            second_hop_ids.extend(
+                hyperedge_id
+                for hyperedge_id in candidate_pool["second_hop_hyperedge_ids"]
+                if hyperedge_id not in second_hop_ids
+            )
+            for hyperedge_id in candidate_pool["candidate_hyperedge_ids"]:
+                if hyperedge_id not in candidate_ids:
+                    candidate_ids.append(hyperedge_id)
+            for source in candidate_pool["candidate_sources"]:
+                enriched = dict(source)
+                enriched["anchor_mentions"] = [match.query_entity]
+                enriched["anchor_entity_ids"] = [match.entity_id]
+                enriched["anchor_query_indices"] = [match.query_index]
+                self._merge_candidate_source(source_by_id, enriched)
+
+        return {
+            "adjacent_hyperedge_ids": adjacent_ids,
+            "expansion_entity_ids": expansion_entity_ids,
+            "second_hop_hyperedge_ids": second_hop_ids,
+            "candidate_hyperedge_ids": candidate_ids,
+            "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
+        }
 
     def _local_candidate_pool(self, primary_anchor_entity_id: str, first_hop_ids: list[str]) -> dict[str, Any]:
         candidate_ids = _dedupe_strings(list(first_hop_ids))
@@ -256,6 +352,32 @@ class AtomicHyperedgeRetriever:
             "candidate_hyperedge_ids": candidate_ids,
             "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
         }
+
+    @staticmethod
+    def _merge_candidate_source(source_by_id: dict[str, dict[str, Any]], source: dict[str, Any]) -> None:
+        hyperedge_id = str(source.get("hyperedge_id", "") or "")
+        if not hyperedge_id:
+            return
+        existing = source_by_id.setdefault(
+            hyperedge_id,
+            {
+                "hyperedge_id": hyperedge_id,
+                "hop": int(source.get("hop", 1) or 1),
+                "via_entity_ids": [],
+                "via_first_hyperedge_ids": [],
+                "anchor_mentions": [],
+                "anchor_entity_ids": [],
+                "anchor_query_indices": [],
+            },
+        )
+        existing["hop"] = min(int(existing.get("hop", 1) or 1), int(source.get("hop", 1) or 1))
+        for key in ("via_entity_ids", "via_first_hyperedge_ids", "anchor_mentions", "anchor_entity_ids"):
+            for value in source.get(key, []):
+                if value not in existing[key]:
+                    existing[key].append(value)
+        for value in source.get("anchor_query_indices", []):
+            if value not in existing["anchor_query_indices"]:
+                existing["anchor_query_indices"].append(value)
 
     def _hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
         if hasattr(self.dataset.graph, "hyperedge_entity_ids"):
@@ -325,6 +447,9 @@ class AtomicHyperedgeRetriever:
                 "candidate_hop": candidate_hop,
                 "via_entity_ids": list(candidate_source.get("via_entity_ids", [])),
                 "via_first_hyperedge_ids": list(candidate_source.get("via_first_hyperedge_ids", [])),
+                "anchor_mentions": list(candidate_source.get("anchor_mentions", [])),
+                "anchor_entity_ids": list(candidate_source.get("anchor_entity_ids", [])),
+                "anchor_query_indices": list(candidate_source.get("anchor_query_indices", [])),
             },
         )
 

@@ -351,7 +351,7 @@ class AtomicDagExecutor:
     ) -> dict[str, Any]:
         answer_contract = self._answer_contract(analysis, atomic_question)
         answer_dependency_answers = self._answer_dependency_context(dependency_answers)
-        evidence_payload, evidence_id_map = self._answer_evidence_payload(evidence)
+        evidence_payload = self._answer_evidence_payload(evidence)
         if self.llm_service is not None:
             payload = self.llm_service.answer_atomic_question(
                 atomic_question=atomic_question,
@@ -359,7 +359,6 @@ class AtomicDagExecutor:
                 dependency_answers=answer_dependency_answers,
                 evidence=evidence_payload,
             )
-            payload = self._with_mapped_used_evidence_ids(payload, evidence_id_map)
         else:
             payload = self._fallback_answer(atomic_question, analysis, evidence, dependency_answers)
         return self._coerce_answer_payload(payload, atomic_question, analysis, evidence, dependency_answers)
@@ -382,13 +381,11 @@ class AtomicDagExecutor:
         return compact
 
     @staticmethod
-    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> tuple[list[dict[str, Any]], dict[str, str]]:
+    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> list[dict[str, Any]]:
         payload: list[dict[str, Any]] = []
-        evidence_id_map: dict[str, str] = {}
         seen_chunk_texts: set[str] = set()
         for index, item in enumerate(evidence, start=1):
             evidence_id = f"E{index}"
-            evidence_id_map[evidence_id] = item.hyperedge_id
             chunk_texts: list[str] = []
             for raw_text in item.chunk_texts:
                 text = str(raw_text or "").strip()
@@ -403,7 +400,7 @@ class AtomicDagExecutor:
                     "chunk_texts": chunk_texts,
                 }
             )
-        return payload, evidence_id_map
+        return payload
 
     @staticmethod
     def _answer_contract(analysis: AtomicQuestionAnalysis, question: str) -> dict[str, str]:
@@ -426,20 +423,6 @@ class AtomicDagExecutor:
             "answer_type": answer_type,
             "output_format": output_formats.get(answer_type, "short answer only"),
         }
-
-    @staticmethod
-    def _with_mapped_used_evidence_ids(payload: Any, evidence_id_map: dict[str, str]) -> Any:
-        if not isinstance(payload, dict):
-            return payload
-        used_hyperedge_ids: list[str] = []
-        valid_evidence_ids = set(evidence_id_map)
-        for evidence_id in ensure_list(payload.get("used_evidence_ids", [])):
-            text = str(evidence_id or "").strip()
-            if text in valid_evidence_ids:
-                used_hyperedge_ids.append(evidence_id_map[text])
-        payload["used_hyperedge_ids"] = _dedupe_strings(used_hyperedge_ids)
-        payload["_used_evidence_ids_validated"] = True
-        return payload
 
     def _fallback_answer(
         self,
@@ -528,21 +511,27 @@ class AtomicDagExecutor:
     ) -> dict[str, Any]:
         if not isinstance(payload, dict):
             payload = self._fallback_answer(question, analysis, evidence, dependency_answers)
-        payload.setdefault("answer", "")
-        payload.setdefault("confidence", 0.0)
-        payload.setdefault("reasoning_summary", "")
-        payload.setdefault("used_hyperedge_ids", [])
-        payload.setdefault("used_evidence_ids", [])
-        payload.setdefault("insufficient", False)
-        insufficient = bool(payload.get("insufficient", False))
-        if insufficient and not str(payload.get("answer", "")).strip():
-            payload["answer"] = "INSUFFICIENT_EVIDENCE"
-        if str(payload.get("answer", "")).strip().upper() == "INSUFFICIENT_EVIDENCE":
-            payload["insufficient"] = True
-            payload["confidence"] = 0.0
-        else:
-            payload["confidence"] = max(0.0, min(1.0, float(payload.get("confidence", 0.0) or 0.0)))
-        return payload
+        answer = str(payload.get("answer", "") or "").strip()
+        if not answer:
+            answer = "INSUFFICIENT_EVIDENCE"
+        insufficient = answer.upper() == "INSUFFICIENT_EVIDENCE"
+        coerced = {
+            "answer": "INSUFFICIENT_EVIDENCE" if insufficient else answer,
+            "confidence": 0.0 if insufficient else 1.0,
+            "reasoning_summary": "",
+            "used_hyperedge_ids": [],
+            "insufficient": insufficient,
+        }
+        if insufficient:
+            return coerced
+        coerced["used_hyperedge_ids"] = _dedupe_strings(
+            [
+                str(item).strip()
+                for item in ensure_list(payload.get("used_hyperedge_ids", []))
+                if str(item).strip()
+            ]
+        )
+        return coerced
 
     @staticmethod
     def _insufficient_answer_payload(reason: str) -> dict[str, Any]:
@@ -556,14 +545,6 @@ class AtomicDagExecutor:
 
     @staticmethod
     def _used_hyperedge_ids(payload: dict[str, Any], evidence: list[FusedHyperedgeCandidate]) -> list[str]:
-        if bool(payload.get("_used_evidence_ids_validated", False)):
-            return _dedupe_strings(
-                [
-                    str(item).strip()
-                    for item in ensure_list(payload.get("used_hyperedge_ids", []))
-                    if str(item).strip()
-                ]
-            )
         evidence_ids = {item.hyperedge_id for item in evidence}
         used = [
             str(item).strip()
@@ -588,7 +569,7 @@ class AtomicDagExecutor:
     ) -> dict[str, Any]:
         retrieval_payload = retrieval_result.to_artifact()
         return {
-            "method": "two_hop_primary_anchor_topk",
+            "method": "two_hop_multi_anchor_topk",
             "node_id": node.node_id,
             "original_question": node.question,
             "resolved_question": resolved_question,
@@ -601,6 +582,10 @@ class AtomicDagExecutor:
             "primary_anchor_mention": retrieval_payload["primary_anchor_mention"],
             "linked_entity_id": retrieval_payload["linked_entity_id"],
             "anchor_match": retrieval_payload["anchor_match"],
+            "anchor_mentions": retrieval_payload.get("anchor_mentions", []),
+            "linked_entities": retrieval_payload.get("linked_entities", []),
+            "anchor_matches": retrieval_payload.get("anchor_matches", []),
+            "unlinked_anchor_mentions": retrieval_payload.get("unlinked_anchor_mentions", []),
             "adjacent_hyperedge_ids": retrieval_payload["adjacent_hyperedge_ids"],
             "expansion_entity_ids": retrieval_payload["expansion_entity_ids"],
             "second_hop_hyperedge_ids": retrieval_payload["second_hop_hyperedge_ids"],

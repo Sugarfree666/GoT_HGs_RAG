@@ -11,11 +11,12 @@ Do not infer any fact from evidence_id. Evidence IDs are citation labels only.
 
 Return strict JSON only:
 {
-  "answer": "...",
-  "confidence": 0.0,
-  "reasoning_summary": "...",
-  "used_evidence_ids": ["E1"],
-  "insufficient": false
+  "answer": "..."
+}
+
+If the provided information is insufficient, return strict JSON only:
+{
+  "answer": "INSUFFICIENT_EVIDENCE"
 }
 
 Primary objective:
@@ -43,8 +44,7 @@ Using evidence:
 - The evidence must match the queried entity and requested relation.
 - If evidence contains multiple entities or values, choose the value attached to the entity and relation asked by atomic_question.
 - If evidence items disagree, prefer the item with the clearest entity and relation match.
-- used_evidence_ids must contain only evidence IDs present in the current payload and only items that support the answer.
-- If the answer is based only on dependency_answers, use an empty used_evidence_ids array.
+- Do not output evidence IDs. Evidence IDs are only labels for organizing the input.
 
 Evidence and knowledge policy:
 - Treat provided evidence and dependency_answers as the primary source of truth.
@@ -53,18 +53,10 @@ Evidence and knowledge policy:
 - Do not fabricate a precise answer when dependency_answers and evidence do not support it.
 
 Insufficient evidence:
-Set insufficient=true and answer="INSUFFICIENT_EVIDENCE" when no dependency answer, evidence item, or reliable stable knowledge supports the current atomic_question.
-If insufficient=true, confidence must be 0.0 and used_evidence_ids should be empty unless an evidence item directly explains the insufficiency.
-
-Reasoning summary:
-- Keep reasoning_summary concise.
-- Mention the key dependency answer or evidence label used.
-- Do not reveal hidden chain-of-thought.
-- Do not include unsupported speculation.
+Set answer="INSUFFICIENT_EVIDENCE" when no dependency answer, evidence item, or reliable stable knowledge supports the current atomic_question.
 
 Output rules:
 - Return valid JSON only.
 - Do not wrap JSON in markdown.
 - Do not include extra keys.
-- confidence must be a number between 0 and 1.
-- insufficient must be true or false.
+- The only allowed key is "answer".
