@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -56,13 +55,10 @@ class OpenAIAtomicLLMService(AtomicLLMService):
                 "atomic_question": atomic_question,
                 "dependency_answers": dependency_answers,
             },
-            max_tokens=700,
+            max_tokens=300,
         )
         response.setdefault("entities", [])
-        response.setdefault("relations", [])
-        response.setdefault("relation_query", "")
-        response.setdefault("answer_type", "")
-        return response
+        return {"entities": response.get("entities", [])}
 
     def answer_atomic_question(
         self,
@@ -129,13 +125,7 @@ class MockAtomicLLMService(AtomicLLMService):
             for phrase in _extract_topic_phrases(atomic_question)
             if phrase.lower() not in {"what", "which", "who", "where", "when", "how"}
         ][:4]
-        relation_intent = _infer_relation_intent(atomic_question)
-        return {
-            "entities": entities,
-            "relations": [relation_intent] if relation_intent else [],
-            "relation_query": _mask_entities(atomic_question, entities),
-            "answer_type": _infer_answer_type(atomic_question),
-        }
+        return {"entities": entities}
 
     def answer_atomic_question(
         self,
@@ -226,46 +216,6 @@ def _extract_topic_phrases(question: str) -> list[str]:
     return _dedupe_texts(phrases)[:6]
 
 
-def _mask_entities(question: str, entities: list[str]) -> str:
-    masked = question.strip().rstrip("?")
-    for entity in entities:
-        text = str(entity).strip()
-        if text:
-            masked = re.sub(re.escape(text), "an entity", masked, flags=re.IGNORECASE)
-    tokens = content_tokens(masked)
-    return " ".join(tokens) if tokens else masked
-
-
-def _infer_answer_type(question: str) -> str:
-    lowered = question.lower().strip()
-    if lowered.startswith("when"):
-        return "time or date"
-    if lowered.startswith("where"):
-        return "location"
-    if lowered.startswith("who"):
-        return "person or organization"
-    if lowered.startswith("which "):
-        tokens = lowered.split()
-        if len(tokens) > 1:
-            return tokens[1].strip(" ?.,")
-    if lowered.startswith("what "):
-        return "entity, concept, or phrase"
-    return "grounded short answer"
-
-
-def _infer_relation_intent(question: str) -> str:
-    lowered = question.lower()
-    if "graduate" in lowered and "from" in lowered:
-        return "graduate from"
-    if "released" in lowered:
-        return "release date"
-    if "known for" in lowered:
-        return "known for"
-    if "located in" in lowered:
-        return "located in"
-    return "connect the topic entities to the missing answer"
-
-
 def _dedupe_texts(values: list[str]) -> list[str]:
     deduped: list[str] = []
     for value in values:
@@ -283,11 +233,7 @@ def _analysis_payload(analysis: Any) -> dict[str, Any]:
     else:
         payload = {
             "entities": getattr(analysis, "entities", []),
-            "relations": getattr(analysis, "relations", []),
-            "relation_query": getattr(analysis, "relation_query", ""),
         }
     return {
         "entities": [str(item) for item in ensure_list(payload.get("entities", []))],
-        "relations": [str(item) for item in ensure_list(payload.get("relations", []))],
-        "relation_query": str(payload.get("relation_query", "") or ""),
     }

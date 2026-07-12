@@ -28,6 +28,9 @@ class RuntimeConfig:
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
     local_hyperedge_hops: int = 2
+    entity_link_top_k: int = 30
+    descriptive_fallback_hyperedge_top_k: int = 80
+    descriptive_fallback_chunk_top_k: int = 20
 
 
 @dataclass(slots=True)
@@ -83,6 +86,9 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
         local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
+        entity_link_top_k=int(retrieval.get("entity_link_top_k", 30)),
+        descriptive_fallback_hyperedge_top_k=int(retrieval.get("descriptive_fallback_hyperedge_top_k", 80)),
+        descriptive_fallback_chunk_top_k=int(retrieval.get("descriptive_fallback_chunk_top_k", 20)),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),

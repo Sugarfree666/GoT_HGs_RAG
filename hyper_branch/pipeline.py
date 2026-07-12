@@ -66,6 +66,7 @@ class HyperBranchPipeline:
         result = self.executor.run(original_question=question, dag_payload=dag_payload)
         artifacts = result.artifacts
         self.trace_store.save_artifact("artifacts/dag_input.json", artifacts["dag_input"])
+        self.trace_store.save_artifact("artifacts/dag_repair.json", artifacts["dag_repair"])
         self.trace_store.save_artifact("artifacts/atomic_question_analyses.json", artifacts["atomic_question_analyses"])
         self.trace_store.save_artifact("artifacts/atomic_retrieval.json", artifacts["atomic_retrieval"])
         self.trace_store.save_artifact("artifacts/atomic_answers.json", artifacts["atomic_answers"])

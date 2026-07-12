@@ -4,7 +4,7 @@ import re
 from typing import Any
 
 from ..llm.service import AtomicLLMService
-from ..utils import content_tokens, ensure_list, normalize_label
+from ..utils import ensure_list, normalize_label
 from .models import AtomicQuestionAnalysis
 
 
@@ -12,7 +12,32 @@ CAPITALIZED_PHRASE_RE = re.compile(
     r"\b(?:[A-Z][a-zA-Z0-9'&.-]+)(?:\s+(?:[A-Z][a-zA-Z0-9'&.-]+|of|the|and|&))*"
 )
 WH_WORDS = {"what", "which", "who", "where", "when", "why", "how"}
-RELATION_STOPWORDS = WH_WORDS | {"did", "does", "do", "is", "are", "was", "were", "a", "an", "the"}
+POSSESSIVE_ROLE_TERMS = {
+    "actor",
+    "actress",
+    "artist",
+    "author",
+    "brother",
+    "child",
+    "composer",
+    "creator",
+    "daughter",
+    "director",
+    "father",
+    "founder",
+    "grandfather",
+    "grandmother",
+    "husband",
+    "mother",
+    "parent",
+    "performer",
+    "producer",
+    "sister",
+    "son",
+    "spouse",
+    "wife",
+    "writer",
+}
 
 
 class AtomicQuestionAnalyzer:
@@ -37,52 +62,28 @@ class AtomicQuestionAnalyzer:
     def _coerce_payload(self, payload: Any, atomic_question: str) -> AtomicQuestionAnalysis:
         if not isinstance(payload, dict):
             payload = self._heuristic_analysis(atomic_question)
-        entities = self._clean_text_list(payload.get("entities", []))
-        relations = self._clean_text_list(payload.get("relations", []))
-        relation_query = normalize_label(str(payload.get("relation_query", "") or "")).strip()
-        answer_type = normalize_label(str(payload.get("answer_type", "") or "")).strip()
-        if not relation_query:
-            relation_query = self._mask_entities(atomic_question, entities)
-        if not answer_type:
-            answer_type = _infer_answer_type(atomic_question)
+        entities = self._clean_entity_mentions(payload.get("entities", []))
+        answer_type = _infer_answer_type(atomic_question)
         return AtomicQuestionAnalysis(
             entities=entities,
-            relations=relations,
-            relation_query=relation_query,
             answer_type=answer_type,
         )
 
     def _heuristic_analysis(self, atomic_question: str) -> dict[str, Any]:
         entities = _extract_capitalized_entities(atomic_question)
-        relations = _extract_relation_phrases(atomic_question, entities)
-        answer_type = _infer_answer_type(atomic_question)
-        relation_query = self._mask_entities(atomic_question, entities)
         return {
             "entities": entities,
-            "relations": relations,
-            "relation_query": relation_query,
-            "answer_type": answer_type,
         }
 
-    def _mask_entities(self, atomic_question: str, entities: list[str]) -> str:
-        masked = atomic_question.strip().rstrip("?")
-        for entity in entities:
-            if not entity:
-                continue
-            masked = re.sub(re.escape(entity), "an entity", masked, flags=re.IGNORECASE)
-        tokens = content_tokens(masked)
-        if not tokens:
-            return masked
-        if entities:
-            return " ".join(tokens)
-        return masked
-
-    def _clean_text_list(self, value: Any) -> list[str]:
+    def _clean_entity_mentions(self, value: Any) -> list[str]:
         cleaned: list[str] = []
         for item in ensure_list(value):
             text = normalize_label(str(item).strip())
-            if text and text not in cleaned:
-                cleaned.append(text)
+            if not text:
+                continue
+            entity = _strip_possessive_role_tail(text)
+            if entity and entity not in cleaned:
+                cleaned.append(entity)
         return cleaned
 
 
@@ -99,20 +100,15 @@ def _extract_capitalized_entities(question: str) -> list[str]:
     return entities
 
 
-def _extract_relation_phrases(question: str, entities: list[str]) -> list[str]:
-    lowered = question.lower().rstrip("?")
-    for entity in entities:
-        lowered = lowered.replace(entity.lower(), " ")
-    tokens = [token for token in content_tokens(lowered) if token not in RELATION_STOPWORDS]
-    if not tokens:
-        return []
-    if "from" in lowered and "graduate" in lowered:
-        return ["graduate from"]
-    if "known for" in lowered:
-        return ["known for"]
-    if "located in" in lowered:
-        return ["located in"]
-    return [" ".join(tokens[:5])]
+def _strip_possessive_role_tail(text: str) -> str:
+    match = re.match(r"^(.+?)'s\s+([A-Za-z][A-Za-z -]*)$", text)
+    if not match:
+        return text
+    owner = normalize_label(match.group(1))
+    tail = normalize_label(match.group(2)).lower()
+    if tail in POSSESSIVE_ROLE_TERMS:
+        return owner
+    return text
 
 
 def _infer_answer_type(question: str) -> str:

@@ -37,6 +37,7 @@ class AtomicDagExecutor:
 
     def run(self, original_question: str, dag_payload: Any | None = None) -> DagExecutionResult:
         nodes = self.normalize_dag_payload(dag_payload, original_question=original_question)
+        nodes, dag_repair = self.repair_dag_for_execution(nodes)
         order = self.topological_sort(nodes)
         self.validate_terminal_leaf(order)
         results_by_id: dict[str, AtomicAnswerResult] = {}
@@ -125,6 +126,7 @@ class AtomicDagExecutor:
         final_answer = self._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
         artifacts = {
             "dag_input": [node.to_dict() for node in nodes],
+            "dag_repair": dag_repair,
             "execution_order": [node.node_id for node in order],
             "atomic_question_analyses": analyses_artifact,
             "atomic_retrieval": retrieval_artifact,
@@ -210,6 +212,57 @@ class AtomicDagExecutor:
             cycle_nodes = [node_id for node_id, degree in indegree.items() if degree > 0]
             raise DagCycleError(f"Atomic DAG contains a cycle involving: {cycle_nodes}")
         return order
+
+    @staticmethod
+    def repair_dag_for_execution(nodes: list[AtomicQuestionNode]) -> tuple[list[AtomicQuestionNode], dict[str, Any]]:
+        if not nodes:
+            return nodes, {"applied": False, "reason": "empty_dag"}
+
+        dependents: dict[str, list[str]] = {node.node_id: [] for node in nodes}
+        for node in nodes:
+            for dependency in node.dependencies:
+                if dependency in dependents:
+                    dependents[dependency].append(node.node_id)
+
+        leaf_ids = [node.node_id for node in nodes if not dependents[node.node_id]]
+        terminal_id = nodes[-1].node_id
+        if len(leaf_ids) <= 1:
+            return nodes, {"applied": False, "leaf_ids": leaf_ids, "terminal_id": terminal_id}
+        if terminal_id not in leaf_ids:
+            return nodes, {
+                "applied": False,
+                "reason": "terminal_not_leaf",
+                "leaf_ids": leaf_ids,
+                "terminal_id": terminal_id,
+            }
+
+        extra_leaf_ids = [leaf_id for leaf_id in leaf_ids if leaf_id != terminal_id]
+        repaired: list[AtomicQuestionNode] = []
+        for node in nodes:
+            if node.node_id != terminal_id:
+                repaired.append(node)
+                continue
+            dependencies = list(node.dependencies)
+            for leaf_id in extra_leaf_ids:
+                if leaf_id not in dependencies:
+                    dependencies.append(leaf_id)
+            metadata = dict(node.metadata)
+            metadata["dag_repair_added_dependencies"] = list(extra_leaf_ids)
+            repaired.append(
+                AtomicQuestionNode(
+                    node_id=node.node_id,
+                    question=node.question,
+                    dependencies=dependencies,
+                    metadata=metadata,
+                )
+            )
+        return repaired, {
+            "applied": True,
+            "reason": "attached_extra_leaves_to_terminal",
+            "terminal_id": terminal_id,
+            "added_dependencies": extra_leaf_ids,
+            "original_leaf_ids": leaf_ids,
+        }
 
     @staticmethod
     def validate_terminal_leaf(nodes: list[AtomicQuestionNode]) -> None:

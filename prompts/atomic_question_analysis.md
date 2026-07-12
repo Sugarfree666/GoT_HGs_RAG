@@ -1,104 +1,64 @@
-You analyze one atomic question for evidence retrieval over a knowledge hypergraph.
+You identify concrete topic entities in one resolved atomic question.
 
 You will receive a JSON payload with:
-- atomic_question: the current atomic question.
+- atomic_question: the current resolved atomic question.
 - dependency_answers: optional answers from prerequisite atomic questions.
 
 Return strict JSON only:
 {
-  "entities": ["..."],
-  "relations": ["..."],
-  "relation_query": "...",
-  "answer_type": "..."
+  "entities": ["..."]
 }
 
-Your job is not to answer the question. Your job is to make retrieval easier, stable, and entity-safe.
+Your only job is entity recognition for graph anchoring. Do not answer the question. Do not build relation queries. Do not infer answer types. Do not explain.
 
-Core principles:
-- Extract anchors that must remain fixed during retrieval.
-- Extract compact relation signatures that connect the anchors to the missing answer.
-- Build relation_query as a predicate-centric signature for relation-level hyperedge retrieval, not as a natural-language question.
-- Use dependency answers only to resolve variables, placeholders, or references when they are clearly connected to the current question.
+Entity rules, aligned with DEPO explicit entity extraction:
+- Extract only concrete named things useful as retrieval anchors: people, places, organizations, institutions, creative works/titles, events, awards, treaties, wars, products, games, etc.
+- A returned entity should be the exact natural surface form from atomic_question or a resolved dependency answer when the question explicitly refers to that answer.
+- Do not invent entities or add facts.
+- Do not include roles, common nouns, answer slots, relation words, wh-phrases, operators, inferred entities, bare dates, bare years, ordinals, quantities, or measurements.
+- Do not include generic answer types such as "university", "film", "country", "date", "person", "father", "mother", "director", "composer", or "performer" unless the word is part of a specific official name.
+- Do not include possessive suffixes or role tails. For "Coulson Wallop's father", return "Coulson Wallop", not "Coulson Wallop's father".
+- For role-of-entity phrases such as "the director of Interview With A Hitman", return only the concrete named work "Interview With A Hitman".
+- For "place of death of the performer of Song A", return only the concrete named work "Song A" unless a dependency answer supplies the performer.
+- Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Keep the full official-looking title as one entity.
+- Person, place, and organization mentions may include disambiguating parentheticals or appositive titles when they identify the entity, such as "Christopher Newton (Criminal)" or "John Ernest, Duke Of Saxe-Eisenach".
+- Some official titles begin with words that look like question words, such as When, What, Who, Where, or Which. If that word is part of a capitalized official-looking title, keep it inside the entity.
+- Split independent coordinated entities, e.g. "Ryan Tubridy or Mauro Massironi".
+- Deduplicate entities while preserving order.
 
-Entity extraction rules:
-- entities should include concrete named entities, proper names, titles, organizations, places, works, events, products, dates, and explicit anchor phrases.
-- Include entities that appear in the atomic question.
-- Include resolved dependency answers as entities only when the question contains a placeholder, variable, pronoun, or reference that clearly points to a dependency answer.
-- Do not invent entities.
-- Do not include generic answer types as entities, such as "university", "film", "country", "date", "person", unless the phrase is part of a specific named entity.
-- Preserve the most natural surface form of each entity.
-- Deduplicate entities.
+Dependency answer rules:
+- Use dependency_answers only when atomic_question contains a placeholder, variable, pronoun, or reference that clearly points to a dependency answer.
+- If dependency answer text is a concrete entity, include that answer as an entity anchor.
+- Do not copy previous evidence, confidence, answer type, or reasoning into entities.
 
-Relation extraction rules:
-- relations should capture compact predicate labels, attribute names, and short paraphrases likely to appear in hyperedge relation text.
-- Prefer 2-5 compact predicate paraphrases.
-- Relations must be short phrases, not full sentences.
-- Keep relation phrases general enough to match paraphrases in evidence, but specific enough to name the target predicate.
-- Include important constraints, such as temporal direction, ranking direction, equality, containment, authorship, affiliation, birthplace, release, publication, award, location, parent organization, nationality, genre, or comparison target.
-- Do not include concrete entity names in relations unless the relation itself is a named relation.
+Examples:
 
-Relation signature query rules:
-- relation_query is a compact predicate signature for relation-level hyperedge retrieval.
-- relation_query is not a natural-language question.
-- Put the compact predicate paraphrases in relations, then make relation_query a compact space-separated concatenation of them.
-- Do not include question words such as "who", "what", "when", "where", or "which".
-- Do not include generic fillers such as "a person", "an entity", "a historical figure", or "a work".
-- Do not include concrete entity names.
-- Prefer relation labels, attribute names, and short paraphrases likely to appear in hyperedge relation text.
-- If the atomic question is a comparison or selection, relation_query should still be predicate-centric, preserving the compared attribute and direction, for example "birth date born earlier born first" or "release date released first earlier release".
-- If dependency answers resolve variables in the question, use them only as entities when needed; do not copy them into relation_query.
-
-Good examples:
+Input atomic_question:
+Where did Coulson Wallop's father study?
+Output:
 {
-  "entities": ["ENTITYA"],
-  "relations": ["mother", "parent", "female parent"],
-  "relation_query": "mother parent female parent",
-  "answer_type": "person"
+  "entities": ["Coulson Wallop"]
 }
 
+Input atomic_question:
+What country is the director of Interview With A Hitman from?
+Output:
 {
-  "entities": ["ENTITYA"],
-  "relations": ["date of death", "death date", "died on"],
-  "relation_query": "date of death death date died on",
-  "answer_type": "date"
+  "entities": ["Interview With A Hitman"]
 }
 
+Input atomic_question:
+When did the mother of Lothair II die?
+Output:
 {
-  "entities": ["ENTITYA"],
-  "relations": ["place of birth", "birthplace", "born in"],
-  "relation_query": "place of birth birthplace born in",
-  "answer_type": "location"
+  "entities": ["Lothair II"]
 }
 
+Input atomic_question:
+Which film was released first, Aas Ka Panchhi or Phoolwari?
+Output:
 {
-  "entities": ["ENTITYA"],
-  "relations": ["director", "directed by", "film director"],
-  "relation_query": "director directed by film director",
-  "answer_type": "person"
+  "entities": ["Aas Ka Panchhi", "Phoolwari"]
 }
 
-Bad examples:
-{
-  "relation_query": "who was the mother of a historical figure"
-}
-
-{
-  "relation_query": "What is the date of death of a person?"
-}
-
-Answer type rules:
-- answer_type should describe the expected answer category as specifically as possible.
-- Use concise labels such as:
-  "person", "organization", "location", "country", "city", "date", "year", "number", "work", "film", "book", "event", "language", "nationality", "award", "boolean", "candidate selection", "comparison result", or "short phrase".
-- Infer answer_type from question words, relation semantics, and dependency context.
-- If the question asks "which candidate", "which one", "which was first", "which is larger", or similar, answer_type should be "candidate selection".
-- If the expected answer is a value to support a later comparison, use the value type, such as "date", "year", "number", or "count".
-
-Robustness rules:
-- Prefer precision for entities and recall for relations.
-- Do not solve the question.
-- Do not return explanations.
-- Return valid JSON only.
-- If no entities are present, return an empty entities array.
-- If no clear relation is present, use a concise intent phrase based on the question.
-- If the question is malformed, still return the best possible retrieval-oriented analysis.
+Return valid JSON only. If no concrete named entity is present, return {"entities": []}.

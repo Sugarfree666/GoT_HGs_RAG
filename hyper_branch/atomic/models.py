@@ -23,15 +23,11 @@ class AtomicQuestionNode:
 @dataclass(slots=True)
 class AtomicQuestionAnalysis:
     entities: list[str] = field(default_factory=list)
-    relations: list[str] = field(default_factory=list)
-    relation_query: str = ""
     answer_type: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "entities": list(self.entities),
-            "relations": list(self.relations),
-            "relation_query": self.relation_query,
             "answer_type": self.answer_type,
         }
 

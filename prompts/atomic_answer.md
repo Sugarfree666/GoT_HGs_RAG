@@ -201,6 +201,13 @@ Do not confuse:
 
 A relation paraphrase is acceptable only when it preserves the same factual meaning and direction.
 
+For singular role-of-work questions, return the single best-supported primary role filler unless the question explicitly asks for all people or a list.
+
+Examples:
+- If the question asks "Who performed the album X?" and evidence says "X is an album by A with B and C", answer `A`, not `A, B, and C`.
+- If the question asks "Who performed the song X?" and evidence names one main performer plus featured guests, answer the main performer unless the wording asks for featured performers too.
+- If evidence genuinely states several equal performers and the question does not permit multiple answers, choose the one most directly expressed as the work's primary artist/performer; if that cannot be determined, return `INSUFFICIENT_EVIDENCE`.
+
 ## Allowed reasoning
 
 You may use:
@@ -277,6 +284,8 @@ For insufficient evidence, return strict JSON only:
 }
 
 Do not wrap the JSON in markdown.
+
+The only allowed key is "answer".
 
 Do not add any key other than `answer`.
 

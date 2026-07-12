@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any
@@ -15,8 +16,11 @@ from ..utils import normalize_label, short_text
 from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 
 
-_ANCHOR_ENTITY_TOP_K = 3
+_ANCHOR_ENTITY_TOP_K = 30
 _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
+_ANCHOR_ENTITY_AUTO_ACCEPT_SCORE = 0.98
+_ANCHOR_ENTITY_CANDIDATE_LIMIT = 40
+_CHUNK_MENTION_ENTITY_LIMIT = 20
 _LOCAL_RETRIEVAL_METHOD = "two_hop_multi_anchor_topk"
 _CHUNK_ENTITY_EXCLUDED_TYPES = {
     "CATEGORY",
@@ -109,6 +113,7 @@ class LocalHyperedgeRetrievalResult:
     top_hyperedges: list[dict[str, Any]] = field(default_factory=list)
     evidence: list[FusedHyperedgeCandidate] = field(default_factory=list)
     insufficient_reason: str = ""
+    fallback_reason: str = ""
 
     @property
     def insufficient(self) -> bool:
@@ -131,6 +136,7 @@ class LocalHyperedgeRetrievalResult:
             "top_hyperedges": [dict(item) for item in self.top_hyperedges],
             "evidence": [item.to_dict() for item in self.evidence],
             "insufficient_reason": self.insufficient_reason,
+            "fallback_reason": self.fallback_reason,
         }
 
 
@@ -151,7 +157,11 @@ class AtomicHyperedgeRetriever:
         self._entity_ids = [
             node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "entity"
         ]
-        self._entity_lookup = self._normalized_lookup(self._entity_ids)
+        self._entity_lookup = self._build_entity_lookup(self._entity_ids)
+        self._hyperedge_ids = [
+            node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "hyperedge"
+        ]
+        self._hyperedge_lookup = self._normalized_lookup(self._hyperedge_ids)
 
     def retrieve_primary_anchor_local(
         self,
@@ -168,7 +178,7 @@ class AtomicHyperedgeRetriever:
         )
         if not anchor_mentions:
             result.insufficient_reason = "missing_primary_anchor"
-            return result
+            return self._try_descriptive_fallback(result, question=question)
 
         linked_matches: list[AnchorEntityMatch] = []
         seen_linked_entity_ids: set[str] = set()
@@ -189,7 +199,7 @@ class AtomicHyperedgeRetriever:
 
         if not linked_matches:
             result.insufficient_reason = "unlinked_primary_anchor"
-            return result
+            return self._try_descriptive_fallback(result, question=question)
 
         result.linked_entity_id = linked_matches[0].entity_id
         result.anchor_match = linked_matches[0].to_metadata()
@@ -208,7 +218,7 @@ class AtomicHyperedgeRetriever:
         result.adjacent_hyperedge_ids = list(candidate_pool["adjacent_hyperedge_ids"])
         if not result.adjacent_hyperedge_ids:
             result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
-            return result
+            return self._try_descriptive_fallback(result, question=question)
 
         result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
         result.second_hop_hyperedge_ids = list(candidate_pool["second_hop_hyperedge_ids"])
@@ -216,8 +226,41 @@ class AtomicHyperedgeRetriever:
         result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
         if not result.candidate_hyperedge_ids:
             result.insufficient_reason = "no_local_candidate_hyperedges"
+            return self._try_descriptive_fallback(result, question=question)
+
+        return self._rank_and_attach_evidence(result, question=question)
+
+    def _try_descriptive_fallback(
+        self,
+        result: LocalHyperedgeRetrievalResult,
+        *,
+        question: str,
+    ) -> LocalHyperedgeRetrievalResult:
+        original_reason = result.insufficient_reason
+        if _has_unresolved_dependency_reference(question):
+            return result
+        candidate_pool = self._descriptive_candidate_pool(question)
+        if not candidate_pool["candidate_hyperedge_ids"]:
             return result
 
+        result.fallback_reason = original_reason or "descriptive_fallback"
+        result.insufficient_reason = ""
+        result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
+        result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
+        result.expansion_entity_ids = _dedupe_strings(
+            [*result.expansion_entity_ids, *candidate_pool["expansion_entity_ids"]]
+        )
+        result.second_hop_hyperedge_ids = _dedupe_strings(
+            [*result.second_hop_hyperedge_ids, *candidate_pool["second_hop_hyperedge_ids"]]
+        )
+        return self._rank_and_attach_evidence(result, question=question)
+
+    def _rank_and_attach_evidence(
+        self,
+        result: LocalHyperedgeRetrievalResult,
+        *,
+        question: str,
+    ) -> LocalHyperedgeRetrievalResult:
         source_by_id = {
             str(item["hyperedge_id"]): item
             for item in result.candidate_sources
@@ -249,7 +292,7 @@ class AtomicHyperedgeRetriever:
                 hyperedge_id=str(item["hyperedge_id"]),
                 semantic_score=float(item["semantic_score"]),
                 rank=int(item["rank"]),
-                primary_anchor_mention=primary_mention,
+                primary_anchor_mention=result.primary_anchor_mention,
                 primary_anchor_entity_id=result.linked_entity_id,
                 candidate_source=source_by_id.get(str(item["hyperedge_id"]), {}),
             )
@@ -259,6 +302,92 @@ class AtomicHyperedgeRetriever:
         if not result.evidence:
             result.insufficient_reason = "no_valid_local_evidence"
         return result
+
+    def _descriptive_candidate_pool(self, question: str) -> dict[str, Any]:
+        candidate_ids: list[str] = []
+        expansion_entity_ids: list[str] = []
+        second_hop_ids: list[str] = []
+        source_by_id: dict[str, dict[str, Any]] = {}
+
+        for rank, hyperedge_id in enumerate(self._query_hyperedge_ids(question), start=1):
+            self._add_descriptive_hyperedge_source(
+                hyperedge_id=hyperedge_id,
+                candidate_ids=candidate_ids,
+                source_by_id=source_by_id,
+                expansion_source="descriptive_hyperedge",
+                rank=rank,
+            )
+
+        for rank, chunk_id in enumerate(self._query_chunk_ids(question), start=1):
+            for hyperedge_id in self._hyperedge_ids_for_chunk(chunk_id):
+                self._add_descriptive_hyperedge_source(
+                    hyperedge_id=hyperedge_id,
+                    candidate_ids=candidate_ids,
+                    source_by_id=source_by_id,
+                    expansion_source="descriptive_chunk_hyperedge",
+                    rank=rank,
+                    via_chunk_ids=[chunk_id],
+                )
+            for entity_id in self._chunk_entity_ids(chunk_id):
+                if entity_id not in expansion_entity_ids:
+                    expansion_entity_ids.append(entity_id)
+                for hyperedge_id in self._adjacent_hyperedge_ids(entity_id):
+                    if hyperedge_id not in second_hop_ids:
+                        second_hop_ids.append(hyperedge_id)
+                    self._add_descriptive_hyperedge_source(
+                        hyperedge_id=hyperedge_id,
+                        candidate_ids=candidate_ids,
+                        source_by_id=source_by_id,
+                        expansion_source="descriptive_chunk_entity",
+                        rank=rank,
+                        via_entity_ids=[entity_id],
+                        via_chunk_ids=[chunk_id],
+                    )
+
+        return {
+            "expansion_entity_ids": expansion_entity_ids,
+            "second_hop_hyperedge_ids": second_hop_ids,
+            "candidate_hyperedge_ids": candidate_ids,
+            "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
+        }
+
+    def _add_descriptive_hyperedge_source(
+        self,
+        *,
+        hyperedge_id: str,
+        candidate_ids: list[str],
+        source_by_id: dict[str, dict[str, Any]],
+        expansion_source: str,
+        rank: int,
+        via_entity_ids: list[str] | None = None,
+        via_chunk_ids: list[str] | None = None,
+    ) -> None:
+        if not hyperedge_id:
+            return
+        if hyperedge_id not in candidate_ids:
+            candidate_ids.append(hyperedge_id)
+        source = source_by_id.setdefault(
+            hyperedge_id,
+            {
+                "hyperedge_id": hyperedge_id,
+                "hop": 0,
+                "via_entity_ids": [],
+                "via_first_hyperedge_ids": [],
+                "expansion_sources": [],
+                "via_chunk_ids": [],
+                "descriptive_seed_ranks": [],
+            },
+        )
+        if expansion_source not in source["expansion_sources"]:
+            source["expansion_sources"].append(expansion_source)
+        if rank not in source["descriptive_seed_ranks"]:
+            source["descriptive_seed_ranks"].append(rank)
+        for entity_id in via_entity_ids or []:
+            if entity_id not in source["via_entity_ids"]:
+                source["via_entity_ids"].append(entity_id)
+        for chunk_id in via_chunk_ids or []:
+            if chunk_id not in source["via_chunk_ids"]:
+                source["via_chunk_ids"].append(chunk_id)
 
     @staticmethod
     def _anchor_mentions(primary_anchor_mention: str, analysis: AtomicQuestionAnalysis) -> list[str]:
@@ -502,20 +631,45 @@ class AtomicHyperedgeRetriever:
             return _dedupe_strings([str(item) for item in description.get("chunk_ids", [])])
         return []
 
-    def _chunk_entity_ids_for_hyperedge(self, hyperedge_id: str) -> list[str]:
+    def _hyperedge_ids_for_chunk(self, chunk_id: str) -> list[str]:
+        source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
+        if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
+            return []
+        nodes = getattr(self.dataset.graph, "nodes", {})
+        hyperedge_ids: list[str] = []
+        for node_id in source_to_nodes.get(chunk_id, []):
+            hyperedge_id = str(node_id)
+            node = nodes.get(hyperedge_id) if hasattr(nodes, "get") else None
+            if node is None or getattr(node, "role", "") != "hyperedge":
+                continue
+            if hyperedge_id not in hyperedge_ids:
+                hyperedge_ids.append(hyperedge_id)
+        return hyperedge_ids
+
+    def _chunk_entity_ids(self, chunk_id: str) -> list[str]:
         source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
         if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
             return []
         nodes = getattr(self.dataset.graph, "nodes", {})
         entity_ids: list[str] = []
+        for node_id in source_to_nodes.get(chunk_id, []):
+            entity_id = str(node_id)
+            node = nodes.get(entity_id) if hasattr(nodes, "get") else None
+            if node is None or getattr(node, "role", "") != "entity":
+                continue
+            if not self._is_concrete_chunk_entity(entity_id):
+                continue
+            if entity_id not in entity_ids:
+                entity_ids.append(entity_id)
+        return entity_ids
+
+    def _chunk_entity_ids_for_hyperedge(self, hyperedge_id: str) -> list[str]:
+        source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
+        if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
+            return []
+        entity_ids: list[str] = []
         for chunk_id in self._hyperedge_chunk_ids(hyperedge_id):
-            for node_id in source_to_nodes.get(chunk_id, []):
-                entity_id = str(node_id)
-                node = nodes.get(entity_id) if hasattr(nodes, "get") else None
-                if node is None or getattr(node, "role", "") != "entity":
-                    continue
-                if not self._is_concrete_chunk_entity(entity_id):
-                    continue
+            for entity_id in self._chunk_entity_ids(chunk_id):
                 if entity_id not in entity_ids:
                     entity_ids.append(entity_id)
         return entity_ids
@@ -548,6 +702,102 @@ class AtomicHyperedgeRetriever:
         except (TypeError, ValueError, AttributeError):
             return {hyperedge_id: 0.0 for hyperedge_id in hyperedge_ids}
         return {hyperedge_id: float(scores.get(hyperedge_id, 0.0)) for hyperedge_id in hyperedge_ids}
+
+    def _query_hyperedge_ids(self, query: str) -> list[str]:
+        top_k = max(0, int(getattr(self.config, "descriptive_fallback_hyperedge_top_k", 80)))
+        if top_k <= 0:
+            return []
+        matches = self._query_vector_store(
+            query=query,
+            store=getattr(self.dataset, "hyperedge_store", None),
+            top_k=top_k,
+            stage="atomic_descriptive_hyperedge_fallback",
+        )
+        hyperedge_ids: list[str] = []
+        for match in matches:
+            hyperedge_id = self._resolve_hyperedge_id_from_vector_match(match)
+            if hyperedge_id and hyperedge_id not in hyperedge_ids:
+                hyperedge_ids.append(hyperedge_id)
+        return hyperedge_ids
+
+    def _query_chunk_ids(self, query: str) -> list[str]:
+        top_k = max(0, int(getattr(self.config, "descriptive_fallback_chunk_top_k", 20)))
+        if top_k <= 0:
+            return []
+        matches = self._query_vector_store(
+            query=query,
+            store=getattr(self.dataset, "chunk_store", None),
+            top_k=top_k,
+            stage="atomic_descriptive_chunk_fallback",
+        )
+        chunk_ids: list[str] = []
+        for match in matches:
+            chunk_id = self._resolve_chunk_id_from_vector_match(match)
+            if chunk_id and chunk_id not in chunk_ids:
+                chunk_ids.append(chunk_id)
+        return chunk_ids
+
+    def _query_vector_store(self, *, query: str, store: Any, top_k: int, stage: str) -> list[VectorMatch]:
+        if top_k <= 0 or not query.strip():
+            return []
+        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
+            return []
+        if store is None or not hasattr(store, "query"):
+            return []
+        try:
+            vectors = self.embedder.embed_texts([query], stage=stage)
+            if not vectors:
+                return []
+            return list(store.query(vectors[0], top_k=top_k))
+        except (TypeError, ValueError, AttributeError):
+            return []
+
+    def _resolve_hyperedge_id_from_vector_match(self, match: VectorMatch) -> str | None:
+        metadata = match.metadata if isinstance(match.metadata, dict) else {}
+        raw_candidates = [
+            match.label,
+            match.item_id,
+            metadata.get("hyperedge_name"),
+            metadata.get("__id__"),
+            metadata.get("name"),
+        ]
+        nodes = getattr(self.dataset.graph, "nodes", {})
+        for raw_candidate in raw_candidates:
+            if raw_candidate is None:
+                continue
+            candidate = str(raw_candidate).strip()
+            if not candidate:
+                continue
+            node = nodes.get(candidate) if hasattr(nodes, "get") else None
+            if node is not None and getattr(node, "role", "") == "hyperedge":
+                return candidate
+            normalized = normalize_label(candidate).lower()
+            mapped = self._hyperedge_lookup.get(normalized, [])
+            if not mapped:
+                mapped = self._hyperedge_lookup.get(_canonical_entity_key(candidate), [])
+            if mapped:
+                return mapped[0]
+        return None
+
+    def _resolve_chunk_id_from_vector_match(self, match: VectorMatch) -> str | None:
+        metadata = match.metadata if isinstance(match.metadata, dict) else {}
+        raw_candidates = [
+            match.item_id,
+            metadata.get("__id__"),
+            metadata.get("chunk_id"),
+            metadata.get("id"),
+            match.label,
+        ]
+        text_chunks = getattr(self.dataset, "text_chunks", {})
+        for raw_candidate in raw_candidates:
+            if raw_candidate is None:
+                continue
+            candidate = str(raw_candidate).strip()
+            if not candidate:
+                continue
+            if isinstance(text_chunks, dict) and candidate in text_chunks:
+                return candidate
+        return None
 
     def _evidence_from_hyperedge(
         self,
@@ -617,24 +867,33 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         query_index: int,
     ) -> list[AnchorEntityMatch]:
-        exact_entity_ids = self._resolve_entity_ids(entity)
-        if exact_entity_ids:
+        exact_candidates = self._entity_lookup_candidates(entity)
+        if len(exact_candidates) == 1:
+            return [self._anchor_match_from_candidate(exact_candidates[0], query_index=query_index, query_entity=entity)]
+        if len(exact_candidates) > 1:
+            selected_exact = self._select_or_auto_anchor_candidate(
+                question=question,
+                entity=entity,
+                analysis=analysis,
+                candidates=exact_candidates,
+            )
+            if selected_exact is not None:
+                return [self._anchor_match_from_candidate(selected_exact, query_index=query_index, query_entity=entity)]
             return [
-                AnchorEntityMatch(
-                    query_index=query_index,
-                    query_entity=entity,
-                    entity_id=entity_id,
-                    match_type="exact",
-                    link_score=1.0,
-                )
-                for entity_id in exact_entity_ids
+                self._anchor_match_from_candidate(candidate, query_index=query_index, query_entity=entity)
+                for candidate in exact_candidates
             ]
 
-        candidates = self._anchor_entity_vector_candidates(entity)
+        candidates = self._merge_anchor_candidates(
+            [
+                *self._anchor_entity_vector_candidates(entity),
+                *self._chunk_mention_entity_candidates(entity),
+            ]
+        )
         if not candidates:
             return []
 
-        selected = self._select_anchor_entity_with_llm(
+        selected = self._select_or_auto_anchor_candidate(
             question=question,
             entity=entity,
             analysis=analysis,
@@ -643,28 +902,36 @@ class AtomicHyperedgeRetriever:
         if selected is None:
             return []
 
-        return [
-            AnchorEntityMatch(
-                query_index=query_index,
-                query_entity=entity,
-                entity_id=str(selected["entity_id"]),
-                match_type="vector_llm",
-                link_score=float(selected["vector_score"]),
-                vector_score=float(selected["vector_score"]),
-                llm_confidence=float(selected["llm_confidence"]),
-                candidate_rank=int(selected["candidate_rank"]),
-            )
-        ]
+        return [self._anchor_match_from_candidate(selected, query_index=query_index, query_entity=entity)]
 
     def _resolve_entity_ids(self, entity: str) -> list[str]:
-        normalized = normalize_label(entity).lower()
-        if not normalized:
-            return []
-        exact = self._entity_lookup.get(normalized, [])
-        return list(exact) if exact else []
+        return [candidate["entity_id"] for candidate in self._entity_lookup_candidates(entity)]
+
+    def _entity_lookup_candidates(self, entity: str) -> list[dict[str, Any]]:
+        candidates: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for rank, (key, match_type, score) in enumerate(_lookup_keys_for_mention(entity), start=1):
+            for entity_id in self._entity_lookup.get(key, []):
+                if entity_id in seen:
+                    continue
+                seen.add(entity_id)
+                candidates.append(
+                    {
+                        "entity_id": entity_id,
+                        "label": normalize_label(entity_id),
+                        "link_score": float(score),
+                        "vector_score": float(score),
+                        "candidate_rank": rank,
+                        "source_label": normalize_label(entity_id),
+                        "source_item_id": entity_id,
+                        "match_type": match_type,
+                    }
+                )
+        return candidates
 
     def _anchor_entity_vector_candidates(self, entity: str) -> list[dict[str, Any]]:
-        matches = self._query_entity_store(entity, _ANCHOR_ENTITY_TOP_K)
+        top_k = int(getattr(self.config, "entity_link_top_k", _ANCHOR_ENTITY_TOP_K))
+        matches = self._query_entity_store(entity, max(top_k, _ANCHOR_ENTITY_TOP_K))
         candidates: list[dict[str, Any]] = []
         seen: set[str] = set()
         for rank, match in enumerate(matches, start=1):
@@ -676,13 +943,156 @@ class AtomicHyperedgeRetriever:
                 {
                     "entity_id": entity_id,
                     "label": normalize_label(entity_id),
+                    "link_score": float(match.score),
                     "vector_score": float(match.score),
                     "candidate_rank": rank,
                     "source_label": normalize_label(match.label),
                     "source_item_id": match.item_id,
+                    "match_type": "vector",
                 }
             )
         return candidates
+
+    def _chunk_mention_entity_candidates(self, entity: str) -> list[dict[str, Any]]:
+        mention_key = _canonical_entity_key(entity)
+        if not mention_key:
+            return []
+        source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
+        if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
+            return []
+        text_chunks = getattr(self.dataset, "text_chunks", {})
+        if not isinstance(text_chunks, dict):
+            return []
+
+        candidate_by_id: dict[str, dict[str, Any]] = {}
+        for chunk_id, record in text_chunks.items():
+            if not isinstance(record, dict):
+                continue
+            content = str(record.get("content", "") or "")
+            if not _text_contains_entity_key(content, mention_key):
+                continue
+            source_title = _chunk_source_title(content)
+            for node_id in source_to_nodes.get(str(chunk_id), []):
+                entity_id = str(node_id)
+                node = self.dataset.graph.nodes.get(entity_id)
+                if node is None or getattr(node, "role", "") != "entity":
+                    continue
+                if not self._is_concrete_chunk_entity(entity_id):
+                    continue
+                label_key = _canonical_entity_key(entity_id)
+                source_title_key = _canonical_entity_key(source_title)
+                score = 0.82
+                if label_key == mention_key:
+                    score = 0.99
+                elif source_title_key == mention_key:
+                    score = 0.97
+                elif mention_key in label_key or label_key in mention_key:
+                    score = 0.9
+                existing = candidate_by_id.get(entity_id)
+                if existing is not None and float(existing["link_score"]) >= score:
+                    continue
+                snippet = short_text(content, 240)
+                candidate_by_id[entity_id] = {
+                    "entity_id": entity_id,
+                    "label": normalize_label(entity_id),
+                    "link_score": float(score),
+                    "vector_score": float(score),
+                    "candidate_rank": 0,
+                    "source_label": source_title or normalize_label(entity_id),
+                    "source_item_id": str(chunk_id),
+                    "match_type": "chunk_mention",
+                    "source_title": source_title,
+                    "chunk_snippet": snippet,
+                    "adjacent_hyperedge_count": len(self._adjacent_hyperedge_ids(entity_id)),
+                }
+
+        candidates = list(candidate_by_id.values())
+        candidates.sort(
+            key=lambda item: (
+                -float(item.get("link_score", 0.0)),
+                -int(item.get("adjacent_hyperedge_count", 0) or 0),
+                str(item.get("entity_id", "")),
+            )
+        )
+        for rank, candidate in enumerate(candidates[:_CHUNK_MENTION_ENTITY_LIMIT], start=1):
+            candidate["candidate_rank"] = rank
+        return candidates[:_CHUNK_MENTION_ENTITY_LIMIT]
+
+    def _merge_anchor_candidates(self, candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        merged: dict[str, dict[str, Any]] = {}
+        for candidate in candidates:
+            entity_id = str(candidate.get("entity_id", "") or "")
+            if not entity_id:
+                continue
+            existing = merged.get(entity_id)
+            if existing is None or float(candidate.get("link_score", 0.0)) > float(existing.get("link_score", 0.0)):
+                merged[entity_id] = dict(candidate)
+        result = list(merged.values())
+        result.sort(
+            key=lambda item: (
+                -float(item.get("link_score", item.get("vector_score", 0.0))),
+                int(item.get("candidate_rank", 0) or 0),
+                str(item.get("entity_id", "")),
+            )
+        )
+        for rank, candidate in enumerate(result[:_ANCHOR_ENTITY_CANDIDATE_LIMIT], start=1):
+            candidate["candidate_rank"] = rank
+        return result[:_ANCHOR_ENTITY_CANDIDATE_LIMIT]
+
+    def _select_or_auto_anchor_candidate(
+        self,
+        *,
+        question: str,
+        entity: str,
+        analysis: AtomicQuestionAnalysis,
+        candidates: list[dict[str, Any]],
+    ) -> dict[str, Any] | None:
+        selected = self._select_anchor_entity_with_llm(
+            question=question,
+            entity=entity,
+            analysis=analysis,
+            candidates=candidates,
+        )
+        if selected is not None:
+            return selected
+        return self._auto_select_anchor_candidate(entity, candidates)
+
+    def _auto_select_anchor_candidate(self, entity: str, candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
+        if not candidates:
+            return None
+        mention_key = _canonical_entity_key(entity)
+        for candidate in candidates:
+            label_key = _canonical_entity_key(str(candidate.get("label", "") or candidate.get("entity_id", "")))
+            source_label_key = _canonical_entity_key(str(candidate.get("source_label", "") or ""))
+            score = float(candidate.get("link_score", candidate.get("vector_score", 0.0)) or 0.0)
+            if mention_key and mention_key in {label_key, source_label_key}:
+                selected = dict(candidate)
+                selected["llm_confidence"] = 0.0
+                return selected
+            if score >= _ANCHOR_ENTITY_AUTO_ACCEPT_SCORE and str(candidate.get("match_type", "")).startswith("alias"):
+                selected = dict(candidate)
+                selected["llm_confidence"] = 0.0
+                return selected
+        return None
+
+    @staticmethod
+    def _anchor_match_from_candidate(
+        candidate: dict[str, Any],
+        *,
+        query_index: int,
+        query_entity: str,
+    ) -> AnchorEntityMatch:
+        link_score = float(candidate.get("link_score", candidate.get("vector_score", 0.0)) or 0.0)
+        return AnchorEntityMatch(
+            query_index=query_index,
+            query_entity=query_entity,
+            entity_id=str(candidate["entity_id"]),
+            match_type=str(candidate.get("match_type", "entity_link")),
+            link_score=link_score,
+            vector_score=float(candidate.get("vector_score", link_score) or link_score),
+            llm_confidence=float(candidate.get("llm_confidence", 0.0) or 0.0),
+            candidate_rank=int(candidate.get("candidate_rank", 0) or 0),
+        )
 
     def _query_entity_store(self, entity: str, top_k: int) -> list[VectorMatch]:
         if top_k <= 0:
@@ -720,6 +1130,8 @@ class AtomicHyperedgeRetriever:
                 return candidate
             normalized = normalize_label(candidate).lower()
             mapped = self._entity_lookup.get(normalized, [])
+            if not mapped:
+                mapped = self._entity_lookup.get(_canonical_entity_key(candidate), [])
             if mapped:
                 return mapped[0]
         return None
@@ -757,20 +1169,30 @@ class AtomicHyperedgeRetriever:
         if selected is None:
             return None
 
-        return {
-            "entity_id": selected["entity_id"],
-            "vector_score": float(selected["vector_score"]),
-            "llm_confidence": confidence,
-            "candidate_rank": int(selected["candidate_rank"]),
-        }
+        payload = dict(selected)
+        payload["llm_confidence"] = confidence
+        payload["link_score"] = float(payload.get("link_score", payload.get("vector_score", 0.0)) or 0.0)
+        payload["vector_score"] = float(payload.get("vector_score", payload["link_score"]) or payload["link_score"])
+        payload["candidate_rank"] = int(payload.get("candidate_rank", 0) or 0)
+        payload.setdefault("match_type", "vector_llm")
+        return payload
+
+    @staticmethod
+    def _build_entity_lookup(values: list[str]) -> dict[str, list[str]]:
+        lookup: dict[str, list[str]] = defaultdict(list)
+        for value in values:
+            for key in _lookup_keys_for_entity(value):
+                if key and value not in lookup[key]:
+                    lookup[key].append(value)
+        return lookup
 
     @staticmethod
     def _normalized_lookup(values: list[str]) -> dict[str, list[str]]:
         lookup: dict[str, list[str]] = defaultdict(list)
         for value in values:
-            normalized = normalize_label(value).lower()
-            if normalized:
-                lookup[normalized].append(value)
+            for key in _lookup_keys_from_variants([value]):
+                if key and value not in lookup[key]:
+                    lookup[key].append(value)
         return lookup
 
 
@@ -781,3 +1203,82 @@ def _dedupe_strings(values: list[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _lookup_keys_for_entity(entity_id: str) -> list[str]:
+    label = normalize_label(entity_id)
+    variants = [label]
+    without_parenthetical = re.sub(r"\s*\([^)]*\)\s*", " ", label).strip()
+    if without_parenthetical and without_parenthetical != label:
+        variants.append(without_parenthetical)
+    if "," in label:
+        before_comma = label.split(",", 1)[0].strip()
+        if before_comma:
+            variants.append(before_comma)
+    return _lookup_keys_from_variants(variants)
+
+
+def _lookup_keys_for_mention(mention: str) -> list[tuple[str, str, float]]:
+    label = normalize_label(mention)
+    keys: list[tuple[str, str, float]] = []
+    for key in _lookup_keys_from_variants([label]):
+        keys.append((key, "exact", 1.0))
+    without_article = re.sub(r"^(the|a|an)\s+", "", label, flags=re.IGNORECASE).strip()
+    for key in _lookup_keys_from_variants([without_article]):
+        keys.append((key, "alias_article", 0.99))
+    without_parenthetical = re.sub(r"\s*\([^)]*\)\s*", " ", label).strip()
+    for key in _lookup_keys_from_variants([without_parenthetical]):
+        keys.append((key, "alias_parenthetical", 0.97))
+    if "," in label:
+        before_comma = label.split(",", 1)[0].strip()
+        for key in _lookup_keys_from_variants([before_comma]):
+            keys.append((key, "alias_comma", 0.95))
+
+    deduped: list[tuple[str, str, float]] = []
+    seen: set[str] = set()
+    for key, match_type, score in keys:
+        if key and key not in seen:
+            seen.add(key)
+            deduped.append((key, match_type, score))
+    return deduped
+
+
+def _lookup_keys_from_variants(variants: list[str]) -> list[str]:
+    keys: list[str] = []
+    for variant in variants:
+        normalized = normalize_label(str(variant or "")).lower()
+        canonical = _canonical_entity_key(variant)
+        for key in (normalized, canonical):
+            if key and key not in keys:
+                keys.append(key)
+    return keys
+
+
+def _canonical_entity_key(text: str) -> str:
+    normalized = normalize_label(str(text or ""))
+    normalized = normalized.replace("&", " and ")
+    normalized = normalized.replace("’", "'")
+    normalized = re.sub(r"'s\b", "s", normalized, flags=re.IGNORECASE)
+    normalized = normalized.replace("'", "")
+    normalized = re.sub(r"[^0-9A-Za-z]+", " ", normalized)
+    normalized = re.sub(r"\s+", " ", normalized).strip().lower()
+    return normalized
+
+
+def _text_contains_entity_key(text: str, entity_key: str) -> bool:
+    if not entity_key:
+        return False
+    canonical_text = f" {_canonical_entity_key(text)} "
+    return f" {entity_key} " in canonical_text
+
+
+def _chunk_source_title(text: str) -> str:
+    for line in str(text or "").splitlines():
+        title = normalize_label(line)
+        if title:
+            return title
+    return ""
+
+
+def _has_unresolved_dependency_reference(text: str) -> bool:
+    return bool(re.search(r"\bq\d+'s\s+answer\b", str(text or ""), flags=re.IGNORECASE))
