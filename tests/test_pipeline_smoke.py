@@ -27,6 +27,9 @@ class PipelineSmokeTest(unittest.TestCase):
         self.assertTrue(result["final_answer"]["answer"])
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
         self.assertTrue((run_dir / "artifacts" / "dag_input.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "original_question_analysis.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "shared_candidate_pool_initial.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "shared_candidate_pool_final.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_question_analyses.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_retrieval.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_answers.json").exists())
@@ -35,4 +38,3 @@ class PipelineSmokeTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

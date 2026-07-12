@@ -57,16 +57,28 @@ class HyperBranchPipeline:
             logger=logger,
         )
 
-    def run(self, question: str, dag_payload: Any | None = None) -> dict[str, Any]:
+    def run(
+        self,
+        question: str,
+        dag_payload: Any | None = None,
+        original_question_entities: list[str] | None = None,
+    ) -> dict[str, Any]:
         self.logger.info("Starting HyperBranch pipeline for question: %s", question)
         if dag_payload is None:
             self.logger.info(
                 "No DAG payload supplied; treating the question as a single atomic node for compatibility."
             )
-        result = self.executor.run(original_question=question, dag_payload=dag_payload)
+        result = self.executor.run(
+            original_question=question,
+            dag_payload=dag_payload,
+            original_question_entities=original_question_entities,
+        )
         artifacts = result.artifacts
         self.trace_store.save_artifact("artifacts/dag_input.json", artifacts["dag_input"])
         self.trace_store.save_artifact("artifacts/dag_repair.json", artifacts["dag_repair"])
+        self.trace_store.save_artifact("artifacts/original_question_analysis.json", artifacts["original_question_analysis"])
+        self.trace_store.save_artifact("artifacts/shared_candidate_pool_initial.json", artifacts["shared_candidate_pool_initial"])
+        self.trace_store.save_artifact("artifacts/shared_candidate_pool_final.json", artifacts["shared_candidate_pool_final"])
         self.trace_store.save_artifact("artifacts/atomic_question_analyses.json", artifacts["atomic_question_analyses"])
         self.trace_store.save_artifact("artifacts/atomic_retrieval.json", artifacts["atomic_retrieval"])
         self.trace_store.save_artifact("artifacts/atomic_answers.json", artifacts["atomic_answers"])

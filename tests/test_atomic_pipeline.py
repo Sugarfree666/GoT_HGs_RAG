@@ -131,6 +131,17 @@ prompts:
         self.assertNotIn("relation_query", analysis.to_dict())
         self.assertEqual(analysis.answer_type, "location")
 
+    def test_atomic_question_analyzer_filters_generic_mentions_and_preserves_specific_titles(self) -> None:
+        analyzer = AtomicQuestionAnalyzer()
+
+        generic = analyzer.analyze("Which country hosted the tournament?")
+        title = analyzer.analyze("Who performed I Love Life, Thank You?")
+        appositive = analyzer.analyze("Where did John Wallop, 2nd Earl of Portsmouth study?")
+
+        self.assertEqual(generic.entities, [])
+        self.assertEqual(title.entities, ["I Love Life, Thank You"])
+        self.assertEqual(appositive.entities, ["John Wallop, 2nd Earl of Portsmouth"])
+
 
 class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
     def test_dag_runs_topologically_and_rewrites_dependency_question(self) -> None:
@@ -229,7 +240,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertFalse(hasattr(llm, "answer_atomic_question_from_paths"))
 
         second_retrieval = result.artifacts["atomic_retrieval"][1]
-        self.assertEqual(second_retrieval["method"], "two_hop_multi_anchor_topk")
+        self.assertEqual(second_retrieval["method"], "shared_original_question_augmented_topk")
         self.assertEqual(second_retrieval["primary_anchor_mention"], "Meek Mill")
         self.assertEqual(second_retrieval["linked_entity_id"], "Meek Mill")
         self.assertEqual(second_retrieval["adjacent_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
@@ -985,13 +996,131 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         result = executor.run("Were Film A and Film B released in the same year?", dag)
 
         self.assertEqual(len(llm.answer_calls), 3)
-        self.assertEqual(llm.answer_calls[2]["evidence"], [])
+        self.assertEqual([item["hyperedge_text"] for item in llm.answer_calls[2]["evidence"]], ["Film A was released in 1960.", "Film B was released in 1960."])
         self.assertEqual([item["answer"] for item in llm.answer_calls[2]["dependency_answers"]], ["1960", "1960"])
         self.assertEqual(result.atomic_results[-1].answer, "yes")
         self.assertEqual(result.final_answer["answer"], "yes")
         self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
-        self.assertEqual(result.final_answer["used_hyperedge_ids"], [])
+        self.assertEqual(result.final_answer["used_hyperedge_ids"], ["H_A"])
         self.assertFalse(result.final_answer["insufficient"])
+
+    def test_original_question_shared_pool_rescues_anchorless_atomic_node(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Tournament X": ["H_HOST"]},
+            hyperedge_entities={"H_HOST": ["Tournament X", "Host Country"]},
+            hyperedge_texts={"H_HOST": "Tournament X was hosted by Host Country."},
+            hyperedge_chunks={"H_HOST": ["C_HOST"]},
+            chunk_texts={"C_HOST": "Tournament X was hosted by Host Country."},
+        )
+        llm = MockAtomicLLMService(answer_responses=[{"answer": "Host Country"}])
+        executor = _executor(
+            graph=graph,
+            scores={"H_HOST": 0.95},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Which country hosted Tournament X?": AtomicQuestionAnalysis(entities=["Tournament X"]),
+                    "Which country hosted the tournament?": AtomicQuestionAnalysis(entities=[]),
+                }
+            ),
+            llm=llm,
+        )
+        dag = {"nodes": [{"node_id": "q1", "question": "Which country hosted the tournament?"}]}
+
+        result = executor.run("Which country hosted Tournament X?", dag)
+
+        retrieval = result.artifacts["atomic_retrieval"][0]
+        self.assertEqual(retrieval["method"], "shared_original_question_augmented_topk")
+        self.assertEqual(retrieval["local_insufficient_reason"], "missing_primary_anchor")
+        self.assertEqual(retrieval["insufficient_reason"], "")
+        self.assertEqual(retrieval["shared_candidate_hyperedge_ids"], ["H_HOST"])
+        self.assertEqual(retrieval["local_candidate_hyperedge_ids"], [])
+        self.assertEqual(retrieval["candidate_hyperedge_ids"], ["H_HOST"])
+        self.assertEqual(retrieval["top_hyperedges"][0]["hyperedge_id"], "H_HOST")
+        self.assertIn("original_question_shared_pool", retrieval["candidate_sources"][0]["pool_sources"])
+        self.assertEqual(llm.answer_calls[0]["evidence"][0]["hyperedge_text"], "Tournament X was hosted by Host Country.")
+        self.assertEqual(result.final_answer["answer"], "Host Country")
+
+    def test_executor_reuses_provided_original_question_entities_for_shared_pool(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Tournament X": ["H_HOST"]},
+            hyperedge_entities={"H_HOST": ["Tournament X", "Host Country"]},
+            hyperedge_texts={"H_HOST": "Tournament X was hosted by Host Country."},
+            hyperedge_chunks={"H_HOST": ["C_HOST"]},
+            chunk_texts={"C_HOST": "Tournament X was hosted by Host Country."},
+        )
+        llm = MockAtomicLLMService(answer_responses=[{"answer": "Host Country"}])
+        analyzer = QuestionAnalyzer({"Which country hosted the tournament?": AtomicQuestionAnalysis(entities=[])})
+        executor = _executor(
+            graph=graph,
+            scores={"H_HOST": 0.95},
+            analyzer=analyzer,
+            llm=llm,
+        )
+        dag = {"topic_entities": ["Tournament X"], "nodes": [{"node_id": "q1", "question": "Which country hosted the tournament?"}]}
+
+        result = executor.run("Which country hosted Tournament X?", dag)
+
+        self.assertEqual(analyzer.calls, ["Which country hosted the tournament?"])
+        self.assertEqual(result.artifacts["original_question_analysis"]["source"], "provided_original_question_entities")
+        self.assertEqual(result.artifacts["original_question_analysis"]["entities"], ["Tournament X"])
+        self.assertEqual(result.artifacts["shared_candidate_pool_initial"]["candidate_hyperedge_ids"], ["H_HOST"])
+        self.assertEqual(result.final_answer["answer"], "Host Country")
+
+    def test_atomic_local_pool_augments_shared_pool_for_later_anchorless_node(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Seed Work": ["H_BRIDGE"],
+                "Tourist City": ["H_BRIDGE", "H_POP"],
+            },
+            hyperedge_entities={
+                "H_BRIDGE": ["Seed Work", "Tourist City"],
+                "H_POP": ["Tourist City", "8.005 million"],
+            },
+            hyperedge_texts={
+                "H_BRIDGE": "Seed Work is associated with Tourist City.",
+                "H_POP": "Tourist City had a population of 8.005 million in 2010.",
+            },
+            hyperedge_chunks={"H_BRIDGE": ["C_BRIDGE"], "H_POP": ["C_POP"]},
+            chunk_texts={
+                "C_BRIDGE": "Seed Work is associated with Tourist City.",
+                "C_POP": "Tourist City had a population of 8.005 million in 2010.",
+            },
+        )
+        llm = MockAtomicLLMService(answer_responses=[{"answer": "Tourist City"}, {"answer": "8.005 million"}])
+        executor = _executor(
+            graph=graph,
+            scores={"H_BRIDGE": 0.4, "H_POP": 0.98},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Which city is associated with Seed Work?": AtomicQuestionAnalysis(entities=["Seed Work"]),
+                    "What is the population in 2010 of the city popular with tourists?": AtomicQuestionAnalysis(
+                        entities=[]
+                    ),
+                }
+            ),
+            llm=llm,
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Which city is associated with Seed Work?"},
+                {
+                    "node_id": "q2",
+                    "question": "What is the population in 2010 of the city popular with tourists?",
+                    "dependencies": ["q1"],
+                },
+            ]
+        }
+
+        result = executor.run("What is the population in 2010 of the city popular with tourists?", dag)
+
+        first_retrieval = result.artifacts["atomic_retrieval"][0]
+        second_retrieval = result.artifacts["atomic_retrieval"][1]
+        self.assertIn("H_POP", first_retrieval["local_candidate_hyperedge_ids"])
+        self.assertEqual(second_retrieval["local_candidate_hyperedge_ids"], [])
+        self.assertEqual(second_retrieval["local_insufficient_reason"], "missing_primary_anchor")
+        self.assertIn("H_POP", second_retrieval["shared_candidate_hyperedge_ids"])
+        self.assertEqual(second_retrieval["top_hyperedges"][0]["hyperedge_id"], "H_POP")
+        self.assertEqual(result.final_answer["answer"], "8.005 million")
 
     def test_executor_repairs_extra_leaves_by_attaching_them_to_terminal_node(self) -> None:
         executor = _executor(

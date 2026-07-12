@@ -235,7 +235,11 @@ def main() -> int:
             _wrap_executor_methods(pipeline, profile)
 
         with profile.timed("hyperbranch.pipeline_run"):
-            hyperbranch_result = pipeline.run(record.question, dag_payload=dag_payload)
+            hyperbranch_result = pipeline.run(
+                record.question,
+                dag_payload=dag_payload,
+                original_question_entities=_depo_explicit_entity_texts(decomposition_payload),
+            )
     finally:
         for handler in list(logger.handlers):
             handler.close()
@@ -335,13 +339,32 @@ def _hyperbranch_dag_payload(decomposition_payload: dict[str, Any]) -> dict[str,
     nodes = dag.get("nodes")
     if not isinstance(nodes, list) or not nodes:
         raise ValueError("DEPO atomic DAG does not contain any nodes.")
+    topic_entities = _depo_explicit_entity_texts(decomposition_payload)
     return {
         "question": decomposition_payload.get("question", ""),
+        "topic_entities": topic_entities,
+        "original_question_entities": topic_entities,
         "nodes": nodes,
         "edges": dag.get("edges") or [],
         "leaf_node_ids": dag.get("leaf_node_ids") or [],
         "source": "depo_stages.6_atomic_question_dag",
     }
+
+
+def _depo_explicit_entity_texts(decomposition_payload: dict[str, Any]) -> list[str]:
+    explicit = (((decomposition_payload.get("stages") or {}).get("1_explicit_entities")) or {})
+    entities = explicit.get("entities") if isinstance(explicit, dict) else []
+    entity_items = entities if isinstance(entities, list) else []
+    texts: list[str] = []
+    seen: set[str] = set()
+    for item in entity_items:
+        raw_text = item.get("text") if isinstance(item, dict) else item
+        text = str(raw_text or "").strip()
+        key = text.lower()
+        if text and key not in seen:
+            seen.add(key)
+            texts.append(text)
+    return texts
 
 
 def _repo_path(path: str | Path) -> Path:

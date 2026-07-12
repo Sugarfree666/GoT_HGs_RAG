@@ -22,6 +22,7 @@ _ANCHOR_ENTITY_AUTO_ACCEPT_SCORE = 0.98
 _ANCHOR_ENTITY_CANDIDATE_LIMIT = 40
 _CHUNK_MENTION_ENTITY_LIMIT = 20
 _LOCAL_RETRIEVAL_METHOD = "two_hop_multi_anchor_topk"
+_SHARED_RETRIEVAL_METHOD = "shared_original_question_augmented_topk"
 _CHUNK_ENTITY_EXCLUDED_TYPES = {
     "CATEGORY",
     "CONCEPT",
@@ -98,6 +99,7 @@ class AnchorEntityMatch:
 
 @dataclass(slots=True)
 class LocalHyperedgeRetrievalResult:
+    method: str = _LOCAL_RETRIEVAL_METHOD
     primary_anchor_mention: str = ""
     linked_entity_id: str = ""
     anchor_match: dict[str, Any] = field(default_factory=dict)
@@ -109,10 +111,14 @@ class LocalHyperedgeRetrievalResult:
     expansion_entity_ids: list[str] = field(default_factory=list)
     second_hop_hyperedge_ids: list[str] = field(default_factory=list)
     candidate_hyperedge_ids: list[str] = field(default_factory=list)
+    shared_candidate_hyperedge_ids: list[str] = field(default_factory=list)
+    local_candidate_hyperedge_ids: list[str] = field(default_factory=list)
     candidate_sources: list[dict[str, Any]] = field(default_factory=list)
     top_hyperedges: list[dict[str, Any]] = field(default_factory=list)
     evidence: list[FusedHyperedgeCandidate] = field(default_factory=list)
     insufficient_reason: str = ""
+    local_insufficient_reason: str = ""
+    shared_insufficient_reason: str = ""
     fallback_reason: str = ""
 
     @property
@@ -121,6 +127,7 @@ class LocalHyperedgeRetrievalResult:
 
     def to_artifact(self) -> dict[str, Any]:
         return {
+            "method": self.method,
             "primary_anchor_mention": self.primary_anchor_mention,
             "linked_entity_id": self.linked_entity_id,
             "anchor_match": dict(self.anchor_match),
@@ -132,10 +139,14 @@ class LocalHyperedgeRetrievalResult:
             "expansion_entity_ids": list(self.expansion_entity_ids),
             "second_hop_hyperedge_ids": list(self.second_hop_hyperedge_ids),
             "candidate_hyperedge_ids": list(self.candidate_hyperedge_ids),
+            "shared_candidate_hyperedge_ids": list(self.shared_candidate_hyperedge_ids),
+            "local_candidate_hyperedge_ids": list(self.local_candidate_hyperedge_ids),
             "candidate_sources": [dict(item) for item in self.candidate_sources],
             "top_hyperedges": [dict(item) for item in self.top_hyperedges],
             "evidence": [item.to_dict() for item in self.evidence],
             "insufficient_reason": self.insufficient_reason,
+            "local_insufficient_reason": self.local_insufficient_reason,
+            "shared_insufficient_reason": self.shared_insufficient_reason,
             "fallback_reason": self.fallback_reason,
         }
 
@@ -170,15 +181,73 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str,
     ) -> LocalHyperedgeRetrievalResult:
+        result = self.build_atomic_candidate_pool(
+            question=question,
+            analysis=analysis,
+            primary_anchor_mention=primary_anchor_mention,
+        )
+        return self.rank_candidate_pool(result, question=question)
+
+    def build_original_question_candidate_pool(
+        self,
+        *,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        primary_anchor_mention: str = "",
+    ) -> LocalHyperedgeRetrievalResult:
+        result = self._build_anchor_candidate_pool(
+            question=question,
+            analysis=analysis,
+            primary_anchor_mention=primary_anchor_mention,
+            method=_SHARED_RETRIEVAL_METHOD,
+            pool_source="original_question_shared_pool",
+            use_descriptive_fallback=False,
+        )
+        result.shared_candidate_hyperedge_ids = list(result.candidate_hyperedge_ids)
+        result.shared_insufficient_reason = result.insufficient_reason
+        return result
+
+    def build_atomic_candidate_pool(
+        self,
+        *,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        primary_anchor_mention: str,
+    ) -> LocalHyperedgeRetrievalResult:
+        result = self._build_anchor_candidate_pool(
+            question=question,
+            analysis=analysis,
+            primary_anchor_mention=primary_anchor_mention,
+            method=_LOCAL_RETRIEVAL_METHOD,
+            pool_source="atomic_node_local_pool",
+            use_descriptive_fallback=True,
+        )
+        result.local_candidate_hyperedge_ids = list(result.candidate_hyperedge_ids)
+        result.local_insufficient_reason = result.insufficient_reason
+        return result
+
+    def _build_anchor_candidate_pool(
+        self,
+        *,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        primary_anchor_mention: str,
+        method: str,
+        pool_source: str,
+        use_descriptive_fallback: bool,
+    ) -> LocalHyperedgeRetrievalResult:
         anchor_mentions = self._anchor_mentions(primary_anchor_mention, analysis)
         primary_mention = anchor_mentions[0] if anchor_mentions else ""
         result = LocalHyperedgeRetrievalResult(
+            method=method,
             primary_anchor_mention=primary_mention,
             anchor_mentions=list(anchor_mentions),
         )
         if not anchor_mentions:
             result.insufficient_reason = "missing_primary_anchor"
-            return self._try_descriptive_fallback(result, question=question)
+            if use_descriptive_fallback:
+                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+            return result
 
         linked_matches: list[AnchorEntityMatch] = []
         seen_linked_entity_ids: set[str] = set()
@@ -199,7 +268,9 @@ class AtomicHyperedgeRetriever:
 
         if not linked_matches:
             result.insufficient_reason = "unlinked_primary_anchor"
-            return self._try_descriptive_fallback(result, question=question)
+            if use_descriptive_fallback:
+                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+            return result
 
         result.linked_entity_id = linked_matches[0].entity_id
         result.anchor_match = linked_matches[0].to_metadata()
@@ -218,23 +289,29 @@ class AtomicHyperedgeRetriever:
         result.adjacent_hyperedge_ids = list(candidate_pool["adjacent_hyperedge_ids"])
         if not result.adjacent_hyperedge_ids:
             result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
-            return self._try_descriptive_fallback(result, question=question)
+            if use_descriptive_fallback:
+                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+            return result
 
         result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
         result.second_hop_hyperedge_ids = list(candidate_pool["second_hop_hyperedge_ids"])
         result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
         result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
+        self._tag_candidate_pool_sources(result, pool_source)
         if not result.candidate_hyperedge_ids:
             result.insufficient_reason = "no_local_candidate_hyperedges"
-            return self._try_descriptive_fallback(result, question=question)
+            if use_descriptive_fallback:
+                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+            return result
 
-        return self._rank_and_attach_evidence(result, question=question)
+        return result
 
-    def _try_descriptive_fallback(
+    def _try_descriptive_fallback_candidates(
         self,
         result: LocalHyperedgeRetrievalResult,
         *,
         question: str,
+        pool_source: str,
     ) -> LocalHyperedgeRetrievalResult:
         original_reason = result.insufficient_reason
         if _has_unresolved_dependency_reference(question):
@@ -247,25 +324,67 @@ class AtomicHyperedgeRetriever:
         result.insufficient_reason = ""
         result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
         result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
+        self._tag_candidate_pool_sources(result, pool_source)
         result.expansion_entity_ids = _dedupe_strings(
             [*result.expansion_entity_ids, *candidate_pool["expansion_entity_ids"]]
         )
         result.second_hop_hyperedge_ids = _dedupe_strings(
             [*result.second_hop_hyperedge_ids, *candidate_pool["second_hop_hyperedge_ids"]]
         )
-        return self._rank_and_attach_evidence(result, question=question)
+        return result
 
-    def _rank_and_attach_evidence(
+    def merge_candidate_pools(
+        self,
+        *,
+        shared_pool: LocalHyperedgeRetrievalResult,
+        local_pool: LocalHyperedgeRetrievalResult,
+    ) -> LocalHyperedgeRetrievalResult:
+        result = LocalHyperedgeRetrievalResult(
+            method=_SHARED_RETRIEVAL_METHOD,
+            primary_anchor_mention=local_pool.primary_anchor_mention,
+            linked_entity_id=local_pool.linked_entity_id,
+            anchor_match=dict(local_pool.anchor_match),
+            anchor_mentions=list(local_pool.anchor_mentions),
+            linked_entities=[dict(item) for item in local_pool.linked_entities],
+            anchor_matches=[dict(item) for item in local_pool.anchor_matches],
+            unlinked_anchor_mentions=list(local_pool.unlinked_anchor_mentions),
+            adjacent_hyperedge_ids=list(local_pool.adjacent_hyperedge_ids),
+            expansion_entity_ids=_dedupe_strings(
+                [*shared_pool.expansion_entity_ids, *local_pool.expansion_entity_ids]
+            ),
+            second_hop_hyperedge_ids=_dedupe_strings(
+                [*shared_pool.second_hop_hyperedge_ids, *local_pool.second_hop_hyperedge_ids]
+            ),
+            shared_candidate_hyperedge_ids=list(shared_pool.candidate_hyperedge_ids),
+            local_candidate_hyperedge_ids=list(local_pool.candidate_hyperedge_ids),
+            local_insufficient_reason=local_pool.insufficient_reason,
+            shared_insufficient_reason=shared_pool.insufficient_reason,
+            fallback_reason=local_pool.fallback_reason,
+        )
+        candidate_ids: list[str] = []
+        source_by_id: dict[str, dict[str, Any]] = {}
+        for pool in (shared_pool, local_pool):
+            for hyperedge_id in pool.candidate_hyperedge_ids:
+                if hyperedge_id not in candidate_ids:
+                    candidate_ids.append(hyperedge_id)
+            for source in pool.candidate_sources:
+                self._merge_candidate_source(source_by_id, dict(source))
+
+        result.candidate_hyperedge_ids = candidate_ids
+        result.candidate_sources = [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids if hyperedge_id in source_by_id]
+        if not result.candidate_hyperedge_ids:
+            result.insufficient_reason = local_pool.insufficient_reason or shared_pool.insufficient_reason
+        return result
+
+    def rank_candidate_pool(
         self,
         result: LocalHyperedgeRetrievalResult,
         *,
         question: str,
     ) -> LocalHyperedgeRetrievalResult:
-        source_by_id = {
-            str(item["hyperedge_id"]): item
-            for item in result.candidate_sources
-            if str(item.get("hyperedge_id", "")).strip()
-        }
+        source_by_id: dict[str, dict[str, Any]] = {}
+        for source in result.candidate_sources:
+            self._merge_candidate_source(source_by_id, dict(source))
         scores = self._hyperedge_similarity_scores(question, result.candidate_hyperedge_ids)
         ranked = [
             {
@@ -277,6 +396,7 @@ class AtomicHyperedgeRetriever:
                 "via_first_hyperedge_ids": list(source_by_id.get(hyperedge_id, {}).get("via_first_hyperedge_ids", [])),
                 "expansion_sources": list(source_by_id.get(hyperedge_id, {}).get("expansion_sources", [])),
                 "via_chunk_ids": list(source_by_id.get(hyperedge_id, {}).get("via_chunk_ids", [])),
+                "pool_sources": list(source_by_id.get(hyperedge_id, {}).get("pool_sources", [])),
             }
             for hyperedge_id in result.candidate_hyperedge_ids
         ]
@@ -295,11 +415,12 @@ class AtomicHyperedgeRetriever:
                 primary_anchor_mention=result.primary_anchor_mention,
                 primary_anchor_entity_id=result.linked_entity_id,
                 candidate_source=source_by_id.get(str(item["hyperedge_id"]), {}),
+                selection_source=result.method,
             )
             for item in selected
         ]
         result.evidence = [item for item in result.evidence if item.hyperedge_id]
-        if not result.evidence:
+        if not result.evidence and not result.insufficient_reason:
             result.insufficient_reason = "no_valid_local_evidence"
         return result
 
@@ -388,6 +509,15 @@ class AtomicHyperedgeRetriever:
         for chunk_id in via_chunk_ids or []:
             if chunk_id not in source["via_chunk_ids"]:
                 source["via_chunk_ids"].append(chunk_id)
+
+    @staticmethod
+    def _tag_candidate_pool_sources(result: LocalHyperedgeRetrievalResult, pool_source: str) -> None:
+        if not pool_source:
+            return
+        for source in result.candidate_sources:
+            pool_sources = source.setdefault("pool_sources", [])
+            if pool_source not in pool_sources:
+                pool_sources.append(pool_source)
 
     @staticmethod
     def _anchor_mentions(primary_anchor_mention: str, analysis: AtomicQuestionAnalysis) -> list[str]:
@@ -593,6 +723,7 @@ class AtomicHyperedgeRetriever:
                 "anchor_mentions": [],
                 "anchor_entity_ids": [],
                 "anchor_query_indices": [],
+                "pool_sources": [],
             },
         )
         existing["hop"] = min(int(existing.get("hop", 1) or 1), int(source.get("hop", 1) or 1))
@@ -603,6 +734,7 @@ class AtomicHyperedgeRetriever:
             "via_chunk_ids",
             "anchor_mentions",
             "anchor_entity_ids",
+            "pool_sources",
         ):
             for value in source.get(key, []):
                 if value not in existing[key]:
@@ -808,6 +940,7 @@ class AtomicHyperedgeRetriever:
         primary_anchor_mention: str,
         primary_anchor_entity_id: str,
         candidate_source: dict[str, Any],
+        selection_source: str = _LOCAL_RETRIEVAL_METHOD,
     ) -> FusedHyperedgeCandidate:
         description = self.dataset.graph.describe_hyperedge(hyperedge_id)
         hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
@@ -831,7 +964,7 @@ class AtomicHyperedgeRetriever:
             evidence_texts=[text for text in [hyperedge_text, *chunk_texts] if text],
             rank=int(rank),
             score_breakdown={
-                "selection_source": _LOCAL_RETRIEVAL_METHOD,
+                "selection_source": selection_source,
                 "semantic_rank": int(rank),
                 "semantic_score": float(semantic_score),
                 "primary_anchor_mention": primary_anchor_mention,
@@ -841,6 +974,7 @@ class AtomicHyperedgeRetriever:
                 "via_first_hyperedge_ids": list(candidate_source.get("via_first_hyperedge_ids", [])),
                 "expansion_sources": list(candidate_source.get("expansion_sources", [])),
                 "via_chunk_ids": list(candidate_source.get("via_chunk_ids", [])),
+                "pool_sources": list(candidate_source.get("pool_sources", [])),
                 "anchor_mentions": list(candidate_source.get("anchor_mentions", [])),
                 "anchor_entity_ids": list(candidate_source.get("anchor_entity_ids", [])),
                 "anchor_query_indices": list(candidate_source.get("anchor_query_indices", [])),

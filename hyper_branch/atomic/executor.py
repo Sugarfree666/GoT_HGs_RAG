@@ -35,7 +35,12 @@ class AtomicDagExecutor:
         self.llm_service = llm_service
         self.logger = logger or logging.getLogger(__name__)
 
-    def run(self, original_question: str, dag_payload: Any | None = None) -> DagExecutionResult:
+    def run(
+        self,
+        original_question: str,
+        dag_payload: Any | None = None,
+        original_question_entities: list[str] | None = None,
+    ) -> DagExecutionResult:
         nodes = self.normalize_dag_payload(dag_payload, original_question=original_question)
         nodes, dag_repair = self.repair_dag_for_execution(nodes)
         order = self.topological_sort(nodes)
@@ -44,6 +49,17 @@ class AtomicDagExecutor:
         analyses_artifact: list[dict[str, Any]] = []
         retrieval_artifact: list[dict[str, Any]] = []
         answer_artifact: list[dict[str, Any]] = []
+        original_question_analysis, original_question_analysis_source = self._original_question_analysis(
+            original_question=original_question,
+            dag_payload=dag_payload,
+            original_question_entities=original_question_entities,
+        )
+        shared_candidate_pool = self.retriever.build_original_question_candidate_pool(
+            question=original_question,
+            analysis=original_question_analysis,
+            primary_anchor_mention=_primary_anchor_mention([], original_question_analysis),
+        )
+        shared_candidate_pool_initial = shared_candidate_pool.to_artifact()
 
         self.logger.info("Executing atomic DAG with %s node(s)", len(order))
         for node in order:
@@ -66,11 +82,16 @@ class AtomicDagExecutor:
                 dependency_rewrite.primary_anchor_entities,
                 analysis,
             )
-            retrieval_result = self.retriever.retrieve_primary_anchor_local(
+            local_candidate_pool = self.retriever.build_atomic_candidate_pool(
                 question=resolved_question,
                 analysis=analysis,
                 primary_anchor_mention=primary_anchor_mention,
             )
+            retrieval_result = self.retriever.merge_candidate_pools(
+                shared_pool=shared_candidate_pool,
+                local_pool=local_candidate_pool,
+            )
+            retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=resolved_question)
             evidence = retrieval_result.evidence
             answer_payload = self._answer_atomic_question(
                 atomic_question=resolved_question,
@@ -121,6 +142,10 @@ class AtomicDagExecutor:
             )
             retrieval_artifact.append(retrieval_record)
             answer_artifact.append(result.to_dict())
+            shared_candidate_pool = self.retriever.merge_candidate_pools(
+                shared_pool=shared_candidate_pool,
+                local_pool=local_candidate_pool,
+            )
 
         atomic_results = [results_by_id[node.node_id] for node in order]
         final_answer = self._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
@@ -128,6 +153,12 @@ class AtomicDagExecutor:
             "dag_input": [node.to_dict() for node in nodes],
             "dag_repair": dag_repair,
             "execution_order": [node.node_id for node in order],
+            "original_question_analysis": {
+                **original_question_analysis.to_dict(),
+                "source": original_question_analysis_source,
+            },
+            "shared_candidate_pool_initial": shared_candidate_pool_initial,
+            "shared_candidate_pool_final": shared_candidate_pool.to_artifact(),
             "atomic_question_analyses": analyses_artifact,
             "atomic_retrieval": retrieval_artifact,
             "atomic_answers": answer_artifact,
@@ -139,6 +170,20 @@ class AtomicDagExecutor:
             final_answer=final_answer,
             artifacts=artifacts,
         )
+
+    def _original_question_analysis(
+        self,
+        *,
+        original_question: str,
+        dag_payload: Any | None,
+        original_question_entities: list[str] | None,
+    ) -> tuple[AtomicQuestionAnalysis, str]:
+        entities = _clean_entity_mentions(original_question_entities)
+        if not entities:
+            entities = _clean_entity_mentions(_original_question_entities_from_payload(dag_payload))
+        if entities:
+            return AtomicQuestionAnalysis(entities=entities, answer_type=""), "provided_original_question_entities"
+        return self.analyzer.analyze(original_question, []), "atomic_question_analyzer"
 
     @classmethod
     def normalize_dag_payload(cls, payload: Any | None, original_question: str | None = None) -> list[AtomicQuestionNode]:
@@ -621,7 +666,7 @@ class AtomicDagExecutor:
     ) -> dict[str, Any]:
         retrieval_payload = retrieval_result.to_artifact()
         return {
-            "method": "two_hop_multi_anchor_topk",
+            "method": retrieval_payload.get("method") or "two_hop_multi_anchor_topk",
             "node_id": node.node_id,
             "original_question": node.question,
             "resolved_question": resolved_question,
@@ -642,11 +687,16 @@ class AtomicDagExecutor:
             "expansion_entity_ids": retrieval_payload["expansion_entity_ids"],
             "second_hop_hyperedge_ids": retrieval_payload["second_hop_hyperedge_ids"],
             "candidate_hyperedge_ids": retrieval_payload["candidate_hyperedge_ids"],
+            "shared_candidate_hyperedge_ids": retrieval_payload.get("shared_candidate_hyperedge_ids", []),
+            "local_candidate_hyperedge_ids": retrieval_payload.get("local_candidate_hyperedge_ids", []),
             "candidate_sources": retrieval_payload["candidate_sources"],
             "top_hyperedges": retrieval_payload["top_hyperedges"],
             "answerer_evidence": retrieval_payload["evidence"],
             "top_evidence": retrieval_payload["evidence"],
             "insufficient_reason": retrieval_payload["insufficient_reason"],
+            "local_insufficient_reason": retrieval_payload.get("local_insufficient_reason", ""),
+            "shared_insufficient_reason": retrieval_payload.get("shared_insufficient_reason", ""),
+            "fallback_reason": retrieval_payload.get("fallback_reason", ""),
             "atomic_answer": answer_payload,
         }
 
@@ -696,6 +746,43 @@ def _primary_anchor_mention(primary_anchor_entities: Iterable[str], analysis: At
         if text:
             return text
     return ""
+
+
+def _original_question_entities_from_payload(payload: Any | None) -> list[str]:
+    payload = _to_plain_payload(payload)
+    if not isinstance(payload, dict):
+        return []
+    for key in ("original_question_entities", "topic_entities"):
+        values = _clean_entity_mentions(payload.get(key))
+        if values:
+            return values
+    stages = payload.get("stages")
+    if isinstance(stages, dict):
+        explicit = stages.get("1_explicit_entities")
+        if isinstance(explicit, dict):
+            raw_entities = [
+                item.get("text") if isinstance(item, dict) else item
+                for item in ensure_list(explicit.get("entities"))
+            ]
+            values = _clean_entity_mentions(raw_entities)
+            if values:
+                return values
+    return []
+
+
+def _clean_entity_mentions(value: Any) -> list[str]:
+    cleaned: list[str] = []
+    seen: set[str] = set()
+    for item in ensure_list(value):
+        text = normalize_label(str(item or "").strip())
+        if not text:
+            continue
+        key = text.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        cleaned.append(text)
+    return cleaned
 
 
 def _to_plain_payload(payload: Any) -> Any:

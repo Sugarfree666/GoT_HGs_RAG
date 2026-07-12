@@ -17,11 +17,13 @@ Entity rules, aligned with DEPO explicit entity extraction:
 - Do not invent entities or add facts.
 - Do not include roles, common nouns, answer slots, relation words, wh-phrases, operators, inferred entities, bare dates, bare years, ordinals, quantities, or measurements.
 - Do not include generic answer types such as "university", "film", "country", "date", "person", "father", "mother", "director", "composer", or "performer" unless the word is part of a specific official name.
+- Do not return vague bridge nouns such as "the tournament", "the city", "the team", "the country", "the championship series", "the house of representatives", or "economic growth" as entities.
 - Do not include possessive suffixes or role tails. For "Coulson Wallop's father", return "Coulson Wallop", not "Coulson Wallop's father".
 - For role-of-entity phrases such as "the director of Interview With A Hitman", return only the concrete named work "Interview With A Hitman".
 - For "place of death of the performer of Song A", return only the concrete named work "Song A" unless a dependency answer supplies the performer.
 - Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Keep the full official-looking title as one entity.
 - Person, place, and organization mentions may include disambiguating parentheticals or appositive titles when they identify the entity, such as "Christopher Newton (Criminal)" or "John Ernest, Duke Of Saxe-Eisenach".
+- Preserve appositive noble/official titles when they identify the entity, such as "John Wallop, 2nd Earl of Portsmouth".
 - Some official titles begin with words that look like question words, such as When, What, Who, Where, or Which. If that word is part of a capitalized official-looking title, keep it inside the entity.
 - Split independent coordinated entities, e.g. "Ryan Tubridy or Mauro Massironi".
 - Deduplicate entities while preserving order.
@@ -48,6 +50,13 @@ Output:
 }
 
 Input atomic_question:
+Who performed I Love Life, Thank You?
+Output:
+{
+  "entities": ["I Love Life, Thank You"]
+}
+
+Input atomic_question:
 When did the mother of Lothair II die?
 Output:
 {
@@ -59,6 +68,13 @@ Which film was released first, Aas Ka Panchhi or Phoolwari?
 Output:
 {
   "entities": ["Aas Ka Panchhi", "Phoolwari"]
+}
+
+Input atomic_question:
+Which country hosted the tournament?
+Output:
+{
+  "entities": []
 }
 
 Return valid JSON only. If no concrete named entity is present, return {"entities": []}.

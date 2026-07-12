@@ -245,6 +245,7 @@ def main() -> int:
                     hyperbranch_result = hyperbranch_runner.run(
                         question=record.question,
                         dag_payload=dag_payload,
+                        original_question_entities=_depo_explicit_entity_texts(decomposition_payload),
                         question_dir=question_dir,
                     )
                     _write_json(hyperbranch_result_path, hyperbranch_result)
@@ -339,7 +340,14 @@ class _ReusableHyperBranchRunner:
             _close_logger(logger)
         self.verbose = args.verbose
 
-    def run(self, *, question: str, dag_payload: dict[str, Any], question_dir: Path) -> dict[str, Any]:
+    def run(
+        self,
+        *,
+        question: str,
+        dag_payload: dict[str, Any],
+        original_question_entities: list[str] | None = None,
+        question_dir: Path,
+    ) -> dict[str, Any]:
         run_dir = question_dir / "hyperbranch_run"
         run_dir.mkdir(parents=True, exist_ok=True)
         logger = configure_logging(run_dir, self.config.runtime.log_level, verbose_console=self.verbose)
@@ -347,7 +355,11 @@ class _ReusableHyperBranchRunner:
         self._bind_question_context(run_dir=run_dir, logger=logger, trace_store=trace_store)
         try:
             trace_store.save_artifact("dataset_summary.json", self.pipeline.dataset.summary)
-            return self.pipeline.run(question, dag_payload=dag_payload)
+            return self.pipeline.run(
+                question,
+                dag_payload=dag_payload,
+                original_question_entities=original_question_entities,
+            )
         finally:
             _close_logger(logger)
 
@@ -398,13 +410,32 @@ def _hyperbranch_dag_payload(decomposition_payload: dict[str, Any]) -> dict[str,
     nodes = dag.get("nodes")
     if not isinstance(nodes, list) or not nodes:
         raise ValueError("DEPO atomic DAG does not contain any nodes.")
+    topic_entities = _depo_explicit_entity_texts(decomposition_payload)
     return {
         "question": decomposition_payload.get("question", ""),
+        "topic_entities": topic_entities,
+        "original_question_entities": topic_entities,
         "nodes": nodes,
         "edges": dag.get("edges") or [],
         "leaf_node_ids": dag.get("leaf_node_ids") or [],
         "source": "depo_stages.6_atomic_question_dag",
     }
+
+
+def _depo_explicit_entity_texts(decomposition_payload: dict[str, Any]) -> list[str]:
+    explicit = (((decomposition_payload.get("stages") or {}).get("1_explicit_entities")) or {})
+    entities = explicit.get("entities") if isinstance(explicit, dict) else []
+    entity_items = entities if isinstance(entities, list) else []
+    texts: list[str] = []
+    seen: set[str] = set()
+    for item in entity_items:
+        raw_text = item.get("text") if isinstance(item, dict) else item
+        text = str(raw_text or "").strip()
+        key = text.lower()
+        if text and key not in seen:
+            seen.add(key)
+            texts.append(text)
+    return texts
 
 
 def _combined_payload(
