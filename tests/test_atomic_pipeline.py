@@ -71,10 +71,10 @@ prompts:
         self.assertIn('"answer": "..."', prompt)
         self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
         self.assertIn("`original_question`", prompt)
-        self.assertIn("Use `original_question` only as global context", prompt)
+        self.assertIn("Use `original_question` only to recover global context", prompt)
         self.assertIn("Do not answer `original_question` unless `atomic_question` itself asks the same final question.", prompt)
-        self.assertIn("Do not rewrite a valid evidence surface into a normalized paraphrase.", prompt)
-        self.assertIn("do not convert between country names and demonyms", prompt)
+        self.assertIn("preserve the supported proper-name spelling", prompt)
+        self.assertIn("nationality, citizenship, ethnicity, birthplace, and country of residence", prompt)
         self.assertIn('The only allowed key is "answer".', prompt)
         self.assertNotIn("answer_type", prompt)
         self.assertNotIn('"confidence"', prompt)
@@ -1190,6 +1190,229 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertIn("H_POP", second_retrieval["shared_candidate_hyperedge_ids"])
         self.assertEqual(second_retrieval["top_hyperedges"][0]["hyperedge_id"], "H_POP")
         self.assertEqual(result.final_answer["answer"], "8.005 million")
+
+    def test_parallel_branch_candidate_pools_are_isolated_until_join(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Original": ["H_ORIGINAL"],
+                "Film A": ["H_Q1"],
+                "Film B": ["H_Q2"],
+                "Comparison": ["H_Q3"],
+            },
+            hyperedge_entities={
+                "H_ORIGINAL": ["Original"],
+                "H_Q1": ["Film A", "Director A"],
+                "H_Q2": ["Film B", "Director B"],
+                "H_Q3": ["Comparison"],
+            },
+            hyperedge_texts={
+                "H_ORIGINAL": "Original question context.",
+                "H_Q1": "Film A was directed by Director A.",
+                "H_Q2": "Film B was directed by Director B.",
+                "H_Q3": "Director A and Director B can be compared.",
+            },
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_ORIGINAL": 0.1, "H_Q1": 0.9, "H_Q2": 0.8, "H_Q3": 0.7},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Which director is older, Film A or Film B?": AtomicQuestionAnalysis(entities=["Original"]),
+                    "Who directed Film A?": AtomicQuestionAnalysis(entities=["Film A"]),
+                    "Who directed Film B?": AtomicQuestionAnalysis(entities=["Film B"]),
+                    "Compare directors.": AtomicQuestionAnalysis(entities=["Comparison"]),
+                }
+            ),
+            llm=MockAtomicLLMService(
+                answer_responses=[{"answer": "Director A"}, {"answer": "Director B"}, {"answer": "Director A"}]
+            ),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who directed Film A?"},
+                {"node_id": "q2", "question": "Who directed Film B?"},
+                {"node_id": "q3", "question": "Compare directors.", "dependencies": ["q1", "q2"]},
+            ]
+        }
+
+        result = executor.run("Which director is older, Film A or Film B?", dag)
+
+        q1, q2, q3 = result.artifacts["atomic_retrieval"]
+        self.assertEqual(q1["active_candidate_pool_node_ids"], ["original_question", "q1"])
+        self.assertEqual(q2["active_candidate_pool_node_ids"], ["original_question", "q2"])
+        self.assertEqual(q3["active_candidate_pool_node_ids"], ["original_question", "q1", "q2", "q3"])
+        self.assertIn("H_ORIGINAL", q1["candidate_hyperedge_ids"])
+        self.assertIn("H_ORIGINAL", q2["candidate_hyperedge_ids"])
+        self.assertIn("H_ORIGINAL", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q1", q1["candidate_hyperedge_ids"])
+        self.assertNotIn("H_Q2", q1["candidate_hyperedge_ids"])
+        self.assertIn("H_Q2", q2["candidate_hyperedge_ids"])
+        self.assertNotIn("H_Q1", q2["candidate_hyperedge_ids"])
+        self.assertIn("H_Q1", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q2", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q3", q3["candidate_hyperedge_ids"])
+
+    def test_transitive_ancestor_candidate_pools_are_active(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Original": ["H_ORIGINAL"],
+                "Seed A": ["H_Q1"],
+                "Seed B": ["H_Q2"],
+                "Seed C": ["H_Q3"],
+            },
+            hyperedge_entities={
+                "H_ORIGINAL": ["Original"],
+                "H_Q1": ["Seed A"],
+                "H_Q2": ["Seed B"],
+                "H_Q3": ["Seed C"],
+            },
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_ORIGINAL": 0.1, "H_Q1": 0.6, "H_Q2": 0.7, "H_Q3": 0.8},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Original chain question?": AtomicQuestionAnalysis(entities=["Original"]),
+                    "Question A?": AtomicQuestionAnalysis(entities=["Seed A"]),
+                    "Question B?": AtomicQuestionAnalysis(entities=["Seed B"]),
+                    "Question C?": AtomicQuestionAnalysis(entities=["Seed C"]),
+                }
+            ),
+            llm=MockAtomicLLMService(
+                answer_responses=[{"answer": "A"}, {"answer": "B"}, {"answer": "C"}]
+            ),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Question A?"},
+                {"node_id": "q2", "question": "Question B?", "dependencies": ["q1"]},
+                {"node_id": "q3", "question": "Question C?", "dependencies": ["q2"]},
+            ]
+        }
+
+        result = executor.run("Original chain question?", dag)
+
+        q3 = result.artifacts["atomic_retrieval"][2]
+        self.assertEqual(q3["active_ancestor_node_ids"], ["q1", "q2"])
+        self.assertEqual(q3["active_candidate_pool_node_ids"], ["original_question", "q1", "q2", "q3"])
+        self.assertIn("H_ORIGINAL", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q1", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q2", q3["candidate_hyperedge_ids"])
+        self.assertIn("H_Q3", q3["candidate_hyperedge_ids"])
+
+    def test_multibranch_partial_dependencies_filter_candidate_pools(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Original": ["H_ORIGINAL"],
+                "Seed 1": ["H_Q1"],
+                "Seed 2": ["H_Q2"],
+                "Seed 3": ["H_Q3"],
+                "Seed 4": ["H_Q4"],
+                "Seed 5": ["H_Q5"],
+            },
+            hyperedge_entities={
+                "H_ORIGINAL": ["Original"],
+                "H_Q1": ["Seed 1"],
+                "H_Q2": ["Seed 2"],
+                "H_Q3": ["Seed 3"],
+                "H_Q4": ["Seed 4"],
+                "H_Q5": ["Seed 5"],
+            },
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_ORIGINAL": 0.1, "H_Q1": 0.2, "H_Q2": 0.3, "H_Q3": 0.4, "H_Q4": 0.5, "H_Q5": 0.6},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Original multibranch question?": AtomicQuestionAnalysis(entities=["Original"]),
+                    "Question 1?": AtomicQuestionAnalysis(entities=["Seed 1"]),
+                    "Question 2?": AtomicQuestionAnalysis(entities=["Seed 2"]),
+                    "Question 3?": AtomicQuestionAnalysis(entities=["Seed 3"]),
+                    "Question 4?": AtomicQuestionAnalysis(entities=["Seed 4"]),
+                    "Question 5?": AtomicQuestionAnalysis(entities=["Seed 5"]),
+                }
+            ),
+            llm=MockAtomicLLMService(
+                answer_responses=[
+                    {"answer": "A1"},
+                    {"answer": "A2"},
+                    {"answer": "A3"},
+                    {"answer": "A4"},
+                    {"answer": "A5"},
+                ]
+            ),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Question 1?"},
+                {"node_id": "q2", "question": "Question 2?"},
+                {"node_id": "q3", "question": "Question 3?", "dependencies": ["q1"]},
+                {"node_id": "q4", "question": "Question 4?", "dependencies": ["q2"]},
+                {"node_id": "q5", "question": "Question 5?", "dependencies": ["q3", "q4"]},
+            ]
+        }
+
+        result = executor.run("Original multibranch question?", dag)
+
+        q3 = result.artifacts["atomic_retrieval"][2]
+        q4 = result.artifacts["atomic_retrieval"][3]
+        q5 = result.artifacts["atomic_retrieval"][4]
+        self.assertEqual(q3["active_candidate_pool_node_ids"], ["original_question", "q1", "q3"])
+        self.assertIn("H_Q1", q3["candidate_hyperedge_ids"])
+        self.assertNotIn("H_Q2", q3["candidate_hyperedge_ids"])
+        self.assertEqual(q4["active_candidate_pool_node_ids"], ["original_question", "q2", "q4"])
+        self.assertIn("H_Q2", q4["candidate_hyperedge_ids"])
+        self.assertNotIn("H_Q1", q4["candidate_hyperedge_ids"])
+        self.assertEqual(q5["active_candidate_pool_node_ids"], ["original_question", "q1", "q2", "q3", "q4", "q5"])
+        for hyperedge_id in ("H_ORIGINAL", "H_Q1", "H_Q2", "H_Q3", "H_Q4", "H_Q5"):
+            self.assertIn(hyperedge_id, q5["candidate_hyperedge_ids"])
+
+    def test_candidate_pool_deduplicates_and_merges_source_metadata(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Original": ["H_SHARED"],
+                "Ancestor": ["H_SHARED"],
+                "Current": ["H_SHARED"],
+            },
+            hyperedge_entities={
+                "H_SHARED": ["Original", "Ancestor", "Current"],
+            },
+            hyperedge_texts={"H_SHARED": "Original, Ancestor, and Current share one fact."},
+        )
+        executor = _executor(
+            graph=graph,
+            scores={"H_SHARED": 1.0},
+            analyzer=QuestionAnalyzer(
+                {
+                    "Original shared question?": AtomicQuestionAnalysis(entities=["Original"]),
+                    "Ancestor shared question?": AtomicQuestionAnalysis(entities=["Ancestor"]),
+                    "Current shared question?": AtomicQuestionAnalysis(entities=["Current"]),
+                }
+            ),
+            llm=MockAtomicLLMService(answer_responses=[{"answer": "shared"}, {"answer": "shared"}]),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Ancestor shared question?"},
+                {"node_id": "q2", "question": "Current shared question?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("Original shared question?", dag)
+
+        retrieval = result.artifacts["atomic_retrieval"][1]
+        self.assertEqual(retrieval["active_candidate_pool_node_ids"], ["original_question", "q1", "q2"])
+        self.assertEqual(retrieval["candidate_hyperedge_ids"], ["H_SHARED"])
+        self.assertEqual(retrieval["candidate_hyperedge_ids"].count("H_SHARED"), 1)
+        self.assertEqual(retrieval["shared_candidate_hyperedge_ids"], ["H_SHARED"])
+        self.assertEqual(retrieval["local_candidate_hyperedge_ids"], ["H_SHARED"])
+        source = retrieval["candidate_sources"][0]
+        self.assertEqual(source["hyperedge_id"], "H_SHARED")
+        self.assertIn("Original", source["via_entity_ids"])
+        self.assertIn("Ancestor", source["via_entity_ids"])
+        self.assertIn("Current", source["via_entity_ids"])
+        self.assertIn("original_question_shared_pool", source["pool_sources"])
+        self.assertIn("atomic_node_local_pool", source["pool_sources"])
 
     def test_executor_repairs_extra_leaves_by_attaching_them_to_terminal_node(self) -> None:
         executor = _executor(

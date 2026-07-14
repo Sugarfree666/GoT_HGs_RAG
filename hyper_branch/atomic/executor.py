@@ -55,12 +55,15 @@ class AtomicDagExecutor:
             dag_payload=dag_payload,
             original_question_entities=original_question_entities,
         )
-        shared_candidate_pool = self.retriever.build_original_question_candidate_pool(
+        original_question_candidate_pool = self.retriever.build_original_question_candidate_pool(
             question=original_question,
             analysis=original_question_analysis,
             primary_anchor_mention=_primary_anchor_mention([], original_question_analysis),
         )
-        shared_candidate_pool_initial = shared_candidate_pool.to_artifact()
+        original_question_candidate_pool_artifact = original_question_candidate_pool.to_artifact()
+        local_candidate_pools_by_node: dict[str, LocalHyperedgeRetrievalResult] = {}
+        node_dependencies_by_id = {node.node_id: list(node.dependencies) for node in order}
+        topological_node_ids = [node.node_id for node in order]
 
         self.logger.info("Executing atomic DAG with %s node(s)", len(order))
         for node in order:
@@ -88,8 +91,18 @@ class AtomicDagExecutor:
                 analysis=analysis,
                 primary_anchor_mention=primary_anchor_mention,
             )
+            active_ancestor_node_ids = self._transitive_ancestor_node_ids(
+                node.node_id,
+                dependencies_by_id=node_dependencies_by_id,
+                topological_node_ids=topological_node_ids,
+            )
+            active_shared_candidate_pool = self._active_shared_candidate_pool(
+                original_question_candidate_pool=original_question_candidate_pool,
+                active_ancestor_node_ids=active_ancestor_node_ids,
+                local_candidate_pools_by_node=local_candidate_pools_by_node,
+            )
             retrieval_result = self.retriever.merge_candidate_pools(
-                shared_pool=shared_candidate_pool,
+                shared_pool=active_shared_candidate_pool,
                 local_pool=local_candidate_pool,
             )
             retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=resolved_question)
@@ -140,13 +153,12 @@ class AtomicDagExecutor:
                 dependency_rewrite_payload=rewrite_payload,
                 retrieval_result=retrieval_result,
                 answer_payload=result.to_dict(),
+                active_ancestor_node_ids=active_ancestor_node_ids,
+                active_candidate_pool_node_ids=["original_question", *active_ancestor_node_ids, node.node_id],
             )
             retrieval_artifact.append(retrieval_record)
             answer_artifact.append(result.to_dict())
-            shared_candidate_pool = self.retriever.merge_candidate_pools(
-                shared_pool=shared_candidate_pool,
-                local_pool=local_candidate_pool,
-            )
+            local_candidate_pools_by_node[node.node_id] = local_candidate_pool
 
         atomic_results = [results_by_id[node.node_id] for node in order]
         final_answer = self._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
@@ -158,8 +170,12 @@ class AtomicDagExecutor:
                 **original_question_analysis.to_dict(),
                 "source": original_question_analysis_source,
             },
-            "shared_candidate_pool_initial": shared_candidate_pool_initial,
-            "shared_candidate_pool_final": shared_candidate_pool.to_artifact(),
+            "original_question_candidate_pool": original_question_candidate_pool_artifact,
+            "shared_candidate_pool_initial": original_question_candidate_pool_artifact,
+            "shared_candidate_pool_final": original_question_candidate_pool_artifact,
+            "local_candidate_pools_by_node": {
+                node_id: pool.to_artifact() for node_id, pool in local_candidate_pools_by_node.items()
+            },
             "atomic_question_analyses": analyses_artifact,
             "atomic_retrieval": retrieval_artifact,
             "atomic_answers": answer_artifact,
@@ -648,6 +664,47 @@ class AtomicDagExecutor:
             return []
         return [item.hyperedge_id for item in evidence[:1]]
 
+    def _active_shared_candidate_pool(
+        self,
+        *,
+        original_question_candidate_pool: LocalHyperedgeRetrievalResult,
+        active_ancestor_node_ids: list[str],
+        local_candidate_pools_by_node: dict[str, LocalHyperedgeRetrievalResult],
+    ) -> LocalHyperedgeRetrievalResult:
+        active_pool = original_question_candidate_pool
+        for ancestor_node_id in active_ancestor_node_ids:
+            ancestor_pool = local_candidate_pools_by_node.get(ancestor_node_id)
+            if ancestor_pool is None:
+                continue
+            active_pool = self.retriever.merge_candidate_pools(
+                shared_pool=active_pool,
+                local_pool=ancestor_pool,
+            )
+        return active_pool
+
+    @staticmethod
+    def _transitive_ancestor_node_ids(
+        node_id: str,
+        *,
+        dependencies_by_id: dict[str, list[str]],
+        topological_node_ids: list[str],
+    ) -> list[str]:
+        ancestors: set[str] = set()
+
+        def visit(current_id: str) -> None:
+            for dependency_id in dependencies_by_id.get(current_id, []):
+                if dependency_id in ancestors:
+                    continue
+                ancestors.add(dependency_id)
+                visit(dependency_id)
+
+        visit(node_id)
+        topological_position = {candidate_id: index for index, candidate_id in enumerate(topological_node_ids)}
+        return sorted(
+            ancestors,
+            key=lambda candidate_id: topological_position.get(candidate_id, len(topological_node_ids)),
+        )
+
     @staticmethod
     def _retrieval_artifact(
         *,
@@ -657,6 +714,8 @@ class AtomicDagExecutor:
         dependency_rewrite_payload: dict[str, Any],
         retrieval_result: LocalHyperedgeRetrievalResult,
         answer_payload: dict[str, Any],
+        active_ancestor_node_ids: list[str],
+        active_candidate_pool_node_ids: list[str],
     ) -> dict[str, Any]:
         retrieval_payload = retrieval_result.to_artifact()
         return {
@@ -670,6 +729,8 @@ class AtomicDagExecutor:
             "dependency_replacements": dependency_rewrite_payload["dependency_replacements"],
             "dependency_answers_used": dependency_rewrite_payload["dependency_answers_used"],
             "unresolved_dependency": dependency_rewrite_payload["unresolved_dependencies"],
+            "active_ancestor_node_ids": list(active_ancestor_node_ids),
+            "active_candidate_pool_node_ids": list(active_candidate_pool_node_ids),
             "primary_anchor_mention": retrieval_payload["primary_anchor_mention"],
             "linked_entity_id": retrieval_payload["linked_entity_id"],
             "anchor_match": retrieval_payload["anchor_match"],
