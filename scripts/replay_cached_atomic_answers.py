@@ -29,6 +29,7 @@ from hyper_branch.atomic.models import (  # noqa: E402
     AtomicAnswerResult,
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
+    EvidencePathCandidate,
     FusedHyperedgeCandidate,
 )
 from hyper_branch.config import LLMConfig  # noqa: E402
@@ -241,13 +242,11 @@ def replay_one_question(
 
         analysis = _analysis_from_cached(analysis_record, old_answer_record)
         evidence = _evidence_from_cached(retrieval_record, old_answer_record, args.top_k)
-        answer_contract = AtomicDagExecutor._answer_contract(resolved_question)
         evidence_payload = AtomicDagExecutor._answer_evidence_payload(evidence)
         answer_input = {
             "node_id": node.node_id,
             "original_question": original_question,
             "atomic_question": resolved_question,
-            "answer_contract": answer_contract,
             "dependency_answers": dependency_answers_for_prompt,
             "evidence": evidence_payload,
             "question_mode": args.question_mode,
@@ -258,7 +257,7 @@ def replay_one_question(
         answer_inputs.append(answer_input)
         raw_payload = service.answer_atomic_question(
             atomic_question=resolved_question,
-            answer_contract=answer_contract,
+            answer_contract={},
             dependency_answers=dependency_answers_for_prompt,
             evidence=evidence_payload,
             original_question=original_question,
@@ -431,15 +430,47 @@ def _evidence_from_cached(
     retrieval_record: dict[str, Any],
     old_answer_record: dict[str, Any],
     top_k: int,
-) -> list[FusedHyperedgeCandidate]:
+) -> list[Any]:
     raw_evidence = ensure_list(
-        retrieval_record.get("answerer_evidence")
+        retrieval_record.get("top_paths")
+        or retrieval_record.get("answerer_evidence")
         or retrieval_record.get("top_evidence")
         or old_answer_record.get("evidence")
     )
     if top_k > 0:
         raw_evidence = raw_evidence[:top_k]
-    return [_fused_candidate_from_payload(item) for item in raw_evidence if isinstance(item, dict)]
+    return [_cached_evidence_from_payload(item) for item in raw_evidence if isinstance(item, dict)]
+
+
+def _cached_evidence_from_payload(item: dict[str, Any]) -> Any:
+    if item.get("path") is not None or item.get("path_texts") is not None or item.get("path_type") is not None:
+        return _path_candidate_from_payload(item)
+    return _fused_candidate_from_payload(item)
+
+
+def _path_candidate_from_payload(item: dict[str, Any]) -> EvidencePathCandidate:
+    path_texts = [
+        str(value).strip()
+        for value in ensure_list(item.get("path_texts") or item.get("path"))
+        if str(value).strip()
+    ]
+    hyperedge_ids = [str(value) for value in ensure_list(item.get("hyperedge_ids")) if str(value).strip()]
+    seed_hyperedge_id = str(item.get("seed_hyperedge_id") or (hyperedge_ids[-1] if hyperedge_ids else "") or "")
+    return EvidencePathCandidate(
+        path_type=str(item.get("path_type", "seed_only") or "seed_only"),
+        path_texts=path_texts,
+        hyperedge_ids=hyperedge_ids,
+        context_ids=[str(value) for value in ensure_list(item.get("context_ids")) if str(value).strip()],
+        anchor_entity_id=str(item.get("anchor_entity_id", "") or ""),
+        bridge_entity_id=str(item.get("bridge_entity_id", "") or ""),
+        seed_hyperedge_id=seed_hyperedge_id,
+        seed_hyperedge_rank=int(item.get("seed_hyperedge_rank", item.get("path_rank", 0)) or 0),
+        seed_hyperedge_score=float(item.get("seed_hyperedge_score", 0.0) or 0.0),
+        path_score=float(item.get("path_score", 0.0) or 0.0),
+        path_rank=int(item["path_rank"]) if str(item.get("path_rank", "")).strip().isdigit() else None,
+        provenance=dict(item.get("provenance") or {}),
+        structural_key=tuple(str(value) for value in ensure_list(item.get("structural_key"))),
+    )
 
 
 def _fused_candidate_from_payload(item: dict[str, Any]) -> FusedHyperedgeCandidate:
@@ -461,7 +492,7 @@ def _fused_candidate_from_payload(item: dict[str, Any]) -> FusedHyperedgeCandida
     )
 
 
-def _coerce_answer_payload(payload: Any, evidence: list[FusedHyperedgeCandidate]) -> dict[str, Any]:
+def _coerce_answer_payload(payload: Any, evidence: list[Any]) -> dict[str, Any]:
     if not isinstance(payload, dict):
         payload = {}
     answer = str(payload.get("answer", "") or "").strip() or "INSUFFICIENT_EVIDENCE"
@@ -479,7 +510,7 @@ def _coerce_answer_payload(payload: Any, evidence: list[FusedHyperedgeCandidate]
     if not used_hyperedge_ids:
         used_hyperedge_ids = _hyperedge_ids_from_evidence_ids(supporting_evidence_ids, evidence)
     if not used_hyperedge_ids and not insufficient and evidence:
-        used_hyperedge_ids = [evidence[0].hyperedge_id]
+        used_hyperedge_ids = _hyperedge_ids_for_cached_evidence(evidence[0])
     return {
         "answer": "INSUFFICIENT_EVIDENCE" if insufficient else answer,
         "reasoning_summary": str(payload.get("reasoning_summary", "") or ""),
@@ -492,7 +523,7 @@ def _coerce_answer_payload(payload: Any, evidence: list[FusedHyperedgeCandidate]
 
 def _hyperedge_ids_from_evidence_ids(
     evidence_ids: Iterable[str],
-    evidence: list[FusedHyperedgeCandidate],
+    evidence: list[Any],
 ) -> list[str]:
     mapped: list[str] = []
     for evidence_id in evidence_ids:
@@ -504,8 +535,24 @@ def _hyperedge_ids_from_evidence_ids(
             continue
         index = int(index_text) - 1
         if 0 <= index < len(evidence):
-            mapped.append(evidence[index].hyperedge_id)
+            mapped.extend(_hyperedge_ids_for_cached_evidence(evidence[index]))
     return mapped
+
+
+def _hyperedge_ids_for_cached_evidence(item: Any) -> list[str]:
+    if isinstance(item, EvidencePathCandidate):
+        return list(item.hyperedge_ids)
+    if isinstance(item, dict):
+        values = [str(value).strip() for value in ensure_list(item.get("hyperedge_ids")) if str(value).strip()]
+        if values:
+            return _dedupe_strings(values)
+        value = str(item.get("hyperedge_id", "") or "").strip()
+        return [value] if value else []
+    values = getattr(item, "hyperedge_ids", None)
+    if values is not None:
+        return _dedupe_strings([str(value) for value in ensure_list(values) if str(value).strip()])
+    value = str(getattr(item, "hyperedge_id", "") or "").strip()
+    return [value] if value else []
 
 
 def _dependency_context(
@@ -528,17 +575,30 @@ def _dependency_context(
                 "used_hyperedge_ids": list(result.used_hyperedge_ids),
                 "insufficient": result.insufficient,
                 "evidence_summary": [
-                    {
-                        "hyperedge_id": evidence.hyperedge_id,
-                        "semantic_score": evidence.semantic_score,
-                        "rank": evidence.rank,
-                        "evidence_texts": evidence.evidence_texts[:2],
-                    }
+                    _cached_evidence_summary(evidence)
                     for evidence in result.evidence[:3]
                 ],
             }
         )
     return context
+
+
+def _cached_evidence_summary(evidence: Any) -> dict[str, Any]:
+    if isinstance(evidence, EvidencePathCandidate):
+        return {
+            "path_type": evidence.path_type,
+            "hyperedge_ids": list(evidence.hyperedge_ids),
+            "context_ids": list(evidence.context_ids),
+            "path_score": evidence.path_score,
+            "rank": evidence.rank,
+            "path_texts": evidence.path_texts[:2],
+        }
+    return {
+        "hyperedge_id": getattr(evidence, "hyperedge_id", ""),
+        "semantic_score": getattr(evidence, "semantic_score", 0.0),
+        "rank": getattr(evidence, "rank", None),
+        "evidence_texts": list(getattr(evidence, "evidence_texts", []))[:2],
+    }
 
 
 def _replay_retrieval_artifact(
@@ -586,8 +646,9 @@ def _replay_retrieval_artifact(
             "dependency_replacements": rewrite_payload.get("dependency_replacements", []),
             "dependency_answers_used": rewrite_payload.get("dependency_answers_used", []),
             "unresolved_dependency": rewrite_payload.get("unresolved_dependencies", []),
-            "answerer_evidence": _evidence_payload_for_artifact(evidence, store_full_evidence),
-            "top_evidence": _evidence_payload_for_artifact(evidence, store_full_evidence),
+            "answerer_evidence": AtomicDagExecutor._answer_evidence_payload(evidence),
+            "top_evidence": AtomicDagExecutor._answer_evidence_payload(evidence),
+            "top_paths": _path_payload_for_artifact(evidence),
             "atomic_answer": answer_payload,
             "replay_reused_cached_candidates": True,
         }
@@ -602,13 +663,16 @@ def _atomic_result_payload(result: AtomicAnswerResult, *, store_full_evidence: b
 
 
 def _evidence_payload_for_artifact(
-    evidence: list[FusedHyperedgeCandidate],
+    evidence: list[Any],
     store_full_evidence: bool,
 ) -> list[dict[str, Any]]:
     if store_full_evidence:
         return [item.to_dict() for item in evidence]
     payload: list[dict[str, Any]] = []
     for index, item in enumerate(evidence, start=1):
+        if isinstance(item, EvidencePathCandidate):
+            payload.append(item.to_answer_payload())
+            continue
         payload.append(
             {
                 "evidence_id": f"E{index}",
@@ -626,6 +690,10 @@ def _evidence_payload_for_artifact(
             }
         )
     return payload
+
+
+def _path_payload_for_artifact(evidence: list[Any]) -> list[dict[str, Any]]:
+    return [item.to_dict() for item in evidence if isinstance(item, EvidencePathCandidate)]
 
 
 def _combined_payload(

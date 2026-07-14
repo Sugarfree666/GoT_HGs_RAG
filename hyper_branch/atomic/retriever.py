@@ -13,7 +13,7 @@ from ..data.loaders import DatasetBundle
 from ..llm.service import AtomicLLMService
 from ..models import VectorMatch
 from ..utils import normalize_label, short_text
-from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
+from .models import AtomicQuestionAnalysis, EvidencePathCandidate, FusedHyperedgeCandidate
 
 
 _ANCHOR_ENTITY_TOP_K = 30
@@ -115,7 +115,12 @@ class LocalHyperedgeRetrievalResult:
     local_candidate_hyperedge_ids: list[str] = field(default_factory=list)
     candidate_sources: list[dict[str, Any]] = field(default_factory=list)
     top_hyperedges: list[dict[str, Any]] = field(default_factory=list)
-    evidence: list[FusedHyperedgeCandidate] = field(default_factory=list)
+    candidate_paths: list[EvidencePathCandidate] = field(default_factory=list)
+    top_paths: list[EvidencePathCandidate] = field(default_factory=list)
+    evidence: list[EvidencePathCandidate] = field(default_factory=list)
+    candidate_path_count: int = 0
+    deduplicated_path_count: int = 0
+    selected_path_count: int = 0
     insufficient_reason: str = ""
     local_insufficient_reason: str = ""
     shared_insufficient_reason: str = ""
@@ -143,7 +148,12 @@ class LocalHyperedgeRetrievalResult:
             "local_candidate_hyperedge_ids": list(self.local_candidate_hyperedge_ids),
             "candidate_sources": [dict(item) for item in self.candidate_sources],
             "top_hyperedges": [dict(item) for item in self.top_hyperedges],
-            "evidence": [item.to_dict() for item in self.evidence],
+            "candidate_paths": [item.to_dict() for item in self.candidate_paths],
+            "top_paths": [item.to_dict() for item in self.top_paths],
+            "evidence": [item.to_answer_payload() for item in self.evidence],
+            "candidate_path_count": self.candidate_path_count,
+            "deduplicated_path_count": self.deduplicated_path_count,
+            "selected_path_count": self.selected_path_count,
             "insufficient_reason": self.insufficient_reason,
             "local_insufficient_reason": self.local_insufficient_reason,
             "shared_insufficient_reason": self.shared_insufficient_reason,
@@ -382,6 +392,15 @@ class AtomicHyperedgeRetriever:
         *,
         question: str,
     ) -> LocalHyperedgeRetrievalResult:
+        result = self.rank_seed_hyperedges(result, question=question)
+        return self.reconstruct_and_rank_paths(result, question=question)
+
+    def rank_seed_hyperedges(
+        self,
+        result: LocalHyperedgeRetrievalResult,
+        *,
+        question: str,
+    ) -> LocalHyperedgeRetrievalResult:
         source_by_id: dict[str, dict[str, Any]] = {}
         for source in result.candidate_sources:
             self._merge_candidate_source(source_by_id, dict(source))
@@ -407,22 +426,304 @@ class AtomicHyperedgeRetriever:
             item["rank"] = rank
 
         result.top_hyperedges = selected
-        result.evidence = [
-            self._evidence_from_hyperedge(
-                hyperedge_id=str(item["hyperedge_id"]),
-                semantic_score=float(item["semantic_score"]),
-                rank=int(item["rank"]),
-                primary_anchor_mention=result.primary_anchor_mention,
-                primary_anchor_entity_id=result.linked_entity_id,
-                candidate_source=source_by_id.get(str(item["hyperedge_id"]), {}),
-                selection_source=result.method,
-            )
-            for item in selected
-        ]
-        result.evidence = [item for item in result.evidence if item.hyperedge_id]
-        if not result.evidence and not result.insufficient_reason:
-            result.insufficient_reason = "no_valid_local_evidence"
         return result
+
+    def reconstruct_and_rank_paths(
+        self,
+        result: LocalHyperedgeRetrievalResult,
+        *,
+        question: str,
+    ) -> LocalHyperedgeRetrievalResult:
+        candidate_paths, raw_path_count = self.reconstruct_paths_from_seeds(result)
+        result.candidate_path_count = raw_path_count
+        result.deduplicated_path_count = len(candidate_paths)
+        result.candidate_paths = candidate_paths
+        result.top_paths = self.rank_evidence_paths(candidate_paths, question=question)
+        result.selected_path_count = len(result.top_paths)
+        result.evidence = list(result.top_paths)
+        if not result.evidence and not result.insufficient_reason:
+            result.insufficient_reason = "no_valid_evidence_paths"
+        return result
+
+    def reconstruct_paths_from_seeds(
+        self,
+        result: LocalHyperedgeRetrievalResult,
+    ) -> tuple[list[EvidencePathCandidate], int]:
+        source_by_id: dict[str, dict[str, Any]] = {}
+        for source in result.candidate_sources:
+            self._merge_candidate_source(source_by_id, dict(source))
+
+        raw_paths: list[EvidencePathCandidate] = []
+        for seed in result.top_hyperedges:
+            seed_hyperedge_id = str(seed.get("hyperedge_id", "") or "")
+            if not seed_hyperedge_id:
+                continue
+            source = source_by_id.get(seed_hyperedge_id, {})
+            traces = [
+                dict(trace)
+                for trace in source.get("path_traces", [])
+                if isinstance(trace, dict)
+                and str(trace.get("terminal_hyperedge_id") or trace.get("hyperedge_id") or "") == seed_hyperedge_id
+            ]
+            seed_paths: list[EvidencePathCandidate] = []
+            for trace in traces:
+                path = self._path_from_trace(trace, seed)
+                if path is not None:
+                    seed_paths.append(path)
+            if not seed_paths:
+                fallback = self._seed_only_path(
+                    seed_hyperedge_id=seed_hyperedge_id,
+                    seed=seed,
+                    source=source,
+                    fallback_reason="missing_or_invalid_precise_path_trace",
+                )
+                if fallback is not None:
+                    seed_paths.append(fallback)
+            raw_paths.extend(seed_paths)
+
+        deduped_by_key: dict[tuple[str, ...], EvidencePathCandidate] = {}
+        for path in raw_paths:
+            key = path.structural_key or self._path_structural_key(path)
+            if key not in deduped_by_key:
+                deduped_by_key[key] = path
+                continue
+            existing = deduped_by_key[key]
+            existing.provenance = self._merge_path_provenance(existing.provenance, path.provenance)
+
+        return list(deduped_by_key.values()), len(raw_paths)
+
+    def rank_evidence_paths(
+        self,
+        paths: list[EvidencePathCandidate],
+        *,
+        question: str,
+    ) -> list[EvidencePathCandidate]:
+        if not paths:
+            return []
+
+        scores = self._path_similarity_scores(question, paths)
+        for index, path in enumerate(paths):
+            path.path_score = float(scores.get(index, 0.0))
+        ranked = sorted(
+            paths,
+            key=lambda item: (
+                -float(item.path_score),
+                int(item.seed_hyperedge_rank or 0),
+                tuple(str(value) for value in item.structural_key),
+            ),
+        )
+        for rank, path in enumerate(ranked, start=1):
+            path.path_rank = rank
+        top_k = max(0, int(getattr(self.config, "local_path_top_k", 5)))
+        return ranked[:top_k]
+
+    def _path_from_trace(self, trace: dict[str, Any], seed: dict[str, Any]) -> EvidencePathCandidate | None:
+        path_kind = str(trace.get("path_kind", "") or "").strip().lower()
+        seed_hyperedge_id = str(seed.get("hyperedge_id", "") or trace.get("terminal_hyperedge_id", "") or "")
+        seed_rank = int(seed.get("rank", 0) or 0)
+        seed_score = float(seed.get("semantic_score", 0.0) or 0.0)
+        anchor_entity_id = str(trace.get("anchor_entity_id", "") or "")
+        first_hyperedge_id = str(trace.get("first_hyperedge_id", "") or "")
+        terminal_hyperedge_id = str(trace.get("terminal_hyperedge_id", "") or seed_hyperedge_id)
+        bridge_entity_id = str(trace.get("bridge_entity_id", "") or "")
+        context_id = str(trace.get("context_id", "") or "")
+
+        if path_kind == "1he":
+            h1 = first_hyperedge_id or terminal_hyperedge_id
+            if not h1 or h1 != terminal_hyperedge_id:
+                return None
+            if anchor_entity_id and anchor_entity_id not in self._hyperedge_entity_ids(h1):
+                return None
+            key = ("1he", h1)
+            return self._make_path_candidate(
+                path_type="1he",
+                path_texts=[self._hyperedge_text(h1)],
+                hyperedge_ids=[h1],
+                context_ids=[],
+                anchor_entity_id=anchor_entity_id,
+                bridge_entity_id="",
+                seed_hyperedge_id=seed_hyperedge_id,
+                seed_hyperedge_rank=seed_rank,
+                seed_hyperedge_score=seed_score,
+                provenance=trace,
+                structural_key=key,
+            )
+
+        if path_kind == "2he":
+            if not first_hyperedge_id or not terminal_hyperedge_id or not bridge_entity_id:
+                return None
+            first_entities = set(self._hyperedge_entity_ids(first_hyperedge_id))
+            terminal_entities = set(self._hyperedge_entity_ids(terminal_hyperedge_id))
+            if anchor_entity_id and anchor_entity_id not in first_entities:
+                return None
+            if bridge_entity_id not in first_entities or bridge_entity_id not in terminal_entities:
+                return None
+            key = ("2he", first_hyperedge_id, bridge_entity_id, terminal_hyperedge_id)
+            return self._make_path_candidate(
+                path_type="2he",
+                path_texts=[self._hyperedge_text(first_hyperedge_id), self._hyperedge_text(terminal_hyperedge_id)],
+                hyperedge_ids=[first_hyperedge_id, terminal_hyperedge_id],
+                context_ids=[],
+                anchor_entity_id=anchor_entity_id,
+                bridge_entity_id=bridge_entity_id,
+                seed_hyperedge_id=seed_hyperedge_id,
+                seed_hyperedge_rank=seed_rank,
+                seed_hyperedge_score=seed_score,
+                provenance=trace,
+                structural_key=key,
+            )
+
+        if path_kind == "3he":
+            if not first_hyperedge_id or not terminal_hyperedge_id or not bridge_entity_id or not context_id:
+                return None
+            first_entities = set(self._hyperedge_entity_ids(first_hyperedge_id))
+            terminal_entities = set(self._hyperedge_entity_ids(terminal_hyperedge_id))
+            if anchor_entity_id and anchor_entity_id not in first_entities:
+                return None
+            if context_id not in self._hyperedge_chunk_ids(first_hyperedge_id):
+                return None
+            if bridge_entity_id not in self._chunk_entity_ids(context_id):
+                return None
+            if bridge_entity_id not in terminal_entities:
+                return None
+            context_text = self.dataset.get_chunk_text(context_id)
+            if not str(context_text or "").strip():
+                return None
+            key = ("3he", first_hyperedge_id, context_id, bridge_entity_id, terminal_hyperedge_id)
+            return self._make_path_candidate(
+                path_type="3he",
+                path_texts=[
+                    self._hyperedge_text(first_hyperedge_id),
+                    str(context_text or "").strip(),
+                    self._hyperedge_text(terminal_hyperedge_id),
+                ],
+                hyperedge_ids=[first_hyperedge_id, terminal_hyperedge_id],
+                context_ids=[context_id],
+                anchor_entity_id=anchor_entity_id,
+                bridge_entity_id=bridge_entity_id,
+                seed_hyperedge_id=seed_hyperedge_id,
+                seed_hyperedge_rank=seed_rank,
+                seed_hyperedge_score=seed_score,
+                provenance=trace,
+                structural_key=key,
+            )
+
+        return None
+
+    def _seed_only_path(
+        self,
+        *,
+        seed_hyperedge_id: str,
+        seed: dict[str, Any],
+        source: dict[str, Any],
+        fallback_reason: str,
+    ) -> EvidencePathCandidate | None:
+        if not seed_hyperedge_id:
+            return None
+        provenance = {
+            "path_kind": "seed_only",
+            "terminal_hyperedge_id": seed_hyperedge_id,
+            "fallback_reason": fallback_reason,
+            "expansion_sources": list(source.get("expansion_sources", [])),
+            "pool_sources": list(source.get("pool_sources", [])),
+        }
+        return self._make_path_candidate(
+            path_type="seed_only",
+            path_texts=[self._hyperedge_text(seed_hyperedge_id)],
+            hyperedge_ids=[seed_hyperedge_id],
+            context_ids=[],
+            anchor_entity_id=str(source.get("anchor_entity_ids", [""])[0] if source.get("anchor_entity_ids") else ""),
+            bridge_entity_id="",
+            seed_hyperedge_id=seed_hyperedge_id,
+            seed_hyperedge_rank=int(seed.get("rank", 0) or 0),
+            seed_hyperedge_score=float(seed.get("semantic_score", 0.0) or 0.0),
+            provenance=provenance,
+            structural_key=("seed_only", seed_hyperedge_id),
+        )
+
+    @staticmethod
+    def _make_path_candidate(
+        *,
+        path_type: str,
+        path_texts: list[str],
+        hyperedge_ids: list[str],
+        context_ids: list[str],
+        anchor_entity_id: str,
+        bridge_entity_id: str,
+        seed_hyperedge_id: str,
+        seed_hyperedge_rank: int,
+        seed_hyperedge_score: float,
+        provenance: dict[str, Any],
+        structural_key: tuple[str, ...],
+    ) -> EvidencePathCandidate:
+        clean_texts = [str(text or "").strip() for text in path_texts if str(text or "").strip()]
+        payload = dict(provenance)
+        payload["structural_key"] = list(structural_key)
+        return EvidencePathCandidate(
+            path_type=path_type,
+            path_texts=clean_texts,
+            hyperedge_ids=_dedupe_strings(hyperedge_ids),
+            context_ids=_dedupe_strings(context_ids),
+            anchor_entity_id=anchor_entity_id,
+            bridge_entity_id=bridge_entity_id,
+            seed_hyperedge_id=seed_hyperedge_id,
+            seed_hyperedge_rank=seed_hyperedge_rank,
+            seed_hyperedge_score=seed_hyperedge_score,
+            provenance=payload,
+            structural_key=structural_key,
+        )
+
+    @staticmethod
+    def _path_structural_key(path: EvidencePathCandidate) -> tuple[str, ...]:
+        if path.structural_key:
+            return path.structural_key
+        if path.path_type == "1he" and path.hyperedge_ids:
+            return ("1he", path.hyperedge_ids[0])
+        if path.path_type == "2he" and len(path.hyperedge_ids) >= 2:
+            return ("2he", path.hyperedge_ids[0], path.bridge_entity_id, path.hyperedge_ids[1])
+        if path.path_type == "3he" and len(path.hyperedge_ids) >= 2 and path.context_ids:
+            return ("3he", path.hyperedge_ids[0], path.context_ids[0], path.bridge_entity_id, path.hyperedge_ids[1])
+        return (path.path_type, path.seed_hyperedge_id)
+
+    @staticmethod
+    def _merge_path_provenance(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
+        merged = dict(left)
+        for key, value in right.items():
+            if key not in merged:
+                merged[key] = value
+                continue
+            if isinstance(merged[key], list):
+                values = list(merged[key])
+                incoming_values = value if isinstance(value, list) else [value]
+                for item in incoming_values:
+                    if item not in values:
+                        values.append(item)
+                merged[key] = values
+        return merged
+
+    def _path_similarity_scores(self, question: str, paths: list[EvidencePathCandidate]) -> dict[int, float]:
+        if not question.strip() or not paths:
+            return {index: 0.0 for index in range(len(paths))}
+        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
+            return {index: 0.0 for index in range(len(paths))}
+        texts = [question, *[path.serialized_text() for path in paths]]
+        try:
+            vectors = self.embedder.embed_texts(texts, stage="atomic_evidence_path_rerank")
+        except (TypeError, ValueError, AttributeError):
+            return {index: 0.0 for index in range(len(paths))}
+        if len(vectors) < len(paths) + 1:
+            return {index: 0.0 for index in range(len(paths))}
+        question_vector = np.asarray(vectors[0], dtype=np.float32)
+        scores: dict[int, float] = {}
+        for index, vector in enumerate(vectors[1: len(paths) + 1]):
+            scores[index] = _cosine_similarity(question_vector, np.asarray(vector, dtype=np.float32))
+        return scores
+
+    def _hyperedge_text(self, hyperedge_id: str) -> str:
+        if not hyperedge_id:
+            return ""
+        description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+        return normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
 
     def _descriptive_candidate_pool(self, question: str) -> dict[str, Any]:
         candidate_ids: list[str] = []
@@ -518,6 +819,12 @@ class AtomicHyperedgeRetriever:
             pool_sources = source.setdefault("pool_sources", [])
             if pool_source not in pool_sources:
                 pool_sources.append(pool_source)
+            for trace in source.get("path_traces", []):
+                if not isinstance(trace, dict):
+                    continue
+                trace_pool_sources = trace.setdefault("pool_sources", [])
+                if pool_source not in trace_pool_sources:
+                    trace_pool_sources.append(pool_source)
 
     @staticmethod
     def _anchor_mentions(primary_anchor_mention: str, analysis: AtomicQuestionAnalysis) -> list[str]:
@@ -621,6 +928,20 @@ class AtomicHyperedgeRetriever:
                 "hop": 1,
                 "via_entity_ids": [primary_anchor_entity_id],
                 "via_first_hyperedge_ids": [],
+                "expansion_sources": ["direct"],
+                "via_chunk_ids": [],
+                "path_traces": [
+                    {
+                        "path_kind": "1he",
+                        "anchor_entity_id": primary_anchor_entity_id,
+                        "first_hyperedge_id": hyperedge_id,
+                        "bridge_entity_id": "",
+                        "context_id": "",
+                        "terminal_hyperedge_id": hyperedge_id,
+                        "expansion_source": "direct",
+                        "pool_sources": [],
+                    }
+                ],
             }
 
         max_hops = max(1, int(getattr(self.config, "local_hyperedge_hops", 2)))
@@ -630,6 +951,7 @@ class AtomicHyperedgeRetriever:
                     if entity_id == primary_anchor_entity_id:
                         continue
                     self._add_second_hop_candidates(
+                        anchor_entity_id=primary_anchor_entity_id,
                         entity_id=entity_id,
                         first_hop_id=first_hop_id,
                         first_hop_ids=first_hop_ids,
@@ -639,20 +961,22 @@ class AtomicHyperedgeRetriever:
                         source_by_id=source_by_id,
                         expansion_source="hyperedge_entity",
                     )
-                for entity_id in self._chunk_entity_ids_for_hyperedge(first_hop_id):
-                    if entity_id == primary_anchor_entity_id:
-                        continue
-                    self._add_second_hop_candidates(
-                        entity_id=entity_id,
-                        first_hop_id=first_hop_id,
-                        first_hop_ids=first_hop_ids,
-                        candidate_ids=candidate_ids,
-                        expansion_entity_ids=expansion_entity_ids,
-                        second_hop_ids=second_hop_ids,
-                        source_by_id=source_by_id,
-                        expansion_source="chunk_entity",
-                        via_chunk_ids=self._hyperedge_chunk_ids(first_hop_id),
-                    )
+                for chunk_id in self._hyperedge_chunk_ids(first_hop_id):
+                    for entity_id in self._chunk_entity_ids(chunk_id):
+                        if entity_id == primary_anchor_entity_id:
+                            continue
+                        self._add_second_hop_candidates(
+                            anchor_entity_id=primary_anchor_entity_id,
+                            entity_id=entity_id,
+                            first_hop_id=first_hop_id,
+                            first_hop_ids=first_hop_ids,
+                            candidate_ids=candidate_ids,
+                            expansion_entity_ids=expansion_entity_ids,
+                            second_hop_ids=second_hop_ids,
+                            source_by_id=source_by_id,
+                            expansion_source="chunk_entity",
+                            via_chunk_ids=[chunk_id],
+                        )
 
         return {
             "expansion_entity_ids": expansion_entity_ids,
@@ -664,6 +988,7 @@ class AtomicHyperedgeRetriever:
     def _add_second_hop_candidates(
         self,
         *,
+        anchor_entity_id: str,
         entity_id: str,
         first_hop_id: str,
         first_hop_ids: list[str],
@@ -692,6 +1017,7 @@ class AtomicHyperedgeRetriever:
                     "via_first_hyperedge_ids": [],
                     "expansion_sources": [],
                     "via_chunk_ids": [],
+                    "path_traces": [],
                 },
             )
             if int(source.get("hop", 2)) > 1:
@@ -705,6 +1031,18 @@ class AtomicHyperedgeRetriever:
             for chunk_id in via_chunk_ids or []:
                 if chunk_id not in source["via_chunk_ids"]:
                     source["via_chunk_ids"].append(chunk_id)
+            source["path_traces"].append(
+                {
+                    "path_kind": "3he" if expansion_source == "chunk_entity" else "2he",
+                    "anchor_entity_id": anchor_entity_id,
+                    "first_hyperedge_id": first_hop_id,
+                    "bridge_entity_id": entity_id,
+                    "context_id": str((via_chunk_ids or [""])[0]) if expansion_source == "chunk_entity" else "",
+                    "terminal_hyperedge_id": second_hop_id,
+                    "expansion_source": expansion_source,
+                    "pool_sources": [],
+                }
+            )
 
     @staticmethod
     def _merge_candidate_source(source_by_id: dict[str, dict[str, Any]], source: dict[str, Any]) -> None:
@@ -724,6 +1062,7 @@ class AtomicHyperedgeRetriever:
                 "anchor_entity_ids": [],
                 "anchor_query_indices": [],
                 "pool_sources": [],
+                "path_traces": [],
             },
         )
         existing["hop"] = min(int(existing.get("hop", 1) or 1), int(source.get("hop", 1) or 1))
@@ -742,6 +1081,51 @@ class AtomicHyperedgeRetriever:
         for value in source.get("anchor_query_indices", []):
             if value not in existing["anchor_query_indices"]:
                 existing["anchor_query_indices"].append(value)
+        trace_by_key = {
+            AtomicHyperedgeRetriever._path_trace_key(trace): trace
+            for trace in existing.get("path_traces", [])
+            if isinstance(trace, dict)
+        }
+        for trace in source.get("path_traces", []):
+            if not isinstance(trace, dict):
+                continue
+            payload = dict(trace)
+            inherited_pool_sources = source.get("pool_sources", [])
+            if inherited_pool_sources:
+                trace_pool_sources = payload.setdefault("pool_sources", [])
+                for pool_source in inherited_pool_sources:
+                    if pool_source not in trace_pool_sources:
+                        trace_pool_sources.append(pool_source)
+            key = AtomicHyperedgeRetriever._path_trace_key(payload)
+            existing_trace = trace_by_key.get(key)
+            if existing_trace is None:
+                existing["path_traces"].append(payload)
+                trace_by_key[key] = payload
+            else:
+                AtomicHyperedgeRetriever._merge_path_trace(existing_trace, payload)
+
+    @staticmethod
+    def _path_trace_key(trace: dict[str, Any]) -> tuple[str, str, str, str, str]:
+        return (
+            str(trace.get("path_kind", "") or ""),
+            str(trace.get("first_hyperedge_id", "") or ""),
+            str(trace.get("context_id", "") or ""),
+            str(trace.get("bridge_entity_id", "") or ""),
+            str(trace.get("terminal_hyperedge_id", "") or ""),
+        )
+
+    @staticmethod
+    def _merge_path_trace(existing: dict[str, Any], incoming: dict[str, Any]) -> None:
+        for key, value in incoming.items():
+            if key not in existing:
+                existing[key] = value
+                continue
+            if isinstance(existing[key], list):
+                values = existing[key]
+                incoming_values = value if isinstance(value, list) else [value]
+                for item in incoming_values:
+                    if item not in values:
+                        values.append(item)
 
     def _hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
         if hasattr(self.dataset.graph, "hyperedge_entity_ids"):
@@ -1337,6 +1721,14 @@ def _dedupe_strings(values: list[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _cosine_similarity(left: np.ndarray, right: np.ndarray) -> float:
+    left_norm = float(np.linalg.norm(left))
+    right_norm = float(np.linalg.norm(right))
+    if left_norm <= 0.0 or right_norm <= 0.0:
+        return 0.0
+    return float(np.dot(left, right) / (left_norm * right_norm))
 
 
 def _lookup_keys_for_entity(entity_id: str) -> list[str]:

@@ -27,6 +27,7 @@ class RuntimeConfig:
 @dataclass(slots=True)
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
+    local_path_top_k: int = 5
     local_hyperedge_hops: int = 2
     entity_link_top_k: int = 30
     descriptive_fallback_hyperedge_top_k: int = 80
@@ -85,6 +86,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     )
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
+        local_path_top_k=int(retrieval.get("local_path_top_k", 5)),
         local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
         entity_link_top_k=int(retrieval.get("entity_link_top_k", 30)),
         descriptive_fallback_hyperedge_top_k=int(retrieval.get("descriptive_fallback_hyperedge_top_k", 80)),

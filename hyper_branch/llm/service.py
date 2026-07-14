@@ -75,7 +75,6 @@ class OpenAIAtomicLLMService(AtomicLLMService):
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,
-                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
                 "evidence": evidence,
             },
@@ -144,7 +143,6 @@ class MockAtomicLLMService(AtomicLLMService):
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,
-                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
                 "evidence": evidence,
             }
@@ -159,12 +157,16 @@ class MockAtomicLLMService(AtomicLLMService):
         answer = ""
         first = evidence[0]
         for item in evidence:
-            text = " ".join(
-                [
-                    str(item.get("hyperedge_text", "") or ""),
-                    *[str(chunk) for chunk in ensure_list(item.get("chunk_texts", []))],
-                ]
-            )
+            path_texts = ensure_list(item.get("path") or item.get("path_texts"))
+            if path_texts:
+                text = " ".join(str(value or "") for value in path_texts)
+            else:
+                text = " ".join(
+                    [
+                        str(item.get("hyperedge_text", "") or ""),
+                        *[str(chunk) for chunk in ensure_list(item.get("chunk_texts", []))],
+                    ]
+                )
             for token in content_tokens(text):
                 if token not in query_tokens:
                     answer = normalize_label(token)
@@ -172,7 +174,10 @@ class MockAtomicLLMService(AtomicLLMService):
             if answer:
                 break
         if not answer:
-            answer = short_text(str(first.get("hyperedge_text", "")), 160)
+            first_path = ensure_list(first.get("path") or first.get("path_texts"))
+            answer = short_text(" ".join(str(value or "") for value in first_path), 160)
+            if not answer:
+                answer = short_text(str(first.get("hyperedge_text", "")), 160)
 
         return {"answer": answer}
 

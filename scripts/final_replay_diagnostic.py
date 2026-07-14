@@ -174,9 +174,14 @@ def atomic_payload(item: dict[str, Any]) -> dict[str, Any]:
 
 
 def evidence_payload(item: dict[str, Any]) -> dict[str, Any]:
+    path_texts = [trim(text) for text in item.get("path_texts") or item.get("path") or []]
     return {
         "hyperedge_id": trim(item.get("hyperedge_id", "")),
         "hyperedge_text": trim(item.get("hyperedge_text", "")),
+        "path_type": trim(item.get("path_type", "")),
+        "path_texts": path_texts,
+        "hyperedge_ids": item.get("hyperedge_ids", []),
+        "context_ids": item.get("context_ids", []),
         "branch_support": item.get("branch_support", []),
         "score_breakdown": item.get("score_breakdown", {}),
         "evidence_texts": [trim(text) for text in item.get("evidence_texts", [])[:2]],
@@ -250,6 +255,10 @@ def collect_evidence_texts(atomic_results: list[dict[str, Any]]) -> list[str]:
     texts: list[str] = []
     for result in atomic_results:
         for evidence in result.get("top_evidence", []):
+            for text in evidence.get("path_texts", []) or evidence.get("path", []):
+                text = str(text or "").strip()
+                if text:
+                    texts.append(text)
             for key in ("hyperedge_text",):
                 text = str(evidence.get(key, "") or "").strip()
                 if text:

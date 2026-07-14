@@ -14,6 +14,7 @@ from .models import (
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
     DagExecutionResult,
+    EvidencePathCandidate,
     FusedHyperedgeCandidate,
 )
 from .retriever import AtomicHyperedgeRetriever, LocalHyperedgeRetrievalResult
@@ -464,7 +465,7 @@ class AtomicDagExecutor:
         original_question: str,
         atomic_question: str,
         analysis: AtomicQuestionAnalysis,
-        evidence: list[FusedHyperedgeCandidate],
+        evidence: list[Any],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
         answer_contract = self._answer_contract(atomic_question)
@@ -503,35 +504,37 @@ class AtomicDagExecutor:
         for item in dependency_answers:
             compact.append(
                 {
-                    "node_id": str(item.get("node_id", "") or ""),
                     "question": str(item.get("question", "") or ""),
-                    "resolved_question": str(item.get("resolved_question") or item.get("question", "") or ""),
                     "answer": str(item.get("answer", "") or ""),
-                    "insufficient": bool(item.get("insufficient", False)),
                 }
             )
         return compact
 
     @staticmethod
-    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> list[dict[str, Any]]:
+    def _answer_evidence_payload(evidence: list[Any]) -> list[dict[str, Any]]:
         payload: list[dict[str, Any]] = []
-        seen_chunk_texts: set[str] = set()
-        for index, item in enumerate(evidence, start=1):
-            evidence_id = f"E{index}"
-            chunk_texts: list[str] = []
-            for raw_text in item.chunk_texts:
-                text = str(raw_text or "").strip()
-                if not text or text in seen_chunk_texts:
-                    continue
-                seen_chunk_texts.add(text)
-                chunk_texts.append(text)
-            payload.append(
-                {
-                    "evidence_id": evidence_id,
-                    "hyperedge_text": str(item.hyperedge_text or "").strip(),
-                    "chunk_texts": chunk_texts,
-                }
-            )
+        for item in evidence:
+            if hasattr(item, "to_answer_payload") and callable(item.to_answer_payload):
+                path_payload = item.to_answer_payload()
+                path_texts = [
+                    str(text or "").strip()
+                    for text in ensure_list(path_payload.get("path"))
+                    if str(text or "").strip()
+                ]
+            elif isinstance(item, dict):
+                path_texts = [
+                    str(text or "").strip()
+                    for text in ensure_list(item.get("path") or item.get("path_texts"))
+                    if str(text or "").strip()
+                ]
+                if not path_texts:
+                    hyperedge_text = str(item.get("hyperedge_text", "") or "").strip()
+                    path_texts = [hyperedge_text] if hyperedge_text else []
+            else:
+                hyperedge_text = str(getattr(item, "hyperedge_text", "") or "").strip()
+                path_texts = [hyperedge_text] if hyperedge_text else []
+            if path_texts:
+                payload.append({"path": path_texts})
         return payload
 
     @staticmethod
@@ -543,7 +546,7 @@ class AtomicDagExecutor:
         self,
         question: str,
         analysis: AtomicQuestionAnalysis,
-        evidence: list[FusedHyperedgeCandidate],
+        evidence: list[Any],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
         if not evidence:
@@ -568,7 +571,7 @@ class AtomicDagExecutor:
         return {
             "answer": answer or "INSUFFICIENT_EVIDENCE",
             "reasoning_summary": short_text(" ".join(evidence[0].evidence_texts), 420),
-            "used_hyperedge_ids": [evidence[0].hyperedge_id] if answer else [],
+            "used_hyperedge_ids": _hyperedge_ids_for_evidence(evidence[0]) if answer else [],
             "insufficient": not bool(answer),
         }
 
@@ -615,7 +618,7 @@ class AtomicDagExecutor:
         payload: Any,
         question: str,
         analysis: AtomicQuestionAnalysis,
-        evidence: list[FusedHyperedgeCandidate],
+        evidence: list[Any],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
         if not isinstance(payload, dict):
@@ -651,8 +654,8 @@ class AtomicDagExecutor:
         }
 
     @staticmethod
-    def _used_hyperedge_ids(payload: dict[str, Any], evidence: list[FusedHyperedgeCandidate]) -> list[str]:
-        evidence_ids = {item.hyperedge_id for item in evidence}
+    def _used_hyperedge_ids(payload: dict[str, Any], evidence: list[Any]) -> list[str]:
+        evidence_ids = {hyperedge_id for item in evidence for hyperedge_id in _hyperedge_ids_for_evidence(item)}
         used = [
             str(item).strip()
             for item in ensure_list(payload.get("used_hyperedge_ids", []))
@@ -662,7 +665,9 @@ class AtomicDagExecutor:
             return _dedupe_strings(used)
         if bool(payload.get("insufficient", False)):
             return []
-        return [item.hyperedge_id for item in evidence[:1]]
+        if not evidence:
+            return []
+        return _hyperedge_ids_for_evidence(evidence[0])
 
     def _active_shared_candidate_pool(
         self,
@@ -746,6 +751,11 @@ class AtomicDagExecutor:
             "local_candidate_hyperedge_ids": retrieval_payload.get("local_candidate_hyperedge_ids", []),
             "candidate_sources": retrieval_payload["candidate_sources"],
             "top_hyperedges": retrieval_payload["top_hyperedges"],
+            "candidate_paths": retrieval_payload.get("candidate_paths", []),
+            "top_paths": retrieval_payload.get("top_paths", []),
+            "candidate_path_count": retrieval_payload.get("candidate_path_count", 0),
+            "deduplicated_path_count": retrieval_payload.get("deduplicated_path_count", 0),
+            "selected_path_count": retrieval_payload.get("selected_path_count", 0),
             "answerer_evidence": retrieval_payload["evidence"],
             "top_evidence": retrieval_payload["evidence"],
             "insufficient_reason": retrieval_payload["insufficient_reason"],
@@ -980,6 +990,22 @@ def _dedupe_strings(values: Iterable[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _hyperedge_ids_for_evidence(item: Any) -> list[str]:
+    if isinstance(item, EvidencePathCandidate):
+        return list(item.hyperedge_ids)
+    if isinstance(item, dict):
+        values = ensure_list(item.get("hyperedge_ids"))
+        if values:
+            return _dedupe_strings(str(value) for value in values)
+        value = str(item.get("hyperedge_id", "") or "").strip()
+        return [value] if value else []
+    values = getattr(item, "hyperedge_ids", None)
+    if values is not None:
+        return _dedupe_strings(str(value) for value in ensure_list(values))
+    value = str(getattr(item, "hyperedge_id", "") or "").strip()
+    return [value] if value else []
 
 
 def _can_reach_terminal(start_id: str, terminal_id: str, dependents: dict[str, list[str]]) -> bool:

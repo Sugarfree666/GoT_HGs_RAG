@@ -5,6 +5,7 @@ from .models import (
     AtomicQuestionAnalysis,
     AtomicQuestionNode,
     DagExecutionResult,
+    EvidencePathCandidate,
     FusedHyperedgeCandidate,
 )
 from .retriever import AtomicHyperedgeRetriever
@@ -18,5 +19,6 @@ __all__ = [
     "AtomicQuestionNode",
     "DagCycleError",
     "DagExecutionResult",
+    "EvidencePathCandidate",
     "FusedHyperedgeCandidate",
 ]
