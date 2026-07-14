@@ -325,20 +325,22 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(llm.user_prompts, [])
         self.assertIn("Step5 requires at least one non-empty step4_paths/global_best_paths entry.", result.validation_errors)
 
-    def test_restore_entity_paths_replaces_complete_placeholder_tokens_only(self) -> None:
+    def test_restore_entity_paths_replaces_placeholders_inside_punctuated_tokens(self) -> None:
         paths = [
-            SimpleNamespace(path_id="P1", nodes=["ENTITYA", "director", "ENTITYBish"]),
-            SimpleNamespace(path_id="P2", nodes=["ENTITYB", "born"]),
+            SimpleNamespace(path_id="P1", nodes=["ENTITYA!", "director", "ENTITYBish"]),
+            SimpleNamespace(path_id="P2", nodes=["ENTITYB.", "born", "ENTITYC/ENTITYD"]),
         ]
         mappings = [
             MaskMapping("ENTITYA", "Ten9Eight: Shoot For The Moon", "entity"),
             MaskMapping("ENTITYB", "Sabotage (1936 Film)", "entity"),
+            MaskMapping("ENTITYC", "Fort Nelson", "entity"),
+            MaskMapping("ENTITYD", "Gordon Field Airport", "entity"),
         ]
 
         restored = restore_entity_paths(paths, mappings)
 
-        self.assertEqual(restored[0].nodes, ("Ten9Eight: Shoot For The Moon", "director", "ENTITYBish"))
-        self.assertEqual(restored[1].nodes, ("Sabotage (1936 Film)", "born"))
+        self.assertEqual(restored[0].nodes, ("Ten9Eight: Shoot For The Moon!", "director", "ENTITYBish"))
+        self.assertEqual(restored[1].nodes, ("Sabotage (1936 Film).", "born", "Fort Nelson/Gordon Field Airport"))
 
     def test_restore_global_best_paths_replace_placeholders(self) -> None:
         self.assertEqual(

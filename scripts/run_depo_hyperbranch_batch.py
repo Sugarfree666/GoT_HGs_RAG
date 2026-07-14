@@ -503,14 +503,11 @@ def _combined_markdown(payload: dict[str, Any]) -> str:
     for answer in atomic_answers:
         lines.append(f"- {answer.get('node_id')}: {answer.get('answer')}")
         lines.append(f"  - question: {answer.get('question')}")
-        lines.append(f"  - confidence: {answer.get('confidence')}")
     lines.extend(
         [
             "",
             "## Final Answer",
             str(final_answer.get("answer", "")),
-            "",
-            f"- confidence: {final_answer.get('confidence')}",
         ]
     )
     return "\n".join(lines)
@@ -530,7 +527,6 @@ def _manifest_item(payload: dict[str, Any]) -> dict[str, Any]:
         "dag_valid": dag.get("valid"),
         "dag_node_count": len(dag.get("nodes", []) or []),
         "final_answer": final_answer.get("answer"),
-        "confidence": final_answer.get("confidence"),
         "output_dir": payload["output_dir"],
         "hyperbranch_run_dir": payload.get("hyperbranch_run_dir"),
     }

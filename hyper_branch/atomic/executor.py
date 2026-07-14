@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import asdict, is_dataclass
 from typing import Any, Iterable
 
@@ -94,6 +95,7 @@ class AtomicDagExecutor:
             retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=resolved_question)
             evidence = retrieval_result.evidence
             answer_payload = self._answer_atomic_question(
+                original_question=original_question,
                 atomic_question=resolved_question,
                 analysis=analysis,
                 evidence=evidence,
@@ -107,7 +109,6 @@ class AtomicDagExecutor:
                 analysis=analysis,
                 evidence=evidence,
                 answer=str(answer_payload.get("answer", "") or ""),
-                confidence=max(0.0, min(1.0, float(answer_payload.get("confidence", 0.0) or 0.0))),
                 reasoning_summary=str(answer_payload.get("reasoning_summary", "") or ""),
                 used_dependencies=list(node.dependencies),
                 used_hyperedge_ids=used_hyperedge_ids,
@@ -425,7 +426,6 @@ class AtomicDagExecutor:
                     "question": result.question,
                     "resolved_question": result.question,
                     "answer": result.answer,
-                    "confidence": result.confidence,
                     "answer_type": result.analysis.answer_type,
                     "reasoning_summary": result.reasoning_summary,
                     "used_hyperedge_ids": list(result.used_hyperedge_ids),
@@ -445,6 +445,7 @@ class AtomicDagExecutor:
 
     def _answer_atomic_question(
         self,
+        original_question: str,
         atomic_question: str,
         analysis: AtomicQuestionAnalysis,
         evidence: list[FusedHyperedgeCandidate],
@@ -459,6 +460,7 @@ class AtomicDagExecutor:
                 answer_contract=answer_contract,
                 dependency_answers=answer_dependency_answers,
                 evidence=evidence_payload,
+                original_question=original_question,
             )
         else:
             payload = self._fallback_answer(atomic_question, analysis, evidence, dependency_answers)
@@ -549,7 +551,6 @@ class AtomicDagExecutor:
 
         return {
             "answer": answer or "INSUFFICIENT_EVIDENCE",
-            "confidence": 0.7 if answer else 0.0,
             "reasoning_summary": short_text(" ".join(evidence[0].evidence_texts), 420),
             "used_hyperedge_ids": [evidence[0].hyperedge_id] if answer else [],
             "insufficient": not bool(answer),
@@ -579,10 +580,6 @@ class AtomicDagExecutor:
                     answer = "no" if same == different_question else "yes"
                     return {
                         "answer": answer,
-                        "confidence": min(
-                            0.85,
-                            max(float(item.get("confidence", 0.0) or 0.0) for item in usable[-2:]),
-                        ),
                         "reasoning_summary": "Answered from direct dependency answers.",
                         "used_hyperedge_ids": [],
                         "insufficient": False,
@@ -590,7 +587,6 @@ class AtomicDagExecutor:
             if len(usable) == 1 and str(usable[-1].get("answer", "")).strip().lower() in {"yes", "no"}:
                 return {
                     "answer": str(usable[-1]["answer"]).strip().lower(),
-                    "confidence": max(0.0, min(0.85, float(usable[-1].get("confidence", 0.0) or 0.0))),
                     "reasoning_summary": "Mirrored the direct dependency yes/no answer.",
                     "used_hyperedge_ids": [],
                     "insufficient": False,
@@ -614,7 +610,6 @@ class AtomicDagExecutor:
         insufficient = answer.upper() == "INSUFFICIENT_EVIDENCE"
         coerced = {
             "answer": "INSUFFICIENT_EVIDENCE" if insufficient else answer,
-            "confidence": 0.0 if insufficient else 1.0,
             "reasoning_summary": "",
             "used_hyperedge_ids": [],
             "insufficient": insufficient,
@@ -634,7 +629,6 @@ class AtomicDagExecutor:
     def _insufficient_answer_payload(reason: str) -> dict[str, Any]:
         return {
             "answer": "INSUFFICIENT_EVIDENCE",
-            "confidence": 0.0,
             "reasoning_summary": f"No local primary-anchor evidence was available: {reason}.",
             "used_hyperedge_ids": [],
             "insufficient": True,
@@ -706,22 +700,28 @@ class AtomicDagExecutor:
         atomic_results: list[AtomicAnswerResult],
     ) -> dict[str, Any]:
         answer = terminal.answer
+        postprocess = _compound_country_comparison_override(terminal, atomic_results)
+        if postprocess is not None:
+            answer = postprocess["answer"]
         return {
             "answer": answer,
             "candidate_answer": answer,
             "semantic_answer": answer,
             "judgment": _yes_no_judgment(answer),
-            "confidence": terminal.confidence,
-            "reasoning_summary": terminal.reasoning_summary,
+            "reasoning_summary": (
+                str(postprocess.get("reasoning_summary", ""))
+                if postprocess is not None
+                else terminal.reasoning_summary
+            ),
             "source_node_id": terminal.node_id,
             "used_hyperedge_ids": list(terminal.used_hyperedge_ids),
             "insufficient": terminal.insufficient,
+            "deterministic_postprocess": postprocess,
             "atomic_answer_trace": [
                 {
                     "node_id": result.node_id,
                     "question": result.question,
                     "answer": result.answer,
-                    "confidence": result.confidence,
                     "answer_type": result.analysis.answer_type,
                     "used_hyperedge_ids": list(result.used_hyperedge_ids),
                     "insufficient": result.insufficient,
@@ -933,6 +933,150 @@ def _can_reach_terminal(start_id: str, terminal_id: str, dependents: dict[str, l
         seen.add(node_id)
         stack.extend(dependents.get(node_id, []))
     return False
+
+
+_COUNTRY_NAME_ALIASES = {
+    "america": "united states",
+    "united states": "united states",
+    "united states of america": "united states",
+    "usa": "united states",
+    "u s a": "united states",
+    "us": "united states",
+    "u s": "united states",
+    "argentina": "argentina",
+    "austria": "austria",
+    "britain": "united kingdom",
+    "cuba": "cuba",
+    "czech republic": "czech republic",
+    "czechia": "czech republic",
+    "greece": "greece",
+    "hungary": "hungary",
+    "jamaica": "jamaica",
+    "romania": "romania",
+    "united kingdom": "united kingdom",
+}
+
+_DEMONYM_TO_COUNTRY = {
+    "american": "united states",
+    "argentine": "argentina",
+    "argentinian": "argentina",
+    "austrian": "austria",
+    "british": "united kingdom",
+    "cuban": "cuba",
+    "czech": "czech republic",
+    "greek": "greece",
+    "hungarian": "hungary",
+    "jamaican": "jamaica",
+    "romanian": "romania",
+}
+
+_COMPARISON_COUNTRY_MARKERS = (
+    "same country",
+    "same nationality",
+    "share the same nationality",
+    "share same nationality",
+    "share the same country",
+    "from the same country",
+    "originate from the same country",
+    "originated from the same country",
+    "both from the same country",
+)
+
+
+def _compound_country_comparison_override(
+    terminal: AtomicAnswerResult,
+    atomic_results: list[AtomicAnswerResult],
+) -> dict[str, Any] | None:
+    if normalize_label(terminal.answer).lower() != "no":
+        return None
+    if not _asks_same_country_or_nationality(terminal.question):
+        return None
+
+    by_id = {result.node_id: result for result in atomic_results}
+    dependencies = [by_id[node_id] for node_id in terminal.used_dependencies if node_id in by_id]
+    if len(dependencies) < 2:
+        dependencies = [result for result in atomic_results if result.node_id != terminal.node_id][-2:]
+    if len(dependencies) < 2:
+        return None
+
+    left, right = dependencies[-2], dependencies[-1]
+    left_sets = _narrow_country_set(left.answer)
+    right_sets = _narrow_country_set(right.answer)
+    if not left_sets.countries or not right_sets.countries:
+        return None
+    if not (left_sets.is_compound or right_sets.is_compound):
+        return None
+
+    intersection = sorted(left_sets.countries & right_sets.countries)
+    if not intersection:
+        return None
+
+    return {
+        "name": "compound_country_nationality_overlap",
+        "answer": "yes",
+        "reasoning_summary": "Deterministic compound country/nationality overlap over dependency answers.",
+        "source_node_ids": [left.node_id, right.node_id],
+        "source_answers": [left.answer, right.answer],
+        "left_countries": sorted(left_sets.countries),
+        "right_countries": sorted(right_sets.countries),
+        "intersection": intersection,
+    }
+
+
+def _asks_same_country_or_nationality(question: str) -> bool:
+    lowered = _comparison_text(question)
+    if not lowered.startswith(("are ", "do ", "does ", "did ", "is ", "was ", "were ")):
+        return False
+    return any(marker in lowered for marker in _COMPARISON_COUNTRY_MARKERS)
+
+
+class _CountryParseResult:
+    def __init__(self, countries: set[str], is_compound: bool) -> None:
+        self.countries = countries
+        self.is_compound = is_compound
+
+
+def _narrow_country_set(answer: str) -> _CountryParseResult:
+    text = _comparison_text(answer)
+    if not text:
+        return _CountryParseResult(set(), False)
+
+    countries: set[str] = set()
+    matched_terms: list[str] = []
+    for alias, country in sorted(
+        {**_COUNTRY_NAME_ALIASES, **_DEMONYM_TO_COUNTRY}.items(),
+        key=lambda item: len(item[0]),
+        reverse=True,
+    ):
+        if re.search(rf"(?<![a-z]){re.escape(alias)}(?![a-z])", text):
+            countries.add(country)
+            matched_terms.append(alias)
+
+    is_compound = len(countries) > 1 and (
+        "-" in normalize_label(answer)
+        or " born " in f" {text} "
+        or _contains_adjacent_demonyms(text)
+    )
+    return _CountryParseResult(countries, is_compound)
+
+
+def _contains_adjacent_demonyms(text: str) -> bool:
+    demonyms = sorted(_DEMONYM_TO_COUNTRY, key=len, reverse=True)
+    for first in demonyms:
+        for second in demonyms:
+            if first == second:
+                continue
+            if re.search(rf"(?<![a-z]){re.escape(first)}\s+{re.escape(second)}(?![a-z])", text):
+                return True
+    return False
+
+
+def _comparison_text(value: str) -> str:
+    text = normalize_label(str(value or "")).lower()
+    text = re.sub(r"[\u2010-\u2015]", "-", text)
+    text = text.replace("&", " and ")
+    text = re.sub(r"[^a-z0-9-]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _answer_output_format(question: str) -> str:

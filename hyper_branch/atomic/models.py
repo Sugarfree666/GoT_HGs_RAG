@@ -74,7 +74,6 @@ class AtomicAnswerResult:
     analysis: AtomicQuestionAnalysis
     evidence: list[FusedHyperedgeCandidate]
     answer: str
-    confidence: float
     reasoning_summary: str
     used_dependencies: list[str] = field(default_factory=list)
     used_hyperedge_ids: list[str] = field(default_factory=list)
@@ -87,7 +86,6 @@ class AtomicAnswerResult:
             "analysis": self.analysis.to_dict(),
             "evidence": [item.to_dict() for item in self.evidence],
             "answer": self.answer,
-            "confidence": self.confidence,
             "reasoning_summary": self.reasoning_summary,
             "used_dependencies": list(self.used_dependencies),
             "used_hyperedge_ids": list(self.used_hyperedge_ids),

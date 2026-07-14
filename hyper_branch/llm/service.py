@@ -24,6 +24,7 @@ class AtomicLLMService(ABC):
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
+        original_question: str = "",
     ) -> dict[str, Any]:
         raise NotImplementedError
 
@@ -66,11 +67,13 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
+        original_question: str = "",
     ) -> dict[str, Any]:
         response = self.client.chat_json(
             "atomic_answer",
             self.prompts.get("atomic_answer"),
             {
+                "original_question": original_question,
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
@@ -80,7 +83,9 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         )
         if not isinstance(response, dict):
             return {"answer": ""}
-        return {"answer": str(response.get("answer", "") or "")}
+        payload = dict(response)
+        payload["answer"] = str(response.get("answer", "") or "")
+        return payload
 
     def select_anchor_entity(
         self,
@@ -133,9 +138,11 @@ class MockAtomicLLMService(AtomicLLMService):
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: list[dict[str, Any]],
+        original_question: str = "",
     ) -> dict[str, Any]:
         self.answer_calls.append(
             {
+                "original_question": original_question,
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,

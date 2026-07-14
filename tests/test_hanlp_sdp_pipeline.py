@@ -351,6 +351,34 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(result.masked_question, "Who is the spouse of ENTITYA's author?")
         self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "Young Man Luther")])
 
+    def test_preprocessor_masks_repeated_entity_mentions_with_same_placeholder(self) -> None:
+        question = (
+            "Country A has an embassy from the country that contains the bay where the city of "
+            "General Santos is located. What network created country A's version of The Biggest Loser?"
+        )
+        llm = StaticPreprocessLLM(
+            {
+                "entities": [
+                    _entity(question, "Country A", "Location"),
+                    _entity(question, "General Santos", "Location"),
+                    _entity(question, "The Biggest Loser", "Work"),
+                ],
+                "warnings": [],
+            }
+        )
+
+        result = EntityMaskingPreprocessor(llm).preprocess(question)
+
+        self.assertEqual(
+            result.masked_question,
+            "ENTITYA has an embassy from the country that contains the bay where the city of "
+            "ENTITYB is located. What network created ENTITYA's version of ENTITYC?",
+        )
+        self.assertEqual(
+            [(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings],
+            [("ENTITYA", "Country A"), ("ENTITYB", "General Santos"), ("ENTITYC", "The Biggest Loser")],
+        )
+
 class TriSDPReasoningCompilerTest(unittest.TestCase):
     def test_dell_constraint_entity_does_not_enter_main_path(self) -> None:
         result = self._dell_result()

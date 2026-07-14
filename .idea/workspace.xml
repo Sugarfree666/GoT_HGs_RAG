@@ -6,15 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/hotpotqa.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/hotpotqa.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/atomic_question_dag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/dependency_rewrite.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/dependency_rewrite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/atomic_question_analysis.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_question_analysis.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/atomic_answer.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_answer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/final_replay_diagnostic.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/final_replay_diagnostic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="62169" />
+    <option name="cachedIndexableFilesCount" value="104834" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,23 +47,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000495759519261" />
-      <entry key="MS500" value="1.13800652757454" />
-      <entry key="S2" value="1.9438025633094937" />
-      <entry key="S5" value="4.005214988336109" />
-      <entry key="S10" value="6.818696951331893" />
-      <entry key="S30" value="12.497797300729038" />
-      <entry key="S60" value="15.520806617426066" />
-      <entry key="M2" value="17.532225371153082" />
-      <entry key="M5" value="18.950919610291916" />
-      <entry key="M10" value="19.59667291865586" />
-      <entry key="M15" value="21.08184117951944" />
-      <entry key="M30" value="39.110744555143505" />
-      <entry key="H1" value="107.79235014997056" />
-      <entry key="H2" value="242.79868570479096" />
-      <entry key="H4" value="421.32494229107647" />
-      <entry key="D1" value="1580.3176288294128" />
-      <entry key="W1" value="4466.843980566788" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000000000011" />
+      <entry key="S60" value="1.0000004966410223" />
+      <entry key="M2" value="1.0049690709029675" />
+      <entry key="M5" value="2.634950425574856" />
+      <entry key="M10" value="13.913940441654802" />
+      <entry key="M15" value="28.9907672462593" />
+      <entry key="M30" value="68.34405383099447" />
+      <entry key="H1" value="111.73513103791208" />
+      <entry key="H2" value="155.32435171571487" />
+      <entry key="H4" value="247.65591168659205" />
+      <entry key="D1" value="1377.2547431175847" />
+      <entry key="W1" value="5043.969229564038" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -81,23 +85,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.94610487466119" />
-      <entry key="MS500" value="1.1256448077924672" />
-      <entry key="S2" value="1.9388409977044734" />
-      <entry key="S5" value="4.001388665324052" />
-      <entry key="S10" value="6.815499887980707" />
-      <entry key="S30" value="12.495837499384283" />
-      <entry key="S60" value="15.519581633547363" />
-      <entry key="M2" value="17.531530358367544" />
-      <entry key="M5" value="18.95061816773478" />
-      <entry key="M10" value="19.59651690764793" />
-      <entry key="M15" value="21.08172932132535" />
-      <entry key="M30" value="39.11064042624905" />
-      <entry key="H1" value="107.79220301735195" />
-      <entry key="H2" value="242.79851425352956" />
-      <entry key="H4" value="421.3247897204041" />
-      <entry key="D1" value="1580.3175328081518" />
-      <entry key="W1" value="4466.84393687747" />
+      <entry key="MS100" value="0.9330329915368074" />
+      <entry key="MS500" value="0.9862327044933592" />
+      <entry key="S2" value="0.9965402628278678" />
+      <entry key="S5" value="0.9986146661010289" />
+      <entry key="S10" value="0.9993070929904525" />
+      <entry key="S30" value="0.9997689776296029" />
+      <entry key="S60" value="0.9998849787557471" />
+      <entry key="M2" value="1.0049111673683964" />
+      <entry key="M5" value="2.6349079418750607" />
+      <entry key="M10" value="13.913849413245305" />
+      <entry key="M15" value="28.99064060717504" />
+      <entry key="M30" value="68.34389870579523" />
+      <entry key="H1" value="111.73500014939685" />
+      <entry key="H2" value="155.32425661519585" />
+      <entry key="H4" value="247.65583108703197" />
+      <entry key="D1" value="1377.2546656178054" />
+      <entry key="W1" value="5043.969182937509" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -270,7 +274,7 @@
       <workItem from="1783663148533" duration="4826000" />
       <workItem from="1783668578156" duration="1133000" />
       <workItem from="1783669951584" duration="48961000" />
-      <workItem from="1783745915493" duration="70848000" />
+      <workItem from="1783745915493" duration="151266000" />
     </task>
     <servers />
   </component>

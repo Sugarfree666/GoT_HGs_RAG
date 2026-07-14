@@ -110,8 +110,6 @@ class DependencyQuestionRewrite:
 def resolve_dependency_question(
     question: str,
     dependency_answers: list[dict[str, Any]],
-    *,
-    confidence_threshold: float = 0.7,
 ) -> DependencyQuestionRewrite:
     """Resolve explicit dependency-answer variables before legacy phrase rewriting."""
 
@@ -129,19 +127,15 @@ def resolve_dependency_question(
         if not matches:
             continue
         answer = str(dependency.get("answer", "") or "").strip()
-        confidence = _safe_float(dependency.get("confidence", 1.0))
-        has_confidence = "confidence" in dependency
         if (
             not answer
             or normalize_label(answer).lower() in _INSUFFICIENT_ANSWERS
-            or (has_confidence and confidence <= 0.0)
         ):
             unresolved_dependencies.append(
                 {
                     "node_id": dependency_node_id,
-                    "reason": "missing_or_low_confidence_answer",
+                    "reason": "missing_or_insufficient_answer",
                     "answer": answer,
-                    "confidence": confidence,
                 }
             )
             continue
@@ -178,8 +172,7 @@ def resolve_dependency_question(
 
     for dependency in dependency_answers:
         answer = str(dependency.get("answer", "") or "").strip()
-        confidence = _safe_float(dependency.get("confidence", 0.0))
-        if confidence <= confidence_threshold:
+        if not answer or normalize_label(answer).lower() in _INSUFFICIENT_ANSWERS:
             continue
         if not is_entity_like_answer(answer, dependency.get("answer_type")):
             continue
@@ -249,7 +242,6 @@ def _dependency_answer_summary(dependency: dict[str, Any]) -> dict[str, Any]:
         "node_id": str(dependency.get("node_id", "") or ""),
         "question": str(dependency.get("question", "") or ""),
         "answer": str(dependency.get("answer", "") or ""),
-        "confidence": _safe_float(dependency.get("confidence", 0.0)),
         "answer_type": str(dependency.get("answer_type", "") or ""),
     }
 
@@ -455,10 +447,3 @@ def _dedupe_by_lowercase(values: list[str]) -> list[str]:
             result.append(text)
             seen.add(key)
     return result
-
-
-def _safe_float(value: Any) -> float:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return 0.0

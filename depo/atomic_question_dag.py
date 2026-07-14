@@ -1077,13 +1077,18 @@ def _restore_path_nodes(raw_nodes: Any, mask_mappings: Any) -> list[str]:
     restored_nodes: list[str] = []
     for raw_node in raw_nodes or []:
         node = str(raw_node)
-        if PLACEHOLDER_RE.fullmatch(node):
-            if node not in mapping:
-                raise ValueError(f"Unresolved entity placeholder in Step4 path: {node}")
-            restored_nodes.append(mapping[node])
-        else:
-            restored_nodes.append(node)
+        restored_nodes.append(_restore_placeholders_in_token(node, mapping))
     return restored_nodes
+
+
+def _restore_placeholders_in_token(token: str, mapping: dict[str, str]) -> str:
+    def replace(match: re.Match[str]) -> str:
+        placeholder = match.group(0)
+        if placeholder not in mapping:
+            raise ValueError(f"Unresolved entity placeholder in Step4 path: {placeholder}")
+        return mapping[placeholder]
+
+    return re.sub(r"\bENTITY[A-Z0-9]*\b", replace, token)
 
 
 def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[list[str]]) -> list[str]:

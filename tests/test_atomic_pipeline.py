@@ -10,6 +10,7 @@ from types import SimpleNamespace
 import numpy as np
 
 from hyper_branch.atomic import (
+    AtomicAnswerResult,
     AtomicDagExecutor,
     AtomicHyperedgeRetriever,
     AtomicQuestionAnalyzer,
@@ -69,6 +70,11 @@ prompts:
 
         self.assertIn('"answer": "..."', prompt)
         self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
+        self.assertIn("`original_question`", prompt)
+        self.assertIn("Use `original_question` only as global context", prompt)
+        self.assertIn("Do not answer `original_question` unless `atomic_question` itself asks the same final question.", prompt)
+        self.assertIn("Do not rewrite a valid evidence surface into a normalized paraphrase.", prompt)
+        self.assertIn("do not convert between country names and demonyms", prompt)
         self.assertIn('The only allowed key is "answer".', prompt)
         self.assertNotIn("answer_type", prompt)
         self.assertNotIn('"confidence"', prompt)
@@ -212,11 +218,16 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
 
         self.assertEqual(result.artifacts["execution_order"], ["q1", "q2"])
         self.assertEqual([item.question for item in result.atomic_results], ["Who performed the song B Boy?", "Where was Meek Mill detained?"])
+        self.assertNotIn("confidence", result.atomic_results[0].to_dict())
+        self.assertNotIn("confidence", result.final_answer)
+        self.assertNotIn("confidence", result.final_answer["atomic_answer_trace"][0])
         self.assertEqual(result.atomic_results[1].answer, "Police Station")
         self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
         self.assertEqual(result.final_answer["source_node_id"], "q2")
         self.assertFalse(result.final_answer["insufficient"])
         self.assertEqual(len(llm.answer_calls), 2)
+        self.assertEqual(llm.answer_calls[0]["original_question"], "Where was the performer of B Boy detained?")
+        self.assertEqual(llm.answer_calls[1]["original_question"], "Where was the performer of B Boy detained?")
         self.assertEqual(llm.answer_calls[1]["atomic_question"], "Where was Meek Mill detained?")
         self.assertEqual(
             llm.answer_calls[1]["answer_contract"],
@@ -903,7 +914,8 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         no_anchor = no_anchor_executor.run("Question?")
 
         self.assertEqual(no_anchor.atomic_results[0].answer, "INSUFFICIENT_EVIDENCE")
-        self.assertEqual(no_anchor.atomic_results[0].confidence, 0.0)
+        self.assertNotIn("confidence", no_anchor.atomic_results[0].to_dict())
+        self.assertNotIn("confidence", no_anchor.final_answer)
         self.assertTrue(no_anchor.atomic_results[0].insufficient)
         self.assertEqual(len(no_anchor_llm.answer_calls), 1)
         self.assertEqual(no_anchor_llm.answer_calls[0]["evidence"], [])
@@ -1003,6 +1015,63 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
         self.assertEqual(result.final_answer["used_hyperedge_ids"], ["H_A"])
         self.assertFalse(result.final_answer["insufficient"])
+
+    def test_compound_demonym_country_overlap_postprocesses_final_no_to_yes(self) -> None:
+        q1 = _atomic_result("q1", "Which country is Naked Tango from?", "American-Argentine")
+        q2 = _atomic_result("q2", "Which country is Algiers from?", "United States")
+        q3 = _atomic_result(
+            "q3",
+            "Are American-Argentine and United States the same country?",
+            "no",
+            dependencies=["q1", "q2"],
+        )
+
+        final = AtomicDagExecutor._final_answer_from_terminal_node(q3, [q1, q2, q3])
+
+        self.assertEqual(final["answer"], "yes")
+        self.assertEqual(final["judgment"], "yes")
+        self.assertEqual(final["deterministic_postprocess"]["name"], "compound_country_nationality_overlap")
+        self.assertEqual(final["deterministic_postprocess"]["intersection"], ["united states"])
+
+    def test_compound_demonym_overlap_handles_space_and_born_forms(self) -> None:
+        cases = [
+            ("Cuban American", "American"),
+            ("American", "Greek American"),
+            ("Hungarian-born American", "American"),
+            ("American-British", "American"),
+            ("Czech-American", "Romanian-American"),
+            ("American", "Jamaican-American"),
+        ]
+        for left_answer, right_answer in cases:
+            with self.subTest(left_answer=left_answer, right_answer=right_answer):
+                q1 = _atomic_result("q1", "left", left_answer)
+                q2 = _atomic_result("q2", "right", right_answer)
+                q3 = _atomic_result(
+                    "q3",
+                    f"Do {left_answer} and {right_answer} share the same nationality?",
+                    "no",
+                    dependencies=["q1", "q2"],
+                )
+
+                final = AtomicDagExecutor._final_answer_from_terminal_node(q3, [q1, q2, q3])
+
+                self.assertEqual(final["answer"], "yes")
+                self.assertIn("united states", final["deterministic_postprocess"]["intersection"])
+
+    def test_compound_demonym_postprocess_does_not_broaden_non_overlap_cases(self) -> None:
+        q1 = _atomic_result("q1", "left", "Swiss")
+        q2 = _atomic_result("q2", "right", "French")
+        q3 = _atomic_result(
+            "q3",
+            "Do Swiss and French share the same nationality?",
+            "no",
+            dependencies=["q1", "q2"],
+        )
+
+        final = AtomicDagExecutor._final_answer_from_terminal_node(q3, [q1, q2, q3])
+
+        self.assertEqual(final["answer"], "no")
+        self.assertIsNone(final["deterministic_postprocess"])
 
     def test_original_question_shared_pool_rescues_anchorless_atomic_node(self) -> None:
         graph = LocalGraph(
@@ -1303,6 +1372,26 @@ def _dataset(graph: LocalGraph, store: ScoreHyperedgeStore):
         full_docs={},
         summary={},
         get_chunk_text=lambda chunk_id: graph.chunk_texts.get(chunk_id, ""),
+    )
+
+
+def _atomic_result(
+    node_id: str,
+    question: str,
+    answer: str,
+    *,
+    dependencies: list[str] | None = None,
+) -> AtomicAnswerResult:
+    return AtomicAnswerResult(
+        node_id=node_id,
+        question=question,
+        analysis=AtomicQuestionAnalysis(),
+        evidence=[],
+        answer=answer,
+        reasoning_summary="",
+        used_dependencies=list(dependencies or []),
+        used_hyperedge_ids=[],
+        insufficient=answer == "INSUFFICIENT_EVIDENCE",
     )
 
 

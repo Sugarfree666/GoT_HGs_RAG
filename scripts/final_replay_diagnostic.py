@@ -166,7 +166,6 @@ def atomic_payload(item: dict[str, Any]) -> dict[str, Any]:
         "node_id": item.get("node_id", ""),
         "question": item.get("question", ""),
         "answer": item.get("answer", ""),
-        "confidence": item.get("confidence", 0.0),
         "reasoning_summary": trim(item.get("reasoning_summary", "")),
         "used_dependencies": list(item.get("used_dependencies", [])) if isinstance(item.get("used_dependencies", []), list) else [],
         "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])) if isinstance(item.get("used_hyperedge_ids", []), list) else [],
