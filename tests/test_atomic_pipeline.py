@@ -37,7 +37,6 @@ runtime:
   base_run_dir: runs/test
 retrieval:
   local_hyperedge_top_k: 4
-  local_path_top_k: 6
   local_hyperedge_hops: 2
   entity_link_top_k: 12
   descriptive_fallback_hyperedge_top_k: 9
@@ -53,7 +52,6 @@ prompts:
             config = load_config(config_path, project_root)
 
         self.assertEqual(config.retrieval.local_hyperedge_top_k, 4)
-        self.assertEqual(config.retrieval.local_path_top_k, 6)
         self.assertEqual(config.retrieval.local_hyperedge_hops, 2)
         self.assertEqual(config.retrieval.entity_link_top_k, 12)
         self.assertEqual(config.retrieval.descriptive_fallback_hyperedge_top_k, 9)
@@ -61,7 +59,6 @@ prompts:
 
     def test_retrieval_config_defaults_to_top3_two_hop(self) -> None:
         self.assertEqual(RetrievalConfig().local_hyperedge_top_k, 3)
-        self.assertEqual(RetrievalConfig().local_path_top_k, 5)
         self.assertEqual(RetrievalConfig().local_hyperedge_hops, 2)
         self.assertEqual(RetrievalConfig().entity_link_top_k, 30)
         self.assertEqual(RetrievalConfig().descriptive_fallback_hyperedge_top_k, 80)
@@ -84,6 +81,18 @@ prompts:
         self.assertNotIn('"reasoning_summary"', prompt)
         self.assertNotIn('"used_evidence_ids"', prompt)
         self.assertNotIn('"insufficient"', prompt)
+
+    def test_atomic_evidence_filter_prompt_selects_only_evidence_ids(self) -> None:
+        project_root = Path(__file__).resolve().parents[1]
+        prompt = (project_root / "prompts" / "atomic_evidence_filter.md").read_text(encoding="utf-8")
+
+        self.assertIn('"keep_evidence_ids"', prompt)
+        self.assertIn('"drop_evidence_ids"', prompt)
+        self.assertIn("Do not answer the question.", prompt)
+        self.assertIn("wrong_subject", prompt)
+        self.assertIn("only_cooccurrence", prompt)
+        self.assertIn("The only allowed keys are `keep_evidence_ids` and `drop_evidence_ids`.", prompt)
+        self.assertNotIn('"answer"', prompt)
 
     def test_mock_answer_service_returns_only_answer_key(self) -> None:
         llm = MockAtomicLLMService(
@@ -232,12 +241,17 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(llm.answer_calls[0]["original_question"], "Where was the performer of B Boy detained?")
         self.assertEqual(llm.answer_calls[1]["original_question"], "Where was the performer of B Boy detained?")
         self.assertEqual(llm.answer_calls[1]["atomic_question"], "Where was Meek Mill detained?")
-        self.assertNotIn("answer_contract", llm.answer_calls[1])
+        self.assertEqual(
+            llm.answer_calls[1]["answer_contract"],
+            {"output_format": "short answer only"},
+        )
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "Meek Mill")
+        self.assertFalse(llm.answer_calls[1]["dependency_answers"][0]["insufficient"])
         self.assertEqual(
             set(llm.answer_calls[1]["dependency_answers"][0]),
-            {"question", "answer"},
+            {"node_id", "question", "resolved_question", "answer", "insufficient"},
         )
+        self.assertNotIn("answer_type", llm.answer_calls[1]["answer_contract"])
         self.assertNotIn("answer_type", llm.answer_calls[1]["dependency_answers"][0])
         self.assertNotIn("confidence", llm.answer_calls[1]["dependency_answers"][0])
         self.assertNotIn("evidence_summary", llm.answer_calls[1]["dependency_answers"][0])
@@ -463,12 +477,13 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual([item.rank for item in result.evidence], [1, 2, 3])
         self.assertNotIn("H_GLOBAL", [item.hyperedge_id for item in result.evidence])
         first = result.evidence[0].to_dict()
-        self.assertEqual(first["path_type"], "2he")
-        self.assertEqual(first["seed_hyperedge_id"], "H_SECOND")
-        self.assertEqual(first["hyperedge_ids"], ["H2", "H_SECOND"])
-        self.assertEqual(first["bridge_entity_id"], "A2")
-        self.assertEqual(first["path_texts"], ["H2", "H_SECOND"])
-        self.assertEqual(first["provenance"]["first_hyperedge_id"], "H2")
+        self.assertEqual(first["hyperedge_id"], "H_SECOND")
+        self.assertEqual(first["entity_ids"], ["A2", "Second Hop Answer"])
+        self.assertEqual(first["entity_records"][0]["entity_id"], "A2")
+        self.assertEqual(first["chunk_ids"], ["C_SECOND"])
+        self.assertEqual(first["chunk_texts"][0], "second hop chunk")
+        self.assertEqual(first["score_breakdown"]["candidate_hop"], 2)
+        self.assertEqual(first["score_breakdown"]["via_entity_ids"], ["A2"])
 
     def test_retrieval_expands_from_concrete_entities_in_first_hop_chunks(self) -> None:
         graph = LocalGraph(
@@ -540,334 +555,6 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(answer_source["via_first_hyperedge_ids"], ["H_BRIDGE"])
         self.assertEqual(answer_source["expansion_sources"], ["chunk_entity"])
         self.assertEqual(answer_source["via_chunk_ids"], ["C_BRIDGE"])
-
-    def test_single_hyperedge_top_k_remains_seed_count(self) -> None:
-        hyperedge_ids = [f"H{i:02d}" for i in range(60)]
-        graph = LocalGraph(
-            entity_edges={"Subject": hyperedge_ids},
-            hyperedge_entities={hyperedge_id: ["Subject", f"Answer {hyperedge_id}"] for hyperedge_id in hyperedge_ids},
-            hyperedge_texts={hyperedge_id: f"Subject fact {hyperedge_id}." for hyperedge_id in hyperedge_ids},
-        )
-        scores = {hyperedge_id: float(100 - index) for index, hyperedge_id in enumerate(hyperedge_ids)}
-        store = ScoreHyperedgeStore(scores)
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, store),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=50, local_path_top_k=5),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.seed_top50"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="Which answer is linked to Subject?",
-            analysis=AtomicQuestionAnalysis(entities=["Subject"]),
-            primary_anchor_mention="Subject",
-        )
-
-        self.assertEqual(store.calls, [hyperedge_ids])
-        self.assertEqual(len(result.top_hyperedges), 50)
-        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges[:3]], ["H00", "H01", "H02"])
-        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges[-2:]], ["H48", "H49"])
-        self.assertEqual(len(result.top_paths), 5)
-        self.assertEqual([item.seed_hyperedge_id for item in result.top_paths], ["H00", "H01", "H02", "H03", "H04"])
-
-    def test_two_hop_path_recovers_first_hop_outside_seed_top_k(self) -> None:
-        noise_ids = [f"H_NOISE_{index:02d}" for index in range(50)]
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H1", *noise_ids], "Bridge": ["H1", "H2"]},
-            hyperedge_entities={
-                "H1": ["Anchor", "Bridge"],
-                "H2": ["Bridge", "Answer"],
-                **{noise_id: ["Anchor", f"Noise {noise_id}"] for noise_id in noise_ids},
-            },
-            hyperedge_texts={
-                "H1": "Anchor identifies Bridge.",
-                "H2": "Bridge identifies Answer.",
-                **{noise_id: f"Anchor has noisy fact {noise_id}." for noise_id in noise_ids},
-            },
-        )
-        scores = {"H1": 0.01, "H2": 1.0}
-        scores.update({noise_id: 0.99 - (index * 0.001) for index, noise_id in enumerate(noise_ids)})
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore(scores)),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=50, local_path_top_k=5),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.first_hop_not_seed"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="What answer is reached from Anchor?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        self.assertEqual(len(result.top_hyperedges), 50)
-        self.assertEqual(result.top_hyperedges[0]["hyperedge_id"], "H2")
-        self.assertNotIn("H1", [item["hyperedge_id"] for item in result.top_hyperedges])
-        self.assertEqual(result.top_paths[0].path_type, "2he")
-        self.assertEqual(result.top_paths[0].hyperedge_ids, ["H1", "H2"])
-        self.assertEqual(result.top_paths[0].bridge_entity_id, "Bridge")
-        self.assertEqual(result.top_paths[0].path_texts, ["Anchor identifies Bridge.", "Bridge identifies Answer."])
-
-    def test_direct_one_hop_path_is_recovered(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H_DIRECT"]},
-            hyperedge_entities={"H_DIRECT": ["Anchor", "Answer"]},
-            hyperedge_texts={"H_DIRECT": "Anchor directly identifies Answer."},
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H_DIRECT": 1.0})),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=3, local_path_top_k=3),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.one_hop_path"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="Who is linked to Anchor?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        self.assertEqual(result.top_paths[0].path_type, "1he")
-        self.assertEqual(result.top_paths[0].to_answer_payload(), {"path": ["Anchor directly identifies Answer."]})
-
-    def test_explicit_bridge_two_hop_path_requires_bridge_in_both_hyperedges(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H1"], "Bridge": ["H1", "H2"], "Noise": ["H_NOISE"]},
-            hyperedge_entities={
-                "H1": ["Anchor", "Bridge"],
-                "H2": ["Bridge", "Answer"],
-                "H_NOISE": ["Noise", "Answer"],
-            },
-            hyperedge_texts={
-                "H1": "Anchor points to Bridge.",
-                "H2": "Bridge points to Answer.",
-                "H_NOISE": "Noise points to Answer.",
-            },
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H1": 0.2, "H2": 0.9, "H_NOISE": 1.0})),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=2, local_path_top_k=3),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.two_hop_bridge"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="What answer follows Anchor?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        path = next(item for item in result.candidate_paths if item.seed_hyperedge_id == "H2")
-        self.assertEqual(path.path_type, "2he")
-        self.assertEqual(path.hyperedge_ids, ["H1", "H2"])
-        self.assertIn(path.bridge_entity_id, graph.hyperedge_entity_ids("H1"))
-        self.assertIn(path.bridge_entity_id, graph.hyperedge_entity_ids("H2"))
-        self.assertNotIn("H_NOISE", [item.seed_hyperedge_id for item in result.candidate_paths])
-
-    def test_chunk_context_three_hop_path_uses_specific_context(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H1"], "Bridge": ["H2"], "Wrong Bridge": ["H_WRONG"]},
-            hyperedge_entities={
-                "H1": ["Anchor"],
-                "H2": ["Bridge", "Answer"],
-                "H_WRONG": ["Wrong Bridge", "Wrong Answer"],
-            },
-            hyperedge_texts={
-                "H1": "Anchor has a source context.",
-                "H2": "Bridge leads to Answer.",
-                "H_WRONG": "Wrong Bridge leads to Wrong Answer.",
-            },
-            hyperedge_chunks={"H1": ["C_BAD", "C_GOOD"], "H2": ["C_ANSWER"]},
-            chunk_texts={
-                "C_BAD": "Anchor source mentions Wrong Bridge only.",
-                "C_GOOD": "Anchor source identifies Bridge exactly.",
-                "C_ANSWER": "Bridge leads to Answer.",
-            },
-            chunk_entities={"C_BAD": ["Wrong Bridge"], "C_GOOD": ["Bridge"]},
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H1": 0.1, "H2": 0.95, "H_WRONG": 0.5})),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=1, local_path_top_k=5),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.three_hop_context"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="What answer follows Anchor's source?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        path = result.top_paths[0]
-        self.assertEqual(path.path_type, "3he")
-        self.assertEqual(path.context_ids, ["C_GOOD"])
-        self.assertEqual(path.path_texts, ["Anchor has a source context.", "Anchor source identifies Bridge exactly.", "Bridge leads to Answer."])
-        self.assertNotIn("C_BAD", path.context_ids)
-
-    def test_precise_provenance_does_not_create_cartesian_paths(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H1", "H2"], "Bridge One": ["H_TERM"], "Bridge Two": ["H_TERM"]},
-            hyperedge_entities={
-                "H1": ["Anchor"],
-                "H2": ["Anchor"],
-                "H_TERM": ["Bridge One", "Bridge Two", "Answer"],
-            },
-            hyperedge_texts={
-                "H1": "Anchor first context.",
-                "H2": "Anchor second context.",
-                "H_TERM": "A bridge points to Answer.",
-            },
-            hyperedge_chunks={"H1": ["C1"], "H2": ["C2"]},
-            chunk_texts={"C1": "Only Bridge One appears here.", "C2": "Only Bridge Two appears here."},
-            chunk_entities={"C1": ["Bridge One"], "C2": ["Bridge Two"]},
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H1": 0.1, "H2": 0.1, "H_TERM": 0.99})),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=1, local_path_top_k=5),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.precise_provenance"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="What answer follows Anchor?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        keys = {tuple(path.structural_key) for path in result.candidate_paths}
-        self.assertEqual(
-            keys,
-            {
-                ("3he", "H1", "C1", "Bridge One", "H_TERM"),
-                ("3he", "H2", "C2", "Bridge Two", "H_TERM"),
-            },
-        )
-        self.assertNotIn(("3he", "H1", "C2", "Bridge Two", "H_TERM"), keys)
-        self.assertNotIn(("3he", "H2", "C1", "Bridge One", "H_TERM"), keys)
-
-    def test_path_deduplicates_same_structure_but_keeps_pool_sources(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H1"]},
-            hyperedge_entities={"H1": ["Anchor", "Answer"]},
-            hyperedge_texts={"H1": "Anchor points to Answer."},
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H1": 1.0})),
-            embedder=CountingEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=3, local_path_top_k=3),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.path_dedup"),
-        )
-        analysis = AtomicQuestionAnalysis(entities=["Anchor"])
-        shared_pool = retriever.build_original_question_candidate_pool(
-            question="Who is linked to Anchor?",
-            analysis=analysis,
-            primary_anchor_mention="Anchor",
-        )
-        local_pool = retriever.build_atomic_candidate_pool(
-            question="Who is linked to Anchor?",
-            analysis=analysis,
-            primary_anchor_mention="Anchor",
-        )
-
-        result = retriever.rank_candidate_pool(
-            retriever.merge_candidate_pools(shared_pool=shared_pool, local_pool=local_pool),
-            question="Who is linked to Anchor?",
-        )
-
-        self.assertEqual(result.candidate_path_count, 1)
-        self.assertEqual(result.deduplicated_path_count, 1)
-        self.assertEqual(len(result.candidate_paths), 1)
-        pool_sources = result.candidate_paths[0].provenance["pool_sources"]
-        self.assertIn("original_question_shared_pool", pool_sources)
-        self.assertIn("atomic_node_local_pool", pool_sources)
-
-    def test_path_cosine_reranking_uses_complete_path_only(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Anchor": ["H_SEED_HIGH", "H_SEED_LOW"]},
-            hyperedge_entities={
-                "H_SEED_HIGH": ["Anchor", "Weak Answer"],
-                "H_SEED_LOW": ["Anchor", "Preferred Answer"],
-            },
-            hyperedge_texts={
-                "H_SEED_HIGH": "Weak answer text.",
-                "H_SEED_LOW": "Preferred answer text.",
-            },
-        )
-        retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H_SEED_HIGH": 0.99, "H_SEED_LOW": 0.1})),
-            embedder=KeywordPathEmbedder(),
-            config=RetrievalConfig(local_hyperedge_top_k=2, local_path_top_k=1),
-            llm_service=MockAtomicLLMService(),
-            logger=logging.getLogger("test.path_rerank"),
-        )
-
-        result = retriever.retrieve_primary_anchor_local(
-            question="Which preferred answer is linked to Anchor?",
-            analysis=AtomicQuestionAnalysis(entities=["Anchor"]),
-            primary_anchor_mention="Anchor",
-        )
-
-        self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges], ["H_SEED_HIGH", "H_SEED_LOW"])
-        self.assertEqual([item.seed_hyperedge_id for item in result.top_paths], ["H_SEED_LOW"])
-        self.assertGreater(result.top_paths[0].path_score, result.candidate_paths[0].path_score)
-
-    def test_llm_receives_only_path_evidence_and_compact_dependencies(self) -> None:
-        graph = LocalGraph(
-            entity_edges={"Subject": ["H1"], "Answer One": ["H2"]},
-            hyperedge_entities={
-                "H1": ["Subject", "Answer One"],
-                "H2": ["Answer One", "Final Value"],
-            },
-            hyperedge_texts={
-                "H1": "Subject is linked to Answer One.",
-                "H2": "Answer One is linked to Final Value.",
-            },
-        )
-        llm = MockAtomicLLMService(answer_responses=[{"answer": "Answer One"}, {"answer": "Final Value"}])
-        executor = _executor(
-            graph=graph,
-            scores={"H1": 0.8, "H2": 0.9},
-            analyzer=QuestionAnalyzer(
-                {
-                    "Who is linked to Subject?": AtomicQuestionAnalysis(entities=["Subject"]),
-                    "What is linked to Answer One?": AtomicQuestionAnalysis(entities=["Answer One"]),
-                }
-            ),
-            llm=llm,
-        )
-        dag = {
-            "nodes": [
-                {"node_id": "q1", "question": "Who is linked to Subject?"},
-                {"node_id": "q2", "question": "What is linked to q1's answer?", "dependencies": ["q1"]},
-            ]
-        }
-
-        executor.run("What is linked to the entity linked to Subject?", dag)
-
-        call = llm.answer_calls[1]
-        self.assertEqual(
-            call,
-            {
-                "original_question": "What is linked to the entity linked to Subject?",
-                "atomic_question": "What is linked to Answer One?",
-                "dependency_answers": [{"question": "Who is linked to Subject?", "answer": "Answer One"}],
-                "evidence": [
-                    {"path": ["Answer One is linked to Final Value."]},
-                    {"path": ["Subject is linked to Answer One.", "Answer One is linked to Final Value."]},
-                    {"path": ["Subject is linked to Answer One."]},
-                ],
-            },
-        )
-        payload_text = json.dumps(call, ensure_ascii=False)
-        for forbidden in ("answer_contract", "evidence_id", "hyperedge_text", "chunk_texts", "path_type", "path_score", "bridge_entity_id"):
-            self.assertNotIn(forbidden, payload_text)
 
     def test_entity_linking_uses_alias_lookup_for_appositive_entity_names(self) -> None:
         graph = LocalGraph(
@@ -1055,9 +742,8 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertIn("H_GOAL", result.candidate_hyperedge_ids)
         self.assertEqual([item["hyperedge_id"] for item in result.top_hyperedges[:2]], ["H_COMPARED", "H_GOAL"])
         compared = next(item for item in result.evidence if item.hyperedge_id == "H_COMPARED")
-        self.assertEqual(compared.path_type, "1he")
-        self.assertEqual(compared.anchor_entity_id, "Copa del Rey")
-        self.assertEqual(compared.provenance["terminal_hyperedge_id"], "H_COMPARED")
+        self.assertIn("Copa del Rey", compared.score_breakdown["anchor_mentions"])
+        self.assertIn("Copa del Rey", compared.score_breakdown["anchor_entity_ids"])
 
     def test_answerer_receives_complete_top3_evidence_once(self) -> None:
         graph = LocalGraph(
@@ -1094,17 +780,14 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(len(llm.answer_calls), 1)
         evidence = llm.answer_calls[0]["evidence"]
         payload_text = json.dumps(llm.answer_calls[0], ensure_ascii=False)
-        self.assertEqual(evidence, [{"path": ["H2"]}, {"path": ["H3"]}, {"path": ["H4"]}])
-        self.assertNotIn("answer_contract", llm.answer_calls[0])
-        self.assertNotIn("evidence_id", evidence[0])
-        self.assertNotIn("hyperedge_text", evidence[0])
-        self.assertNotIn("chunk_texts", evidence[0])
+        self.assertEqual([item["evidence_id"] for item in evidence], ["E1", "E2", "E3"])
+        self.assertEqual([item["hyperedge_text"] for item in evidence], ["H2", "H3", "H4"])
+        self.assertEqual(evidence[0]["chunk_texts"], ["two"])
         self.assertNotIn("hyperedge_id", evidence[0])
         self.assertNotIn("entity_records", evidence[0])
         self.assertNotIn("score_breakdown", evidence[0])
         self.assertNotIn("chunk_ids", evidence[0])
         for forbidden in (
-            "answer_contract",
             "source_ids",
             "entity_records",
             "metadata",
@@ -1122,8 +805,9 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(result.final_answer["answer"], "Answer Two")
         self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
         artifact_evidence = result.artifacts["atomic_retrieval"][0]["answerer_evidence"][0]
-        self.assertEqual(artifact_evidence, {"path": ["H2"]})
-        self.assertEqual(result.artifacts["atomic_retrieval"][0]["top_paths"][0]["seed_hyperedge_id"], "H2")
+        self.assertIn("entity_records", artifact_evidence)
+        self.assertIn("chunk_ids", artifact_evidence)
+        self.assertIn("score_breakdown", artifact_evidence)
 
     def test_answerer_payload_deduplicates_repeated_chunk_texts_without_changing_artifact(self) -> None:
         graph = LocalGraph(
@@ -1165,12 +849,15 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         result = executor.run("Who is linked to Subject?")
 
         evidence = llm.answer_calls[0]["evidence"]
-        self.assertEqual(evidence, [{"path": ["Subject is linked to Answer One."]}, {"path": ["Subject is also linked to Answer Two."]}, {"path": ["Subject is linked to Answer Three."]}])
-        self.assertNotIn("chunk_texts", evidence[0])
-        self.assertNotIn("hyperedge_text", evidence[0])
+        all_chunk_texts = [text for item in evidence for text in item["chunk_texts"]]
+        self.assertEqual(all_chunk_texts.count("The same source chunk mentions Subject and two answers."), 1)
+        self.assertEqual(evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+        self.assertEqual(evidence[1]["chunk_texts"], [])
         artifact_evidence = result.artifacts["atomic_retrieval"][0]["answerer_evidence"]
-        self.assertEqual(artifact_evidence[0], {"path": ["Subject is linked to Answer One."]})
-        self.assertEqual(result.artifacts["atomic_retrieval"][0]["top_paths"][0]["hyperedge_ids"], ["H1"])
+        self.assertEqual(artifact_evidence[0]["chunk_ids"], ["C_SHARED"])
+        self.assertEqual(artifact_evidence[1]["chunk_ids"], ["C_SHARED"])
+        self.assertEqual(artifact_evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+        self.assertEqual(artifact_evidence[1]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
 
     def test_compact_answer_payload_is_much_smaller_than_full_candidate_dicts(self) -> None:
         long_description = "role metadata description " * 200
@@ -1217,6 +904,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         compact_evidence = AtomicDagExecutor._answer_evidence_payload(candidates)
         compact_payload = {
             "atomic_question": "What country is Perry Bhandal from?",
+            "answer_contract": AtomicDagExecutor._answer_contract("What country is Perry Bhandal from?"),
             "dependency_answers": AtomicDagExecutor._answer_dependency_context(full_payload["dependency_answers"]),
             "evidence": compact_evidence,
         }
@@ -1224,8 +912,6 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         full_size = len(json.dumps(full_payload, ensure_ascii=False))
         compact_size = len(json.dumps(compact_payload, ensure_ascii=False))
         self.assertNotIn("answer_type", json.dumps(compact_payload, ensure_ascii=False))
-        self.assertNotIn("answer_contract", json.dumps(compact_payload, ensure_ascii=False))
-        self.assertEqual(compact_evidence[0], {"path": ["Hyperedge 0: Perry Bhandal is British."]})
         self.assertLess(compact_size, full_size * 0.2)
 
     def test_missing_anchor_and_missing_evidence_still_call_answerer_once(self) -> None:
@@ -1334,12 +1020,8 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         result = executor.run("Were Film A and Film B released in the same year?", dag)
 
         self.assertEqual(len(llm.answer_calls), 3)
-        self.assertEqual(
-            [item["path"] for item in llm.answer_calls[2]["evidence"]],
-            [["Film A was released in 1960."], ["Film B was released in 1960."]],
-        )
+        self.assertEqual([item["hyperedge_text"] for item in llm.answer_calls[2]["evidence"]], ["Film A was released in 1960.", "Film B was released in 1960."])
         self.assertEqual([item["answer"] for item in llm.answer_calls[2]["dependency_answers"]], ["1960", "1960"])
-        self.assertEqual([set(item) for item in llm.answer_calls[2]["dependency_answers"]], [{"question", "answer"}, {"question", "answer"}])
         self.assertEqual(result.atomic_results[-1].answer, "yes")
         self.assertEqual(result.final_answer["answer"], "yes")
         self.assertEqual(result.final_answer["answer"], result.atomic_results[-1].answer)
@@ -1436,7 +1118,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(retrieval["candidate_hyperedge_ids"], ["H_HOST"])
         self.assertEqual(retrieval["top_hyperedges"][0]["hyperedge_id"], "H_HOST")
         self.assertIn("original_question_shared_pool", retrieval["candidate_sources"][0]["pool_sources"])
-        self.assertEqual(llm.answer_calls[0]["evidence"][0], {"path": ["Tournament X was hosted by Host Country."]})
+        self.assertEqual(llm.answer_calls[0]["evidence"][0]["hyperedge_text"], "Tournament X was hosted by Host Country.")
         self.assertEqual(result.final_answer["answer"], "Host Country")
 
     def test_executor_reuses_provided_original_question_entities_for_shared_pool(self) -> None:
@@ -1913,24 +1595,6 @@ class CountingEmbedder:
     def embed_texts(self, texts: list[str], stage: str | None = None):
         self.calls.append((list(texts), stage))
         return [np.ones(3, dtype=np.float32) for _ in texts]
-
-
-class KeywordPathEmbedder:
-    def __init__(self) -> None:
-        self.calls: list[tuple[list[str], str | None]] = []
-
-    def embed_texts(self, texts: list[str], stage: str | None = None):
-        self.calls.append((list(texts), stage))
-        vectors = []
-        for text in texts:
-            lowered = str(text or "").lower()
-            if "preferred" in lowered:
-                vectors.append(np.asarray([1.0, 0.0, 0.0], dtype=np.float32))
-            elif "weak" in lowered:
-                vectors.append(np.asarray([0.0, 1.0, 0.0], dtype=np.float32))
-            else:
-                vectors.append(np.asarray([0.5, 0.5, 0.0], dtype=np.float32))
-        return vectors
 
 
 def _dataset(graph: LocalGraph, store: ScoreHyperedgeStore):
