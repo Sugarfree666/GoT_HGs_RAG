@@ -18,12 +18,20 @@ class AtomicLLMService(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def rewrite_atomic_fact_query(
+        self,
+        atomic_question: str,
+        answer_type: str,
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    @abstractmethod
     def answer_atomic_question(
         self,
         atomic_question: str,
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
-        evidence: list[dict[str, Any]],
+        evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
         raise NotImplementedError
@@ -61,14 +69,31 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         response.setdefault("entities", [])
         return {"entities": response.get("entities", [])}
 
+    def rewrite_atomic_fact_query(
+        self,
+        atomic_question: str,
+        answer_type: str,
+    ) -> dict[str, Any]:
+        response = self.client.chat_json(
+            "atomic_fact_query",
+            self.prompts.get("atomic_fact_query"),
+            {
+                "atomic_question": atomic_question,
+                "answer_type": answer_type,
+            },
+            max_tokens=200,
+        )
+        return _fact_query_payload(response)
+
     def answer_atomic_question(
         self,
         atomic_question: str,
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
-        evidence: list[dict[str, Any]],
+        evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
+        evidence_items, contexts = _answer_evidence_sections(evidence)
         response = self.client.chat_json(
             "atomic_answer",
             self.prompts.get("atomic_answer"),
@@ -77,7 +102,8 @@ class OpenAIAtomicLLMService(AtomicLLMService):
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
-                "evidence": evidence,
+                "evidence": evidence_items,
+                "contexts": contexts,
             },
             max_tokens=900,
         )
@@ -115,9 +141,12 @@ class MockAtomicLLMService(AtomicLLMService):
     def __init__(
         self,
         answer_responses: list[dict[str, Any]] | None = None,
+        fact_query_responses: list[dict[str, Any] | BaseException] | None = None,
     ) -> None:
         self.answer_responses = list(answer_responses or [])
+        self.fact_query_responses = list(fact_query_responses or [])
         self.answer_calls: list[dict[str, Any]] = []
+        self.fact_query_calls: list[dict[str, Any]] = []
 
     def analyze_atomic_question(
         self,
@@ -132,37 +161,70 @@ class MockAtomicLLMService(AtomicLLMService):
         ][:4]
         return {"entities": entities}
 
+    def rewrite_atomic_fact_query(
+        self,
+        atomic_question: str,
+        answer_type: str,
+    ) -> dict[str, Any]:
+        self.fact_query_calls.append(
+            {
+                "atomic_question": atomic_question,
+                "answer_type": answer_type,
+            }
+        )
+        if self.fact_query_responses:
+            response = self.fact_query_responses.pop(0)
+            if isinstance(response, BaseException):
+                raise response
+            return _fact_query_payload(response)
+        return {"fact_query": str(atomic_question or "").strip()}
+
     def answer_atomic_question(
         self,
         atomic_question: str,
         answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
-        evidence: list[dict[str, Any]],
+        evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
+        evidence_items, contexts = _answer_evidence_sections(evidence)
         self.answer_calls.append(
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
-                "evidence": evidence,
+                "evidence": evidence_items,
+                "contexts": contexts,
             }
         )
         if self.answer_responses:
             response = self.answer_responses.pop(0)
             return {"answer": str(response.get("answer", "") or "")} if isinstance(response, dict) else {"answer": ""}
-        if not evidence:
+        if not evidence_items and not contexts:
             return {"answer": "INSUFFICIENT_EVIDENCE"}
 
         query_tokens = set(content_tokens(atomic_question))
         answer = ""
-        first = evidence[0]
-        for item in evidence:
+        first = evidence_items[0] if evidence_items else {}
+        context_by_id = {str(item.get("chunk_id", "") or ""): item for item in contexts}
+        for item in evidence_items:
+            context_texts: list[str] = []
+            for chunk_id in ensure_list(item.get("chunk_ids", [])):
+                context = context_by_id.get(str(chunk_id))
+                if not context:
+                    continue
+                context_texts.extend(
+                    [
+                        str(context.get("title", "") or ""),
+                        str(context.get("text", "") or ""),
+                    ]
+                )
             text = " ".join(
                 [
                     str(item.get("hyperedge_text", "") or ""),
                     *[str(chunk) for chunk in ensure_list(item.get("chunk_texts", []))],
+                    *context_texts,
                 ]
             )
             for token in content_tokens(text):
@@ -244,3 +306,17 @@ def _analysis_payload(analysis: Any) -> dict[str, Any]:
     return {
         "entities": [str(item) for item in ensure_list(payload.get("entities", []))],
     }
+
+
+def _fact_query_payload(response: Any) -> dict[str, Any]:
+    if not isinstance(response, dict):
+        return {"fact_query": ""}
+    return {"fact_query": str(response.get("fact_query", "") or "").strip()}
+
+
+def _answer_evidence_sections(evidence: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    if isinstance(evidence, dict):
+        evidence_items = [dict(item) for item in ensure_list(evidence.get("evidence")) if isinstance(item, dict)]
+        contexts = [dict(item) for item in ensure_list(evidence.get("contexts")) if isinstance(item, dict)]
+        return evidence_items, contexts
+    return [dict(item) for item in ensure_list(evidence) if isinstance(item, dict)], []

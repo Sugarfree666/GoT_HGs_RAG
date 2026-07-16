@@ -82,6 +82,11 @@ class AtomicDagExecutor:
                 resolved_question,
                 self._analysis_dependency_context(dependency_answers),
             )
+            fact_query = self._atomic_fact_query(
+                node_id=node.node_id,
+                resolved_question=resolved_question,
+                analysis=analysis,
+            )
             primary_anchor_mention = _primary_anchor_mention(
                 dependency_rewrite.primary_anchor_entities,
                 analysis,
@@ -90,6 +95,7 @@ class AtomicDagExecutor:
                 question=resolved_question,
                 analysis=analysis,
                 primary_anchor_mention=primary_anchor_mention,
+                hyperedge_query=fact_query,
             )
             active_ancestor_node_ids = self._transitive_ancestor_node_ids(
                 node.node_id,
@@ -105,7 +111,7 @@ class AtomicDagExecutor:
                 shared_pool=active_shared_candidate_pool,
                 local_pool=local_candidate_pool,
             )
-            retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=resolved_question)
+            retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=fact_query)
             evidence = retrieval_result.evidence
             answer_payload = self._answer_atomic_question(
                 original_question=original_question,
@@ -137,6 +143,8 @@ class AtomicDagExecutor:
                     "original_question": node.question,
                     "resolved_question": resolved_question,
                     "retrieval_question": resolved_question,
+                    "fact_query": fact_query,
+                    "hyperedge_retrieval_query": fact_query,
                     "dependency_question_rewrite": rewrite_payload,
                     "dependency_replacements": rewrite_payload["dependency_replacements"],
                     "dependency_answers": dependency_answers,
@@ -149,6 +157,7 @@ class AtomicDagExecutor:
             retrieval_record = self._retrieval_artifact(
                 node=node,
                 resolved_question=resolved_question,
+                fact_query=fact_query,
                 dependency_answers=dependency_answers,
                 dependency_rewrite_payload=rewrite_payload,
                 retrieval_result=retrieval_result,
@@ -201,6 +210,34 @@ class AtomicDagExecutor:
         if entities:
             return AtomicQuestionAnalysis(entities=entities, answer_type=""), "provided_original_question_entities"
         return self.analyzer.analyze(original_question, []), "atomic_question_analyzer"
+
+    def _atomic_fact_query(
+        self,
+        *,
+        node_id: str,
+        resolved_question: str,
+        analysis: AtomicQuestionAnalysis,
+    ) -> str:
+        if self.llm_service is None:
+            return resolved_question
+        try:
+            payload = self.llm_service.rewrite_atomic_fact_query(
+                atomic_question=resolved_question,
+                answer_type=analysis.answer_type,
+            )
+        except Exception as exc:  # pragma: no cover - exercised by tests through fallback behavior
+            self.logger.warning(
+                "Atomic fact query rewrite failed for %s; using resolved question: %s",
+                node_id,
+                exc,
+            )
+            return resolved_question
+        fact_query = _clean_fact_query_payload(payload)
+        if not fact_query:
+            self.logger.warning("Atomic fact query rewrite returned empty output for %s; using resolved question", node_id)
+            return resolved_question
+        self.logger.info("Atomic fact query for %s: %s -> %s", node_id, resolved_question, fact_query)
+        return fact_query
 
     @classmethod
     def normalize_dag_payload(cls, payload: Any | None, original_question: str | None = None) -> list[AtomicQuestionNode]:
@@ -513,26 +550,54 @@ class AtomicDagExecutor:
         return compact
 
     @staticmethod
-    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> list[dict[str, Any]]:
-        payload: list[dict[str, Any]] = []
-        seen_chunk_texts: set[str] = set()
+    def _chunk_context(raw_text: Any) -> tuple[str, str]:
+        text = str(raw_text or "").strip()
+        if not text:
+            return "", ""
+        title, separator, body = text.partition("\n")
+        title = title.strip()
+        body = body.strip()
+        return title, body if separator else text
+
+    @staticmethod
+    def _answer_evidence_payload(evidence: list[FusedHyperedgeCandidate]) -> dict[str, list[dict[str, Any]]]:
+        evidence_payload: list[dict[str, Any]] = []
+        contexts: list[dict[str, Any]] = []
+        context_id_by_text: dict[str, str] = {}
+        context_by_id: dict[str, dict[str, Any]] = {}
         for index, item in enumerate(evidence, start=1):
             evidence_id = f"E{index}"
-            chunk_texts: list[str] = []
+            chunk_ids: list[str] = []
             for raw_text in item.chunk_texts:
                 text = str(raw_text or "").strip()
-                if not text or text in seen_chunk_texts:
+                if not text:
                     continue
-                seen_chunk_texts.add(text)
-                chunk_texts.append(text)
-            payload.append(
+                context_id = context_id_by_text.get(text)
+                if context_id is None:
+                    context_id = f"C{len(contexts) + 1}"
+                    title, context_text = AtomicDagExecutor._chunk_context(text)
+                    context = {
+                        "chunk_id": context_id,
+                        "title": title,
+                        "text": context_text,
+                        "supports": [],
+                    }
+                    context_id_by_text[text] = context_id
+                    context_by_id[context_id] = context
+                    contexts.append(context)
+                if context_id not in chunk_ids:
+                    chunk_ids.append(context_id)
+                supports = context_by_id[context_id]["supports"]
+                if evidence_id not in supports:
+                    supports.append(evidence_id)
+            evidence_payload.append(
                 {
                     "evidence_id": evidence_id,
                     "hyperedge_text": str(item.hyperedge_text or "").strip(),
-                    "chunk_texts": chunk_texts,
+                    "chunk_ids": chunk_ids,
                 }
             )
-        return payload
+        return {"evidence": evidence_payload, "contexts": contexts}
 
     @staticmethod
     def _answer_contract(question: str) -> dict[str, str]:
@@ -710,6 +775,7 @@ class AtomicDagExecutor:
         *,
         node: AtomicQuestionNode,
         resolved_question: str,
+        fact_query: str,
         dependency_answers: list[dict[str, Any]],
         dependency_rewrite_payload: dict[str, Any],
         retrieval_result: LocalHyperedgeRetrievalResult,
@@ -724,6 +790,8 @@ class AtomicDagExecutor:
             "original_question": node.question,
             "resolved_question": resolved_question,
             "retrieval_question": resolved_question,
+            "fact_query": fact_query,
+            "hyperedge_retrieval_query": fact_query,
             "dependency_answers": dependency_answers,
             "dependency_question_rewrite": dependency_rewrite_payload,
             "dependency_replacements": dependency_rewrite_payload["dependency_replacements"],
@@ -844,6 +912,12 @@ def _clean_entity_mentions(value: Any) -> list[str]:
         seen.add(key)
         cleaned.append(text)
     return cleaned
+
+
+def _clean_fact_query_payload(value: Any) -> str:
+    if not isinstance(value, dict):
+        return ""
+    return normalize_label(str(value.get("fact_query", "") or "").strip())
 
 
 def _to_plain_payload(payload: Any) -> Any:

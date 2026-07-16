@@ -180,13 +180,20 @@ class AtomicHyperedgeRetriever:
         question: str,
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str,
+        hyperedge_query: str | None = None,
     ) -> LocalHyperedgeRetrievalResult:
+        retrieval_query = self._atomic_hyperedge_query(
+            question=question,
+            analysis=analysis,
+            hyperedge_query=hyperedge_query,
+        )
         result = self.build_atomic_candidate_pool(
             question=question,
             analysis=analysis,
             primary_anchor_mention=primary_anchor_mention,
+            hyperedge_query=retrieval_query,
         )
-        return self.rank_candidate_pool(result, question=question)
+        return self.rank_candidate_pool(result, question=retrieval_query)
 
     def build_original_question_candidate_pool(
         self,
@@ -213,9 +220,16 @@ class AtomicHyperedgeRetriever:
         question: str,
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str,
+        hyperedge_query: str | None = None,
     ) -> LocalHyperedgeRetrievalResult:
+        retrieval_query = self._atomic_hyperedge_query(
+            question=question,
+            analysis=analysis,
+            hyperedge_query=hyperedge_query,
+        )
         result = self._build_anchor_candidate_pool(
             question=question,
+            hyperedge_query=retrieval_query,
             analysis=analysis,
             primary_anchor_mention=primary_anchor_mention,
             method=_LOCAL_RETRIEVAL_METHOD,
@@ -226,16 +240,40 @@ class AtomicHyperedgeRetriever:
         result.local_insufficient_reason = result.insufficient_reason
         return result
 
+    def _atomic_hyperedge_query(
+        self,
+        *,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        hyperedge_query: str | None = None,
+    ) -> str:
+        if hyperedge_query and hyperedge_query.strip():
+            return hyperedge_query
+        if self.llm_service is None or not hasattr(self.llm_service, "rewrite_atomic_fact_query"):
+            return question
+        try:
+            payload = self.llm_service.rewrite_atomic_fact_query(
+                atomic_question=question,
+                answer_type=analysis.answer_type,
+            )
+        except Exception as exc:
+            self.logger.warning("Atomic fact query rewrite failed in retriever; using question: %s", exc)
+            return question
+        fact_query = _clean_fact_query_payload(payload)
+        return fact_query or question
+
     def _build_anchor_candidate_pool(
         self,
         *,
         question: str,
+        hyperedge_query: str | None = None,
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str,
         method: str,
         pool_source: str,
         use_descriptive_fallback: bool,
     ) -> LocalHyperedgeRetrievalResult:
+        retrieval_query = hyperedge_query if hyperedge_query and hyperedge_query.strip() else question
         anchor_mentions = self._anchor_mentions(primary_anchor_mention, analysis)
         primary_mention = anchor_mentions[0] if anchor_mentions else ""
         result = LocalHyperedgeRetrievalResult(
@@ -246,7 +284,12 @@ class AtomicHyperedgeRetriever:
         if not anchor_mentions:
             result.insufficient_reason = "missing_primary_anchor"
             if use_descriptive_fallback:
-                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+                return self._try_descriptive_fallback_candidates(
+                    result,
+                    question=question,
+                    hyperedge_query=retrieval_query,
+                    pool_source=pool_source,
+                )
             return result
 
         linked_matches: list[AnchorEntityMatch] = []
@@ -269,7 +312,12 @@ class AtomicHyperedgeRetriever:
         if not linked_matches:
             result.insufficient_reason = "unlinked_primary_anchor"
             if use_descriptive_fallback:
-                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+                return self._try_descriptive_fallback_candidates(
+                    result,
+                    question=question,
+                    hyperedge_query=retrieval_query,
+                    pool_source=pool_source,
+                )
             return result
 
         result.linked_entity_id = linked_matches[0].entity_id
@@ -290,7 +338,12 @@ class AtomicHyperedgeRetriever:
         if not result.adjacent_hyperedge_ids:
             result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
             if use_descriptive_fallback:
-                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+                return self._try_descriptive_fallback_candidates(
+                    result,
+                    question=question,
+                    hyperedge_query=retrieval_query,
+                    pool_source=pool_source,
+                )
             return result
 
         result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
@@ -301,7 +354,12 @@ class AtomicHyperedgeRetriever:
         if not result.candidate_hyperedge_ids:
             result.insufficient_reason = "no_local_candidate_hyperedges"
             if use_descriptive_fallback:
-                return self._try_descriptive_fallback_candidates(result, question=question, pool_source=pool_source)
+                return self._try_descriptive_fallback_candidates(
+                    result,
+                    question=question,
+                    hyperedge_query=retrieval_query,
+                    pool_source=pool_source,
+                )
             return result
 
         return result
@@ -311,12 +369,13 @@ class AtomicHyperedgeRetriever:
         result: LocalHyperedgeRetrievalResult,
         *,
         question: str,
+        hyperedge_query: str,
         pool_source: str,
     ) -> LocalHyperedgeRetrievalResult:
         original_reason = result.insufficient_reason
         if _has_unresolved_dependency_reference(question):
             return result
-        candidate_pool = self._descriptive_candidate_pool(question)
+        candidate_pool = self._descriptive_candidate_pool(hyperedge_query)
         if not candidate_pool["candidate_hyperedge_ids"]:
             return result
 
@@ -1337,6 +1396,12 @@ def _dedupe_strings(values: list[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
+
+
+def _clean_fact_query_payload(value: Any) -> str:
+    if not isinstance(value, dict):
+        return ""
+    return normalize_label(str(value.get("fact_query", "") or "").strip())
 
 
 def _lookup_keys_for_entity(entity_id: str) -> list[str]:
