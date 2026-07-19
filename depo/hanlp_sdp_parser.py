@@ -31,6 +31,7 @@ class HanLPSDPParser:
         tokens = [token for sentence in token_sentences for token in sentence]
         available_keys = list(payload.keys())
         sdp_graphs = {key: payload[key] for key in available_keys if _is_pas_sdp_key(key)}
+        syntax_heads, syntax_head_source = _extract_syntax_heads(payload, token_sentences)
         parse_warnings: list[str] = []
         if not sdp_graphs:
             parse_warnings.append("HanLP result did not contain an sdp/pas field.")
@@ -45,6 +46,8 @@ class HanLPSDPParser:
             raw=payload,
             warnings=parse_warnings,
             model=self.model_label,
+            syntax_heads=syntax_heads,
+            syntax_head_source=syntax_head_source,
         )
         check_mask_tokens(result, placeholders or [])
         return result
@@ -221,6 +224,64 @@ def _collect_sdp_edges(
                     )
                 )
     return edges
+
+
+def _extract_syntax_heads(payload: dict[str, Any], token_sentences: list[list[str]]) -> tuple[dict[str, int], str]:
+    syntax_key = _find_syntax_dependency_key(payload)
+    if syntax_key is None:
+        return {}, ""
+    return _collect_dependency_heads(payload[syntax_key], token_sentences), syntax_key
+
+
+def _find_syntax_dependency_key(payload: dict[str, Any]) -> str | None:
+    keys = list(payload.keys())
+    for key in keys:
+        if _is_udep_key(str(key)):
+            return str(key)
+    for key in keys:
+        if _is_dep_key(str(key)):
+            return str(key)
+    return None
+
+
+def _is_udep_key(key: str) -> bool:
+    normalized = key.lower()
+    return normalized == "udep" or normalized.endswith("/udep") or normalized.endswith("_udep")
+
+
+def _is_dep_key(key: str) -> bool:
+    normalized = key.lower()
+    if "sdp" in normalized:
+        return False
+    return (
+        normalized == "dep"
+        or normalized == "dependencies"
+        or normalized.endswith("/dep")
+        or normalized.endswith("_dep")
+    )
+
+
+def _collect_dependency_heads(graph_payload: Any, token_sentences: list[list[str]]) -> dict[str, int]:
+    syntax_heads: dict[str, int] = {}
+    sentence_offsets: list[int] = []
+    offset = 0
+    for tokens in token_sentences:
+        sentence_offsets.append(offset)
+        offset += len(tokens)
+
+    sentence_graphs = _split_graph_by_sentence(graph_payload, token_sentences)
+    for sentence_index, graph in enumerate(sentence_graphs):
+        tokens = token_sentences[min(sentence_index, len(token_sentences) - 1)] if token_sentences else []
+        token_offset = sentence_offsets[min(sentence_index, len(sentence_offsets) - 1)] if sentence_offsets else 0
+        for edge in _edges_from_graph(graph, tokens):
+            if edge.dependent_index <= 0:
+                continue
+            dep_idx = edge.dependent_index + token_offset
+            head_idx = 0 if edge.head_index == 0 else edge.head_index + token_offset
+            if dep_idx <= 0:
+                continue
+            syntax_heads[str(dep_idx)] = head_idx
+    return syntax_heads
 
 
 def _is_pas_sdp_key(key: str) -> bool:

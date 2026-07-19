@@ -14,6 +14,7 @@ if str(DEPO_ROOT) not in sys.path:
 
 from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor  # noqa: E402
 from placeholder import selective_entity_masking  # noqa: E402
+from prompts import EXPLICIT_ENTITY_EXTRACTION_SYSTEM, build_explicit_entity_extraction_prompt  # noqa: E402
 
 
 class ExplicitEntityExtractionTest(unittest.TestCase):
@@ -195,6 +196,55 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
 
         self.assertEqual(result.mask_spans, [])
         self.assertEqual(replacement.mask_mappings, [])
+
+
+class ExplicitEntityPromptTest(unittest.TestCase):
+    def test_system_prompt_requires_pas_structure_preserving_normalization(self) -> None:
+        prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn("HanLP PAS", prompt)
+        self.assertIn("structure-preserving question normalization", prompt)
+        self.assertIn("the director of X", prompt)
+        self.assertIn("the person who directed X", prompt)
+        self.assertIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertIn('"born later" is not "younger"', prompt)
+        self.assertIn("ENTITYA/ENTITYB placeholders", prompt)
+        self.assertIn("normalization_changed matches the actual text change", prompt)
+        self.assertNotIn("Only make minimal grammar/parser-friendly edits", prompt)
+        self.assertNotIn("If the original question is already grammatical and natural, keep it unchanged", prompt)
+
+    def test_candidate_prompt_contains_structural_rewrite_rules_and_compatible_schema(self) -> None:
+        question = "Which film has the director born later, A or B?"
+        prompt = build_explicit_entity_extraction_prompt(
+            question,
+            [
+                {"candidate_id": "c1", "text": "A", "start_char": 41, "end_char": 42},
+                {"candidate_id": "c2", "text": "B", "start_char": 46, "end_char": 47},
+            ],
+        )
+
+        self.assertIn("Deterministic entity candidates", prompt)
+        self.assertIn("Legacy verified_entities responses are accepted", prompt)
+        self.assertIn("HanLP PAS semantic dependency parsing", prompt)
+        self.assertIn("Turn deep role/of nesting into explicit predicate-argument clauses", prompt)
+        self.assertIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertIn('"explicit_entities"', prompt)
+        self.assertIn('"normalized_question"', prompt)
+        self.assertIn('"normalization_changed"', prompt)
+        self.assertIn('"normalization_note"', prompt)
+        self.assertNotIn("Only apply light parser-friendly grammar repair", prompt)
+
+    def test_free_extraction_prompt_contains_examples_and_conservative_fallback(self) -> None:
+        question = "Who is the child of the director of film An Event?"
+        prompt = build_explicit_entity_extraction_prompt(question)
+
+        self.assertIn("the person who directed the film An Event", prompt)
+        self.assertIn("Where was the person who directed The Outlaw Express born?", prompt)
+        self.assertIn("Which country is the composer of film Thunder On The Hill from?", prompt)
+        self.assertIn("If strict equivalence is uncertain, return the original question unchanged", prompt)
+        self.assertIn("Do not use near-synonym rewrites", prompt)
+        self.assertIn("The original and normalized questions have exactly the same answer set", prompt)
+        self.assertNotIn("lightly normalize", prompt)
 
 
 class StaticEntityLLM:

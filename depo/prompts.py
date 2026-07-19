@@ -4,9 +4,10 @@ import json
 
 
 EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
-You are DEPO Step 2: topic entity extraction and parser-friendly question normalization.
+You are DEPO Step 2: topic entity extraction and structure-preserving question normalization for HanLP PAS parsing.
 
-Extract only explicit topic entities in the original question, and produce one lightly normalized question for parser input.
+Extract only explicit topic entities in the original question, and produce one PAS-friendly normalized question for parser input.
+The original question is the semantic authority; normalized_question is only a parser input. Preserve the exact answer set.
 
 A topic entity is a concrete named thing explicitly mentioned in the question and useful as an anchor for QA decomposition:
 person, creative work/title, organization, institution, location, geopolitical place, event, award, treaty, war, product, game, etc.
@@ -22,11 +23,39 @@ Some official titles begin with words that also look like question words, such a
 
 Do not answer the question.
 Do not decompose it into atomic questions.
-Do not change the meaning or delete any constraint.
+Do not use external knowledge.
+Do not change the meaning, answer type, relation direction, comparison direction, negation, quantifier, candidate set, or any restriction.
 Keep every entity surface form exactly as it appears in the original question.
-Only make minimal grammar/parser-friendly edits, such as repairing wh-question word order, adding a missing auxiliary, or smoothing parser-unfriendly phrasing.
-The normalized question must still be one single-sentence question.
-If the original question is already grammatical and natural, keep it unchanged.
+
+Normalization goal: make implicit predicate-argument structure explicit enough for HanLP PAS without adding facts.
+- Prefer explicit predicates and clear arguments over deep noun/of nesting.
+- Expand strictly equivalent role nouns when useful: "the director of X" -> "the person who directed X".
+- Expose unnamed intermediate objects with relative clauses when the original already implies them.
+- Keep coordinated candidates parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
+- Repair malformed wh-question order when needed.
+
+Hard semantic constraints:
+- Preserve all explicit entities verbatim in normalized_question.
+- Preserve and/or, both/either/neither, same, all, superlatives, ordinals, time, quantity, range, negation, and restrictive clauses.
+- Do not replace with near-synonyms that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
+- Do not introduce new named entities or ENTITYA/ENTITYB placeholders.
+- If a rewrite is not strictly equivalent, keep normalized_question identical to the original and set normalization_changed=false.
+
+Examples:
+Original: Who is the child of the director of film An Event?
+normalized_question: Who is the child of the person who directed the film An Event?
+
+Original: Where was the director of The Outlaw Express born?
+normalized_question: Where was the person who directed The Outlaw Express born?
+
+Original: Which film has the director born later, A or B?
+normalized_question: Which film, A or B, has a director who was born later?
+
+Original: Which country the composer of film X is from?
+normalized_question: Which country is the composer of film X from?
+
+The normalized question must be one natural English question ending with one question mark.
+Before returning JSON, silently verify selected entities occur verbatim in both questions, the answer set is unchanged, no relation direction or restriction changed, no placeholders or external facts were introduced, and normalization_changed matches the actual text change.
 
 Return JSON only.
 """.strip()
@@ -44,9 +73,9 @@ def build_explicit_entity_extraction_prompt(
                     "type": "Person | Location | Organization | Work | Event | Other",
                 }
             ],
-            "normalized_question": "one grammatical parser-friendly question preserving the original meaning",
+            "normalized_question": "one structure-preserving parser-friendly question preserving the exact answer set",
             "normalization_changed": True,
-            "normalization_note": "brief description of the minimal edit, or empty string if unchanged",
+            "normalization_note": "brief description of the structural rewrite, or empty string if unchanged",
             "warnings": [],
         }
 
@@ -58,7 +87,7 @@ Candidate spans (Deterministic entity candidates):
 {json.dumps(entity_candidates, ensure_ascii=False, indent=2)}
 
 Task:
-Verify which candidate spans are topic entities, and lightly normalize the original question for dependency parsing.
+Verify which candidate spans are topic entities, and normalize the original question for HanLP PAS semantic dependency parsing.
 Legacy verified_entities responses are accepted by the parser for compatibility, but you must return the explicit_entities schema below.
 
 Rules:
@@ -75,15 +104,42 @@ Rules:
 11. In typed comparison or choice lists, such as "Which film ..., A or B?", verify each branch that looks like a title as its own entity. A branch may start with a number when the number is part of the title; do not reduce it to the alphabetic substring.
 12. A candidate title may start with a capitalized question-like word such as When, What, Who, Where, or Which. If the whole candidate is an official-looking work/title, keep that first word; do not shorten it only because it resembles a wh-word.
 13. Do not answer the question or decompose it.
-14. Do not remove any restriction or change the semantics.
-15. normalized_question must be a single question sentence.
-16. Only apply light parser-friendly grammar repair. For example, "Which country the composer of film Thunder On The Hill is from?" becomes "Which country is the composer of film Thunder On The Hill from?"
-17. If the original question is already grammatical and natural, return it unchanged and set normalization_changed=false.
+14. Do not remove any restriction, alter the answer type, reverse a relation, change and/or, or change comparison direction.
+15. normalized_question must be a single natural English question ending with exactly one question mark.
+16. Structure-preserving normalization is allowed only when strictly equivalent and useful for PAS parsing:
+    - Turn deep role/of nesting into explicit predicate-argument clauses: "the director of X" -> "the person who directed X".
+    - Make unnamed intermediate objects explicit with relative clauses when the original already implies them.
+    - Keep candidate choices parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
+    - Repair malformed wh-question order, auxiliaries, or articles when needed.
+17. Preserve all selected entity surfaces verbatim in normalized_question.
+18. Preserve negation, time, quantity, scope, both/either/neither, same, all, superlatives, ordinals, and restrictive clauses.
+19. Do not use near-synonym rewrites that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
+20. Do not introduce new named entities, external facts, answers, or ENTITYA/ENTITYB placeholders.
+21. If strict equivalence is uncertain, return the original question unchanged and set normalization_changed=false.
 
 Example:
 Question: The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?
 True topic entities: "Johnny Majors", "Heisman Trophy"
 False candidates: "player", "1956", "what year", "born", "defeated"
+
+Normalization examples:
+- Who is the child of the director of film An Event?
+  -> Who is the child of the person who directed the film An Event?
+- Where was the director of The Outlaw Express born?
+  -> Where was the person who directed The Outlaw Express born?
+- Which film has the director born later, A or B?
+  -> Which film, A or B, has a director who was born later?
+- Which country the composer of film Thunder On The Hill is from?
+  -> Which country is the composer of film Thunder On The Hill from?
+
+Silent self-check before output:
+1. Every selected entity is copied verbatim from the original question.
+2. Every selected entity appears verbatim in normalized_question.
+3. The original and normalized questions have exactly the same answer set.
+4. Relation directions, restrictions, quantifiers, and comparison direction are unchanged.
+5. The normalized result is one question and ends with one question mark.
+6. No answer, external fact, new named entity, or placeholder was introduced.
+7. normalization_changed matches whether normalized_question actually changed.
 
 Return JSON only.
 Output JSON with exactly this shape:
@@ -97,9 +153,9 @@ Output JSON with exactly this shape:
                 "type": "Person | Location | Organization | Work | Event | Other",
             }
         ],
-        "normalized_question": "one grammatical parser-friendly question preserving the original meaning",
+        "normalized_question": "one structure-preserving parser-friendly question preserving the exact answer set",
         "normalization_changed": True,
-        "normalization_note": "brief description of the minimal edit, or empty string if unchanged",
+        "normalization_note": "brief description of the structural rewrite, or empty string if unchanged",
         "warnings": [],
     }
 
@@ -108,7 +164,7 @@ Original question:
 {question}
 
 Task:
-Extract all topic entities explicitly mentioned in the question, and lightly normalize the original question for dependency parsing.
+Extract all topic entities explicitly mentioned in the question, and normalize the original question for HanLP PAS semantic dependency parsing.
 
 Rules:
 1. A returned entity surface must be an exact contiguous substring of the original question.
@@ -124,10 +180,37 @@ Rules:
 11. In typed comparison or choice lists, such as "Which film ..., A or B?", extract each title-like branch as its own entity. A branch may start with a number when the number is part of the title; do not drop the numeric token or return only the alphabetic substring.
 12. Some official titles begin with capitalized question-like words, e.g. When/What/Who/Where/Which as the first word of a song, book, film, episode, or other work title. If the complete contiguous title starts with such a word, return the complete title and do not trim off the first word.
 13. Do not answer the question or decompose it.
-14. Do not remove any restriction or change the semantics.
-15. normalized_question must be a single question sentence.
-16. Only apply light parser-friendly grammar repair. For example, "Which country the composer of film Thunder On The Hill is from?" becomes "Which country is the composer of film Thunder On The Hill from?"
-17. If the original question is already grammatical and natural, return it unchanged and set normalization_changed=false.
+14. Do not remove any restriction, alter the answer type, reverse a relation, change and/or, or change comparison direction.
+15. normalized_question must be a single natural English question ending with exactly one question mark.
+16. Structure-preserving normalization is allowed only when strictly equivalent and useful for PAS parsing:
+    - Turn deep role/of nesting into explicit predicate-argument clauses: "the director of X" -> "the person who directed X".
+    - Make unnamed intermediate objects explicit with relative clauses when the original already implies them.
+    - Keep candidate choices parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
+    - Repair malformed wh-question order, auxiliaries, or articles when needed.
+17. Preserve all selected entity surfaces verbatim in normalized_question.
+18. Preserve negation, time, quantity, scope, both/either/neither, same, all, superlatives, ordinals, and restrictive clauses.
+19. Do not use near-synonym rewrites that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
+20. Do not introduce new named entities, external facts, answers, or ENTITYA/ENTITYB placeholders.
+21. If strict equivalence is uncertain, return the original question unchanged and set normalization_changed=false.
+
+Examples:
+- Who is the child of the director of film An Event?
+  -> Who is the child of the person who directed the film An Event?
+- Where was the director of The Outlaw Express born?
+  -> Where was the person who directed The Outlaw Express born?
+- Which film has the director born later, A or B?
+  -> Which film, A or B, has a director who was born later?
+- Which country the composer of film Thunder On The Hill is from?
+  -> Which country is the composer of film Thunder On The Hill from?
+
+Silent self-check before output:
+1. Every selected entity is copied verbatim from the original question.
+2. Every selected entity appears verbatim in normalized_question.
+3. The original and normalized questions have exactly the same answer set.
+4. Relation directions, restrictions, quantifiers, and comparison direction are unchanged.
+5. The normalized result is one question and ends with one question mark.
+6. No answer, external fact, new named entity, or placeholder was introduced.
+7. normalization_changed matches whether normalized_question actually changed.
 
 Return JSON only.
 Output JSON with exactly this shape:

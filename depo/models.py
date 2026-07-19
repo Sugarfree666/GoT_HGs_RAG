@@ -180,6 +180,8 @@ class HanLPSDPResult:
     warnings: list[str] = field(default_factory=list)
     model: str = ""
     mask_token_checks: dict[str, str] = field(default_factory=dict)
+    syntax_heads: dict[str, int] = field(default_factory=dict)
+    syntax_head_source: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
