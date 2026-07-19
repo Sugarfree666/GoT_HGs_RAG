@@ -30,10 +30,10 @@ class HanLPSDPParser:
         token_sentences = _extract_token_sentences(payload, text)
         tokens = [token for sentence in token_sentences for token in sentence]
         available_keys = list(payload.keys())
-        sdp_graphs = {key: payload[key] for key in available_keys if "sdp" in key.lower()}
+        sdp_graphs = {key: payload[key] for key in available_keys if _is_pas_sdp_key(key)}
         parse_warnings: list[str] = []
         if not sdp_graphs:
-            parse_warnings.append("HanLP result did not contain an SDP field.")
+            parse_warnings.append("HanLP result did not contain an sdp/pas field.")
 
         edges = _collect_sdp_edges(sdp_graphs, token_sentences)
         result = HanLPSDPResult(
@@ -221,6 +221,11 @@ def _collect_sdp_edges(
                     )
                 )
     return edges
+
+
+def _is_pas_sdp_key(key: str) -> bool:
+    normalized = str(key).lower()
+    return normalized == "sdp/pas" or normalized.endswith("/pas") and "sdp" in normalized
 
 
 def _split_graph_by_sentence(value: Any, token_sentences: list[list[str]]) -> list[Any]:

@@ -98,6 +98,34 @@ ANSWER_ANCHOR_SOURCE_ORDER = {
     "clause_predicate": 7,
 }
 
+EDGE_COST_ONE_RELATIONS = {
+    "verb_arg1",
+    "verb_arg2",
+    "verb_arg3",
+    "noun_arg1",
+    "noun_arg2",
+    "adj_arg1",
+}
+
+EDGE_COST_TWO_RELATIONS = {
+    "conj_arg1",
+    "conj_arg2",
+    "relative_arg1",
+    "relative_arg2",
+    "comp_arg1",
+    "comp_mod",
+    "verb_mod",
+}
+
+EDGE_COST_ONE_RULES = {
+    "pas_preposition_contraction",
+    "pas_possessive_contraction",
+}
+
+EDGE_COST_TWO_RULES = {
+    "pas_coordination_candidate_attachment",
+}
+
 
 @dataclass
 class TokenReasoningNode:
@@ -142,6 +170,7 @@ class TokenReasoningEdge:
             "derived": self.derived,
             "rule": self.rule,
             "provenance": [dict(item) if isinstance(item, dict) else item for item in self.provenance],
+            "edge_cost": _edge_cost(self),
         }
 
 
@@ -393,7 +422,7 @@ def compile_token_reasoning_structure(
     debug: bool = False,
     debug_dir: str | Path | None = None,
 ) -> TokenReasoningStructureResult:
-    """Compile three HanLP SDP graph views into entity-branch token paths.
+    """Compile HanLP PAS SDP evidence into entity-branch token paths.
 
     Step 4 no longer searches over answer-anchor candidates.  Explicit masked
     entities are fixed branch starts; each branch keeps the best Dijkstra path
@@ -404,8 +433,9 @@ def compile_token_reasoning_structure(
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
     _mark_anchors(state.nodes, explicit_entity_ids, None)
 
-    add_possessive_marker_contraction_edges(state)
-    add_bridge_contraction_edges(state)
+    add_pas_preposition_contraction_edges(state)
+    add_pas_possessive_contraction_edges(state)
+    add_pas_coordination_candidate_attachment_edges(state, explicit_entity_ids)
 
     branch_selection = _select_entity_branch_best_paths(state, explicit_entity_ids)
     paths = branch_selection["paths"]
@@ -463,6 +493,7 @@ def compile_token_reasoning_structure(
     debug_payload["semantic_nodes"] = [
         state.nodes[node_id].text for node_id in branch_selection["semantic_node_ids"] if node_id in state.nodes
     ]
+    debug_payload["unsearchable_pas_edges"] = list(branch_selection["unsearchable_pas_edges"])
     debug_payload["entity_branch_results"] = list(global_selection["entity_branch_results"])
     debug_payload["answer_anchor_candidates"] = []
     debug_payload["global_candidates"] = []
@@ -544,9 +575,14 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     nodes = _build_token_nodes(hanlp_sdp_result)
     raw_edges: dict[tuple[str, str], TokenReasoningEdge] = {}
     normalized_edges: list[dict[str, Any]] = []
-    warnings: list[str] = []
+    warnings: list[str] = list(hanlp_sdp_result.warnings)
 
     for raw_edge in hanlp_sdp_result.edges:
+        if not _is_pas_formalism(raw_edge.formalism):
+            warning = f"Step4 PAS-only graph ignored non-PAS edge from {raw_edge.formalism}: {raw_edge.display()}"
+            if warning not in warnings:
+                warnings.append(warning)
+            continue
         _ensure_edge_nodes(nodes, raw_edge)
         source_id = str(raw_edge.head_idx)
         target_id = str(raw_edge.dep_idx)
@@ -582,6 +618,9 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
             provenance=[provenance],
         )
 
+    if not raw_edges:
+        warnings.append("Step4 PAS-only graph received no sdp/pas edges; DM/PSD fallback is disabled")
+
     _mark_possessive_marker_nodes(nodes, raw_edges)
     edges = {key: _copy_edge(edge) for key, edge in raw_edges.items()}
     return _WorkingState(
@@ -594,6 +633,11 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     )
 
 
+def _is_pas_formalism(formalism: str) -> bool:
+    normalized = str(formalism or "").lower()
+    return normalized == "sdp/pas" or normalized.endswith("/pas") and "sdp" in normalized
+
+
 def _select_entity_branch_best_paths(
     state: _WorkingState,
     explicit_entity_ids: list[str],
@@ -602,6 +646,7 @@ def _select_entity_branch_best_paths(
     boundary_ids = _semantic_boundary_node_ids(state.nodes, boundary_degree_graph)
     semantic_node_ids = _semantic_degree_node_ids(state.nodes, boundary_degree_graph)
     search_graph = _semantic_path_search_graph(state.nodes, state.edges)
+    unsearchable_edges = _unsearchable_pas_edges(state)
 
     if not explicit_entity_ids:
         state.warnings.append("entity branch path extraction found no explicit entity starts")
@@ -630,11 +675,14 @@ def _select_entity_branch_best_paths(
             )
             if not path_ids:
                 continue
-            rank, rank_components = _rank_entity_branch_boundary_path(
+            rank_result = _rank_entity_branch_boundary_path(
                 state,
                 path_ids,
                 semantic_node_ids,
             )
+            if rank_result is None:
+                continue
+            rank, rank_components = rank_result
             candidates.append(
                 {
                     "entity_id": entity_id,
@@ -644,6 +692,8 @@ def _select_entity_branch_best_paths(
                     "node_ids": list(path_ids),
                     "nodes": [state.nodes[node_id].text for node_id in path_ids if node_id in state.nodes],
                     "dijkstra_cost": dijkstra_cost,
+                    "path_cost": rank_components["path_cost"],
+                    "edge_costs": rank_components["edge_costs"],
                     "rank": rank,
                     "rank_components": rank_components,
                 }
@@ -688,6 +738,7 @@ def _select_entity_branch_best_paths(
             node_id: _sort_node_ids(neighbors, state.nodes)
             for node_id, neighbors in sorted(boundary_degree_graph.items(), key=lambda item: _node_sort_key(state.nodes[item[0]]))
         },
+        "unsearchable_pas_edges": unsearchable_edges,
         "entity_branch_results": branch_results,
     }
 
@@ -716,8 +767,8 @@ def _semantic_boundary_degree_graph(
 def _semantic_path_search_graph(
     nodes: dict[str, TokenReasoningNode],
     edges: dict[tuple[str, str], TokenReasoningEdge],
-) -> dict[str, list[tuple[str, float, tuple[str, str]]]]:
-    graph: dict[str, list[tuple[str, float, tuple[str, str]]]] = {}
+) -> dict[str, list[tuple[str, int, tuple[str, str]]]]:
+    graph: dict[str, list[tuple[str, int, tuple[str, str]]]] = {}
     for key in _sorted_edge_keys(edges, nodes):
         source_id, target_id = key
         if source_id not in nodes or target_id not in nodes:
@@ -729,7 +780,9 @@ def _semantic_path_search_graph(
         edge = edges[key]
         if _edge_is_pure_coordination(edge):
             continue
-        cost = _edge_cost(edge, source, target)
+        cost = _edge_cost(edge)
+        if cost is None:
+            continue
         graph.setdefault(source_id, []).append((target_id, cost, key))
         graph.setdefault(target_id, []).append((source_id, cost, key))
     for items in graph.values():
@@ -814,13 +867,13 @@ def _edge_is_pure_coordination(edge: TokenReasoningEdge) -> bool:
 
 
 def _shortest_semantic_boundary_path(
-    graph: dict[str, list[tuple[str, float, tuple[str, str]]]],
+    graph: dict[str, list[tuple[str, int, tuple[str, str]]]],
     nodes: dict[str, TokenReasoningNode],
     source_id: str,
     target_id: str,
     *,
     blocked_internal_ids: set[str],
-) -> tuple[list[str], float]:
+) -> tuple[list[str], int | float]:
     if source_id == target_id:
         return [], math.inf
     if source_id not in graph or target_id not in graph:
@@ -861,51 +914,19 @@ def _rank_entity_branch_boundary_path(
     state: _WorkingState,
     path_ids: list[str],
     semantic_node_ids: list[str],
-) -> tuple[tuple[Any, ...], dict[str, Any]]:
+) -> tuple[tuple[Any, ...], dict[str, Any]] | None:
     path_set = set(path_ids)
     semantic_ids = _sort_node_ids([node_id for node_id in semantic_node_ids if node_id in state.nodes], state.nodes)
     covered_semantic_ids = _sort_node_ids([node_id for node_id in semantic_ids if node_id in path_set], state.nodes)
     missing_semantic_ids = _sort_node_ids([node_id for node_id in semantic_ids if node_id not in path_set], state.nodes)
-    weak_edge_count = 0
-    medium_edge_count = 0
-    derived_edge_count = 0
-    strong_edge_count = 0
-    consensus_count = 0
-    missing_edge_pairs: list[dict[str, Any]] = []
-
-    for left, right in zip(path_ids, path_ids[1:]):
-        edge = state.edges.get(_edge_key(left, right))
-        if edge is None:
-            weak_edge_count += 1
-            missing_edge_pairs.append(
-                {
-                    "source": left,
-                    "target": right,
-                    "source_text": state.nodes[left].text if left in state.nodes else left,
-                    "target_text": state.nodes[right].text if right in state.nodes else right,
-                }
-            )
-            continue
-        quality = _normalize_edge_quality(edge.edge_quality)
-        if quality == "STRONG":
-            strong_edge_count += 1
-        elif quality == "MEDIUM":
-            medium_edge_count += 1
-        else:
-            weak_edge_count += 1
-        if edge.derived:
-            derived_edge_count += 1
-        consensus_count += edge.consensus_count
-
-    function_node_count = sum(
-        1 for node_id in path_ids if node_id in state.nodes and state.nodes[node_id].kind == "function"
-    )
-    dirty_path_count = weak_edge_count + medium_edge_count + function_node_count + derived_edge_count
+    path_cost, edge_costs = _path_cost_details(state, path_ids)
+    if path_cost is None:
+        return None
     path_length = max(0, len(path_ids) - 1)
     token_index_sequence = _path_index_tuple(path_ids, state.nodes)
     rank = (
         len(missing_semantic_ids),
-        dirty_path_count,
+        path_cost,
         path_length,
         token_index_sequence,
     )
@@ -921,20 +942,67 @@ def _rank_entity_branch_boundary_path(
             state.nodes[node_id].text for node_id in missing_semantic_ids if node_id in state.nodes
         ],
         "missing_semantic_nodes_count": len(missing_semantic_ids),
-        "weak_edge_count": weak_edge_count,
-        "medium_edge_count": medium_edge_count,
-        "function_node_count": function_node_count,
-        "derived_edge_count": derived_edge_count,
-        "dirty_path_count": dirty_path_count,
+        "path_cost": path_cost,
+        "edge_costs": edge_costs,
         "path_length": path_length,
         "path_token_index_sequence": list(token_index_sequence),
-        "strong_edge_count": strong_edge_count,
-        "consensus_count": consensus_count,
         "rank": _jsonable_rank(rank),
     }
-    if missing_edge_pairs:
-        components["missing_edge_pairs"] = missing_edge_pairs
     return rank, components
+
+
+def _path_cost_details(
+    state: _WorkingState,
+    path_ids: list[str],
+) -> tuple[int | None, list[dict[str, Any]]]:
+    total = 0
+    details: list[dict[str, Any]] = []
+    for left, right in zip(path_ids, path_ids[1:]):
+        edge = state.edges.get(_edge_key(left, right))
+        if edge is None:
+            return None, []
+        edge_cost = _edge_cost(edge)
+        if edge_cost is None:
+            return None, []
+        total += edge_cost
+        details.append(
+            {
+                "source_id": left,
+                "source": state.nodes[left].text if left in state.nodes else left,
+                "target_id": right,
+                "target": state.nodes[right].text if right in state.nodes else right,
+                "edge_key": list(_edge_key(left, right)),
+                "edge_cost": edge_cost,
+                "rules": sorted(_edge_rule_values(edge)),
+                "relations": sorted(_edge_pas_relation_keys(edge)),
+                "derived": edge.derived,
+            }
+        )
+    return total, details
+
+
+def _unsearchable_pas_edges(state: _WorkingState) -> list[dict[str, Any]]:
+    result: list[dict[str, Any]] = []
+    for key in _sorted_edge_keys(state.edges, state.nodes):
+        edge = state.edges[key]
+        if _edge_cost(edge) is not None:
+            continue
+        relations = sorted(_edge_pas_relation_keys(edge))
+        rules = sorted(_edge_rule_values(edge))
+        if not relations and not rules:
+            continue
+        result.append(
+            {
+                "source_id": edge.source,
+                "source": edge.source_text,
+                "target_id": edge.target,
+                "target": edge.target_text,
+                "relations": relations,
+                "rules": rules,
+                "edge_cost": None,
+            }
+        )
+    return result
 
 
 def _entity_branch_candidate_payload(candidate: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -948,6 +1016,8 @@ def _entity_branch_candidate_payload(candidate: dict[str, Any] | None) -> dict[s
         "node_ids": list(candidate["node_ids"]),
         "nodes": list(candidate["nodes"]),
         "dijkstra_cost": candidate["dijkstra_cost"],
+        "path_cost": candidate.get("path_cost"),
+        "edge_costs": list(candidate.get("edge_costs") or []),
         "rank": _jsonable_rank(candidate["rank"]),
         "rank_components": dict(candidate["rank_components"]),
     }
@@ -992,6 +1062,7 @@ def _entity_branch_global_selection_payload(
         ],
         "semantic_node_ids": list(semantic_node_ids),
         "semantic_nodes": [state.nodes[node_id].text for node_id in semantic_node_ids if node_id in state.nodes],
+        "unsearchable_pas_edges": list(branch_selection["unsearchable_pas_edges"]),
         "entity_branch_results": list(branch_selection["entity_branch_results"]),
         "paths": list(branch_selection["selected_paths"]),
         "selected_paths": list(branch_selection["selected_paths"]),
@@ -1805,56 +1876,68 @@ def detect_constraints(
     return constraints
 
 
-def add_bridge_contraction_edges(state: _WorkingState) -> None:
-    adjacency = _adjacency(state.edges)
-    for bridge in _sorted_nodes(state.nodes.values()):
-        if not _is_bridge_node(bridge):
+def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
+    touched: set[tuple[str, str]] = set()
+    for preposition in _sorted_nodes(state.nodes.values()):
+        if preposition.text.lower() not in PREPOSITIONS:
             continue
-        if _is_contextual_possessive_marker(bridge.id, state.nodes, state.raw_edges):
+        arg1_edges, arg2_edges = _pas_preposition_role_edges(preposition.id, state)
+        if not arg1_edges or not arg2_edges:
             continue
-        neighbors = [
-            neighbor_id
-            for neighbor_id in adjacency.get(bridge.id, {})
-            if _is_high_salience_node(state.nodes[neighbor_id], include_order_constraints=False)
-        ]
-        neighbors = sorted(set(neighbors), key=lambda node_id: _node_sort_key(state.nodes[node_id]))
-        for left_index, left_id in enumerate(neighbors):
-            for right_id in neighbors[left_index + 1 :]:
-                left_edge = state.edges[_edge_key(left_id, bridge.id)]
-                right_edge = state.edges[_edge_key(bridge.id, right_id)]
-                provenance = {
-                    "rule": "bridge_contraction",
-                    "bridge": bridge.text,
-                    "bridge_id": bridge.id,
-                    "collapsed_path": [
-                        state.nodes[left_id].text,
-                        bridge.text,
-                        state.nodes[right_id].text,
-                    ],
-                    "source_edges": _edge_provenance_summaries([left_edge, right_edge]),
-                }
-                edge_quality = _infer_edge_quality(state.nodes, left_id, right_id, "bridge_contraction", [provenance])
+        for arg1_id, arg1_edge in arg1_edges:
+            if not _is_high_salience_node(state.nodes[arg1_id], include_order_constraints=False):
+                continue
+            for arg2_id, arg2_edge in arg2_edges:
+                if arg1_id == arg2_id:
+                    continue
+                if not _is_high_salience_node(state.nodes[arg2_id], include_order_constraints=False):
+                    continue
+                edge_quality = "WEAK"
                 support = EDGE_QUALITY_SCORES[edge_quality]
-                provenance["edge_quality"] = edge_quality
-                provenance["derived"] = True
-                provenance["support"] = support
-                virtual = _merge_edge(
+                provenance = {
+                    "rule": "pas_preposition_contraction",
+                    "edge_quality": edge_quality,
+                    "derived": True,
+                    "formalism": "sdp/pas",
+                    "preposition": preposition.text,
+                    "preposition_id": preposition.id,
+                    "arg1_id": arg1_id,
+                    "arg1": state.nodes[arg1_id].text,
+                    "arg2_id": arg2_id,
+                    "arg2": state.nodes[arg2_id].text,
+                    "collapsed_path": [
+                        state.nodes[arg1_id].text,
+                        preposition.text,
+                        state.nodes[arg2_id].text,
+                    ],
+                    "source_edges": _edge_provenance_summaries([arg1_edge, arg2_edge]),
+                    "support": support,
+                }
+                _merge_edge(
                     state.edges,
                     state.nodes,
-                    left_id,
-                    right_id,
+                    arg1_id,
+                    arg2_id,
                     support=support,
                     edge_quality=edge_quality,
                     derived=True,
-                    rule="bridge_contraction",
+                    rule="pas_preposition_contraction",
                     provenance=[provenance],
                 )
-                state.virtual_edges.append(virtual.to_dict())
+                touched.add(_edge_key(arg1_id, arg2_id))
+    _append_virtual_edges_for_keys(state, touched)
 
 
-def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
-    """Collapse parser-introduced possessive clitics without treating all "s" as function words."""
+def add_bridge_contraction_edges(state: _WorkingState) -> None:
+    """Compatibility wrapper; broad bridge contraction is disabled."""
 
+    add_pas_preposition_contraction_edges(state)
+
+
+def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
+    """Collapse explicit PAS possessive markers without treating all "s" as possessive."""
+
+    touched: set[tuple[str, str]] = set()
     for marker in _sorted_nodes(state.nodes.values()):
         if not _is_contextual_possessive_marker(marker.id, state.nodes, state.raw_edges):
             continue
@@ -1870,11 +1953,16 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                 edge_quality = "STRONG"
                 support = EDGE_QUALITY_SCORES[edge_quality]
                 provenance = {
-                    "rule": "possessive_marker_contraction",
+                    "rule": "pas_possessive_contraction",
                     "edge_quality": edge_quality,
                     "derived": True,
+                    "formalism": "sdp/pas",
                     "marker": marker.text,
                     "marker_id": marker.id,
+                    "owner_id": owner_id,
+                    "owner": state.nodes[owner_id].text,
+                    "possessed_id": possessed_id,
+                    "possessed": state.nodes[possessed_id].text,
                     "collapsed_path": [
                         state.nodes[owner_id].text,
                         marker.text,
@@ -1883,7 +1971,7 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                     "source_edges": _edge_provenance_summaries([owner_edge, possessed_edge]),
                     "support": support,
                 }
-                virtual = _merge_edge(
+                _merge_edge(
                     state.edges,
                     state.nodes,
                     owner_id,
@@ -1891,10 +1979,257 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                     support=support,
                     edge_quality=edge_quality,
                     derived=True,
-                    rule="possessive_marker_contraction",
+                    rule="pas_possessive_contraction",
                     provenance=[provenance],
                 )
-                state.virtual_edges.append(virtual.to_dict())
+                touched.add(_edge_key(owner_id, possessed_id))
+    _append_virtual_edges_for_keys(state, touched)
+
+
+def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
+    """Compatibility wrapper for PAS-only possessive contraction."""
+
+    add_pas_possessive_contraction_edges(state)
+
+
+def add_pas_coordination_candidate_attachment_edges(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+) -> None:
+    if len(explicit_entity_ids) < 2:
+        return
+    explicit = set(explicit_entity_ids)
+    touched: set[tuple[str, str]] = set()
+    for group in _pas_coordination_candidate_groups(state, explicit):
+        member_ids = group["member_ids"]
+        shared = _select_pas_coordination_shared_attachment(state, group, explicit)
+        if shared is None:
+            state.warnings.append(
+                "pas coordination candidate attachment skipped for "
+                f"{state.nodes[group['connector_id']].text}[{group['connector_id']}] because shared attachment node is ambiguous"
+            )
+            continue
+        shared_id, basis = shared
+        for member_id in member_ids:
+            if _edge_key(member_id, shared_id) in state.edges:
+                continue
+            edge_quality = "MEDIUM"
+            support = EDGE_QUALITY_SCORES[edge_quality]
+            provenance = {
+                "rule": "pas_coordination_candidate_attachment",
+                "edge_quality": edge_quality,
+                "derived": True,
+                "formalism": "sdp/pas",
+                "connector_id": group["connector_id"],
+                "connector": state.nodes[group["connector_id"]].text,
+                "member_id": member_id,
+                "member": state.nodes[member_id].text,
+                "candidate_member_ids": list(member_ids),
+                "candidate_members": [state.nodes[node_id].text for node_id in member_ids],
+                "shared_node_id": shared_id,
+                "shared_node": state.nodes[shared_id].text,
+                "basis": basis,
+                "coordination_edges": group["evidence"],
+                "support": support,
+            }
+            _merge_edge(
+                state.edges,
+                state.nodes,
+                member_id,
+                shared_id,
+                support=support,
+                edge_quality=edge_quality,
+                derived=True,
+                rule="pas_coordination_candidate_attachment",
+                provenance=[provenance],
+            )
+            touched.add(_edge_key(member_id, shared_id))
+    _append_virtual_edges_for_keys(state, touched)
+
+
+def _pas_preposition_role_edges(
+    preposition_id: str,
+    state: _WorkingState,
+) -> tuple[list[tuple[str, TokenReasoningEdge]], list[tuple[str, TokenReasoningEdge]]]:
+    arg1: dict[str, TokenReasoningEdge] = {}
+    arg2: dict[str, TokenReasoningEdge] = {}
+    for key, edge in state.raw_edges.items():
+        if preposition_id not in key:
+            continue
+        for item in _raw_provenance(edge):
+            if not _is_pas_formalism(str(item.get("formalism") or "")):
+                continue
+            relation = _normalized_relation_key(str(item.get("normalized_relation") or item.get("relation") or ""))
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if str(head_idx) != preposition_id:
+                continue
+            related_id = str(dep_idx)
+            if related_id not in state.nodes:
+                continue
+            if relation == "prep_arg1":
+                arg1[related_id] = edge
+            elif relation == "prep_arg2":
+                arg2[related_id] = edge
+    return (
+        sorted(arg1.items(), key=lambda item: _node_sort_key(state.nodes[item[0]])),
+        sorted(arg2.items(), key=lambda item: _node_sort_key(state.nodes[item[0]])),
+    )
+
+
+def _pas_coordination_candidate_groups(
+    state: _WorkingState,
+    explicit_entity_ids: set[str],
+) -> list[dict[str, Any]]:
+    grouped: dict[str, dict[str, Any]] = {}
+    for key, edge in state.raw_edges.items():
+        for item in _raw_provenance(edge):
+            if not _is_pas_formalism(str(item.get("formalism") or "")):
+                continue
+            relation = _normalized_relation_key(str(item.get("normalized_relation") or item.get("relation") or ""))
+            if not _is_coordination_relation_key(relation):
+                continue
+            head_id = str(_coerce_provenance_index(item.get("head_idx")))
+            dep_id = str(_coerce_provenance_index(item.get("dep_idx")))
+            connector_id: str | None = None
+            member_id: str | None = None
+            if head_id in state.nodes and _is_pas_candidate_connector(state.nodes[head_id]) and dep_id in explicit_entity_ids:
+                connector_id = head_id
+                member_id = dep_id
+            elif dep_id in state.nodes and _is_pas_candidate_connector(state.nodes[dep_id]) and head_id in explicit_entity_ids:
+                connector_id = dep_id
+                member_id = head_id
+            if connector_id is None or member_id is None:
+                continue
+            group = grouped.setdefault(
+                connector_id,
+                {
+                    "connector_id": connector_id,
+                    "member_ids": set(),
+                    "evidence": [],
+                },
+            )
+            group["member_ids"].add(member_id)
+            group["evidence"].append(_edge_provenance_summary(edge))
+
+    results: list[dict[str, Any]] = []
+    for connector_id, group in grouped.items():
+        member_ids = _sort_node_ids(group["member_ids"], state.nodes)
+        if len(member_ids) < 2:
+            continue
+        results.append(
+            {
+                "connector_id": connector_id,
+                "member_ids": member_ids,
+                "evidence": group["evidence"],
+            }
+        )
+    return sorted(results, key=lambda item: _node_sort_key(state.nodes[item["connector_id"]]))
+
+
+def _select_pas_coordination_shared_attachment(
+    state: _WorkingState,
+    group: dict[str, Any],
+    explicit_entity_ids: set[str],
+) -> tuple[str, str] | None:
+    direct = _pas_coordination_existing_member_attachments(state, group["member_ids"], explicit_entity_ids)
+    if len(direct) == 1:
+        return next(iter(direct)), "existing_member_attachment"
+    if len(direct) > 1:
+        return None
+
+    typed_slots = _pas_unique_typed_slot_candidates(state)
+    if len(typed_slots) == 1:
+        return typed_slots[0], "unique_pas_typed_slot"
+    if len(typed_slots) > 1:
+        return None
+
+    connector_neighbors = _pas_coordination_connector_attachments(state, group["connector_id"], explicit_entity_ids)
+    if len(connector_neighbors) == 1:
+        return connector_neighbors[0], "unique_connector_attachment"
+    return None
+
+
+def _pas_coordination_existing_member_attachments(
+    state: _WorkingState,
+    member_ids: list[str],
+    explicit_entity_ids: set[str],
+) -> set[str]:
+    adjacency = _adjacency(state.edges)
+    member_set = set(member_ids)
+    candidates: set[str] = set()
+    for member_id in member_ids:
+        for neighbor_id, key in adjacency.get(member_id, {}).items():
+            if neighbor_id in explicit_entity_ids or neighbor_id in member_set:
+                continue
+            if not _is_pas_shared_attachment_node(state.nodes[neighbor_id]):
+                continue
+            edge = state.edges[key]
+            if _edge_is_pure_coordination(edge):
+                continue
+            candidates.add(neighbor_id)
+    return candidates
+
+
+def _pas_unique_typed_slot_candidates(state: _WorkingState) -> list[str]:
+    slots: set[str] = set()
+    for edge in state.raw_edges.values():
+        for item in _raw_provenance(edge):
+            if not _is_pas_formalism(str(item.get("formalism") or "")):
+                continue
+            head_id = str(_coerce_provenance_index(item.get("head_idx")))
+            dep_id = str(_coerce_provenance_index(item.get("dep_idx")))
+            if head_id not in state.nodes or dep_id not in state.nodes:
+                continue
+            head = state.nodes[head_id]
+            dep = state.nodes[dep_id]
+            if head.text.lower() in WH_ANCHOR_WORDS and _is_pas_shared_attachment_node(dep):
+                slots.add(dep_id)
+            elif dep.text.lower() in WH_ANCHOR_WORDS and _is_pas_shared_attachment_node(head):
+                slots.add(head_id)
+    return _sort_node_ids(slots, state.nodes)
+
+
+def _pas_coordination_connector_attachments(
+    state: _WorkingState,
+    connector_id: str,
+    explicit_entity_ids: set[str],
+) -> list[str]:
+    adjacency = _adjacency(state.raw_edges)
+    candidates: set[str] = set()
+    for neighbor_id, key in adjacency.get(connector_id, {}).items():
+        if neighbor_id in explicit_entity_ids:
+            continue
+        if not _is_pas_shared_attachment_node(state.nodes[neighbor_id]):
+            continue
+        edge = state.raw_edges[key]
+        if _edge_is_pure_coordination(edge):
+            continue
+        candidates.add(neighbor_id)
+    return _sort_node_ids(candidates, state.nodes)
+
+
+def _is_coordination_relation_key(relation: str) -> bool:
+    return "coord" in relation or relation in {"conj_member", "disj_member"}
+
+
+def _is_pas_candidate_connector(node: TokenReasoningNode) -> bool:
+    return node.text.lower() in {"and", "or"}
+
+
+def _is_pas_shared_attachment_node(node: TokenReasoningNode) -> bool:
+    if node.id == "0" or node.kind == "entity":
+        return False
+    if _is_punctuation(node.text) or _is_scope_node(node):
+        return False
+    return _is_high_salience_node(node, include_order_constraints=True)
+
+
+def _append_virtual_edges_for_keys(state: _WorkingState, keys: set[tuple[str, str]]) -> None:
+    for key in sorted(keys, key=lambda item: (_node_sort_key(state.nodes[item[0]]), _node_sort_key(state.nodes[item[1]]))):
+        edge = state.edges.get(key)
+        if edge is not None:
+            state.virtual_edges.append(edge.to_dict())
 
 
 def add_candidate_typed_slot_instantiation_edges(
@@ -2470,47 +2805,17 @@ def _rank_global_path_candidate(
     question_semantic_node_ids: set[str],
     *,
     warnings: list[str],
-) -> tuple[tuple[int, int, int, int], dict[str, Any]]:
+) -> tuple[tuple[Any, ...], dict[str, Any]]:
     covered_node_ids = set(path.node_ids)
     missing_semantic_node_ids = set(question_semantic_node_ids) - covered_node_ids
-    weak_edge_count = 0
-    medium_edge_count = 0
-    derived_edge_count = 0
-    missing_edge_pairs: list[dict[str, Any]] = []
-
-    for left, right in zip(path.node_ids, path.node_ids[1:]):
-        edge = state.edges.get(_edge_key(left, right))
-        if edge is None:
-            weak_edge_count += 1
-            missing_edge_pair = {
-                "source": left,
-                "target": right,
-                "source_text": state.nodes[left].text if left in state.nodes else left,
-                "target_text": state.nodes[right].text if right in state.nodes else right,
-            }
-            missing_edge_pairs.append(missing_edge_pair)
-            warning = (
-                "global path rank missing edge for "
-                f"{missing_edge_pair['source_text']}[{left}] -- {missing_edge_pair['target_text']}[{right}] "
-                f"on {path.path_id}; counted as WEAK"
-            )
-            if warning not in warnings:
-                warnings.append(warning)
-            if warning not in state.warnings:
-                state.warnings.append(warning)
-            continue
-        quality = _normalize_edge_quality(edge.edge_quality)
-        if quality == "WEAK":
-            weak_edge_count += 1
-        elif quality == "MEDIUM":
-            medium_edge_count += 1
-        if edge.derived:
-            derived_edge_count += 1
-
-    function_node_count = sum(
-        1 for node_id in path.node_ids if node_id in state.nodes and state.nodes[node_id].kind == "function"
-    )
-    dirty_path_count = weak_edge_count + medium_edge_count + function_node_count + derived_edge_count
+    path_cost, edge_costs = _path_cost_details(state, list(path.node_ids))
+    if path_cost is None:
+        warning = f"global path rank received unsearchable path {path.path_id}; candidate skipped by cost policy"
+        if warning not in warnings:
+            warnings.append(warning)
+        if warning not in state.warnings:
+            state.warnings.append(warning)
+        raise ValueError(warning)
     path_length = max(0, len(path.node_ids) - 1)
     fallback_penalty = max(ANSWER_ANCHOR_SOURCE_ORDER.values(), default=0) + 1
     anchor_fit_penalty = min(
@@ -2519,7 +2824,7 @@ def _rank_global_path_candidate(
     )
     global_rank = (
         len(missing_semantic_node_ids),
-        dirty_path_count,
+        path_cost,
         path_length,
         anchor_fit_penalty,
     )
@@ -2538,17 +2843,12 @@ def _rank_global_path_candidate(
             state.nodes[node_id].text for node_id in missing_semantic_ids if node_id in state.nodes
         ],
         "missing_semantic_nodes_count": len(missing_semantic_node_ids),
-        "weak_edge_count": weak_edge_count,
-        "medium_edge_count": medium_edge_count,
-        "function_node_count": function_node_count,
-        "derived_edge_count": derived_edge_count,
-        "dirty_path_count": dirty_path_count,
+        "path_cost": path_cost,
+        "edge_costs": edge_costs,
         "path_length": path_length,
         "anchor_fit_penalty": anchor_fit_penalty,
-        "rank": list(global_rank),
+        "rank": _jsonable_rank(global_rank),
     }
-    if missing_edge_pairs:
-        components["missing_edge_pairs"] = missing_edge_pairs
     return global_rank, components
 
 
@@ -4036,7 +4336,8 @@ def _bounded_k_simple_paths(
     unique: dict[tuple[str, ...], list[str]] = {}
     for path in results:
         unique.setdefault(tuple(path), path)
-    return sorted(unique.values(), key=lambda path: _path_search_sort_key(nodes, edges, path))[: max(top_k, 1)]
+    valid_paths = [path for path in unique.values() if _path_is_searchable(edges, path)]
+    return sorted(valid_paths, key=lambda path: _path_search_sort_key(nodes, edges, path))[: max(top_k, 1)]
 
 
 def _path_search_sort_key(
@@ -4044,27 +4345,43 @@ def _path_search_sort_key(
     edges: dict[tuple[str, str], TokenReasoningEdge],
     path: list[str],
 ) -> tuple[Any, ...]:
-    weak_edge_count = 0
-    medium_edge_count = 0
-    derived_edge_count = 0
-    strong_edge_count = 0
-    consensus_count = 0
+    path_cost = 0
     for left, right in zip(path, path[1:]):
         edge = edges.get(_edge_key(left, right))
         if edge is None:
-            weak_edge_count += 1_000_000
-            continue
-        quality = _normalize_edge_quality(edge.edge_quality)
-        if quality == "WEAK":
-            weak_edge_count += 1
-        elif quality == "MEDIUM":
-            medium_edge_count += 1
-        elif quality == "STRONG":
-            strong_edge_count += 1
-        if edge.derived:
-            derived_edge_count += 1
-        consensus_count += edge.consensus_count
-    return (weak_edge_count, medium_edge_count, derived_edge_count, len(path) - 1, -strong_edge_count, -consensus_count, _path_index_tuple(path, nodes))
+            raise ValueError("path search sort received a path with a missing edge")
+        edge_cost = _edge_cost(edge)
+        if edge_cost is None:
+            raise ValueError("path search sort received a path with an unsearchable edge")
+        path_cost += edge_cost
+    return (path_cost, len(path) - 1, _path_index_tuple(path, nodes))
+
+
+def _path_is_searchable(
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    path: list[str],
+) -> bool:
+    for left, right in zip(path, path[1:]):
+        edge = edges.get(_edge_key(left, right))
+        if edge is None or _edge_cost(edge) is None:
+            return False
+    return True
+
+
+def _path_cost_from_edge_map(
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    path: list[str],
+) -> int | None:
+    total = 0
+    for left, right in zip(path, path[1:]):
+        edge = edges.get(_edge_key(left, right))
+        if edge is None:
+            return None
+        edge_cost = _edge_cost(edge)
+        if edge_cost is None:
+            return None
+        total += edge_cost
+    return total
 
 
 def _search_neighbor_edges(
@@ -4073,8 +4390,12 @@ def _search_neighbor_edges(
     adjacency: dict[str, dict[str, tuple[str, str]]],
     node_id: str,
 ) -> list[tuple[str, TokenReasoningEdge]]:
-    neighbors = [(neighbor_id, edges[key]) for neighbor_id, key in adjacency.get(node_id, {}).items()]
-    neighbors.sort(key=lambda item: (_edge_cost(item[1], nodes[node_id], nodes[item[0]]), _node_sort_key(nodes[item[0]]), item[0]))
+    neighbors = [
+        (neighbor_id, edges[key])
+        for neighbor_id, key in adjacency.get(node_id, {}).items()
+        if _edge_cost(edges[key]) is not None
+    ]
+    neighbors.sort(key=lambda item: (_edge_cost(item[1]), _node_sort_key(nodes[item[0]]), item[0]))
     return neighbors
 
 
@@ -4091,6 +4412,8 @@ def _edge_allowed_for_path(
     if _is_scope_node(nodes[edge.source]) or _is_scope_node(nodes[edge.target]):
         return False
     if "COORD" in _edge_label_classes_deep(edge):
+        return False
+    if _edge_cost(edge) is None:
         return False
     if (
         "candidate_expansion" in edge.rule
@@ -4122,41 +4445,14 @@ def _rank_candidate_path(
     ordered_semantic_nodes = _sort_node_ids([node_id for node_id in semantic_nodes if node_id in nodes], nodes)
     covered_semantic_nodes = [node_id for node_id in ordered_semantic_nodes if node_id in path_set]
     missing_semantic_nodes = [node_id for node_id in ordered_semantic_nodes if node_id not in path_set]
-    strong_edge_count = 0
-    medium_edge_count = 0
-    weak_edge_count = 0
-    derived_edge_count = 0
-    consensus_count = 0
-    for left, right in zip(path_ids, path_ids[1:]):
-        edge = edges.get(_edge_key(left, right))
-        if edge is None:
-            weak_edge_count += 1
-            continue
-        quality = _normalize_edge_quality(edge.edge_quality)
-        if quality == "STRONG":
-            strong_edge_count += 1
-        elif quality == "MEDIUM":
-            medium_edge_count += 1
-        else:
-            weak_edge_count += 1
-        if edge.derived:
-            derived_edge_count += 1
-        consensus_count += edge.consensus_count
-
-    function_node_count = sum(
-        1
-        for node_id in path_ids
-        if nodes[node_id].kind == "function"
-    )
+    path_cost = _path_cost_from_edge_map(edges, path_ids)
+    if path_cost is None:
+        raise ValueError("candidate path rank received a path with a missing or unsearchable edge")
     rank = (
         len(missing_semantic_nodes),
-        weak_edge_count,
-        medium_edge_count,
-        function_node_count,
-        derived_edge_count,
+        path_cost,
         max(len(path_ids) - 1, 0),
-        -strong_edge_count,
-        -consensus_count,
+        _path_index_tuple(path_ids, nodes),
     )
     components = {
         "missing_semantic_nodes_count": len(missing_semantic_nodes),
@@ -4166,14 +4462,9 @@ def _rank_candidate_path(
         "covered_semantic_node_ids": covered_semantic_nodes,
         "missing_semantic_nodes": [nodes[node_id].text for node_id in missing_semantic_nodes],
         "missing_semantic_node_ids": missing_semantic_nodes,
-        "strong_edge_count": strong_edge_count,
-        "medium_edge_count": medium_edge_count,
-        "weak_edge_count": weak_edge_count,
-        "function_node_count": function_node_count,
-        "derived_edge_count": derived_edge_count,
+        "path_cost": path_cost,
         "path_length": max(len(path_ids) - 1, 0),
-        "consensus_count": consensus_count,
-        "rank": list(rank),
+        "rank": _jsonable_rank(rank),
     }
     return _CandidatePath(
         source_entity_id=source_entity_id,
@@ -5471,6 +5762,7 @@ def _edge_provenance_summary(edge: TokenReasoningEdge) -> dict[str, Any]:
         "normalized_relation": relation_keys[0] if len(relation_keys) == 1 else None,
         "normalized_relations": relation_keys,
         "support": edge.support,
+        "edge_cost": _edge_cost(edge),
     }
     return summary
 
@@ -5874,8 +6166,8 @@ def _weighted_adjacency(
     edges: dict[tuple[str, str], TokenReasoningEdge],
     *,
     include_scope: bool,
-) -> dict[str, list[tuple[str, float, tuple[str, str]]]]:
-    adjacency: dict[str, list[tuple[str, float, tuple[str, str]]]] = {}
+) -> dict[str, list[tuple[str, int, tuple[str, str]]]]:
+    adjacency: dict[str, list[tuple[str, int, tuple[str, str]]]] = {}
     for key in _sorted_edge_keys(edges, nodes):
         source, target = key
         if "0" in key:
@@ -5883,7 +6175,9 @@ def _weighted_adjacency(
         if not include_scope and (_is_scope_node(nodes[source]) or _is_scope_node(nodes[target])):
             continue
         edge = edges[key]
-        cost = _edge_cost(edge, nodes[source], nodes[target])
+        cost = _edge_cost(edge)
+        if cost is None:
+            continue
         adjacency.setdefault(source, []).append((target, cost, key))
         adjacency.setdefault(target, []).append((source, cost, key))
     for items in adjacency.values():
@@ -5891,17 +6185,59 @@ def _weighted_adjacency(
     return adjacency
 
 
-def _edge_cost(edge: TokenReasoningEdge, source: TokenReasoningNode, target: TokenReasoningNode) -> float:
-    quality = _normalize_edge_quality(edge.edge_quality)
-    quality_cost = {"STRONG": 1.0, "MEDIUM": 2.0, "WEAK": 4.0}[quality]
-    cost = quality_cost
-    if edge.derived:
-        cost += 0.25
-    cost += 0.01 * abs(source.index - target.index)
-    if source.kind == "function" or target.kind == "function":
-        cost += 0.20
-    cost -= min(edge.consensus_count, 3) * 0.02
-    return cost
+def _edge_cost(edge: TokenReasoningEdge) -> int | None:
+    rules = _edge_rule_values(edge)
+    if rules & EDGE_COST_ONE_RULES:
+        return 1
+    if rules & EDGE_COST_TWO_RULES:
+        return 2
+
+    finite_costs: list[int] = []
+    for relation in _edge_pas_relation_keys(edge):
+        if relation in EDGE_COST_ONE_RELATIONS:
+            finite_costs.append(1)
+        elif relation in EDGE_COST_TWO_RELATIONS:
+            finite_costs.append(2)
+    return min(finite_costs) if finite_costs else None
+
+
+def _edge_rule_values(edge: TokenReasoningEdge) -> set[str]:
+    values: set[str] = set()
+    for rule in _combine_rule_values(edge.rule):
+        if rule:
+            values.add(rule)
+    for item in _walk_provenance_payload(edge.provenance):
+        for rule in _combine_rule_values(str(item.get("rule") or "")):
+            if rule:
+                values.add(rule)
+    return values
+
+
+def _edge_pas_relation_keys(edge: TokenReasoningEdge) -> set[str]:
+    relations: set[str] = set()
+    for item in _walk_provenance_payload(edge.provenance):
+        if not _payload_has_pas_formalism(item):
+            continue
+        for key in ("normalized_relation", "relation"):
+            relation = item.get(key)
+            if relation:
+                relations.add(_normalized_relation_key(str(relation)))
+        for key in ("normalized_relations", "relations"):
+            for relation in _iter_sequence(item.get(key)):
+                if relation:
+                    relations.add(_normalized_relation_key(str(relation)))
+    return relations
+
+
+def _payload_has_pas_formalism(item: dict[str, Any]) -> bool:
+    formalism = item.get("formalism")
+    if formalism and _is_pas_formalism(str(formalism)):
+        return True
+    return any(_is_pas_formalism(str(value)) for value in _iter_sequence(item.get("formalisms")))
+
+
+def _combine_rule_values(rule: str) -> set[str]:
+    return {part for part in str(rule or "").split("+") if part}
 
 
 def _shortest_path(
