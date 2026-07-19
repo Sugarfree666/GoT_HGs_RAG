@@ -79,6 +79,7 @@ PREPOSITIONS = {
     "through",
 }
 SCOPE_WORDS = {"and", "or", "among", "between", "than"}
+SEMANTIC_BOUNDARY_SCOPE_WORDS = SCOPE_WORDS | {"both", "either", "neither"}
 FUNCTION_WORDS = DETERMINERS | WH_WORDS | RELATIVE_PRONOUNS | LIGHT_VERBS | PREPOSITIONS | SCOPE_WORDS
 POSSESSIVE_MARKER_TOKENS = {"'", "’", "'s", "’s", "s"}
 POSSESSIVE_OWNER_RELATIONS = {"poss_arg2"}
@@ -392,143 +393,42 @@ def compile_token_reasoning_structure(
     debug: bool = False,
     debug_dir: str | Path | None = None,
 ) -> TokenReasoningStructureResult:
-    """Compile three HanLP SDP graph views into a query-focused token structure.
+    """Compile three HanLP SDP graph views into entity-branch token paths.
 
-    The compiler is intentionally symbolic and deterministic: it consumes DM,
-    PAS, and PSD edge evidence, adds generic virtual edges by graph operations,
-    selects one main entity-to-focus path or a controlled parallel path cover,
-    and emits only the graph induced by those selected paths. It does not call
-    an LLM and it does not introduce semantic relation labels.
+    Step 4 no longer searches over answer-anchor candidates.  Explicit masked
+    entities are fixed branch starts; each branch keeps the best Dijkstra path
+    to one semantic boundary node under the existing path ranking components.
     """
 
     state = build_evidence_graph(hanlp_sdp_result)
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
-    answer_anchor_candidates = collect_answer_anchor_candidates(
-        state.nodes,
-        state.raw_edges,
-        state.warnings,
-        explicit_entity_ids=explicit_entity_ids,
-    )
+    _mark_anchors(state.nodes, explicit_entity_ids, None)
 
     add_possessive_marker_contraction_edges(state)
     add_bridge_contraction_edges(state)
-    add_restriction_closure_edges(state)
 
-    question_semantic_node_ids = _collect_question_semantic_node_ids(
-        state,
-        explicit_entity_ids,
-        focus_node_ids=[candidate.node_id for candidate in answer_anchor_candidates],
-    )
-    per_anchor_results: list[dict[str, Any]] = []
-    global_candidates: list[_GlobalPathCandidate] = []
-
-    for anchor_index, anchor in enumerate(answer_anchor_candidates, start=1):
-        anchor_state = _copy_working_state(state)
-        _mark_anchors(anchor_state.nodes, explicit_entity_ids, anchor.node_id)
-
-        constraints = detect_constraints(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id)
-        query_focus = _build_query_focus(anchor_state.nodes, anchor_state.raw_edges, anchor.node_id, constraints)
-        direct_candidate_sets = detect_candidate_sets(anchor_state.nodes, anchor_state.raw_edges, explicit_entity_ids)
-        add_candidate_typed_slot_instantiation_edges(anchor_state, query_focus, direct_candidate_sets)
-        parallel_entity_sets = _detect_parallel_entity_sets(
-            anchor_state,
-            explicit_entity_ids,
-            direct_candidate_sets,
-            query_focus,
-        )
-
-        add_descriptor_lifting_edges(anchor_state, explicit_entity_ids, anchor.node_id)
-
-        anchor_paths, path_type, candidate_path_records, selection_mode, conjunctive_cover_debug = _select_query_focused_paths(
-            state=anchor_state,
-            explicit_entity_ids=explicit_entity_ids,
-            query_focus=query_focus,
-            constraints=constraints,
-            direct_candidate_sets=direct_candidate_sets,
-            parallel_entity_sets=parallel_entity_sets,
-        )
-
-        candidate_sets = _candidate_sets_for_result(anchor_state.nodes, direct_candidate_sets, parallel_entity_sets)
-        anchor_global_candidates: list[_GlobalPathCandidate] = []
-        for path_index, path in enumerate(anchor_paths, start=1):
-            global_path = TokenReasoningPath(
-                path_id=f"A{anchor_index}.P{path_index}",
-                nodes=list(path.nodes),
-                node_ids=list(path.node_ids),
-            )
-            global_candidate = _build_global_path_candidate(
-                anchor_index=anchor_index,
-                path_index=path_index,
-                anchor=anchor,
-                path=global_path,
-                question_semantic_node_ids=question_semantic_node_ids,
-                anchor_state=anchor_state,
-                constraints=constraints,
-                candidate_sets=candidate_sets,
-                query_focus=query_focus,
-                path_type=path_type,
-                selection_mode=selection_mode,
-                conjunctive_cover=conjunctive_cover_debug,
-                warnings=state.warnings,
-            )
-            global_candidates.append(global_candidate)
-            anchor_global_candidates.append(global_candidate)
-
-        per_anchor_results.append(
-            {
-                "anchor_id": anchor.node_id,
-                "anchor_text": anchor.text,
-                "source_types": list(anchor.source_types),
-                "score": anchor.score,
-                "evidence": list(anchor.evidence),
-                "query_focus": query_focus.to_dict(anchor_state.nodes),
-                "constraints": constraints,
-                "path_type": path_type,
-                "paths": [path.to_dict() for path in anchor_paths],
-                "selection_mode": selection_mode,
-                "conjunctive_constraint_covers": [conjunctive_cover_debug] if conjunctive_cover_debug else [],
-                "candidate_paths": [record.to_debug(anchor_state.nodes) for record in candidate_path_records],
-                "candidate_sets": candidate_sets,
-                "parallel_entity_sets": list(parallel_entity_sets),
-                "virtual_edges": list(anchor_state.virtual_edges),
-                "global_candidates": [candidate.to_debug() for candidate in anchor_global_candidates],
-                "contains_global_best_path": False,
-            }
-        )
-
-    selected_global_selection = _select_global_path_structure(global_candidates, warnings=state.warnings)
-    selected_global_candidates = selected_global_selection.candidates if selected_global_selection is not None else []
-    _annotate_per_anchor_global_selection(per_anchor_results, global_candidates, selected_global_candidates)
-
-    if selected_global_selection is not None:
-        selected_global_candidate = selected_global_selection.winning_candidate
-        result_state = selected_global_candidate.anchor_state
-        paths = _renumber_selected_global_paths(selected_global_candidates)
-        answer_anchor_id = selected_global_candidate.anchor_id
-        answer_anchor = selected_global_candidate.anchor_text
-        path_type = selected_global_selection.selection_type
-        constraints = [dict(item) for item in selected_global_candidate.constraints]
-        candidate_sets = [list(item) for item in selected_global_candidate.candidate_sets]
-    else:
-        if "global path selection found no candidates" not in state.warnings:
-            state.warnings.append("global path selection found no candidates")
-        result_state = _copy_working_state(state)
-        paths = []
-        answer_anchor_id = None
-        answer_anchor = None
-        path_type = "no_global_path"
-        constraints = []
-        candidate_sets = []
+    branch_selection = _select_entity_branch_best_paths(state, explicit_entity_ids)
+    paths = branch_selection["paths"]
+    path_type = "entity_branch_best_paths" if paths else "no_entity_branch_path"
+    constraints: list[dict[str, Any]] = []
+    candidate_sets: list[list[str]] = []
+    answer_anchor = None
+    answer_anchor_id = None
 
     final_node_ids, final_pairs = _graph_from_selected_paths(paths)
-    backbone_before = _graph_snapshot(final_node_ids, final_pairs, result_state.nodes, result_state.edges)
+    backbone_before = _graph_snapshot(final_node_ids, final_pairs, state.nodes, state.edges)
     backbone_after = backbone_before
-    final_nodes = _final_nodes(result_state.nodes, final_node_ids)
-    active_entity_ids = _active_entity_ids(result_state.nodes, paths)
-    final_edges = _final_edges(result_state.nodes, result_state.edges, final_pairs, paths, active_entity_ids, answer_anchor_id)
+    final_nodes = _final_nodes(state.nodes, final_node_ids)
+    active_entity_ids = _active_entity_ids(state.nodes, paths)
+    final_edges = _final_edges(state.nodes, state.edges, final_pairs, paths, active_entity_ids, answer_anchor_id)
 
-    entity_anchors = [result_state.nodes[node_id].text for node_id in active_entity_ids if node_id in result_state.nodes]
-    result_warnings = _unique_warnings([*state.warnings, *result_state.warnings])
+    entity_anchors = [state.nodes[node_id].text for node_id in active_entity_ids if node_id in state.nodes]
+    result_warnings = _unique_warnings(state.warnings)
+    global_selection = _entity_branch_global_selection_payload(
+        state,
+        path_type=path_type,
+        branch_selection=branch_selection,
+    )
     debug_payload = _build_debug_payload(
         question_id=question_id,
         masked_question=masked_question or hanlp_sdp_result.text,
@@ -538,12 +438,12 @@ def compile_token_reasoning_structure(
         normalization_note=normalization_note or "",
         hanlp_sdp_result=hanlp_sdp_result,
         explicit_entities=explicit_entities,
-        state=result_state,
+        state=state,
         answer_anchor_id=answer_anchor_id,
         entity_ids=explicit_entity_ids,
         constraints=constraints,
         candidate_sets=candidate_sets,
-        terminals=[],
+        terminals=branch_selection["boundary_ids"],
         backbone_before=backbone_before,
         backbone_after=backbone_after,
         final_nodes=final_nodes,
@@ -557,17 +457,18 @@ def compile_token_reasoning_structure(
         selected_paths=paths,
         selection_mode=path_type,
     )
-    debug_payload["answer_anchor_candidates"] = [candidate.to_debug() for candidate in answer_anchor_candidates]
-    debug_payload["per_anchor_results"] = list(per_anchor_results)
-    debug_payload["question_semantic_node_ids"] = _sort_node_ids(question_semantic_node_ids, state.nodes)
-    debug_payload["global_candidates"] = [candidate.to_debug() for candidate in global_candidates]
-    debug_payload["selected_global_candidate"] = (
-        selected_global_selection.winning_candidate.to_debug() if selected_global_selection is not None else None
-    )
-    debug_payload["selected_global_candidates"] = [candidate.to_debug() for candidate in selected_global_candidates]
-    debug_payload["selected_global_selection"] = (
-        selected_global_selection.to_debug() if selected_global_selection is not None else None
-    )
+    debug_payload["step4_path_extraction"] = "entity_branch_best_paths"
+    debug_payload["semantic_boundary_nodes"] = list(global_selection["semantic_boundary_nodes"])
+    debug_payload["semantic_node_ids"] = list(branch_selection["semantic_node_ids"])
+    debug_payload["semantic_nodes"] = [
+        state.nodes[node_id].text for node_id in branch_selection["semantic_node_ids"] if node_id in state.nodes
+    ]
+    debug_payload["entity_branch_results"] = list(global_selection["entity_branch_results"])
+    debug_payload["answer_anchor_candidates"] = []
+    debug_payload["global_candidates"] = []
+    debug_payload["selected_global_candidate"] = None
+    debug_payload["selected_global_candidates"] = []
+    debug_payload["selected_global_selection"] = global_selection
     debug_payload["warnings"] = result_warnings
     debug_file = None
     if debug:
@@ -578,8 +479,8 @@ def compile_token_reasoning_structure(
         edges=final_edges,
         paths=paths,
         path_type=path_type,
-        anchor_path_results=per_anchor_results,
-        global_selection=selected_global_selection.to_debug() if selected_global_selection is not None else {},
+        anchor_path_results=[],
+        global_selection=global_selection,
         answer_anchor=answer_anchor,
         answer_anchor_id=answer_anchor_id,
         entity_anchors=entity_anchors,
@@ -693,16 +594,428 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     )
 
 
+def _select_entity_branch_best_paths(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+) -> dict[str, Any]:
+    boundary_degree_graph = _semantic_boundary_degree_graph(state.nodes, state.edges)
+    boundary_ids = _semantic_boundary_node_ids(state.nodes, boundary_degree_graph)
+    semantic_node_ids = _semantic_degree_node_ids(state.nodes, boundary_degree_graph)
+    search_graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+    if not explicit_entity_ids:
+        state.warnings.append("entity branch path extraction found no explicit entity starts")
+    if not boundary_ids:
+        state.warnings.append("entity branch path extraction found no semantic boundary nodes")
+
+    branch_results: list[dict[str, Any]] = []
+    selected_paths: list[TokenReasoningPath] = []
+    selected_payloads: list[dict[str, Any]] = []
+    selected_node_paths: set[tuple[str, ...]] = set()
+
+    for entity_id in _sort_node_ids(explicit_entity_ids, state.nodes):
+        if entity_id not in state.nodes:
+            continue
+        blocked_internal_ids = set(explicit_entity_ids) - {entity_id}
+        candidates: list[dict[str, Any]] = []
+        for boundary_id in boundary_ids:
+            if boundary_id == entity_id:
+                continue
+            path_ids, dijkstra_cost = _shortest_semantic_boundary_path(
+                search_graph,
+                state.nodes,
+                entity_id,
+                boundary_id,
+                blocked_internal_ids=blocked_internal_ids,
+            )
+            if not path_ids:
+                continue
+            rank, rank_components = _rank_entity_branch_boundary_path(
+                state,
+                path_ids,
+                semantic_node_ids,
+            )
+            candidates.append(
+                {
+                    "entity_id": entity_id,
+                    "entity": state.nodes[entity_id].text,
+                    "boundary_id": boundary_id,
+                    "boundary": state.nodes[boundary_id].text,
+                    "node_ids": list(path_ids),
+                    "nodes": [state.nodes[node_id].text for node_id in path_ids if node_id in state.nodes],
+                    "dijkstra_cost": dijkstra_cost,
+                    "rank": rank,
+                    "rank_components": rank_components,
+                }
+            )
+
+        candidates.sort(key=lambda item: item["rank"])
+        selected = dict(candidates[0]) if candidates else None
+        if selected is None:
+            state.warnings.append(
+                f"entity branch path extraction found no reachable semantic boundary for {state.nodes[entity_id].text}[{entity_id}]"
+            )
+        else:
+            path_key = tuple(selected["node_ids"])
+            if path_key not in selected_node_paths:
+                selected_node_paths.add(path_key)
+                path_id = f"P{len(selected_paths) + 1}"
+                selected_path = _path_from_ids(path_id, state.nodes, list(selected["node_ids"]))
+                selected_paths.append(selected_path)
+                selected["path_id"] = path_id
+                selected["path"] = selected_path.to_dict()
+                selected_payloads.append(_entity_branch_selected_path_payload(selected))
+            else:
+                selected["path_id"] = None
+                selected["path"] = None
+
+        branch_results.append(
+            {
+                "entity_id": entity_id,
+                "entity": state.nodes[entity_id].text,
+                "candidate_count": len(candidates),
+                "candidates": [_entity_branch_candidate_payload(candidate) for candidate in candidates],
+                "selected": _entity_branch_candidate_payload(selected) if selected is not None else None,
+            }
+        )
+
+    return {
+        "paths": selected_paths,
+        "selected_paths": selected_payloads,
+        "boundary_ids": boundary_ids,
+        "semantic_node_ids": semantic_node_ids,
+        "boundary_degree_graph": {
+            node_id: _sort_node_ids(neighbors, state.nodes)
+            for node_id, neighbors in sorted(boundary_degree_graph.items(), key=lambda item: _node_sort_key(state.nodes[item[0]]))
+        },
+        "entity_branch_results": branch_results,
+    }
+
+
+def _semantic_boundary_degree_graph(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> dict[str, set[str]]:
+    graph: dict[str, set[str]] = {}
+    for key in _sorted_edge_keys(edges, nodes):
+        source_id, target_id = key
+        if source_id not in nodes or target_id not in nodes:
+            continue
+        source = nodes[source_id]
+        target = nodes[target_id]
+        if not _semantic_degree_node_allowed(source) or not _semantic_degree_node_allowed(target):
+            continue
+        edge = edges[key]
+        if _edge_is_pure_coordination(edge):
+            continue
+        graph.setdefault(source_id, set()).add(target_id)
+        graph.setdefault(target_id, set()).add(source_id)
+    return graph
+
+
+def _semantic_path_search_graph(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> dict[str, list[tuple[str, float, tuple[str, str]]]]:
+    graph: dict[str, list[tuple[str, float, tuple[str, str]]]] = {}
+    for key in _sorted_edge_keys(edges, nodes):
+        source_id, target_id = key
+        if source_id not in nodes or target_id not in nodes:
+            continue
+        source = nodes[source_id]
+        target = nodes[target_id]
+        if not _semantic_search_node_allowed(source) or not _semantic_search_node_allowed(target):
+            continue
+        edge = edges[key]
+        if _edge_is_pure_coordination(edge):
+            continue
+        cost = _edge_cost(edge, source, target)
+        graph.setdefault(source_id, []).append((target_id, cost, key))
+        graph.setdefault(target_id, []).append((source_id, cost, key))
+    for items in graph.values():
+        items.sort(key=lambda item: (item[1], _node_sort_key(nodes[item[0]]), item[0]))
+    return graph
+
+
+def _semantic_boundary_node_ids(
+    nodes: dict[str, TokenReasoningNode],
+    boundary_degree_graph: dict[str, set[str]],
+) -> list[str]:
+    return _sort_node_ids(
+        [
+            node_id
+            for node_id, neighbors in boundary_degree_graph.items()
+            if node_id in nodes
+            and len(neighbors) == 1
+            and _is_semantic_boundary_node(nodes[node_id])
+        ],
+        nodes,
+    )
+
+
+def _semantic_degree_node_ids(
+    nodes: dict[str, TokenReasoningNode],
+    boundary_degree_graph: dict[str, set[str]],
+) -> list[str]:
+    return _sort_node_ids(
+        [
+            node_id
+            for node_id, neighbors in boundary_degree_graph.items()
+            if node_id in nodes
+            and neighbors
+            and _is_semantic_boundary_node(nodes[node_id])
+        ],
+        nodes,
+    )
+
+
+def _semantic_degree_node_allowed(node: TokenReasoningNode) -> bool:
+    lower = node.text.lower()
+    if node.id == "0" or node.index <= 0 or lower == "root":
+        return False
+    if _is_punctuation(node.text):
+        return False
+    if lower in SEMANTIC_BOUNDARY_SCOPE_WORDS:
+        return False
+    if lower in DETERMINERS or lower in PREPOSITIONS or lower in LIGHT_VERBS or lower in RELATIVE_PRONOUNS:
+        return False
+    if node.kind == "function" and lower not in WH_ANCHOR_WORDS and node.kind != "entity":
+        return False
+    return True
+
+
+def _semantic_search_node_allowed(node: TokenReasoningNode) -> bool:
+    lower = node.text.lower()
+    if node.id == "0" or node.index <= 0 or lower == "root":
+        return False
+    if _is_punctuation(node.text):
+        return False
+    if lower in SEMANTIC_BOUNDARY_SCOPE_WORDS:
+        return False
+    return True
+
+
+def _is_semantic_boundary_node(node: TokenReasoningNode) -> bool:
+    lower = node.text.lower()
+    if node.kind == "entity" or ENTITY_RE.fullmatch(node.text):
+        return False
+    if lower in WH_ANCHOR_WORDS:
+        return True
+    if not _semantic_degree_node_allowed(node):
+        return False
+    return node.kind in {"content", "constraint", "answer"}
+
+
+def _edge_is_pure_coordination(edge: TokenReasoningEdge) -> bool:
+    classes = _edge_label_classes_deep(edge)
+    if not classes:
+        classes = _edge_label_classes(edge)
+    return bool(classes) and all(label_class == "COORD" for label_class in classes)
+
+
+def _shortest_semantic_boundary_path(
+    graph: dict[str, list[tuple[str, float, tuple[str, str]]]],
+    nodes: dict[str, TokenReasoningNode],
+    source_id: str,
+    target_id: str,
+    *,
+    blocked_internal_ids: set[str],
+) -> tuple[list[str], float]:
+    if source_id == target_id:
+        return [], math.inf
+    if source_id not in graph or target_id not in graph:
+        return [], math.inf
+
+    import heapq
+
+    start_key = _path_index_tuple([source_id], nodes)
+    heap: list[tuple[float, int, tuple[int, ...], str, list[str]]] = [
+        (0.0, 0, start_key, source_id, [source_id])
+    ]
+    best: dict[str, tuple[float, int, tuple[int, ...]]] = {source_id: (0.0, 0, start_key)}
+
+    while heap:
+        cost, edge_count, path_key, node_id, path = heapq.heappop(heap)
+        if best.get(node_id) != (cost, edge_count, path_key):
+            continue
+        if node_id == target_id:
+            return path, cost
+        for neighbor_id, edge_cost, _edge_key_value in graph.get(node_id, []):
+            if neighbor_id in path:
+                continue
+            if neighbor_id in blocked_internal_ids and neighbor_id != target_id:
+                continue
+            next_path = [*path, neighbor_id]
+            next_cost = cost + edge_cost
+            next_edge_count = edge_count + 1
+            next_key = _path_index_tuple(next_path, nodes)
+            candidate = (next_cost, next_edge_count, next_key)
+            previous = best.get(neighbor_id)
+            if previous is None or candidate < previous:
+                best[neighbor_id] = candidate
+                heapq.heappush(heap, (next_cost, next_edge_count, next_key, neighbor_id, next_path))
+    return [], math.inf
+
+
+def _rank_entity_branch_boundary_path(
+    state: _WorkingState,
+    path_ids: list[str],
+    semantic_node_ids: list[str],
+) -> tuple[tuple[Any, ...], dict[str, Any]]:
+    path_set = set(path_ids)
+    semantic_ids = _sort_node_ids([node_id for node_id in semantic_node_ids if node_id in state.nodes], state.nodes)
+    covered_semantic_ids = _sort_node_ids([node_id for node_id in semantic_ids if node_id in path_set], state.nodes)
+    missing_semantic_ids = _sort_node_ids([node_id for node_id in semantic_ids if node_id not in path_set], state.nodes)
+    weak_edge_count = 0
+    medium_edge_count = 0
+    derived_edge_count = 0
+    strong_edge_count = 0
+    consensus_count = 0
+    missing_edge_pairs: list[dict[str, Any]] = []
+
+    for left, right in zip(path_ids, path_ids[1:]):
+        edge = state.edges.get(_edge_key(left, right))
+        if edge is None:
+            weak_edge_count += 1
+            missing_edge_pairs.append(
+                {
+                    "source": left,
+                    "target": right,
+                    "source_text": state.nodes[left].text if left in state.nodes else left,
+                    "target_text": state.nodes[right].text if right in state.nodes else right,
+                }
+            )
+            continue
+        quality = _normalize_edge_quality(edge.edge_quality)
+        if quality == "STRONG":
+            strong_edge_count += 1
+        elif quality == "MEDIUM":
+            medium_edge_count += 1
+        else:
+            weak_edge_count += 1
+        if edge.derived:
+            derived_edge_count += 1
+        consensus_count += edge.consensus_count
+
+    function_node_count = sum(
+        1 for node_id in path_ids if node_id in state.nodes and state.nodes[node_id].kind == "function"
+    )
+    dirty_path_count = weak_edge_count + medium_edge_count + function_node_count + derived_edge_count
+    path_length = max(0, len(path_ids) - 1)
+    token_index_sequence = _path_index_tuple(path_ids, state.nodes)
+    rank = (
+        len(missing_semantic_ids),
+        dirty_path_count,
+        path_length,
+        token_index_sequence,
+    )
+    components: dict[str, Any] = {
+        "semantic_node_ids": semantic_ids,
+        "semantic_nodes": [state.nodes[node_id].text for node_id in semantic_ids if node_id in state.nodes],
+        "covered_semantic_node_ids": covered_semantic_ids,
+        "covered_semantic_nodes": [
+            state.nodes[node_id].text for node_id in covered_semantic_ids if node_id in state.nodes
+        ],
+        "missing_semantic_node_ids": missing_semantic_ids,
+        "missing_semantic_nodes": [
+            state.nodes[node_id].text for node_id in missing_semantic_ids if node_id in state.nodes
+        ],
+        "missing_semantic_nodes_count": len(missing_semantic_ids),
+        "weak_edge_count": weak_edge_count,
+        "medium_edge_count": medium_edge_count,
+        "function_node_count": function_node_count,
+        "derived_edge_count": derived_edge_count,
+        "dirty_path_count": dirty_path_count,
+        "path_length": path_length,
+        "path_token_index_sequence": list(token_index_sequence),
+        "strong_edge_count": strong_edge_count,
+        "consensus_count": consensus_count,
+        "rank": _jsonable_rank(rank),
+    }
+    if missing_edge_pairs:
+        components["missing_edge_pairs"] = missing_edge_pairs
+    return rank, components
+
+
+def _entity_branch_candidate_payload(candidate: dict[str, Any] | None) -> dict[str, Any] | None:
+    if candidate is None:
+        return None
+    payload = {
+        "entity_id": candidate["entity_id"],
+        "entity": candidate["entity"],
+        "boundary_id": candidate["boundary_id"],
+        "boundary": candidate["boundary"],
+        "node_ids": list(candidate["node_ids"]),
+        "nodes": list(candidate["nodes"]),
+        "dijkstra_cost": candidate["dijkstra_cost"],
+        "rank": _jsonable_rank(candidate["rank"]),
+        "rank_components": dict(candidate["rank_components"]),
+    }
+    if "path_id" in candidate:
+        payload["path_id"] = candidate["path_id"]
+    if "path" in candidate:
+        payload["path"] = candidate["path"]
+    return payload
+
+
+def _entity_branch_selected_path_payload(candidate: dict[str, Any]) -> dict[str, Any]:
+    payload = _entity_branch_candidate_payload(candidate) or {}
+    payload["global_rank"] = payload.get("rank", [])
+    return payload
+
+
+def _entity_branch_global_selection_payload(
+    state: _WorkingState,
+    *,
+    path_type: str,
+    branch_selection: dict[str, Any],
+) -> dict[str, Any]:
+    boundary_ids = branch_selection["boundary_ids"]
+    semantic_node_ids = branch_selection["semantic_node_ids"]
+    return {
+        "selection_type": path_type,
+        "path_type": path_type,
+        "anchor_id": None,
+        "anchor_text": None,
+        "source_types": [],
+        "semantic_boundary_node_ids": list(boundary_ids),
+        "semantic_boundary_nodes": [
+            {
+                "id": node_id,
+                "text": state.nodes[node_id].text,
+                "index": state.nodes[node_id].index,
+                "kind": state.nodes[node_id].kind,
+                "degree": len(branch_selection["boundary_degree_graph"].get(node_id, [])),
+            }
+            for node_id in boundary_ids
+            if node_id in state.nodes
+        ],
+        "semantic_node_ids": list(semantic_node_ids),
+        "semantic_nodes": [state.nodes[node_id].text for node_id in semantic_node_ids if node_id in state.nodes],
+        "entity_branch_results": list(branch_selection["entity_branch_results"]),
+        "paths": list(branch_selection["selected_paths"]),
+        "selected_paths": list(branch_selection["selected_paths"]),
+        "warnings": list(state.warnings),
+    }
+
+
+def _jsonable_rank(rank: tuple[Any, ...]) -> list[Any]:
+    result: list[Any] = []
+    for item in rank:
+        if isinstance(item, tuple):
+            result.append(list(item))
+        else:
+            result.append(item)
+    return result
+
+
 def detect_answer_anchor(
     nodes: dict[str, TokenReasoningNode],
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     warnings: list[str],
 ) -> str | None:
-    candidates = collect_answer_anchor_candidates(nodes, raw_edges, explicit_entity_ids=[])
-    if candidates:
-        warnings.append(f"answer anchor selected by {','.join(candidates[0].source_types)}")
-        return candidates[0].node_id
-    warnings.append("answer anchor fallback failed")
+    del nodes, raw_edges
+    warnings.append("answer anchor selection is disabled in Step4 entity-branch mode")
     return None
 
 
@@ -713,33 +1026,12 @@ def collect_answer_anchor_candidates(
     *,
     explicit_entity_ids: list[str] | None = None,
 ) -> list[_AnswerAnchorCandidate]:
-    """Recall answer-anchor candidates without committing to a final global anchor."""
+    """Disabled: Step 4 now starts from explicit entity branches."""
 
-    explicit_entity_ids = explicit_entity_ids or []
-    query_root = _find_query_root(nodes, raw_edges)
-    candidates: list[_AnswerAnchorCandidate] = []
-
-    candidates.extend(_find_typed_wh_slot_candidates(nodes, raw_edges))
-    candidates.extend(_find_wh_anchor_candidates(nodes))
-    if query_root:
-        candidates.extend(_collect_root_projection_candidates(nodes, raw_edges, query_root))
-        candidates.extend(_find_modifier_projection_candidates(nodes, raw_edges, query_root))
-    candidates.extend(_find_comparative_focus_candidates(nodes, raw_edges, query_root))
-    candidates.extend(_find_bare_wh_predicate_root_candidates(nodes, raw_edges, query_root))
-    candidates.extend(_collect_explicit_entity_anchor_candidates(nodes, raw_edges, explicit_entity_ids))
-    candidates.extend(_collect_clause_predicate_anchor_candidates(nodes, raw_edges, explicit_entity_ids, query_root))
-
-    merged = _merge_answer_anchor_candidates(nodes, candidates)
+    del nodes, raw_edges, explicit_entity_ids
     if warnings is not None:
-        if merged:
-            rendered = ", ".join(
-                f"{candidate.text}[{candidate.node_id}]/{'+'.join(candidate.source_types)}"
-                for candidate in merged
-            )
-            warnings.append(f"answer anchor candidates collected: {rendered}")
-        else:
-            warnings.append("answer anchor candidates collection found no candidates")
-    return merged
+        warnings.append("answer anchor candidate collection is disabled in Step4 entity-branch mode")
+    return []
 
 
 def _find_typed_wh_slot_candidates(
@@ -1603,153 +1895,6 @@ def add_possessive_marker_contraction_edges(state: _WorkingState) -> None:
                     provenance=[provenance],
                 )
                 state.virtual_edges.append(virtual.to_dict())
-
-
-def add_restriction_closure_edges(state: _WorkingState) -> None:
-    adjacency = _adjacency(state.edges)
-    restrict_pairs = [
-        (source, target, state.edges[key])
-        for key in _sorted_edge_keys(state.edges, state.nodes)
-        for source, target in [key]
-        if "RESTRICT" in _edge_label_classes(state.edges[key])
-    ]
-
-    for head_id, predicate_id, restrict_edge in restrict_pairs:
-        head_candidates = [head_id, predicate_id]
-        for candidate_head_id in head_candidates:
-            predicate = predicate_id if candidate_head_id == head_id else head_id
-            if not _is_high_salience_node(state.nodes[candidate_head_id], include_order_constraints=False):
-                continue
-            for neighbor_id, neighbor_key in adjacency.get(predicate, {}).items():
-                if neighbor_id == candidate_head_id:
-                    continue
-                neighbor_node = state.nodes[neighbor_id]
-                if not _is_high_salience_node(neighbor_node, include_order_constraints=False):
-                    continue
-                neighbor_edge = state.edges[neighbor_key]
-                if not (_edge_label_classes(neighbor_edge) & {"CORE_ARG", "IDENTITY", "RESTRICT", "UNKNOWN"}):
-                    continue
-                edge_quality = "STRONG"
-                support = EDGE_QUALITY_SCORES[edge_quality]
-                provenance = {
-                    "rule": "restriction_closure",
-                    "edge_quality": edge_quality,
-                    "derived": True,
-                    "collapsed_path": [
-                        state.nodes[candidate_head_id].text,
-                        state.nodes[predicate].text,
-                        neighbor_node.text,
-                    ],
-                    "source_edges": _edge_provenance_summaries([restrict_edge, neighbor_edge]),
-                    "support": support,
-                }
-                virtual = _merge_edge(
-                    state.edges,
-                    state.nodes,
-                    candidate_head_id,
-                    neighbor_id,
-                    support=support,
-                    edge_quality=edge_quality,
-                    derived=True,
-                    rule="restriction_closure",
-                    provenance=[provenance],
-                )
-                state.virtual_edges.append(virtual.to_dict())
-
-    predicate_to_heads: dict[str, list[str]] = {}
-    for left_id, right_id, _edge in restrict_pairs:
-        if _is_high_salience_node(state.nodes[left_id], include_order_constraints=False):
-            predicate_to_heads.setdefault(right_id, []).append(left_id)
-        if _is_high_salience_node(state.nodes[right_id], include_order_constraints=False):
-            predicate_to_heads.setdefault(left_id, []).append(right_id)
-
-    for predicate_id, head_ids in predicate_to_heads.items():
-        ordered_heads = sorted(set(head_ids), key=lambda node_id: _node_sort_key(state.nodes[node_id]))
-        for left_index, left_id in enumerate(ordered_heads):
-            for right_id in ordered_heads[left_index + 1 :]:
-                left_edge = state.edges[_edge_key(left_id, predicate_id)]
-                right_edge = state.edges[_edge_key(right_id, predicate_id)]
-                edge_quality = "STRONG"
-                support = EDGE_QUALITY_SCORES[edge_quality]
-                provenance = {
-                    "rule": "restriction_closure",
-                    "edge_quality": edge_quality,
-                    "derived": True,
-                    "shared_predicate": state.nodes[predicate_id].text,
-                    "collapsed_path": [
-                        state.nodes[left_id].text,
-                        state.nodes[predicate_id].text,
-                        state.nodes[right_id].text,
-                    ],
-                    "source_edges": _edge_provenance_summaries([left_edge, right_edge]),
-                    "support": support,
-                }
-                virtual = _merge_edge(
-                    state.edges,
-                    state.nodes,
-                    left_id,
-                    right_id,
-                    support=support,
-                    edge_quality=edge_quality,
-                    derived=True,
-                    rule="restriction_closure",
-                    provenance=[provenance],
-                )
-                state.virtual_edges.append(virtual.to_dict())
-
-
-def add_descriptor_lifting_edges(
-    state: _WorkingState,
-    entity_ids: list[str],
-    answer_anchor_id: str | None,
-) -> None:
-    graph = _weighted_adjacency(state.nodes, state.edges, include_scope=False)
-    anchor_targets = set(entity_ids)
-    if answer_anchor_id:
-        anchor_targets.add(answer_anchor_id)
-
-    for entity_id in entity_ids:
-        if entity_id not in state.nodes:
-            continue
-        candidates = _bounded_paths_from_entity(state.nodes, state.edges, graph, entity_id, max_depth=4)
-        for target_id, path in candidates:
-            if len(path) < 4:
-                continue
-            if target_id in anchor_targets or state.nodes[target_id].kind not in {"content", "answer", "constraint"}:
-                continue
-            if not _path_has_descriptor_evidence(path, state.edges, state.nodes):
-                continue
-            if not _target_reaches_anchor(target_id, entity_id, anchor_targets, graph):
-                continue
-            source_edges = [
-                _edge_provenance_summary(state.edges[_edge_key(path[index], path[index + 1])])
-                for index in range(len(path) - 1)
-                if _edge_key(path[index], path[index + 1]) in state.edges
-            ]
-            if not source_edges:
-                continue
-            edge_quality = "MEDIUM"
-            support = EDGE_QUALITY_SCORES[edge_quality]
-            provenance = {
-                "rule": "descriptor_lifting",
-                "edge_quality": edge_quality,
-                "derived": True,
-                "collapsed_path": [state.nodes[node_id].text for node_id in path],
-                "source_edges": source_edges,
-                "support": support,
-            }
-            virtual = _merge_edge(
-                state.edges,
-                state.nodes,
-                entity_id,
-                target_id,
-                support=support,
-                edge_quality=edge_quality,
-                derived=True,
-                rule="descriptor_lifting",
-                provenance=[provenance],
-            )
-            state.virtual_edges.append(virtual.to_dict())
 
 
 def add_candidate_typed_slot_instantiation_edges(
@@ -2736,7 +2881,6 @@ def _edge_has_core_semantic_evidence(edge: TokenReasoningEdge) -> bool:
     if edge.derived and (
         "bridge_contraction" in edge.rule
         or "possessive_marker_contraction" in edge.rule
-        or "restriction_closure" in edge.rule
         or "function_backbone_contraction" in edge.rule
     ):
         return True
@@ -2974,21 +3118,15 @@ def _select_conjunctive_constraint_path_cover(
 
         member_to_branch = dict(zip(cover.member_head_ids, cover.branch_paths))
         member_to_entity = dict(zip(cover.member_head_ids, cover.branch_entity_ids))
-        threaded_branch_paths: dict[str, list[str]] = {}
-        for member_id, branch_path in member_to_branch.items():
-            blocked_ids = {cover.predicate_id, *(set(cover.member_head_ids) - {member_id})}
-            if cover.marker_id:
-                blocked_ids.add(cover.marker_id)
-            threaded = _thread_conjunctive_branch_modifiers(state, list(branch_path), blocked_ids=blocked_ids)
-            threaded_branch_paths[member_id] = threaded
+        branch_paths = {member_id: list(branch_path) for member_id, branch_path in member_to_branch.items()}
 
         selected_paths: list[TokenReasoningPath] = []
         selected_records: list[_CandidatePath] = []
         semantic_nodes = set(backbone)
-        for branch_path in threaded_branch_paths.values():
+        for branch_path in branch_paths.values():
             semantic_nodes.update(branch_path)
         for path_index, member_id in enumerate(cover.member_head_ids, start=1):
-            branch_path = threaded_branch_paths.get(member_id, [])
+            branch_path = branch_paths.get(member_id, [])
             if not branch_path:
                 break
             if member_id == cover.target_id:
@@ -3024,7 +3162,7 @@ def _select_conjunctive_constraint_path_cover(
             marker_id=cover.marker_id,
             member_head_ids=cover.member_head_ids,
             branch_entity_ids=cover.branch_entity_ids,
-            branch_paths=tuple(tuple(threaded_branch_paths[member_id]) for member_id in cover.member_head_ids),
+            branch_paths=tuple(tuple(branch_paths[member_id]) for member_id in cover.member_head_ids),
             evidence=cover.evidence,
         )
         return selected_paths, selected_records, threaded_cover
@@ -3478,58 +3616,6 @@ def _conjunctive_member_connector_path(
     return [cover.target_id, member_id]
 
 
-def _thread_conjunctive_branch_modifiers(
-    state: _WorkingState,
-    path_ids: list[str],
-    *,
-    blocked_ids: set[str],
-) -> list[str]:
-    if len(path_ids) < 3:
-        return path_ids
-    threaded = list(path_ids)
-    index = 0
-    while index < len(threaded) - 1:
-        current_id = threaded[index]
-        next_id = threaded[index + 1]
-        modifiers = _conjunctive_modifier_neighbors(state, current_id, exclude=set(threaded) | blocked_ids)
-        for modifier_id in modifiers:
-            if modifier_id in threaded:
-                continue
-            _ensure_conjunctive_modifier_threading_edge(state, current_id, modifier_id, next_id)
-            threaded.insert(index + 1, modifier_id)
-            index += 1
-        index += 1
-    return threaded
-
-
-def _conjunctive_modifier_neighbors(
-    state: _WorkingState,
-    node_id: str,
-    *,
-    exclude: set[str],
-) -> list[str]:
-    adjacency = _adjacency(state.edges)
-    modifiers: list[str] = []
-    for neighbor_id, edge in _neighbor_edges(node_id, adjacency, state.edges):
-        if neighbor_id in exclude or neighbor_id not in state.nodes:
-            continue
-        neighbor = state.nodes[neighbor_id]
-        if neighbor.kind == "function" or neighbor.kind == "entity" or _is_scope_node(neighbor):
-            continue
-        if not _is_semantic_node_candidate(neighbor):
-            continue
-        if _edge_is_modifier_like(edge):
-            modifiers.append(neighbor_id)
-    return _sort_node_ids(modifiers, state.nodes)
-
-
-def _edge_is_modifier_like(edge: TokenReasoningEdge) -> bool:
-    if "MODIFIER" in _edge_label_classes_deep(edge):
-        return True
-    relation_keys = _relation_keys_from_payload(edge.provenance)
-    return bool(relation_keys & {"ext", "adj_arg1", "adj_arg2", "amod", "advmod", "modifier", "nummod"})
-
-
 def _ensure_conjunctive_constraint_edge(
     state: _WorkingState,
     source_id: str,
@@ -3569,46 +3655,6 @@ def _ensure_conjunctive_constraint_edge(
         edge_quality=edge_quality,
         derived=True,
         rule="conjunctive_constraint_edge",
-        provenance=[provenance],
-    )
-    state.virtual_edges.append(virtual.to_dict())
-
-
-def _ensure_conjunctive_modifier_threading_edge(
-    state: _WorkingState,
-    modified_id: str,
-    modifier_id: str,
-    next_id: str,
-) -> None:
-    existing = state.edges.get(_edge_key(modifier_id, next_id))
-    if existing is not None and "conjunctive_constraint_modifier_threading" in existing.rule:
-        return
-    modifier_edge = state.edges.get(_edge_key(modified_id, modifier_id))
-    next_edge = state.edges.get(_edge_key(modified_id, next_id))
-    edge_quality = "MEDIUM"
-    support = EDGE_QUALITY_SCORES[edge_quality]
-    provenance = {
-        "rule": "conjunctive_constraint_modifier_threading",
-        "edge_quality": edge_quality,
-        "derived": True,
-        "support": support,
-        "modified_id": modified_id,
-        "modified": state.nodes[modified_id].text if modified_id in state.nodes else None,
-        "modifier_id": modifier_id,
-        "modifier": state.nodes[modifier_id].text if modifier_id in state.nodes else None,
-        "next_id": next_id,
-        "next": state.nodes[next_id].text if next_id in state.nodes else None,
-        "source_edges": _edge_provenance_summaries([modifier_edge, next_edge]),
-    }
-    virtual = _merge_edge(
-        state.edges,
-        state.nodes,
-        modifier_id,
-        next_id,
-        support=support,
-        edge_quality=edge_quality,
-        derived=True,
-        rule="conjunctive_constraint_modifier_threading",
         provenance=[provenance],
     )
     state.virtual_edges.append(virtual.to_dict())
@@ -4051,8 +4097,6 @@ def _edge_allowed_for_path(
         or "candidate_slot_substitution" in edge.rule
         or "candidate_bare_wh_substitution" in edge.rule
     ):
-        return False
-    if not allow_weak and "descriptor_lifting" in edge.rule:
         return False
     neighbor = nodes[neighbor_id]
     if neighbor.kind == "function" and neighbor_id != target_id:
@@ -5243,8 +5287,6 @@ def _infer_edge_quality(
     )
     if explicit:
         return explicit
-    if "descriptor_lifting" in rule:
-        return "MEDIUM"
     if (
         "candidate_expansion" in rule
         or "candidate_slot_substitution" in rule
@@ -5256,7 +5298,7 @@ def _infer_edge_quality(
         if _is_high_salience_node(nodes[source_id], include_order_constraints=True) and _is_high_salience_node(nodes[target_id], include_order_constraints=True):
             return "STRONG" if _bridge_contraction_has_strong_evidence(provenance) else "MEDIUM"
         return "WEAK"
-    if "possessive_marker_contraction" in rule or "restriction_closure" in rule:
+    if "possessive_marker_contraction" in rule:
         return "STRONG"
     if "function_backbone_contraction" in rule:
         return "MEDIUM"
@@ -5899,87 +5941,6 @@ def _shortest_path(
 
 def _path_index_tuple(path: list[str], nodes: dict[str, TokenReasoningNode]) -> tuple[int, ...]:
     return tuple(nodes[node_id].index for node_id in path if node_id in nodes)
-
-
-def _bounded_paths_from_entity(
-    nodes: dict[str, TokenReasoningNode],
-    edges: dict[tuple[str, str], TokenReasoningEdge],
-    graph: dict[str, list[tuple[str, float, tuple[str, str]]]],
-    entity_id: str,
-    *,
-    max_depth: int,
-) -> list[tuple[str, list[str]]]:
-    del edges
-    results: list[tuple[str, list[str]]] = []
-    queue: list[list[str]] = [[entity_id]]
-    while queue:
-        path = queue.pop(0)
-        current = path[-1]
-        if len(path) > max_depth + 1:
-            continue
-        if len(path) > 1 and nodes[current].kind in {"content", "answer", "constraint"}:
-            interiors = path[1:-1]
-            if interiors and all(not nodes[node_id].is_anchor and nodes[node_id].kind != "entity" for node_id in interiors):
-                results.append((current, path))
-        if len(path) == max_depth + 1:
-            continue
-        for neighbor_id, _cost, _key in graph.get(current, []):
-            if neighbor_id in path:
-                continue
-            if nodes[neighbor_id].kind == "entity" and neighbor_id != entity_id:
-                continue
-            queue.append([*path, neighbor_id])
-    results.sort(key=lambda item: (len(item[1]), _path_index_tuple(item[1], nodes), item[0]))
-    return results
-
-
-def _path_has_descriptor_evidence(
-    path: list[str],
-    edges: dict[tuple[str, str], TokenReasoningEdge],
-    nodes: dict[str, TokenReasoningNode],
-) -> bool:
-    del nodes
-    first_edge = edges.get(_edge_key(path[0], path[1]))
-    if not first_edge:
-        return False
-    if _edge_label_classes(first_edge) & {"IDENTITY", "RESTRICT"}:
-        return True
-    for item in first_edge.provenance:
-        if not isinstance(item, dict):
-            continue
-        bridge = str(item.get("bridge") or "").lower()
-        if bridge in LIGHT_VERBS:
-            return True
-        for source_edge in item.get("source_edges") or []:
-            if not isinstance(source_edge, dict):
-                continue
-            relation_keys = _relation_keys_from_payload(source_edge)
-            source_token = str(source_edge.get("source") or "").lower()
-            target_token = str(source_edge.get("target") or "").lower()
-            if relation_keys & {"cop", "bv"} or source_token in LIGHT_VERBS or target_token in LIGHT_VERBS:
-                return True
-    return False
-
-
-def _target_reaches_anchor(
-    target_id: str,
-    source_entity_id: str,
-    anchor_targets: set[str],
-    graph: dict[str, list[tuple[str, float, tuple[str, str]]]],
-) -> bool:
-    queue = [target_id]
-    visited = {source_entity_id}
-    while queue:
-        node_id = queue.pop(0)
-        if node_id in visited:
-            continue
-        visited.add(node_id)
-        if node_id in anchor_targets and node_id != source_entity_id and node_id != target_id:
-            return True
-        for neighbor_id, _cost, _key in graph.get(node_id, []):
-            if neighbor_id not in visited:
-                queue.append(neighbor_id)
-    return False
 
 
 def _contract_function_backbone_nodes(

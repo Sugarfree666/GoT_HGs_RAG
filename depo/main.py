@@ -256,34 +256,46 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         print("(none)")
     print()
     selected_paths = getattr(token_reasoning_structure, "paths", []) or []
-    is_cover = getattr(token_reasoning_structure, "path_type", "") == "global_best_path_cover" or len(selected_paths) > 1
-    print("[Global Best Path Cover]" if is_cover else "[Global Best Path]")
     global_selection = getattr(token_reasoning_structure, "global_selection", {}) or {}
-    if global_selection and selected_paths:
-        anchor_text = global_selection.get("anchor_text") or "(unknown)"
-        anchor_id = global_selection.get("anchor_id") or "(unknown)"
-        source_types = ",".join(global_selection.get("source_types") or [])
-        print(f"Anchor: {anchor_text}[{anchor_id}] sources={source_types}")
-        if is_cover:
-            candidate_set = global_selection.get("candidate_set") or []
-            if candidate_set:
-                print(f"Candidate set: {', '.join(candidate_set)}")
-            selected_payloads = global_selection.get("paths") or []
-            for path_index, path in enumerate(selected_paths, start=1):
-                nodes = list(getattr(path, "nodes", []))
-                rank_payload = selected_payloads[path_index - 1] if path_index - 1 < len(selected_payloads) else {}
-                rank = tuple(rank_payload.get("global_rank") or ())
-                print(f"P{path_index}: {' ---- '.join(nodes)}")
-                if rank:
-                    print(f"  Global rank: {rank}")
-        else:
-            path = selected_paths[0]
+    path_type = getattr(token_reasoning_structure, "path_type", "")
+    if path_type == "entity_branch_best_paths":
+        print("[Entity Branch Best Paths]" if len(selected_paths) > 1 else "[Entity Branch Best Path]")
+        selected_payloads = global_selection.get("paths") or []
+        for path_index, path in enumerate(selected_paths, start=1):
             nodes = list(getattr(path, "nodes", []))
-            rank = tuple(global_selection.get("global_rank") or ())
-            print(f"Path: {' ---- '.join(nodes)}")
-            print(f"Global rank: {rank}")
+            rank_payload = selected_payloads[path_index - 1] if path_index - 1 < len(selected_payloads) else {}
+            rank = tuple(rank_payload.get("global_rank") or ())
+            print(f"P{path_index}: {' ---- '.join(nodes)}")
+            if rank:
+                print(f"  Branch rank: {rank}")
     else:
-        print("(no path selected)")
+        is_cover = path_type == "global_best_path_cover" or len(selected_paths) > 1
+        print("[Global Best Path Cover]" if is_cover else "[Global Best Path]")
+        if global_selection and selected_paths:
+            anchor_text = global_selection.get("anchor_text") or "(unknown)"
+            anchor_id = global_selection.get("anchor_id") or "(unknown)"
+            source_types = ",".join(global_selection.get("source_types") or [])
+            print(f"Anchor: {anchor_text}[{anchor_id}] sources={source_types}")
+            if is_cover:
+                candidate_set = global_selection.get("candidate_set") or []
+                if candidate_set:
+                    print(f"Candidate set: {', '.join(candidate_set)}")
+                selected_payloads = global_selection.get("paths") or []
+                for path_index, path in enumerate(selected_paths, start=1):
+                    nodes = list(getattr(path, "nodes", []))
+                    rank_payload = selected_payloads[path_index - 1] if path_index - 1 < len(selected_payloads) else {}
+                    rank = tuple(rank_payload.get("global_rank") or ())
+                    print(f"P{path_index}: {' ---- '.join(nodes)}")
+                    if rank:
+                        print(f"  Global rank: {rank}")
+            else:
+                path = selected_paths[0]
+                nodes = list(getattr(path, "nodes", []))
+                rank = tuple(global_selection.get("global_rank") or ())
+                print(f"Path: {' ---- '.join(nodes)}")
+                print(f"Global rank: {rank}")
+        else:
+            print("(no path selected)")
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
     if debug and combined_warnings:
         print()

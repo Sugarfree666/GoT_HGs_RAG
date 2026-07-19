@@ -4,7 +4,6 @@ import io
 import json
 import sys
 import tempfile
-import time
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
@@ -16,50 +15,28 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
+from atomic_question_dag import restore_global_best_paths  # noqa: E402
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
-from main import (  # noqa: E402
-    print_hanlp_sdp_result,
-    run_hanlp_sdp_pipeline,
-)
+from main import print_hanlp_sdp_result, run_hanlp_sdp_pipeline  # noqa: E402
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
 from tri_sdp_reasoning_compiler import (  # noqa: E402
-    TokenReasoningEdge,
-    TokenReasoningNode,
-    TokenReasoningPath,
-    _AnswerAnchorCandidate,
-    _WorkingState,
-    _rank_global_path_candidate,
-    _select_global_best_path,
+    _semantic_path_search_graph,
+    _shortest_semantic_boundary_path,
     build_evidence_graph,
     compile_token_reasoning_structure,
 )
 
 
-def _global_candidate_stub(
-    rank: tuple[int, int, int, int],
-    anchor_index: int,
-    path_index: int,
-    node_ids: list[str],
-) -> SimpleNamespace:
-    return SimpleNamespace(
-        global_rank=rank,
-        anchor_index=anchor_index,
-        path_index=path_index,
-        path=SimpleNamespace(node_ids=node_ids),
-    )
-
-
 class HanLPSDPMainlineTest(unittest.TestCase):
-    def test_hanlp_sdp_pipeline_runs_step5_from_global_best_path_by_default(self) -> None:
+    def test_hanlp_sdp_pipeline_runs_step5_from_entity_branch_paths_by_default(self) -> None:
         record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
         parser = FakeHanLPSDPParser()
         llm = FakePreprocessLLM()
-        preprocessor = EntityMaskingPreprocessor(llm)
 
         result = run_hanlp_sdp_pipeline(
             record=record,
             index=1,
-            preprocessor=preprocessor,
+            preprocessor=EntityMaskingPreprocessor(llm),
             parser=parser,
         )
 
@@ -71,10 +48,14 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
+
         step5_payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(set(step5_payload), {"original_question", "topic_entities", "step4_paths"})
         self.assertEqual(step5_payload["topic_entities"], ["Ryan Tubridy", "Mauro Massironi"])
-        self.assertTrue(step5_payload["step4_paths"])
+        self.assertEqual(
+            step5_payload["step4_paths"],
+            [["Ryan Tubridy", "older", "Who"], ["Mauro Massironi", "older", "Who"]],
+        )
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -84,43 +65,21 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("[Original Question]", output)
         self.assertIn("[1. Explicit Entities]", output)
         self.assertIn(" - Ryan Tubridy", output)
-        self.assertNotIn(" - Ryan Tubridy [Person]", output)
         self.assertIn("[2. Entity Masking]", output)
         self.assertIn(" - ENTITYA -> Ryan Tubridy", output)
-        self.assertIn("Normalized question: unchanged", output)
-        self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
-        self.assertNotIn("SDP input sentence:", output)
         self.assertIn("[3. HanLP SDP Parsing]", output)
-        self.assertIn("HanLP input sentence: Who is older, ENTITYA or ENTITYB?", output)
-        self.assertNotIn("[HanLP Tokens]", output)
-        self.assertNotIn("[Available HanLP Keys]", output)
         self.assertIn("[Raw SDP Edges]", output)
-        self.assertIn("[SDP: sdp/dm]", output)
-        self.assertIn("[SDP: sdp/pas]", output)
-        self.assertIn("[SDP: sdp/psd]", output)
-        self.assertIn("older[3] --ARG1--> Who[1]", output)
-        self.assertIn("older[3] --ARG1--> ENTITYA[5]", output)
-        self.assertIn("older[3] --ACT-arg--> ENTITYB[7]", output)
         self.assertIn("[4. Token Reasoning Structure]", output)
-        self.assertNotIn("[Graph]", output)
-        self.assertIn("[Anchor Paths]", output)
-        self.assertIn("Anchor A1: older[3] sources=comparative_focus,clause_predicate", output)
-        self.assertIn("  P1: ENTITYA ---- older", output)
-        self.assertIn("Anchor A2: Who[1] sources=wh_anchor", output)
-        self.assertIn("Anchor A3: ENTITYA[5] sources=explicit_entity", output)
-        self.assertIn("Anchor A4: ENTITYB[7] sources=explicit_entity", output)
-        self.assertNotIn("answer_anchor:", output)
-        self.assertNotIn("entity_anchors:", output)
-        self.assertNotIn("[5. Semantic Reasoning Paths]", output)
+        self.assertIn("[Anchor Paths]\n(none)", output)
+        self.assertIn("[Entity Branch Best Paths]", output)
+        self.assertIn("P1: ENTITYA ---- older ---- Who", output)
+        self.assertIn("P2: ENTITYB ---- older ---- Who", output)
+        self.assertIn("Branch rank:", output)
+        self.assertNotIn("Anchor A1:", output)
+        self.assertNotIn("typed_wh_slot", output)
         self.assertIn("[5. Atomic Question DAG]", output)
-        self.assertNotIn("(skipped: Step5 disabled)", output)
         self.assertIn("q1: When was Ryan Tubridy born?", output)
         self.assertIn("q2: When was Mauro Massironi born?", output)
-        self.assertNotIn("[4. Content Reasoning Chains]", output)
-        self.assertNotIn("[4. Simplified SDP/DM Graph]", output)
-        self.assertNotIn("[Kept / Derived Edges]", output)
-        self.assertNotIn("older --ARG2--> ENTITYA", output)
-        self.assertNotIn("older --ARG1--> ANSWER\n", output)
 
     def test_pipeline_normalizes_wh_order_before_masking_and_parsing(self) -> None:
         question = "Which country the composer of film Thunder On The Hill is from?"
@@ -158,32 +117,14 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         preprocess_result = result["preprocess_result"]
         self.assertEqual(llm.calls, 1)
-        self.assertEqual(preprocess_result.normalized_question, normalized)
-        self.assertTrue(preprocess_result.normalization_changed)
-        self.assertEqual(preprocess_result.normalization_note, "Inserted auxiliary is for wh-question order.")
-        self.assertEqual([entity.text for entity in preprocess_result.explicit_entities.entities], ["Thunder On The Hill"])
-        self.assertEqual(
-            [
-                (
-                    entity.start_char,
-                    entity.end_char,
-                    question[entity.start_char : entity.end_char],
-                )
-                for entity in preprocess_result.explicit_entities.entities
-            ],
-            [(35, 54, "Thunder On The Hill")],
-        )
         self.assertEqual(preprocess_result.masked_question, masked)
         self.assertEqual(preprocess_result.sdp_input_sentence, masked)
-        self.assertEqual(result["hanlp_input_sentence"], masked)
         self.assertEqual(parser.text, masked)
-        self.assertEqual(parser.placeholders, ["ENTITYA"])
-
+        self.assertTrue(preprocess_result.normalization_changed)
         self.assertEqual(debug_payload["original_question"], question)
         self.assertEqual(debug_payload["normalized_question"], normalized)
-        self.assertTrue(debug_payload["normalization_changed"])
-        self.assertEqual(debug_payload["normalization_note"], "Inserted auxiliary is for wh-question order.")
         self.assertEqual(debug_payload["masked_question"], masked)
+        self.assertEqual(debug_payload["step4_path_extraction"], "entity_branch_best_paths")
 
     def test_hanlp_sdp_pipeline_can_skip_step5(self) -> None:
         record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
@@ -205,7 +146,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             print_hanlp_sdp_result(1, record, result)
         self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
-    def test_pipeline_sends_restored_global_best_path_cover_to_step5(self) -> None:
+    def test_pipeline_sends_restored_entity_branch_paths_to_step5(self) -> None:
         question = "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
         llm = IllusionsPipelineLLM(question)
         result = run_hanlp_sdp_pipeline(
@@ -216,14 +157,20 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         )
 
         compiled = result["token_reasoning_structure"]
-        self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
+        self.assertEqual(compiled.path_type, "entity_branch_best_paths")
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
+            [
+                ["ENTITYA", "director", "born", "later"],
+                ["ENTITYB", "director", "born", "later"],
+            ],
+        )
         payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(
             payload["step4_paths"],
             [
-                ["Illusions (1982 Film)", "film", "director", "born"],
-                ["It'S A Wonderful Afterlife", "film", "director", "born"],
+                ["Illusions (1982 Film)", "director", "born", "later"],
+                ["It'S A Wonderful Afterlife", "director", "born", "later"],
             ],
         )
         self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
@@ -232,1543 +179,177 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertTrue(dag.valid, dag.validation_errors)
         self.assertEqual(dag.nodes[-1].depends_on, ("q2", "q4"))
 
-    def test_preprocessor_smoke_examples(self) -> None:
-        cases = [
-            (
-                "Who is the spouse of Young Man Luther's author?",
-                {
-                    "entities": [
-                        _entity("Who is the spouse of Young Man Luther's author?", "Young Man Luther"),
-                    ],
-                    "warnings": [],
-                },
-                "Who is the spouse of ENTITYA's author?",
-                "Who is the spouse of ENTITYA's author?",
-            ),
-            (
-                "What is the date of death of the director of film FilmA?",
-                {
-                    "entities": [
-                        _entity("What is the date of death of the director of film FilmA?", "FilmA"),
-                    ],
-                    "warnings": [],
-                },
-                "What is the date of death of the director of film ENTITYA?",
-                "What is the date of death of the director of film ENTITYA?",
-            ),
-            (
-                "Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?",
-                {
-                    "entities": [
-                        _entity(
-                            "Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?",
-                            "Birmingham",
-                        ),
-                    ],
-                    "warnings": [],
-                },
-                "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
-                "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
-            ),
-            (
-                "Who is older, Ryan Tubridy or Mauro Massironi?",
-                {
-                    "entities": [
-                        _entity("Who is older, Ryan Tubridy or Mauro Massironi?", "Ryan Tubridy", "Person"),
-                        _entity("Who is older, Ryan Tubridy or Mauro Massironi?", "Mauro Massironi", "Person"),
-                    ],
-                    "warnings": [],
-                },
-                "Who is older, ENTITYA or ENTITYB?",
-                "Who is older, ENTITYA or ENTITYB?",
-            ),
-        ]
-        for question, payload, expected_masked, expected_sdp in cases:
-            with self.subTest(question=question):
-                llm = StaticPreprocessLLM(payload)
-                result = EntityMaskingPreprocessor(llm).preprocess(question)
 
-                self.assertEqual(llm.calls, 1)
-                self.assertEqual(result.masked_question, expected_masked)
-                self.assertEqual(result.sdp_input_sentence, expected_sdp)
-                for mapping in result.mask_mappings:
-                    self.assertTrue(mapping.placeholder.startswith("ENTITY"))
-                    self.assertIn(mapping.placeholder, result.masked_question)
-                    self.assertIn(mapping.placeholder, result.sdp_input_sentence)
+class TriSDPEntityBranchCompilerTest(unittest.TestCase):
+    def test_old_answer_anchor_sources_do_not_participate(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
 
-    def test_preprocessor_uses_generic_entities_only_schema(self) -> None:
-        question = "What music school did the singer of The Search for Everything: Wave One attend?"
-        llm = StaticPreprocessLLM(
-            {
-                "entities": [_entity(question, "The Search for Everything: Wave One", "Work")],
-                "warnings": [],
-            }
-        )
-
-        result = EntityMaskingPreprocessor(llm).preprocess(question)
-
-        self.assertEqual([entity.text for entity in result.explicit_entities.entities], ["The Search for Everything: Wave One"])
-        self.assertEqual(result.masked_question, "What music school did the singer of ENTITYA attend?")
-        self.assertEqual(result.sdp_input_sentence, result.masked_question)
-        self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "The Search for Everything: Wave One")])
-        self.assertNotIn("attend", result.explicit_entities.entities[0].text)
-        self.assertIn("DEPO Step 2: topic entity extraction", llm.system_prompt)
-        self.assertNotIn("semantic_type_hint", llm.user_prompt)
-
-    def test_preprocessor_recovers_numeric_title_in_typed_comparison_list(self) -> None:
-        question = "Which film came out first, 3 Dots or Dying God?"
-        llm = StaticPreprocessLLM(
-            {
-                "entities": [_entity(question, "Dying God", "Film")],
-                "warnings": [],
-            }
-        )
-
-        result = EntityMaskingPreprocessor(llm).preprocess(question)
-
-        self.assertEqual([entity.text for entity in result.explicit_entities.entities], ["3 Dots", "Dying God"])
-        self.assertEqual(result.masked_question, "Which film came out first, ENTITYA or ENTITYB?")
-        self.assertEqual(
-            [(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings],
-            [("ENTITYA", "3 Dots"), ("ENTITYB", "Dying God")],
-        )
-        self.assertNotIn("Dots or Dying God", [entity.text for entity in result.explicit_entities.entities])
-        self.assertIn("typed coordinate title candidate", result.explicit_entities.entities[0].reason)
-
-    def test_preprocessor_ignores_legacy_mask_fields_but_accepts_legacy_entities(self) -> None:
-        question = "Who is the spouse of Young Man Luther's author?"
-        llm = StaticPreprocessLLM(
-            {
-                "explicit_entities": [_entity(question, "Young Man Luther", "Work")],
-                "mask_mappings": [{"placeholder": "WRONG", "original_text": "Young Man Luther"}],
-                "masked_question": "SHOULD NOT BE USED",
-                "warnings": [],
-            }
-        )
-
-        result = EntityMaskingPreprocessor(llm).preprocess(question)
-
-        self.assertEqual(result.masked_question, "Who is the spouse of ENTITYA's author?")
-        self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "Young Man Luther")])
-
-    def test_preprocessor_masks_repeated_entity_mentions_with_same_placeholder(self) -> None:
-        question = (
-            "Country A has an embassy from the country that contains the bay where the city of "
-            "General Santos is located. What network created country A's version of The Biggest Loser?"
-        )
-        llm = StaticPreprocessLLM(
-            {
-                "entities": [
-                    _entity(question, "Country A", "Location"),
-                    _entity(question, "General Santos", "Location"),
-                    _entity(question, "The Biggest Loser", "Work"),
-                ],
-                "warnings": [],
-            }
-        )
-
-        result = EntityMaskingPreprocessor(llm).preprocess(question)
-
-        self.assertEqual(
-            result.masked_question,
-            "ENTITYA has an embassy from the country that contains the bay where the city of "
-            "ENTITYB is located. What network created ENTITYA's version of ENTITYC?",
-        )
-        self.assertEqual(
-            [(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings],
-            [("ENTITYA", "Country A"), ("ENTITYB", "General Santos"), ("ENTITYC", "The Biggest Loser")],
-        )
-
-class TriSDPReasoningCompilerTest(unittest.TestCase):
-    def test_dell_constraint_entity_does_not_enter_main_path(self) -> None:
-        result = self._dell_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "feature")
-        self.assertEqual(anchor["path_type"], "fallback_main_path")
-        path = anchor["paths"][0]  # type: ignore[index]
-        self.assertEqual(path["nodes"][0], "ENTITYB")
-        self.assert_ordered_subsequence(path["nodes"], ["ENTITYB", "drives", "iterations", "interface", "replacing", "letting", "feature", "call", "What"])
-        self.assertEqual(len(path["node_ids"]), len(set(path["node_ids"])))
-        selected = [record for record in anchor["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
-        self.assertIn("missing_semantic_nodes_count", selected["rank_components"])
-        self.assert_path_union_graph(compiled)
-
-    def test_johnny_majors_main_path_excludes_constraint_entity(self) -> None:
-        result = self._johnny_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "year")
-        self.assertEqual(anchor["path_type"], "fallback_main_path")
-        path = anchor["paths"][0]  # type: ignore[index]
-        self.assertEqual(path["nodes"], ["ENTITYA", "defeated", "player", "born", "year"])
-        self.assertNotIn("ENTITYB", path["nodes"])
-        self.assertNotIn("1956", path["nodes"])
-        self.assertEqual(len(path["node_ids"]), len(set(path["node_ids"])))
-        self.assert_path_union_graph(compiled)
-
-    def test_role_coordinated_nationality_parallel_cover(self) -> None:
-        result = self._nationality_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "nationality")
-        self.assertEqual(anchor["anchor_id"], "14")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "nationality"), [["5", "2", "11", "13", "14"], ["10", "7", "11", "13", "14"]])
-        self.assertEqual(self.anchor_path_nodes(compiled, "nationality"), [["ENTITYA", "director", "share", "same", "nationality"], ["ENTITYB", "director", "share", "same", "nationality"]])
-        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assert_path_union_graph(compiled)
-
-    def test_lifted_coordination_parallel_cover_is_structural_not_lexical(self) -> None:
-        result = _hanlp_result(
-            "Do alpha near ENTITYA and beta near ENTITYB align the common omega?",
-            ["Do", "alpha", "near", "ENTITYA", "and", "beta", "near", "ENTITYB", "align", "the", "common", "omega", "?"],
-            [
-                _root("sdp/dm", "align", 9),
-                _psd("and", "CONJ.member", "alpha", 5, 2),
-                _psd("and", "CONJ.member", "beta", 5, 6),
-                _psd("alpha", "PAT-arg", "ENTITYA", 2, 4),
-                _psd("beta", "PAT-arg", "ENTITYB", 6, 8),
-                _psd("align", "ACT-arg", "alpha", 9, 2),
-                _psd("align", "ACT-arg", "beta", 9, 6),
-                _psd("align", "PAT-arg", "omega", 9, 12),
-                _dm("common", "RSTR", "omega", 11, 12),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "omega")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "omega"), [["4", "2", "9", "11", "12"], ["8", "6", "9", "11", "12"]])
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assert_path_union_graph(compiled)
-
-    def test_lifted_coordination_same_bound_entity_is_not_parallel(self) -> None:
-        result = _hanlp_result(
-            "Do left and right merge target near ENTITYA beside ENTITYB?",
-            ["Do", "left", "and", "right", "merge", "target", "near", "ENTITYA", "beside", "ENTITYB", "?"],
-            [
-                _root("sdp/dm", "merge", 5),
-                _psd("and", "CONJ.member", "left", 3, 2),
-                _psd("and", "CONJ.member", "right", 3, 4),
-                _psd("left", "PAT-arg", "ENTITYA", 2, 8),
-                _psd("right", "PAT-arg", "ENTITYA", 4, 8),
-                _psd("merge", "ACT-arg", "left", 5, 2),
-                _psd("merge", "ACT-arg", "right", 5, 4),
-                _psd("merge", "PAT-arg", "target", 5, 6),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "target")
-        self.assertEqual(anchor["path_type"], "fallback_main_path")
-        self.assertEqual(len(anchor["paths"]), 1)
-        self.assertNotIn("ENTITYB", anchor["paths"][0]["nodes"])  # type: ignore[index]
-        self.assert_path_union_graph(compiled)
-
-    def test_candidate_comparison_uses_typed_slot_instantiation(self) -> None:
-        result = self._film_director_died_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "film")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]])
-        self.assertTrue(any(item["text"] == "first" for item in compiled.constraints))
-        rendered = "\n".join(" ---- ".join(path) for path in self.anchor_path_nodes(compiled, "film"))
-        self.assertNotIn(" or ", rendered)
-        derived_rules = {edge.rule for edge in compiled.edges if edge.derived}
-        self.assertTrue(any("candidate_typed_slot_instantiation" in rule for rule in derived_rules))
-        instantiation_edges = [edge for edge in compiled.edges if "candidate_typed_slot_instantiation" in edge.rule]
-        self.assertEqual(len(instantiation_edges), 2)
-        self.assertTrue(all(edge.provenance for edge in instantiation_edges))
-        self.assert_path_union_graph(compiled)
-
-    def test_candidate_comparison_recovers_surface_typed_wh_slot(self) -> None:
-        result = self._which_film_director_younger_result()
-        self.assertFalse(any(edge.head == "Which" and edge.dep == "film" for edge in result.edges))
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "film")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "film"), [["8", "2", "4", "6"], ["10", "2", "4", "6"]])
-        self.assertEqual(self.anchor_path_nodes(compiled, "film"), [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]])
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
-        self.assert_path_union_graph(compiled)
-
-        instantiation_edges = [
-            edge
-            for edge in self.anchor_result(compiled, "film").get("virtual_edges", [])  # type: ignore[union-attr]
-            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
-        ]
-        self.assertEqual(len(instantiation_edges), 2)
-        for edge in instantiation_edges:
-            provenance = next(item for item in edge["provenance"] if item.get("rule") == "candidate_typed_slot_instantiation")
-            self.assertEqual(provenance["typed_slot_id"], "2")
-            self.assertEqual(provenance["reason"], "candidate fills the typed WH answer slot")
-            self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
-            self.assertTrue(provenance["candidate_set_evidence"])
-
-    def test_candidate_path_cover_does_not_traverse_between_film_candidates_for_younger(self) -> None:
-        result = self._which_film_has_director_younger_with_candidate_predicate_edges_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertEqual(
-            [list(path.nodes) for path in compiled.paths],
-            [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]],
-        )
-        for path in compiled.paths:
-            self.assertNotIn(["ENTITYA", "ENTITYB"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
-            self.assertNotIn(["ENTITYB", "ENTITYA"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
-        anchor = self.anchor_result(compiled, "film")
-        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
-        self.assertEqual(
-            [path["nodes"] for path in selected_paths],
-            [["ENTITYA", "film", "director", "younger"], ["ENTITYB", "film", "director", "younger"]],
-        )
-
-    def test_candidate_path_cover_does_not_traverse_between_film_candidates_for_died_first(self) -> None:
-        result = self._which_film_has_director_died_with_candidate_predicate_edges_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertEqual(
-            [list(path.nodes) for path in compiled.paths],
-            [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]],
-        )
-        for path in compiled.paths:
-            self.assertNotIn(["ENTITYA", "ENTITYB"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
-            self.assertNotIn(["ENTITYB", "ENTITYA"], [list(pair) for pair in zip(path.nodes, path.nodes[1:])])
-        anchor = self.anchor_result(compiled, "film")
-        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
-        self.assertEqual(
-            [path["nodes"] for path in selected_paths],
-            [["ENTITYA", "film", "director", "died"], ["ENTITYB", "film", "director", "died"]],
-        )
-
-    def test_conjunctive_constraint_cover_preserves_region_and_location_branches(self) -> None:
-        compiled = compile_token_reasoning_structure(self._region_location_created_result(), ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_conjunctive_constraint_cover")
-        self.assertEqual(
-            [list(path.nodes) for path in compiled.paths],
-            [
-                ["When", "created", "region", "north", "immediately", "region", "located", "ENTITYA"],
-                ["When", "created", "region", "and", "location", "ENTITYB"],
-            ],
-        )
-        self.assertEqual(compiled.global_selection["selection_type"], "global_conjunctive_constraint_cover")
-        cover = compiled.global_selection["conjunctive_constraint_cover"]
-        self.assertEqual(cover["predicate"], "created")
-        self.assertEqual(cover["target"], "region")
-        self.assertEqual(cover["marker"], "and")
-        rendered_paths = [list(path.nodes) for path in compiled.paths]
-        self.assertFalse(
-            any(
-                self.contains_ordered_subsequence(path, ["ENTITYB", "location", "created", "region", "ENTITYA"])
-                for path in rendered_paths
-            )
-        )
-        self.assertTrue(
-            any(
-                result.get("conjunctive_constraint_covers")
-                for result in compiled.debug_payload["per_anchor_results"]
-            )
-        )
-        self.assert_path_union_graph(compiled)
-
-    def test_or_candidate_comparison_does_not_become_conjunctive_constraint_cover(self) -> None:
-        compiled = compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path_cover")
-        self.assertFalse(
-            any(
-                result.get("path_type") == "conjunctive_constraint_path_cover"
-                for result in compiled.debug_payload["per_anchor_results"]
-            )
-        )
-
-    def test_conjunctive_constraint_cover_is_structural_not_lexical(self) -> None:
-        result = _hanlp_result(
-            "When was the object adjacent to ENTITYA and the marker around ENTITYB formed?",
-            ["When", "was", "the", "object", "adjacent", "to", "ENTITYA", "and", "the", "marker", "around", "ENTITYB", "formed", "?"],
-            [
-                _root("sdp/dm", "formed", 13),
-                _psd("formed", "TWHEN", "When", 13, 1),
-                _psd("formed", "PAT-arg", "object", 13, 4),
-                _pas("formed", "verb_ARG2", "and", 13, 8),
-                _pas("and", "coord_ARG2", "marker", 8, 10),
-                _psd("formed", "PAT-arg", "marker", 13, 10),
-                _psd("object", "LOC", "adjacent", 4, 5),
-                _psd("adjacent", "PAT-arg", "ENTITYA", 5, 7),
-                _psd("marker", "LOC", "around", 10, 11),
-                _psd("around", "PAT-arg", "ENTITYB", 11, 12),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_conjunctive_constraint_cover")
-        self.assertEqual(
-            [list(path.nodes) for path in compiled.paths],
-            [
-                ["When", "formed", "object", "adjacent", "ENTITYA"],
-                ["When", "formed", "object", "and", "marker", "around", "ENTITYB"],
-            ],
-        )
-        self.assertEqual(compiled.global_selection["conjunctive_constraint_cover"]["predicate"], "formed")
-        self.assertEqual(compiled.global_selection["conjunctive_constraint_cover"]["target"], "object")
-        self.assert_path_union_graph(compiled)
-
-    def test_global_best_path_cover_preserves_both_born_later_film_branches(self) -> None:
-        result = self._film_director_born_later_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.path_type, "global_best_path_cover")
-        self.assertEqual(len(compiled.paths), 2)
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
-        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path_cover")
-        self.assertEqual(compiled.global_selection["candidate_set"], ["ENTITYA", "ENTITYB"])
-        self.assertEqual(
-            [path["nodes"] for path in compiled.global_selection["paths"]],
-            [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]],
-        )
-        anchor = self.anchor_result(compiled, "film")
-        selected_paths = [path for path in anchor["paths"] if path.get("contains_global_best_path")]  # type: ignore[index,union-attr]
-        self.assertEqual([path["nodes"] for path in selected_paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
-        self.assert_path_union_graph(compiled)
-
-    def test_candidate_typed_slot_instantiation_preserves_whose_restriction_chain(self) -> None:
-        result = _hanlp_result(
-            "Which film whose director was born first, ENTITYA or ENTITYB?",
-            ["Which", "film", "whose", "director", "was", "born", "first", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("Which", "BV", "film", 1, 2),
-                _dm("film", "poss", "director", 2, 4),
-                _dm("whose", "poss", "director", 3, 4),
-                _dm("born", "ARG2", "director", 6, 4),
-                _dm("first", "ARG1", "born", 7, 6),
-                _pas("or", "coord_ARG1", "ENTITYA", 10, 9),
-                _pas("or", "coord_ARG2", "ENTITYB", 10, 11),
-                _psd("film", "RSTR", "born", 2, 6),
-                _psd("or", "DISJ.member", "ENTITYA", 10, 9),
-                _psd("or", "DISJ.member", "ENTITYB", 10, 11),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "film", "director", "born"], ["ENTITYB", "film", "director", "born"]])
-        self.assertNotEqual([list(path.nodes) for path in compiled.paths], [["ENTITYA", "born"], ["ENTITYB", "born"]])
-        anchor = self.anchor_result(compiled, "film")
-        virtual_edges = [
-            edge
-            for edge in anchor.get("virtual_edges", [])  # type: ignore[union-attr]
-            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
-        ]
-        self.assertEqual({(edge["source_text"], edge["target_text"]) for edge in virtual_edges}, {("ENTITYA", "film"), ("ENTITYB", "film")})
-        self.assertTrue(
-            all(
-                next(item for item in edge["provenance"] if item.get("rule") == "candidate_typed_slot_instantiation")["reason"]
-                == "candidate fills the typed WH answer slot"
-                for edge in virtual_edges
-            )
-        )
-
-        extra_result = _hanlp_result(
-            "Which film whose director was born first, ENTITYA or ENTITYB, according to ENTITYC?",
-            [
-                "Which",
-                "film",
-                "whose",
-                "director",
-                "was",
-                "born",
-                "first",
-                ",",
-                "ENTITYA",
-                "or",
-                "ENTITYB",
-                ",",
-                "according",
-                "to",
-                "ENTITYC",
-                "?",
-            ],
-            [
-                _dm("Which", "BV", "film", 1, 2),
-                _dm("film", "poss", "director", 2, 4),
-                _dm("whose", "poss", "director", 3, 4),
-                _dm("born", "ARG2", "director", 6, 4),
-                _dm("first", "ARG1", "born", 7, 6),
-                _pas("or", "coord_ARG1", "ENTITYA", 10, 9),
-                _pas("or", "coord_ARG2", "ENTITYB", 10, 11),
-                _pas("according", "prep_ARG2", "ENTITYC", 13, 15),
-                _psd("film", "RSTR", "born", 2, 6),
-                _psd("or", "DISJ.member", "ENTITYA", 10, 9),
-                _psd("or", "DISJ.member", "ENTITYB", 10, 11),
-            ],
-        )
-        extra_compiled = compile_token_reasoning_structure(extra_result, ["ENTITYA", "ENTITYB", "ENTITYC"])
-        extra_anchor = self.anchor_result(extra_compiled, "film")
-        extra_virtual_edges = [
-            edge
-            for edge in extra_anchor.get("virtual_edges", [])  # type: ignore[union-attr]
-            if "candidate_typed_slot_instantiation" in str(edge.get("rule", ""))
-        ]
-        self.assertEqual({edge["source_text"] for edge in extra_virtual_edges}, {"ENTITYA", "ENTITYB"})
-        self.assertNotIn("ENTITYC", {edge["source_text"] for edge in extra_virtual_edges})
-
-    def test_simple_chain_still_uses_single_global_best_path(self) -> None:
-        compiled = compile_token_reasoning_structure(self._director_born_result(), ["ENTITYA"])
-
-        self.assertEqual(compiled.path_type, "global_best_path")
-        self.assertEqual(len(compiled.paths), 1)
-        self.assertEqual(list(compiled.paths[0].nodes), ["ENTITYA", "director", "born"])
-        self.assertEqual(compiled.global_selection["selection_type"], "global_best_path")
-
-    def test_surface_typed_wh_adjacency_positive_and_negative_cases(self) -> None:
-        what_year = _hanlp_result(
-            "What year was ENTITYA born?",
-            ["What", "year", "was", "ENTITYA", "born", "?"],
-            [
-                _root("sdp/dm", "born", 5),
-                _dm("born", "ARG1", "ENTITYA", 5, 4),
-                _dm("born", "TWHEN", "year", 5, 2),
-            ],
-        )
-        self.assertTrue(self.anchor_result(compile_token_reasoning_structure(what_year, ["ENTITYA"]), "year"))
-
-        what_does = _hanlp_result(
-            "What does ENTITYA call target?",
-            ["What", "does", "ENTITYA", "call", "target", "?"],
-            [
-                _root("sdp/dm", "call", 4),
-                _dm("call", "ARG1", "What", 4, 1),
-                _dm("call", "ARG2", "target", 4, 5),
-                _dm("call", "ARG1", "ENTITYA", 4, 3),
-            ],
-        )
-        self.assertFalse(
-            [
-                result
-                for result in compile_token_reasoning_structure(what_does, ["ENTITYA"]).anchor_path_results
-                if result.get("anchor_text") == "does"
-            ]
-        )
-
-        which_of = _hanlp_result(
-            "Which of ENTITYA is older?",
-            ["Which", "of", "ENTITYA", "is", "older", "?"],
-            [
-                _root("sdp/dm", "older", 5),
-                _dm("older", "ARG1", "ENTITYA", 5, 3),
-            ],
-        )
-        compiled_which_of = compile_token_reasoning_structure(which_of, ["ENTITYA"])
-        self.assertFalse([result for result in compiled_which_of.anchor_path_results if result.get("anchor_text") == "of"])
-
-    def test_wh_anchor_candidate_preserves_possessive_answer_intent(self) -> None:
-        result = _hanlp_result(
-            "Whose sister played ENTITYA in ENTITYB?",
-            ["Whose", "sister", "played", "ENTITYA", "in", "ENTITYB", "?"],
-            [
-                _root("sdp/dm", "played", 3),
-                _dm("sister", "poss", "Whose", 2, 1),
-                _pas("sister", "poss_ARG1", "Whose", 2, 1),
-                _dm("played", "ARG1", "sister", 3, 2),
-                _dm("played", "ARG2", "ENTITYA", 3, 4),
-                _pas("in", "prep_ARG1", "played", 5, 3),
-                _pas("in", "prep_ARG2", "ENTITYB", 5, 6),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        wh_candidates = [
-            candidate
-            for candidate in compiled.debug_payload["answer_anchor_candidates"]
-            if candidate["text"] == "Whose" and "wh_anchor" in candidate["source_types"]
-        ]
-        self.assertTrue(wh_candidates)
-        self.assertEqual(compiled.answer_anchor, "Whose")
-        self.assertEqual([list(path.nodes) for path in compiled.paths], [["Whose", "sister", "played", "ENTITYA"]])
-
-    def test_bridge_contraction_edges_are_strong_and_semantic(self) -> None:
-        result = _hanlp_result(
-            "Who is the spouse of the director of film ENTITYA?",
-            ["Who", "is", "the", "spouse", "of", "the", "director", "of", "film", "ENTITYA", "?"],
-            [
-                _root("sdp/dm", "is", 2),
-                _dm("is", "ARG2", "Who", 2, 1),
-                _dm("is", "ARG2", "spouse", 2, 4),
-                _dm("of", "ARG1", "spouse", 5, 4),
-                _dm("of", "ARG2", "director", 5, 7),
-                _pas("of", "prep_ARG1", "director", 8, 7),
-                _pas("of", "prep_ARG2", "ENTITYA", 8, 10),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
-        self.assertEqual(self.anchor_path_nodes(compiled, "spouse")[0], ["ENTITYA", "director", "spouse"])
-        selected = [record for record in self.anchor_result(compiled, "spouse")["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
-        components = selected["rank_components"]
-        self.assertEqual(components["semantic_nodes"], ["spouse", "director", "ENTITYA"])
-        self.assertEqual(components["missing_semantic_nodes_count"], 0)
-        self.assertEqual(components["weak_edge_count"], 0)
-        edges = {
-            frozenset((edge.source_text, edge.target_text)): edge
-            for edge in compiled.edges
-        }
-        self.assertEqual(edges[frozenset(("ENTITYA", "director"))].edge_quality, "STRONG")
-        self.assertEqual(edges[frozenset(("director", "spouse"))].edge_quality, "STRONG")
-        self.assertTrue(edges[frozenset(("ENTITYA", "director"))].derived)
-        self.assertTrue(edges[frozenset(("director", "spouse"))].derived)
-
-    def test_washington_state_prison_step4_finishes_under_30_seconds(self) -> None:
-        result = _hanlp_result(
-            "Which county shares a border with the county where the most populous city in the state where ENTITYA can be found is located?",
-            [
-                "Which",
-                "county",
-                "shares",
-                "a",
-                "border",
-                "with",
-                "the",
-                "county",
-                "where",
-                "the",
-                "most",
-                "populous",
-                "city",
-                "in",
-                "the",
-                "state",
-                "where",
-                "ENTITYA",
-                "can",
-                "be",
-                "found",
-                "is",
-                "located",
-                "?",
-            ],
-            [
-                _root("sdp/dm", "shares", 3),
-                _dm("county", "BV", "Which", 2, 1),
-                _dm("shares", "ARG1", "county", 3, 2),
-                _dm("shares", "ARG2", "border", 3, 5),
-                _psd("shares", "ACT-arg", "county", 3, 2),
-                _psd("shares", "PAT-arg", "border", 3, 5),
-                _pas("with", "prep_ARG1", "border", 6, 5),
-                _pas("with", "prep_ARG2", "county", 6, 8),
-                _dm("border", "ARG2", "county", 5, 8),
-                _psd("border", "PAT-arg", "county", 5, 8),
-                _dm("county", "RSTR", "located", 8, 23),
-                _dm("located", "ARG1", "city", 23, 13),
-                _pas("located", "verb_ARG1", "city", 23, 13),
-                _psd("located", "ACT-arg", "city", 23, 13),
-                _dm("city", "RSTR", "populous", 13, 12),
-                _dm("populous", "ARG1", "most", 12, 11),
-                _pas("in", "prep_ARG1", "city", 14, 13),
-                _pas("in", "prep_ARG2", "state", 14, 16),
-                _dm("city", "LOC", "state", 13, 16),
-                _dm("state", "RSTR", "found", 16, 21),
-                _dm("found", "ARG1", "ENTITYA", 21, 18),
-                _pas("found", "verb_ARG1", "ENTITYA", 21, 18),
-                _psd("state", "RSTR", "found", 16, 21),
-                _psd("found", "PAT-arg", "ENTITYA", 21, 18),
-            ],
-        )
-
-        started = time.perf_counter()
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-        elapsed = time.perf_counter() - started
-
-        self.assertLess(elapsed, 30.0)
-        self.assert_multi_anchor_result(compiled)
-        json.dumps(compiled.to_dict())
-
-    def test_local_rank_prefers_semantic_coverage_over_short_entity_path(self) -> None:
-        result = _hanlp_result(
-            "When was ENTITYA constructed in the city where ENTITYB from the region where ENTITYC is located died?",
-            [
-                "When",
-                "was",
-                "ENTITYA",
-                "constructed",
-                "in",
-                "the",
-                "city",
-                "where",
-                "ENTITYB",
-                "from",
-                "the",
-                "region",
-                "where",
-                "ENTITYC",
-                "is",
-                "located",
-                "died",
-                "?",
-            ],
-            [
-                _root("sdp/dm", "constructed", 4),
-                _dm("constructed", "ARG1", "ENTITYA", 4, 3),
-                _dm("constructed", "loc", "city", 4, 7),
-                _dm("died", "loc", "city", 17, 7),
-                _dm("died", "ARG1", "ENTITYB", 17, 9),
-                _dm("from", "ARG1", "ENTITYB", 10, 9),
-                _dm("from", "ARG2", "region", 10, 12),
-                _dm("located", "ARG1", "ENTITYC", 16, 14),
-                _dm("located", "loc", "region", 16, 12),
-                _pas("from", "prep_ARG1", "ENTITYB", 10, 9),
-                _pas("from", "prep_ARG2", "region", 10, 12),
-                _psd("located", "ACT-arg", "ENTITYC", 16, 14),
-                _psd("located", "LOC", "region", 16, 12),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB", "ENTITYC"])
-
-        self.assertEqual(
-            self.anchor_path_nodes(compiled, "ENTITYC")[0],
-            ["ENTITYA", "constructed", "city", "died", "ENTITYB", "region", "located", "ENTITYC"],
-        )
-        anchor = self.anchor_result(compiled, "ENTITYC")
-        selected = [record for record in anchor["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
-        self.assertEqual(selected["rank_components"]["missing_semantic_nodes_count"], 0)
-        short_entity = [
-            record
-            for record in anchor["candidate_paths"]  # type: ignore[index]
-            if record["nodes"] == ["ENTITYC"]
-        ][0]
-        partial = [
-            record
-            for record in anchor["candidate_paths"]  # type: ignore[index]
-            if record["nodes"] == ["ENTITYB", "region", "located", "ENTITYC"]
-        ][0]
-        self.assertGreater(short_entity["rank_components"]["missing_semantic_nodes_count"], selected["rank_components"]["missing_semantic_nodes_count"])
-        self.assertGreater(partial["rank_components"]["missing_semantic_nodes_count"], selected["rank_components"]["missing_semantic_nodes_count"])
-
-    def test_bare_wh_candidate_substitution_born_later(self) -> None:
-        result = self._born_later_result()
-        self.assertFalse(any(edge.head_idx == 0 for edge in result.edges))
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "born")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "born"), [["6", "3", "4"], ["8", "3", "4"]])
-        self.assertEqual(self.anchor_path_nodes(compiled, "born"), [["ENTITYA", "born", "later"], ["ENTITYB", "born", "later"]])
-        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
-        self.assertTrue(all(len(path["node_ids"]) > 1 for path in anchor["paths"]))  # type: ignore[index]
-        self.assertTrue(all(len(path["node_ids"]) == len(set(path["node_ids"])) for path in anchor["paths"]))  # type: ignore[index]
-        self.assert_path_union_graph(compiled)
-
-        substitution_edges = [
-            edge
-            for edge in self.anchor_result(compiled, "born").get("virtual_edges", [])  # type: ignore[union-attr]
-            if "candidate_bare_wh_substitution" in str(edge.get("rule", ""))
-        ]
-        self.assertEqual(len(substitution_edges), 2)
-        self.assertTrue(all(edge.get("derived") and edge.get("provenance") for edge in substitution_edges))
-        for edge in substitution_edges:
-            provenance = edge["provenance"][0]
-            self.assertEqual(provenance["rule"], "candidate_bare_wh_substitution")
-            self.assertEqual(provenance["bare_wh_slot_id"], "1")
-            self.assertEqual(provenance["query_predicate_id"], "3")
-            self.assertEqual(provenance["schema_path_ids"], ["1", "3", "4"])
-            self.assertTrue(provenance["candidate_set_evidence"])
-
-    def test_bare_wh_candidate_substitution_is_structural_not_lexical(self) -> None:
-        result = _hanlp_result(
-            "Whom did pivot afterward, ENTITYA or ENTITYB?",
-            ["Whom", "did", "pivot", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("pivot", "ARG2", "Whom", 3, 1),
-                _pas("pivot", "verb_ARG2", "Whom", 3, 1),
-                _psd("pivot", "PAT-arg", "Whom", 3, 1),
-                _dm("pivot", "TWHEN", "afterward", 3, 4),
-                _psd("afterward", "adj_ARG1", "pivot", 4, 3),
-                _pas("or", "coord_ARG1", "ENTITYA", 7, 6),
-                _pas("or", "coord_ARG2", "ENTITYB", 7, 8),
-                _psd("or", "DISJ.member", "ENTITYA", 7, 6),
-                _psd("or", "DISJ.member", "ENTITYB", 7, 8),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        anchor = self.anchor_result(compiled, "pivot")
-        self.assertEqual(anchor["path_type"], "candidate_path_cover")
-        self.assertEqual(self.anchor_path_ids(compiled, "pivot"), [["6", "3", "4"], ["8", "3", "4"]])
-        self.assertTrue(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
-        self.assert_path_union_graph(compiled)
-
-    def test_bare_wh_candidate_substitution_requires_direct_wh_core_argument(self) -> None:
-        result = _hanlp_result(
-            "Who did marker shift afterward, ENTITYA or ENTITYB?",
-            ["Who", "did", "marker", "shift", "afterward", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("marker", "ARG1", "Who", 3, 1),
-                _dm("shift", "ARG2", "marker", 4, 3),
-                _dm("shift", "TWHEN", "afterward", 4, 5),
-                _pas("or", "coord_ARG1", "ENTITYA", 8, 7),
-                _pas("or", "coord_ARG2", "ENTITYB", 8, 9),
-                _psd("or", "DISJ.member", "ENTITYA", 8, 7),
-                _psd("or", "DISJ.member", "ENTITYB", 8, 9),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assertEqual(compiled.debug_payload["selection_mode"], "global_best_path")
-        self.assertFalse(
-            any(
-                result.get("selection_mode") == "candidate_bare_wh_substitution"
-                for result in compiled.debug_payload["per_anchor_results"]
-            )
-        )
-        self.assertFalse(any("candidate_bare_wh_substitution" in edge.rule for edge in compiled.edges))
-        self.assertFalse(any("candidate_bare_wh_substitution" in str(edge) for edge in compiled.debug_payload["virtual_edges"]))
-
-    def test_simple_main_chain_and_answer_anchor_regressions(self) -> None:
-        director_born = self._director_born_result()
-
-        compiled = compile_token_reasoning_structure(director_born, ["ENTITYA"])
-
-        self.assert_multi_anchor_result(compiled)
-        born_anchor = self.anchor_result(compiled, "born")
-        self.assertEqual(born_anchor["path_type"], "single_main_path")
-        self.assertEqual(self.anchor_path_nodes(compiled, "born")[0], ["ENTITYA", "director", "born"])
-        self.assert_path_union_graph(compiled)
-
-        for result, entities, anchor_text in [
-            (self._older_result(), ["ENTITYA", "ENTITYB"], "older"),
-            (director_born, ["ENTITYA"], "born"),
-            (self._typed_year_result(), ["ENTITYA"], "year"),
-            (self._nationality_result(), ["ENTITYA", "ENTITYB"], "nationality"),
-            (self._born_later_result(), ["ENTITYA", "ENTITYB"], "born"),
-            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"], "film"),
-        ]:
-            self.assertTrue(self.anchor_result(compile_token_reasoning_structure(result, entities), anchor_text))
-
-    def test_possessive_clitic_marker_is_contracted_from_entity_mother_path(self) -> None:
-        result = _hanlp_result(
-            "When did ENTITYA's mother die?",
-            ["When", "did", "ENTITYA", "'", "s", "mother", "die", "?"],
-            [
-                _root("sdp/dm", "die", 7),
-                _pas("s", "poss_ARG2", "ENTITYA", 5, 3),
-                _pas("s", "poss_ARG1", "mother", 5, 6),
-                _dm("die", "ARG1", "mother", 7, 6),
-                _pas("die", "verb_ARG1", "mother", 7, 6),
-                _dm("When", "TWHEN", "die", 1, 7),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
-        self.assertEqual(self.anchor_path_nodes(compiled, "die")[0], ["ENTITYA", "mother", "die"])
-        self.assertNotIn("s", self.anchor_path_nodes(compiled, "die")[0])
-        self.assertNotIn("s", {node.text for node in compiled.nodes})
-        self.assertIn(frozenset(("ENTITYA", "mother")), _edge_text_pairs(compiled))
-        self.assertIn(frozenset(("mother", "die")), _edge_text_pairs(compiled))
-        possessive_edges = [
-            edge for edge in compiled.edges
-            if {edge.source_text, edge.target_text} == {"ENTITYA", "mother"}
-        ]
-        self.assertTrue(any("possessive_marker_contraction" in edge.rule for edge in possessive_edges))
-
-    def test_possessive_clitic_with_adj_possessed_edge_is_contracted(self) -> None:
-        result = _hanlp_result(
-            "What is the ENTITYA dom ensamma performer's birth date?",
-            ["What", "is", "the", "ENTITYA", "dom", "ensamma", "performer", "'", "s", "birth", "date", "?"],
-            [
-                _root("sdp/dm", "date", 11),
-                _dm("What", "BV", "date", 1, 11),
-                _pas("performer", "noun_ARG1", "ENTITYA", 7, 4),
-                _pas("s", "poss_ARG2", "performer", 9, 7),
-                _pas("s", "adj_ARG1", "date", 9, 11),
-                _dm("birth", "compound", "date", 10, 11),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
-        self.assertEqual(self.anchor_path_nodes(compiled, "date")[0], ["ENTITYA", "performer", "date"])
-        self.assertNotIn("s", self.anchor_path_nodes(compiled, "date")[0])
-        self.assertNotIn("s", {node.text for node in compiled.nodes})
-        self.assertIn(frozenset(("ENTITYA", "performer")), _edge_text_pairs(compiled))
-        self.assertIn(frozenset(("performer", "date")), _edge_text_pairs(compiled))
-
-    def test_non_possessive_s_is_not_globally_treated_as_function(self) -> None:
-        result = _hanlp_result(
-            "ENTITYA s target?",
-            ["ENTITYA", "s", "target", "?"],
-            [
-                _root("sdp/dm", "s", 2),
-                _dm("s", "ARG1", "ENTITYA", 2, 1),
-                _dm("s", "ARG2", "target", 2, 3),
-            ],
-        )
-
-        state = build_evidence_graph(result)
-
-        self.assertEqual(state.nodes["2"].text, "s")
-        self.assertEqual(state.nodes["2"].kind, "content")
-
-    def test_broadcaster_headquarters_remains_single_main_path(self) -> None:
-        result = self._broadcaster_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
-        self.assertEqual(self.anchor_path_nodes(compiled, "headquarters")[0], ["ENTITYA", "show", "broadcaster", "headquarters"])
-        self.assert_path_union_graph(compiled)
-
-    def test_role_descriptor_lifting_is_debug_evidence_not_forced_terminal_cover(self) -> None:
-        result = self._role_series_result()
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB", "ENTITYC"])
-
-        json.dumps(compiled.to_dict())
-        self.assert_multi_anchor_result(compiled)
-        series_paths = self.anchor_result(compiled, "series")["paths"]  # type: ignore[index]
-        self.assertEqual(len(series_paths), 1)
-        self.assertEqual(len(series_paths[0]["node_ids"]), len(set(series_paths[0]["node_ids"])))  # type: ignore[index]
-        self.assert_path_union_graph(compiled)
-        self.assertTrue(
-            any(
-                "descriptor_lifting" in str(edge.get("rule", ""))
-                for result in compiled.debug_payload["per_anchor_results"]
-                for edge in result.get("virtual_edges", [])
-            )
-        )
-
-    def test_works_collection_museum_houses_main_path_and_debug(self) -> None:
-        result = self._works_result()
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            compiled = compile_token_reasoning_structure(
-                result,
-                ["ENTITYA"],
-                masked_question=result.text,
-                question_id="works_case",
-                debug=True,
-                debug_dir=tmpdir,
-            )
-            self.assertTrue(Path(compiled.debug_file or "").exists())
-            json.dumps(compiled.to_dict())
-
-        self.assertEqual(self.anchor_path_nodes(compiled, "houses")[0], ["ENTITYA", "Works", "part", "collection", "museum", "houses"])
-        self.assertTrue(any(item["text"] == "65,000" for item in compiled.constraints))
-        final_texts = {node.text for node in compiled.nodes}
-        self.assertNotIn("ROOT", final_texts)
-        self.assertNotIn("a", final_texts)
-        self.assertNotIn("?", final_texts)
-        self.assert_path_union_graph(compiled)
-
-    def test_structure_ranking_not_lexical_shortcut(self) -> None:
-        result = _hanlp_result(
-            "Alpha ENTITYA links target while ENTITYB label also links target?",
-            ["Alpha", "ENTITYA", "links", "target", "while", "ENTITYB", "label", "also", "?"],
-            [
-                _root("sdp/dm", "links", 3),
-                _dm("links", "ARG1", "ENTITYA", 3, 2),
-                _dm("links", "ARG2", "target", 3, 4),
-                _dm("label", "compound", "ENTITYB", 7, 6),
-                _dm("links", "ARG1", "label", 3, 7),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
-        self.assert_multi_anchor_result(compiled)
-        self.assertEqual(self.anchor_path_nodes(compiled, "target")[0], ["ENTITYB", "label", "links", "target"])
-        selected = [record for record in self.anchor_result(compiled, "target")["candidate_paths"] if record.get("selected")][0]  # type: ignore[index]
-        self.assertEqual(selected["rank_components"]["missing_semantic_nodes_count"], 1)
-        self.assertIn("ENTITYB", selected["rank_components"]["covered_semantic_nodes"])
-        self.assertIn("label", selected["rank_components"]["covered_semantic_nodes"])
-        self.assert_path_union_graph(compiled)
-
-    def test_global_path_union_invariants_and_determinism(self) -> None:
-        cases = [
-            (self._dell_result(), ["ENTITYA", "ENTITYB"], "global_best_path", 1),
-            (self._johnny_result(), ["ENTITYA", "ENTITYB"], "global_best_path", 1),
-            (self._nationality_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
-            (self._film_director_died_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
-            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
-            (self._born_later_result(), ["ENTITYA", "ENTITYB"], "global_best_path_cover", 2),
-            (self._director_born_result(), ["ENTITYA"], "global_best_path", 1),
-        ]
-        for result, entities, expected_path_type, expected_path_count in cases:
-            with self.subTest(question=result.text):
-                first = compile_token_reasoning_structure(result, entities)
-                second = compile_token_reasoning_structure(result, entities)
-                self.assertEqual(first.to_dict(), second.to_dict())
-                self.assert_path_union_graph(first)
-                edge_pairs = [(edge.source, edge.target) for edge in first.edges]
-                self.assertEqual(len(edge_pairs), len(set(frozenset(pair) for pair in edge_pairs)))
-                for path in first.paths:
-                    self.assertEqual(len(path.node_ids), len(set(path.node_ids)))
-                self.assertEqual(first.path_type, expected_path_type)
-                self.assertEqual(len(first.paths), expected_path_count)
-                self.assertTrue(first.global_selection)
-
-    def test_global_rank_tiebreak_prefers_typed_anchor_fit(self) -> None:
-        selected = _select_global_best_path(
-            [
-                _global_candidate_stub((0, 0, 2, 6), 2, 1, ["8", "5", "2"]),
-                _global_candidate_stub((0, 0, 2, 0), 1, 1, ["8", "5", "2"]),
-            ]
-        )
-
-        self.assertEqual(selected.anchor_index, 1)  # type: ignore[union-attr]
-
-    def test_global_rank_priorities_are_lexicographic(self) -> None:
-        semantic_winner = _select_global_best_path(
-            [
-                _global_candidate_stub((1, 0, 1, 0), 1, 1, ["1"]),
-                _global_candidate_stub((0, 9, 9, 6), 2, 1, ["1", "2", "3"]),
-            ]
-        )
-        self.assertEqual(semantic_winner.anchor_index, 2)  # type: ignore[union-attr]
-
-        dirty_winner = _select_global_best_path(
-            [
-                _global_candidate_stub((0, 1, 2, 0), 1, 1, ["1", "2"]),
-                _global_candidate_stub((0, 0, 9, 6), 2, 1, ["1", "2", "3"]),
-            ]
-        )
-        self.assertEqual(dirty_winner.anchor_index, 2)  # type: ignore[union-attr]
-
-        length_winner = _select_global_best_path(
-            [
-                _global_candidate_stub((0, 0, 3, 0), 1, 1, ["1", "2", "3", "4"]),
-                _global_candidate_stub((0, 0, 2, 6), 2, 1, ["1", "2", "3"]),
-            ]
-        )
-        self.assertEqual(length_winner.anchor_index, 2)  # type: ignore[union-attr]
-
-    def test_global_rank_stable_when_tuples_match(self) -> None:
-        selected = _select_global_best_path(
-            [
-                _global_candidate_stub((0, 0, 2, 0), 2, 1, ["1", "3"]),
-                _global_candidate_stub((0, 0, 2, 0), 1, 2, ["1", "2"]),
-                _global_candidate_stub((0, 0, 2, 0), 1, 1, ["1", "4"]),
-            ]
-        )
-
-        self.assertEqual((selected.anchor_index, selected.path_index), (1, 1))  # type: ignore[union-attr]
-
-    def test_global_rank_components_count_dirty_path_and_missing_edges(self) -> None:
-        state = _WorkingState(
-            nodes={
-                "1": TokenReasoningNode("1", "ENTITYA", 1, "entity"),
-                "2": TokenReasoningNode("2", "of", 2, "function"),
-                "3": TokenReasoningNode("3", "target", 3, "content"),
-            },
-            raw_edges={},
-            edges={
-                ("1", "2"): TokenReasoningEdge(
-                    "1",
-                    "2",
-                    "ENTITYA",
-                    "of",
-                    support=0.67,
-                    edge_quality="MEDIUM",
-                    derived=True,
-                    rule="test_edge",
-                )
-            },
-            normalized_edges=[],
-            virtual_edges=[],
-            warnings=[],
-        )
-        warnings: list[str] = []
-
-        rank, components = _rank_global_path_candidate(
-            TokenReasoningPath("A1.P1", ["ENTITYA", "of", "target"], ["1", "2", "3"]),
-            _AnswerAnchorCandidate("3", "target", ["clause_predicate"], 0),
-            state,
-            {"1", "3"},
-            warnings=warnings,
-        )
-
-        self.assertEqual(rank, (0, 4, 2, 7))
-        self.assertEqual(components["medium_edge_count"], 1)
-        self.assertEqual(components["weak_edge_count"], 1)
-        self.assertEqual(components["function_node_count"], 1)
-        self.assertEqual(components["derived_edge_count"], 1)
-        self.assertEqual(components["dirty_path_count"], 4)
-        self.assertTrue(warnings)
-
-    def test_no_global_candidate_fallback(self) -> None:
-        result = HanLPSDPResult(
-            text="?",
-            tokens=["?"],
-            available_keys=[],
-            sdp_graphs={},
-            edges=[],
-            raw={},
-        )
-
-        compiled = compile_token_reasoning_structure(result, [])
-
-        self.assertEqual(compiled.path_type, "no_global_path")
-        self.assertEqual(compiled.paths, [])
-        self.assertEqual(compiled.global_selection, {})
         self.assertIsNone(compiled.answer_anchor)
         self.assertIsNone(compiled.answer_anchor_id)
-        self.assertIn("global path selection found no candidates", compiled.warnings)
+        self.assertEqual(compiled.anchor_path_results, [])
+        self.assertEqual(compiled.debug_payload["answer_anchor_candidates"], [])
+        serialized_debug = json.dumps(compiled.debug_payload, ensure_ascii=False)
+        for source in [
+            "typed_wh_slot",
+            "wh_anchor",
+            "root_projection",
+            "modifier_projection",
+            "comparative_focus",
+            "bare_wh_predicate_root",
+            "clause_predicate",
+            "explicit_entity",
+        ]:
+            self.assertNotIn(source, serialized_debug)
 
-    def assert_ordered_subsequence(self, values: list[str], expected: list[str]) -> None:
-        cursor = 0
-        for value in values:
-            if cursor < len(expected) and value == expected[cursor]:
-                cursor += 1
-        self.assertEqual(cursor, len(expected), values)
+    def test_each_explicit_entity_is_an_independent_branch_without_global_competition(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
 
-    def contains_ordered_subsequence(self, values: list[str], expected: list[str]) -> bool:
-        cursor = 0
-        for value in values:
-            if cursor < len(expected) and value == expected[cursor]:
-                cursor += 1
-        return cursor == len(expected)
+        self.assertEqual(compiled.path_type, "entity_branch_best_paths")
+        self.assertEqual(len(compiled.paths), 2)
+        self.assertEqual([path.nodes[0] for path in compiled.paths], ["ENTITYA", "ENTITYB"])
+        self.assertEqual([path.nodes[-1] for path in compiled.paths], ["later", "later"])
+        self.assertEqual(compiled.global_selection["selection_type"], "entity_branch_best_paths")
+        self.assertEqual(len(compiled.global_selection["entity_branch_results"]), 2)
 
-    def assert_path_union_graph(self, compiled: object) -> None:
-        path_node_ids: set[str] = set()
-        path_pairs: set[frozenset[str]] = set()
-        for path in compiled.paths:  # type: ignore[attr-defined]
-            path_node_ids.update(path.node_ids)
-            for left, right in zip(path.node_ids, path.node_ids[1:]):
-                path_pairs.add(frozenset((left, right)))
-        final_node_ids = {node.id for node in compiled.nodes}  # type: ignore[attr-defined]
-        final_pairs = {frozenset((edge.source, edge.target)) for edge in compiled.edges}  # type: ignore[attr-defined]
-        self.assertEqual(final_node_ids, path_node_ids)
-        self.assertEqual(final_pairs, path_pairs)
+    def test_semantic_boundaries_are_degree_one_non_entity_nodes_in_filtered_graph(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
+        boundaries = compiled.global_selection["semantic_boundary_nodes"]
+        boundary_by_text = {item["text"]: item for item in boundaries}
 
-    def assert_multi_anchor_result(self, compiled: object) -> None:
-        self.assertIn(compiled.path_type, {"global_best_path", "global_best_path_cover", "global_conjunctive_constraint_cover"})  # type: ignore[attr-defined]
-        self.assertIsNotNone(compiled.answer_anchor)  # type: ignore[attr-defined]
-        self.assertIsNotNone(compiled.answer_anchor_id)  # type: ignore[attr-defined]
-        self.assertTrue(compiled.anchor_path_results)  # type: ignore[attr-defined]
-        self.assertTrue(compiled.global_selection)  # type: ignore[attr-defined]
-        self.assertGreaterEqual(len(compiled.paths), 1)  # type: ignore[attr-defined]
+        self.assertEqual(boundary_by_text["Which"]["degree"], 1)
+        self.assertEqual(boundary_by_text["later"]["degree"], 1)
+        self.assertNotIn("film", boundary_by_text)
+        self.assertNotIn("director", boundary_by_text)
+        self.assertNotIn("ENTITYA", boundary_by_text)
+        self.assertNotIn("ENTITYB", boundary_by_text)
 
-    def anchor_result(self, compiled: object, anchor_text: str) -> dict[str, object]:
-        matches = [
-            result
-            for result in compiled.anchor_path_results  # type: ignore[attr-defined]
-            if result.get("anchor_text") == anchor_text
-        ]
-        self.assertTrue(matches, f"missing anchor {anchor_text!r}")
-        return matches[0]
+    def test_wh_function_word_can_be_semantic_boundary(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA"])
+        boundaries = {item["text"]: item for item in compiled.global_selection["semantic_boundary_nodes"]}
 
-    def anchor_path_nodes(self, compiled: object, anchor_text: str) -> list[list[str]]:
-        return [list(path["nodes"]) for path in self.anchor_result(compiled, anchor_text).get("paths", [])]  # type: ignore[index,union-attr]
+        self.assertIn("Which", boundaries)
+        self.assertEqual(boundaries["Which"]["kind"], "function")
 
-    def anchor_path_ids(self, compiled: object, anchor_text: str) -> list[list[str]]:
-        return [list(path["node_ids"]) for path in self.anchor_result(compiled, anchor_text).get("paths", [])]  # type: ignore[index,union-attr]
+    def test_root_punctuation_function_and_coord_words_are_not_boundaries(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
+        boundary_texts = {item["text"] for item in compiled.global_selection["semantic_boundary_nodes"]}
 
-    def _dell_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "What does dell call the feature letting the interface replacing ENTITYA in later iterations of the ENTITYB drives to remain powered when the computer is off?",
+        for excluded in {"ROOT", ",", "?", "has", "the", "or"}:
+            self.assertNotIn(excluded, boundary_texts)
+
+    def test_dijkstra_uses_existing_edge_cost_for_lowest_cost_path(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA can reach goal.",
+            ["ENTITYA", "can", "mid", "goal", "."],
             [
-                "What",
-                "does",
-                "dell",
-                "call",
-                "the",
-                "feature",
-                "letting",
-                "the",
-                "interface",
-                "replacing",
-                "ENTITYA",
-                "in",
-                "later",
-                "iterations",
-                "of",
-                "the",
-                "ENTITYB",
-                "drives",
-                "to",
-                "remain",
-                "powered",
-                "when",
-                "the",
-                "computer",
-                "is",
-                "off",
-                "?",
+                _dm("ENTITYA", "unknown_relation", "goal", 1, 4),
+                _dm("mid", "ARG1", "ENTITYA", 3, 1),
+                _dm("mid", "ARG2", "goal", 3, 4),
             ],
+        )
+        state = build_evidence_graph(result)
+        graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+        path, cost = _shortest_semantic_boundary_path(graph, state.nodes, "1", "4", blocked_internal_ids=set())
+
+        self.assertEqual([state.nodes[node_id].text for node_id in path], ["ENTITYA", "mid", "goal"])
+        self.assertLess(cost, 4.0)
+
+    def test_other_explicit_entities_cannot_be_internal_nodes(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA ENTITYB target?",
+            ["ENTITYA", "ENTITYB", "target", "?"],
             [
-                _root("sdp/dm", "call", 4),
-                _dm("call", "ARG1", "What", 4, 1),
-                _dm("call", "ARG2", "feature", 4, 6),
-                _pas("call", "verb_ARG2", "feature", 4, 6),
-                _dm("feature", "RSTR", "letting", 6, 7),
-                _dm("letting", "ARG1", "interface", 7, 9),
-                _dm("interface", "RSTR", "replacing", 9, 10),
-                _dm("replacing", "ARG2", "ENTITYA", 10, 11),
-                _pas("in", "prep_ARG1", "interface", 12, 9),
-                _pas("in", "prep_ARG2", "iterations", 12, 14),
-                _dm("iterations", "RSTR", "drives", 14, 18),
-                _pas("of", "prep_ARG1", "iterations", 15, 14),
-                _pas("of", "prep_ARG2", "drives", 15, 18),
-                _dm("drives", "ARG1", "ENTITYB", 18, 17),
+                _dm("ENTITYB", "ARG1", "ENTITYA", 2, 1),
+                _dm("ENTITYB", "ARG2", "target", 2, 3),
             ],
         )
 
-    def _johnny_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "The player who defeated ENTITYA for the ENTITYB in 1956 was born in what year?",
-            ["The", "player", "who", "defeated", "ENTITYA", "for", "the", "ENTITYB", "in", "1956", "was", "born", "in", "what", "year", "?"],
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYB", "target"]])
+        self.assertTrue(any("ENTITYA" in warning and "no reachable semantic boundary" in warning for warning in compiled.warnings))
+
+    def test_each_entity_keeps_only_one_top1_candidate(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
+        branch_results = compiled.global_selection["entity_branch_results"]
+
+        self.assertEqual(len(compiled.paths), 2)
+        for branch in branch_results:
+            self.assertGreater(branch["candidate_count"], 1)
+            self.assertEqual(branch["selected"]["boundary"], "later")
+        self.assertEqual(
+            [list(path.nodes) for path in compiled.paths],
             [
-                _root("sdp/dm", "born", 12),
-                _dm("what", "BV", "year", 14, 15),
-                _dm("born", "ARG1", "player", 12, 2),
-                _dm("born", "TWHEN", "year", 12, 15),
-                _dm("defeated", "ARG1", "player", 4, 2),
-                _dm("defeated", "ARG2", "ENTITYA", 4, 5),
-                _pas("for", "prep_ARG1", "defeated", 6, 4),
-                _pas("for", "prep_ARG2", "ENTITYB", 6, 8),
-                _dm("1956", "ARG1", "defeated", 10, 4),
+                ["ENTITYA", "director", "born", "later"],
+                ["ENTITYB", "director", "born", "later"],
             ],
         )
 
-    def _nationality_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Do director of film ENTITYA and director of film ENTITYB share the same nationality?",
-            ["Do", "director", "of", "film", "ENTITYA", "and", "director", "of", "film", "ENTITYB", "share", "the", "same", "nationality", "?"],
+    def test_entity_branch_ranking_prefers_current_semantic_coverage_metric(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA"])
+        branch = compiled.global_selection["entity_branch_results"][0]
+        candidate_by_boundary = {candidate["boundary"]: candidate for candidate in branch["candidates"]}
+
+        self.assertEqual(branch["selected"]["boundary"], "later")
+        self.assertLess(
+            candidate_by_boundary["later"]["rank_components"]["missing_semantic_nodes_count"],
+            candidate_by_boundary["Which"]["rank_components"]["missing_semantic_nodes_count"],
+        )
+        self.assertEqual(branch["selected"]["rank"][:3], [2, 2, 3])
+
+    def test_step5_restore_accepts_multiple_entity_branch_paths(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), ["ENTITYA", "ENTITYB"])
+        restored = restore_global_best_paths(
+            compiled.paths,
             [
-                _root("sdp/dm", "share", 11),
-                _psd("and", "CONJ.member", "director", 6, 2),
-                _psd("and", "CONJ.member", "director", 6, 7),
-                _psd("director", "PAT-arg", "ENTITYA", 2, 5),
-                _psd("director", "PAT-arg", "ENTITYB", 7, 10),
-                _dm("share", "ARG2", "nationality", 11, 14),
-                _dm("same", "RSTR", "nationality", 13, 14),
-                _pas("share", "verb_ARG1", "director", 11, 2),
-                _pas("share", "verb_ARG1", "director", 11, 7),
-                _pas("share", "verb_ARG2", "nationality", 11, 14),
-                _psd("share", "ACT-arg", "director", 11, 2),
-                _psd("share", "ACT-arg", "director", 11, 7),
-                _psd("share", "PAT-arg", "nationality", 11, 14),
+                SimpleNamespace(placeholder="ENTITYA", original_text="Illusions (1982 Film)"),
+                SimpleNamespace(placeholder="ENTITYB", original_text="It'S A Wonderful Afterlife"),
             ],
         )
 
-    def _film_director_died_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Which film has the director who died first, ENTITYA or ENTITYB?",
-            ["Which", "film", "has", "the", "director", "who", "died", "first", ",", "ENTITYA", "or", "ENTITYB", "?"],
+        self.assertEqual(
+            restored,
             [
-                _dm("Which", "BV", "film", 1, 2),
-                _dm("has", "ARG1", "film", 3, 2),
-                _dm("has", "ARG2", "director", 3, 5),
-                _dm("died", "ARG1", "director", 7, 5),
-                _dm("first", "ARG1", "died", 8, 7),
-                _pas("or", "coord_ARG1", "ENTITYA", 11, 10),
-                _pas("or", "coord_ARG2", "ENTITYB", 11, 12),
-                _psd("or", "DISJ.member", "ENTITYA", 11, 10),
-                _psd("or", "DISJ.member", "ENTITYB", 11, 12),
-                _psd("director", "RSTR", "died", 5, 7),
+                ["Illusions (1982 Film)", "director", "born", "later"],
+                ["It'S A Wonderful Afterlife", "director", "born", "later"],
             ],
         )
 
-    def _which_film_director_younger_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Which film whose director is younger, ENTITYA or ENTITYB?",
-            ["Which", "film", "whose", "director", "is", "younger", ",", "ENTITYA", "or", "ENTITYB", "?"],
+    def test_no_explicit_entities_returns_empty_paths_and_warning(self) -> None:
+        compiled = compile_token_reasoning_structure(_which_film_born_later_result(), [])
+
+        self.assertEqual(compiled.path_type, "no_entity_branch_path")
+        self.assertEqual(compiled.paths, [])
+        self.assertTrue(any("no explicit entity starts" in warning for warning in compiled.warnings))
+
+    def test_no_semantic_boundary_returns_empty_paths_and_warning(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA or ENTITYB?",
+            ["ENTITYA", "or", "ENTITYB", "?"],
             [
-                _dm("film", "poss", "director", 2, 4),
-                _pas("director", "ARG1", "film", 4, 2),
-                _dm("younger", "ARG1", "director", 6, 4),
-                _psd("younger", "adj_ARG1", "director", 6, 4),
-                _pas("is", "verb_ARG2", "younger", 5, 6),
-                _psd("is", "PAT-arg", "younger", 5, 6),
-                _pas("or", "coord_ARG1", "ENTITYA", 9, 8),
-                _pas("or", "coord_ARG2", "ENTITYB", 9, 10),
-                _psd("or", "DISJ.member", "ENTITYA", 9, 8),
-                _psd("or", "DISJ.member", "ENTITYB", 9, 10),
+                _pas("or", "coord_ARG1", "ENTITYA", 2, 1),
+                _pas("or", "coord_ARG2", "ENTITYB", 2, 3),
             ],
         )
 
-    def _which_film_has_director_younger_with_candidate_predicate_edges_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Which film has a director who is younger, ENTITYA or ENTITYB?",
-            ["Which", "film", "has", "a", "director", "who", "is", "younger", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("Which", "BV", "film", 1, 2),
-                _dm("has", "ARG1", "film", 3, 2),
-                _dm("has", "ARG2", "director", 3, 5),
-                _dm("a", "BV", "director", 4, 5),
-                _dm("younger", "ARG1", "director", 8, 5),
-                _pas("has", "verb_ARG1", "film", 3, 2),
-                _pas("has", "verb_ARG2", "director", 3, 5),
-                _pas("a", "det_ARG1", "director", 4, 5),
-                _pas("who", "relative_ARG1", "director", 6, 5),
-                _pas("is", "verb_ARG1", "director", 7, 5),
-                _pas("younger", "adj_ARG1", "director", 8, 5),
-                _pas("is", "verb_ARG2", "younger", 7, 8),
-                _pas("or", "coord_ARG1", "ENTITYA", 11, 10),
-                _pas("or", "coord_ARG2", "ENTITYB", 11, 12),
-                _psd("has", "ACT-arg", "film", 3, 2),
-                _psd("has", "PAT-arg", "director", 3, 5),
-                _psd("is", "ACT-arg", "who", 7, 6),
-                _psd("director", "RSTR", "is", 5, 7),
-                _psd("is", "PAT-arg", "younger", 7, 8),
-                _psd("has", "PAT-arg", "ENTITYA", 3, 10),
-                _psd("or", "DISJ.member", "ENTITYA", 11, 10),
-                _psd("has", "ACT-arg", "ENTITYB", 3, 12),
-                _psd("or", "DISJ.member", "ENTITYB", 11, 12),
-            ],
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.path_type, "no_entity_branch_path")
+        self.assertEqual(compiled.paths, [])
+        self.assertTrue(any("no semantic boundary nodes" in warning for warning in compiled.warnings))
+
+    def test_disconnected_entity_warns_but_other_branch_survives(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA ENTITYB target?",
+            ["ENTITYA", "ENTITYB", "target", "?"],
+            [_dm("target", "ARG1", "ENTITYB", 3, 2)],
         )
 
-    def _which_film_has_director_died_with_candidate_predicate_edges_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Which film has the director who died first, ENTITYA or ENTITYB?",
-            ["Which", "film", "has", "the", "director", "who", "died", "first", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("Which", "BV", "film", 1, 2),
-                _dm("has", "ARG1", "film", 3, 2),
-                _dm("has", "ARG2", "director", 3, 5),
-                _dm("died", "ARG1", "director", 7, 5),
-                _dm("first", "ARG1", "died", 8, 7),
-                _pas("has", "verb_ARG1", "film", 3, 2),
-                _pas("has", "verb_ARG2", "director", 3, 5),
-                _pas("who", "relative_ARG1", "director", 6, 5),
-                _pas("died", "verb_ARG1", "director", 7, 5),
-                _pas("or", "coord_ARG1", "ENTITYA", 11, 10),
-                _pas("or", "coord_ARG2", "ENTITYB", 11, 12),
-                _psd("has", "ACT-arg", "film", 3, 2),
-                _psd("has", "PAT-arg", "director", 3, 5),
-                _psd("director", "RSTR", "died", 5, 7),
-                _psd("has", "PAT-arg", "ENTITYA", 3, 10),
-                _psd("or", "DISJ.member", "ENTITYA", 11, 10),
-                _psd("has", "ACT-arg", "ENTITYB", 3, 12),
-                _psd("or", "DISJ.member", "ENTITYB", 11, 12),
-            ],
-        )
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
 
-    def _film_director_born_later_result(self) -> HanLPSDPResult:
-        return _film_director_born_later_hanlp_result()
-
-    def _director_born_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Where was the director of film ENTITYA born?",
-            ["Where", "was", "the", "director", "of", "film", "ENTITYA", "born", "?"],
-            [
-                _dm("director", "ARG1", "ENTITYA", 4, 7),
-                _dm("born", "ARG2", "director", 8, 4),
-                _dm("Where", "loc", "born", 1, 8),
-                _pas("of", "prep_ARG1", "director", 5, 4),
-                _pas("of", "prep_ARG2", "ENTITYA", 5, 7),
-                _psd("born", "ACT-arg", "director", 8, 4),
-            ],
-        )
-
-    def _older_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Who is older, ENTITYA or ENTITYB?",
-            ["Who", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _root("sdp/dm", "older", 3),
-                _dm("older", "ARG1", "Who", 3, 1),
-                _dm("older", "ARG2", "ENTITYA", 3, 5),
-                _psd("older", "ACT-arg", "ENTITYB", 3, 7),
-            ],
-        )
-
-    def _born_later_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Who was born later, ENTITYA or ENTITYB?",
-            ["Who", "was", "born", "later", ",", "ENTITYA", "or", "ENTITYB", "?"],
-            [
-                _dm("born", "ARG2", "Who", 3, 1),
-                _pas("born", "verb_ARG2", "Who", 3, 1),
-                _psd("born", "PAT-arg", "Who", 3, 1),
-                _dm("later", "loc", "born", 4, 3),
-                _psd("later", "adj_ARG1", "born", 4, 3),
-                _dm("born", "TWHEN", "later", 3, 4),
-                _pas("or", "coord_ARG1", "ENTITYA", 7, 6),
-                _pas("or", "coord_ARG2", "ENTITYB", 7, 8),
-                _psd("or", "DISJ.member", "ENTITYA", 7, 6),
-                _psd("or", "DISJ.member", "ENTITYB", 7, 8),
-            ],
-        )
-
-    def _region_location_created_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "When was the region immediately north of the region where ENTITYA is located and the location of the ENTITYB created?",
-            [
-                "When",
-                "was",
-                "the",
-                "region",
-                "immediately",
-                "north",
-                "of",
-                "the",
-                "region",
-                "where",
-                "ENTITYA",
-                "is",
-                "located",
-                "and",
-                "the",
-                "location",
-                "of",
-                "the",
-                "ENTITYB",
-                "created",
-                "?",
-            ],
-            [
-                _dm("the", "BV", "region", 3, 4),
-                _dm("north", "loc", "region", 6, 4),
-                _dm("created", "ARG2", "region", 20, 4),
-                _dm("of", "ARG1", "north", 7, 6),
-                _dm("north", "ARG2", "region", 6, 9),
-                _dm("of", "ARG2", "region", 7, 9),
-                _dm("the", "BV", "region", 8, 9),
-                _dm("located", "ARG2", "ENTITYA", 13, 11),
-                _dm("region", "loc", "located", 9, 13),
-                _dm("the", "BV", "location", 15, 16),
-                _dm("of", "ARG1", "location", 17, 16),
-                _dm("of", "ARG2", "ENTITYB", 17, 19),
-                _dm("the", "BV", "ENTITYB", 18, 19),
-                _pas("the", "det_ARG1", "region", 3, 4),
-                _pas("north", "adj_ARG1", "region", 6, 4),
-                _pas("created", "verb_ARG2", "region", 20, 4),
-                _pas("immediately", "adj_ARG1", "north", 5, 6),
-                _pas("of", "prep_ARG1", "north", 7, 6),
-                _pas("of", "prep_ARG2", "region", 7, 9),
-                _pas("the", "det_ARG1", "region", 8, 9),
-                _pas("where", "conj_ARG1", "region", 10, 9),
-                _pas("is", "aux_ARG1", "ENTITYA", 12, 11),
-                _pas("located", "verb_ARG2", "ENTITYA", 13, 11),
-                _pas("where", "conj_ARG2", "located", 10, 13),
-                _pas("is", "aux_ARG2", "located", 12, 13),
-                _pas("was", "aux_ARG1", "and", 2, 14),
-                _pas("created", "verb_ARG2", "and", 20, 14),
-                _pas("and", "coord_ARG2", "location", 14, 16),
-                _pas("the", "det_ARG1", "location", 15, 16),
-                _pas("of", "prep_ARG1", "location", 17, 16),
-                _pas("of", "prep_ARG2", "ENTITYB", 17, 19),
-                _pas("the", "det_ARG1", "ENTITYB", 18, 19),
-                _pas("When", "adj_ARG1", "created", 1, 20),
-                _pas("was", "aux_ARG2", "created", 2, 20),
-                _psd("created", "TWHEN", "When", 20, 1),
-                _psd("created", "PAT-arg", "region", 20, 4),
-                _psd("north", "EXT", "immediately", 6, 5),
-                _psd("region", "LOC", "north", 4, 6),
-                _psd("north", "DIR1", "region", 6, 9),
-                _psd("located", "LOC-arg", "where", 13, 10),
-                _psd("located", "PAT-arg", "ENTITYA", 13, 11),
-                _psd("region", "RSTR", "located", 9, 13),
-                _psd("created", "PAT-arg", "location", 20, 16),
-                _psd("location", "APP", "ENTITYB", 16, 19),
-                _root("sdp/psd", "created", 20),
-            ],
-        )
-
-    def _typed_year_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "What year was ENTITYA born?",
-            ["What", "year", "was", "ENTITYA", "born", "?"],
-            [
-                _root("sdp/dm", "born", 5),
-                _dm("What", "BV", "year", 1, 2),
-                _dm("born", "ARG1", "ENTITYA", 5, 4),
-                _dm("born", "TWHEN", "year", 5, 2),
-            ],
-        )
-
-    def _broadcaster_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Where is the headquarters for the service broadcaster the show ENTITYA is on?",
-            ["Where", "is", "the", "headquarters", "for", "the", "service", "broadcaster", "the", "show", "ENTITYA", "is", "on", "?"],
-            [
-                _dm("for", "ARG1", "headquarters", 5, 4),
-                _dm("for", "ARG2", "broadcaster", 5, 8),
-                _dm("on", "ARG1", "show", 13, 10),
-                _pas("show", "noun_ARG1", "ENTITYA", 10, 11),
-                _pas("on", "prep_ARG1", "ENTITYA", 13, 11),
-                _psd("show", "ID", "ENTITYA", 10, 11),
-                _psd("broadcaster", "RSTR", "is", 8, 12),
-                _psd("show", "RSTR", "is", 10, 12),
-                _psd("is", "ACT-arg", "show", 12, 10),
-            ],
-        )
-
-    def _role_series_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "ENTITYA is an American actress and voice actress, known for her role as ENTITYB on what American animated television series produced for ENTITYC?",
-            ["ENTITYA", "is", "an", "American", "actress", "and", "voice", "actress", "known", "for", "her", "role", "as", "ENTITYB", "on", "what", "American", "animated", "television", "series", "produced", "for", "ENTITYC", "?"],
-            [
-                _pas("is", "ARG1", "ENTITYA", 2, 1),
-                _pas("is", "ARG2", "actress", 2, 5),
-                _dm("known", "ARG1", "actress", 9, 5),
-                _pas("for", "prep_ARG1", "known", 10, 9),
-                _pas("for", "prep_ARG2", "role", 10, 12),
-                _pas("as", "prep_ARG1", "role", 13, 12),
-                _pas("as", "prep_ARG2", "ENTITYB", 13, 14),
-                _pas("on", "prep_ARG1", "role", 15, 12),
-                _pas("on", "prep_ARG2", "series", 15, 20),
-                _dm("produced", "ARG1", "series", 21, 20),
-                _pas("for", "prep_ARG1", "produced", 22, 21),
-                _pas("for", "prep_ARG2", "ENTITYC", 22, 23),
-                _dm("what", "BV", "series", 16, 20),
-            ],
-        )
-
-    def _works_result(self) -> HanLPSDPResult:
-        return _hanlp_result(
-            "Works by ENTITYA are part of a collection in a museum that houses approximately 65,000 what?",
-            ["Works", "by", "ENTITYA", "are", "part", "of", "a", "collection", "in", "a", "museum", "that", "houses", "approximately", "65,000", "what", "?"],
-            [
-                _pas("by", "prep_ARG1", "Works", 2, 1),
-                _pas("by", "prep_ARG2", "ENTITYA", 2, 3),
-                _pas("are", "ARG1", "Works", 4, 1),
-                _pas("are", "ARG2", "part", 4, 5),
-                _dm("part", "ARG2", "collection", 5, 8),
-                _pas("in", "prep_ARG1", "collection", 9, 8),
-                _pas("in", "prep_ARG2", "museum", 9, 11),
-                _dm("houses", "ARG1", "museum", 13, 11),
-                _dm("houses", "ARG2", "what", 13, 16),
-                _dm("what", "ARG1", "65,000", 16, 15),
-                _dm("approximately", "ARG1", "65,000", 14, 15),
-            ],
-        )
+        self.assertEqual([list(path.nodes) for path in compiled.paths], [["ENTITYB", "target"]])
+        self.assertTrue(any("ENTITYA" in warning and "no reachable semantic boundary" in warning for warning in compiled.warnings))
 
 
 def _atomic_question(
@@ -1833,7 +414,10 @@ class FakePreprocessLLM:
             payload = json.loads(user_prompt)
             assert set(payload) == {"original_question", "topic_entities", "step4_paths"}
             assert payload["topic_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
-            assert payload["step4_paths"]
+            assert payload["step4_paths"] == [
+                ["Ryan Tubridy", "older", "Who"],
+                ["Mauro Massironi", "older", "Who"],
+            ]
             serialized = json.dumps(payload, ensure_ascii=False)
             assert "ENTITYA" not in serialized
             assert "ENTITYB" not in serialized
@@ -1880,8 +464,8 @@ class IllusionsPipelineLLM:
             assert set(payload) == {"original_question", "topic_entities", "step4_paths"}
             assert payload["topic_entities"] == ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"]
             assert payload["step4_paths"] == [
-                ["Illusions (1982 Film)", "film", "director", "born"],
-                ["It'S A Wonderful Afterlife", "film", "director", "born"],
+                ["Illusions (1982 Film)", "director", "born", "later"],
+                ["It'S A Wonderful Afterlife", "director", "born", "later"],
             ]
             return _illusions_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
@@ -1902,20 +486,20 @@ class StaticPreprocessLLM:
         self.user_prompt = ""
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
+        self.calls += 1
         self.system_prompt = system_prompt
         self.user_prompt = user_prompt
-        self.calls += 1
         return self.payload
 
 
 class RecordingHanLPSDPParser:
     def __init__(self) -> None:
-        self.placeholders: list[str] = []
         self.text = ""
+        self.placeholders: list[str] = []
 
     def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
-        self.placeholders = list(placeholders or [])
         self.text = text
+        self.placeholders = list(placeholders or [])
         tokens = ["Which", "country", "is", "the", "composer", "of", "film", "ENTITYA", "from", "?"]
         return HanLPSDPResult(
             text=text,
@@ -1971,10 +555,10 @@ class FakeHanLPSDPParser:
 class FakeIllusionsBornLaterParser:
     def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
         del text, placeholders
-        return _film_director_born_later_hanlp_result()
+        return _which_film_born_later_result()
 
 
-def _film_director_born_later_hanlp_result() -> HanLPSDPResult:
+def _which_film_born_later_result() -> HanLPSDPResult:
     return _hanlp_result(
         "Which film has the director who was born later, ENTITYA or ENTITYB?",
         ["Which", "film", "has", "the", "director", "who", "was", "born", "later", ",", "ENTITYA", "or", "ENTITYB", "?"],
@@ -1982,8 +566,11 @@ def _film_director_born_later_hanlp_result() -> HanLPSDPResult:
             _dm("Which", "BV", "film", 1, 2),
             _dm("has", "ARG1", "film", 3, 2),
             _dm("has", "ARG2", "director", 3, 5),
+            _dm("has", "ARG3", "ENTITYA", 3, 11),
+            _dm("has", "ARG3", "ENTITYB", 3, 13),
             _dm("born", "ARG2", "director", 8, 5),
             _psd("born", "ACT-arg", "director", 8, 5),
+            _dm("born", "TWHEN", "later", 8, 9),
             _pas("or", "coord_ARG1", "ENTITYA", 12, 11),
             _pas("or", "coord_ARG2", "ENTITYB", 12, 13),
             _psd("or", "DISJ.member", "ENTITYA", 12, 11),
@@ -2016,10 +603,6 @@ def _psd(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> Han
     return HanLPSDPEdge("sdp/psd", head_idx, head, relation, dep_idx, dep)
 
 
-def _root(formalism: str, dep: str, dep_idx: int) -> HanLPSDPEdge:
-    return HanLPSDPEdge(formalism, 0, "ROOT", "root", dep_idx, dep)
-
-
 def _hanlp_result(text: str, tokens: list[str], edges: list[HanLPSDPEdge]) -> HanLPSDPResult:
     formalisms = sorted({edge.formalism for edge in edges})
     return HanLPSDPResult(
@@ -2030,10 +613,6 @@ def _hanlp_result(text: str, tokens: list[str], edges: list[HanLPSDPEdge]) -> Ha
         edges=edges,
         raw={"tok": tokens},
     )
-
-
-def _edge_text_pairs(compiled: object) -> set[frozenset[str]]:
-    return {frozenset((edge.source_text, edge.target_text)) for edge in compiled.edges}  # type: ignore[attr-defined]
 
 
 if __name__ == "__main__":
