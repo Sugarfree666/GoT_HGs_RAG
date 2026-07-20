@@ -269,8 +269,8 @@ def compile_token_reasoning_structure(
     """Compile HanLP PAS SDP evidence into entity-branch token paths.
 
     Step 4 no longer searches over answer-anchor candidates.  Explicit masked
-    entities are fixed branch starts; each branch keeps the best Dijkstra path
-    to one semantic boundary node under the existing path ranking components.
+    entities are fixed branch starts; each branch keeps the reachable boundary
+    path with the highest Semantic Path Score (SP).
     """
 
     state = build_evidence_graph(hanlp_sdp_result)
@@ -547,6 +547,7 @@ def _select_entity_branch_best_paths(
     selected_paths: list[TokenReasoningPath] = []
     selected_payloads: list[dict[str, Any]] = []
     selected_node_paths: set[tuple[str, ...]] = set()
+    semantic_node_id_set = set(semantic_node_ids)
 
     for entity_id in _sort_node_ids(explicit_entity_ids, state.nodes):
         if entity_id not in state.nodes:
@@ -565,14 +566,9 @@ def _select_entity_branch_best_paths(
             )
             if not path_ids:
                 continue
-            rank_result = _rank_entity_branch_boundary_path(
-                state,
-                path_ids,
-                semantic_node_ids,
-            )
-            if rank_result is None:
+            path_cost, edge_costs = _path_cost_details(state, path_ids)
+            if path_cost is None:
                 continue
-            rank, rank_components = rank_result
             candidates.append(
                 {
                     "entity_id": entity_id,
@@ -586,15 +582,32 @@ def _select_entity_branch_best_paths(
                         if node_id in state.nodes
                     ],
                     "dijkstra_cost": dijkstra_cost,
-                    "path_cost": rank_components["path_cost"],
-                    "edge_costs": rank_components["edge_costs"],
-                    "rank": rank,
-                    "rank_components": rank_components,
+                    "path_cost": path_cost,
+                    "edge_costs": edge_costs,
                 }
             )
 
-        candidates.sort(key=lambda item: item["rank"])
-        selected = dict(candidates[0]) if candidates else None
+        branch_semantic_ids: set[str] = set()
+        for candidate in candidates:
+            for node_id in candidate["node_ids"]:
+                if node_id != entity_id and node_id in semantic_node_id_set:
+                    branch_semantic_ids.add(node_id)
+
+        for candidate in candidates:
+            sp_score, sp_components = _semantic_path_score(
+                state=state,
+                entity_id=entity_id,
+                path_ids=list(candidate["node_ids"]),
+                branch_semantic_ids=branch_semantic_ids,
+            )
+            candidate["sp_score"] = sp_score
+            candidate["sp_components"] = sp_components
+
+        selected = (
+            dict(max(candidates, key=lambda item: item["sp_score"]))
+            if candidates
+            else None
+        )
         if selected is None:
             state.warnings.append(
                 f"entity branch path extraction found no reachable semantic boundary for {state.nodes[entity_id].text}[{entity_id}]"
@@ -833,38 +846,37 @@ def _shortest_semantic_boundary_path(
     return [], math.inf
 
 
-def _rank_entity_branch_boundary_path(
+def _semantic_path_score(
+    *,
     state: _WorkingState,
+    entity_id: str,
     path_ids: list[str],
-    semantic_node_ids: list[str],
-) -> tuple[tuple[Any, ...], dict[str, Any]] | None:
-    path_set = set(path_ids)
-    semantic_ids = _sort_node_ids(
-        [node_id for node_id in semantic_node_ids if node_id in state.nodes],
+    branch_semantic_ids: set[str],
+) -> tuple[float, dict[str, Any]]:
+    path_node_ids_without_entity = [
+        node_id
+        for node_id in path_ids
+        if node_id != entity_id and node_id in state.nodes
+    ]
+    covered_semantic_ids = _sort_node_ids(
+        [
+            node_id
+            for node_id in path_node_ids_without_entity
+            if node_id in branch_semantic_ids
+        ],
         state.nodes,
     )
-    covered_semantic_ids = _sort_node_ids(
-        [node_id for node_id in semantic_ids if node_id in path_set], state.nodes
+    branch_semantic_node_ids = _sort_node_ids(
+        [node_id for node_id in branch_semantic_ids if node_id in state.nodes],
+        state.nodes,
     )
-    missing_semantic_ids = _sort_node_ids(
-        [node_id for node_id in semantic_ids if node_id not in path_set], state.nodes
-    )
-    path_cost, edge_costs = _path_cost_details(state, path_ids)
-    if path_cost is None:
-        return None
-    path_length = max(0, len(path_ids) - 1)
-    token_index_sequence = _path_index_tuple(path_ids, state.nodes)
-    rank = (
-        len(missing_semantic_ids),
-        path_cost,
-        path_length,
-        token_index_sequence,
-    )
+    denominator = len(branch_semantic_node_ids) + len(path_node_ids_without_entity)
+    sp_score = 2.0 * len(covered_semantic_ids) / denominator if denominator > 0 else 0.0
     components: dict[str, Any] = {
-        "semantic_node_ids": semantic_ids,
-        "semantic_nodes": [
+        "branch_semantic_node_ids": branch_semantic_node_ids,
+        "branch_semantic_nodes": [
             state.nodes[node_id].text
-            for node_id in semantic_ids
+            for node_id in branch_semantic_node_ids
             if node_id in state.nodes
         ],
         "covered_semantic_node_ids": covered_semantic_ids,
@@ -873,20 +885,17 @@ def _rank_entity_branch_boundary_path(
             for node_id in covered_semantic_ids
             if node_id in state.nodes
         ],
-        "missing_semantic_node_ids": missing_semantic_ids,
-        "missing_semantic_nodes": [
+        "branch_semantic_nodes_count": len(branch_semantic_node_ids),
+        "covered_semantic_nodes_count": len(covered_semantic_ids),
+        "path_node_ids_without_entity": list(path_node_ids_without_entity),
+        "path_nodes_without_entity": [
             state.nodes[node_id].text
-            for node_id in missing_semantic_ids
+            for node_id in path_node_ids_without_entity
             if node_id in state.nodes
         ],
-        "missing_semantic_nodes_count": len(missing_semantic_ids),
-        "path_cost": path_cost,
-        "edge_costs": edge_costs,
-        "path_length": path_length,
-        "path_token_index_sequence": list(token_index_sequence),
-        "rank": _jsonable_rank(rank),
+        "path_nodes_without_entity_count": len(path_node_ids_without_entity),
     }
-    return rank, components
+    return sp_score, components
 
 
 def _path_cost_details(
@@ -958,8 +967,8 @@ def _entity_branch_candidate_payload(
         "dijkstra_cost": candidate["dijkstra_cost"],
         "path_cost": candidate.get("path_cost"),
         "edge_costs": list(candidate.get("edge_costs") or []),
-        "rank": _jsonable_rank(candidate["rank"]),
-        "rank_components": dict(candidate["rank_components"]),
+        "sp_score": candidate.get("sp_score", 0.0),
+        "sp_components": dict(candidate.get("sp_components") or {}),
     }
     if "path_id" in candidate:
         payload["path_id"] = candidate["path_id"]
@@ -969,9 +978,7 @@ def _entity_branch_candidate_payload(
 
 
 def _entity_branch_selected_path_payload(candidate: dict[str, Any]) -> dict[str, Any]:
-    payload = _entity_branch_candidate_payload(candidate) or {}
-    payload["global_rank"] = payload.get("rank", [])
-    return payload
+    return _entity_branch_candidate_payload(candidate) or {}
 
 
 def _entity_branch_global_selection_payload(
@@ -1014,16 +1021,6 @@ def _entity_branch_global_selection_payload(
         "selected_paths": list(branch_selection["selected_paths"]),
         "warnings": list(state.warnings),
     }
-
-
-def _jsonable_rank(rank: tuple[Any, ...]) -> list[Any]:
-    result: list[Any] = []
-    for item in rank:
-        if isinstance(item, tuple):
-            result.append(list(item))
-        else:
-            result.append(item)
-    return result
 
 
 def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:

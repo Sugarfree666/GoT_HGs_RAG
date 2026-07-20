@@ -24,6 +24,7 @@ from tri_sdp_reasoning_compiler import (  # noqa: E402
     _edge_cost,
     _path_cost_from_edge_map,
     _semantic_path_search_graph,
+    _semantic_path_score,
     _shortest_semantic_boundary_path,
     build_evidence_graph,
     compile_token_reasoning_structure,
@@ -97,7 +98,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("[Entity Branch Best Paths]", output)
         self.assertIn("P1: ENTITYA ---- older ---- Who", output)
         self.assertIn("P2: ENTITYB ---- older ---- Who", output)
-        self.assertIn("Branch rank:", output)
+        self.assertIn("Branch SP:", output)
         self.assertNotIn("typed_wh_slot", output)
         self.assertIn("[5. Atomic Question DAG]", output)
         self.assertIn("q1: When was Ryan Tubridy born?", output)
@@ -573,15 +574,15 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             [state.nodes[node_id].text for node_id in path], ["ENTITYA", "target"]
         )
 
-    def test_entity_branch_ranking_prefers_lower_path_cost_when_semantic_coverage_matches(
+    def test_entity_branch_sp_tie_keeps_first_candidate_without_cost_tiebreak(
         self,
     ) -> None:
         result = _hanlp_result(
             "ENTITYA cheap expensive?",
             ["ENTITYA", "cheap", "expensive", "?"],
             [
-                _pas("cheap", "adj_ARG1", "ENTITYA", 2, 1),
-                _pas("expensive", "comp_ARG1", "ENTITYA", 3, 1),
+                _pas("cheap", "comp_ARG1", "ENTITYA", 2, 1),
+                _pas("expensive", "adj_ARG1", "ENTITYA", 3, 1),
             ],
         )
 
@@ -591,16 +592,85 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             candidate["boundary"]: candidate for candidate in branch["candidates"]
         }
 
+        self.assertEqual(candidates["cheap"]["path_cost"], 2)
+        self.assertEqual(candidates["expensive"]["path_cost"], 1)
         self.assertEqual(
-            candidates["cheap"]["rank_components"]["missing_semantic_nodes_count"], 1
+            candidates["cheap"]["sp_score"], candidates["expensive"]["sp_score"]
         )
-        self.assertEqual(
-            candidates["expensive"]["rank_components"]["missing_semantic_nodes_count"],
-            1,
-        )
-        self.assertEqual(candidates["cheap"]["path_cost"], 1)
-        self.assertEqual(candidates["expensive"]["path_cost"], 2)
         self.assertEqual(branch["selected"]["boundary"], "cheap")
+        self.assertNotIn("rank", candidates["cheap"])
+        self.assertNotIn("rank_components", candidates["cheap"])
+
+    def test_semantic_path_score_prefers_complete_compact_paths(self) -> None:
+        state = build_evidence_graph(
+            _hanlp_result(
+                "ENTITYA film can director born later?",
+                ["ENTITYA", "film", "can", "director", "born", "later", "?"],
+                [],
+            )
+        )
+        branch_semantic_ids = {"2", "4", "5", "6"}
+
+        compact_score, compact_components = _semantic_path_score(
+            state=state,
+            entity_id="1",
+            path_ids=["1", "2", "4", "5", "6"],
+            branch_semantic_ids=branch_semantic_ids,
+        )
+        noisy_score, noisy_components = _semantic_path_score(
+            state=state,
+            entity_id="1",
+            path_ids=["1", "2", "3", "4", "5", "6"],
+            branch_semantic_ids=branch_semantic_ids,
+        )
+        short_score, short_components = _semantic_path_score(
+            state=state,
+            entity_id="1",
+            path_ids=["1", "2"],
+            branch_semantic_ids=branch_semantic_ids,
+        )
+
+        self.assertEqual(compact_score, 1.0)
+        self.assertAlmostEqual(noisy_score, 8 / 9)
+        self.assertEqual(short_score, 0.4)
+        self.assertGreater(compact_score, noisy_score)
+        self.assertGreater(noisy_score, short_score)
+        self.assertEqual(compact_components["covered_semantic_nodes_count"], 4)
+        self.assertEqual(noisy_components["path_nodes_without_entity_count"], 5)
+        self.assertEqual(short_components["covered_semantic_node_ids"], ["2"])
+
+    def test_entity_branch_sp_uses_per_entity_candidate_semantics(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA alpha beta ENTITYB gamma delta?",
+            ["ENTITYA", "alpha", "beta", "ENTITYB", "gamma", "delta", "?"],
+            [
+                _pas("alpha", "verb_ARG1", "ENTITYA", 2, 1),
+                _pas("alpha", "verb_ARG2", "beta", 2, 3),
+                _pas("gamma", "verb_ARG1", "ENTITYB", 5, 4),
+                _pas("gamma", "verb_ARG2", "delta", 5, 6),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+        branch_by_entity = {
+            branch["entity"]: branch
+            for branch in compiled.global_selection["entity_branch_results"]
+        }
+
+        entity_a_semantics = set(
+            branch_by_entity["ENTITYA"]["selected"]["sp_components"][
+                "branch_semantic_nodes"
+            ]
+        )
+        entity_b_semantics = set(
+            branch_by_entity["ENTITYB"]["selected"]["sp_components"][
+                "branch_semantic_nodes"
+            ]
+        )
+
+        self.assertEqual(entity_a_semantics, {"alpha", "beta"})
+        self.assertEqual(entity_b_semantics, {"gamma", "delta"})
+        self.assertTrue(entity_a_semantics.isdisjoint(entity_b_semantics))
 
     def test_other_explicit_entities_cannot_be_internal_nodes(self) -> None:
         result = _hanlp_result(
@@ -728,7 +798,10 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
                 self.assertEqual(
                     [item["edge_cost"] for item in selected["edge_costs"]], [1, 1]
                 )
-                self.assertNotIn("derived_edge_count", selected["rank_components"])
+                self.assertNotIn("rank", selected)
+                self.assertNotIn("rank_components", selected)
+                self.assertIn("sp_score", selected)
+                self.assertIn("sp_components", selected)
 
     def test_plain_content_s_is_not_possessive_contracted(self) -> None:
         result = _hanlp_result(
@@ -962,7 +1035,7 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             ],
         )
 
-    def test_entity_branch_ranking_prefers_current_semantic_coverage_metric(
+    def test_entity_branch_sp_prefers_complete_semantic_path(
         self,
     ) -> None:
         compiled = compile_token_reasoning_structure(
@@ -974,18 +1047,26 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
         }
 
         self.assertEqual(branch["selected"]["boundary"], "later")
-        self.assertEqual(
-            candidate_by_boundary["later"]["rank_components"][
-                "missing_semantic_nodes_count"
-            ],
-            0,
+        self.assertGreater(
+            candidate_by_boundary["later"]["sp_score"],
+            candidate_by_boundary["director"]["sp_score"],
         )
-        self.assertEqual(branch["selected"]["rank"][:3], [0, 6, 5])
+        self.assertAlmostEqual(candidate_by_boundary["later"]["sp_score"], 8 / 9)
+        self.assertEqual(
+            candidate_by_boundary["later"]["sp_components"]["branch_semantic_nodes"],
+            ["film", "director", "born", "later"],
+        )
+        self.assertEqual(
+            candidate_by_boundary["later"]["sp_components"]["covered_semantic_nodes"],
+            ["film", "director", "born", "later"],
+        )
         self.assertEqual(branch["selected"]["path_cost"], 6)
         self.assertEqual(
             [item["edge_cost"] for item in branch["selected"]["edge_costs"]],
             [2, 1, 1, 1, 1],
         )
+        self.assertNotIn("rank", branch["selected"])
+        self.assertNotIn("rank_components", branch["selected"])
 
     def test_step5_restore_accepts_multiple_entity_branch_paths(self) -> None:
         compiled = compile_token_reasoning_structure(

@@ -301,15 +301,15 @@ def print_hanlp_sdp_result(
         selected_payloads = global_selection.get("paths") or []
         for path_index, path in enumerate(selected_paths, start=1):
             nodes = list(getattr(path, "nodes", []))
-            rank_payload = (
+            selected_payload = (
                 selected_payloads[path_index - 1]
                 if path_index - 1 < len(selected_payloads)
                 else {}
             )
-            rank = tuple(rank_payload.get("global_rank") or ())
+            sp_score = selected_payload.get("sp_score")
             print(f"P{path_index}: {' ---- '.join(nodes)}")
-            if rank:
-                print(f"  Branch rank: {rank}")
+            if sp_score is not None:
+                print(f"  Branch SP: {sp_score:.6g}")
     else:
         print("[Entity Branch Best Paths]")
         print("(no path selected)")
