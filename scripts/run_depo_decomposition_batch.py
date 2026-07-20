@@ -3,9 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import sys
-from dataclasses import asdict, is_dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -39,7 +37,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--start", type=int, default=1, help="1-based inclusive start index in each input file.")
     parser.add_argument("--end", type=int, help="1-based inclusive end index in each input file.")
     parser.add_argument("--limit", type=int, help="Maximum number of questions after applying --start/--end.")
-    parser.add_argument("--resume", action="store_true", help="Skip questions whose decomposition.json already exists.")
+    parser.add_argument("--resume", action="store_true", help="Skip questions already recorded in manifest.jsonl.")
     parser.add_argument("--api-key", help="OpenAI-compatible API key. Defaults to OPENAI_API_KEY.")
     parser.add_argument("--base-url", help="OpenAI-compatible base URL. Defaults to OPENAI_BASE_URL.")
     parser.add_argument("--llm-model", default="gpt-4o-mini", help="LLM model used by DEPO Step2 and Step5.")
@@ -47,11 +45,11 @@ def parse_args() -> argparse.Namespace:
         "--hanlp-model",
         help="HanLP pretrained constant name from hanlp.pretrained.mtl/sdp, or a local model path.",
     )
-    parser.add_argument("--debug", action="store_true", help="Enable Tri-SDP Step4 debug JSON files.")
+    parser.add_argument("--debug", action="store_true", help="Enable HanLP PAS Step4 debug JSON files.")
     parser.add_argument(
         "--debug-dir",
         default="debug/hanlp_sdp",
-        help="Directory for Tri-SDP debug JSON files when --debug is enabled.",
+        help="Directory for HanLP PAS debug JSON files when --debug is enabled.",
     )
     return parser.parse_args()
 
@@ -98,6 +96,12 @@ def main() -> int:
         dataset_output_dir.mkdir(parents=True, exist_ok=True)
         manifest_path = dataset_output_dir / "manifest.jsonl"
         summary_path = dataset_output_dir / "summary.md"
+        report_path = dataset_output_dir / "decomposition.md"
+        processed_keys = (
+            _processed_manifest_keys(manifest_path)
+            if args.resume and report_path.exists()
+            else set()
+        )
 
         items = _slice_items(_read_question_items(questions_file), start=args.start, end=args.end, limit=args.limit)
         print(
@@ -113,13 +117,26 @@ def main() -> int:
             end=args.end,
             limit=args.limit,
         )
+        if args.resume and report_path.exists():
+            report_lines = report_path.read_text(encoding="utf-8").splitlines()
+            if report_lines and report_lines[-1]:
+                report_lines.append("")
+        else:
+            report_lines = _run_report_header(
+                dataset=dataset,
+                questions_file=questions_file,
+                run_id=run_id,
+                start=args.start,
+                end=args.end,
+                limit=args.limit,
+            )
 
-        with manifest_path.open("a", encoding="utf-8") as manifest:
+        manifest_mode = "a" if args.resume else "w"
+        with manifest_path.open(manifest_mode, encoding="utf-8") as manifest:
             for offset, item in enumerate(items, start=1):
                 record = QuestionRecord(question=item["question"], qid=item.get("qid"))
-                question_dir = dataset_output_dir / _question_dir_name(item["index"], record.qid, record.question)
-                decomposition_path = question_dir / "decomposition.json"
-                if args.resume and decomposition_path.exists():
+                manifest_key = _manifest_key(dataset, item["index"], record.qid)
+                if args.resume and manifest_key in processed_keys:
                     print(f"[skip] {dataset} #{item['index']} {record.question}")
                     manifest_item = {
                         "method": "depo_hanlp_sdp_atomic_dag",
@@ -128,13 +145,12 @@ def main() -> int:
                         "qid": record.qid,
                         "question": record.question,
                         "status": "skipped",
-                        "output_dir": str(question_dir),
+                        "output_file": str(report_path),
                     }
                     manifest.write(json.dumps(manifest_item, ensure_ascii=False) + "\n")
                     manifest.flush()
                     continue
 
-                question_dir.mkdir(parents=True, exist_ok=True)
                 print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {record.question}")
                 try:
                     result = run_hanlp_sdp_pipeline(
@@ -157,18 +173,18 @@ def main() -> int:
                         result=result,
                         restored_global_best_paths=restored_global_best_paths,
                     )
-                    _write_json(decomposition_path, payload)
-                    (question_dir / "decomposition.md").write_text(build_markdown_report(payload), encoding="utf-8")
-                    manifest_item = _manifest_item(payload, question_dir)
-                    summary_lines.extend(_summary_question_lines(payload, question_dir))
+                    report_lines.extend(build_markdown_report(payload, heading_level=2).splitlines())
+                    report_lines.append("")
+                    manifest_item = _manifest_item(payload, report_path)
+                    summary_lines.extend(_summary_question_lines(payload, report_path))
                     print(
                         f"[ok]  {dataset} #{item['index']} "
-                        f"nodes={_dag_node_count(payload)} valid={_dag_valid(payload)} -> {question_dir}"
+                        f"nodes={_dag_node_count(payload)} valid={_dag_valid(payload)} -> {report_path}"
                     )
                 except Exception as exc:  # Keep long batch jobs inspectable even if one item fails.
                     payload = build_error_payload(dataset, questions_file, item, exc)
-                    _write_json(question_dir / "sample.json", payload)
-                    (question_dir / "sample.md").write_text(build_error_markdown(payload), encoding="utf-8")
+                    report_lines.extend(build_error_markdown(payload, heading_level=2).splitlines())
+                    report_lines.append("")
                     manifest_item = {
                         "method": "depo_hanlp_sdp_atomic_dag",
                         "dataset": dataset,
@@ -178,16 +194,19 @@ def main() -> int:
                         "status": "sample",
                         "error_type": type(exc).__name__,
                         "sample": str(exc),
-                        "output_dir": str(question_dir),
+                        "output_file": str(report_path),
                     }
-                    summary_lines.extend(_summary_error_lines(payload, question_dir))
+                    summary_lines.extend(_summary_error_lines(payload, report_path))
                     print(f"[err] {dataset} #{item['index']} {type(exc).__name__}: {exc}")
 
                 manifest.write(json.dumps(manifest_item, ensure_ascii=False) + "\n")
                 manifest.flush()
+                report_path.write_text("\n".join(report_lines).rstrip() + "\n", encoding="utf-8")
                 summary_path.write_text("\n".join(summary_lines).rstrip() + "\n", encoding="utf-8")
 
+        report_path.write_text("\n".join(report_lines).rstrip() + "\n", encoding="utf-8")
         summary_path.write_text("\n".join(summary_lines).rstrip() + "\n", encoding="utf-8")
+        print(f"Decomposition report written to {report_path}")
         print(f"Summary written to {summary_path}")
 
     return 0
@@ -267,12 +286,16 @@ def build_error_payload(
     }
 
 
-def build_markdown_report(payload: dict[str, Any]) -> str:
+def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) -> str:
     stages = payload["stages"]
     dag = stages.get("6_atomic_question_dag") or {}
     action_trace = stages.get("5_step5_action_trace") or {}
+    token_reasoning = stages.get("4_token_reasoning_structure") or {}
+    h1 = "#" * heading_level
+    h2 = "#" * (heading_level + 1)
+    h3 = "#" * (heading_level + 2)
     lines: list[str] = [
-        f"# DEPO Decomposition #{payload['index']}",
+        f"{h1} DEPO Decomposition #{payload['index']}",
         "",
         f"- Dataset: `{payload['dataset']}`",
     ]
@@ -283,7 +306,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append(f"- Gold answer: {payload['gold_answer']}")
     lines.append("")
 
-    lines.append("## 1. Explicit Entities")
+    lines.append(f"{h2} 1. Explicit Entities")
     entities = (stages.get("1_explicit_entities") or {}).get("entities", [])
     if entities:
         for entity in entities:
@@ -292,7 +315,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 2. Entity Masking")
+    lines.append(f"{h2} 2. Entity Masking")
     masking = stages.get("2_entity_masking") or {}
     for mapping in masking.get("mask_mappings", []):
         lines.append(f"- {mapping.get('placeholder')} -> {mapping.get('original_text')}")
@@ -302,7 +325,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append(f"Masked question: {masking.get('masked_question', '')}")
     lines.append("")
 
-    lines.append("## 3. HanLP SDP Graph")
+    lines.append(f"{h2} 3. HanLP SDP Graph")
     hanlp = stages.get("3_hanlp_sdp_parsing") or {}
     lines.append(f"Model: {hanlp.get('model') or '(unknown)'}")
     tokens = hanlp.get("tokens") or []
@@ -327,7 +350,16 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(no readable SDP edges)")
     lines.append("")
 
-    lines.append("## 4. Global Best Path")
+    lines.append(f"{h2} 4. Token Reasoning Structure")
+    lines.append(f"{h3} Repaired Evidence Graph")
+    repaired_graph_lines = _repaired_evidence_graph_lines(token_reasoning)
+    if repaired_graph_lines:
+        lines.extend(repaired_graph_lines)
+    else:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append(f"{h3} Entity Branch Best Paths")
     input_payload = action_trace.get("input") or {}
     global_best_paths = input_payload.get("step4_paths") or input_payload.get("global_best_paths") or []
     if global_best_paths:
@@ -338,7 +370,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 5. Step5 Atomic Questions")
+    lines.append(f"{h2} 5. Step5 Atomic Questions")
     atomic_questions = _atomic_questions_from_payload(action_trace)
     if atomic_questions:
         for question in atomic_questions:
@@ -351,7 +383,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 6. Atomic Question DAG")
+    lines.append(f"{h2} 6. Atomic Question DAG")
     if dag is None:
         lines.append("(not generated)")
     elif not dag.get("valid", False):
@@ -366,9 +398,10 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("")
     return "\n".join(lines)
 
-def build_error_markdown(payload: dict[str, Any]) -> str:
+def build_error_markdown(payload: dict[str, Any], *, heading_level: int = 1) -> str:
+    h1 = "#" * heading_level
     lines = [
-        f"# DEPO Decomposition Error #{payload['index']}",
+        f"{h1} DEPO Decomposition Error #{payload['index']}",
         "",
         f"- Dataset: `{payload['dataset']}`",
         f"- Question: {payload['question']}",
@@ -386,6 +419,29 @@ def build_error_markdown(payload: dict[str, Any]) -> str:
         ]
     )
     return "\n".join(lines)
+
+
+def _repaired_evidence_graph_lines(token_reasoning: dict[str, Any]) -> list[str]:
+    edges = token_reasoning.get("repaired_evidence_edges") or token_reasoning.get("graph_edges") or []
+    lines: list[str] = []
+    for edge in edges:
+        if not isinstance(edge, dict):
+            continue
+        source_id = str(edge.get("source") or edge.get("source_id") or "?")
+        target_id = str(edge.get("target") or edge.get("target_id") or "?")
+        source_text = str(edge.get("source_text") or edge.get("source") or source_id)
+        target_text = str(edge.get("target_text") or edge.get("target") or target_id)
+        metadata = _format_repaired_edge_metadata(edge)
+        suffix = f" ({metadata})" if metadata else ""
+        lines.append(f"{source_text}[{source_id}] -- {target_text}[{target_id}]{suffix}")
+    return lines
+
+
+def _format_repaired_edge_metadata(edge: dict[str, Any]) -> str:
+    edge_cost = edge.get("edge_cost")
+    if edge_cost is None:
+        return "cost=blocked"
+    return f"cost={edge_cost}"
 
 
 def _resolve_question_files(args: argparse.Namespace) -> list[Path]:
@@ -535,6 +591,14 @@ def _hanlp_sdp_edge_display(edge: dict[str, Any]) -> str:
 
 
 def _compact_token_reasoning(token_reasoning_structure: Any) -> dict[str, Any]:
+    debug_payload = getattr(token_reasoning_structure, "debug_payload", {}) or {}
+    repaired_evidence_edges = list(debug_payload.get("repaired_evidence_edges") or [])
+    if not repaired_evidence_edges:
+        repaired_evidence_edges = [
+            edge.to_dict() if hasattr(edge, "to_dict") else dict(edge)
+            for edge in getattr(token_reasoning_structure, "edges", []) or []
+            if hasattr(edge, "to_dict") or isinstance(edge, dict)
+        ]
     return {
         "path_type": token_reasoning_structure.path_type,
         "answer_anchor": token_reasoning_structure.answer_anchor,
@@ -546,14 +610,11 @@ def _compact_token_reasoning(token_reasoning_structure: Any) -> dict[str, Any]:
         "warnings": list(token_reasoning_structure.warnings),
         "debug_file": token_reasoning_structure.debug_file,
         "graph_edges": [
-            {
-                "source": edge.source_text,
-                "target": edge.target_text,
-                "derived": edge.derived,
-                "rule": edge.rule,
-            }
+            edge.to_dict() if hasattr(edge, "to_dict") else dict(edge)
             for edge in token_reasoning_structure.edges
         ],
+        "repaired_evidence_edges": repaired_evidence_edges,
+        "virtual_edges": list(debug_payload.get("virtual_edges") or []),
         "paths": [path.to_dict() for path in token_reasoning_structure.paths],
     }
 
@@ -580,12 +641,34 @@ def _summary_header(
     return lines
 
 
-def _summary_question_lines(payload: dict[str, Any], question_dir: Path) -> list[str]:
+def _run_report_header(
+    *,
+    dataset: str,
+    questions_file: Path,
+    run_id: str,
+    start: int,
+    end: int | None,
+    limit: int | None,
+) -> list[str]:
+    lines = [
+        f"# DEPO Decomposition Run: {dataset}",
+        "",
+        f"- Run id: `{run_id}`",
+        f"- Questions file: `{questions_file}`",
+        f"- Range: `{start}-{end if end is not None else 'end'}`",
+    ]
+    if limit is not None:
+        lines.append(f"- Limit: `{limit}`")
+    lines.append("")
+    return lines
+
+
+def _summary_question_lines(payload: dict[str, Any], output_file: Path) -> list[str]:
     dag = (((payload.get("stages") or {}).get("6_atomic_question_dag")) or {})
     lines = [
         f"## {payload['index']}. {payload['question']}",
         "",
-        f"- Output: `{question_dir}`",
+        f"- Output: `{output_file}`",
         f"- DAG valid: `{dag.get('valid')}`",
         f"- DAG nodes: `{len(dag.get('nodes', []) or [])}`",
         "",
@@ -597,18 +680,18 @@ def _summary_question_lines(payload: dict[str, Any], question_dir: Path) -> list
     return lines
 
 
-def _summary_error_lines(payload: dict[str, Any], question_dir: Path) -> list[str]:
+def _summary_error_lines(payload: dict[str, Any], output_file: Path) -> list[str]:
     return [
         f"## {payload['index']}. {payload['question']}",
         "",
-        f"- Output: `{question_dir}`",
+        f"- Output: `{output_file}`",
         f"- Status: sample",
         f"- Error: `{payload['error_type']}: {payload['sample']}`",
         "",
     ]
 
 
-def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any]:
+def _manifest_item(payload: dict[str, Any], output_file: Path) -> dict[str, Any]:
     dag = (((payload.get("stages") or {}).get("6_atomic_question_dag")) or {})
     return {
         "method": payload["method"],
@@ -620,8 +703,33 @@ def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any
         "status": payload["status"],
         "dag_valid": dag.get("valid"),
         "dag_node_count": len(dag.get("nodes", []) or []),
-        "output_dir": str(question_dir),
+        "output_file": str(output_file),
     }
+
+
+def _processed_manifest_keys(manifest_path: Path) -> set[tuple[str, int, str | None]]:
+    if not manifest_path.exists():
+        return set()
+    keys: set[tuple[str, int, str | None]] = set()
+    for line in manifest_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if item.get("status") not in {"ok", "sample"}:
+            continue
+        try:
+            index = int(item["index"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        keys.add(_manifest_key(str(item.get("dataset") or ""), index, item.get("qid")))
+    return keys
+
+
+def _manifest_key(dataset: str, index: int, qid: str | None) -> tuple[str, int, str | None]:
+    return (dataset, index, str(qid) if qid is not None else None)
 
 
 def _dag_valid(payload: dict[str, Any]) -> Any:
@@ -632,22 +740,10 @@ def _dag_node_count(payload: dict[str, Any]) -> int:
     return len(((((payload.get("stages") or {}).get("6_atomic_question_dag")) or {}).get("nodes")) or [])
 
 
-def _question_dir_name(index: int, qid: str | None, question: str) -> str:
-    prefix = f"{index:05d}"
-    if qid:
-        prefix += f"_{_slug(qid, max_len=48)}"
-    return f"{prefix}_{_slug(question, max_len=80)}"
-
-
 def _dataset_name(questions_file: Path) -> str:
     if questions_file.name == "questions.json":
         return questions_file.parent.name
     return questions_file.parent.name if questions_file.parent.name != "questions" else questions_file.stem
-
-
-def _slug(value: str, max_len: int = 80) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9]+", "-", str(value).strip().lower()).strip("-")
-    return (slug[:max_len].strip("-") or "question")
 
 
 def _repo_path(path: str | Path) -> Path:
@@ -655,28 +751,6 @@ def _repo_path(path: str | Path) -> Path:
     if value.is_absolute():
         return value
     return PROJECT_ROOT / value
-
-
-def _write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(_jsonable(payload), ensure_ascii=False, indent=2), encoding="utf-8")
-
-
-def _jsonable(value: Any) -> Any:
-    if value is None:
-        return None
-    if hasattr(value, "to_dict") and callable(value.to_dict):
-        return _jsonable(value.to_dict())
-    if is_dataclass(value):
-        return _jsonable(asdict(value))
-    if isinstance(value, dict):
-        return {str(key): _jsonable(item) for key, item in value.items()}
-    if isinstance(value, (list, tuple, set)):
-        return [_jsonable(item) for item in value]
-    if isinstance(value, Path):
-        return str(value)
-    if isinstance(value, (str, int, float, bool)):
-        return value
-    return str(value)
 
 
 if __name__ == "__main__":

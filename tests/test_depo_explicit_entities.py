@@ -199,52 +199,102 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
 
 
 class ExplicitEntityPromptTest(unittest.TestCase):
-    def test_system_prompt_requires_pas_structure_preserving_normalization(self) -> None:
+    def test_system_prompt_limits_normalization_to_nested_nominal_of_chains(self) -> None:
         prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 
         self.assertIn("HanLP PAS", prompt)
-        self.assertIn("structure-preserving question normalization", prompt)
-        self.assertIn("the director of X", prompt)
+        self.assertIn("narrow nested-of question normalization", prompt)
+        self.assertIn("normalized_question must usually equal the original question", prompt)
+        self.assertIn("two or more mutually nested nominal \"of\" relations", prompt)
         self.assertIn("the person who directed X", prompt)
-        self.assertIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
+        self.assertIn("What is the capital of France?  (single-layer \"of\")", prompt)
+        self.assertIn("Who was born first out of A and B?  (fixed phrase \"out of\")", prompt)
+        self.assertIn("What event followed War of 1812?  (\"of\" inside an entity name)", prompt)
+        self.assertIn("parallel candidate question; Step4 handles candidate attachment", prompt)
+        self.assertIn("Do not normalize for style, fluency, articles, general parser-friendliness, wh-order repair", prompt)
         self.assertIn('"born later" is not "younger"', prompt)
         self.assertIn("ENTITYA/ENTITYB placeholders", prompt)
         self.assertIn("normalization_changed matches the actual text change", prompt)
-        self.assertNotIn("Only make minimal grammar/parser-friendly edits", prompt)
-        self.assertNotIn("If the original question is already grammatical and natural, keep it unchanged", prompt)
+        self.assertNotIn("Keep coordinated candidates parallel and attached", prompt)
+        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertNotIn("Repair malformed wh-question order", prompt)
 
-    def test_candidate_prompt_contains_structural_rewrite_rules_and_compatible_schema(self) -> None:
-        question = "Which film has the director born later, A or B?"
+    def test_candidate_prompt_contains_nested_of_rules_and_compatible_schema(self) -> None:
+        question = "What is the place of birth of the performer of song Changed It?"
         prompt = build_explicit_entity_extraction_prompt(
             question,
             [
-                {"candidate_id": "c1", "text": "A", "start_char": 41, "end_char": 42},
-                {"candidate_id": "c2", "text": "B", "start_char": 46, "end_char": 47},
+                {
+                    "candidate_id": "c1",
+                    "text": "Changed It",
+                    "start_char": question.index("Changed It"),
+                    "end_char": question.index("Changed It") + len("Changed It"),
+                },
             ],
         )
 
         self.assertIn("Deterministic entity candidates", prompt)
         self.assertIn("Legacy verified_entities responses are accepted", prompt)
-        self.assertIn("HanLP PAS semantic dependency parsing", prompt)
-        self.assertIn("Turn deep role/of nesting into explicit predicate-argument clauses", prompt)
-        self.assertIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertIn("using only the narrow nested-of policy", prompt)
+        self.assertIn("the place of birth of the performer of song X", prompt)
+        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
         self.assertIn('"explicit_entities"', prompt)
         self.assertIn('"normalized_question"', prompt)
         self.assertIn('"normalization_changed"', prompt)
         self.assertIn('"normalization_note"', prompt)
-        self.assertNotIn("Only apply light parser-friendly grammar repair", prompt)
+        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
+        self.assertNotIn("Repair malformed wh-question order", prompt)
 
-    def test_free_extraction_prompt_contains_examples_and_conservative_fallback(self) -> None:
+    def test_free_extraction_prompt_contains_nested_of_examples_and_conservative_fallback(self) -> None:
         question = "Who is the child of the director of film An Event?"
         prompt = build_explicit_entity_extraction_prompt(question)
 
         self.assertIn("the person who directed the film An Event", prompt)
-        self.assertIn("Where was the person who directed The Outlaw Express born?", prompt)
-        self.assertIn("Which country is the composer of film Thunder On The Hill from?", prompt)
+        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
         self.assertIn("If strict equivalence is uncertain, return the original question unchanged", prompt)
         self.assertIn("Do not use near-synonym rewrites", prompt)
         self.assertIn("The original and normalized questions have exactly the same answer set", prompt)
-        self.assertNotIn("lightly normalize", prompt)
+        self.assertNotIn("general parser-friendly", prompt.replace("general parser-friendliness", ""))
+
+    def test_prompt_examples_keep_non_trigger_questions_unchanged(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "Which film has the director born later, A or B?"
+        )
+
+        self.assertIn("What is the capital of France?\n  -> What is the capital of France?", prompt)
+        self.assertIn("Who was born first out of A and B?\n  -> Who was born first out of A and B?", prompt)
+        self.assertIn("What event followed War of 1812?", prompt)
+        self.assertIn(
+            "Which film has the director born later, A or B?\n  -> Which film has the director born later, A or B?",
+            prompt,
+        )
+        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
+
+    def test_candidate_and_free_prompts_share_same_narrow_normalization_scope(self) -> None:
+        question = "What is the capital of France?"
+        candidate_prompt = build_explicit_entity_extraction_prompt(
+            question,
+            [
+                {
+                    "candidate_id": "c1",
+                    "text": "France",
+                    "start_char": question.index("France"),
+                    "end_char": question.index("France") + len("France"),
+                }
+            ],
+        )
+        free_prompt = build_explicit_entity_extraction_prompt(question)
+
+        for prompt in [candidate_prompt, free_prompt]:
+            with self.subTest(prompt=prompt[:40]):
+                self.assertIn("Rewrite only when all conditions hold", prompt)
+                self.assertIn("Outside explicit entity names", prompt)
+                self.assertIn("single-layer \"of\"", prompt)
+                self.assertIn("fixed phrase \"out of\"", prompt)
+                self.assertIn("parallel candidate question", prompt)
+                self.assertIn("normalization_changed", prompt)
+                self.assertIn('"explicit_entities"', prompt)
 
 
 class StaticEntityLLM:

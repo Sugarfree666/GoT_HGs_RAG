@@ -3,10 +3,46 @@ from __future__ import annotations
 import json
 
 
-EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
-You are DEPO Step 2: topic entity extraction and structure-preserving question normalization for HanLP PAS parsing.
+NESTED_OF_NORMALIZATION_POLICY = """
+Normalization is deliberately narrow.
+normalized_question must usually equal the original question.
 
-Extract only explicit topic entities in the original question, and produce one PAS-friendly normalized question for parser input.
+Rewrite only when all conditions hold:
+1. Outside explicit entity names, the question contains two or more mutually nested nominal "of" relations.
+2. Those "of" relations express the query relation chain, not merely an entity name or a fixed phrase.
+3. The rewrite is strictly equivalent and makes the implicit predicate-argument chain explicit for HanLP PAS.
+
+Target rewrites:
+- Convert common role nouns in a nested "of" chain into explicit predicates:
+  "the director of X" -> "the person who directed X"
+  "the performer of song X" -> "the person who performed the song X"
+  "the composer of work X" -> "the person who composed the work X"
+  "the author/writer of work X" -> "the person who wrote the work X"
+- Convert birth-location attributes over an unnamed person into a direct birth question:
+  "the place of birth of the performer of song X" -> "Where was the person who performed the song X born?"
+  Preserve "country/city/place" answer type when it is explicitly requested.
+
+Examples that should change:
+- Who is the child of the director of film An Event?
+  -> Who is the child of the person who directed the film An Event?
+- What is the place of birth of the performer of song Changed It?
+  -> Where was the person who performed the song Changed It born?
+
+Examples that must stay unchanged:
+- What is the capital of France?  (single-layer "of")
+- Who was born first out of A and B?  (fixed phrase "out of")
+- What event followed War of 1812?  ("of" inside an entity name)
+- Which film has the director born later, A or B?  (parallel candidate question; Step4 handles candidate attachment)
+
+Do not normalize for style, fluency, articles, general parser-friendliness, wh-order repair, or parallel candidate attachment.
+If strict equivalence is uncertain, return the original question and set normalization_changed=false.
+""".strip()
+
+
+EXPLICIT_ENTITY_EXTRACTION_SYSTEM = f"""
+You are DEPO Step 2: topic entity extraction and narrow nested-of question normalization for HanLP PAS parsing.
+
+Extract only explicit topic entities in the original question. Also return normalized_question, but its scope is intentionally limited.
 The original question is the semantic authority; normalized_question is only a parser input. Preserve the exact answer set.
 
 A topic entity is a concrete named thing explicitly mentioned in the question and useful as an anchor for QA decomposition:
@@ -27,32 +63,13 @@ Do not use external knowledge.
 Do not change the meaning, answer type, relation direction, comparison direction, negation, quantifier, candidate set, or any restriction.
 Keep every entity surface form exactly as it appears in the original question.
 
-Normalization goal: make implicit predicate-argument structure explicit enough for HanLP PAS without adding facts.
-- Prefer explicit predicates and clear arguments over deep noun/of nesting.
-- Expand strictly equivalent role nouns when useful: "the director of X" -> "the person who directed X".
-- Expose unnamed intermediate objects with relative clauses when the original already implies them.
-- Keep coordinated candidates parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
-- Repair malformed wh-question order when needed.
+{NESTED_OF_NORMALIZATION_POLICY}
 
 Hard semantic constraints:
 - Preserve all explicit entities verbatim in normalized_question.
 - Preserve and/or, both/either/neither, same, all, superlatives, ordinals, time, quantity, range, negation, and restrictive clauses.
 - Do not replace with near-synonyms that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
 - Do not introduce new named entities or ENTITYA/ENTITYB placeholders.
-- If a rewrite is not strictly equivalent, keep normalized_question identical to the original and set normalization_changed=false.
-
-Examples:
-Original: Who is the child of the director of film An Event?
-normalized_question: Who is the child of the person who directed the film An Event?
-
-Original: Where was the director of The Outlaw Express born?
-normalized_question: Where was the person who directed The Outlaw Express born?
-
-Original: Which film has the director born later, A or B?
-normalized_question: Which film, A or B, has a director who was born later?
-
-Original: Which country the composer of film X is from?
-normalized_question: Which country is the composer of film X from?
 
 The normalized question must be one natural English question ending with one question mark.
 Before returning JSON, silently verify selected entities occur verbatim in both questions, the answer set is unchanged, no relation direction or restriction changed, no placeholders or external facts were introduced, and normalization_changed matches the actual text change.
@@ -73,7 +90,7 @@ def build_explicit_entity_extraction_prompt(
                     "type": "Person | Location | Organization | Work | Event | Other",
                 }
             ],
-            "normalized_question": "one structure-preserving parser-friendly question preserving the exact answer set",
+            "normalized_question": "the original question, or a strictly equivalent nested-of rewrite",
             "normalization_changed": True,
             "normalization_note": "brief description of the structural rewrite, or empty string if unchanged",
             "warnings": [],
@@ -87,7 +104,7 @@ Candidate spans (Deterministic entity candidates):
 {json.dumps(entity_candidates, ensure_ascii=False, indent=2)}
 
 Task:
-Verify which candidate spans are topic entities, and normalize the original question for HanLP PAS semantic dependency parsing.
+Verify which candidate spans are topic entities. Also return normalized_question, using only the narrow nested-of policy below.
 Legacy verified_entities responses are accepted by the parser for compatibility, but you must return the explicit_entities schema below.
 
 Rules:
@@ -106,11 +123,8 @@ Rules:
 13. Do not answer the question or decompose it.
 14. Do not remove any restriction, alter the answer type, reverse a relation, change and/or, or change comparison direction.
 15. normalized_question must be a single natural English question ending with exactly one question mark.
-16. Structure-preserving normalization is allowed only when strictly equivalent and useful for PAS parsing:
-    - Turn deep role/of nesting into explicit predicate-argument clauses: "the director of X" -> "the person who directed X".
-    - Make unnamed intermediate objects explicit with relative clauses when the original already implies them.
-    - Keep candidate choices parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
-    - Repair malformed wh-question order, auxiliaries, or articles when needed.
+16. Apply this normalization policy exactly:
+{NESTED_OF_NORMALIZATION_POLICY}
 17. Preserve all selected entity surfaces verbatim in normalized_question.
 18. Preserve negation, time, quantity, scope, both/either/neither, same, all, superlatives, ordinals, and restrictive clauses.
 19. Do not use near-synonym rewrites that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
@@ -125,12 +139,14 @@ False candidates: "player", "1956", "what year", "born", "defeated"
 Normalization examples:
 - Who is the child of the director of film An Event?
   -> Who is the child of the person who directed the film An Event?
-- Where was the director of The Outlaw Express born?
-  -> Where was the person who directed The Outlaw Express born?
+- What is the place of birth of the performer of song Changed It?
+  -> Where was the person who performed the song Changed It born?
+- What is the capital of France?
+  -> What is the capital of France?
+- Who was born first out of A and B?
+  -> Who was born first out of A and B?
 - Which film has the director born later, A or B?
-  -> Which film, A or B, has a director who was born later?
-- Which country the composer of film Thunder On The Hill is from?
-  -> Which country is the composer of film Thunder On The Hill from?
+  -> Which film has the director born later, A or B?
 
 Silent self-check before output:
 1. Every selected entity is copied verbatim from the original question.
@@ -153,7 +169,7 @@ Output JSON with exactly this shape:
                 "type": "Person | Location | Organization | Work | Event | Other",
             }
         ],
-        "normalized_question": "one structure-preserving parser-friendly question preserving the exact answer set",
+        "normalized_question": "the original question, or a strictly equivalent nested-of rewrite",
         "normalization_changed": True,
         "normalization_note": "brief description of the structural rewrite, or empty string if unchanged",
         "warnings": [],
@@ -164,7 +180,7 @@ Original question:
 {question}
 
 Task:
-Extract all topic entities explicitly mentioned in the question, and normalize the original question for HanLP PAS semantic dependency parsing.
+Extract all topic entities explicitly mentioned in the question. Also return normalized_question, using only the narrow nested-of policy below.
 
 Rules:
 1. A returned entity surface must be an exact contiguous substring of the original question.
@@ -182,11 +198,8 @@ Rules:
 13. Do not answer the question or decompose it.
 14. Do not remove any restriction, alter the answer type, reverse a relation, change and/or, or change comparison direction.
 15. normalized_question must be a single natural English question ending with exactly one question mark.
-16. Structure-preserving normalization is allowed only when strictly equivalent and useful for PAS parsing:
-    - Turn deep role/of nesting into explicit predicate-argument clauses: "the director of X" -> "the person who directed X".
-    - Make unnamed intermediate objects explicit with relative clauses when the original already implies them.
-    - Keep candidate choices parallel and attached to the asked type: "Which film has the director born later, A or B?" -> "Which film, A or B, has a director who was born later?"
-    - Repair malformed wh-question order, auxiliaries, or articles when needed.
+16. Apply this normalization policy exactly:
+{NESTED_OF_NORMALIZATION_POLICY}
 17. Preserve all selected entity surfaces verbatim in normalized_question.
 18. Preserve negation, time, quantity, scope, both/either/neither, same, all, superlatives, ordinals, and restrictive clauses.
 19. Do not use near-synonym rewrites that change meaning: "born later" is not "younger"; "country of birth" is not "nationality".
@@ -196,12 +209,14 @@ Rules:
 Examples:
 - Who is the child of the director of film An Event?
   -> Who is the child of the person who directed the film An Event?
-- Where was the director of The Outlaw Express born?
-  -> Where was the person who directed The Outlaw Express born?
+- What is the place of birth of the performer of song Changed It?
+  -> Where was the person who performed the song Changed It born?
+- What is the capital of France?
+  -> What is the capital of France?
+- Who was born first out of A and B?
+  -> Who was born first out of A and B?
 - Which film has the director born later, A or B?
-  -> Which film, A or B, has a director who was born later?
-- Which country the composer of film Thunder On The Hill is from?
-  -> Which country is the composer of film Thunder On The Hill from?
+  -> Which film has the director born later, A or B?
 
 Silent self-check before output:
 1. Every selected entity is copied verbatim from the original question.

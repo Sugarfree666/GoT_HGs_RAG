@@ -1,0 +1,4022 @@
+{
+  "aggregated_edges": [
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "was",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "ROOT",
+          "head_idx": 0,
+          "label_class": "BRIDGE",
+          "normalized_relation": "root",
+          "relation": "root",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "0",
+      "source_text": "ROOT",
+      "support": 0.33,
+      "target": "2",
+      "target_text": "was"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "When",
+          "dep_idx": 1,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "was",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "MEDIUM",
+          "formalism": "sdp/pas",
+          "head": "When",
+          "head_idx": 1,
+          "label_class": "MODIFIER",
+          "normalized_relation": "adj_arg1",
+          "relation": "adj_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.67
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "1",
+      "source_text": "When",
+      "support": 1.0,
+      "target": "2",
+      "target_text": "was"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "was",
+      "support": 1.0,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg3",
+          "relation": "verb_ARG3",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "was",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "the",
+          "head_idx": 3,
+          "label_class": "BRIDGE",
+          "normalized_relation": "det_arg1",
+          "relation": "det_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "3",
+      "source_text": "the",
+      "support": 0.33,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "who",
+          "head_idx": 5,
+          "label_class": "RESTRICT",
+          "normalized_relation": "relative_arg1",
+          "relation": "relative_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "5",
+      "target_text": "who"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "6",
+      "target_text": "compared"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "get",
+          "head_idx": 14,
+          "label_class": "BRIDGE",
+          "normalized_relation": "aux_arg1",
+          "relation": "aux_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 0.33,
+      "target": "14",
+      "target_text": "get"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "compared",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "compared",
+          "dep_idx": 6,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "to",
+          "head_idx": 13,
+          "label_class": "UNKNOWN",
+          "normalized_relation": "comp_mod",
+          "relation": "comp_MOD",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "compared",
+      "support": 0.33,
+      "target": "13",
+      "target_text": "to"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYA",
+          "dep_idx": 7,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "'",
+          "head_idx": 8,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg2",
+          "relation": "poss_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "8",
+      "target_text": "'"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYA",
+          "dep_idx": 7,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "s",
+          "head_idx": 9,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg2",
+          "relation": "poss_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "9",
+      "target_text": "s"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "'",
+          "head_idx": 8,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg1",
+          "relation": "poss_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "8",
+      "source_text": "'",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "s",
+          "head_idx": 9,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg1",
+          "relation": "poss_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "9",
+      "source_text": "s",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "in",
+          "head_idx": 11,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg1",
+          "relation": "prep_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "10",
+      "source_text": "goals",
+      "support": 0.33,
+      "target": "11",
+      "target_text": "in"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYB",
+          "dep_idx": 12,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "in",
+          "head_idx": 11,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg2",
+          "relation": "prep_ARG2",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "11",
+      "source_text": "in",
+      "support": 0.33,
+      "target": "12",
+      "target_text": "ENTITYB"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "to",
+          "head_idx": 13,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "comp_arg1",
+          "relation": "comp_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "13",
+      "source_text": "to",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "get",
+          "head_idx": 14,
+          "label_class": "BRIDGE",
+          "normalized_relation": "aux_arg2",
+          "relation": "aux_ARG2",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "14",
+      "source_text": "get",
+      "support": 0.33,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYC",
+          "dep_idx": 17,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "15",
+      "source_text": "signed",
+      "support": 1.0,
+      "target": "17",
+      "target_text": "ENTITYC"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYC",
+          "dep_idx": 17,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "by",
+          "head_idx": 16,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "lgs_arg2",
+          "relation": "lgs_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "16",
+      "source_text": "by",
+      "support": 1.0,
+      "target": "17",
+      "target_text": "ENTITYC"
+    }
+  ],
+  "entity_anchors": [
+    {
+      "id": "7",
+      "text": "ENTITYA"
+    },
+    {
+      "id": "12",
+      "text": "ENTITYB"
+    },
+    {
+      "id": "17",
+      "text": "ENTITYC"
+    }
+  ],
+  "entity_branch_results": [
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "boundary": "who",
+          "boundary_id": "5",
+          "dijkstra_cost": 5.0,
+          "edge_costs": [
+            {
+              "derived": true,
+              "edge_cost": 1,
+              "edge_key": [
+                "7",
+                "10"
+              ],
+              "relations": [
+                "poss_arg1",
+                "poss_arg2"
+              ],
+              "rules": [
+                "pas_possessive_contraction",
+                "raw_evidence"
+              ],
+              "source": "ENTITYA",
+              "source_id": "7",
+              "target": "goals",
+              "target_id": "10"
+            },
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "6",
+                "10"
+              ],
+              "relations": [
+                "verb_arg2"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "goals",
+              "source_id": "10",
+              "target": "compared",
+              "target_id": "6"
+            },
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "4",
+                "6"
+              ],
+              "relations": [
+                "verb_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "compared",
+              "source_id": "6",
+              "target": "person",
+              "target_id": "4"
+            },
+            {
+              "derived": false,
+              "edge_cost": 2,
+              "edge_key": [
+                "4",
+                "5"
+              ],
+              "relations": [
+                "relative_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "person",
+              "source_id": "4",
+              "target": "who",
+              "target_id": "5"
+            }
+          ],
+          "entity": "ENTITYA",
+          "entity_id": "7",
+          "node_ids": [
+            "7",
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_cost": 5,
+          "sp_components": {
+            "branch_semantic_node_ids": [
+              "4",
+              "5",
+              "6",
+              "10"
+            ],
+            "branch_semantic_nodes": [
+              "person",
+              "who",
+              "compared",
+              "goals"
+            ],
+            "branch_semantic_nodes_count": 4,
+            "covered_semantic_node_ids": [
+              "4",
+              "5",
+              "6",
+              "10"
+            ],
+            "covered_semantic_nodes": [
+              "person",
+              "who",
+              "compared",
+              "goals"
+            ],
+            "covered_semantic_nodes_count": 4,
+            "path_node_ids_without_entity": [
+              "10",
+              "6",
+              "4",
+              "5"
+            ],
+            "path_nodes_without_entity": [
+              "goals",
+              "compared",
+              "person",
+              "who"
+            ],
+            "path_nodes_without_entity_count": 4
+          },
+          "sp_score": 1.0
+        }
+      ],
+      "entity": "ENTITYA",
+      "entity_id": "7",
+      "selected": {
+        "boundary": "who",
+        "boundary_id": "5",
+        "dijkstra_cost": 5.0,
+        "edge_costs": [
+          {
+            "derived": true,
+            "edge_cost": 1,
+            "edge_key": [
+              "7",
+              "10"
+            ],
+            "relations": [
+              "poss_arg1",
+              "poss_arg2"
+            ],
+            "rules": [
+              "pas_possessive_contraction",
+              "raw_evidence"
+            ],
+            "source": "ENTITYA",
+            "source_id": "7",
+            "target": "goals",
+            "target_id": "10"
+          },
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "6",
+              "10"
+            ],
+            "relations": [
+              "verb_arg2"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "goals",
+            "source_id": "10",
+            "target": "compared",
+            "target_id": "6"
+          },
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "4",
+              "6"
+            ],
+            "relations": [
+              "verb_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "compared",
+            "source_id": "6",
+            "target": "person",
+            "target_id": "4"
+          },
+          {
+            "derived": false,
+            "edge_cost": 2,
+            "edge_key": [
+              "4",
+              "5"
+            ],
+            "relations": [
+              "relative_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "person",
+            "source_id": "4",
+            "target": "who",
+            "target_id": "5"
+          }
+        ],
+        "entity": "ENTITYA",
+        "entity_id": "7",
+        "node_ids": [
+          "7",
+          "10",
+          "6",
+          "4",
+          "5"
+        ],
+        "nodes": [
+          "ENTITYA",
+          "goals",
+          "compared",
+          "person",
+          "who"
+        ],
+        "path": {
+          "node_ids": [
+            "7",
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYA",
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_id": "P1"
+        },
+        "path_cost": 5,
+        "path_id": "P1",
+        "sp_components": {
+          "branch_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10"
+          ],
+          "branch_semantic_nodes": [
+            "person",
+            "who",
+            "compared",
+            "goals"
+          ],
+          "branch_semantic_nodes_count": 4,
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10"
+          ],
+          "covered_semantic_nodes": [
+            "person",
+            "who",
+            "compared",
+            "goals"
+          ],
+          "covered_semantic_nodes_count": 4,
+          "path_node_ids_without_entity": [
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "path_nodes_without_entity": [
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_nodes_without_entity_count": 4
+        },
+        "sp_score": 1.0
+      }
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "boundary": "who",
+          "boundary_id": "5",
+          "dijkstra_cost": 5.0,
+          "edge_costs": [
+            {
+              "derived": true,
+              "edge_cost": 1,
+              "edge_key": [
+                "10",
+                "12"
+              ],
+              "relations": [
+                "prep_arg1",
+                "prep_arg2"
+              ],
+              "rules": [
+                "pas_preposition_contraction",
+                "raw_evidence"
+              ],
+              "source": "ENTITYB",
+              "source_id": "12",
+              "target": "goals",
+              "target_id": "10"
+            },
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "6",
+                "10"
+              ],
+              "relations": [
+                "verb_arg2"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "goals",
+              "source_id": "10",
+              "target": "compared",
+              "target_id": "6"
+            },
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "4",
+                "6"
+              ],
+              "relations": [
+                "verb_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "compared",
+              "source_id": "6",
+              "target": "person",
+              "target_id": "4"
+            },
+            {
+              "derived": false,
+              "edge_cost": 2,
+              "edge_key": [
+                "4",
+                "5"
+              ],
+              "relations": [
+                "relative_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "person",
+              "source_id": "4",
+              "target": "who",
+              "target_id": "5"
+            }
+          ],
+          "entity": "ENTITYB",
+          "entity_id": "12",
+          "node_ids": [
+            "12",
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYB",
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_cost": 5,
+          "sp_components": {
+            "branch_semantic_node_ids": [
+              "4",
+              "5",
+              "6",
+              "10"
+            ],
+            "branch_semantic_nodes": [
+              "person",
+              "who",
+              "compared",
+              "goals"
+            ],
+            "branch_semantic_nodes_count": 4,
+            "covered_semantic_node_ids": [
+              "4",
+              "5",
+              "6",
+              "10"
+            ],
+            "covered_semantic_nodes": [
+              "person",
+              "who",
+              "compared",
+              "goals"
+            ],
+            "covered_semantic_nodes_count": 4,
+            "path_node_ids_without_entity": [
+              "10",
+              "6",
+              "4",
+              "5"
+            ],
+            "path_nodes_without_entity": [
+              "goals",
+              "compared",
+              "person",
+              "who"
+            ],
+            "path_nodes_without_entity_count": 4
+          },
+          "sp_score": 1.0
+        }
+      ],
+      "entity": "ENTITYB",
+      "entity_id": "12",
+      "selected": {
+        "boundary": "who",
+        "boundary_id": "5",
+        "dijkstra_cost": 5.0,
+        "edge_costs": [
+          {
+            "derived": true,
+            "edge_cost": 1,
+            "edge_key": [
+              "10",
+              "12"
+            ],
+            "relations": [
+              "prep_arg1",
+              "prep_arg2"
+            ],
+            "rules": [
+              "pas_preposition_contraction",
+              "raw_evidence"
+            ],
+            "source": "ENTITYB",
+            "source_id": "12",
+            "target": "goals",
+            "target_id": "10"
+          },
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "6",
+              "10"
+            ],
+            "relations": [
+              "verb_arg2"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "goals",
+            "source_id": "10",
+            "target": "compared",
+            "target_id": "6"
+          },
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "4",
+              "6"
+            ],
+            "relations": [
+              "verb_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "compared",
+            "source_id": "6",
+            "target": "person",
+            "target_id": "4"
+          },
+          {
+            "derived": false,
+            "edge_cost": 2,
+            "edge_key": [
+              "4",
+              "5"
+            ],
+            "relations": [
+              "relative_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "person",
+            "source_id": "4",
+            "target": "who",
+            "target_id": "5"
+          }
+        ],
+        "entity": "ENTITYB",
+        "entity_id": "12",
+        "node_ids": [
+          "12",
+          "10",
+          "6",
+          "4",
+          "5"
+        ],
+        "nodes": [
+          "ENTITYB",
+          "goals",
+          "compared",
+          "person",
+          "who"
+        ],
+        "path": {
+          "node_ids": [
+            "12",
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYB",
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_id": "P2"
+        },
+        "path_cost": 5,
+        "path_id": "P2",
+        "sp_components": {
+          "branch_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10"
+          ],
+          "branch_semantic_nodes": [
+            "person",
+            "who",
+            "compared",
+            "goals"
+          ],
+          "branch_semantic_nodes_count": 4,
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "6",
+            "10"
+          ],
+          "covered_semantic_nodes": [
+            "person",
+            "who",
+            "compared",
+            "goals"
+          ],
+          "covered_semantic_nodes_count": 4,
+          "path_node_ids_without_entity": [
+            "10",
+            "6",
+            "4",
+            "5"
+          ],
+          "path_nodes_without_entity": [
+            "goals",
+            "compared",
+            "person",
+            "who"
+          ],
+          "path_nodes_without_entity_count": 4
+        },
+        "sp_score": 1.0
+      }
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "boundary": "who",
+          "boundary_id": "5",
+          "dijkstra_cost": 4.0,
+          "edge_costs": [
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "15",
+                "17"
+              ],
+              "relations": [
+                "verb_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "ENTITYC",
+              "source_id": "17",
+              "target": "signed",
+              "target_id": "15"
+            },
+            {
+              "derived": false,
+              "edge_cost": 1,
+              "edge_key": [
+                "4",
+                "15"
+              ],
+              "relations": [
+                "verb_arg2"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "signed",
+              "source_id": "15",
+              "target": "person",
+              "target_id": "4"
+            },
+            {
+              "derived": false,
+              "edge_cost": 2,
+              "edge_key": [
+                "4",
+                "5"
+              ],
+              "relations": [
+                "relative_arg1"
+              ],
+              "rules": [
+                "raw_evidence"
+              ],
+              "source": "person",
+              "source_id": "4",
+              "target": "who",
+              "target_id": "5"
+            }
+          ],
+          "entity": "ENTITYC",
+          "entity_id": "17",
+          "node_ids": [
+            "17",
+            "15",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYC",
+            "signed",
+            "person",
+            "who"
+          ],
+          "path_cost": 4,
+          "sp_components": {
+            "branch_semantic_node_ids": [
+              "4",
+              "5",
+              "15"
+            ],
+            "branch_semantic_nodes": [
+              "person",
+              "who",
+              "signed"
+            ],
+            "branch_semantic_nodes_count": 3,
+            "covered_semantic_node_ids": [
+              "4",
+              "5",
+              "15"
+            ],
+            "covered_semantic_nodes": [
+              "person",
+              "who",
+              "signed"
+            ],
+            "covered_semantic_nodes_count": 3,
+            "path_node_ids_without_entity": [
+              "15",
+              "4",
+              "5"
+            ],
+            "path_nodes_without_entity": [
+              "signed",
+              "person",
+              "who"
+            ],
+            "path_nodes_without_entity_count": 3
+          },
+          "sp_score": 1.0
+        }
+      ],
+      "entity": "ENTITYC",
+      "entity_id": "17",
+      "selected": {
+        "boundary": "who",
+        "boundary_id": "5",
+        "dijkstra_cost": 4.0,
+        "edge_costs": [
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "15",
+              "17"
+            ],
+            "relations": [
+              "verb_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "ENTITYC",
+            "source_id": "17",
+            "target": "signed",
+            "target_id": "15"
+          },
+          {
+            "derived": false,
+            "edge_cost": 1,
+            "edge_key": [
+              "4",
+              "15"
+            ],
+            "relations": [
+              "verb_arg2"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "signed",
+            "source_id": "15",
+            "target": "person",
+            "target_id": "4"
+          },
+          {
+            "derived": false,
+            "edge_cost": 2,
+            "edge_key": [
+              "4",
+              "5"
+            ],
+            "relations": [
+              "relative_arg1"
+            ],
+            "rules": [
+              "raw_evidence"
+            ],
+            "source": "person",
+            "source_id": "4",
+            "target": "who",
+            "target_id": "5"
+          }
+        ],
+        "entity": "ENTITYC",
+        "entity_id": "17",
+        "node_ids": [
+          "17",
+          "15",
+          "4",
+          "5"
+        ],
+        "nodes": [
+          "ENTITYC",
+          "signed",
+          "person",
+          "who"
+        ],
+        "path": {
+          "node_ids": [
+            "17",
+            "15",
+            "4",
+            "5"
+          ],
+          "nodes": [
+            "ENTITYC",
+            "signed",
+            "person",
+            "who"
+          ],
+          "path_id": "P3"
+        },
+        "path_cost": 4,
+        "path_id": "P3",
+        "sp_components": {
+          "branch_semantic_node_ids": [
+            "4",
+            "5",
+            "15"
+          ],
+          "branch_semantic_nodes": [
+            "person",
+            "who",
+            "signed"
+          ],
+          "branch_semantic_nodes_count": 3,
+          "covered_semantic_node_ids": [
+            "4",
+            "5",
+            "15"
+          ],
+          "covered_semantic_nodes": [
+            "person",
+            "who",
+            "signed"
+          ],
+          "covered_semantic_nodes_count": 3,
+          "path_node_ids_without_entity": [
+            "15",
+            "4",
+            "5"
+          ],
+          "path_nodes_without_entity": [
+            "signed",
+            "person",
+            "who"
+          ],
+          "path_nodes_without_entity_count": 3
+        },
+        "sp_score": 1.0
+      }
+    }
+  ],
+  "explicit_entities": [
+    "ENTITYA",
+    "ENTITYB",
+    "ENTITYC"
+  ],
+  "final_edges": [
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "'",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "'",
+          "marker_id": "8",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "'",
+              "target_id": "8"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "'",
+              "source_id": "8",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        },
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "s",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "s",
+          "marker_id": "9",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "s",
+              "target_id": "9"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "s",
+              "source_id": "9",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        }
+      ],
+      "rule": "pas_possessive_contraction",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "10",
+      "source_text": "goals",
+      "support": 1.0,
+      "target": "6",
+      "target_text": "compared"
+    },
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "arg1": "goals",
+          "arg1_id": "10",
+          "arg2": "ENTITYB",
+          "arg2_id": "12",
+          "collapsed_path": [
+            "goals",
+            "in",
+            "ENTITYB"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "preposition": "in",
+          "preposition_id": "11",
+          "rule": "pas_preposition_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg1",
+              "normalized_relations": [
+                "prep_arg1"
+              ],
+              "relation": "prep_arg1",
+              "relations": [
+                "prep_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "goals",
+              "source_id": "10",
+              "support": 0.33,
+              "target": "in",
+              "target_id": "11"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg2",
+              "normalized_relations": [
+                "prep_arg2"
+              ],
+              "relation": "prep_arg2",
+              "relations": [
+                "prep_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "in",
+              "source_id": "11",
+              "support": 0.33,
+              "target": "ENTITYB",
+              "target_id": "12"
+            }
+          ],
+          "support": 0.33
+        }
+      ],
+      "rule": "pas_preposition_contraction",
+      "source": "12",
+      "source_text": "ENTITYB",
+      "support": 0.33,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "compared",
+      "support": 1.0,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "who",
+          "head_idx": 5,
+          "label_class": "RESTRICT",
+          "normalized_relation": "relative_arg1",
+          "relation": "relative_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "5",
+      "target_text": "who"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "15",
+      "source_text": "signed",
+      "support": 1.0,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYC",
+          "dep_idx": 17,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "17",
+      "source_text": "ENTITYC",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    }
+  ],
+  "final_nodes": [
+    {
+      "id": "4",
+      "index": 4,
+      "is_anchor": false,
+      "kind": "content",
+      "text": "person"
+    },
+    {
+      "id": "5",
+      "index": 5,
+      "is_anchor": false,
+      "kind": "function",
+      "text": "who"
+    },
+    {
+      "id": "6",
+      "index": 6,
+      "is_anchor": false,
+      "kind": "content",
+      "text": "compared"
+    },
+    {
+      "id": "7",
+      "index": 7,
+      "is_anchor": true,
+      "kind": "entity",
+      "text": "ENTITYA"
+    },
+    {
+      "id": "10",
+      "index": 10,
+      "is_anchor": false,
+      "kind": "content",
+      "text": "goals"
+    },
+    {
+      "id": "12",
+      "index": 12,
+      "is_anchor": true,
+      "kind": "entity",
+      "text": "ENTITYB"
+    },
+    {
+      "id": "15",
+      "index": 15,
+      "is_anchor": false,
+      "kind": "content",
+      "text": "signed"
+    },
+    {
+      "id": "17",
+      "index": 17,
+      "is_anchor": true,
+      "kind": "entity",
+      "text": "ENTITYC"
+    }
+  ],
+  "masked_question": "When was the person who compared ENTITYA's goals in ENTITYB to get signed by ENTITYC?",
+  "normalization_changed": true,
+  "normalization_note": "Rephrased to clarify the comparison action.",
+  "normalized_evidence_edges": [
+    {
+      "consensus_count": 1,
+      "dep": "When",
+      "dep_idx": 1,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "was",
+      "dep_idx": 2,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "label_class": "BRIDGE",
+      "normalized_relation": "root",
+      "relation": "root",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "was",
+      "dep_idx": 2,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "MEDIUM",
+      "formalism": "sdp/pas",
+      "head": "When",
+      "head_idx": 1,
+      "label_class": "MODIFIER",
+      "normalized_relation": "adj_arg1",
+      "relation": "adj_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.67
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 3,
+      "label_class": "BRIDGE",
+      "normalized_relation": "det_arg1",
+      "relation": "det_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "who",
+      "head_idx": 5,
+      "label_class": "RESTRICT",
+      "normalized_relation": "relative_arg1",
+      "relation": "relative_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "compared",
+      "head_idx": 6,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "get",
+      "head_idx": 14,
+      "label_class": "BRIDGE",
+      "normalized_relation": "aux_arg1",
+      "relation": "aux_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "person",
+      "dep_idx": 4,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "signed",
+      "head_idx": 15,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg2",
+      "relation": "verb_ARG2",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "compared",
+      "dep_idx": 6,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "to",
+      "head_idx": 13,
+      "label_class": "UNKNOWN",
+      "normalized_relation": "comp_mod",
+      "relation": "comp_MOD",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "ENTITYA",
+      "dep_idx": 7,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "'",
+      "head_idx": 8,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "poss_arg2",
+      "relation": "poss_ARG2",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "ENTITYA",
+      "dep_idx": 7,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "s",
+      "head_idx": 9,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "poss_arg2",
+      "relation": "poss_ARG2",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "goals",
+      "dep_idx": 10,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "compared",
+      "head_idx": 6,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg2",
+      "relation": "verb_ARG2",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "goals",
+      "dep_idx": 10,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "'",
+      "head_idx": 8,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "poss_arg1",
+      "relation": "poss_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "goals",
+      "dep_idx": 10,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "s",
+      "head_idx": 9,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "poss_arg1",
+      "relation": "poss_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "goals",
+      "dep_idx": 10,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "in",
+      "head_idx": 11,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg1",
+      "relation": "prep_ARG1",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "ENTITYB",
+      "dep_idx": 12,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "in",
+      "head_idx": 11,
+      "label_class": "BRIDGE",
+      "normalized_relation": "prep_arg2",
+      "relation": "prep_ARG2",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "signed",
+      "dep_idx": 15,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg3",
+      "relation": "verb_ARG3",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "signed",
+      "dep_idx": 15,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "to",
+      "head_idx": 13,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "comp_arg1",
+      "relation": "comp_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "signed",
+      "dep_idx": 15,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "WEAK",
+      "formalism": "sdp/pas",
+      "head": "get",
+      "head_idx": 14,
+      "label_class": "BRIDGE",
+      "normalized_relation": "aux_arg2",
+      "relation": "aux_ARG2",
+      "rule": "raw_evidence",
+      "support": 0.33
+    },
+    {
+      "consensus_count": 1,
+      "dep": "ENTITYC",
+      "dep_idx": 17,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "signed",
+      "head_idx": 15,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "verb_arg1",
+      "relation": "verb_ARG1",
+      "rule": "raw_evidence",
+      "support": 1.0
+    },
+    {
+      "consensus_count": 1,
+      "dep": "ENTITYC",
+      "dep_idx": 17,
+      "derived": false,
+      "direction": "head_to_dep",
+      "edge_quality": "STRONG",
+      "formalism": "sdp/pas",
+      "head": "by",
+      "head_idx": 16,
+      "label_class": "CORE_ARG",
+      "normalized_relation": "lgs_arg2",
+      "relation": "lgs_ARG2",
+      "rule": "raw_evidence",
+      "support": 1.0
+    }
+  ],
+  "normalized_question": "When was the person who compared Messi's goals in Copa del Rey to get signed by Barcelona?",
+  "original_question": "When was the person who Messi's goals in Copa del Rey compared to get signed by Barcelona?",
+  "paths": [
+    {
+      "node_ids": [
+        "7",
+        "10",
+        "6",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "goals",
+        "compared",
+        "person",
+        "who"
+      ],
+      "path_id": "P1"
+    },
+    {
+      "node_ids": [
+        "12",
+        "10",
+        "6",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYB",
+        "goals",
+        "compared",
+        "person",
+        "who"
+      ],
+      "path_id": "P2"
+    },
+    {
+      "node_ids": [
+        "17",
+        "15",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYC",
+        "signed",
+        "person",
+        "who"
+      ],
+      "path_id": "P3"
+    }
+  ],
+  "question_id": "q1",
+  "raw_sdp_edges": [
+    {
+      "dep": "When",
+      "dep_idx": 1,
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "was",
+      "dep_idx": 2,
+      "formalism": "sdp/pas",
+      "head": "ROOT",
+      "head_idx": 0,
+      "relation": "root"
+    },
+    {
+      "dep": "was",
+      "dep_idx": 2,
+      "formalism": "sdp/pas",
+      "head": "When",
+      "head_idx": 1,
+      "relation": "adj_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "the",
+      "head_idx": 3,
+      "relation": "det_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "who",
+      "head_idx": 5,
+      "relation": "relative_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "compared",
+      "head_idx": 6,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "get",
+      "head_idx": 14,
+      "relation": "aux_ARG1"
+    },
+    {
+      "dep": "person",
+      "dep_idx": 4,
+      "formalism": "sdp/pas",
+      "head": "signed",
+      "head_idx": 15,
+      "relation": "verb_ARG2"
+    },
+    {
+      "dep": "compared",
+      "dep_idx": 6,
+      "formalism": "sdp/pas",
+      "head": "to",
+      "head_idx": 13,
+      "relation": "comp_MOD"
+    },
+    {
+      "dep": "ENTITYA",
+      "dep_idx": 7,
+      "formalism": "sdp/pas",
+      "head": "'",
+      "head_idx": 8,
+      "relation": "poss_ARG2"
+    },
+    {
+      "dep": "ENTITYA",
+      "dep_idx": 7,
+      "formalism": "sdp/pas",
+      "head": "s",
+      "head_idx": 9,
+      "relation": "poss_ARG2"
+    },
+    {
+      "dep": "goals",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "compared",
+      "head_idx": 6,
+      "relation": "verb_ARG2"
+    },
+    {
+      "dep": "goals",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "'",
+      "head_idx": 8,
+      "relation": "poss_ARG1"
+    },
+    {
+      "dep": "goals",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "s",
+      "head_idx": 9,
+      "relation": "poss_ARG1"
+    },
+    {
+      "dep": "goals",
+      "dep_idx": 10,
+      "formalism": "sdp/pas",
+      "head": "in",
+      "head_idx": 11,
+      "relation": "prep_ARG1"
+    },
+    {
+      "dep": "ENTITYB",
+      "dep_idx": 12,
+      "formalism": "sdp/pas",
+      "head": "in",
+      "head_idx": 11,
+      "relation": "prep_ARG2"
+    },
+    {
+      "dep": "signed",
+      "dep_idx": 15,
+      "formalism": "sdp/pas",
+      "head": "was",
+      "head_idx": 2,
+      "relation": "verb_ARG3"
+    },
+    {
+      "dep": "signed",
+      "dep_idx": 15,
+      "formalism": "sdp/pas",
+      "head": "to",
+      "head_idx": 13,
+      "relation": "comp_ARG1"
+    },
+    {
+      "dep": "signed",
+      "dep_idx": 15,
+      "formalism": "sdp/pas",
+      "head": "get",
+      "head_idx": 14,
+      "relation": "aux_ARG2"
+    },
+    {
+      "dep": "ENTITYC",
+      "dep_idx": 17,
+      "formalism": "sdp/pas",
+      "head": "signed",
+      "head_idx": 15,
+      "relation": "verb_ARG1"
+    },
+    {
+      "dep": "ENTITYC",
+      "dep_idx": 17,
+      "formalism": "sdp/pas",
+      "head": "by",
+      "head_idx": 16,
+      "relation": "lgs_ARG2"
+    }
+  ],
+  "repaired_evidence_edges": [
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "was",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "ROOT",
+          "head_idx": 0,
+          "label_class": "BRIDGE",
+          "normalized_relation": "root",
+          "relation": "root",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "0",
+      "source_text": "ROOT",
+      "support": 0.33,
+      "target": "2",
+      "target_text": "was"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "When",
+          "dep_idx": 1,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        },
+        {
+          "consensus_count": 1,
+          "dep": "was",
+          "dep_idx": 2,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "MEDIUM",
+          "formalism": "sdp/pas",
+          "head": "When",
+          "head_idx": 1,
+          "label_class": "MODIFIER",
+          "normalized_relation": "adj_arg1",
+          "relation": "adj_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.67
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "1",
+      "source_text": "When",
+      "support": 1.0,
+      "target": "2",
+      "target_text": "was"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "was",
+      "support": 1.0,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "was",
+          "head_idx": 2,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg3",
+          "relation": "verb_ARG3",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "2",
+      "source_text": "was",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "the",
+          "head_idx": 3,
+          "label_class": "BRIDGE",
+          "normalized_relation": "det_arg1",
+          "relation": "det_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "3",
+      "source_text": "the",
+      "support": 0.33,
+      "target": "4",
+      "target_text": "person"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "who",
+          "head_idx": 5,
+          "label_class": "RESTRICT",
+          "normalized_relation": "relative_arg1",
+          "relation": "relative_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "5",
+      "target_text": "who"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "6",
+      "target_text": "compared"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "get",
+          "head_idx": 14,
+          "label_class": "BRIDGE",
+          "normalized_relation": "aux_arg1",
+          "relation": "aux_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 0.33,
+      "target": "14",
+      "target_text": "get"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "person",
+          "dep_idx": 4,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "4",
+      "source_text": "person",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "compared",
+          "head_idx": 6,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg2",
+          "relation": "verb_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "compared",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "compared",
+          "dep_idx": 6,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "to",
+          "head_idx": 13,
+          "label_class": "UNKNOWN",
+          "normalized_relation": "comp_mod",
+          "relation": "comp_MOD",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "6",
+      "source_text": "compared",
+      "support": 0.33,
+      "target": "13",
+      "target_text": "to"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYA",
+          "dep_idx": 7,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "'",
+          "head_idx": 8,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg2",
+          "relation": "poss_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "8",
+      "target_text": "'"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYA",
+          "dep_idx": 7,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "s",
+          "head_idx": 9,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg2",
+          "relation": "poss_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "9",
+      "target_text": "s"
+    },
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "'",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "'",
+          "marker_id": "8",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "'",
+              "target_id": "8"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "'",
+              "source_id": "8",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        },
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "s",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "s",
+          "marker_id": "9",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "s",
+              "target_id": "9"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "s",
+              "source_id": "9",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        }
+      ],
+      "rule": "pas_possessive_contraction",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "'",
+          "head_idx": 8,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg1",
+          "relation": "poss_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "8",
+      "source_text": "'",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "s",
+          "head_idx": 9,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "poss_arg1",
+          "relation": "poss_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "9",
+      "source_text": "s",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "goals",
+          "dep_idx": 10,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "in",
+          "head_idx": 11,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg1",
+          "relation": "prep_ARG1",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "10",
+      "source_text": "goals",
+      "support": 0.33,
+      "target": "11",
+      "target_text": "in"
+    },
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "arg1": "goals",
+          "arg1_id": "10",
+          "arg2": "ENTITYB",
+          "arg2_id": "12",
+          "collapsed_path": [
+            "goals",
+            "in",
+            "ENTITYB"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "preposition": "in",
+          "preposition_id": "11",
+          "rule": "pas_preposition_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg1",
+              "normalized_relations": [
+                "prep_arg1"
+              ],
+              "relation": "prep_arg1",
+              "relations": [
+                "prep_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "goals",
+              "source_id": "10",
+              "support": 0.33,
+              "target": "in",
+              "target_id": "11"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg2",
+              "normalized_relations": [
+                "prep_arg2"
+              ],
+              "relation": "prep_arg2",
+              "relations": [
+                "prep_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "in",
+              "source_id": "11",
+              "support": 0.33,
+              "target": "ENTITYB",
+              "target_id": "12"
+            }
+          ],
+          "support": 0.33
+        }
+      ],
+      "rule": "pas_preposition_contraction",
+      "source": "10",
+      "source_text": "goals",
+      "support": 0.33,
+      "target": "12",
+      "target_text": "ENTITYB"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYB",
+          "dep_idx": 12,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "in",
+          "head_idx": 11,
+          "label_class": "BRIDGE",
+          "normalized_relation": "prep_arg2",
+          "relation": "prep_ARG2",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "11",
+      "source_text": "in",
+      "support": 0.33,
+      "target": "12",
+      "target_text": "ENTITYB"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 2,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "to",
+          "head_idx": 13,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "comp_arg1",
+          "relation": "comp_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "13",
+      "source_text": "to",
+      "support": 1.0,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "signed",
+          "dep_idx": 15,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "head": "get",
+          "head_idx": 14,
+          "label_class": "BRIDGE",
+          "normalized_relation": "aux_arg2",
+          "relation": "aux_ARG2",
+          "rule": "raw_evidence",
+          "support": 0.33
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "14",
+      "source_text": "get",
+      "support": 0.33,
+      "target": "15",
+      "target_text": "signed"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYC",
+          "dep_idx": 17,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "signed",
+          "head_idx": 15,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "verb_arg1",
+          "relation": "verb_ARG1",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "15",
+      "source_text": "signed",
+      "support": 1.0,
+      "target": "17",
+      "target_text": "ENTITYC"
+    },
+    {
+      "consensus_count": 1,
+      "derived": false,
+      "edge_cost": null,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "consensus_count": 1,
+          "dep": "ENTITYC",
+          "dep_idx": 17,
+          "derived": false,
+          "direction": "head_to_dep",
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "head": "by",
+          "head_idx": 16,
+          "label_class": "CORE_ARG",
+          "normalized_relation": "lgs_arg2",
+          "relation": "lgs_ARG2",
+          "rule": "raw_evidence",
+          "support": 1.0
+        }
+      ],
+      "rule": "raw_evidence",
+      "source": "16",
+      "source_text": "by",
+      "support": 1.0,
+      "target": "17",
+      "target_text": "ENTITYC"
+    }
+  ],
+  "selected_paths": [
+    {
+      "node_ids": [
+        "7",
+        "10",
+        "6",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYA",
+        "goals",
+        "compared",
+        "person",
+        "who"
+      ],
+      "path_id": "P1"
+    },
+    {
+      "node_ids": [
+        "12",
+        "10",
+        "6",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYB",
+        "goals",
+        "compared",
+        "person",
+        "who"
+      ],
+      "path_id": "P2"
+    },
+    {
+      "node_ids": [
+        "17",
+        "15",
+        "4",
+        "5"
+      ],
+      "nodes": [
+        "ENTITYC",
+        "signed",
+        "person",
+        "who"
+      ],
+      "path_id": "P3"
+    }
+  ],
+  "selection_mode": "entity_branch_best_paths",
+  "semantic_boundary_nodes": [
+    {
+      "degree": 1,
+      "id": "5",
+      "index": 5,
+      "kind": "function",
+      "text": "who"
+    }
+  ],
+  "semantic_node_ids": [
+    "4",
+    "5",
+    "6",
+    "10",
+    "14",
+    "15"
+  ],
+  "semantic_nodes": [
+    "person",
+    "who",
+    "compared",
+    "goals",
+    "get",
+    "signed"
+  ],
+  "step4_path_extraction": "entity_branch_best_paths",
+  "syntax_head_source": "dep",
+  "syntax_heads": {
+    "1": 2,
+    "10": 6,
+    "11": 12,
+    "12": 10,
+    "13": 15,
+    "14": 15,
+    "15": 2,
+    "16": 17,
+    "17": 15,
+    "18": 2,
+    "2": 0,
+    "3": 4,
+    "4": 2,
+    "5": 6,
+    "6": 4,
+    "7": 10,
+    "8": 7,
+    "9": 7
+  },
+  "terminals": [
+    "who"
+  ],
+  "tokens": [
+    "When",
+    "was",
+    "the",
+    "person",
+    "who",
+    "compared",
+    "ENTITYA",
+    "'",
+    "s",
+    "goals",
+    "in",
+    "ENTITYB",
+    "to",
+    "get",
+    "signed",
+    "by",
+    "ENTITYC",
+    "?"
+  ],
+  "unsearchable_pas_edges": [
+    {
+      "edge_cost": null,
+      "relations": [
+        "root"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "ROOT",
+      "source_id": "0",
+      "target": "was",
+      "target_id": "2"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "det_arg1"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "the",
+      "source_id": "3",
+      "target": "person",
+      "target_id": "4"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "aux_arg1"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "person",
+      "source_id": "4",
+      "target": "get",
+      "target_id": "14"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "poss_arg2"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "ENTITYA",
+      "source_id": "7",
+      "target": "'",
+      "target_id": "8"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "poss_arg2"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "ENTITYA",
+      "source_id": "7",
+      "target": "s",
+      "target_id": "9"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "poss_arg1"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "'",
+      "source_id": "8",
+      "target": "goals",
+      "target_id": "10"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "poss_arg1"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "s",
+      "source_id": "9",
+      "target": "goals",
+      "target_id": "10"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "prep_arg1"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "goals",
+      "source_id": "10",
+      "target": "in",
+      "target_id": "11"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "prep_arg2"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "in",
+      "source_id": "11",
+      "target": "ENTITYB",
+      "target_id": "12"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "aux_arg2"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "get",
+      "source_id": "14",
+      "target": "signed",
+      "target_id": "15"
+    },
+    {
+      "edge_cost": null,
+      "relations": [
+        "lgs_arg2"
+      ],
+      "rules": [
+        "raw_evidence"
+      ],
+      "source": "by",
+      "source_id": "16",
+      "target": "ENTITYC",
+      "target_id": "17"
+    }
+  ],
+  "virtual_edges": [
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "WEAK",
+      "provenance": [
+        {
+          "arg1": "goals",
+          "arg1_id": "10",
+          "arg2": "ENTITYB",
+          "arg2_id": "12",
+          "collapsed_path": [
+            "goals",
+            "in",
+            "ENTITYB"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "WEAK",
+          "formalism": "sdp/pas",
+          "preposition": "in",
+          "preposition_id": "11",
+          "rule": "pas_preposition_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg1",
+              "normalized_relations": [
+                "prep_arg1"
+              ],
+              "relation": "prep_arg1",
+              "relations": [
+                "prep_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "goals",
+              "source_id": "10",
+              "support": 0.33,
+              "target": "in",
+              "target_id": "11"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "WEAK",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "BRIDGE",
+              "label_classes": [
+                "BRIDGE"
+              ],
+              "normalized_relation": "prep_arg2",
+              "normalized_relations": [
+                "prep_arg2"
+              ],
+              "relation": "prep_arg2",
+              "relations": [
+                "prep_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "in",
+              "source_id": "11",
+              "support": 0.33,
+              "target": "ENTITYB",
+              "target_id": "12"
+            }
+          ],
+          "support": 0.33
+        }
+      ],
+      "rule": "pas_preposition_contraction",
+      "source": "10",
+      "source_text": "goals",
+      "support": 0.33,
+      "target": "12",
+      "target_text": "ENTITYB"
+    },
+    {
+      "consensus_count": 1,
+      "derived": true,
+      "edge_cost": 1,
+      "edge_quality": "STRONG",
+      "provenance": [
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "'",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "'",
+          "marker_id": "8",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "'",
+              "target_id": "8"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "'",
+              "source_id": "8",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        },
+        {
+          "collapsed_path": [
+            "ENTITYA",
+            "s",
+            "goals"
+          ],
+          "consensus_count": 1,
+          "derived": true,
+          "edge_quality": "STRONG",
+          "formalism": "sdp/pas",
+          "marker": "s",
+          "marker_id": "9",
+          "owner": "ENTITYA",
+          "owner_id": "7",
+          "possessed": "goals",
+          "possessed_id": "10",
+          "rule": "pas_possessive_contraction",
+          "source_edges": [
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg2",
+              "normalized_relations": [
+                "poss_arg2"
+              ],
+              "relation": "poss_arg2",
+              "relations": [
+                "poss_arg2"
+              ],
+              "rule": "raw_evidence",
+              "source": "ENTITYA",
+              "source_id": "7",
+              "support": 1.0,
+              "target": "s",
+              "target_id": "9"
+            },
+            {
+              "consensus_count": 1,
+              "derived": false,
+              "edge_cost": null,
+              "edge_quality": "STRONG",
+              "formalism": "sdp/pas",
+              "formalisms": [
+                "sdp/pas"
+              ],
+              "label_class": "CORE_ARG",
+              "label_classes": [
+                "CORE_ARG"
+              ],
+              "normalized_relation": "poss_arg1",
+              "normalized_relations": [
+                "poss_arg1"
+              ],
+              "relation": "poss_arg1",
+              "relations": [
+                "poss_arg1"
+              ],
+              "rule": "raw_evidence",
+              "source": "s",
+              "source_id": "9",
+              "support": 1.0,
+              "target": "goals",
+              "target_id": "10"
+            }
+          ],
+          "support": 1.0
+        }
+      ],
+      "rule": "pas_possessive_contraction",
+      "source": "7",
+      "source_text": "ENTITYA",
+      "support": 1.0,
+      "target": "10",
+      "target_text": "goals"
+    }
+  ],
+  "warnings": []
+}

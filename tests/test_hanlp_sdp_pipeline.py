@@ -173,6 +173,29 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             print_hanlp_sdp_result(1, record, result)
         self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
+    def test_pipeline_runs_no_path_step5_when_step4_has_no_paths(self) -> None:
+        question = "What is the capital of France?"
+        llm = NoPathPipelineLLM(question)
+
+        result = run_hanlp_sdp_pipeline(
+            record=QuestionRecord(question=question),
+            index=1,
+            preprocessor=EntityMaskingPreprocessor(llm),
+            parser=NoPathHanLPSDPParser(),
+        )
+
+        compiled = result["token_reasoning_structure"]
+        self.assertEqual(compiled.path_type, "no_entity_branch_path")
+        self.assertEqual(compiled.paths, [])
+        self.assertEqual(llm.calls, 2)
+        self.assertEqual(
+            json.loads(llm.no_path_user_prompt),
+            {"original_question": question},
+        )
+        dag = result["atomic_question_dag"]
+        self.assertTrue(dag.valid, dag.validation_errors)
+        self.assertEqual([node.question for node in dag.nodes], [question])
+
     def test_pipeline_sends_restored_entity_branch_paths_to_step5(self) -> None:
         question = "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
         llm = IllusionsPipelineLLM(question)
@@ -357,10 +380,10 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
 
         self.assertEqual(_edge_cost(_edge_between_texts(state, "head", "dep")), 1)
 
-    def test_function_and_structure_only_pas_labels_are_excluded_from_search_graph(
+    def test_non_noise_pas_labels_cost_three_and_remain_searchable(
         self,
     ) -> None:
-        excluded_relations = [
+        cost_three_relations = [
             "prep_ARG1",
             "prep_ARG2",
             "poss_ARG1",
@@ -369,13 +392,32 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             "coord_ARG2",
             "det_ARG1",
             "aux_ARG1",
+            "unlisted_relation",
+        ]
+        for relation in cost_three_relations:
+            with self.subTest(relation=relation):
+                state = build_evidence_graph(
+                    _hanlp_result(
+                        "ENTITYA target",
+                        ["ENTITYA", "target"],
+                        [_pas("ENTITYA", relation, "target", 1, 2)],
+                    )
+                )
+                edge = _edge_between_texts(state, "ENTITYA", "target")
+                graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+                self.assertEqual(_edge_cost(edge), 3)
+                self.assertTrue(_has_search_edge(graph, "1", "2"))
+
+    def test_pure_noise_pas_labels_remain_excluded_from_search_graph(self) -> None:
+        blocked_relations = [
             "punct_ARG1",
             "quote_ARG1",
             "lparen_ARG1",
+            "rbracket_ARG1",
             "root",
-            "unlisted_relation",
         ]
-        for relation in excluded_relations:
+        for relation in blocked_relations:
             with self.subTest(relation=relation):
                 state = build_evidence_graph(
                     _hanlp_result(
@@ -390,7 +432,7 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
                 self.assertIsNone(_edge_cost(edge))
                 self.assertFalse(_has_search_edge(graph, "1", "2"))
 
-    def test_unrecognized_pas_labels_are_reported_as_unsearchable_debug_edges(
+    def test_unrecognized_pas_labels_use_cost_three_fallback(
         self,
     ) -> None:
         compiled = compile_token_reasoning_structure(
@@ -402,13 +444,14 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             ["ENTITYA"],
         )
 
-        self.assertEqual(compiled.paths, [])
-        self.assertTrue(
-            any(
-                "unknown_relation" in edge.get("relations", [])
-                for edge in compiled.debug_payload["unsearchable_pas_edges"]
-            )
+        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "target"]])
+        self.assertEqual(
+            compiled.global_selection["entity_branch_results"][0]["selected"][
+                "path_cost"
+            ],
+            3,
         )
+        self.assertEqual(compiled.debug_payload["unsearchable_pas_edges"], [])
 
     def test_answer_anchor_debug_fields_are_removed_from_step4_mainline(self) -> None:
         compiled = compile_token_reasoning_structure(
@@ -508,6 +551,79 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
 
         for excluded in {"ROOT", ",", "?", "has", "the", "or"}:
             self.assertNotIn(excluded, boundary_texts)
+
+    def test_function_words_remain_searchable_internal_bridges(self) -> None:
+        state = build_evidence_graph(
+            _hanlp_result(
+                "ENTITYA from country same?",
+                ["ENTITYA", "from", "country", "same", "?"],
+                [
+                    _pas("ENTITYA", "verb_ARG1", "from", 1, 2),
+                    _pas("from", "prep_ARG2", "country", 2, 3),
+                    _pas("country", "adj_ARG1", "same", 3, 4),
+                ],
+            )
+        )
+        graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+        self.assertEqual(_edge_cost(_edge_between_texts(state, "from", "country")), 3)
+        self.assertTrue(_has_search_edge(graph, "1", "2"))
+        self.assertTrue(_has_search_edge(graph, "2", "3"))
+        path, cost = _shortest_semantic_boundary_path(
+            graph, state.nodes, "1", "4", blocked_internal_ids=set()
+        )
+        self.assertEqual(
+            [state.nodes[node_id].text for node_id in path],
+            ["ENTITYA", "from", "country", "same"],
+        )
+        self.assertEqual(cost, 5)
+
+    def test_coordination_and_scope_words_remain_searchable_internal_bridges(
+        self,
+    ) -> None:
+        for bridge in ["and", "or", "both", "between", "than"]:
+            with self.subTest(bridge=bridge):
+                state = build_evidence_graph(
+                    _hanlp_result(
+                        f"ENTITYA {bridge} country",
+                        ["ENTITYA", bridge, "country"],
+                        [
+                            _pas("ENTITYA", "coord_ARG1", bridge, 1, 2),
+                            _pas(bridge, "coord_ARG2", "country", 2, 3),
+                        ],
+                    )
+                )
+                graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+                self.assertEqual(
+                    _edge_cost(_edge_between_texts(state, "ENTITYA", bridge)), 3
+                )
+                self.assertTrue(_has_search_edge(graph, "1", "2"))
+                self.assertTrue(_has_search_edge(graph, "2", "3"))
+                path, cost = _shortest_semantic_boundary_path(
+                    graph, state.nodes, "1", "3", blocked_internal_ids=set()
+                )
+                self.assertEqual(
+                    [state.nodes[node_id].text for node_id in path],
+                    ["ENTITYA", bridge, "country"],
+                )
+                self.assertEqual(cost, 6)
+
+    def test_root_and_punctuation_nodes_cannot_enter_search_paths(self) -> None:
+        state = build_evidence_graph(
+            _hanlp_result(
+                "ENTITYA ? country",
+                ["ENTITYA", "?", "country"],
+                [
+                    _pas("ENTITYA", "verb_ARG1", "?", 1, 2),
+                    _pas("?", "verb_ARG2", "country", 2, 3),
+                ],
+            )
+        )
+        graph = _semantic_path_search_graph(state.nodes, state.edges)
+
+        self.assertFalse(_has_search_edge(graph, "1", "2"))
+        self.assertFalse(_has_search_edge(graph, "2", "3"))
 
     def test_dijkstra_uses_existing_edge_cost_for_lowest_cost_path(self) -> None:
         result = _hanlp_result(
@@ -760,6 +876,81 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
         self.assertEqual(
             {item["marker"] for item in possessive_edges[0]["provenance"]}, {"'", "s"}
         )
+        self.assertFalse(
+            any(
+                {"'", "s"}.intersection(
+                    {edge["source_text"], edge["target_text"]}
+                )
+                for edge in compiled.debug_payload["repaired_evidence_edges"]
+            )
+        )
+
+    def test_pas_possessive_contraction_keeps_single_marker_behavior(self) -> None:
+        result = _hanlp_result(
+            "ENTITYA 's father died?",
+            ["ENTITYA", "'s", "father", "died", "?"],
+            [
+                _pas("'s", "poss_ARG2", "ENTITYA", 2, 1),
+                _pas("'s", "noun_ARG1", "father", 2, 3),
+                _pas("died", "verb_ARG1", "father", 4, 3),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+        possessive_edges = _virtual_edges_by_rule(
+            compiled, "pas_possessive_contraction"
+        )
+
+        self.assertEqual(len(possessive_edges), 1)
+        self.assertEqual(
+            {possessive_edges[0]["source_text"], possessive_edges[0]["target_text"]},
+            {"ENTITYA", "father"},
+        )
+        self.assertEqual(possessive_edges[0]["edge_cost"], 1)
+        self.assertEqual(possessive_edges[0]["provenance"][0]["marker"], "'s")
+        self.assertFalse(
+            any(
+                "'s" in {edge["source_text"], edge["target_text"]}
+                for edge in compiled.debug_payload["repaired_evidence_edges"]
+            )
+        )
+
+    def test_pas_possessive_contraction_merges_split_quote_and_s_markers(
+        self,
+    ) -> None:
+        result = _hanlp_result(
+            "ENTITYA ' s father died?",
+            ["ENTITYA", "'", "s", "father", "died", "?"],
+            [
+                _pas("'", "poss_ARG2", "ENTITYA", 2, 1),
+                _pas("s", "poss_ARG1", "father", 3, 4),
+                _pas("died", "verb_ARG1", "father", 5, 4),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
+        possessive_edges = _virtual_edges_by_rule(
+            compiled, "pas_possessive_contraction"
+        )
+
+        self.assertEqual(len(possessive_edges), 1)
+        self.assertEqual(
+            {possessive_edges[0]["source_text"], possessive_edges[0]["target_text"]},
+            {"ENTITYA", "father"},
+        )
+        self.assertEqual(possessive_edges[0]["edge_cost"], 1)
+        provenance = possessive_edges[0]["provenance"][0]
+        self.assertEqual(provenance["marker"], "'s")
+        self.assertEqual(provenance["marker_ids"], ["2", "3"])
+        self.assertEqual(len(provenance["source_edges"]), 2)
+        self.assertFalse(
+            any(
+                {"'", "s"}.intersection(
+                    {edge["source_text"], edge["target_text"]}
+                )
+                for edge in compiled.debug_payload["repaired_evidence_edges"]
+            )
+        )
 
     def test_pas_preposition_and_possessive_contractions_do_not_receive_derived_penalty(
         self,
@@ -817,6 +1008,111 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
 
         self.assertEqual(
             _virtual_edges_by_rule(compiled, "pas_possessive_contraction"), []
+        )
+
+    def test_pas_coordination_contraction_through_and(self) -> None:
+        result = _hanlp_result(
+            "Do both films ENTITYA and ENTITYB have directors from the same country?",
+            [
+                "Do",
+                "both",
+                "films",
+                "ENTITYA",
+                "and",
+                "ENTITYB",
+                "have",
+                "directors",
+                "from",
+                "the",
+                "same",
+                "country",
+                "?",
+            ],
+            [
+                _pas("have", "verb_ARG2", "and", 7, 5),
+                _pas("and", "coord_ARG1", "ENTITYA", 5, 4),
+                _pas("and", "coord_ARG2", "ENTITYB", 5, 6),
+                _pas("have", "verb_ARG1", "directors", 7, 8),
+                _pas("directors", "noun_ARG1", "country", 8, 12),
+                _pas("country", "adj_ARG1", "same", 12, 11),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+        contraction_edges = _virtual_edges_by_rule(
+            compiled, "pas_coordination_contraction"
+        )
+
+        self.assertEqual(len(contraction_edges), 2)
+        self.assertEqual(
+            {
+                frozenset((edge["source_text"], edge["target_text"]))
+                for edge in contraction_edges
+            },
+            {frozenset(("have", "ENTITYA")), frozenset(("have", "ENTITYB"))},
+        )
+        for edge in contraction_edges:
+            self.assertTrue(edge["derived"])
+            self.assertEqual(edge["edge_cost"], 2)
+            self.assertEqual(
+                edge["provenance"][0]["semantic_relation"], "verb_arg2"
+            )
+        self.assertFalse(
+            any(
+                "and" in {edge["source_text"], edge["target_text"]}
+                for edge in compiled.debug_payload["repaired_evidence_edges"]
+            )
+        )
+
+    def test_pas_coordination_contraction_through_or(self) -> None:
+        result = _hanlp_result(
+            "Does ENTITYA or ENTITYB have a director?",
+            ["Does", "ENTITYA", "or", "ENTITYB", "have", "director", "?"],
+            [
+                _pas("have", "verb_ARG2", "or", 5, 3),
+                _pas("or", "coord_ARG1", "ENTITYA", 3, 2),
+                _pas("or", "coord_ARG2", "ENTITYB", 3, 4),
+                _pas("have", "verb_ARG1", "director", 5, 6),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+        contraction_edges = _virtual_edges_by_rule(
+            compiled, "pas_coordination_contraction"
+        )
+
+        self.assertEqual(
+            {
+                frozenset((edge["source_text"], edge["target_text"]))
+                for edge in contraction_edges
+            },
+            {frozenset(("have", "ENTITYA")), frozenset(("have", "ENTITYB"))},
+        )
+        self.assertTrue(all(edge["edge_cost"] == 2 for edge in contraction_edges))
+        self.assertFalse(
+            any(
+                "or" in {edge["source_text"], edge["target_text"]}
+                for edge in compiled.debug_payload["repaired_evidence_edges"]
+            )
+        )
+
+    def test_pas_coordination_contraction_skips_predicate_coordination(self) -> None:
+        result = _hanlp_result(
+            "Do ENTITYA write and ENTITYB direct?",
+            ["Do", "ENTITYA", "write", "and", "ENTITYB", "direct", "?"],
+            [
+                _pas("Do", "verb_ARG2", "and", 1, 4),
+                _pas("and", "coord_ARG1", "write", 4, 3),
+                _pas("and", "coord_ARG2", "direct", 4, 6),
+                _pas("write", "verb_ARG1", "ENTITYA", 3, 2),
+                _pas("direct", "verb_ARG1", "ENTITYB", 6, 5),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(
+            _virtual_edges_by_rule(compiled, "pas_coordination_contraction"), []
         )
 
     def test_pas_coordination_candidates_attach_by_syntactic_head(self) -> None:
@@ -1012,7 +1308,7 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
         self.assertIn("film[2] -- ENTITYA[3] (cost=2)", output)
         self.assertIn("ENTITYC[6] -- mother[8] (cost=1)", output)
         self.assertIn("mother[8] -- director[10] (cost=1)", output)
-        self.assertIn("ENTITYA[3] -- or[4] (cost=blocked)", output)
+        self.assertIn("ENTITYA[3] -- or[4] (cost=3)", output)
         self.assertNotIn("; rule=", output)
         self.assertNotIn("; rel=", output)
         self.assertNotIn("; derived", output)
@@ -1256,6 +1552,29 @@ class FakePreprocessLLM:
         }
 
 
+class NoPathPipelineLLM:
+    def __init__(self, question: str) -> None:
+        self.question = question
+        self.calls = 0
+        self.no_path_user_prompt = ""
+
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
+        self.calls += 1
+        if "action trace generation" in system_prompt:
+            self.no_path_user_prompt = user_prompt
+            return {
+                "actions": [
+                    {
+                        "id": "q1",
+                        "consume": [],
+                        "produce": "q1_answer",
+                        "question": self.question,
+                    }
+                ]
+            }
+        return {"verified_entities": [], "warnings": []}
+
+
 class IllusionsPipelineLLM:
     def __init__(self, question: str) -> None:
         self.question = question
@@ -1344,6 +1663,22 @@ class RecordingHanLPSDPParser:
             ],
             raw={"tok": tokens, "sdp/pas": []},
             model="fake",
+        )
+
+
+class NoPathHanLPSDPParser:
+    def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
+        del placeholders
+        tokens = ["What", "is", "the", "capital", "of", "France", "?"]
+        return HanLPSDPResult(
+            text=text,
+            tokens=tokens,
+            available_keys=["tok", "sdp/pas"],
+            sdp_graphs={"sdp/pas": []},
+            edges=[HanLPSDPEdge("sdp/pas", 0, "ROOT", "root", 2, "is")],
+            raw={"tok": tokens, "sdp/pas": []},
+            warnings=[],
+            model="fake.no-path.model",
         )
 
 
