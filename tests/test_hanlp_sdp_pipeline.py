@@ -151,6 +151,36 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             debug_payload["step4_path_extraction"], "entity_branch_best_paths"
         )
 
+    def test_implicit_attribute_normalization_connects_entity_to_attribute(self) -> None:
+        question = "What nationality is Lamprocles's father?"
+        normalized = "What is the nationality of Lamprocles's father?"
+        masked = "What is the nationality of ENTITYA's father?"
+        llm = StaticPreprocessLLM(
+            {
+                "explicit_entities": [{"surface": "Lamprocles", "type": "Person"}],
+                "normalized_question": normalized,
+                "normalization_changed": True,
+                "normalization_note": "Made the attribute ownership explicit.",
+                "warnings": [],
+            }
+        )
+        parser = AttributeOwnershipHanLPSDPParser()
+
+        result = run_hanlp_sdp_pipeline(
+            record=QuestionRecord(question=question),
+            index=1,
+            preprocessor=EntityMaskingPreprocessor(llm),
+            parser=parser,
+            skip_step5=True,
+        )
+
+        self.assertEqual(result["preprocess_result"].masked_question, masked)
+        self.assertEqual(parser.text, masked)
+        self.assertEqual(
+            [list(path.nodes) for path in result["token_reasoning_structure"].paths],
+            [["ENTITYA", "father", "nationality"]],
+        )
+
     def test_hanlp_sdp_pipeline_can_skip_step5(self) -> None:
         record = QuestionRecord(
             question="Who is older, Ryan Tubridy or Mauro Massironi?"
@@ -1527,25 +1557,17 @@ class FakePreprocessLLM:
             assert "answer_anchor" not in serialized
             return _older_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
-        assert "Deterministic entity candidates" in user_prompt
+        assert "Candidate spans" not in user_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
         return {
-            "entities": [
+            "explicit_entities": [
                 {
-                    "text": "Ryan Tubridy",
-                    "semantic_type_hint": "Person",
-                    "start_char": 14,
-                    "end_char": 26,
-                    "confidence": 1.0,
-                    "reason": "explicit person name",
+                    "surface": "Ryan Tubridy",
+                    "type": "Person",
                 },
                 {
-                    "text": "Mauro Massironi",
-                    "semantic_type_hint": "Person",
-                    "start_char": 30,
-                    "end_char": 45,
-                    "confidence": 1.0,
-                    "reason": "explicit person name",
+                    "surface": "Mauro Massironi",
+                    "type": "Person",
                 },
             ],
             "warnings": [],
@@ -1572,7 +1594,7 @@ class NoPathPipelineLLM:
                     }
                 ]
             }
-        return {"verified_entities": [], "warnings": []}
+        return {"explicit_entities": [], "warnings": []}
 
 
 class IllusionsPipelineLLM:
@@ -1609,9 +1631,9 @@ class IllusionsPipelineLLM:
             return _illusions_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         return {
-            "entities": [
-                _entity(self.question, "Illusions (1982 Film)", "Work"),
-                _entity(self.question, "It'S A Wonderful Afterlife", "Work"),
+            "explicit_entities": [
+                {"surface": "Illusions (1982 Film)", "type": "Work"},
+                {"surface": "It'S A Wonderful Afterlife", "type": "Work"},
             ],
             "warnings": [],
         }
@@ -1663,6 +1685,31 @@ class RecordingHanLPSDPParser:
             ],
             raw={"tok": tokens, "sdp/pas": []},
             model="fake",
+        )
+
+
+class AttributeOwnershipHanLPSDPParser:
+    def __init__(self) -> None:
+        self.text = ""
+
+    def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
+        del placeholders
+        self.text = text
+        tokens = ["What", "is", "the", "nationality", "of", "ENTITYA", "'s", "father", "?"]
+        return HanLPSDPResult(
+            text=text,
+            tokens=tokens,
+            available_keys=["tok", "sdp/pas"],
+            sdp_graphs={"sdp/pas": []},
+            edges=[
+                HanLPSDPEdge("sdp/pas", 7, "'s", "poss_ARG2", 6, "ENTITYA"),
+                HanLPSDPEdge("sdp/pas", 7, "'s", "poss_ARG1", 8, "father"),
+                HanLPSDPEdge("sdp/pas", 5, "of", "prep_ARG1", 4, "nationality"),
+                HanLPSDPEdge("sdp/pas", 5, "of", "prep_ARG2", 8, "father"),
+            ],
+            raw={"tok": tokens, "sdp/pas": []},
+            warnings=[],
+            model="fake.attribute-ownership.model",
         )
 
 

@@ -208,7 +208,6 @@ CLAUSE_BOUNDARY = {
     "that",
 }
 
-
 class ExplicitEntityExtractor:
     """Step 2 extractor for explicit named entities only."""
 
@@ -218,20 +217,13 @@ class ExplicitEntityExtractor:
     def extract(self, question: str) -> ExplicitEntityResult:
         warnings: list[str] = []
         raw_payload: dict[str, Any] | None = None
-        deterministic_candidates = _generate_explicit_entity_candidates(question)
-        candidate_payloads = _entity_candidate_payloads(deterministic_candidates)
-        candidates_by_id = {
-            str(candidate["candidate_id"]): deterministic_candidates[index]
-            for index, candidate in enumerate(candidate_payloads)
-        }
         if self.llm_client is not None:
             try:
                 raw = self.llm_client.chat_json(
                     EXPLICIT_ENTITY_EXTRACTION_SYSTEM,
-                    build_explicit_entity_extraction_prompt(question, candidate_payloads),
+                    build_explicit_entity_extraction_prompt(question),
                 )
                 raw_payload = raw if isinstance(raw, dict) else {}
-                raw_payload.setdefault("deterministic_candidates", candidate_payloads)
                 normalized_question, normalization_changed, normalization_note = self._parse_normalization_payload(
                     question,
                     raw_payload,
@@ -241,25 +233,9 @@ class ExplicitEntityExtractor:
                     question,
                     raw_payload,
                     warnings,
-                    candidates_by_id=candidates_by_id,
                 )
-                candidate_decisions_present = any(
-                    key in raw_payload for key in ("verified_entities", "candidate_entities")
-                )
-                if llm_entities or candidate_decisions_present:
-                    base_entities = llm_entities
-                else:
-                    warnings.append("LLM returned no verified explicit entities; using deterministic candidates.")
-                    base_entities = deterministic_candidates
                 return ExplicitEntityResult(
-                    entities=_merge_explicit_entities(
-                        _with_structural_explicit_entities(
-                            question,
-                            base_entities,
-                            warnings,
-                        ),
-                        warnings,
-                    ),
+                    entities=llm_entities,
                     warnings=warnings,
                     raw_payload=raw_payload,
                     normalized_question=normalized_question,
@@ -267,17 +243,10 @@ class ExplicitEntityExtractor:
                     normalization_note=normalization_note,
                 )
             except Exception as exc:
-                warnings.append(f"Explicit entity LLM failed; using heuristic fallback: {exc}")
+                warnings.append(f"Explicit entity LLM failed; returning no entities: {exc}")
 
         return ExplicitEntityResult(
-            entities=_merge_explicit_entities(
-                _with_structural_explicit_entities(
-                    question,
-                    deterministic_candidates,
-                    warnings,
-                ),
-                warnings,
-            ),
+            entities=[],
             warnings=warnings,
             raw_payload=raw_payload,
             normalized_question=question,
@@ -316,78 +285,65 @@ class ExplicitEntityExtractor:
         question: str,
         payload: dict[str, Any],
         warnings: list[str],
-        candidates_by_id: dict[str, ExplicitEntity] | None = None,
     ) -> list[ExplicitEntity]:
-        candidates_by_id = candidates_by_id or {}
-        raw_entities = payload.get("verified_entities", payload.get("candidate_entities"))
-        if raw_entities is None:
-            raw_entities = payload.get("entities", payload.get("explicit_entities"))
-        if raw_entities is None:
-            raw_entities = payload.get("mask_spans", payload.get("maskSpans", []))
+        raw_entities = payload.get("explicit_entities")
         if not isinstance(raw_entities, list):
-            warnings.append("Explicit entity payload did not contain a list entities field.")
+            warnings.append("Explicit entity payload did not contain an explicit_entities list.")
             return []
 
         entities: list[ExplicitEntity] = []
-        for raw in raw_entities:
+        invalid_reasons: list[str] = []
+        seen_surfaces: set[str] = set()
+        spans: list[tuple[int, int, str]] = []
+        for index, raw in enumerate(raw_entities, start=1):
             if not isinstance(raw, dict):
+                invalid_reasons.append(f"explicit_entities[{index - 1}] must be an object")
                 continue
-            candidate_id = str(raw.get("candidate_id", raw.get("id", ""))).strip()
-            if candidate_id:
-                if candidate_id not in candidates_by_id:
-                    warnings.append(f"Dropped unknown explicit entity candidate_id={candidate_id!r}.")
-                    continue
-                if not _coerce_bool(
-                    raw.get("is_entity", raw.get("selected", raw.get("keep", True))),
-                    default=True,
-                ):
-                    continue
-                candidate = candidates_by_id[candidate_id]
-                semantic_type_hint = _normalize_entity_type(
-                    raw.get("type", raw.get("semantic_type_hint", raw.get("semantic_type", candidate.semantic_type_hint)))
-                )
-                confidence = _clamp_float(raw.get("confidence", candidate.confidence), 0.0, 1.0)
-                entities.append(
-                    ExplicitEntity(
-                        text=candidate.text,
-                        start_char=candidate.start_char,
-                        end_char=candidate.end_char,
-                        semantic_type_hint=semantic_type_hint,
-                        confidence=confidence,
-                        reason=str(raw.get("reason", candidate.reason)).strip(),
-                    )
+            text = raw.get("surface")
+            if not isinstance(text, str) or not text:
+                invalid_reasons.append(
+                    f"explicit_entities[{index - 1}].surface must be a non-empty string"
                 )
                 continue
-            if _normalize_kind_hint(raw.get("kind_hint", raw.get("kind", "entity"))) != "entity":
-                warnings.append(f"Dropped non-entity explicit entity item: {raw!r}.")
+            if text in seen_surfaces:
+                invalid_reasons.append(f"duplicate explicit entity surface={text!r}")
                 continue
-            text = str(raw.get("surface", raw.get("text", ""))).strip()
-            start = _coerce_int(raw.get("start_char", raw.get("start")))
-            end = _coerce_int(raw.get("end_char", raw.get("end")))
-            if not text:
+            seen_surfaces.add(text)
+            matches = list(re.finditer(re.escape(text), question))
+            if not matches:
+                invalid_reasons.append(
+                    f"explicit entity surface was not found exactly in the original question: {text!r}"
+                )
                 continue
-            start, end = _resolve_explicit_entity_span(question, text, start, end, warnings)
-            if start is None or end is None:
-                warnings.append(f"Could not resolve explicit entity text={text!r}.")
+            start = matches[0].start()
+            end = start + len(text)
+            if any(
+                match.start() < other_end and match.end() > other_start
+                for match in matches
+                for other_start, other_end, _ in spans
+            ):
+                invalid_reasons.append(
+                    f"overlapping explicit entity span for surface={text!r}"
+                )
                 continue
-            entity_text = question[start:end]
-            if _is_forbidden_explicit_entity(entity_text):
-                warnings.append(f"Dropped forbidden non-entity span text={entity_text!r}.")
-                continue
-            semantic_type_hint = _normalize_entity_type(raw.get("type", raw.get("semantic_type_hint", raw.get("semantic_type", ""))))
+            spans.extend((match.start(), match.end(), text) for match in matches)
             entities.append(
                 ExplicitEntity(
-                    text=question[start:end],
+                    text=text,
                     start_char=start,
                     end_char=end,
-                    semantic_type_hint=semantic_type_hint,
-                    confidence=_clamp_float(raw.get("confidence", 1.0), 0.0, 1.0),
-                    reason=str(raw.get("reason", "")).strip(),
+                    semantic_type_hint=_normalize_entity_type(raw.get("type")),
+                    confidence=1.0,
+                    reason="LLM direct explicit entity",
                 )
             )
-        return _merge_explicit_entities(entities, warnings)
-
-
+        if invalid_reasons:
+            warnings.append(
+                "Invalid LLM explicit_entities output; ignoring all entities: "
+                + "; ".join(invalid_reasons)
+            )
+            return []
+        return entities
 class MaskSpanExtractor:
     """Compatibility wrapper for the new explicit-entity Step 2."""
 
@@ -415,164 +371,6 @@ def _mask_spans_from_explicit_entities(entities: list[ExplicitEntity]) -> list[M
         )
         for entity in entities
     ]
-
-
-def _heuristic_explicit_entities(question: str) -> list[ExplicitEntity]:
-    spans = _heuristic_mask_spans(question)
-    entities = [
-        ExplicitEntity(
-            text=span.text,
-            start_char=span.start_char,
-            end_char=span.end_char,
-            semantic_type_hint=_normalize_entity_type(span.semantic_type_hint),
-            confidence=0.55,
-            reason=span.reason or "deterministic explicit entity fallback",
-        )
-        for span in spans
-        if span.kind_hint == "entity" and not _is_forbidden_explicit_entity(span.text)
-    ]
-    return _merge_explicit_entities(entities, [])
-
-
-def _generate_explicit_entity_candidates(question: str) -> list[ExplicitEntity]:
-    """Generate deterministic candidate spans before LLM verification.
-
-    The LLM should classify these candidates instead of inventing character
-    offsets. Candidate generation prioritizes recall for explicit named
-    entities while leaving final yes/no filtering to the LLM.
-    """
-    candidates: list[ExplicitEntity] = []
-    candidates.extend(_heuristic_explicit_entities(question))
-    candidates.extend(_single_token_explicit_entity_candidates(question))
-    return _dedupe_explicit_entity_candidates(question, candidates)
-
-
-def _dedupe_explicit_entity_candidates(question: str, candidates: list[ExplicitEntity]) -> list[ExplicitEntity]:
-    by_span: dict[tuple[int, int], ExplicitEntity] = {}
-    for candidate in candidates:
-        start, end = _trim_explicit_entity_boundary(question, candidate.start_char, candidate.end_char)
-        if start < 0 or end <= start:
-            continue
-        text = question[start:end]
-        if _is_forbidden_explicit_entity(text):
-            continue
-        normalized = ExplicitEntity(
-            text=text.strip(),
-            start_char=start,
-            end_char=end,
-            semantic_type_hint=_normalize_entity_type(candidate.semantic_type_hint),
-            confidence=_clamp_float(candidate.confidence, 0.0, 1.0),
-            reason=candidate.reason,
-        )
-        key = (normalized.start_char, normalized.end_char)
-        existing = by_span.get(key)
-        if existing is None or normalized.confidence > existing.confidence:
-            by_span[key] = normalized
-    return sorted(by_span.values(), key=lambda item: (item.start_char, -(item.end_char - item.start_char)))
-
-
-def _entity_candidate_payloads(candidates: list[ExplicitEntity]) -> list[dict[str, Any]]:
-    payloads: list[dict[str, Any]] = []
-    for index, candidate in enumerate(candidates, start=1):
-        payloads.append(
-            {
-                "candidate_id": f"c{index}",
-                "text": candidate.text,
-                "start_char": candidate.start_char,
-                "end_char": candidate.end_char,
-                "reason": candidate.reason,
-            }
-        )
-    return payloads
-
-
-def _single_token_explicit_entity_candidates(question: str) -> list[ExplicitEntity]:
-    candidates: list[ExplicitEntity] = []
-    for match in re.finditer(UNICODE_WORD_TOKEN_PATTERN, question):
-        start, end = _trim_explicit_entity_boundary(question, match.start(), match.end())
-        if end <= start:
-            continue
-        text = question[start:end]
-        if (
-            _is_forbidden_explicit_entity(text)
-            or _starts_sentence_only(question, start, text)
-            or not _looks_like_single_token_entity_candidate(question, text, start, end)
-        ):
-            continue
-        candidates.append(
-            ExplicitEntity(
-                text=text,
-                start_char=start,
-                end_char=end,
-                semantic_type_hint=_infer_semantic_type(text, "entity", question, start, end),
-                confidence=0.5,
-                reason="single-token proper-name candidate",
-            )
-        )
-    return candidates
-
-
-def _looks_like_single_token_entity_candidate(
-    question: str,
-    text: str,
-    start: int,
-    end: int,
-) -> bool:
-    del start, end
-    stripped = text.strip()
-    lowered = stripped.lower().strip(".")
-    if len(stripped) < 2 or lowered in INTERNAL_NAME_CONNECTORS or lowered in PERSON_NAME_PARTICLES:
-        return False
-    if _looks_like_acronym(stripped) or _looks_like_mixedcase_name(stripped):
-        return True
-    if any(ord(char) > 127 for char in stripped) and stripped[:1].isupper():
-        return True
-    if stripped[:1].isupper() and re.search(r"[A-Za-z]", stripped):
-        return True
-    return False
-
-
-def _with_structural_explicit_entities(
-    question: str,
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> list[ExplicitEntity]:
-    entities = _with_coordinated_designation_entities(question, entities, warnings)
-    return _with_typed_coordinate_title_entities(question, entities, warnings)
-
-
-def _with_coordinated_designation_entities(
-    question: str,
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> list[ExplicitEntity]:
-    additions = _coordinated_designation_entities(question)
-    if not additions:
-        return entities
-    existing_spans = {(entity.start_char, entity.end_char) for entity in entities}
-    for entity in additions:
-        if (entity.start_char, entity.end_char) not in existing_spans:
-            warnings.append(f"Added complete coordinated named designation entity text={entity.text!r}.")
-            entities.append(entity)
-    return entities
-
-
-def _with_typed_coordinate_title_entities(
-    question: str,
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> list[ExplicitEntity]:
-    additions = _typed_coordinate_title_entities(question)
-    if not additions:
-        return entities
-    existing_spans = {(entity.start_char, entity.end_char) for entity in entities}
-    for entity in additions:
-        if (entity.start_char, entity.end_char) in existing_spans:
-            continue
-        warnings.append(f"Added typed coordinate title candidate entity text={entity.text!r}.")
-        entities.append(entity)
-        existing_spans.add((entity.start_char, entity.end_char))
-    return entities
 
 
 def _typed_coordinate_title_entities(question: str) -> list[ExplicitEntity]:

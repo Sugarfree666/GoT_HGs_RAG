@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import sys
 import unittest
 from pathlib import Path
@@ -12,335 +11,334 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
-from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor  # noqa: E402
-from placeholder import selective_entity_masking  # noqa: E402
+from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
+from mask_span_extractor import ExplicitEntityExtractor  # noqa: E402
 from prompts import EXPLICIT_ENTITY_EXTRACTION_SYSTEM, build_explicit_entity_extraction_prompt  # noqa: E402
 
 
 class ExplicitEntityExtractionTest(unittest.TestCase):
-    def test_explicit_entity_extraction_person_possessive(self) -> None:
-        question = "Why did John Middleton Murry's wife die?"
-        result = ExplicitEntityExtractor(
-            StaticEntityLLM([_entity(question, "John Middleton Murry", "Person")])
-        ).extract(question)
-        replacement = selective_entity_masking(
-            question=question,
-            mask_spans=MaskSpanExtractor(StaticEntityLLM([_entity(question, "John Middleton Murry", "Person")])).extract(question),
-        )
-
-        self.assertEqual([entity.text for entity in result.entities], ["John Middleton Murry"])
-        self.assertNotIn("wife", [entity.text for entity in result.entities])
-        self.assertNotIn("die", [entity.text for entity in result.entities])
-        self.assertEqual(replacement.masked_question, "Why did PersonA's wife die?")
-        self.assertEqual(replacement.mapping["PersonA"], "John Middleton Murry")
-
-    def test_mask_all_single_token_entities(self) -> None:
-        question = "Are Marufabad and Nasamkhrali both located in the same country?"
-        replacement = selective_entity_masking(
-            question=question,
-            mask_spans=MaskSpanExtractor(
-                StaticEntityLLM(
-                    [
-                        _entity(question, "Marufabad", "Location"),
-                        _entity(question, "Nasamkhrali", "Location"),
-                    ]
-                )
-            ).extract(question),
-        )
-
-        self.assertEqual(replacement.masked_question, "Are LocationA and LocationB both located in the same country?")
-        self.assertEqual(replacement.mapping["LocationA"], "Marufabad")
-        self.assertEqual(replacement.mapping["LocationB"], "Nasamkhrali")
-
-    def test_do_not_extract_roles_slots_or_type_variables(self) -> None:
-        question = "Which university did the CEO of the company that developed the AI game AlphaGo graduate from?"
-        result = ExplicitEntityExtractor(
-            StaticEntityLLM([_entity(question, "AlphaGo", "Game")])
-        ).extract(question)
-        replacement = selective_entity_masking(
-            question=question,
-            mask_spans=MaskSpanExtractor(StaticEntityLLM([_entity(question, "AlphaGo", "Game")])).extract(question),
-        )
-
-        self.assertEqual([entity.text for entity in result.entities], ["AlphaGo"])
-        self.assertNotIn("CEO", [entity.text for entity in result.entities])
-        self.assertNotIn("company", [entity.text for entity in result.entities])
-        self.assertNotIn("university", [entity.text for entity in result.entities])
-        self.assertEqual(
-            replacement.masked_question,
-            "Which university did the CEO of the company that developed the AI game GameA graduate from?",
-        )
-
-    def test_internal_and_inside_named_event_is_not_split(self) -> None:
-        question = (
-            "When was the region immediately north of the region where Israel is located and "
-            "the location of the Battle of Qurah and Umm al Maradim created?"
-        )
-        result = ExplicitEntityExtractor(
-            StaticEntityLLM(
-                [
-                    _entity(question, "Israel", "Country"),
-                    _entity(question, "Battle of Qurah", "Event"),
-                    _entity(question, "Umm al Maradim", "Location"),
-                ]
-            )
-        ).extract(question)
-        replacement = selective_entity_masking(
-            question=question,
-            mask_spans=MaskSpanExtractor(
-                StaticEntityLLM(
-                    [
-                        _entity(question, "Israel", "Country"),
-                        _entity(question, "Battle of Qurah", "Event"),
-                        _entity(question, "Umm al Maradim", "Location"),
-                    ]
-                )
-            ).extract(question),
-        )
-
-        self.assertEqual(
-            [entity.text for entity in result.entities],
-            ["Israel", "Battle of Qurah and Umm al Maradim"],
-        )
-        self.assertNotIn("Battle of Qurah", replacement.mapping.values())
-        self.assertNotIn("Umm al Maradim", replacement.mapping.values())
-        self.assertIn("Battle of Qurah and Umm al Maradim", replacement.mapping.values())
-        self.assertEqual(
-            replacement.masked_question,
-            "When was the region immediately north of the region where CountryA is located and "
-            "the location of the EventA created?",
-        )
-
-    def test_candidate_verification_handles_titles_apostrophe_and_non_ascii(self) -> None:
-        question = "Which film has the director who is older, God'S Gift To Women or Aldri Annet Enn Br氓k?"
-        llm = CandidateSelectingLLM(
-            {
-                "God'S Gift To Women": "Film",
-                "Aldri Annet Enn Br氓k": "Film",
-            }
-        )
-        result = ExplicitEntityExtractor(llm).extract(question)
-
-        self.assertIn("Candidate spans", llm.prompt)
-        self.assertIn("verified_entities", llm.prompt)
-        self.assertEqual(
-            [(entity.text, entity.semantic_type_hint) for entity in result.entities],
-            [("God'S Gift To Women", "Film"), ("Aldri Annet Enn Br氓k", "Film")],
-        )
-        self.assertNotIn("God", [entity.text for entity in result.entities])
-        self.assertNotIn("Br氓k", [entity.text for entity in result.entities])
-
-    def test_colon_subtitle_title_is_kept_as_one_work_entity(self) -> None:
-        question = "What music school did the singer of The Search for Everything: Wave One attend?"
-        title = "The Search for Everything: Wave One"
-        llm = CandidateSelectingLLM({title: "Work"})
+    def test_llm_directly_identifies_entities_without_candidates(self) -> None:
+        question = "Which film featured Shrek 2?"
+        llm = DirectEntityLLM(_payload([_entity("Shrek 2", "Work")]))
 
         result = ExplicitEntityExtractor(llm).extract(question)
 
-        self.assertIn("colon/subtitle", llm.prompt)
-        self.assertEqual([(entity.text, entity.semantic_type_hint) for entity in result.entities], [(title, "Work")])
-        self.assertNotIn("The Search for Everything", [entity.text for entity in result.entities])
-        self.assertNotIn("Wave One", [entity.text for entity in result.entities])
+        self.assertEqual([entity.text for entity in result.entities], ["Shrek 2"])
+        self.assertEqual(result.entities[0].start_char, question.index("Shrek 2"))
+        self.assertNotIn("Candidate spans", llm.user_prompt)
+        self.assertNotIn("candidate_id", llm.user_prompt)
+        self.assertNotIn("verified_entities", llm.user_prompt)
 
-    def test_wh_leading_work_title_keeps_question_like_first_word(self) -> None:
-        title = "When The Stars Go Blue"
-        questions = [
-            "What nationality is the performer of song When The Stars Go Blue?",
-            "What nationality is the performer of the When The Stars Go Blue?",
+    def test_title_surfaces_keep_numbers_and_terminal_punctuation(self) -> None:
+        cases = [
+            ("What country produced Shrek 2?", "Shrek 2"),
+            ("Who performed Back In The U.S.A.?", "Back In The U.S.A."),
+            ("Who wrote Love, Honor And Oh-Baby!?", "Love, Honor And Oh-Baby!"),
         ]
-        for question in questions:
-            with self.subTest(question=question):
-                llm = CandidateSelectingLLM({title: "Song"})
 
-                result = ExplicitEntityExtractor(llm).extract(question)
+        for question, title in cases:
+            with self.subTest(title=title):
+                result = ExplicitEntityExtractor(
+                    DirectEntityLLM(_payload([_entity(title, "Work")]))
+                ).extract(question)
 
-                self.assertIn("question-like word", llm.prompt)
                 self.assertEqual([entity.text for entity in result.entities], [title])
-                self.assertNotIn("The Stars Go Blue", [entity.text for entity in result.entities])
+                self.assertEqual(
+                    (result.entities[0].start_char, result.entities[0].end_char),
+                    (question.index(title), question.index(title) + len(title)),
+                )
 
-    def test_free_span_possessive_boundary_is_repaired(self) -> None:
-        question = "When did Lothair II's mother die?"
+    def test_independent_coordinated_entities_are_masked_separately(self) -> None:
+        question = "Are Marufabad and Nasamkhrali both located in the same country?"
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(
+                _payload(
+                    [
+                        _entity("Marufabad", "Location"),
+                        _entity("Nasamkhrali", "Location"),
+                    ]
+                )
+            )
+        ).preprocess(question)
+
+        self.assertEqual(
+            result.masked_question,
+            "Are ENTITYA and ENTITYB both located in the same country?",
+        )
+        self.assertEqual(
+            [(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings],
+            [("ENTITYA", "Marufabad"), ("ENTITYB", "Nasamkhrali")],
+        )
+
+    def test_llm_entity_order_controls_placeholder_order(self) -> None:
+        question = "Was Beta released before Alpha?"
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(
+                _payload([_entity("Alpha", "Work"), _entity("Beta", "Work")])
+            )
+        ).preprocess(question)
+
+        self.assertEqual(result.masked_question, "Was ENTITYB released before ENTITYA?")
+        self.assertEqual(
+            [mapping.original_text for mapping in result.mask_mappings],
+            ["Alpha", "Beta"],
+        )
+
+    def test_llm_boundaries_are_not_merged_split_or_sorted(self) -> None:
+        question = "What nationality is Beatrice I, Countess Of Burgundy's husband?"
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(
+                _payload(
+                    [
+                        _entity("Countess Of Burgundy", "Other"),
+                        _entity("Beatrice I", "Person"),
+                    ]
+                )
+            )
+        ).preprocess(question)
+
+        self.assertEqual(
+            [entity.text for entity in result.explicit_entities.entities],
+            ["Countess Of Burgundy", "Beatrice I"],
+        )
+        self.assertEqual(
+            result.masked_question,
+            "What nationality is ENTITYB, ENTITYA's husband?",
+        )
+
+    def test_duplicate_llm_surface_is_invalid_instead_of_deduplicated(self) -> None:
         result = ExplicitEntityExtractor(
-            StaticEntityLLM(
-                [
-                    {
-                        "text": "Lothair II's",
-                        "start_char": question.index("Lothair"),
-                        "end_char": question.index("Lothair") + len("Lothair II's"),
-                        "semantic_type_hint": "Person",
-                        "confidence": 0.9,
-                    }
-                ]
+            DirectEntityLLM(
+                _payload([_entity("Shrek 2", "Work"), _entity("Shrek 2", "Work")])
+            )
+        ).extract("Who produced Shrek 2?")
+
+        self.assertEqual(result.entities, [])
+        self.assertTrue(any("duplicate explicit entity surface" in warning for warning in result.warnings))
+
+    def test_missing_exact_surface_is_invalid(self) -> None:
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(_payload([_entity("shrek 2", "Work")]))
+        ).extract("Who produced Shrek 2?")
+
+        self.assertEqual(result.entities, [])
+        self.assertTrue(
+            any("was not found exactly in the original question" in warning for warning in result.warnings)
+        )
+
+    def test_overlapping_llm_surfaces_are_invalid_instead_of_resolved(self) -> None:
+        question = "What nationality is Beatrice I, Countess Of Burgundy's husband?"
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(
+                _payload(
+                    [
+                        _entity("Beatrice I", "Person"),
+                        _entity("Beatrice I, Countess Of Burgundy", "Person"),
+                    ]
+                )
             )
         ).extract(question)
 
-        self.assertEqual([entity.text for entity in result.entities], ["Lothair II"])
+        self.assertEqual(result.entities, [])
+        self.assertTrue(any("overlapping explicit entity span" in warning for warning in result.warnings))
 
-    def test_no_type_variable_masks_from_step2(self) -> None:
-        question = "Which university did the CEO of the artificial intelligence company graduate from?"
-        result = MaskSpanExtractor(
-            StaticEntityLLM(
-                [
-                    {
-                        "text": "artificial intelligence company",
-                        "start_char": question.index("artificial intelligence company"),
-                        "end_char": question.index("artificial intelligence company") + len("artificial intelligence company"),
-                        "kind_hint": "type_variable",
-                        "semantic_type_hint": "Company",
-                    }
-                ],
-                field_name="mask_spans",
+    def test_repeated_surface_reuses_one_placeholder_and_mapping(self) -> None:
+        question = "Did Shrek 2 influence Shrek 2's sequel?"
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(_payload([_entity("Shrek 2", "Work")]))
+        ).preprocess(question)
+
+        self.assertEqual(result.masked_question, "Did ENTITYA influence ENTITYA's sequel?")
+        self.assertEqual(len(result.mask_mappings), 1)
+        self.assertEqual(result.mask_mappings[0].placeholder, "ENTITYA")
+        self.assertEqual(result.mask_mappings[0].original_text, "Shrek 2")
+
+    def test_masked_question_and_mappings_use_the_same_entities(self) -> None:
+        question = "Did Alpha meet Beta?"
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(
+                _payload([_entity("Beta", "Person"), _entity("Alpha", "Person")])
+            )
+        ).preprocess(question)
+
+        self.assertEqual(
+            [entity.text for entity in result.explicit_entities.entities],
+            [mapping.original_text for mapping in result.mask_mappings],
+        )
+        for mapping in result.mask_mappings:
+            self.assertIn(mapping.placeholder, result.masked_question)
+            self.assertIn(mapping.original_text, question)
+
+    def test_normalized_question_payload_is_preserved(self) -> None:
+        question = "Who is the child of the director of film An Event?"
+        normalized = "Who is the child of the person who directed the film An Event?"
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(
+                _payload(
+                    [_entity("An Event", "Work")],
+                    normalized_question=normalized,
+                    normalization_changed=True,
+                    normalization_note="Expanded the nested relation.",
+                )
             )
         ).extract(question)
-        replacement = selective_entity_masking(question=question, mask_spans=result)
 
-        self.assertEqual(result.mask_spans, [])
-        self.assertEqual(replacement.mask_mappings, [])
+        self.assertEqual(result.normalized_question, normalized)
+        self.assertTrue(result.normalization_changed)
+        self.assertEqual(result.normalization_note, "Expanded the nested relation.")
+
+    def test_implicit_attribute_ownership_normalization_payload_is_preserved(self) -> None:
+        question = "What nationality is Lamprocles's father?"
+        normalized = "What is the nationality of Lamprocles's father?"
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(
+                _payload(
+                    [_entity("Lamprocles", "Person")],
+                    normalized_question=normalized,
+                    normalization_changed=True,
+                    normalization_note="Made the attribute ownership explicit.",
+                )
+            )
+        ).extract(question)
+
+        self.assertEqual(result.normalized_question, normalized)
+        self.assertTrue(result.normalization_changed)
+        self.assertIn(result.entities[0].text, result.normalized_question)
+
+    def test_explicit_attribute_relation_normalization_payload_remains_unchanged(self) -> None:
+        question = "What country is Lamprocles located in?"
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(
+                _payload([_entity("Lamprocles", "Person")], normalized_question=question)
+            )
+        ).extract(question)
+
+        self.assertEqual(result.normalized_question, question)
+        self.assertFalse(result.normalization_changed)
 
 
 class ExplicitEntityPromptTest(unittest.TestCase):
-    def test_system_prompt_limits_normalization_to_nested_nominal_of_chains(self) -> None:
+    def test_direct_prompt_keeps_normalization_policy_without_candidate_rules(self) -> None:
+        question = "What is the place of birth of the performer of song Changed It?"
+        prompt = build_explicit_entity_extraction_prompt(question)
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn("topic entity extraction and narrow structural question normalization", system_prompt)
+        self.assertIn("the place of birth of the performer of song X", system_prompt)
+        self.assertIn("Where was the person who performed the song Changed It born?", system_prompt)
+        self.assertIn("What is the capital of France?  (single-layer \"of\")", system_prompt)
+        self.assertIn('"born later" is not "younger"', system_prompt)
+        self.assertIn("Directly identify explicit named topic entities", prompt)
+        self.assertNotIn("Candidate spans", prompt)
+        self.assertNotIn("Judge only the supplied candidates", prompt)
+        self.assertNotIn("candidate_id", prompt)
+        self.assertNotIn("verified_entities", prompt)
+
+    def test_prompt_has_entity_boundary_rules_for_observed_failures(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "What nationality is Beatrice I, Countess Of Burgundy's husband?"
+        )
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn('return "B Boy (Song)" rather than "song B Boy (Song)"', system_prompt)
+        self.assertIn('Never return "the director", "the performer"', system_prompt)
+        self.assertIn('return "Lamprocles" only', system_prompt)
+        self.assertIn('"Maurice, Prince Of Orange"', system_prompt)
+        self.assertIn('"Beatrice I, Countess Of Burgundy"', system_prompt)
+
+    def test_prompt_scans_full_question_and_rejects_generic_capitalized_labels(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "Which prime minister met WikiLeaks at the Gujarat Legislative Assembly?"
+        )
+
+        self.assertIn("Directly identify explicit named topic entities", prompt)
+        self.assertIn("Each surface is an exact case-preserving contiguous substring", prompt)
+        self.assertIn("Keep normalized_question equal to the original question", prompt)
+
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+        self.assertIn("Scan the whole original question from left to right", system_prompt)
+        self.assertIn('"prime minister", "Jamaican cricketer", "British racing driver"', system_prompt)
+        self.assertIn('"Gujarat Legislative Assembly"', system_prompt)
+        self.assertIn('"Wexner Graduate Fellowships"', system_prompt)
+        self.assertIn("FINAL ENTITY OUTPUT GATE", system_prompt)
+        self.assertIn("NORMALIZATION FIREWALL", system_prompt)
+
+    def test_prompt_excludes_possessive_relations_and_requires_global_non_overlap(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "Who is the father of Empress Wang's husband?"
+        )
+
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+        self.assertIn('return "marty mcfly", not "marty mcfly\'s daughter"', system_prompt)
+        self.assertIn('"Empress Wang\'s husband"', system_prompt)
+        self.assertIn("All exact occurrences of all selected surfaces", system_prompt)
+        self.assertIn("omit the short candidate", system_prompt)
+
+    def test_prompt_keeps_internal_coordination_and_parenthetical_disambiguators(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "When did Christopher Newton (Criminal) visit the Battle of X and Y?"
+        )
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn('"Battle of X and Y"', system_prompt)
+        self.assertIn('"Christopher Newton (Criminal)"', system_prompt)
+        self.assertIn("mutually non-overlapping", system_prompt)
+        self.assertIn("Directly identify explicit named topic entities", prompt)
+
+    def test_system_prompt_preserves_existing_normalization_constraints(self) -> None:
         prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 
-        self.assertIn("HanLP PAS", prompt)
-        self.assertIn("narrow nested-of question normalization", prompt)
         self.assertIn("normalized_question must usually equal the original question", prompt)
         self.assertIn("two or more mutually nested nominal \"of\" relations", prompt)
-        self.assertIn("the person who directed X", prompt)
-        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
-        self.assertIn("What is the capital of France?  (single-layer \"of\")", prompt)
-        self.assertIn("Who was born first out of A and B?  (fixed phrase \"out of\")", prompt)
-        self.assertIn("What event followed War of 1812?  (\"of\" inside an entity name)", prompt)
-        self.assertIn("parallel candidate question; Step4 handles candidate attachment", prompt)
-        self.assertIn("Do not normalize for style, fluency, articles, general parser-friendliness, wh-order repair", prompt)
-        self.assertIn('"born later" is not "younger"', prompt)
+        self.assertIn("Do not normalize for style, fluency, articles, general parser-friendliness", prompt)
+        self.assertIn("Preserve the exact answer set", prompt)
         self.assertIn("ENTITYA/ENTITYB placeholders", prompt)
-        self.assertIn("normalization_changed matches the actual text change", prompt)
-        self.assertNotIn("Keep coordinated candidates parallel and attached", prompt)
-        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
-        self.assertNotIn("Repair malformed wh-question order", prompt)
+        self.assertIn("Stop an entity before a possessive relation", prompt)
+        self.assertIn("comma-separated personal name and capitalized rank/designation", prompt)
 
-    def test_candidate_prompt_contains_nested_of_rules_and_compatible_schema(self) -> None:
-        question = "What is the place of birth of the performer of song Changed It?"
-        prompt = build_explicit_entity_extraction_prompt(
-            question,
-            [
-                {
-                    "candidate_id": "c1",
-                    "text": "Changed It",
-                    "start_char": question.index("Changed It"),
-                    "end_char": question.index("Changed It") + len("Changed It"),
-                },
-            ],
-        )
+    def test_prompt_allows_only_strict_implicit_attribute_ownership_normalization(self) -> None:
+        prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 
-        self.assertIn("Deterministic entity candidates", prompt)
-        self.assertIn("Legacy verified_entities responses are accepted", prompt)
-        self.assertIn("using only the narrow nested-of policy", prompt)
-        self.assertIn("the place of birth of the performer of song X", prompt)
-        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
-        self.assertIn('"explicit_entities"', prompt)
-        self.assertIn('"normalized_question"', prompt)
-        self.assertIn('"normalization_changed"', prompt)
-        self.assertIn('"normalization_note"', prompt)
-        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
-        self.assertNotIn("Repair malformed wh-question order", prompt)
-
-    def test_free_extraction_prompt_contains_nested_of_examples_and_conservative_fallback(self) -> None:
-        question = "Who is the child of the director of film An Event?"
-        prompt = build_explicit_entity_extraction_prompt(question)
-
-        self.assertIn("the person who directed the film An Event", prompt)
-        self.assertIn("Where was the person who performed the song Changed It born?", prompt)
-        self.assertIn("If strict equivalence is uncertain, return the original question unchanged", prompt)
-        self.assertIn("Do not use near-synonym rewrites", prompt)
-        self.assertIn("The original and normalized questions have exactly the same answer set", prompt)
-        self.assertNotIn("general parser-friendly", prompt.replace("general parser-friendliness", ""))
-
-    def test_prompt_examples_keep_non_trigger_questions_unchanged(self) -> None:
-        prompt = build_explicit_entity_extraction_prompt(
-            "Which film has the director born later, A or B?"
-        )
-
-        self.assertIn("What is the capital of France?\n  -> What is the capital of France?", prompt)
-        self.assertIn("Who was born first out of A and B?\n  -> Who was born first out of A and B?", prompt)
-        self.assertIn("What event followed War of 1812?", prompt)
-        self.assertIn(
-            "Which film has the director born later, A or B?\n  -> Which film has the director born later, A or B?",
-            prompt,
-        )
-        self.assertNotIn("Which film, A or B, has a director who was born later?", prompt)
-
-    def test_candidate_and_free_prompts_share_same_narrow_normalization_scope(self) -> None:
-        question = "What is the capital of France?"
-        candidate_prompt = build_explicit_entity_extraction_prompt(
-            question,
-            [
-                {
-                    "candidate_id": "c1",
-                    "text": "France",
-                    "start_char": question.index("France"),
-                    "end_char": question.index("France") + len("France"),
-                }
-            ],
-        )
-        free_prompt = build_explicit_entity_extraction_prompt(question)
-
-        for prompt in [candidate_prompt, free_prompt]:
-            with self.subTest(prompt=prompt[:40]):
-                self.assertIn("Rewrite only when all conditions hold", prompt)
-                self.assertIn("Outside explicit entity names", prompt)
-                self.assertIn("single-layer \"of\"", prompt)
-                self.assertIn("fixed phrase \"out of\"", prompt)
-                self.assertIn("parallel candidate question", prompt)
-                self.assertIn("normalization_changed", prompt)
-                self.assertIn('"explicit_entities"', prompt)
+        self.assertIn("Implicit attribute ownership", prompt)
+        self.assertIn("What nationality is Lamprocles's father?", prompt)
+        self.assertIn("What is the nationality of Lamprocles's father?", prompt)
+        self.assertIn("What profession is ENTITYA's husband?", prompt)
+        self.assertIn("What religion was ENTITYA's mother?", prompt)
+        self.assertIn("not an attribute-word whitelist", prompt)
+        self.assertIn("What country is ENTITYA located in?", prompt)
+        self.assertIn("Which film has the director born later, A or B?", prompt)
+        self.assertIn("Preserve and/or, both/either/neither, same, all, superlatives", prompt)
 
 
-class StaticEntityLLM:
-    def __init__(self, entities: list[dict[str, Any]], field_name: str = "entities") -> None:
-        self.entities = entities
-        self.field_name = field_name
+class DirectEntityLLM:
+    def __init__(self, payload: dict[str, object]) -> None:
+        self.payload = payload
+        self.system_prompt = ""
+        self.user_prompt = ""
 
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        del system_prompt, prompt
-        return {self.field_name: self.entities}
-
-
-class CandidateSelectingLLM:
-    def __init__(self, selected_text_to_type: dict[str, str]) -> None:
-        self.selected_text_to_type = selected_text_to_type
-        self.prompt = ""
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        del system_prompt
-        self.prompt = prompt
-        marker = "Candidate spans:\n"
-        candidates_json = prompt.split(marker, 1)[1].split("\n\nTask:", 1)[0]
-        candidates = json.loads(candidates_json)
-        verified = []
-        for candidate in candidates:
-            text = candidate["text"]
-            verified.append(
-                {
-                    "candidate_id": candidate["candidate_id"],
-                    "is_entity": text in self.selected_text_to_type,
-                    "confidence": 0.98 if text in self.selected_text_to_type else 0.1,
-                    "reason": "selected candidate" if text in self.selected_text_to_type else "not selected by test",
-                }
-            )
-        return {"verified_entities": verified}
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
+        self.system_prompt = system_prompt
+        self.user_prompt = user_prompt
+        return self.payload
 
 
-def _entity(question: str, text: str, semantic_type: str) -> dict[str, Any]:
-    start = question.index(text)
+def _entity(surface: str, entity_type: str) -> dict[str, str]:
+    return {"surface": surface, "type": entity_type}
+
+
+def _payload(
+    entities: list[dict[str, str]],
+    *,
+    normalized_question: str | None = None,
+    normalization_changed: bool = False,
+    normalization_note: str = "",
+) -> dict[str, object]:
     return {
-        "text": text,
-        "start_char": start,
-        "end_char": start + len(text),
-        "semantic_type_hint": semantic_type,
-        "confidence": 0.95,
-        "reason": "test entity",
+        "explicit_entities": entities,
+        "normalized_question": normalized_question,
+        "normalization_changed": normalization_changed,
+        "normalization_note": normalization_note,
+        "warnings": [],
     }
 
 

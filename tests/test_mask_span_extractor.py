@@ -15,10 +15,10 @@ from mask_span_extractor import MaskSpanExtractor, _heuristic_mask_spans  # noqa
 from placeholder import selective_entity_masking  # noqa: E402
 
 
-class EmptyMaskLLM:
+class EmptyEntityLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         del system_prompt, prompt
-        return {"mask_spans": []}
+        return {"explicit_entities": []}
 
 
 class MaskSpanExtractorTest(unittest.TestCase):
@@ -30,18 +30,18 @@ class MaskSpanExtractorTest(unittest.TestCase):
         self.assertEqual([span.text for span in spans], ["Blue Valley"])
         self.assertEqual(spans[0].semantic_type_hint, "Region")
 
-    def test_llm_empty_result_is_augmented_with_deterministic_multi_token_entities(self) -> None:
+    def test_llm_empty_result_does_not_fall_back_to_deterministic_entities(self) -> None:
         question = (
             "When was the region immediately north of the region that prevailed with the disgrace of "
             "Near East and the terrain feature on which shamal is located created?"
         )
 
-        result = MaskSpanExtractor(EmptyMaskLLM()).extract(question)
+        result = MaskSpanExtractor(EmptyEntityLLM()).extract(question)
 
-        self.assertEqual([span.text for span in result.mask_spans], ["Near East"])
+        self.assertEqual(result.mask_spans, [])
         replacement = selective_entity_masking(question=question, mask_spans=result)
-        self.assertIn("RegionA", replacement.masked_question)
-        self.assertNotIn("Near East", replacement.masked_question)
+        self.assertEqual(replacement.mask_mappings, [])
+        self.assertEqual(replacement.masked_question, question)
 
 
 if __name__ == "__main__":

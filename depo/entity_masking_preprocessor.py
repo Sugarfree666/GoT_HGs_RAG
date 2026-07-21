@@ -79,86 +79,26 @@ def _masked_question_from_entities(
     warnings: list[str] | None = None,
 ) -> str:
     masked = question
-    occupied_spans: list[tuple[int, int]] = []
     replacements: list[tuple[int, int, str]] = []
-    for index, entity in enumerate(sorted(entities, key=lambda item: (item.start_char, item.end_char))):
-        span = _resolve_entity_span_for_masking(question, entity, occupied_spans)
-        if span is None:
+    for index, entity in enumerate(entities):
+        matches = list(re.finditer(re.escape(entity.text), question))
+        if not matches:
             if warnings is not None:
                 warnings.append(
                     f"Could not find explicit entity surface in normalized question; left unmasked: {entity.text!r}."
                 )
             continue
         placeholder = f"ENTITY{_letter_suffix(index)}"
-        spans = [span, *_additional_entity_spans(question, entity.text, occupied_spans, primary_span=span)]
-        for start, end in spans:
-            occupied_spans.append((start, end))
-            replacements.append((start, end, placeholder))
+        for match in matches:
+            replacements.append((match.start(), match.end(), placeholder))
     for start, end, placeholder in sorted(replacements, key=lambda item: item[0], reverse=True):
         masked = masked[:start] + placeholder + masked[end:]
     return masked
 
 
-def _resolve_entity_span_for_masking(
-    question: str,
-    entity: ExplicitEntity,
-    occupied_spans: list[tuple[int, int]],
-) -> tuple[int, int] | None:
-    if (
-        0 <= entity.start_char <= entity.end_char <= len(question)
-        and question[entity.start_char : entity.end_char] == entity.text
-        and _span_is_available(entity.start_char, entity.end_char, occupied_spans)
-    ):
-        return entity.start_char, entity.end_char
-
-    matches = [
-        (match.start(), match.end())
-        for match in re.finditer(re.escape(entity.text), question)
-        if _span_is_available(match.start(), match.end(), occupied_spans)
-    ]
-    if not matches:
-        return None
-    return min(matches, key=lambda span: (abs(span[0] - entity.start_char), span[0]))
-
-
-def _span_is_available(start: int, end: int, occupied_spans: list[tuple[int, int]]) -> bool:
-    return all(end <= occupied_start or start >= occupied_end for occupied_start, occupied_end in occupied_spans)
-
-
-def _additional_entity_spans(
-    question: str,
-    entity_text: str,
-    occupied_spans: list[tuple[int, int]],
-    *,
-    primary_span: tuple[int, int],
-) -> list[tuple[int, int]]:
-    if not entity_text.strip():
-        return []
-    spans: list[tuple[int, int]] = []
-    occupied_with_primary = [*occupied_spans, primary_span]
-    for match in _iter_entity_surface_matches(question, entity_text):
-        span = (match.start(), match.end())
-        if span == primary_span:
-            continue
-        if not _span_is_available(span[0], span[1], occupied_with_primary):
-            continue
-        occupied_with_primary.append(span)
-        spans.append(span)
-    return spans
-
-
-def _iter_entity_surface_matches(question: str, entity_text: str) -> list[re.Match[str]]:
-    pattern = re.escape(entity_text)
-    if entity_text[0].isalnum():
-        pattern = rf"(?<!\w){pattern}"
-    if entity_text[-1].isalnum():
-        pattern = rf"{pattern}(?!\w)"
-    return list(re.finditer(pattern, question, flags=re.IGNORECASE))
-
-
 def _mask_mappings_from_entities(masked_question: str, entities: list[ExplicitEntity]) -> list[MaskMapping]:
     mappings: list[MaskMapping] = []
-    for index, entity in enumerate(sorted(entities, key=lambda item: (item.start_char, item.end_char))):
+    for index, entity in enumerate(entities):
         placeholder = f"ENTITY{_letter_suffix(index)}"
         masked_span = _find_placeholder_span(masked_question, placeholder)
         mappings.append(
