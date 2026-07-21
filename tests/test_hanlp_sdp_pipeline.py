@@ -1040,7 +1040,7 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             _virtual_edges_by_rule(compiled, "pas_possessive_contraction"), []
         )
 
-    def test_pas_coordination_contraction_through_and(self) -> None:
+    def test_pas_coordination_contraction_is_not_emitted(self) -> None:
         result = _hanlp_result(
             "Do both films ENTITYA and ENTITYB have directors from the same country?",
             [
@@ -1065,77 +1065,6 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
                 _pas("have", "verb_ARG1", "directors", 7, 8),
                 _pas("directors", "noun_ARG1", "country", 8, 12),
                 _pas("country", "adj_ARG1", "same", 12, 11),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-        contraction_edges = _virtual_edges_by_rule(
-            compiled, "pas_coordination_contraction"
-        )
-
-        self.assertEqual(len(contraction_edges), 2)
-        self.assertEqual(
-            {
-                frozenset((edge["source_text"], edge["target_text"]))
-                for edge in contraction_edges
-            },
-            {frozenset(("have", "ENTITYA")), frozenset(("have", "ENTITYB"))},
-        )
-        for edge in contraction_edges:
-            self.assertTrue(edge["derived"])
-            self.assertEqual(edge["edge_cost"], 2)
-            self.assertEqual(
-                edge["provenance"][0]["semantic_relation"], "verb_arg2"
-            )
-        self.assertFalse(
-            any(
-                "and" in {edge["source_text"], edge["target_text"]}
-                for edge in compiled.debug_payload["repaired_evidence_edges"]
-            )
-        )
-
-    def test_pas_coordination_contraction_through_or(self) -> None:
-        result = _hanlp_result(
-            "Does ENTITYA or ENTITYB have a director?",
-            ["Does", "ENTITYA", "or", "ENTITYB", "have", "director", "?"],
-            [
-                _pas("have", "verb_ARG2", "or", 5, 3),
-                _pas("or", "coord_ARG1", "ENTITYA", 3, 2),
-                _pas("or", "coord_ARG2", "ENTITYB", 3, 4),
-                _pas("have", "verb_ARG1", "director", 5, 6),
-            ],
-        )
-
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-        contraction_edges = _virtual_edges_by_rule(
-            compiled, "pas_coordination_contraction"
-        )
-
-        self.assertEqual(
-            {
-                frozenset((edge["source_text"], edge["target_text"]))
-                for edge in contraction_edges
-            },
-            {frozenset(("have", "ENTITYA")), frozenset(("have", "ENTITYB"))},
-        )
-        self.assertTrue(all(edge["edge_cost"] == 2 for edge in contraction_edges))
-        self.assertFalse(
-            any(
-                "or" in {edge["source_text"], edge["target_text"]}
-                for edge in compiled.debug_payload["repaired_evidence_edges"]
-            )
-        )
-
-    def test_pas_coordination_contraction_skips_predicate_coordination(self) -> None:
-        result = _hanlp_result(
-            "Do ENTITYA write and ENTITYB direct?",
-            ["Do", "ENTITYA", "write", "and", "ENTITYB", "direct", "?"],
-            [
-                _pas("Do", "verb_ARG2", "and", 1, 4),
-                _pas("and", "coord_ARG1", "write", 4, 3),
-                _pas("and", "coord_ARG2", "direct", 4, 6),
-                _pas("write", "verb_ARG1", "ENTITYA", 3, 2),
-                _pas("direct", "verb_ARG1", "ENTITYB", 6, 5),
             ],
         )
 

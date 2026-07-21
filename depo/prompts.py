@@ -198,324 +198,91 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
 You are DEPO Step 5: Retrieval-Executable Atomic Question DAG Generator.
 
-Your task is to decompose the original question into the smallest DAG whose nodes can be executed reliably by the downstream retrieval-and-answering system.
+Return the smallest retrieval-executable DAG that still asks exactly the original question. Do not answer it, use external knowledge, or emit reasoning. Return exactly one JSON object with the single top-level key "atomic_questions"; do not emit markdown, commentary, or extra keys.
 
-Do not answer the original question.
-Do not use external knowledge.
-Return exactly one valid JSON object with one top-level key: "atomic_questions".
-Do not output explanations, plans, reasoning traces, markdown, comments, or warnings.
+Inputs:
+- original_question is the complete semantic authority.
+- topic_entities are exact named-entity anchors.
+- step4_paths are noisy structural hints. They can be incomplete, reversed, or redundant; never copy their token order mechanically. DAG nodes do not need path support from step4_paths when the original_question requires them.
 
-You are given:
-- original_question: the semantic authority.
-- topic_entities: explicit named entities from the original question.
-- step4_paths: token-level structural hints selected by Step4.
+FINAL-ANSWER CONTRACT
+Before drafting nodes, silently identify the exact final request: its answer target, answer type, relation direction, candidates, comparison direction, and every answer-changing restriction. The final qN must be the unique leaf and must return that same requested answer. An intermediate answer may help identify a target, but must never replace the final target.
 
-The original_question is authoritative. step4_paths are only structural hints. They may be incomplete, noisy, reversed, or redundant. Use them to detect latent variables, relation chains, candidate branches, constraints, and operators, but never copy token order mechanically.
-DAG nodes do not need path support from step4_paths when the original_question requires the node.
+For example, a question asking which artist/person/place/work must end with that entity, not with a fact about it, a related building, or true/false. Use a boolean verify node only when the original question itself asks a yes/no question. A question asking for an entity that satisfies several conditions must end by selecting that entity, not by verifying one condition as boolean.
 
-============================================================
-PRIMARY OBJECTIVE: RETRIEVAL-EXECUTABLE ATOMICITY
-============================================================
+SEMANTIC CONSERVATION
+Every entity, relation, candidate, comparison, quantifier, negation, temporal/numeric condition, and restrictive modifier that changes the answer set must be consumed by at least one node. Keep conjunctive restrictions together when they identify the same answer; do not split them into independent facts unless a later node recombines them into the original target. Preserve exact topic-entity surfaces.
 
-Generate the smallest RETRIEVAL-EXECUTABLE DAG, not merely the smallest syntactic DAG.
+Maintain relation direction exactly. Distinguish owner from possessed, agent from patient, source from destination, and subject from object. Do not exchange relations just because they are related. For example, "whose sister is X" asks for the owner of the sister relation; it is not "who is X's sister." Do not substitute a nearby relation or attribute: signed is not born, nationality is not country of birth, born later is not younger, and lived longer cannot be decided from birth dates alone.
 
-A lookup node is retrieval-executable only when, after every qN's answer reference is replaced by its established answer, the question:
-1. asks for exactly one missing entity, attribute, value, set, or fact;
-2. applies one target relation or attribute to a concrete named anchor or to one entity-like dependency answer;
-3. contains enough explicit wording to identify that anchor and relation;
-4. does not hide another unresolved entity/value inside a possessive phrase, role phrase, relative clause, location phrase, or nested relational description;
-5. does not also perform comparison, selection, verification, or aggregation.
+ATOMICITY AND STOPPING
+A lookup asks for one entity, attribute, value, set, or fact from a concrete named anchor or an earlier answer. Apply the latent-bridge test: if an unnamed intermediate person, place, work, organization, event, or relation result must be found before an outer relation can be evaluated, retrieve that intermediate result first and use "qN's answer" in the later lookup.
 
-A lookup node may contain modifiers needed to disambiguate the same one-hop relation. It must be split when an unnamed intermediate object must first be identified and then queried by another relation.
+Keep a direct one-hop lookup as one node. A lookup may retain multiple necessary modifiers or conjunctive filters. Do not create a node merely because the sentence contains more than one entity, and do not add a hop after the original target has been reached. Every node must be an ancestor of the final qN; there must be no unused branch, detached lookup, or second leaf.
 
-Use the LATENT-BRIDGE TEST:
-- Ask whether part of the question denotes an unknown person/place/organization/work/event/value that must be resolved before the outer requested relation can be evaluated.
-- If yes, create a lookup node for that intermediate object and a later node that explicitly uses qN's answer.
-- If no, keep the direct relation in one lookup node.
+For comparisons, judgments, and candidate selections, retrieve the exact needed value or fact for each candidate independently, then use one final compare/select/verify node depending on every branch. Preserve the original candidates, operator, and comparison direction. For a conjunction asking for one shared answer, a direct lookup containing both constraints is often atomic; do not turn the answer values from separate lookups into the wrong kind of input.
 
-============================================================
-MANDATORY SPLIT PATTERNS
-============================================================
+DEPENDENCIES AND OPERATIONS
+- Use ordered ids q1, q2, q3, ... .
+- A node may depend only on earlier ids.
+- If a question uses a prior answer, write the exact phrase "qN's answer" and include qN in depends_on.
+- Every depends_on entry must appear as that exact answer reference in the question. Never use vague references such as "it", "that person", or "the place".
+- Do not emit unresolved ENTITYA/ENTITYB placeholders.
+- Use "lookup" for factual retrieval, "compare" for a judgment over retrieved values, "select" for choosing a requested candidate/entity, "verify" only for a requested boolean, and "aggregate" for an operation over retrieved values.
 
-Split all outer-attribute questions over an unnamed role or relation result.
-
-1. Possessive role or kinship bridge
-- "Where did Coulson Wallop's father study?"
-  q1: "Who is Coulson Wallop's father?"
-  q2: "Where did q1's answer study?"
-
-- "Where did Sylvia Burka's husband die?"
-  q1: "Who is Sylvia Burka's husband?"
-  q2: "Where did q1's answer die?"
-
-2. Role-of-entity bridge
-- "Where was the director of The Outlaw Express born?"
-  q1: "Who directed The Outlaw Express?"
-  q2: "Where was q1's answer born?"
-
-- "What nationality is the performer of When The Stars Go Blue?"
-  q1: "Who performed When The Stars Go Blue?"
-  q2: "What is the nationality of q1's answer?"
-
-3. Nested relative or location bridge
-- "Which region is immediately north of the region where Israel is located?"
-  q1: "Which region is Israel located in?"
-  q2: "Which region is immediately north of q1's answer?"
-
-- "When was the region immediately north of the region where Israel is located created?"
-  q1: "Which region is Israel located in?"
-  q2: "Which region is immediately north of q1's answer?"
-  q3: "When was q2's answer created?"
-
-4. Nested target followed by another attribute
-- "How long are the city council terms of the city that shares a county with Helvetia?"
-  q1: "Which city shares a county with Helvetia?"
-  q2: "How long are the city council terms of q1's answer?"
-
-5. Multi-relation chains
-If the semantic chain is A --r1--> B --r2--> C, and B is not explicitly named, use two lookup nodes. Continue similarly for longer chains. Do not compress two entity-changing relations into one lookup node.
-
-============================================================
-DO NOT OVER-SPLIT
-============================================================
-
-Keep one lookup node when the requested answer is directly returned by one relation from a known anchor and there is no hidden intermediate object that is queried again.
-
-Valid one-node lookups:
-- "Who is Coulson Wallop's father?"
-- "What is the label of Vilaiyaadu Mankatha?"
-- "Which city shares a county with Helvetia?"
-- "When was The Outlaw Express released?"
-
-The phrase "shares a county with Helvetia" directly defines the requested city. The county is not separately requested and is not later queried, so it need not become its own node.
-
-Do not create nodes for grammatical words, generic categories, relation labels, or values that are never consumed.
-
-============================================================
-DEPENDENCY AND ANCHOR SAFETY
-============================================================
-
-1. Use ids q1, q2, q3, ... in order.
-2. depends_on may contain only earlier q ids.
-3. If depends_on contains qN, the question text must explicitly contain exactly the reference "qN's answer".
-4. If the question text contains "qN's answer", depends_on must contain qN.
-5. Never use vague references such as "the person", "that city", "the group", "it", or "they" for a previous answer.
-6. A dependent lookup must remain answerable after dependency substitution.
-7. A lookup node that uses a dependency as its retrieval anchor should consume an entity-like output: entity, person, place, organization, work, or event.
-8. Date, year, number, boolean, and ordinary scalar/value outputs should normally feed compare, select, verify, or aggregate nodes, not another entity lookup.
-9. Independent evidence branches must not depend on each other.
-10. Preserve exact topic-entity surface forms when used.
-11. Do not output unresolved ENTITYA/ENTITYB placeholders.
-
-============================================================
-OPERATIONS
-============================================================
-
-lookup:
-- retrieves one relation or attribute from a known anchor;
-- returns one entity/value/set needed by a later node or by the final answer.
-
-compare:
-- compares already retrieved values and returns a relation or judgment;
-- must not introduce a new factual lookup.
-
-select:
-- chooses the requested candidate/entity using already retrieved branch values;
-- must preserve the exact candidate surfaces from the original question.
-
-verify:
-- returns a boolean based on already retrieved facts.
-
-aggregate:
-- counts, sums, lists, minimizes, maximizes, or otherwise aggregates an already retrieved set or values.
-
-For comparison/candidate questions:
-- build independent lookup branches for each candidate;
-- retrieve the exact compared attribute for each branch;
-- use one final compare/select/verify node that depends on every required branch.
-
-For "lived longer", retrieve sufficient lifespan information for every candidate, not birth dates alone.
-
-============================================================
-CONSTRAINT COVERAGE AND BRANCH COMPLETENESS
-============================================================
-
-Preserve every restrictive condition that changes which entity is being asked about.
-
-If several branches jointly identify one target:
-- resolve each required branch, or retain a branch directly in the target lookup when it is genuinely one-hop;
-- combine all required branches before asking the final attribute;
-- never leave a required branch as a separate unused leaf.
-
-If branches are candidate alternatives, keep them independent until the terminal compare/select/verify node.
-
-Every non-final node must be an ancestor of the final node.
-There must be exactly one leaf node.
-The unique leaf must be the final qN node.
-The unique leaf must return the answer type and intent requested by the original question.
-
-============================================================
-OUTPUT SCHEMA
-============================================================
-
-Return exactly:
-
+Return this schema exactly:
 {
   "atomic_questions": [
     {
       "id": "q1",
       "question": "atomic question?",
       "depends_on": [],
-      "operation": "lookup | compare | select | verify | aggregate",
-      "output_type": "entity | person | place | organization | work | event | date | number | boolean | value | set | unknown"
+      "operation": "lookup",
+      "output_type": "person | place | organization | work | event | date | number | boolean | value | set | entity | unknown"
     }
   ]
 }
 
-Do not output fields other than id, question, depends_on, operation, and output_type.
-Every question must be one grammatical question ending in exactly one question mark.
+FEW-SHOT EXAMPLES
 
-============================================================
-EXAMPLES
-============================================================
-
-Example A — Possessive bridge
-Input question:
-"Where did Coulson Wallop's father study?"
-
+1. Direct one-hop: the release date is directly queried from a named work, so do not create an unnecessary node.
+Input: "When was The Outlaw Express released?"
 Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who is Coulson Wallop's father?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "Where did q1's answer study?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "place"
-    }
-  ]
-}
+{"atomic_questions":[{"id":"q1","question":"When was The Outlaw Express released?","depends_on":[],"operation":"lookup","output_type":"date"}]}
 
-Example B — Nested location chain
-Input question:
-"When was the region immediately north of the region where Israel is located created?"
-
+2. Entity selection with a required second condition: preserve both conditions and return the artist, not a boolean verification.
+Input: "Heartbreak Hurricane was recorded by which country artist that also goes by the name Ricky Skaggs?"
 Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Which region is Israel located in?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "place"
-    },
-    {
-      "id": "q2",
-      "question": "Which region is immediately north of q1's answer?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "place"
-    },
-    {
-      "id": "q3",
-      "question": "When was q2's answer created?",
-      "depends_on": ["q2"],
-      "operation": "lookup",
-      "output_type": "date"
-    }
-  ]
-}
+{"atomic_questions":[{"id":"q1","question":"Which country artist recorded Heartbreak Hurricane and also goes by the name Ricky Skaggs?","depends_on":[],"operation":"lookup","output_type":"person"}]}
 
-Example C — Direct lookup, no over-splitting
-Input question:
-"Which city shares a county with Helvetia?"
-
+3. Kinship bridge: nationality applies to an unknown father, so identify the father first; the final answer remains nationality.
+Input: "What nationality is Lamprocles's father?"
 Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Which city shares a county with Helvetia?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "place"
-    }
-  ]
-}
+{"atomic_questions":[{"id":"q1","question":"Who is Lamprocles's father?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"What is the nationality of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"value"}]}
 
-Example D — Parallel candidate comparison
-Input question:
-"Which film has the younger director, Dangerously They Live or Salad By The Roots?"
-
+4. Direction matters: the final owner is the person whose sister is the actor.
+Input: "Whose sister played Susie in Miracle on 34th Street?"
 Output:
-{
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "Who directed Dangerously They Live?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q2",
-      "question": "When was q1's answer born?",
-      "depends_on": ["q1"],
-      "operation": "lookup",
-      "output_type": "date"
-    },
-    {
-      "id": "q3",
-      "question": "Who directed Salad By The Roots?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
-    },
-    {
-      "id": "q4",
-      "question": "When was q3's answer born?",
-      "depends_on": ["q3"],
-      "operation": "lookup",
-      "output_type": "date"
-    },
-    {
-      "id": "q5",
-      "question": "Based on q2's answer and q4's answer, which film has the younger director: Dangerously They Live or Salad By The Roots?",
-      "depends_on": ["q2", "q4"],
-      "operation": "select",
-      "output_type": "work"
-    }
-  ]
-}
+{"atomic_questions":[{"id":"q1","question":"Who played Susie in Miracle on 34th Street?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"Whose sister is q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"person"}]}
 
-============================================================
-FINAL SILENT AUDIT
-============================================================
+5. Multi-link chain: each unknown relation result is a bridge, but stop once the requested date is reached.
+Input: "When was the region immediately north of the region where Israel is located created?"
+Output:
+{"atomic_questions":[{"id":"q1","question":"Which region is Israel located in?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q2","question":"Which region is immediately north of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"place"},{"id":"q3","question":"When was q2's answer created?","depends_on":["q2"],"operation":"lookup","output_type":"date"}]}
 
-Before returning JSON, silently verify all of the following:
-1. The output has only the atomic_questions top-level key.
-2. Each lookup passes the retrieval-executable one-link test.
-3. Every hidden role, kinship, nested location, or relative-clause bridge is split when an outer relation queries its result.
-4. No direct one-hop lookup is unnecessarily split.
-5. Every qN reference and depends_on entry matches exactly.
-6. Every dependent lookup has a usable entity anchor after substitution.
-7. Scalar dependencies feed operator nodes rather than unsupported entity lookups.
-8. All restrictive constraints and candidate branches are preserved.
-9. There is exactly one leaf, it is the final qN node, and every earlier node reaches it.
-10. The final leaf preserves the original answer intent and answer type.
-11. No unresolved placeholders or invented facts appear.
-12. The result is valid JSON only.
+6. Parallel comparison: retrieve each director and birth date independently, then return the original film choice.
+Input: "Which film has the younger director, Dangerously They Live or Salad By The Roots?"
+Output:
+{"atomic_questions":[{"id":"q1","question":"Who directed Dangerously They Live?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup","output_type":"date"},{"id":"q3","question":"Who directed Salad By The Roots?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup","output_type":"date"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the younger director: Dangerously They Live or Salad By The Roots?","depends_on":["q2","q4"],"operation":"select","output_type":"work"}]}
+
+Before returning JSON, silently audit:
+1. Is qN the only leaf, and does it answer the original question rather than an auxiliary condition?
+2. Does its output type and relation target match the original request?
+3. Has every answer-changing constraint been consumed without reversing any role or relation?
+4. Does every earlier node feed qN, with no redundant lookup or extra hop after the target?
+5. Do comparison/selection branches preserve every candidate and criterion?
+6. Do all qN references exactly match depends_on?
 """.strip()
-
-
 
 def build_atomic_question_dag_prompt(
     original_question: str,
@@ -551,6 +318,11 @@ Preserve all entities, modifiers, constraints, operators, and the final answer i
 If the question contains a comparison, equality check, choice, or aggregation, decompose each needed branch and then generate the final comparison, equality, choice, or aggregation action.
 If a subquestion depends on a previous answer, express the dependency only in the question text using natural references such as q1's answer, q2's answer, etc.
 
+FINAL-ANSWER CONTRACT
+Before drafting actions, silently identify the exact final answer target, answer type, relation direction, candidates, comparison direction, and every answer-changing restriction in original_question. The final action qN must be the unique terminal action and must return that same requested answer, not a fact about the answer, a nearby object, or an auxiliary boolean.
+
+For a wh-question that asks for an entity satisfying multiple conditions, the final action must return that entity while retaining all required conditions. Do not convert one condition into a true/false verification unless the original question itself is yes/no. Preserve owner/possessed, agent/patient, source/destination, and all comparison directions. For example, "whose sister is X" cannot become "who is X's sister." Every earlier action must be necessary for qN; do not leave detached branches or append a relation after the original target has been reached.
+
 Action trace rules:
 
 * actions must be a non-empty array.
@@ -559,6 +331,7 @@ Action trace rules:
 * Do not put entities, relations, constraints, qN_answer references, semantic fragments, or any other text in consume.
 * produce must be qN_answer for action qN.
 * question is the natural-language question to show downstream.
+* The final qN question must answer the original request and retain its output type; every earlier action must feed qN through qN's answer references.
 * Do not output depends_on. The program will derive dependencies only from qN's answer references in question text.
 * Do not output support spans, nodes, edges, depends_on, start_index, or end_index.
 * Return valid JSON only.

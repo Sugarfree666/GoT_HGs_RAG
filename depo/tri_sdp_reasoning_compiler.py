@@ -103,16 +103,6 @@ SPLIT_POSSESSIVE_POSSESSED_RELATIONS = {
     "adj_arg1",
     "noun_arg1",
 }
-COORDINATION_PROPAGATION_RELATIONS = {
-    "verb_arg1",
-    "verb_arg2",
-    "verb_arg3",
-    "noun_arg1",
-    "noun_arg2",
-    "adj_arg1",
-    "relative_arg1",
-    "relative_arg2",
-}
 ORDER_CUES = {
     "first",
     "earliest",
@@ -150,7 +140,6 @@ EDGE_COST_ONE_RULES = {
 }
 
 EDGE_COST_TWO_RULES = {
-    "pas_coordination_contraction",
     "pas_coordination_candidate_attachment",
 }
 
@@ -302,7 +291,6 @@ def compile_token_reasoning_structure(
 
     add_pas_preposition_contraction_edges(state)
     add_pas_possessive_contraction_edges(state)
-    add_pas_coordination_contraction_edges(state)
     add_pas_coordination_candidate_attachment_edges(state, explicit_entity_ids)
 
     branch_selection = _select_entity_branch_best_paths(state, explicit_entity_ids)
@@ -1163,81 +1151,6 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
     _append_virtual_edges_for_keys(state, touched)
 
 
-def add_pas_coordination_contraction_edges(state: _WorkingState) -> None:
-    """Collapse reliable PAS attachments through noun-like and/or coordination."""
-
-    touched: set[tuple[str, str]] = set()
-    for connector in _sorted_nodes(state.nodes.values()):
-        if not _is_pas_candidate_connector(connector):
-            continue
-        members, coordination_edges = _pas_coordination_member_edges(
-            connector.id, state
-        )
-        if len(members) < 2 or _pas_predicate_coordination_members(members, state):
-            continue
-        contraction_added = False
-        for attachment_id, attachment_edge, relation in _pas_coordination_attachment_edges(
-            connector.id, state
-        ):
-            for member_id, coordination_edge in members:
-                if attachment_id == member_id:
-                    continue
-                if not _is_high_salience_node(
-                    state.nodes[member_id], include_order_constraints=False
-                ):
-                    continue
-                key = _edge_key(attachment_id, member_id)
-                if key in state.edges:
-                    continue
-                edge_quality = "MEDIUM"
-                support = EDGE_QUALITY_SCORES[edge_quality]
-                provenance = {
-                    "rule": "pas_coordination_contraction",
-                    "edge_quality": edge_quality,
-                    "derived": True,
-                    "formalism": "sdp/pas",
-                    "connector": connector.text,
-                    "connector_id": connector.id,
-                    "attachment_id": attachment_id,
-                    "attachment": state.nodes[attachment_id].text,
-                    "semantic_relation": relation,
-                    "member_id": member_id,
-                    "member": state.nodes[member_id].text,
-                    "coordination_member_ids": [
-                        node_id for node_id, _edge in members
-                    ],
-                    "coordination_members": [
-                        state.nodes[node_id].text for node_id, _edge in members
-                    ],
-                    "collapsed_path": [
-                        state.nodes[attachment_id].text,
-                        connector.text,
-                        state.nodes[member_id].text,
-                    ],
-                    "source_edges": _edge_provenance_summaries(
-                        [attachment_edge, coordination_edge]
-                    ),
-                    "coordination_edges": coordination_edges,
-                    "support": support,
-                }
-                _merge_edge(
-                    state.edges,
-                    state.nodes,
-                    attachment_id,
-                    member_id,
-                    support=support,
-                    edge_quality=edge_quality,
-                    derived=True,
-                    rule="pas_coordination_contraction",
-                    provenance=[provenance],
-                )
-                touched.add(key)
-                contraction_added = True
-        if contraction_added:
-            _remove_contracted_coordination_connector_edges(state, connector.id)
-    _append_virtual_edges_for_keys(state, touched)
-
-
 def add_pas_coordination_candidate_attachment_edges(
     state: _WorkingState,
     explicit_entity_ids: list[str],
@@ -1329,129 +1242,6 @@ def _pas_preposition_role_edges(
         sorted(arg1.items(), key=lambda item: _node_sort_key(state.nodes[item[0]])),
         sorted(arg2.items(), key=lambda item: _node_sort_key(state.nodes[item[0]])),
     )
-
-
-def _pas_coordination_member_edges(
-    connector_id: str,
-    state: _WorkingState,
-) -> tuple[list[tuple[str, TokenReasoningEdge]], list[dict[str, Any]]]:
-    members: dict[str, TokenReasoningEdge] = {}
-    evidence: list[dict[str, Any]] = []
-    for key, edge in state.raw_edges.items():
-        if connector_id not in key:
-            continue
-        for item in _raw_provenance(edge):
-            if not _is_pas_formalism(str(item.get("formalism") or "")):
-                continue
-            relation = _normalized_relation_key(
-                str(item.get("normalized_relation") or item.get("relation") or "")
-            )
-            if not _is_coordination_relation_key(relation):
-                continue
-            head_id = str(_coerce_provenance_index(item.get("head_idx")))
-            dep_id = str(_coerce_provenance_index(item.get("dep_idx")))
-            if head_id == connector_id:
-                member_id = dep_id
-            elif dep_id == connector_id:
-                member_id = head_id
-            else:
-                continue
-            member = state.nodes.get(member_id)
-            if (
-                member is None
-                or _is_pas_candidate_connector(member)
-                or not _is_high_salience_node(
-                    member, include_order_constraints=False
-                )
-            ):
-                continue
-            members[member_id] = edge
-            evidence.append(_edge_provenance_summary(edge))
-    return (
-        sorted(members.items(), key=lambda item: _node_sort_key(state.nodes[item[0]])),
-        evidence,
-    )
-
-
-def _pas_coordination_attachment_edges(
-    connector_id: str,
-    state: _WorkingState,
-) -> list[tuple[str, TokenReasoningEdge, str]]:
-    attachments: dict[tuple[str, str], TokenReasoningEdge] = {}
-    for key, edge in state.raw_edges.items():
-        if connector_id not in key:
-            continue
-        for item in _raw_provenance(edge):
-            if not _is_pas_formalism(str(item.get("formalism") or "")):
-                continue
-            relation = _normalized_relation_key(
-                str(item.get("normalized_relation") or item.get("relation") or "")
-            )
-            if relation not in COORDINATION_PROPAGATION_RELATIONS:
-                continue
-            head_id = str(_coerce_provenance_index(item.get("head_idx")))
-            dep_id = str(_coerce_provenance_index(item.get("dep_idx")))
-            if dep_id != connector_id or head_id not in state.nodes:
-                continue
-            attachment = state.nodes[head_id]
-            if (
-                head_id == connector_id
-                or head_id == "0"
-                or _is_punctuation(attachment.text)
-            ):
-                continue
-            attachments[(head_id, relation)] = edge
-    return [
-        (attachment_id, edge, relation)
-        for (attachment_id, relation), edge in sorted(
-            attachments.items(),
-            key=lambda item: (
-                _node_sort_key(state.nodes[item[0][0]]),
-                item[0][1],
-            ),
-        )
-    ]
-
-
-def _pas_predicate_coordination_members(
-    members: list[tuple[str, TokenReasoningEdge]],
-    state: _WorkingState,
-) -> bool:
-    member_ids = {member_id for member_id, _edge in members}
-    for member_id in member_ids:
-        for key, edge in state.raw_edges.items():
-            if member_id not in key:
-                continue
-            for item in _raw_provenance(edge):
-                if not _is_pas_formalism(str(item.get("formalism") or "")):
-                    continue
-                relation = _normalized_relation_key(
-                    str(item.get("normalized_relation") or item.get("relation") or "")
-                )
-                if relation not in {"verb_arg1", "verb_arg2", "verb_arg3"}:
-                    continue
-                head_id = str(_coerce_provenance_index(item.get("head_idx")))
-                dep_id = str(_coerce_provenance_index(item.get("dep_idx")))
-                if head_id != member_id or dep_id not in state.nodes:
-                    continue
-                if dep_id not in member_ids and not _is_punctuation(
-                    state.nodes[dep_id].text
-                ):
-                    return True
-    return False
-
-
-def _remove_contracted_coordination_connector_edges(
-    state: _WorkingState, connector_id: str
-) -> None:
-    for key in list(state.edges):
-        if connector_id in key:
-            del state.edges[key]
-    state.virtual_edges = [
-        edge
-        for edge in state.virtual_edges
-        if connector_id not in {str(edge.get("source")), str(edge.get("target"))}
-    ]
 
 
 def _remove_contracted_possessive_marker_edges(

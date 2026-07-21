@@ -188,7 +188,7 @@ def validate_atomic_question_dag(
     explicit_entities: list[str] | None = None,
     global_best_paths: list[list[str]] | None = None,
 ) -> AtomicQuestionDAGResult:
-    del global_best_paths
+    del original_question, explicit_entities, global_best_paths
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
@@ -198,17 +198,16 @@ def validate_atomic_question_dag(
     if not raw_questions:
         return _invalid_result(["atomic_questions must be a non-empty list."], raw_payload=raw_payload)
 
-    parsed_nodes = _coerce_atomic_question_nodes(raw_questions)
-    if not parsed_nodes:
-        return _invalid_result(["atomic_questions did not contain any parseable question objects."], raw_payload=raw_payload)
+    parsed_nodes, errors = _parse_atomic_question_nodes(raw_questions)
+    if errors:
+        return _invalid_result(errors, raw_payload=raw_payload)
+
+    errors = _validate_atomic_question_dag_structure(parsed_nodes)
+    if errors:
+        return _invalid_result(errors, raw_payload=raw_payload)
 
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
-    warnings = _atomic_question_dag_quality_warnings(
-        parsed_nodes,
-        original_question=original_question,
-        explicit_entities=explicit_entities,
-    )
     return AtomicQuestionDAGResult(
         nodes=parsed_nodes,
         edges=edges,
@@ -216,52 +215,127 @@ def validate_atomic_question_dag(
         valid=True,
         validation_errors=[],
         raw_payload=raw_payload,
-        warnings=warnings,
     )
 
 
 def _extract_atomic_questions(raw_payload: dict[str, Any]) -> Any:
-    """Read Step5 questions from the direct DAG envelope, with legacy fallback."""
-
-    if isinstance(raw_payload.get("atomic_questions"), list):
-        return raw_payload.get("atomic_questions")
-
-    raw_dag = raw_payload.get("atomic_question_dag")
-    if isinstance(raw_dag, dict):
-        if isinstance(raw_dag.get("atomic_questions"), list):
-            return raw_dag.get("atomic_questions")
-        if isinstance(raw_dag.get("nodes"), list):
-            return raw_dag.get("nodes")
-    if isinstance(raw_dag, list):
-        return raw_dag
-    return None
+    return raw_payload.get("atomic_questions")
 
 
-def _coerce_atomic_question_nodes(raw_questions: Any) -> list[AtomicQuestionNode]:
-    """Normalize Step5 DAG nodes without enforcing semantic path support."""
-
-    if not isinstance(raw_questions, list):
-        return []
+def _parse_atomic_question_nodes(raw_questions: list[Any]) -> tuple[list[AtomicQuestionNode], list[str]]:
+    """Parse only the stable output schema; semantic adequacy belongs to the LLM prompt."""
 
     nodes: list[AtomicQuestionNode] = []
-    for index, raw_question in enumerate(raw_questions, start=1):
+    errors: list[str] = []
+    seen_ids: set[str] = set()
+    for index, raw_question in enumerate(raw_questions):
+        prefix = f"atomic_questions[{index}]"
         if not isinstance(raw_question, dict):
+            errors.append(f"{prefix} must be an object.")
             continue
-        node_id = str(raw_question.get("id") or f"q{index}").strip() or f"q{index}"
-        question = str(raw_question.get("question") or "").strip()
+
+        raw_id = raw_question.get("id")
+        if not isinstance(raw_id, str) or not raw_id.strip():
+            errors.append(f"{prefix}.id must be a non-empty string.")
+            continue
+        node_id = raw_id.strip()
+        if node_id in seen_ids:
+            errors.append(f"{prefix}.id duplicates node id {node_id!r}.")
+            continue
+        seen_ids.add(node_id)
+
+        raw_text = raw_question.get("question")
+        if not isinstance(raw_text, str) or not raw_text.strip():
+            errors.append(f"{prefix}.question must be a non-empty string.")
+            continue
+        question = raw_text.strip()
+
+        raw_depends_on = raw_question.get("depends_on", [])
+        if not isinstance(raw_depends_on, list):
+            errors.append(f"{prefix}.depends_on must be a list of node ids.")
+            continue
+        depends_on: list[str] = []
+        for dependency_index, dependency in enumerate(raw_depends_on):
+            if not isinstance(dependency, str) or not dependency.strip():
+                errors.append(f"{prefix}.depends_on[{dependency_index}] must be a non-empty string.")
+                continue
+            dependency_id = dependency.strip()
+            if dependency_id in depends_on:
+                errors.append(f"{prefix}.depends_on duplicates node id {dependency_id!r}.")
+                continue
+            depends_on.append(dependency_id)
+
         nodes.append(
             AtomicQuestionNode(
                 id=node_id,
                 question=question,
-                depends_on=_coerce_string_tuple(raw_question.get("depends_on")),
+                depends_on=tuple(depends_on),
                 operation=str(raw_question.get("operation") or "lookup").strip() or "lookup",
-                semantic_edge_ids=_coerce_string_tuple(raw_question.get("semantic_edge_ids")),
-                output_node_id=str(raw_question.get("output_node_id") or "").strip(),
+                semantic_edge_ids=(),
+                output_node_id="",
                 output_type=str(raw_question.get("output_type") or "unknown").strip() or "unknown",
-                support_step_ids=_coerce_string_tuple(raw_question.get("support_step_ids")),
+                support_step_ids=(),
             )
         )
-    return nodes
+    return nodes, errors
+
+
+def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> list[str]:
+    node_positions = {node.id: index for index, node in enumerate(nodes)}
+    errors: list[str] = []
+    for index, node in enumerate(nodes):
+        references = set(_question_refs([node.question]))
+        dependencies = set(node.depends_on)
+        if _contains_placeholder(node.question):
+            errors.append(f"{node.id}: question contains unresolved ENTITY placeholder.")
+
+        for dependency in node.depends_on:
+            dependency_position = node_positions.get(dependency)
+            if dependency_position is None:
+                errors.append(f"{node.id}: depends_on references unknown node {dependency!r}.")
+            elif dependency == node.id:
+                errors.append(f"{node.id}: depends_on references itself.")
+            elif dependency_position >= index:
+                errors.append(f"{node.id}: depends_on references a later node {dependency!r}.")
+
+        for reference in references:
+            reference_position = node_positions.get(reference)
+            if reference_position is None:
+                errors.append(f"{node.id}: question references unknown answer {reference!r}.")
+            elif reference == node.id:
+                errors.append(f"{node.id}: question references its own answer.")
+            elif reference_position >= index:
+                errors.append(f"{node.id}: question references a later answer {reference!r}.")
+
+        for dependency in dependencies - references:
+            errors.append(f"{node.id}: depends_on includes {dependency!r}, but the question does not reference that answer.")
+        for reference in references - dependencies:
+            errors.append(f"{node.id}: question references {reference!r}, but depends_on does not include it.")
+
+    if _has_dependency_cycle(nodes):
+        errors.append("atomic_questions contains a dependency cycle.")
+    return errors
+
+
+def _has_dependency_cycle(nodes: list[AtomicQuestionNode]) -> bool:
+    dependencies_by_node = {node.id: node.depends_on for node in nodes}
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(node_id: str) -> bool:
+        if node_id in visiting:
+            return True
+        if node_id in visited:
+            return False
+        visiting.add(node_id)
+        for dependency in dependencies_by_node.get(node_id, ()):
+            if dependency in dependencies_by_node and visit(dependency):
+                return True
+        visiting.remove(node_id)
+        visited.add(node_id)
+        return False
+
+    return any(visit(node.id) for node in nodes)
 
 
 def _coerce_string_tuple(value: Any) -> tuple[str, ...]:

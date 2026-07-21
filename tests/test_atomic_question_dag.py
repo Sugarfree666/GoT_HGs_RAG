@@ -41,8 +41,19 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertNotIn("semantic_reasoning_paths", json.dumps(payload, ensure_ascii=False))
 
         self.assertIn("Atomic Question DAG Generator", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("step4_paths are only structural hints", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("step4_paths are noisy structural hints", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("DAG nodes do not need path support", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("latent-bridge test", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("nationality is not country of birth", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Direct one-hop", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Parallel comparison", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Whose sister played Susie", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("FINAL-ANSWER CONTRACT", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("unique leaf", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("not a boolean verification", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Which country artist recorded Heartbreak Hurricane", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Whose sister is q1's answer", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("silently audit", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("qN's answer", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_reasoning_paths"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
@@ -64,22 +75,19 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.leaf_node_ids, ["q2"])
         self.assertEqual(result.raw_payload, _bridge_payload())
 
-    def test_permissive_parser_coerces_missing_optional_fields(self) -> None:
+    def test_missing_node_id_or_question_is_invalid(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
                     {"question": "Who performed When The Stars Go Blue?"},
-                    {"question": "What is the nationality of q1's answer?", "depends_on": "q1"},
+                    {"id": "q2", "depends_on": []},
                 ]
             }
         )
 
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([node.id for node in result.nodes], ["q1", "q2"])
-        self.assertEqual([node.operation for node in result.nodes], ["lookup", "lookup"])
-        self.assertEqual([node.output_type for node in result.nodes], ["unknown", "unknown"])
-        self.assertEqual(result.nodes[1].depends_on, ("q1",))
-        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
+        self.assertFalse(result.valid)
+        self.assertTrue(any(".id must be a non-empty string" in error for error in result.validation_errors))
+        self.assertTrue(any(".question must be a non-empty string" in error for error in result.validation_errors))
 
     def test_only_atomic_questions_are_required(self) -> None:
         result = validate_atomic_question_dag(
@@ -106,12 +114,11 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 self.assertFalse(result.valid)
                 self.assertIn("atomic_questions must be a non-empty list.", result.validation_errors)
 
-    def test_nested_atomic_question_dag_fallback_still_parses(self) -> None:
+    def test_nested_atomic_question_dag_envelope_is_invalid(self) -> None:
         result = validate_atomic_question_dag({"atomic_question_dag": {"atomic_questions": _bridge_payload()["atomic_questions"]}})
 
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual([node.id for node in result.nodes], ["q1", "q2"])
-        self.assertEqual(result.leaf_node_ids, ["q2"])
+        self.assertFalse(result.valid)
+        self.assertIn("atomic_questions must be a non-empty list.", result.validation_errors)
 
     def test_path_hints_are_not_used_as_support_requirements(self) -> None:
         result = validate_atomic_question_dag(
@@ -173,7 +180,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
 
-    def test_dependency_binding_quality_warning(self) -> None:
+    def test_dependency_binding_mismatch_is_invalid(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -197,10 +204,10 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             explicit_entities=["Turn Me On", "Come Away with Me"],
         )
 
-        self.assertTrue(result.valid)
-        self.assertTrue(any("does not mention q1's answer" in warning for warning in result.warnings))
+        self.assertFalse(result.valid)
+        self.assertTrue(any("does not reference that answer" in error for error in result.validation_errors))
 
-    def test_possessive_wh_reversal_quality_warning(self) -> None:
+    def test_validator_does_not_apply_possessive_semantic_heuristics(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -224,10 +231,10 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             explicit_entities=["Susie", "Miracle on 34th Street"],
         )
 
-        self.assertTrue(result.valid)
-        self.assertTrue(any("possessive-WH" in warning for warning in result.warnings))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.warnings, [])
 
-    def test_lived_longer_needs_lifespan_evidence_warning(self) -> None:
+    def test_validator_does_not_apply_lifespan_semantic_heuristics(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -258,10 +265,10 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             explicit_entities=["Ludwig Elsbett", "Pamela Ann Rymer"],
         )
 
-        self.assertTrue(result.valid)
-        self.assertTrue(any("lived-longer comparison" in warning for warning in result.warnings))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.warnings, [])
 
-    def test_appositive_identity_quality_warning(self) -> None:
+    def test_validator_does_not_apply_appositive_semantic_heuristics(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -278,10 +285,10 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             explicit_entities=["John Ernest", "Duke Of Saxe-Eisenach"],
         )
 
-        self.assertTrue(result.valid)
-        self.assertTrue(any("Duke Of Saxe-Eisenach" in warning for warning in result.warnings))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.warnings, [])
 
-    def test_path_generator_does_not_repair_quality_warnings(self) -> None:
+    def test_path_generator_returns_structural_invalidity_from_its_single_call(self) -> None:
         bad_payload = {
             "atomic_questions": [
                 {
@@ -308,10 +315,95 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             global_best_paths=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
         )
 
-        self.assertTrue(result.valid)
+        self.assertFalse(result.valid)
         self.assertEqual(len(llm.user_prompts), 1)
-        self.assertTrue(any("does not mention q1's answer" in warning for warning in result.warnings))
-        self.assertEqual(result.nodes[1].question, "Who wrote Turn Me On?")
+        self.assertTrue(any("does not reference that answer" in error for error in result.validation_errors))
+
+    def test_validator_rejects_deterministic_dag_structure_errors(self) -> None:
+        cases = [
+            (
+                "duplicate ids",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is A?", "depends_on": []},
+                        {"id": "q1", "question": "Who is B?", "depends_on": []},
+                    ]
+                },
+                "duplicates node id",
+            ),
+            (
+                "unknown dependency",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is A?", "depends_on": ["q9"]},
+                    ]
+                },
+                "references unknown node",
+            ),
+            (
+                "self dependency",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is q1's answer?", "depends_on": ["q1"]},
+                    ]
+                },
+                "references itself",
+            ),
+            (
+                "later dependency",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is q2's answer?", "depends_on": ["q2"]},
+                        {"id": "q2", "question": "Who is B?", "depends_on": []},
+                    ]
+                },
+                "references a later node",
+            ),
+            (
+                "unknown answer reference",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is q9's answer?", "depends_on": ["q9"]},
+                    ]
+                },
+                "references unknown answer",
+            ),
+            (
+                "answer reference missing dependency",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is A?", "depends_on": []},
+                        {"id": "q2", "question": "Where was q1's answer born?", "depends_on": []},
+                    ]
+                },
+                "depends_on does not include it",
+            ),
+            (
+                "unresolved placeholder",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who directed ENTITYA?", "depends_on": []},
+                    ]
+                },
+                "unresolved ENTITY placeholder",
+            ),
+            (
+                "cycle",
+                {
+                    "atomic_questions": [
+                        {"id": "q1", "question": "Who is q2's answer?", "depends_on": ["q2"]},
+                        {"id": "q2", "question": "Who is q1's answer?", "depends_on": ["q1"]},
+                    ]
+                },
+                "dependency cycle",
+            ),
+        ]
+
+        for name, payload, expected_error in cases:
+            with self.subTest(name=name):
+                result = validate_atomic_question_dag(payload)
+                self.assertFalse(result.valid)
+                self.assertTrue(any(expected_error in error for error in result.validation_errors))
 
     def test_empty_global_best_path_fails_before_llm_call(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
@@ -378,6 +470,9 @@ class AtomicQuestionDAGTest(unittest.TestCase):
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertIn("action trace generation", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
+        self.assertIn("FINAL-ANSWER CONTRACT", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
+        self.assertIn("not a fact about the answer", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
+        self.assertIn("whose sister is X", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
         self.assertEqual(result.nodes[0].question, "Who is the performer of Song A?")
         self.assertEqual(result.nodes[0].depends_on, ())
         self.assertIn("ignored non-empty consume", result.warnings[0])
