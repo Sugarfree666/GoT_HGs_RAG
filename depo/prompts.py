@@ -215,6 +215,12 @@ Every entity, relation, candidate, comparison, quantifier, negation, temporal/nu
 
 Maintain relation direction exactly. Distinguish owner from possessed, agent from patient, source from destination, and subject from object. Do not exchange relations just because they are related. For example, "whose sister is X" asks for the owner of the sister relation; it is not "who is X's sister." Do not substitute a nearby relation or attribute: signed is not born, nationality is not country of birth, born later is not younger, and lived longer cannot be decided from birth dates alone.
 
+CONSTRAINT BRANCH COMPLETENESS
+Treat every coordinated item and every independent restrictive clause as required unless it is clearly non-restrictive. When two or more clauses jointly identify one unknown target, retain all of them in one lookup or resolve each needed clause and explicitly combine their answers in a later lookup. A branch is not consumed merely because it exists: it must be referenced by the final target-identification chain. Do not choose one member of an and/or list, one location constraint, or one superlative branch and silently drop the others.
+
+BINDING INTEGRITY
+Before writing each node, silently preserve a binding map for every relation: who/what is the subject, object, owner, possessed item, modifier, and antecedent. Step4 path order is not permission to reattach these roles. Never promote a title, episode, work, city, proper-name modifier, or previous answer into a different grammatical role without an explicit relation in the original question. In particular: a work in "the series with X" identifies an unknown series rather than becoming the series; "the birth city of the composer of X" requires the composer before that person's birth city; coordinated descriptions of one person constrain the same person rather than separate people; and an answer that is a city must not be reused as a state, district, region, or other different type.
+
 ATOMICITY AND STOPPING
 A lookup asks for one entity, attribute, value, set, or fact from a concrete named anchor or an earlier answer. Apply the latent-bridge test: if an unnamed intermediate person, place, work, organization, event, or relation result must be found before an outer relation can be evaluated, retrieve that intermediate result first and use "qN's answer" in the later lookup.
 
@@ -265,12 +271,22 @@ Input: "Whose sister played Susie in Miracle on 34th Street?"
 Output:
 {"atomic_questions":[{"id":"q1","question":"Who played Susie in Miracle on 34th Street?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"Whose sister is q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"person"}]}
 
-5. Multi-link chain: each unknown relation result is a bridge, but stop once the requested date is reached.
+5. Unknown-head bridge: the work identifies an unknown series; do not treat the work itself as that series.
+Input: "How many episodes are in season 5 of the series with The Bag or the Bat?"
+Output:
+{"atomic_questions":[{"id":"q1","question":"Which series includes The Bag or the Bat?","depends_on":[],"operation":"lookup","output_type":"work"},{"id":"q2","question":"How many episodes are in season 5 of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"number"}]}
+
+6. Joint location constraints: both clauses identify the same region, so both must feed the target before querying its date.
+Input: "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?"
+Output:
+{"atomic_questions":[{"id":"q1","question":"Which region is Israel located in?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q2","question":"Which region is the location of the Battle of Qurah and Umm al Maradim?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q3","question":"Which region is q2's answer and is immediately north of q1's answer?","depends_on":["q1","q2"],"operation":"lookup","output_type":"place"},{"id":"q4","question":"When was q3's answer created?","depends_on":["q3"],"operation":"lookup","output_type":"date"}]}
+
+7. Multi-link chain: each unknown relation result is a bridge, but stop once the requested date is reached.
 Input: "When was the region immediately north of the region where Israel is located created?"
 Output:
 {"atomic_questions":[{"id":"q1","question":"Which region is Israel located in?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q2","question":"Which region is immediately north of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"place"},{"id":"q3","question":"When was q2's answer created?","depends_on":["q2"],"operation":"lookup","output_type":"date"}]}
 
-6. Parallel comparison: retrieve each director and birth date independently, then return the original film choice.
+8. Parallel comparison: retrieve each director and birth date independently, then return the original film choice.
 Input: "Which film has the younger director, Dangerously They Live or Salad By The Roots?"
 Output:
 {"atomic_questions":[{"id":"q1","question":"Who directed Dangerously They Live?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup","output_type":"date"},{"id":"q3","question":"Who directed Salad By The Roots?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup","output_type":"date"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the younger director: Dangerously They Live or Salad By The Roots?","depends_on":["q2","q4"],"operation":"select","output_type":"work"}]}
@@ -279,10 +295,17 @@ Before returning JSON, silently audit:
 1. Is qN the only leaf, and does it answer the original question rather than an auxiliary condition?
 2. Does its output type and relation target match the original request?
 3. Has every answer-changing constraint been consumed without reversing any role or relation?
-4. Does every earlier node feed qN, with no redundant lookup or extra hop after the target?
-5. Do comparison/selection branches preserve every candidate and criterion?
-6. Do all qN references exactly match depends_on?
+4. Does every coordinated member and restrictive branch feed the target-identification chain rather than only one selected branch?
+5. Does every earlier node feed qN, with no redundant lookup or extra hop after the target?
+6. Do comparison/selection branches preserve every candidate and criterion?
+7. Do all qN references exactly match depends_on?
 """.strip()
+
+
+ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM = r"""
+
+""".strip()
+
 
 def build_atomic_question_dag_prompt(
     original_question: str,
@@ -297,109 +320,12 @@ def build_atomic_question_dag_prompt(
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
-ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM = """
-You are DEPO Step 5: action trace generation from the original question only.
-
-Your task is to convert a complex question into a complete decomposition action trace.
-Do not output the final Atomic Question DAG. A deterministic program will convert your action trace into the DAG.
-
-You are given exactly:
-
-* original_question: the full natural-language question
-
-No-path mode has no parser path, no path evidence, and no structural backbone.
-You must not construct a pseudo-path, semantic path, relation chain, support span, or any path-like fragment yourself.
-
-Use only the semantics of original_question.
-Do not use external knowledge.
-Do not answer the question.
-Do not invent entities, relations, events, dates, constraints, or comparison criteria.
-Preserve all entities, modifiers, constraints, operators, and the final answer intent from original_question.
-If the question contains a comparison, equality check, choice, or aggregation, decompose each needed branch and then generate the final comparison, equality, choice, or aggregation action.
-If a subquestion depends on a previous answer, express the dependency only in the question text using natural references such as q1's answer, q2's answer, etc.
-
-FINAL-ANSWER CONTRACT
-Before drafting actions, silently identify the exact final answer target, answer type, relation direction, candidates, comparison direction, and every answer-changing restriction in original_question. The final action qN must be the unique terminal action and must return that same requested answer, not a fact about the answer, a nearby object, or an auxiliary boolean.
-
-For a wh-question that asks for an entity satisfying multiple conditions, the final action must return that entity while retaining all required conditions. Do not convert one condition into a true/false verification unless the original question itself is yes/no. Preserve owner/possessed, agent/patient, source/destination, and all comparison directions. For example, "whose sister is X" cannot become "who is X's sister." Every earlier action must be necessary for qN; do not leave detached branches or append a relation after the original target has been reached.
-
-Action trace rules:
-
-* actions must be a non-empty array.
-* id must be q1, q2, q3, ... in order.
-* consume must be exactly [] for every action.
-* Do not put entities, relations, constraints, qN_answer references, semantic fragments, or any other text in consume.
-* produce must be qN_answer for action qN.
-* question is the natural-language question to show downstream.
-* The final qN question must answer the original request and retain its output type; every earlier action must feed qN through qN's answer references.
-* Do not output depends_on. The program will derive dependencies only from qN's answer references in question text.
-* Do not output support spans, nodes, edges, depends_on, start_index, or end_index.
-* Return valid JSON only.
-
-Output format:
-{
-"actions": [
-{
-"id": "q1",
-"consume": [],
-"produce": "q1_answer",
-"question": "natural-language question?"
-},
-{
-"id": "q2",
-"consume": [],
-"produce": "q2_answer",
-"question": "natural-language question using q1's answer?"
-}
-]
-}
-
-Example input:
-{
-"original_question": "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
-}
-
-Expected output:
-{
-"actions": [
-{
-"id": "q1",
-"consume": [],
-"produce": "q1_answer",
-"question": "Who is the director of Illusions (1982 Film)?"
-},
-{
-"id": "q2",
-"consume": [],
-"produce": "q2_answer",
-"question": "When was q1's answer born?"
-},
-{
-"id": "q3",
-"consume": [],
-"produce": "q3_answer",
-"question": "Who is the director of It'S A Wonderful Afterlife?"
-},
-{
-"id": "q4",
-"consume": [],
-"produce": "q4_answer",
-"question": "When was q3's answer born?"
-},
-{
-"id": "q5",
-"consume": [],
-"produce": "q5_answer",
-"question": "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?"
-}
-]
-}
-
-Now generate the action trace for the given input JSON.
-Return only the JSON object.
-""".strip()
-
-
-def build_atomic_question_dag_no_path_prompt(original_question: str) -> str:
-    payload = {"original_question": original_question}
+def build_llm_only_atomic_question_dag_prompt(
+    original_question: str,
+    explicit_entities: list[str],
+) -> str:
+    payload = {
+        "original_question": original_question,
+        "topic_entities": [str(entity) for entity in explicit_entities],
+    }
     return json.dumps(payload, ensure_ascii=False, indent=2)

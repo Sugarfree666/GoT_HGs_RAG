@@ -14,9 +14,9 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from atomic_question_dag import (  # noqa: E402
-    ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM,
+    ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM,
     ATOMIC_QUESTION_DAG_SYSTEM,
-    NoPathAtomicDAGGenerator,
+    LLMOnlyAtomicDAGGenerator,
     PathAlignedAtomicDAGGenerator,
     prompt_input_payload,
     restore_entity_paths,
@@ -49,10 +49,15 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertIn("Parallel comparison", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("Whose sister played Susie", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("FINAL-ANSWER CONTRACT", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("CONSTRAINT BRANCH COMPLETENESS", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("BINDING INTEGRITY", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("unique leaf", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("not a boolean verification", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("Which country artist recorded Heartbreak Hurricane", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("Whose sister is q1's answer", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("series with The Bag or the Bat", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("Joint location constraints", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("birth city of the composer of X", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("silently audit", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("qN's answer", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_reasoning_paths"', ATOMIC_QUESTION_DAG_SYSTEM)
@@ -179,6 +184,48 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(set(payload), {"original_question", "topic_entities", "step4_paths"})
         self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
+
+    def test_llm_only_generator_sends_question_and_topic_entities_without_paths(self) -> None:
+        llm = RecordingStep5LLM(_bridge_payload())
+
+        result = LLMOnlyAtomicDAGGenerator(llm).generate(
+            original_question="What nationality is the performer of the song When The Stars Go Blue?",
+            explicit_entities=["When The Stars Go Blue", "Blue"],
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(llm.system_prompts, [ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM])
+        self.assertEqual(len(llm.user_prompts), 1)
+        payload = json.loads(llm.user_prompts[0])
+        self.assertEqual(set(payload), {"original_question", "topic_entities"})
+        self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue", "Blue"])
+        self.assertNotIn("step4_paths", llm.system_prompts[0])
+        self.assertIn("LLM-only Atomic Question DAG Generator", llm.system_prompts[0])
+        self.assertIn("topic_entities are exact named-entity anchors", llm.system_prompts[0])
+
+    def test_llm_only_generator_allows_an_empty_topic_entity_list(self) -> None:
+        llm = RecordingStep5LLM(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "How many continents are there?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "number",
+                    }
+                ]
+            }
+        )
+
+        result = LLMOnlyAtomicDAGGenerator(llm).generate(
+            original_question="How many continents are there?",
+            explicit_entities=[],
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(len(llm.user_prompts), 1)
+        self.assertEqual(json.loads(llm.user_prompts[0])["topic_entities"], [])
 
     def test_dependency_binding_mismatch_is_invalid(self) -> None:
         result = validate_atomic_question_dag(
@@ -452,32 +499,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unresolved entity placeholder"):
             restore_global_best_path({"nodes": ["ENTITYA", "born"]}, [])
 
-    def test_no_path_generator_still_accepts_isolated_action_trace(self) -> None:
-        llm = RecordingNoPathLLM(
-            {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": ["ignored"],
-                        "produce": "q1_answer",
-                        "question": "Who is the performer of Song A?",
-                    }
-                ]
-            }
-        )
-
-        result = NoPathAtomicDAGGenerator(llm).generate(original_question="Who is the performer of Song A?")
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertIn("action trace generation", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
-        self.assertIn("FINAL-ANSWER CONTRACT", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
-        self.assertIn("not a fact about the answer", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
-        self.assertIn("whose sister is X", ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM)
-        self.assertEqual(result.nodes[0].question, "Who is the performer of Song A?")
-        self.assertEqual(result.nodes[0].depends_on, ())
-        self.assertIn("ignored non-empty consume", result.warnings[0])
-
-
 class RecordingStep5LLM:
     def __init__(self, payload: dict[str, Any]) -> None:
         self.payload = payload
@@ -487,16 +508,6 @@ class RecordingStep5LLM:
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, Any]:
         self.system_prompts.append(system_prompt)
         self.user_prompts.append(user_prompt)
-        return self.payload
-
-
-class RecordingNoPathLLM:
-    def __init__(self, payload: dict[str, Any]) -> None:
-        self.payload = payload
-
-    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, Any]:
-        self.system_prompt = system_prompt
-        self.user_prompt = user_prompt
         return self.payload
 
 

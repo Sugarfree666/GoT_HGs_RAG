@@ -6,10 +6,10 @@ from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any
 
 from prompts import (
-    ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM,
+    ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM,
     ATOMIC_QUESTION_DAG_SYSTEM,
-    build_atomic_question_dag_no_path_prompt,
     build_atomic_question_dag_prompt,
+    build_llm_only_atomic_question_dag_prompt,
 )
 
 if TYPE_CHECKING:
@@ -125,19 +125,39 @@ class PathAlignedAtomicDAGGenerator:
         )
 
 
-class NoPathAtomicDAGGenerator:
-    """Generate and validate an original-question-only action-trace DAG."""
+class LLMOnlyAtomicDAGGenerator:
+    """Run the question-plus-topic-entities Step5 ablation without Step4 paths."""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
 
-    def generate(self, *, original_question: str) -> AtomicQuestionDAGResult:
-        user_prompt = build_atomic_question_dag_no_path_prompt(original_question=original_question)
-        raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_NO_PATH_SYSTEM, user_prompt)
-        sanitized_payload, warnings = _sanitize_no_path_action_trace(raw_payload)
-        result = _validate_action_trace_atomic_question_dag(sanitized_payload)
-        result.warnings.extend(warnings)
-        return result
+    def generate(
+        self,
+        *,
+        original_question: str,
+        explicit_entities: list[str],
+    ) -> AtomicQuestionDAGResult:
+        if not isinstance(explicit_entities, list):
+            return _invalid_result(
+                ["LLM-only Step5 topic_entities/explicit_entities must be a list."],
+                raw_payload=None,
+            )
+
+        explicit_entity_texts = [str(entity) for entity in explicit_entities]
+        preflight_errors = _llm_only_preflight_errors(explicit_entities=explicit_entity_texts)
+        if preflight_errors:
+            return _invalid_result(preflight_errors, raw_payload=None)
+
+        user_prompt = build_llm_only_atomic_question_dag_prompt(
+            original_question=original_question,
+            explicit_entities=explicit_entity_texts,
+        )
+        raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM, user_prompt)
+        return validate_atomic_question_dag(
+            raw_payload,
+            original_question=original_question,
+            explicit_entities=explicit_entity_texts,
+        )
 
 
 def restore_entity_paths(step4_paths: Any, mask_mappings: Any) -> list[RestoredTokenPath]:
@@ -1033,107 +1053,6 @@ def _string_list(value: Any, field_name: str, errors: list[str]) -> list[str]:
     return items
 
 
-def _validate_action_trace_atomic_question_dag(raw_payload: Any) -> AtomicQuestionDAGResult:
-    errors: list[str] = []
-    raw_actions = raw_payload.get("actions") if isinstance(raw_payload, dict) else None
-    if not isinstance(raw_actions, list) or not raw_actions:
-        return _invalid_result(
-            ["actions must be a non-empty list."],
-            raw_payload=raw_payload if isinstance(raw_payload, dict) else None,
-        )
-
-    parsed_nodes: list[AtomicQuestionNode] = []
-    seen_ids: set[str] = set()
-
-    for index, raw_action in enumerate(raw_actions, start=1):
-        if not isinstance(raw_action, dict):
-            errors.append(f"actions[{index - 1}] must be an object.")
-            continue
-
-        expected_id = f"q{index}"
-        node_id = str(raw_action.get("id") or "").strip()
-        previous_ids = set(seen_ids)
-        if node_id != expected_id:
-            errors.append(f"action id must be {expected_id}, got {node_id!r}.")
-        if node_id in seen_ids:
-            errors.append(f"duplicate action id: {node_id}.")
-        if node_id:
-            seen_ids.add(node_id)
-
-        consume = _coerce_consume(raw_action.get("consume"), index, errors)
-        produce = str(raw_action.get("produce") or "").strip()
-        expected_produce = f"{expected_id}_answer"
-        if produce != expected_produce:
-            errors.append(f"{node_id or expected_id}: produce must be {expected_produce!r}, got {produce!r}.")
-
-        question = str(raw_action.get("question") or "").strip()
-        if not _is_single_question(question):
-            errors.append(f"{node_id or expected_id}: question must be a non-empty single question.")
-        if BRACED_QUESTION_REF_RE.search(question):
-            errors.append(f"{node_id or expected_id}: question must use qN's answer references, not braced references.")
-        if _contains_placeholder(question):
-            errors.append(f"{node_id or expected_id}: question contains unresolved ENTITY placeholder.")
-        for consume_item in consume:
-            if _contains_placeholder(consume_item):
-                errors.append(f"{node_id or expected_id}: consume contains unresolved ENTITY placeholder.")
-                break
-
-        refs = _question_refs([question])
-        invalid_refs = [ref for ref in refs if ref not in previous_ids]
-        for ref in invalid_refs:
-            errors.append(f"{node_id or expected_id}: qN reference points to non-previous node {ref!r}.")
-        depends_on = tuple(ref for ref in refs if ref in previous_ids)
-
-        parsed_nodes.append(
-            AtomicQuestionNode(
-                id=node_id,
-                question=question,
-                depends_on=depends_on,
-            )
-        )
-
-    edges = _edges_from_nodes(parsed_nodes)
-    leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
-    return AtomicQuestionDAGResult(
-        nodes=parsed_nodes,
-        edges=edges,
-        leaf_node_ids=leaf_node_ids,
-        valid=not errors,
-        validation_errors=errors,
-        raw_payload=raw_payload if isinstance(raw_payload, dict) else None,
-    )
-
-
-def validate_action_trace_atomic_question_dag(raw_payload: Any) -> AtomicQuestionDAGResult:
-    return _validate_action_trace_atomic_question_dag(raw_payload)
-
-
-def _sanitize_no_path_action_trace(raw_payload: Any) -> tuple[Any, list[str]]:
-    warnings: list[str] = []
-    if not isinstance(raw_payload, dict):
-        return raw_payload, warnings
-    raw_actions = raw_payload.get("actions")
-    if not isinstance(raw_actions, list):
-        return dict(raw_payload), warnings
-
-    sanitized_payload = dict(raw_payload)
-    sanitized_actions: list[Any] = []
-    for index, raw_action in enumerate(raw_actions, start=1):
-        if not isinstance(raw_action, dict):
-            sanitized_actions.append(raw_action)
-            continue
-        action = dict(raw_action)
-        if "consume" not in action:
-            warnings.append(f"q{index}: no-path mode inserted empty consume [].")
-        elif action.get("consume") != []:
-            warnings.append(f"q{index}: no-path mode ignored non-empty consume and replaced it with [].")
-        action["consume"] = []
-        sanitized_actions.append(action)
-
-    sanitized_payload["actions"] = sanitized_actions
-    return sanitized_payload, warnings
-
-
 def invalid_atomic_question_dag(errors: list[str]) -> AtomicQuestionDAGResult:
     return _invalid_result(errors, raw_payload=None)
 
@@ -1185,17 +1104,12 @@ def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[l
     return errors
 
 
-def _coerce_consume(value: Any, action_index: int, errors: list[str]) -> list[str]:
-    if not isinstance(value, list):
-        errors.append(f"actions[{action_index - 1}]: consume must be a list.")
-        return []
-    consume: list[str] = []
-    for item_index, item in enumerate(value):
-        if not isinstance(item, str):
-            errors.append(f"actions[{action_index - 1}].consume[{item_index}] must be a string.")
-            continue
-        consume.append(item.strip())
-    return consume
+def _llm_only_preflight_errors(*, explicit_entities: list[str]) -> list[str]:
+    return [
+        f"LLM-only Step5 topic_entities contains unresolved ENTITY placeholder: {entity}."
+        for entity in explicit_entities
+        if _contains_placeholder(entity)
+    ]
 
 
 def _edges_from_nodes(nodes: list[AtomicQuestionNode]) -> list[AtomicQuestionEdge]:

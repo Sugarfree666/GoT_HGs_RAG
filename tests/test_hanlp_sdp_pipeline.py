@@ -203,28 +203,27 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             print_hanlp_sdp_result(1, record, result)
         self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
-    def test_pipeline_runs_no_path_step5_when_step4_has_no_paths(self) -> None:
+    def test_pipeline_returns_invalid_step5_when_step4_has_no_paths(self) -> None:
         question = "What is the capital of France?"
-        llm = NoPathPipelineLLM(question)
+        llm = EmptyPathPipelineLLM()
 
         result = run_hanlp_sdp_pipeline(
             record=QuestionRecord(question=question),
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
-            parser=NoPathHanLPSDPParser(),
+            parser=EmptyPathHanLPSDPParser(),
         )
 
         compiled = result["token_reasoning_structure"]
         self.assertEqual(compiled.path_type, "no_entity_branch_path")
         self.assertEqual(compiled.paths, [])
-        self.assertEqual(llm.calls, 2)
-        self.assertEqual(
-            json.loads(llm.no_path_user_prompt),
-            {"original_question": question},
-        )
+        self.assertEqual(llm.calls, 1)
         dag = result["atomic_question_dag"]
-        self.assertTrue(dag.valid, dag.validation_errors)
-        self.assertEqual([node.question for node in dag.nodes], [question])
+        self.assertFalse(dag.valid)
+        self.assertIn(
+            "Step5 requires at least one non-empty step4_paths/global_best_paths entry.",
+            dag.validation_errors,
+        )
 
     def test_pipeline_sends_restored_entity_branch_paths_to_step5(self) -> None:
         question = "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
@@ -1503,26 +1502,12 @@ class FakePreprocessLLM:
         }
 
 
-class NoPathPipelineLLM:
-    def __init__(self, question: str) -> None:
-        self.question = question
+class EmptyPathPipelineLLM:
+    def __init__(self) -> None:
         self.calls = 0
-        self.no_path_user_prompt = ""
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
-        if "action trace generation" in system_prompt:
-            self.no_path_user_prompt = user_prompt
-            return {
-                "actions": [
-                    {
-                        "id": "q1",
-                        "consume": [],
-                        "produce": "q1_answer",
-                        "question": self.question,
-                    }
-                ]
-            }
         return {"explicit_entities": [], "warnings": []}
 
 
@@ -1642,7 +1627,7 @@ class AttributeOwnershipHanLPSDPParser:
         )
 
 
-class NoPathHanLPSDPParser:
+class EmptyPathHanLPSDPParser:
     def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
         del placeholders
         tokens = ["What", "is", "the", "capital", "of", "France", "?"]
