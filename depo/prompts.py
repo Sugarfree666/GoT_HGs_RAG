@@ -202,7 +202,6 @@ Return the smallest retrieval-executable DAG that still asks exactly the origina
 
 Inputs:
 - original_question is the complete semantic authority.
-- topic_entities are exact named-entity anchors.
 - step4_paths are noisy structural hints. They can be incomplete, reversed, or redundant; never copy their token order mechanically. DAG nodes do not need path support from step4_paths when the original_question requires them.
 
 FINAL-ANSWER CONTRACT
@@ -211,7 +210,7 @@ Before drafting nodes, silently identify the exact final request: its answer tar
 For example, a question asking which artist/person/place/work must end with that entity, not with a fact about it, a related building, or true/false. Use a boolean verify node only when the original question itself asks a yes/no question. A question asking for an entity that satisfies several conditions must end by selecting that entity, not by verifying one condition as boolean.
 
 SEMANTIC CONSERVATION
-Every entity, relation, candidate, comparison, quantifier, negation, temporal/numeric condition, and restrictive modifier that changes the answer set must be consumed by at least one node. Keep conjunctive restrictions together when they identify the same answer; do not split them into independent facts unless a later node recombines them into the original target. Preserve exact topic-entity surfaces.
+Every entity, relation, candidate, comparison, quantifier, negation, temporal/numeric condition, and restrictive modifier that changes the answer set must be consumed by at least one node. Keep conjunctive restrictions together when they identify the same answer; do not split them into independent facts unless a later node recombines them into the original target. Preserve exact named-entity surfaces from original_question.
 
 Maintain relation direction exactly. Distinguish owner from possessed, agent from patient, source from destination, and subject from object. Do not exchange relations just because they are related. For example, "whose sister is X" asks for the owner of the sister relation; it is not "who is X's sister." Do not substitute a nearby relation or attribute: signed is not born, nationality is not country of birth, born later is not younger, and lived longer cannot be decided from birth dates alone.
 
@@ -304,12 +303,10 @@ Before returning JSON, silently audit:
 
 def build_atomic_question_dag_prompt(
     original_question: str,
-    explicit_entities: list[str],
     global_best_paths: list[list[str]],
 ) -> str:
     payload = {
         "original_question": original_question,
-        "topic_entities": [str(entity) for entity in explicit_entities],
         "step4_paths": [[str(node) for node in path] for path in global_best_paths],
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)

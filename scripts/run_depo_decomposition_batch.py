@@ -255,7 +255,6 @@ def build_decomposition_payload(
             "5_step5_action_trace": {
                 "input": {
                     "original_question": item["question"],
-                    "topic_entities": [entity.text for entity in preprocess_result.explicit_entities.entities],
                     "step4_paths": [list(path) for path in restored_global_best_paths],
                 },
                 "atomic_questions": _step5_atomic_questions(atomic_question_dag),

@@ -23,12 +23,11 @@ questions may keep one path per candidate branch. Step 5 directly generates an
 Atomic Question DAG from only:
 
 1. `original_question`
-2. `topic_entities` / `explicit_entities`
-3. restored Step 4 paths (`step4_paths` / `global_best_paths`)
+2. restored Step 4 paths (`step4_paths` / `global_best_paths`)
 
-`explicit_entities` are the original Step 2 entity surface strings. The
-`global_best_paths` value is a list of restored Step 4 paths. In the Step5 LLM
-prompt these are rendered as `topic_entities` and `step4_paths`. Ordinary
+The `global_best_paths` value is a list of restored Step 4 paths. In the Step5
+LLM prompt these are rendered as `step4_paths`. Step5 does not receive the Step
+2 entity surface list because entity recognition can be noisy. Ordinary
 questions pass one path; candidate/comparison questions pass multiple branch
 paths. Step 4 paths are structural hints only: DAG nodes do not need explicit
 path support, and Step5 does not output semantic reasoning paths or path-aligned
@@ -46,8 +45,8 @@ The CLI prints:
 6. Atomic Question DAG
 
 Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure. Step 5 does not receive all anchor paths, raw SDP edges, masks,
-candidate sets, constraints, support spans, or path indices.
+structure. Step 5 does not receive entity surface lists, all anchor paths, raw
+SDP edges, masks, candidate sets, constraints, support spans, or path indices.
 
 Step 5 returns JSON atomic questions only:
 

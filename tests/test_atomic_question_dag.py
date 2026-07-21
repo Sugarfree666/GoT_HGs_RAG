@@ -29,18 +29,18 @@ class AtomicQuestionDAGTest(unittest.TestCase):
     def test_prompt_contract_uses_step4_paths_as_hints_only(self) -> None:
         payload = prompt_input_payload(
             original_question="Question?",
-            explicit_entities=["When The Stars Go Blue"],
             global_best_paths=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
 
-        self.assertEqual(set(payload), {"original_question", "topic_entities", "step4_paths"})
-        self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
+        self.assertEqual(set(payload), {"original_question", "step4_paths"})
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
+        self.assertNotIn("topic_entities", payload)
         self.assertNotIn("semantic_reasoning_paths", json.dumps(payload, ensure_ascii=False))
 
         self.assertIn("complex-question decomposition", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("step4_paths are noisy structural hints", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("DAG nodes do not need path support", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn("topic_entities are exact named-entity anchors", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("latent-bridge test", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("nationality is not country of birth", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("Direct one-hop", ATOMIC_QUESTION_DAG_SYSTEM)
@@ -168,19 +168,17 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.nodes[-1].operation, "select")
         self.assertEqual(result.nodes[-1].output_type, "work")
 
-    def test_path_generator_sends_topic_entities_and_step4_paths(self) -> None:
+    def test_path_generator_sends_question_and_step4_paths_only(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="What nationality is the performer of the song When The Stars Go Blue?",
-            explicit_entities=["When The Stars Go Blue"],
             global_best_paths=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(llm.system_prompts, [ATOMIC_QUESTION_DAG_SYSTEM])
         payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(set(payload), {"original_question", "topic_entities", "step4_paths"})
-        self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
+        self.assertEqual(set(payload), {"original_question", "step4_paths"})
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
 
     def test_dependency_binding_mismatch_is_invalid(self) -> None:
@@ -314,7 +312,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
 
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
-            explicit_entities=["Turn Me On", "Come Away with Me"],
             global_best_paths=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
         )
 
@@ -412,7 +409,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         llm = RecordingStep5LLM(_bridge_payload())
         result = PathAlignedAtomicDAGGenerator(llm).generate(
             original_question="Question?",
-            explicit_entities=[],
             global_best_paths=[],
         )
 

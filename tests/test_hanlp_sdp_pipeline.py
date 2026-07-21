@@ -68,11 +68,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         step5_payload = json.loads(llm.step5_user_prompt)
         self.assertEqual(
-            set(step5_payload), {"original_question", "topic_entities", "step4_paths"}
+            set(step5_payload), {"original_question", "step4_paths"}
         )
-        self.assertEqual(
-            step5_payload["topic_entities"], ["Ryan Tubridy", "Mauro Massironi"]
-        )
+        self.assertNotIn("topic_entities", step5_payload)
         self.assertEqual(
             step5_payload["step4_paths"],
             [["Ryan Tubridy", "older", "Who"], ["Mauro Massironi", "older", "Who"]],
@@ -1474,10 +1472,9 @@ class FakePreprocessLLM:
             payload = json.loads(user_prompt)
             assert set(payload) == {
                 "original_question",
-                "topic_entities",
                 "step4_paths",
             }
-            assert payload["topic_entities"] == ["Ryan Tubridy", "Mauro Massironi"]
+            assert "topic_entities" not in payload
             assert payload["step4_paths"] == [
                 ["Ryan Tubridy", "older", "Who"],
                 ["Mauro Massironi", "older", "Who"],
@@ -1532,13 +1529,9 @@ class IllusionsPipelineLLM:
             payload = json.loads(user_prompt)
             assert set(payload) == {
                 "original_question",
-                "topic_entities",
                 "step4_paths",
             }
-            assert payload["topic_entities"] == [
-                "Illusions (1982 Film)",
-                "It'S A Wonderful Afterlife",
-            ]
+            assert "topic_entities" not in payload
             assert payload["step4_paths"] == [
                 ["Illusions (1982 Film)", "film", "has", "director", "born", "later"],
                 [

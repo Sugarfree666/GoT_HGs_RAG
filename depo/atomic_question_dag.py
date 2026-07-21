@@ -88,7 +88,7 @@ class AtomicQuestionDAGResult:
 
 
 class PathAlignedAtomicDAGGenerator:
-    """Run Step5 as original question + topic entities + Step4 path hints -> atomic question DAG."""
+    """Run Step5 as original question + Step4 path hints -> atomic question DAG."""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
@@ -97,28 +97,21 @@ class PathAlignedAtomicDAGGenerator:
         self,
         *,
         original_question: str,
-        explicit_entities: list[str],
         global_best_paths: list[list[str]],
     ) -> AtomicQuestionDAGResult:
-        explicit_entity_texts = [str(entity) for entity in explicit_entities]
         restored_global_best_paths = [[str(node) for node in path] for path in global_best_paths]
-        preflight_errors = _preflight_errors(
-            explicit_entities=explicit_entity_texts,
-            global_best_paths=restored_global_best_paths,
-        )
+        preflight_errors = _preflight_errors(global_best_paths=restored_global_best_paths)
         if preflight_errors:
             return _invalid_result(preflight_errors, raw_payload=None)
 
         user_prompt = build_atomic_question_dag_prompt(
             original_question=original_question,
-            explicit_entities=explicit_entity_texts,
             global_best_paths=restored_global_best_paths,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
         return validate_atomic_question_dag(
             raw_payload,
             original_question=original_question,
-            explicit_entities=explicit_entity_texts,
             global_best_paths=restored_global_best_paths,
         )
 
@@ -1047,13 +1040,8 @@ def _restore_placeholders_in_token(token: str, mapping: dict[str, str]) -> str:
     return re.sub(r"\bENTITY[A-Z0-9]*\b", replace, token)
 
 
-def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[list[str]]) -> list[str]:
+def _preflight_errors(*, global_best_paths: list[list[str]]) -> list[str]:
     errors: list[str] = []
-    if not isinstance(explicit_entities, list):
-        errors.append("Step5 topic_entities/explicit_entities must be a list.")
-    for entity in explicit_entities:
-        if _contains_placeholder(entity):
-            errors.append(f"Step5 topic_entities contains unresolved ENTITY placeholder: {entity}.")
     if not global_best_paths:
         errors.append("Step5 requires at least one non-empty step4_paths/global_best_paths entry.")
         return errors
@@ -1111,13 +1099,11 @@ def _invalid_result(errors: list[str], raw_payload: dict[str, Any] | None) -> At
 
 def prompt_input_payload(
     original_question: str,
-    explicit_entities: list[str],
     global_best_paths: list[list[str]],
 ) -> dict[str, Any]:
     return json.loads(
         build_atomic_question_dag_prompt(
             original_question=original_question,
-            explicit_entities=explicit_entities,
             global_best_paths=global_best_paths,
         )
     )

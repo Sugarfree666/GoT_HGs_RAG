@@ -187,10 +187,6 @@ def run_hanlp_sdp_pipeline(
                     step5_llm
                 ).generate(
                     original_question=record.question,
-                    explicit_entities=[
-                        entity.text
-                        for entity in preprocess_result.explicit_entities.entities
-                    ],
                     global_best_paths=restored_global_best_paths,
                 )
     return {

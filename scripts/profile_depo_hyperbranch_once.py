@@ -175,7 +175,6 @@ def main() -> int:
     with profile.timed("depo.step5_atomic_dag"):
         atomic_question_dag = PathAlignedAtomicDAGGenerator(llm_client).generate(
             original_question=record.question,
-            explicit_entities=[entity.text for entity in preprocess_result.explicit_entities.entities],
             global_best_paths=restored_global_best_paths,
         )
 
