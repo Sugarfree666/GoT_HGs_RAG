@@ -6,10 +6,8 @@ from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any
 
 from prompts import (
-    ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM,
     ATOMIC_QUESTION_DAG_SYSTEM,
     build_atomic_question_dag_prompt,
-    build_llm_only_atomic_question_dag_prompt,
 )
 
 if TYPE_CHECKING:
@@ -122,41 +120,6 @@ class PathAlignedAtomicDAGGenerator:
             original_question=original_question,
             explicit_entities=explicit_entity_texts,
             global_best_paths=restored_global_best_paths,
-        )
-
-
-class LLMOnlyAtomicDAGGenerator:
-    """Run the question-plus-topic-entities Step5 ablation without Step4 paths."""
-
-    def __init__(self, llm_client: "LLMClient") -> None:
-        self.llm_client = llm_client
-
-    def generate(
-        self,
-        *,
-        original_question: str,
-        explicit_entities: list[str],
-    ) -> AtomicQuestionDAGResult:
-        if not isinstance(explicit_entities, list):
-            return _invalid_result(
-                ["LLM-only Step5 topic_entities/explicit_entities must be a list."],
-                raw_payload=None,
-            )
-
-        explicit_entity_texts = [str(entity) for entity in explicit_entities]
-        preflight_errors = _llm_only_preflight_errors(explicit_entities=explicit_entity_texts)
-        if preflight_errors:
-            return _invalid_result(preflight_errors, raw_payload=None)
-
-        user_prompt = build_llm_only_atomic_question_dag_prompt(
-            original_question=original_question,
-            explicit_entities=explicit_entity_texts,
-        )
-        raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM, user_prompt)
-        return validate_atomic_question_dag(
-            raw_payload,
-            original_question=original_question,
-            explicit_entities=explicit_entity_texts,
         )
 
 
@@ -1102,14 +1065,6 @@ def _preflight_errors(*, explicit_entities: list[str], global_best_paths: list[l
             if _contains_placeholder(node):
                 errors.append(f"Step5 step4_paths[{path_index - 1}] contains unresolved ENTITY placeholder: {node}.")
     return errors
-
-
-def _llm_only_preflight_errors(*, explicit_entities: list[str]) -> list[str]:
-    return [
-        f"LLM-only Step5 topic_entities contains unresolved ENTITY placeholder: {entity}."
-        for entity in explicit_entities
-        if _contains_placeholder(entity)
-    ]
 
 
 def _edges_from_nodes(nodes: list[AtomicQuestionNode]) -> list[AtomicQuestionEdge]:

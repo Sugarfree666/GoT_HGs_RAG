@@ -1465,7 +1465,11 @@ class FakePreprocessLLM:
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
-        if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
+        if (
+            "DEPO Step 5" in system_prompt
+            or "Atomic Question DAG" in system_prompt
+            or "complex-question decomposition" in system_prompt
+        ):
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
             assert set(payload) == {
@@ -1519,7 +1523,11 @@ class IllusionsPipelineLLM:
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
-        if "DEPO Step 5" in system_prompt or "Atomic Question DAG" in system_prompt:
+        if (
+            "DEPO Step 5" in system_prompt
+            or "Atomic Question DAG" in system_prompt
+            or "complex-question decomposition" in system_prompt
+        ):
             self.step5_user_prompt = user_prompt
             payload = json.loads(user_prompt)
             assert set(payload) == {

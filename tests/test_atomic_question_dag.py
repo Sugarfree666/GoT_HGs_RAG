@@ -14,9 +14,7 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from atomic_question_dag import (  # noqa: E402
-    ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM,
     ATOMIC_QUESTION_DAG_SYSTEM,
-    LLMOnlyAtomicDAGGenerator,
     PathAlignedAtomicDAGGenerator,
     prompt_input_payload,
     restore_entity_paths,
@@ -40,7 +38,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
         self.assertNotIn("semantic_reasoning_paths", json.dumps(payload, ensure_ascii=False))
 
-        self.assertIn("Atomic Question DAG Generator", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("complex-question decomposition", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("step4_paths are noisy structural hints", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("DAG nodes do not need path support", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertIn("latent-bridge test", ATOMIC_QUESTION_DAG_SYSTEM)
@@ -184,48 +182,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(set(payload), {"original_question", "topic_entities", "step4_paths"})
         self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue"])
         self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
-
-    def test_llm_only_generator_sends_question_and_topic_entities_without_paths(self) -> None:
-        llm = RecordingStep5LLM(_bridge_payload())
-
-        result = LLMOnlyAtomicDAGGenerator(llm).generate(
-            original_question="What nationality is the performer of the song When The Stars Go Blue?",
-            explicit_entities=["When The Stars Go Blue", "Blue"],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(llm.system_prompts, [ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM])
-        self.assertEqual(len(llm.user_prompts), 1)
-        payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(set(payload), {"original_question", "topic_entities"})
-        self.assertEqual(payload["topic_entities"], ["When The Stars Go Blue", "Blue"])
-        self.assertNotIn("step4_paths", llm.system_prompts[0])
-        self.assertIn("LLM-only Atomic Question DAG Generator", llm.system_prompts[0])
-        self.assertIn("topic_entities are exact named-entity anchors", llm.system_prompts[0])
-
-    def test_llm_only_generator_allows_an_empty_topic_entity_list(self) -> None:
-        llm = RecordingStep5LLM(
-            {
-                "atomic_questions": [
-                    {
-                        "id": "q1",
-                        "question": "How many continents are there?",
-                        "depends_on": [],
-                        "operation": "lookup",
-                        "output_type": "number",
-                    }
-                ]
-            }
-        )
-
-        result = LLMOnlyAtomicDAGGenerator(llm).generate(
-            original_question="How many continents are there?",
-            explicit_entities=[],
-        )
-
-        self.assertTrue(result.valid, result.validation_errors)
-        self.assertEqual(len(llm.user_prompts), 1)
-        self.assertEqual(json.loads(llm.user_prompts[0])["topic_entities"], [])
 
     def test_dependency_binding_mismatch_is_invalid(self) -> None:
         result = validate_atomic_question_dag(

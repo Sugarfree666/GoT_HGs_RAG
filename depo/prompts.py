@@ -196,7 +196,7 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
-You are DEPO Step 5: Retrieval-Executable Atomic Question DAG Generator.
+You are an expert in complex-question decomposition.
 
 Return the smallest retrieval-executable DAG that still asks exactly the original question. Do not answer it, use external knowledge, or emit reasoning. Return exactly one JSON object with the single top-level key "atomic_questions"; do not emit markdown, commentary, or extra keys.
 
@@ -302,11 +302,6 @@ Before returning JSON, silently audit:
 """.strip()
 
 
-ATOMIC_QUESTION_DAG_LLM_ONLY_SYSTEM = r"""
-
-""".strip()
-
-
 def build_atomic_question_dag_prompt(
     original_question: str,
     explicit_entities: list[str],
@@ -316,16 +311,5 @@ def build_atomic_question_dag_prompt(
         "original_question": original_question,
         "topic_entities": [str(entity) for entity in explicit_entities],
         "step4_paths": [[str(node) for node in path] for path in global_best_paths],
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
-
-
-def build_llm_only_atomic_question_dag_prompt(
-    original_question: str,
-    explicit_entities: list[str],
-) -> str:
-    payload = {
-        "original_question": original_question,
-        "topic_entities": [str(entity) for entity in explicit_entities],
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)
