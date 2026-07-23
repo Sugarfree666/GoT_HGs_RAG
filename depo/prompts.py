@@ -69,23 +69,23 @@ You are DEPO Step 2: topic entity extraction and narrow structural question norm
 Extract only explicit topic entities in the original question. Also return normalized_question, but its scope is intentionally limited.
 The original question is the semantic authority; normalized_question is only a parser input. Preserve the exact answer set.
 
-A topic entity is a concrete named thing explicitly mentioned in the question and useful as an anchor for QA decomposition:
-person, creative work/title, organization, institution, location, geopolitical place, event, award, treaty, war, product, game, etc.
+A topic entity is a concrete named or identifier-like thing explicitly mentioned in the question and useful as an anchor for QA decomposition:
+person, fictional character or named role, creative work/title, organization, institution, government body, location, named building or facility, named region, geopolitical place, event, award, competition, treaty, war, product, game, acronym, code, designation, etc.
 
 Do not extract roles, common nouns, answer slots, relation words, wh-words, operators, inferred entities, bare numbers, dates, years, ordinals, quantities, or measurements.
 
 Entity selection procedure (perform it silently before producing JSON):
-1. Apply the anchor gate before selecting a span: emit it only if the span itself names one particular person, work, organization, location, event, product, or other identifiable object. Apply the distinctiveness test: a valid surface identifies one particular object by itself, while a role, occupation, class, category, or description could denote many different objects and must be rejected. Do not emit a variable in the relation chain merely because resolving it is necessary to answer the question. Return an empty entity list only when no explicit named anchor passes this test; never use an empty list to avoid classifying an unfamiliar but clearly named surface.
-2. Scan the whole original question from left to right for every explicit named object that passes the anchor gate. Scan subordinate clauses, possessives, quotations, comparisons, and long relation chains too; the grammatical focus of the question is not the only possible entity.
+1. Apply the anchor gate before selecting a span: emit a surface when it plausibly names or identifies a concrete person, fictional character, work, organization, institution, government body, named location, named region, named building/facility, event, award, competition, product, code, acronym, or other anchor in the question. Prefer recall for exact named or identifier-like surfaces, even when they are unfamiliar, lowercase, all-caps, short, numeric, or punctuated. Reject only pure roles, occupations, classes, categories, answer slots, and relation variables that do not name a concrete anchor. Do not emit a variable in the relation chain merely because resolving it is necessary to answer the question. Return an empty entity list only when no explicit named or identifier-like anchor is present.
+2. Scan the whole original question from left to right for every explicit named or identifier-like anchor that passes the anchor gate. Scan subordinate clauses, possessives, quotations, comparisons, and long relation chains too; the grammatical focus of the question is not the only possible entity.
 3. For each accepted candidate, keep the complete official-looking name or title, but remove only adjacent grammatical wrappers, role words, and possessive relations. A capitalized name component that looks like an article or initial is still part of a name when it is attached to the named surface, such as "A Lim" or "The Who". Do not use capitalization as the only test: source questions can lowercase a real name or title.
 4. Emit each selected surface once, in left-to-right textual order. A surface denotes every exact occurrence of that surface in the original question. Before returning it, check all of those occurrences: selected surfaces must be mutually non-overlapping everywhere, not only at their first occurrence. Never emit both a full entity and one of its nested substrings.
 5. Copy the surface exactly as written, even when the question contains a typo, unusual casing, malformed punctuation, or a non-English spelling. Do not correct, translate, expand, or normalize an entity surface.
 
-Do not promote a descriptive label into an entity merely because it is capitalized or appears important to the question. Occupations, offices, demonyms, generic facilities, and administrative categories remain non-entities unless an actual proper name is present. For example, "prime minister", "Jamaican cricketer", "British racing driver", "Payload Specialist", "indoor arena", "Governor", "city", "region", "state", and "country" are descriptions, not topic entities. In contrast, a complete named institution, award, event, or location may legitimately contain category words, such as "Gujarat Legislative Assembly" or "Wexner Graduate Fellowships".
+Do not promote a descriptive label into an entity merely because it is capitalized or appears important to the question. Occupations, offices, demonyms, generic facilities, and administrative categories remain non-entities unless an actual proper name, identifier, or official designation is present. For example, "prime minister", "Jamaican cricketer", "British racing driver", "Payload Specialist", "indoor arena", "Governor", "governor general of India", "city", "region", "state", "country", "league", and "body of water" are descriptions or relation variables, not topic entities. In contrast, a complete named institution, award, event, competition, code, character, official designation, named building/facility, or location may legitimately contain category words, such as "Gujarat Legislative Assembly", "Wexner Graduate Fellowships", "House of Representatives", "US Senate", "Cabinet", "NATO", "Mantua Cathedral", "Birmingham", "Near East", "Indy Car Race", "FA Cup", "MLB MVP", "Susie", or "ISO 3166-2:CV".
 
-Treat relation variables as non-entities even when they occur in a long multi-hop question or appear with an article. Never emit bare or descriptive forms such as "city", "the city", "country", "the country", "region", "place", "the birthplace", "author", "the author", "the performer", "Governor", "headquarters", "group", "film company", "the president", "basilica", "museum", "series", "British racing driver", "English musician", "American", "2005 American drama-comedy film", or "seventh-most populated city". Descriptions such as "a Jamaican cricketer", "an American rock band", "an English actress", "a Payload Specialist", "an American professional Hawaiian surfer", and "a poetry and fiction writer" are likewise not entities. These are answer variables, roles, descriptions, or relation endpoints, not named anchors. A title or office becomes an entity only when its complete selected surface itself identifies a particular entity, such as "Prince Of Orange", "Crown Princess Of Denmark", or "University Of Kentucky".
+Treat relation variables as non-entities even when they occur in a long multi-hop question or appear with an article. Never emit bare or descriptive forms such as "city", "the city", "country", "the country", "region", "place", "the birthplace", "author", "the author", "the performer", "Governor", "governor general of India", "headquarters", "group", "film company", "league", "body of water", "the president", "basilica", "museum", "series", "British racing driver", "English musician", "American", "Italian", "1999 draft", "2005 American drama-comedy film", or "seventh-most populated city". Descriptions such as "a Jamaican cricketer", "an American rock band", "an English actress", "a Payload Specialist", "an American professional Hawaiian surfer", and "a poetry and fiction writer" are likewise not entities. These are answer variables, roles, descriptions, or relation endpoints, not named anchors. A title or office becomes an entity only when its complete selected surface itself identifies a particular entity, such as "Prince Of Orange", "Crown Princess Of Denmark", or "University Of Kentucky".
 
-A number or year is allowed only when it is part of a complete official name, such as "Sabotage (1936 Film)", "Wrong Turn 5: Bloodlines", or "War of 1812".
+A number, year, Roman numeral, or code is allowed when it is part of a complete official-looking name or identifier, such as "Sabotage (1936 Film)", "Wrong Turn 5: Bloodlines", "War of 1812", "1979-80 European Cup", "1894-95 FA Cup", "Shrek 2", "III", "ISO 3166-2:CV", or "MLB MVP". A bare calendar year before a generic event or type noun, such as "1999 draft", is a time constraint rather than an entity unless the full span is an official name.
 Short titles in a typed comparison list may begin with a number; keep the full branch when the surrounding question supplies the type, such as film, album, song, book, game, or series.
 
 Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Treat the full official-looking title as one entity when the punctuation connects title parts; do not split the subtitle into a separate person/place/entity. A parenthetical disambiguator attached to any named entity remains inside that entity, for example "B Boy (Song)", "Sabotage (1936 Film)", or "Christopher Newton (Criminal)".
@@ -116,13 +116,13 @@ Hard semantic constraints:
 - Do not introduce new named entities or ENTITYA/ENTITYB placeholders.
 
 FINAL ENTITY OUTPUT GATE:
-Before returning JSON, remove every surface that fails any condition below. This gate takes priority over the desire to return more entities.
-1. The surface itself must identify one particular named object in the question. Do not return unknown relation variables, answer slots, roles, categories, descriptive phrases, demonyms, or bare numbers and years.
-2. Reject generic forms such as "battle", "city", "the birthplace", "the performer", "Governor", "basilica", "museum", "state", "Payload Specialist", "Space Shuttle", "English musician", "poetry and fiction writer", "American", and "1956". A phrase is not an entity merely because it can be assigned a semantic type.
+Before returning JSON, remove surfaces that are clearly not named or identifier-like anchors. This gate prevents pure relation variables and descriptions; it must not suppress plausible exact anchors merely because they are unfamiliar, short, lowercase, all-caps, numeric, or punctuated.
+1. The surface must be a named or identifier-like anchor in the question. Do not return unknown relation variables, answer slots, roles, categories, descriptive phrases, demonyms, or standalone numbers and years that are not part of an identifier/name.
+2. Reject generic forms such as "battle", "city", "the birthplace", "the performer", "Governor", "governor general of India", "basilica", "museum", "state", "league", "film company", "body of water", "Payload Specialist", "Space Shuttle", "English musician", "poetry and fiction writer", "American", "Italian", "1956", and "1999". A phrase is not an entity merely because it can be assigned a semantic type. However, keep official-looking names and identifiers that include category words or numbers, such as "House of Representatives", "US Senate", "Cabinet", "NATO", "Civil War", "Mexican-American war", "Korean conflict", "Indy Car Race", "FA Cup", "European Cup", "1979-80 European Cup", "1894-95 FA Cup", "MLB MVP", "ISO 3166-2:CV", "Shrek 2", "III", "Auctor", "KZAR", "Darling Mills Creek", "Mantua Cathedral", "Birmingham", "Near East", "Susie", and "Manchuria".
 3. For a possessive X's role, retain X only when X is a named entity; never return the role or the entire possessive relation.
 4. Copy source characters exactly. Never correct a typo, accent, capitalization, punctuation, or spacing.
 5. All exact occurrences of all selected surfaces must be mutually non-overlapping. If a short candidate occurs inside a longer selected candidate anywhere in the question, omit the short candidate even when it also appears separately elsewhere.
-6. Return an empty explicit_entities list only when the question contains no explicit named anchor. Do not omit a named person, official-looking title, named institution, event, or location merely because it is unfamiliar or its type is uncertain.
+6. Return an empty explicit_entities list only when the question contains no plausible named or identifier-like anchor. Make a final recall pass for named places, named regions, named buildings/facilities, named characters, short titles, acronyms, codes, awards, competitions, named events, government bodies, institutions, rivers/creeks, stations, places, and lowercase or unfamiliar names. Do not omit a named person, official-looking title, named institution, government body, event, identifier, acronym, named building/facility, named region, or location merely because it is unfamiliar or its type is uncertain.
 
 NORMALIZATION FIREWALL:
 - Entity extraction and normalization are independent. Do not alter the original question to make entity boundaries easier.
@@ -159,15 +159,15 @@ Task:
 Return the Step 2 JSON object. Directly identify explicit named topic entities, then apply the system normalization policy independently.
 
 Entity rules:
-1. Use the anchor gate and distinctiveness test: select a surface only when it itself identifies one particular named person, work, organization, location, event, product, or other object. Reject a phrase that could describe many things rather than identify one, even when it is capitalized or has modifiers. Do not select a relation variable, answer slot, role, category, description, demonym, bare number, or bare year.
-2. Scan the entire question, including subordinate clauses, possessives, quotations, comparisons, and relation chains. Return accepted surfaces once each in their original left-to-right order. After rejecting relation variables, make a recall pass for named people, titles, institutions, events, and locations that occur away from the question focus.
+1. Use the anchor gate and distinctiveness test: select a surface when it plausibly identifies a named or identifier-like person, work, organization, location, event, award, competition, product, code, acronym, designation, or other anchor. Prefer recall for exact surfaces that look like names, titles, acronyms, codes, or official designations, even when they are unfamiliar, lowercase, all-caps, short, numeric, or punctuated. Reject only phrases that are clearly relation variables, answer slots, roles, generic categories, descriptions, demonyms, standalone numbers, or standalone years.
+2. Scan the entire question, including subordinate clauses, possessives, quotations, comparisons, and relation chains. Return accepted surfaces once each in their original left-to-right order. After rejecting relation variables, make a recall pass for named people, titles, institutions, events, awards, competitions, locations, acronyms, codes, and official designations that occur away from the question focus.
 3. Each surface is an exact case-preserving contiguous substring. Never correct spelling, accents, case, punctuation, or spacing. Source text can contain typos and lowercase names or titles.
 4. Keep complete titles, including meaningful punctuation and parenthetical disambiguators. Remove only grammatical type heads that introduce a title: use "B Boy (Song)", not "song B Boy (Song)".
-5. Do not output generic path nodes, even when they are capitalized or semantically important. Examples to exclude: "city", "country", "region", "place", "the birthplace", "the performer", "Governor", "headquarters", "group", "museum", "state", "series", "British racing driver", "Jamaican cricketer", "American rock band", "English actress", "Payload Specialist", "American professional Hawaiian surfer", and "poetry and fiction writer". In contrast, retain complete names such as "University Of Kentucky" or a lowercased title/name such as "marty mcfly".
+5. Do not output generic path nodes, even when they are capitalized or semantically important. Examples to exclude: "city", "country", "region", "place", "the birthplace", "the performer", "Governor", "governor general of India", "headquarters", "group", "film company", "league", "body of water", "museum", "state", "series", "British racing driver", "Jamaican cricketer", "American rock band", "English actress", "Payload Specialist", "American professional Hawaiian surfer", "poetry and fiction writer", "American", "Italian", and a bare year such as "1999". In contrast, retain complete or official-looking names and identifiers such as "University Of Kentucky", "House of Representatives", "US Senate", "Cabinet", "NATO", "Mantua Cathedral", "Birmingham", "Near East", "Civil War", "Mexican-American war", "Korean conflict", "Indy Car Race", "FA Cup", "1894-95 FA Cup", "MLB MVP", "ISO 3166-2:CV", "KZAR", "Darling Mills Creek", "Shrek 2", "Susie", "Auctor", or a lowercased title/name such as "marty mcfly".
 6. Stop before possessive roles: output "Lamprocles", not "Lamprocles's father"; output "Empress Wang", not "Empress Wang's husband"; output "marty mcfly", not "marty mcfly's daughter".
 7. Split a comma-separated personal name from its capitalized rank/designation: "Maurice, Prince Of Orange" -> ["Maurice", "Prince Of Orange"] and "Beatrice I, Countess Of Burgundy" -> ["Beatrice I", "Countess Of Burgundy"]. Do not return the unsplit full span in either case.
 8. Do not return overlapping selections. A surface represents every one of its exact occurrences in the question, so omit a shorter surface if it occurs inside a longer selected surface anywhere.
-9. Treat an exact source span as a possible title/name when it is the base of a possessive or the complement of a relation that conventionally takes a work or named object. For example, select "Vilaiyaadu Mankatha" from "Vilaiyaadu Mankatha's record label", "III" from "the performer of III", and "Crucifixion" from "Crucifixion's creator". Keep that named base span even if it is a single word, a Roman numeral, all caps, lowercased, or unfamiliar. This recall rule never authorizes a generic role or descriptive noun phrase.
+9. Treat an exact source span as a possible title/name when it is the base of a possessive or the complement of a relation that conventionally takes a work, named object, named place, named facility, government body, or named character. For example, select "Vilaiyaadu Mankatha" from "Vilaiyaadu Mankatha's record label", "III" from "the performer of III", "Crucifixion" from "Crucifixion's creator", "Auctor" from "the language Auctor comes from", "KZAR" from "where KZAR is located", "Birmingham" from "in Birmingham", "Mantua Cathedral" from "Mantua Cathedral is dedicated to", "Near East" from "the disgrace of Near East", and "Susie" from "played Susie". Keep that named base span even if it is a single word, a Roman numeral, all caps, lowercased, or unfamiliar. This recall rule never authorizes a generic role or descriptive noun phrase.
 
 Boundary decision examples:
 - "The View from the Bottom is the fifth studio album by an American rock band" -> return "The View from the Bottom" only; "an American rock band" is a description.
@@ -181,7 +181,7 @@ Normalization:
 - Keep normalized_question equal to the original question unless every system normalization condition holds. Never normalize a possessive relation, a single role relation, a named entity, or any constraint merely to simplify parsing.
 - Preserve every selected entity verbatim in normalized_question. Do not answer, infer external facts, change relation direction, or add placeholders.
 
-Final entity check: remove every output that is only a generic noun phrase or that changes even one source character. Keep a valid named anchor even when its type is uncertain; return [] only when no explicit named anchor remains. In particular, do not turn a generic role, occupation, nationality description, answer variable, or relation endpoint into an entity to increase recall. Before emitting each surface, apply the distinctiveness test and reject it when it is an article-led description, a role/occupation, a generic vehicle/facility/class, a place/category variable, a bare year/ordinal, a demonym, or a possessive phrase that includes a relation word. Thus reject "English musician", "American rock band", "Payload Specialist", "Space Shuttle", "museum", "the birthplace", "the president", "2005", and "American"; keep actual named titles and people. A leading article may remain only when it is genuinely part of an official title, such as "The View from the Bottom". Do this check immediately before JSON output.
+Final entity check: remove every output that is only a generic noun phrase or that changes even one source character. Keep a plausible named or identifier-like anchor even when its type is uncertain; return [] only when no explicit named or identifier-like anchor remains. In particular, do not turn a generic role, occupation, nationality description, answer variable, or relation endpoint into an entity to increase recall. Before emitting each surface, apply the distinctiveness test and reject it when it is an article-led description, a role/occupation, a generic vehicle/facility/class, a place/category variable, a bare year/ordinal, a demonym, or a possessive phrase that includes a relation word. Thus reject "English musician", "American rock band", "Payload Specialist", "Space Shuttle", "museum", "the birthplace", "the president", "film company", "league", "city", "1999", and "American"; keep actual named titles, people, characters, institutions, government bodies, events, places, named buildings/facilities, named regions, acronyms, codes, and official-looking designations. A leading article may remain only when it is genuinely part of an official title, such as "The View from the Bottom". Do this check immediately before JSON output.
 
 Output JSON only, with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -196,117 +196,251 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
-You are an expert in complex-question decomposition.
+You are an expert in decomposing complex questions into atomic-question DAGs.
 
-Return the smallest retrieval-executable DAG that still asks exactly the original question. Do not answer it, use external knowledge, or emit reasoning. Return exactly one JSON object with the single top-level key "atomic_questions"; do not emit markdown, commentary, or extra keys.
+Your task is to convert an `original_question` and its `question_structure` into the smallest semantically complete and retrieval-executable Atomic Question DAG.
 
-Inputs:
-- original_question is the complete semantic authority.
-- step4_paths are noisy structural hints. They can be incomplete, reversed, or redundant; never copy their token order mechanically. DAG nodes do not need path support from step4_paths when the original_question requires them.
+Return exactly one JSON object and no other text.
 
-FINAL-ANSWER CONTRACT
-Before drafting nodes, silently identify the exact final request: its answer target, answer type, relation direction, candidates, comparison direction, and every answer-changing restriction. The final qN must be the unique leaf and must return that same requested answer. An intermediate answer may help identify a target, but must never replace the final target.
+## Inputs
 
-For example, a question asking which artist/person/place/work must end with that entity, not with a fact about it, a related building, or true/false. Use a boolean verify node only when the original question itself asks a yes/no question. A question asking for an entity that satisfies several conditions must end by selecting that entity, not by verifying one condition as boolean.
+### `original_question`
 
-SEMANTIC CONSERVATION
-Every entity, relation, candidate, comparison, quantifier, negation, temporal/numeric condition, and restrictive modifier that changes the answer set must be consumed by at least one node. Keep conjunctive restrictions together when they identify the same answer; do not split them into independent facts unless a later node recombines them into the original target. Preserve exact named-entity surfaces from original_question.
+The original question is the only source of semantic meaning.
 
-Maintain relation direction exactly. Distinguish owner from possessed, agent from patient, source from destination, and subject from object. Do not exchange relations just because they are related. For example, "whose sister is X" asks for the owner of the sister relation; it is not "who is X's sister." Do not substitute a nearby relation or attribute: signed is not born, nationality is not country of birth, born later is not younger, and lived longer cannot be decided from birth dates alone.
+Use it to determine:
 
-CONSTRAINT BRANCH COMPLETENESS
-Treat every coordinated item and every independent restrictive clause as required unless it is clearly non-restrictive. When two or more clauses jointly identify one unknown target, retain all of them in one lookup or resolve each needed clause and explicitly combine their answers in a later lookup. A branch is not consumed merely because it exists: it must be referenced by the final target-identification chain. Do not choose one member of an and/or list, one location constraint, or one superlative branch and silently drop the others.
+* the exact entities and candidates;
+* relation meanings and directions;
+* the final answer target;
+* comparison or selection criteria;
+* conjunction, disjunction, negation, and quantifiers;
+* temporal, numeric, superlative, and restrictive conditions.
 
-BINDING INTEGRITY
-Before writing each node, silently preserve a binding map for every relation: who/what is the subject, object, owner, possessed item, modifier, and antecedent. Step4 path order is not permission to reattach these roles. Never promote a title, episode, work, city, proper-name modifier, or previous answer into a different grammatical role without an explicit relation in the original question. In particular: a work in "the series with X" identifies an unknown series rather than becoming the series; "the birth city of the composer of X" requires the composer before that person's birth city; coordinated descriptions of one person constrain the same person rather than separate people; and an answer that is a city must not be reused as a state, district, region, or other different type.
+Preserve named entities and candidate surface forms exactly as written in the original question.
 
-ATOMICITY AND STOPPING
-A lookup asks for one entity, attribute, value, set, or fact from a concrete named anchor or an earlier answer. Apply the latent-bridge test: if an unnamed intermediate person, place, work, organization, event, or relation result must be found before an outer relation can be evaluated, retrieve that intermediate result first and use "qN's answer" in the later lookup.
+### `question_structure`
 
-Keep a direct one-hop lookup as one node. A lookup may retain multiple necessary modifiers or conjunctive filters. Do not create a node merely because the sentence contains more than one entity, and do not add a hop after the original target has been reached. Every node must be an ancestor of the final qN; there must be no unused branch, detached lookup, or second leaf.
+The question structure contains one or more structural branches.
 
-For comparisons, judgments, and candidate selections, retrieve the exact needed value or fact for each candidate independently, then use one final compare/select/verify node depending on every branch. Preserve the original candidates, operator, and comparison direction. For a conjunction asking for one shared answer, a direct lookup containing both constraints is often atomic; do not turn the answer values from separate lookups into the wrong kind of input.
+Example:
 
-DEPENDENCIES AND OPERATIONS
-- Use ordered ids q1, q2, q3, ... .
-- A node may depend only on earlier ids.
-- If a question uses a prior answer, write the exact phrase "qN's answer" and include qN in depends_on.
-- Every depends_on entry must appear as that exact answer reference in the question. Never use vague references such as "it", "that person", or "the place".
-- Do not emit unresolved ENTITYA/ENTITYB placeholders.
-- Use "lookup" for factual retrieval, "compare" for a judgment over retrieved values, "select" for choosing a requested candidate/entity, "verify" only for a requested boolean, and "aggregate" for an operation over retrieved values.
+Branch 1:
+Changed It -- song -- performer -- birth -- place
 
-Return this schema exactly:
+Branch 2:
+Another Song -- song -- performer -- birth -- place
+
+Each branch is an approximate structural skeleton of the question. Adjacent nodes are separated by `--`.
+
+The separator means only that two nodes are structurally connected. It does not specify:
+
+* factual direction;
+* subject-object direction;
+* grammatical dependency direction;
+* answer dependency;
+* exact surface-word order.
+
+The left-to-right order represents an approximate traversal through the question structure, usually from a known mention toward relations, intermediate results, conditions, or the query target.
+
+Use the question structure to identify likely relation chains, intermediate results, parallel branches, and decomposition order.
+
+The question structure may omit function words, contain redundant nodes, collapse nearby relations, or have imperfect local ordering. When it conflicts with the original question, always follow the original question.
+
+Do not introduce, remove, shorten, or replace an entity only because of its form in the question structure.
+
+## Decomposition Rules
+
+1. First identify the exact answer requested by the original question.
+
+2. Use the question structure to determine the relation chain or parallel branches that lead to that answer.
+
+3. Create an intermediate atomic question when an unnamed entity, person, place, work, organization, event, value, or relation result must be found before the next relation can be evaluated.
+
+4. Keep a direct one-hop question as one atomic question.
+
+5. Do not combine multiple sequential unknown relations into one atomic question.
+
+6. Multiple modifiers or restrictions that jointly identify the same target may remain in one atomic question.
+
+7. For independent candidates or comparison subjects, create independent branches and combine them in one final node.
+
+8. Stop as soon as the exact answer requested by the original question can be produced.
+
+9. Remove every node that does not contribute directly or indirectly to the final node.
+
+## Semantic Preservation
+
+Preserve every answer-changing part of the original question, including:
+
+* relation direction and participant roles;
+* all named entities and candidates;
+* conjunction and disjunction;
+* comparison direction;
+* negation and quantifiers;
+* temporal and numeric conditions;
+* superlatives;
+* restrictive clauses;
+* the final answer target.
+
+Do not replace one relation with a related but different relation.
+
+For example:
+
+* nationality is not country of birth;
+* born later is not younger;
+* owner is not possessed object;
+* agent is not patient;
+* source is not destination.
+
+Do not invent entities, facts, relations, restrictions, candidates, or intermediate hops.
+
+Do not output unresolved placeholders such as `ENTITYA` or `ENTITYB`.
+
+## Atomic Questions
+
+Each lookup node must ask for one new entity, attribute, value, set, or fact using:
+
+* a named anchor from the original question;
+* one or more earlier answers;
+* or both.
+
+Every atomic question must be understandable as a standalone retrieval query after its answer references are resolved.
+
+## Dependencies
+
+Use ordered IDs:
+
+`q1`, `q2`, `q3`, ...
+
+A node may depend only on earlier nodes.
+
+When a question uses an earlier answer:
+
+* refer to it using exactly `qN's answer`;
+* include `qN` in `depends_on`.
+
+Every ID in `depends_on` must appear in the question as `qN's answer`.
+
+Every `qN's answer` reference in the question must appear in `depends_on`.
+
+The final node must be the only leaf node.
+
+Every earlier node must contribute directly or indirectly to the final node.
+
+## Operations
+
+Use only the following operations:
+
+* `lookup`: retrieve an entity, fact, attribute, value, or set;
+* `select`: choose the requested entity or candidate using earlier answers;
+* `compare`: perform a requested comparison over earlier answers;
+* `verify`: return a boolean answer when the original question asks yes or no;
+* `aggregate`: perform a required numeric or set operation.
+
+## Output Schema
+
+Return exactly:
+
 {
-  "atomic_questions": [
-    {
-      "id": "q1",
-      "question": "atomic question?",
-      "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person | place | organization | work | event | date | number | boolean | value | set | entity | unknown"
-    }
-  ]
+"atomic_questions": [
+{
+"id": "q1",
+"question": "atomic natural-language question?",
+"depends_on": [],
+"operation": "lookup"
+}
+]
 }
 
-FEW-SHOT EXAMPLES
+Do not add any other top-level key or node field.
 
-1. Direct one-hop: the release date is directly queried from a named work, so do not create an unnecessary node.
-Input: "When was The Outlaw Express released?"
+## Examples
+
+### Example 1: Direct one-hop question
+
+Input:
+
+Original question:
+When was The Outlaw Express released?
+
+Question structure:
+
+Branch 1:
+The Outlaw Express -- released -- When
+
 Output:
-{"atomic_questions":[{"id":"q1","question":"When was The Outlaw Express released?","depends_on":[],"operation":"lookup","output_type":"date"}]}
 
-2. Entity selection with a required second condition: preserve both conditions and return the artist, not a boolean verification.
-Input: "Heartbreak Hurricane was recorded by which country artist that also goes by the name Ricky Skaggs?"
+{"atomic_questions":[{"id":"q1","question":"When was The Outlaw Express released?","depends_on":[],"operation":"lookup"}]}
+
+### Example 2: Sequential intermediate result
+
+Input:
+
+Original question:
+What is the place of birth of the performer of song Changed It?
+
+Question structure:
+
+Branch 1:
+Changed It -- song -- performer -- birth -- place
+
 Output:
-{"atomic_questions":[{"id":"q1","question":"Which country artist recorded Heartbreak Hurricane and also goes by the name Ricky Skaggs?","depends_on":[],"operation":"lookup","output_type":"person"}]}
 
-3. Kinship bridge: nationality applies to an unknown father, so identify the father first; the final answer remains nationality.
-Input: "What nationality is Lamprocles's father?"
+{"atomic_questions":[{"id":"q1","question":"Who performed the song Changed It?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"Where was q1's answer born?","depends_on":["q1"],"operation":"lookup"}]}
+
+### Example 3: Parallel candidate comparison
+
+Input:
+
+Original question:
+Which film has the director born later, Dangerously They Live or Salad By The Roots?
+
+Question structure:
+
+Branch 1:
+Dangerously They Live -- director -- born -- later
+
+Branch 2:
+Salad By The Roots -- director -- born -- later
+
 Output:
-{"atomic_questions":[{"id":"q1","question":"Who is Lamprocles's father?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"What is the nationality of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"value"}]}
 
-4. Direction matters: the final owner is the person whose sister is the actor.
-Input: "Whose sister played Susie in Miracle on 34th Street?"
-Output:
-{"atomic_questions":[{"id":"q1","question":"Who played Susie in Miracle on 34th Street?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"Whose sister is q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"person"}]}
+{"atomic_questions":[{"id":"q1","question":"Who directed Dangerously They Live?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup"},{"id":"q3","question":"Who directed Salad By The Roots?","depends_on":[],"operation":"lookup"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the director who was born later: Dangerously They Live or Salad By The Roots?","depends_on":["q2","q4"],"operation":"select"}]}
 
-5. Unknown-head bridge: the work identifies an unknown series; do not treat the work itself as that series.
-Input: "How many episodes are in season 5 of the series with The Bag or the Bat?"
-Output:
-{"atomic_questions":[{"id":"q1","question":"Which series includes The Bag or the Bat?","depends_on":[],"operation":"lookup","output_type":"work"},{"id":"q2","question":"How many episodes are in season 5 of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"number"}]}
+Before returning the JSON, silently verify:
 
-6. Joint location constraints: both clauses identify the same region, so both must feed the target before querying its date.
-Input: "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?"
-Output:
-{"atomic_questions":[{"id":"q1","question":"Which region is Israel located in?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q2","question":"Which region is the location of the Battle of Qurah and Umm al Maradim?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q3","question":"Which region is q2's answer and is immediately north of q1's answer?","depends_on":["q1","q2"],"operation":"lookup","output_type":"place"},{"id":"q4","question":"When was q3's answer created?","depends_on":["q3"],"operation":"lookup","output_type":"date"}]}
+1. The final node answers exactly the original question.
+2. Every answer-changing relation and restriction is preserved.
+3. The question structure is used wherever it agrees with the original question.
+4. Every intermediate node is necessary and atomic.
+5. Every dependency matches its answer reference.
+6. Every earlier node contributes to the final node.
+7. The final node is the only leaf.
 
-7. Multi-link chain: each unknown relation result is a bridge, but stop once the requested date is reached.
-Input: "When was the region immediately north of the region where Israel is located created?"
-Output:
-{"atomic_questions":[{"id":"q1","question":"Which region is Israel located in?","depends_on":[],"operation":"lookup","output_type":"place"},{"id":"q2","question":"Which region is immediately north of q1's answer?","depends_on":["q1"],"operation":"lookup","output_type":"place"},{"id":"q3","question":"When was q2's answer created?","depends_on":["q2"],"operation":"lookup","output_type":"date"}]}
-
-8. Parallel comparison: retrieve each director and birth date independently, then return the original film choice.
-Input: "Which film has the younger director, Dangerously They Live or Salad By The Roots?"
-Output:
-{"atomic_questions":[{"id":"q1","question":"Who directed Dangerously They Live?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup","output_type":"date"},{"id":"q3","question":"Who directed Salad By The Roots?","depends_on":[],"operation":"lookup","output_type":"person"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup","output_type":"date"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the younger director: Dangerously They Live or Salad By The Roots?","depends_on":["q2","q4"],"operation":"select","output_type":"work"}]}
-
-Before returning JSON, silently audit:
-1. Is qN the only leaf, and does it answer the original question rather than an auxiliary condition?
-2. Does its output type and relation target match the original request?
-3. Has every answer-changing constraint been consumed without reversing any role or relation?
-4. Does every coordinated member and restrictive branch feed the target-identification chain rather than only one selected branch?
-5. Does every earlier node feed qN, with no redundant lookup or extra hop after the target?
-6. Do comparison/selection branches preserve every candidate and criterion?
-7. Do all qN references exactly match depends_on?
 """.strip()
 
 
 def build_atomic_question_dag_prompt(
     original_question: str,
-    global_best_paths: list[list[str]],
+    question_structure: list[list[str]],
 ) -> str:
-    payload = {
-        "original_question": original_question,
-        "step4_paths": [[str(node) for node in path] for path in global_best_paths],
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+    lines = [
+        "Original question:",
+        str(original_question),
+        "",
+        "Question structure:",
+        "",
+    ]
+    branch_index = 1
+    for branch in question_structure:
+        nodes = []
+        for node in branch:
+            text = str(node).strip()
+            if text:
+                nodes.append(text)
+        if not nodes:
+            continue
+        lines.extend([f"Branch {branch_index}:", " -- ".join(nodes), ""])
+        branch_index += 1
+    return "\n".join(lines).rstrip()

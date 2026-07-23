@@ -164,7 +164,7 @@ def run_hanlp_sdp_pipeline(
     atomic_question_dag = None
     if run_step5 and not skip_step5:
         from atomic_question_dag import (
-            PathAlignedAtomicDAGGenerator,
+            QuestionStructureAtomicDAGGenerator,
             invalid_atomic_question_dag,
             restore_global_best_paths,
         )
@@ -176,18 +176,18 @@ def run_hanlp_sdp_pipeline(
             )
         else:
             try:
-                restored_global_best_paths = restore_global_best_paths(
+                question_structure = restore_global_best_paths(
                     token_reasoning_structure.paths,
                     preprocess_result.mask_mappings,
                 )
             except ValueError as exc:
                 atomic_question_dag = invalid_atomic_question_dag([str(exc)])
             else:
-                atomic_question_dag = PathAlignedAtomicDAGGenerator(
+                atomic_question_dag = QuestionStructureAtomicDAGGenerator(
                     step5_llm
                 ).generate(
                     original_question=record.question,
-                    global_best_paths=restored_global_best_paths,
+                    question_structure=question_structure,
                 )
     return {
         "preprocess_result": preprocess_result,

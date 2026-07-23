@@ -215,7 +215,7 @@ def main() -> int:
                             debug_dir=debug_dir,
                             llm_client=llm_client,
                         )
-                        restored_global_best_paths = restore_global_best_paths(
+                        question_structure = restore_global_best_paths(
                             result["token_reasoning_structure"].paths,
                             result["preprocess_result"].mask_mappings,
                         )
@@ -224,7 +224,7 @@ def main() -> int:
                             questions_file=questions_file,
                             item=item,
                             result=result,
-                            restored_global_best_paths=restored_global_best_paths,
+                            question_structure=question_structure,
                         )
                         depo_batch._write_json(decomposition_path, decomposition_payload)
                         (question_dir / "decomposition.md").write_text(

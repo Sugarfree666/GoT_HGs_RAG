@@ -79,7 +79,7 @@ class DEPOBatchReportTest(unittest.TestCase):
                 },
                 "5_step5_action_trace": {
                     "input": {
-                        "step4_paths": [
+                        "question_structure": [
                             [
                                 "Romance On The Run",
                                 "film",
@@ -111,9 +111,9 @@ class DEPOBatchReportTest(unittest.TestCase):
         self.assertIn("#### Repaired Evidence Graph", markdown)
         self.assertIn("film[2] -- has[3] (cost=1)", markdown)
         self.assertIn("ENTITYA[9] -- or[10] (cost=blocked)", markdown)
-        self.assertIn("#### Entity Branch Best Paths", markdown)
+        self.assertIn("#### Question Structure", markdown)
         self.assertIn(
-            "P1: Romance On The Run ---- film ---- has ---- director ---- born ---- later",
+            "Branch 1: Romance On The Run -- film -- has -- director -- born -- later",
             markdown,
         )
         self.assertNotIn("## 4. Global Best Path", markdown)

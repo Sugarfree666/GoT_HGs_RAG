@@ -105,7 +105,7 @@ def main() -> int:
         os.environ["OPENAI_BASE_URL"] = base_url
 
     try:
-        from atomic_question_dag import PathAlignedAtomicDAGGenerator, restore_global_best_paths
+        from atomic_question_dag import QuestionStructureAtomicDAGGenerator, restore_global_best_paths
         from entity_masking_preprocessor import EntityMaskingPreprocessor
         from hanlp_sdp_parser import HanLPSDPParser
         from llm_client import LLMClient
@@ -165,17 +165,17 @@ def main() -> int:
             question_id=record.qid or f"q{item['index']}",
         )
 
-    with profile.timed("depo.restore_global_best_paths"):
-        restored_global_best_paths = restore_global_best_paths(
+    with profile.timed("depo.restore_question_structure"):
+        question_structure = restore_global_best_paths(
             token_reasoning_structure.paths,
             preprocess_result.mask_mappings,
         )
 
     llm_client.phase = "depo.step5_action_trace"
     with profile.timed("depo.step5_atomic_dag"):
-        atomic_question_dag = PathAlignedAtomicDAGGenerator(llm_client).generate(
+        atomic_question_dag = QuestionStructureAtomicDAGGenerator(llm_client).generate(
             original_question=record.question,
-            global_best_paths=restored_global_best_paths,
+            question_structure=question_structure,
         )
 
     with profile.timed("depo.build_decomposition_payload"):
@@ -200,7 +200,7 @@ def main() -> int:
             questions_file=questions_file,
             item=item,
             result=result,
-            restored_global_best_paths=restored_global_best_paths,
+            question_structure=question_structure,
         )
         dag_payload = _hyperbranch_dag_payload(decomposition_payload)
 

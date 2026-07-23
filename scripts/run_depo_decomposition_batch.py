@@ -162,7 +162,7 @@ def main() -> int:
                         debug_dir=debug_dir,
                         llm_client=llm_client,
                     )
-                    restored_global_best_paths = restore_global_best_paths(
+                    question_structure = restore_global_best_paths(
                         result["token_reasoning_structure"].paths,
                         result["preprocess_result"].mask_mappings,
                     )
@@ -171,7 +171,7 @@ def main() -> int:
                         questions_file=questions_file,
                         item=item,
                         result=result,
-                        restored_global_best_paths=restored_global_best_paths,
+                        question_structure=question_structure,
                     )
                     report_lines.extend(build_markdown_report(payload, heading_level=2).splitlines())
                     report_lines.append("")
@@ -218,7 +218,7 @@ def build_decomposition_payload(
     questions_file: Path,
     item: dict[str, Any],
     result: dict[str, Any],
-    restored_global_best_paths: list[list[str]],
+    question_structure: list[list[str]],
 ) -> dict[str, Any]:
     preprocess_result = result["preprocess_result"]
     token_reasoning_structure = result["token_reasoning_structure"]
@@ -255,7 +255,7 @@ def build_decomposition_payload(
             "5_step5_action_trace": {
                 "input": {
                     "original_question": item["question"],
-                    "step4_paths": [list(path) for path in restored_global_best_paths],
+                    "question_structure": [list(branch) for branch in question_structure],
                 },
                 "atomic_questions": _step5_atomic_questions(atomic_question_dag),
             },
@@ -358,13 +358,12 @@ def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) ->
         lines.append("(none)")
     lines.append("")
 
-    lines.append(f"{h3} Entity Branch Best Paths")
+    lines.append(f"{h3} Question Structure")
     input_payload = action_trace.get("input") or {}
-    global_best_paths = input_payload.get("step4_paths") or input_payload.get("global_best_paths") or []
-    if global_best_paths:
-        for path_index, path in enumerate(global_best_paths, start=1):
-            prefix = f"P{path_index}: " if len(global_best_paths) > 1 else ""
-            lines.append(f"- {prefix}{' ---- '.join(path)}")
+    question_structure = input_payload.get("question_structure") or []
+    if question_structure:
+        for branch_index, branch in enumerate(question_structure, start=1):
+            lines.append(f"- Branch {branch_index}: {' -- '.join(branch)}")
     else:
         lines.append("(none)")
     lines.append("")
@@ -394,6 +393,12 @@ def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) ->
             lines.append(f"- {node.get('id')}: {node.get('question')}")
             depends_on = node.get("depends_on") or []
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
+        dag_warnings = dag.get("warnings") or []
+        if dag_warnings:
+            lines.append("")
+            lines.append("Warnings:")
+            for warning in dag_warnings:
+                lines.append(f"- {warning}")
     lines.append("")
     return "\n".join(lines)
 

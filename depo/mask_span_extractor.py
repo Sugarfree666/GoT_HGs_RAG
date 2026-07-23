@@ -305,31 +305,29 @@ class ExplicitEntityExtractor:
                     f"explicit_entities[{index - 1}].surface must be a non-empty string"
                 )
                 continue
-            if text in seen_surfaces:
-                invalid_reasons.append(f"duplicate explicit entity surface={text!r}")
+            resolved_text, matches, match_error = _find_surface_matches_case_relaxed(question, text)
+            if match_error is not None:
+                invalid_reasons.append(match_error)
                 continue
-            seen_surfaces.add(text)
-            matches = list(re.finditer(re.escape(text), question))
-            if not matches:
-                invalid_reasons.append(
-                    f"explicit entity surface was not found exactly in the original question: {text!r}"
-                )
+            if resolved_text in seen_surfaces:
+                invalid_reasons.append(f"duplicate explicit entity surface={resolved_text!r}")
                 continue
+            seen_surfaces.add(resolved_text)
             start = matches[0].start()
-            end = start + len(text)
+            end = matches[0].end()
             if any(
                 match.start() < other_end and match.end() > other_start
                 for match in matches
                 for other_start, other_end, _ in spans
             ):
                 invalid_reasons.append(
-                    f"overlapping explicit entity span for surface={text!r}"
+                    f"overlapping explicit entity span for surface={resolved_text!r}"
                 )
                 continue
-            spans.extend((match.start(), match.end(), text) for match in matches)
+            spans.extend((match.start(), match.end(), resolved_text) for match in matches)
             entities.append(
                 ExplicitEntity(
-                    text=text,
+                    text=resolved_text,
                     start_char=start,
                     end_char=end,
                     semantic_type_hint=_normalize_entity_type(raw.get("type")),
@@ -344,6 +342,35 @@ class ExplicitEntityExtractor:
             )
             return []
         return entities
+
+
+def _find_surface_matches_case_relaxed(
+    question: str,
+    surface: str,
+) -> tuple[str, list[re.Match[str]], str | None]:
+    matches = list(re.finditer(re.escape(surface), question))
+    if matches:
+        return surface, matches, None
+
+    case_relaxed_matches = list(re.finditer(re.escape(surface), question, flags=re.IGNORECASE))
+    if not case_relaxed_matches:
+        return (
+            surface,
+            [],
+            f"explicit entity surface was not found in the original question with matching spaces and punctuation: {surface!r}",
+        )
+
+    source_surfaces = {match.group(0) for match in case_relaxed_matches}
+    if len(source_surfaces) != 1:
+        return (
+            surface,
+            [],
+            f"case-insensitive explicit entity surface matched multiple source casings: {surface!r}",
+        )
+
+    return case_relaxed_matches[0].group(0), case_relaxed_matches, None
+
+
 class MaskSpanExtractor:
     """Compatibility wrapper for the new explicit-entity Step 2."""
 

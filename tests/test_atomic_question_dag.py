@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import sys
 import unittest
 from pathlib import Path
@@ -15,8 +14,8 @@ if str(DEPO_ROOT) not in sys.path:
 
 from atomic_question_dag import (  # noqa: E402
     ATOMIC_QUESTION_DAG_SYSTEM,
-    PathAlignedAtomicDAGGenerator,
-    prompt_input_payload,
+    QuestionStructureAtomicDAGGenerator,
+    prompt_input_text,
     restore_entity_paths,
     restore_global_best_path,
     restore_global_best_paths,
@@ -26,43 +25,41 @@ from models import MaskMapping  # noqa: E402
 
 
 class AtomicQuestionDAGTest(unittest.TestCase):
-    def test_prompt_contract_uses_step4_paths_as_hints_only(self) -> None:
-        payload = prompt_input_payload(
+    def test_prompt_contract_renders_question_structure_text(self) -> None:
+        prompt = prompt_input_text(
             original_question="Question?",
-            global_best_paths=[["When The Stars Go Blue", "song", "performer", "nationality"]],
+            question_structure=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
 
-        self.assertEqual(set(payload), {"original_question", "step4_paths"})
-        self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
-        self.assertNotIn("topic_entities", payload)
-        self.assertNotIn("semantic_reasoning_paths", json.dumps(payload, ensure_ascii=False))
+        self.assertIn("Original question:\nQuestion?", prompt)
+        self.assertIn("Question structure:", prompt)
+        self.assertIn("Branch 1:\nWhen The Stars Go Blue -- song -- performer -- nationality", prompt)
+        self.assertNotIn("step4_paths", prompt)
+        self.assertNotIn("global_best_paths", prompt)
+        self.assertNotIn("topic_entities", prompt)
+        self.assertNotIn("semantic_reasoning_paths", prompt)
 
-        self.assertIn("complex-question decomposition", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("step4_paths are noisy structural hints", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("DAG nodes do not need path support", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertNotIn("topic_entities are exact named-entity anchors", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("latent-bridge test", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("nationality is not country of birth", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Direct one-hop", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Parallel comparison", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Whose sister played Susie", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("FINAL-ANSWER CONTRACT", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("CONSTRAINT BRANCH COMPLETENESS", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("BINDING INTEGRITY", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("unique leaf", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("not a boolean verification", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Which country artist recorded Heartbreak Hurricane", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Whose sister is q1's answer", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("series with The Bag or the Bat", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("Joint location constraints", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("birth city of the composer of X", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("silently audit", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("qN's answer", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("question_structure", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_reasoning_paths"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_edges"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_edge_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"output_node_id"', ATOMIC_QUESTION_DAG_SYSTEM)
+
+    def test_prompt_renders_multiple_branches_and_ignores_empty_nodes(self) -> None:
+        prompt = prompt_input_text(
+            original_question="Which film has the younger director, Dangerously They Live or Salad By The Roots?",
+            question_structure=[
+                ["Dangerously They Live", "", "director", "born"],
+                [],
+                ["Salad By The Roots", "director", "born"],
+            ],
+        )
+
+        self.assertIn("Branch 1:\nDangerously They Live -- director -- born", prompt)
+        self.assertIn("Branch 2:\nSalad By The Roots -- director -- born", prompt)
+        self.assertNotIn("Branch 3", prompt)
+        self.assertNotIn("--  --", prompt)
 
     def test_direct_atomic_questions_build_dag(self) -> None:
         result = validate_atomic_question_dag(_bridge_payload())
@@ -123,7 +120,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertFalse(result.valid)
         self.assertIn("atomic_questions must be a non-empty list.", result.validation_errors)
 
-    def test_path_hints_are_not_used_as_support_requirements(self) -> None:
+    def test_question_structure_hints_are_not_used_as_support_requirements(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -144,8 +141,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 ]
             },
             original_question="Who stars in the video 'One Last Time' by the performer of Baby I?",
-            explicit_entities=["One Last Time", "Baby I"],
-            global_best_paths=[["One Last Time", "video", "stars", "Who"]],
+            question_structure=[["One Last Time", "video", "stars", "Who"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
@@ -168,20 +164,24 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertEqual(result.nodes[-1].operation, "select")
         self.assertEqual(result.nodes[-1].output_type, "work")
 
-    def test_path_generator_sends_question_and_step4_paths_only(self) -> None:
+    def test_question_structure_generator_sends_text_prompt_once(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
-        result = PathAlignedAtomicDAGGenerator(llm).generate(
+        result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="What nationality is the performer of the song When The Stars Go Blue?",
-            global_best_paths=[["When The Stars Go Blue", "song", "performer", "nationality"]],
+            question_structure=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(llm.system_prompts, [ATOMIC_QUESTION_DAG_SYSTEM])
-        payload = json.loads(llm.user_prompts[0])
-        self.assertEqual(set(payload), {"original_question", "step4_paths"})
-        self.assertEqual(payload["step4_paths"], [["When The Stars Go Blue", "song", "performer", "nationality"]])
+        self.assertEqual(len(llm.user_prompts), 1)
+        self.assertIn("Original question:", llm.user_prompts[0])
+        self.assertIn("Question structure:", llm.user_prompts[0])
+        self.assertIn("Branch 1:\nWhen The Stars Go Blue -- song -- performer -- nationality", llm.user_prompts[0])
+        self.assertNotIn("step4_paths", llm.user_prompts[0])
+        self.assertNotIn("global_best_paths", llm.user_prompts[0])
+        self.assertNotIn("topic_entities", llm.user_prompts[0])
 
-    def test_dependency_binding_mismatch_is_invalid(self) -> None:
+    def test_dependency_binding_mismatch_is_warning_only(self) -> None:
         result = validate_atomic_question_dag(
             {
                 "atomic_questions": [
@@ -202,11 +202,12 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 ]
             },
             original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
-            explicit_entities=["Turn Me On", "Come Away with Me"],
         )
 
-        self.assertFalse(result.valid)
-        self.assertTrue(any("does not reference that answer" in error for error in result.validation_errors))
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.validation_errors, [])
+        self.assertEqual([edge.to_dict() for edge in result.edges], [{"source": "q1", "target": "q2"}])
+        self.assertTrue(any("does not reference that answer" in warning for warning in result.warnings))
 
     def test_validator_does_not_apply_possessive_semantic_heuristics(self) -> None:
         result = validate_atomic_question_dag(
@@ -229,7 +230,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 ]
             },
             original_question="Whose sister played Susie in Miracle on 34th Street?",
-            explicit_entities=["Susie", "Miracle on 34th Street"],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
@@ -263,7 +263,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 ]
             },
             original_question="Who lived longer, Ludwig Elsbett or Pamela Ann Rymer?",
-            explicit_entities=["Ludwig Elsbett", "Pamela Ann Rymer"],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
@@ -283,13 +282,12 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 ]
             },
             original_question="Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?",
-            explicit_entities=["John Ernest", "Duke Of Saxe-Eisenach"],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(result.warnings, [])
 
-    def test_path_generator_returns_structural_invalidity_from_its_single_call(self) -> None:
+    def test_question_structure_generator_keeps_binding_mismatch_as_warning(self) -> None:
         bad_payload = {
             "atomic_questions": [
                 {
@@ -310,14 +308,14 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         }
         llm = RecordingStep5LLM(bad_payload)
 
-        result = PathAlignedAtomicDAGGenerator(llm).generate(
+        result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
-            global_best_paths=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
+            question_structure=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
         )
 
-        self.assertFalse(result.valid)
+        self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(len(llm.user_prompts), 1)
-        self.assertTrue(any("does not reference that answer" in error for error in result.validation_errors))
+        self.assertTrue(any("does not reference that answer" in warning for warning in result.warnings))
 
     def test_validator_rejects_deterministic_dag_structure_errors(self) -> None:
         cases = [
@@ -369,16 +367,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 "references unknown answer",
             ),
             (
-                "answer reference missing dependency",
-                {
-                    "atomic_questions": [
-                        {"id": "q1", "question": "Who is A?", "depends_on": []},
-                        {"id": "q2", "question": "Where was q1's answer born?", "depends_on": []},
-                    ]
-                },
-                "depends_on does not include it",
-            ),
-            (
                 "unresolved placeholder",
                 {
                     "atomic_questions": [
@@ -405,16 +393,32 @@ class AtomicQuestionDAGTest(unittest.TestCase):
                 self.assertFalse(result.valid)
                 self.assertTrue(any(expected_error in error for error in result.validation_errors))
 
-    def test_empty_global_best_path_fails_before_llm_call(self) -> None:
+    def test_empty_question_structure_still_calls_llm(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
-        result = PathAlignedAtomicDAGGenerator(llm).generate(
+        result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="Question?",
-            global_best_paths=[],
+            question_structure=[],
         )
 
-        self.assertFalse(result.valid)
-        self.assertEqual(llm.user_prompts, [])
-        self.assertIn("Step5 requires at least one non-empty step4_paths/global_best_paths entry.", result.validation_errors)
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(len(llm.user_prompts), 1)
+        self.assertIn("Original question:\nQuestion?", llm.user_prompts[0])
+        self.assertIn("Question structure:", llm.user_prompts[0])
+        self.assertNotIn("Branch 1:", llm.user_prompts[0])
+
+    def test_missing_depends_on_reference_is_warning_only(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {"id": "q1", "question": "Who is A?", "depends_on": []},
+                    {"id": "q2", "question": "Where was q1's answer born?", "depends_on": []},
+                ]
+            }
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.edges, [])
+        self.assertTrue(any("depends_on does not include it" in warning for warning in result.warnings))
 
     def test_restore_entity_paths_replaces_placeholders_inside_punctuated_tokens(self) -> None:
         paths = [

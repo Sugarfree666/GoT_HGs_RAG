@@ -9,10 +9,14 @@
       <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/atomic_question_dag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_batch_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_batch_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_explicit_entities.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_explicit_entities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +25,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="112509" />
+    <option name="cachedIndexableFilesCount" value="111056" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -42,23 +46,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0030021511705725" />
-      <entry key="MS500" value="1.3700932403088362" />
-      <entry key="S2" value="2.6842722357532223" />
-      <entry key="S5" value="4.857781158192511" />
-      <entry key="S10" value="7.8445852019617055" />
-      <entry key="S30" value="13.019721286801746" />
-      <entry key="S60" value="15.21562620517906" />
-      <entry key="M2" value="16.56203142023616" />
-      <entry key="M5" value="18.92436046568485" />
-      <entry key="M10" value="23.71511202184338" />
-      <entry key="M15" value="28.837586846335295" />
-      <entry key="M30" value="45.79557816838419" />
-      <entry key="H1" value="80.43549790603107" />
-      <entry key="H2" value="137.83819932050963" />
-      <entry key="H4" value="210.32020665514034" />
-      <entry key="D1" value="460.4914852836359" />
-      <entry key="W1" value="4262.60884385464" />
+      <entry key="MS100" value="1.0000001595022276" />
+      <entry key="MS500" value="1.0498993732839623" />
+      <entry key="S2" value="1.9576303982261338" />
+      <entry key="S5" value="3.5862381047386895" />
+      <entry key="S10" value="4.869852119038305" />
+      <entry key="S30" value="6.164534497456992" />
+      <entry key="S60" value="6.564080715575459" />
+      <entry key="M2" value="6.777280077164118" />
+      <entry key="M5" value="6.909741055910189" />
+      <entry key="M10" value="6.9550496670222" />
+      <entry key="M15" value="6.97959942464739" />
+      <entry key="M30" value="7.302270239285303" />
+      <entry key="H1" value="9.189244695946206" />
+      <entry key="H2" value="13.403995937215209" />
+      <entry key="H4" value="24.389680004111028" />
+      <entry key="D1" value="354.73087639110287" />
+      <entry key="W1" value="3989.434657045434" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -80,23 +84,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9754951583912458" />
-      <entry key="MS500" value="1.3605648104025472" />
-      <entry key="S2" value="2.6786902052575687" />
-      <entry key="S5" value="4.853682920083661" />
-      <entry key="S10" value="7.841294225394514" />
-      <entry key="S30" value="13.01790308975298" />
-      <entry key="S60" value="15.214563056340936" />
-      <entry key="M2" value="16.561452312960935" />
-      <entry key="M5" value="18.924092458113005" />
-      <entry key="M10" value="23.714939286526633" />
-      <entry key="M15" value="28.837443346651337" />
-      <entry key="M30" value="45.79545331715744" />
-      <entry key="H1" value="80.4353712772485" />
-      <entry key="H2" value="137.83808265304003" />
-      <entry key="H4" value="210.3201168506515" />
-      <entry key="D1" value="460.4914537133028" />
-      <entry key="W1" value="4262.608804740555" />
+      <entry key="MS100" value="0.9265882117465758" />
+      <entry key="MS500" value="1.0341808878218048" />
+      <entry key="S2" value="1.9512087586691473" />
+      <entry key="S5" value="3.581776899930293" />
+      <entry key="S10" value="4.866851624451151" />
+      <entry key="S30" value="6.163272239087814" />
+      <entry key="S60" value="6.56340892309164" />
+      <entry key="M2" value="6.776933314572288" />
+      <entry key="M5" value="6.909599648108355" />
+      <entry key="M10" value="6.954978501244478" />
+      <entry key="M15" value="6.979551821806898" />
+      <entry key="M30" value="7.302245421615761" />
+      <entry key="H1" value="9.189229213318564" />
+      <entry key="H2" value="13.403984683370075" />
+      <entry key="H4" value="24.38966965065051" />
+      <entry key="D1" value="354.7308516002101" />
+      <entry key="W1" value="3989.4346200710584" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -110,38 +114,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.cli.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "D:/GitHub/HyperBranch/questions/musique",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.cli.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/HyperBranch/questions/musique&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GitHub\HyperBranch\questions\musique" />
@@ -279,7 +283,8 @@
       <workItem from="1784531945925" duration="1000" />
       <workItem from="1784559293085" duration="2225000" />
       <workItem from="1784625432644" duration="182000" />
-      <workItem from="1784625889532" duration="10274000" />
+      <workItem from="1784625889532" duration="32736000" />
+      <workItem from="1784714284691" duration="13392000" />
     </task>
     <servers />
   </component>

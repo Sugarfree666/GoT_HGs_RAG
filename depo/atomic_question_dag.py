@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any
@@ -87,8 +86,8 @@ class AtomicQuestionDAGResult:
         }
 
 
-class PathAlignedAtomicDAGGenerator:
-    """Run Step5 as original question + Step4 path hints -> atomic question DAG."""
+class QuestionStructureAtomicDAGGenerator:
+    """Generate an atomic question DAG from the original question and question structure."""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
@@ -97,29 +96,29 @@ class PathAlignedAtomicDAGGenerator:
         self,
         *,
         original_question: str,
-        global_best_paths: list[list[str]],
+        question_structure: list[list[str]],
     ) -> AtomicQuestionDAGResult:
-        restored_global_best_paths = [[str(node) for node in path] for path in global_best_paths]
-        preflight_errors = _preflight_errors(global_best_paths=restored_global_best_paths)
+        restored_question_structure = _sanitize_question_structure(question_structure)
+        preflight_errors = _preflight_errors(question_structure=restored_question_structure)
         if preflight_errors:
             return _invalid_result(preflight_errors, raw_payload=None)
 
         user_prompt = build_atomic_question_dag_prompt(
             original_question=original_question,
-            global_best_paths=restored_global_best_paths,
+            question_structure=restored_question_structure,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
         return validate_atomic_question_dag(
             raw_payload,
             original_question=original_question,
-            global_best_paths=restored_global_best_paths,
+            question_structure=restored_question_structure,
         )
 
 
 def restore_entity_paths(step4_paths: Any, mask_mappings: Any) -> list[RestoredTokenPath]:
     """Restore ENTITY placeholders in Step4 paths.
 
-    Kept for tests/debugging. Step5 now consumes only the single restored global best path.
+    Kept for tests/debugging. Step5 consumes restored question_structure branches.
     """
 
     restored: list[RestoredTokenPath] = []
@@ -161,10 +160,9 @@ def validate_atomic_question_dag(
     raw_payload: Any,
     *,
     original_question: str | None = None,
-    explicit_entities: list[str] | None = None,
-    global_best_paths: list[list[str]] | None = None,
+    question_structure: list[list[str]] | None = None,
 ) -> AtomicQuestionDAGResult:
-    del original_question, explicit_entities, global_best_paths
+    del original_question, question_structure
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
 
@@ -178,7 +176,7 @@ def validate_atomic_question_dag(
     if errors:
         return _invalid_result(errors, raw_payload=raw_payload)
 
-    errors = _validate_atomic_question_dag_structure(parsed_nodes)
+    errors, warnings = _validate_atomic_question_dag_structure(parsed_nodes)
     if errors:
         return _invalid_result(errors, raw_payload=raw_payload)
 
@@ -190,6 +188,7 @@ def validate_atomic_question_dag(
         leaf_node_ids=leaf_node_ids,
         valid=True,
         validation_errors=[],
+        warnings=warnings,
         raw_payload=raw_payload,
     )
 
@@ -256,9 +255,10 @@ def _parse_atomic_question_nodes(raw_questions: list[Any]) -> tuple[list[AtomicQ
     return nodes, errors
 
 
-def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> list[str]:
+def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> tuple[list[str], list[str]]:
     node_positions = {node.id: index for index, node in enumerate(nodes)}
     errors: list[str] = []
+    warnings: list[str] = []
     for index, node in enumerate(nodes):
         references = set(_question_refs([node.question]))
         dependencies = set(node.depends_on)
@@ -284,13 +284,13 @@ def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> 
                 errors.append(f"{node.id}: question references a later answer {reference!r}.")
 
         for dependency in dependencies - references:
-            errors.append(f"{node.id}: depends_on includes {dependency!r}, but the question does not reference that answer.")
+            warnings.append(f"{node.id}: depends_on includes {dependency!r}, but the question does not reference that answer.")
         for reference in references - dependencies:
-            errors.append(f"{node.id}: question references {reference!r}, but depends_on does not include it.")
+            warnings.append(f"{node.id}: question references {reference!r}, but depends_on does not include it.")
 
     if _has_dependency_cycle(nodes):
         errors.append("atomic_questions contains a dependency cycle.")
-    return errors
+    return errors, warnings
 
 
 def _has_dependency_cycle(nodes: list[AtomicQuestionNode]) -> bool:
@@ -327,7 +327,6 @@ def _atomic_question_dag_quality_warnings(
     nodes: list[AtomicQuestionNode],
     *,
     original_question: str | None,
-    explicit_entities: list[str] | None,
 ) -> list[str]:
     warnings: list[str] = []
     question_text = original_question or ""
@@ -337,7 +336,7 @@ def _atomic_question_dag_quality_warnings(
     warnings.extend(_placeholder_warnings(nodes))
     warnings.extend(_possessive_wh_warnings(nodes, question_lc))
     warnings.extend(_lifespan_comparison_warnings(nodes, question_lc))
-    warnings.extend(_appositive_identity_warnings(nodes, question_text, explicit_entities or []))
+    warnings.extend(_appositive_identity_warnings(nodes, question_text))
 
     return _dedupe_preserve_order(warnings)
 
@@ -419,9 +418,7 @@ def _lifespan_comparison_warnings(nodes: list[AtomicQuestionNode], original_ques
 def _appositive_identity_warnings(
     nodes: list[AtomicQuestionNode],
     original_question: str,
-    explicit_entities: list[str],
 ) -> list[str]:
-    del explicit_entities
     warnings: list[str] = []
     node_text = " ".join(node.question for node in nodes)
     for mention, base in _disambiguated_mentions(original_question):
@@ -530,7 +527,7 @@ def _validate_semantic_reasoning_paths(
     warnings: list[str],
     *,
     original_question: str | None,
-    global_best_paths: list[list[str]] | None,
+    question_structure: list[list[str]] | None,
 ) -> tuple[set[str], set[str], dict[str, str], dict[str, str]]:
     all_node_ids: set[str] = set()
     all_edge_ids: set[str] = set()
@@ -551,10 +548,10 @@ def _validate_semantic_reasoning_paths(
         source_token_path = _string_list(raw_path.get("source_token_path"), f"{prefix}.source_token_path", errors)
         if not source_token_path:
             errors.append(f"{prefix}.source_token_path must be a non-empty list of strings.")
-        if global_best_paths is not None and path_index <= len(global_best_paths):
-            expected_source_path = [str(token) for token in global_best_paths[path_index - 1]]
+        if question_structure is not None and path_index <= len(question_structure):
+            expected_source_path = [str(token) for token in question_structure[path_index - 1]]
             if source_token_path and source_token_path != expected_source_path:
-                errors.append(f"{prefix}.source_token_path must match global_best_paths[{path_index - 1}] exactly.")
+                errors.append(f"{prefix}.source_token_path must match question_structure[{path_index - 1}] exactly.")
         for token in source_token_path:
             if _contains_placeholder(token):
                 errors.append(f"{prefix}.source_token_path contains unresolved ENTITY placeholder.")
@@ -1040,18 +1037,30 @@ def _restore_placeholders_in_token(token: str, mapping: dict[str, str]) -> str:
     return re.sub(r"\bENTITY[A-Z0-9]*\b", replace, token)
 
 
-def _preflight_errors(*, global_best_paths: list[list[str]]) -> list[str]:
-    errors: list[str] = []
-    if not global_best_paths:
-        errors.append("Step5 requires at least one non-empty step4_paths/global_best_paths entry.")
-        return errors
-    for path_index, path in enumerate(global_best_paths, start=1):
-        if not isinstance(path, list) or not path:
-            errors.append(f"Step5 step4_paths[{path_index - 1}] must be a non-empty list.")
+def _sanitize_question_structure(question_structure: list[list[str]]) -> list[list[str]]:
+    sanitized: list[list[str]] = []
+    for branch in question_structure:
+        if not isinstance(branch, list):
             continue
-        for node in path:
+        nodes: list[str] = []
+        for node in branch:
+            text = str(node).strip()
+            if text:
+                nodes.append(text)
+        if nodes:
+            sanitized.append(nodes)
+    return sanitized
+
+
+def _preflight_errors(*, question_structure: list[list[str]]) -> list[str]:
+    errors: list[str] = []
+    for branch_index, branch in enumerate(question_structure, start=1):
+        if not isinstance(branch, list) or not branch:
+            errors.append(f"Step5 question_structure[{branch_index - 1}] must be a non-empty list.")
+            continue
+        for node in branch:
             if _contains_placeholder(node):
-                errors.append(f"Step5 step4_paths[{path_index - 1}] contains unresolved ENTITY placeholder: {node}.")
+                errors.append(f"Step5 question_structure[{branch_index - 1}] contains unresolved ENTITY placeholder: {node}.")
     return errors
 
 
@@ -1097,13 +1106,11 @@ def _invalid_result(errors: list[str], raw_payload: dict[str, Any] | None) -> At
     )
 
 
-def prompt_input_payload(
+def prompt_input_text(
     original_question: str,
-    global_best_paths: list[list[str]],
-) -> dict[str, Any]:
-    return json.loads(
-        build_atomic_question_dag_prompt(
-            original_question=original_question,
-            global_best_paths=global_best_paths,
-        )
+    question_structure: list[list[str]],
+) -> str:
+    return build_atomic_question_dag_prompt(
+        original_question=original_question,
+        question_structure=question_structure,
     )

@@ -66,15 +66,13 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
 
-        step5_payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(
-            set(step5_payload), {"original_question", "step4_paths"}
-        )
-        self.assertNotIn("topic_entities", step5_payload)
-        self.assertEqual(
-            step5_payload["step4_paths"],
-            [["Ryan Tubridy", "older", "Who"], ["Mauro Massironi", "older", "Who"]],
-        )
+        self.assertIn("Original question:\nWho is older, Ryan Tubridy or Mauro Massironi?", llm.step5_user_prompt)
+        self.assertIn("Question structure:", llm.step5_user_prompt)
+        self.assertIn("Branch 1:\nRyan Tubridy -- older -- Who", llm.step5_user_prompt)
+        self.assertIn("Branch 2:\nMauro Massironi -- older -- Who", llm.step5_user_prompt)
+        self.assertNotIn("step4_paths", llm.step5_user_prompt)
+        self.assertNotIn("global_best_paths", llm.step5_user_prompt)
+        self.assertNotIn("topic_entities", llm.step5_user_prompt)
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -201,7 +199,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             print_hanlp_sdp_result(1, record, result)
         self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
-    def test_pipeline_returns_invalid_step5_when_step4_has_no_paths(self) -> None:
+    def test_pipeline_still_calls_step5_when_step4_has_no_paths(self) -> None:
         question = "What is the capital of France?"
         llm = EmptyPathPipelineLLM()
 
@@ -215,13 +213,12 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         compiled = result["token_reasoning_structure"]
         self.assertEqual(compiled.path_type, "no_entity_branch_path")
         self.assertEqual(compiled.paths, [])
-        self.assertEqual(llm.calls, 1)
+        self.assertEqual(llm.calls, 2)
+        self.assertIn("Original question:\nWhat is the capital of France?", llm.step5_user_prompt)
+        self.assertIn("Question structure:", llm.step5_user_prompt)
+        self.assertNotIn("Branch 1:", llm.step5_user_prompt)
         dag = result["atomic_question_dag"]
-        self.assertFalse(dag.valid)
-        self.assertIn(
-            "Step5 requires at least one non-empty step4_paths/global_best_paths entry.",
-            dag.validation_errors,
-        )
+        self.assertTrue(dag.valid, dag.validation_errors)
 
     def test_pipeline_sends_restored_entity_branch_paths_to_step5(self) -> None:
         question = "Which film has the director who was born later, Illusions (1982 Film) or It'S A Wonderful Afterlife?"
@@ -242,23 +239,19 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                 ["ENTITYB", "film", "has", "director", "born", "later"],
             ],
         )
-        payload = json.loads(llm.step5_user_prompt)
-        self.assertEqual(
-            payload["step4_paths"],
-            [
-                ["Illusions (1982 Film)", "film", "has", "director", "born", "later"],
-                [
-                    "It'S A Wonderful Afterlife",
-                    "film",
-                    "has",
-                    "director",
-                    "born",
-                    "later",
-                ],
-            ],
+        self.assertIn(
+            "Branch 1:\nIllusions (1982 Film) -- film -- has -- director -- born -- later",
+            llm.step5_user_prompt,
         )
-        self.assertNotIn("ENTITYA", json.dumps(payload, ensure_ascii=False))
-        self.assertNotIn("ENTITYB", json.dumps(payload, ensure_ascii=False))
+        self.assertIn(
+            "Branch 2:\nIt'S A Wonderful Afterlife -- film -- has -- director -- born -- later",
+            llm.step5_user_prompt,
+        )
+        self.assertNotIn("step4_paths", llm.step5_user_prompt)
+        self.assertNotIn("global_best_paths", llm.step5_user_prompt)
+        self.assertNotIn("topic_entities", llm.step5_user_prompt)
+        self.assertNotIn("ENTITYA", llm.step5_user_prompt)
+        self.assertNotIn("ENTITYB", llm.step5_user_prompt)
         dag = result["atomic_question_dag"]
         self.assertTrue(dag.valid, dag.validation_errors)
         self.assertEqual(dag.nodes[-1].depends_on, ("q2", "q4"))
@@ -1469,21 +1462,17 @@ class FakePreprocessLLM:
             or "complex-question decomposition" in system_prompt
         ):
             self.step5_user_prompt = user_prompt
-            payload = json.loads(user_prompt)
-            assert set(payload) == {
-                "original_question",
-                "step4_paths",
-            }
-            assert "topic_entities" not in payload
-            assert payload["step4_paths"] == [
-                ["Ryan Tubridy", "older", "Who"],
-                ["Mauro Massironi", "older", "Who"],
-            ]
-            serialized = json.dumps(payload, ensure_ascii=False)
-            assert "ENTITYA" not in serialized
-            assert "ENTITYB" not in serialized
-            assert "masked_question" not in serialized
-            assert "answer_anchor" not in serialized
+            assert "Original question:\nWho is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
+            assert "Question structure:" in user_prompt
+            assert "Branch 1:\nRyan Tubridy -- older -- Who" in user_prompt
+            assert "Branch 2:\nMauro Massironi -- older -- Who" in user_prompt
+            assert "ENTITYA" not in user_prompt
+            assert "ENTITYB" not in user_prompt
+            assert "masked_question" not in user_prompt
+            assert "answer_anchor" not in user_prompt
+            assert "step4_paths" not in user_prompt
+            assert "global_best_paths" not in user_prompt
+            assert "topic_entities" not in user_prompt
             return _older_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         assert "Candidate spans" not in user_prompt
@@ -1506,9 +1495,26 @@ class FakePreprocessLLM:
 class EmptyPathPipelineLLM:
     def __init__(self) -> None:
         self.calls = 0
+        self.step5_user_prompt = ""
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
+        if (
+            "DEPO Step 5" in system_prompt
+            or "Atomic Question DAG" in system_prompt
+            or "complex-question decomposition" in system_prompt
+        ):
+            self.step5_user_prompt = user_prompt
+            return {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "What is the capital of France?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                    }
+                ]
+            }
         return {"explicit_entities": [], "warnings": []}
 
 
@@ -1526,23 +1532,17 @@ class IllusionsPipelineLLM:
             or "complex-question decomposition" in system_prompt
         ):
             self.step5_user_prompt = user_prompt
-            payload = json.loads(user_prompt)
-            assert set(payload) == {
-                "original_question",
-                "step4_paths",
-            }
-            assert "topic_entities" not in payload
-            assert payload["step4_paths"] == [
-                ["Illusions (1982 Film)", "film", "has", "director", "born", "later"],
-                [
-                    "It'S A Wonderful Afterlife",
-                    "film",
-                    "has",
-                    "director",
-                    "born",
-                    "later",
-                ],
-            ]
+            assert (
+                "Branch 1:\nIllusions (1982 Film) -- film -- has -- director -- born -- later"
+                in user_prompt
+            )
+            assert (
+                "Branch 2:\nIt'S A Wonderful Afterlife -- film -- has -- director -- born -- later"
+                in user_prompt
+            )
+            assert "step4_paths" not in user_prompt
+            assert "global_best_paths" not in user_prompt
+            assert "topic_entities" not in user_prompt
             return _illusions_step5_payload()
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         return {

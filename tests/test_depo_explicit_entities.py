@@ -116,14 +116,50 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         self.assertEqual(result.entities, [])
         self.assertTrue(any("duplicate explicit entity surface" in warning for warning in result.warnings))
 
-    def test_missing_exact_surface_is_invalid(self) -> None:
+    def test_case_insensitive_duplicate_surface_is_invalid(self) -> None:
         result = ExplicitEntityExtractor(
-            DirectEntityLLM(_payload([_entity("shrek 2", "Work")]))
+            DirectEntityLLM(
+                _payload([_entity("Shrek 2", "Work"), _entity("shrek 2", "Work")])
+            )
+        ).extract("Who produced Shrek 2?")
+
+        self.assertEqual(result.entities, [])
+        self.assertTrue(any("duplicate explicit entity surface='Shrek 2'" in warning for warning in result.warnings))
+
+    def test_case_insensitive_surface_match_uses_original_question_casing(self) -> None:
+        question = (
+            "An Indy car race was held in the capital of the state where the performer of "
+            "Mingus Plays Piano was born. Who won the race?"
+        )
+        result = EntityMaskingPreprocessor(
+            DirectEntityLLM(
+                _payload(
+                    [
+                        _entity("Indy Car Race", "Event"),
+                        _entity("Mingus Plays Piano", "Work"),
+                    ]
+                )
+            )
+        ).preprocess(question)
+
+        self.assertEqual(
+            [entity.text for entity in result.explicit_entities.entities],
+            ["Indy car race", "Mingus Plays Piano"],
+        )
+        self.assertEqual(
+            result.masked_question,
+            "An ENTITYA was held in the capital of the state where the performer of ENTITYB was born. Who won the race?",
+        )
+        self.assertEqual(result.warnings, [])
+
+    def test_missing_surface_with_spacing_or_punctuation_difference_is_invalid(self) -> None:
+        result = ExplicitEntityExtractor(
+            DirectEntityLLM(_payload([_entity("Shrek-2", "Work")]))
         ).extract("Who produced Shrek 2?")
 
         self.assertEqual(result.entities, [])
         self.assertTrue(
-            any("was not found exactly in the original question" in warning for warning in result.warnings)
+            any("was not found in the original question" in warning for warning in result.warnings)
         )
 
     def test_overlapping_llm_surfaces_are_invalid_instead_of_resolved(self) -> None:
@@ -262,6 +298,45 @@ class ExplicitEntityPromptTest(unittest.TestCase):
         self.assertIn('"Wexner Graduate Fellowships"', system_prompt)
         self.assertIn("FINAL ENTITY OUTPUT GATE", system_prompt)
         self.assertIn("NORMALIZATION FIREWALL", system_prompt)
+
+    def test_prompt_prefers_recall_for_identifier_like_anchors(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "Where is the country with ISO code ISO 3166-2:CV located?"
+        )
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn("Prefer recall for exact named or identifier-like surfaces", system_prompt)
+        self.assertIn('"ISO 3166-2:CV"', system_prompt)
+        self.assertIn('"MLB MVP"', system_prompt)
+        self.assertIn('"FA Cup"', system_prompt)
+        self.assertIn('"Auctor"', system_prompt)
+        self.assertIn('"KZAR"', system_prompt)
+        self.assertIn('"Darling Mills Creek"', system_prompt)
+        self.assertIn("codes, awards, competitions, named events", system_prompt)
+        self.assertIn("identifier-like", prompt)
+
+    def test_prompt_calibrates_relaxed_step1_musique_failures(self) -> None:
+        prompt = build_explicit_entity_extraction_prompt(
+            "What year did the Governor of the city where the basilica named after the same saint as the one that Mantua Cathedral is dedicated to die?"
+        )
+        system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+        self.assertIn('"Mantua Cathedral"', system_prompt)
+        self.assertIn('"Birmingham"', system_prompt)
+        self.assertIn('"Near East"', system_prompt)
+        self.assertIn('"Susie"', system_prompt)
+        self.assertIn('"Indy Car Race"', system_prompt)
+        self.assertIn('"Cabinet"', system_prompt)
+        self.assertIn('"NATO"', system_prompt)
+        self.assertIn("named buildings/facilities", system_prompt)
+        self.assertIn('"city"', system_prompt)
+        self.assertIn('"film company"', system_prompt)
+        self.assertIn('"league"', system_prompt)
+        self.assertIn('"body of water"', system_prompt)
+        self.assertIn('"1999"', system_prompt)
+        self.assertIn('"American"', system_prompt)
+        self.assertIn('"Italian"', system_prompt)
+        self.assertIn("generic path nodes", prompt)
 
     def test_prompt_excludes_possessive_relations_and_requires_global_non_overlap(self) -> None:
         prompt = build_explicit_entity_extraction_prompt(
