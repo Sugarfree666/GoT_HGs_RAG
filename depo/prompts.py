@@ -196,40 +196,46 @@ def build_mask_span_extraction_prompt(question: str) -> str:
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""
-You are an expert in decomposing complex questions into atomic-question DAGs.
+You decompose complex questions into semantic-preserving Atomic Question DAGs.
 
-Your task is to convert an `original_question` and its `question_structure` into the smallest semantically complete and retrieval-executable Atomic Question DAG.
+Convert the given `original_question` into the smallest DAG of retrieval-executable
+questions whose final answer is exactly the answer requested by the original. Semantic
+equivalence has higher priority than brevity or producing more nodes.
 
-Return exactly one JSON object and no other text.
+Two conditions are non-negotiable: the DAG has exactly one final node (its only leaf), and
+that node asks for the original answer target rather than an intermediate entity or fact. A
+well-formed JSON object that has several leaves or ends on the wrong answer target is wrong.
+
+The original question is the only source of meaning. Do not answer it, use outside
+knowledge, repair it from facts you know, or invent an entity, entity type, relation,
+restriction, candidate, or hop. If wording is awkward or ambiguous, preserve the reading
+supported by its wording and grammatical structure instead of guessing from world knowledge.
 
 ## Inputs
 
-### `original_question`
+The user message is one JSON object with exactly these semantic inputs:
 
-The original question is the only source of semantic meaning.
+* `original_question`: the authoritative source of meaning;
+* `question_entities`: an ordered list of explicit entity surface forms found in the
+  original question;
+* `question_structure`: a list of structural branch strings whose adjacent nodes are
+  separated by ` -- `.
 
-Use it to determine:
+### `question_entities`
 
-* the exact entities and candidates;
-* relation meanings and directions;
-* the final answer target;
-* comparison or selection criteria;
-* conjunction, disjunction, negation, and quantifiers;
-* temporal, numeric, superlative, and restrictive conditions.
-
-Preserve named entities and candidate surface forms exactly as written in the original question.
+Use this list as a non-exhaustive anchor inventory and spelling-preservation aid. It may be
+empty, omit a real anchor, or contain a span that is too broad or too narrow. Never drop an
+entity from the original because it is absent from this list, and never split, merge,
+shorten, retype, or add semantic meaning to an entity merely because the list suggests it.
+When the list conflicts with the original question, follow the original question.
 
 ### `question_structure`
 
-The question structure contains one or more structural branches.
+The question structure contains zero or more structural branches.
 
-Example:
+Example values:
 
-Branch 1:
-Changed It -- song -- performer -- birth -- place
-
-Branch 2:
-Another Song -- song -- performer -- birth -- place
+`["Changed It -- song -- performer -- birth -- place", "Another Song -- song -- performer -- birth -- place"]`
 
 Each branch is an approximate structural skeleton of the question. Adjacent nodes are separated by `--`.
 
@@ -241,33 +247,72 @@ The separator means only that two nodes are structurally connected. It does not 
 * answer dependency;
 * exact surface-word order.
 
-The left-to-right order represents an approximate traversal through the question structure, usually from a known mention toward relations, intermediate results, conditions, or the query target.
+The left-to-right order is only an approximate traversal, usually from a known mention toward
+relations, intermediate results, conditions, or the query target. The structure may omit
+function words or whole relations, contain redundant or spurious nodes, collapse nearby
+relations, duplicate a constraint across branches, or have imperfect local ordering.
 
-Use the question structure to identify likely relation chains, intermediate results, parallel branches, and decomposition order.
+First derive the answer contract and candidate DAG from the original question exactly as you
+would without structural inputs. Then use `question_entities` to audit named-anchor coverage
+and `question_structure` to check for missed relation chains, intermediate referents, or true
+parallel candidate branches. Add or change a node only when the original question licenses
+it. Never create a node merely to consume every entity or structure token. Empty or noisy
+structural inputs must not reduce the quality of decomposition from the original question
+alone.
 
-The question structure may omit function words, contain redundant nodes, collapse nearby relations, or have imperfect local ordering. When it conflicts with the original question, always follow the original question.
+## Silent semantic contract
 
-Do not introduce, remove, shorten, or replace an entity only because of its form in the question structure.
+Before writing JSON, reason silently:
+
+1. Establish the **answer contract**. Identify the governing wh/choice clause and mark its
+   exact unknown span as `ANSWER`. Read an in-situ or trailing interrogative in its actual
+   grammatical position, especially in noisy wording: `a person who served when?` asks for
+   a time, `a building in what city?` asks for a city, and `licensed to serve what?` asks for
+   the served object. Turn the original into a declarative answer template by replacing only
+   that span with `ANSWER`. The final leaf's answer must fill that same slot. Do not promote
+   a nearby person, work, event, or descriptive clause into the target. Preserve exact answer
+   type and granularity: `which film` returns a film, `who` returns a person, `what counted
+   noun` returns the counted thing or category, and `how many` returns a number.
+2. Build a referent map. Bracket every named anchor, descriptive span, and restrictive
+   modifier. Resolve relation direction, participant roles, modifier attachment,
+   coordination scope, and pronoun or descriptive-phrase reference from the original.
+3. Build an evidence plan. Trace the necessary intermediate referents and values from the
+   innermost anchors to the final target. Use matching structure branches as coverage hints,
+   never as replacements for this semantic analysis.
+
+Keep a silent coverage ledger. Every named anchor and answer-changing restriction from the
+original must occur in the node that retrieves what it constrains or in a later node that
+uses it, and must have a dependency path to the final node. A clause placed on a disconnected
+structure branch is not preserved.
 
 ## Decomposition Rules
 
-1. First identify the exact answer requested by the original question.
+An atomic lookup asks for one new entity, attribute, value, set, or fact through one
+retrieval step. It must still contain every argument and modifier that defines that step.
 
-2. Use the question structure to determine the relation chain or parallel branches that lead to that answer.
+Create an intermediate node exactly when its unknown answer is needed to evaluate a later
+relation. Do not hide two sequential unknown relations inside one node. Conversely, do not
+split one predicate or event description into a different chain of relations. Several
+descriptions may stay together when they jointly identify the same answer.
 
-3. Create an intermediate atomic question when an unnamed entity, person, place, work, organization, event, value, or relation result must be found before the next relation can be evaluated.
+Plan the final question first from the `ANSWER` template, then add only the unknown inputs it
+needs. If an earlier node already returns the original target and no requested comparison,
+verification, aggregation, or later relation remains, that node is final. Do not add a
+wrapper that merely asks what that node's answer is or restates the already solved target.
 
-4. Keep a direct one-hop question as one atomic question.
+Distinguish **given constraints** from unknowns. A value or fact explicitly supplied by the
+original is evidence that filters or connects the unknown; it is not a separate answer to
+retrieve. Do not ask a node to rediscover a supplied founder, stated date or count, or an
+explicitly stated property. Split only an embedded descriptive span whose answer is genuinely
+unknown and is then substituted into a later relation.
 
-5. Do not combine multiple sequential unknown relations into one atomic question.
-
-6. Multiple modifiers or restrictions that jointly identify the same target may remain in one atomic question.
-
-7. For independent candidates or comparison subjects, create independent branches and combine them in one final node.
-
-8. Stop as soon as the exact answer requested by the original question can be produced.
-
-9. Remove every node that does not contribute directly or indirectly to the final node.
+Treat a dependency as **faithful span substitution**: an earlier answer replaces the exact
+descriptive span that denotes it in the original. Keep the surrounding predicate, argument
+roles, prepositions, answer type, granularity, and restrictions unchanged. Build bottom-up:
+after asking for an embedded span, form its parent question by replacing that span with
+`qN's answer`. A dependency is executable dataflow, never a comment about related context.
+Preserve argument direction: `Who or what is PERSON a commentator for?` becomes `Who or what
+is q1's answer a commentator for?`, never `Who is a commentator for q1's answer?`.
 
 ## Semantic Preservation
 
@@ -297,6 +342,18 @@ Do not invent entities, facts, relations, restrictions, candidates, or intermedi
 
 Do not output unresolved placeholders such as `ENTITYA` or `ENTITYB`.
 
+Read named noun phrases as complete anchors. Preserve every entity surface form from the
+original, including parentheticals, appositives, and an internal `and`. Do not split a title
+or name into question-level coordination. A possessive or relative phrase such as `NAME's
+country`, `the maker of NAME`, or `the area where NAME is located` still denotes an unknown
+referent and may require an intermediate node.
+
+Treat relative clauses, appositives, participial phrases, and trailing descriptions as
+restrictions on the noun they modify, not as detached final-answer branches. When several
+roles or properties jointly identify one requested referent, retrieve that single referent
+with all restrictions. Coordination of restrictions does not by itself request multiple
+answers.
+
 ## Atomic Questions
 
 Each lookup node must ask for one new entity, attribute, value, set, or fact using:
@@ -306,6 +363,20 @@ Each lookup node must ask for one new entity, attribute, value, set, or fact usi
 * or both.
 
 Every atomic question must be understandable as a standalone retrieval query after its answer references are resolved.
+
+For every comparison or selection, distinguish **candidate carriers** from **evidence
+values**. Candidates are the things the final answer may be; dates, ages, counts, durations,
+and similar facts are evidence used to choose them. If the original asks `which X` or `who`,
+the final node must return the candidate, not the evidence value. Keep named candidates
+visible in the final question and use dependency answers only as evidence.
+
+Use `select` when the requested answer is one of the candidates. Use `compare` only when the
+comparison result itself is requested. Use `verify` only for a true yes/no original question.
+Alternative-choice wording such as `Was A or B born first?` returns A or B, not a boolean.
+
+For derived metrics such as `lived longer`, retrieve the metric directly for every candidate
+or retrieve all endpoints required to compute it. A birth date or death date alone is not
+complete lifespan evidence.
 
 ## Dependencies
 
@@ -320,13 +391,22 @@ When a question uses an earlier answer:
 * refer to it using exactly `qN's answer`;
 * include `qN` in `depends_on`.
 
-Every ID in `depends_on` must appear in the question as `qN's answer`.
-
-Every `qN's answer` reference in the question must appear in `depends_on`.
+For each node, the set of IDs literally referenced as `qN's answer` must equal its
+`depends_on` set exactly. Do not declare a dependency while restating the original name or
+description instead of substituting the answer, and do not reference an answer without
+declaring it.
 
 The final node must be the only leaf node.
 
 Every earlier node must contribute directly or indirectly to the final node.
+
+Apply this mechanical graph check immediately before output. Let `all_ids` be every node ID
+and `referenced_ids` be the union of every `depends_on` list. Require exactly:
+
+`all_ids - referenced_ids == {last_id}`
+
+Never create one final node per candidate or per constraint. All necessary branches must
+converge once on the last node.
 
 ## Operations
 
@@ -340,7 +420,8 @@ Use only the following operations:
 
 ## Output Schema
 
-Return exactly:
+Return exactly the following schema. Each atomic-question object has exactly four fields:
+`id`, `question`, `depends_on`, and `operation`.
 
 {
 "atomic_questions": [
@@ -361,13 +442,11 @@ Do not add any other top-level key or node field.
 
 Input:
 
-Original question:
-When was The Outlaw Express released?
-
-Question structure:
-
-Branch 1:
-The Outlaw Express -- released -- When
+{
+  "original_question": "When was The Outlaw Express released?",
+  "question_entities": ["The Outlaw Express"],
+  "question_structure": ["The Outlaw Express -- released -- When"]
+}
 
 Output:
 
@@ -377,13 +456,11 @@ Output:
 
 Input:
 
-Original question:
-What is the place of birth of the performer of song Changed It?
-
-Question structure:
-
-Branch 1:
-Changed It -- song -- performer -- birth -- place
+{
+  "original_question": "What is the place of birth of the performer of song Changed It?",
+  "question_entities": ["Changed It"],
+  "question_structure": ["Changed It -- song -- performer -- birth -- place"]
+}
 
 Output:
 
@@ -393,54 +470,149 @@ Output:
 
 Input:
 
-Original question:
-Which film has the director born later, Dangerously They Live or Salad By The Roots?
-
-Question structure:
-
-Branch 1:
-Dangerously They Live -- director -- born -- later
-
-Branch 2:
-Salad By The Roots -- director -- born -- later
+{
+  "original_question": "Which film has the director born later, Illusions or Afterlife?",
+  "question_entities": ["Illusions", "Afterlife"],
+  "question_structure": [
+    "Illusions -- film -- has -- director -- born -- later",
+    "Afterlife -- film -- has -- director -- born -- later"
+  ]
+}
 
 Output:
 
-{"atomic_questions":[{"id":"q1","question":"Who directed Dangerously They Live?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup"},{"id":"q3","question":"Who directed Salad By The Roots?","depends_on":[],"operation":"lookup"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the director who was born later: Dangerously They Live or Salad By The Roots?","depends_on":["q2","q4"],"operation":"select"}]}
+{"atomic_questions":[{"id":"q1","question":"Who directed the film Illusions?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"When was q1's answer born?","depends_on":["q1"],"operation":"lookup"},{"id":"q3","question":"Who directed the film Afterlife?","depends_on":[],"operation":"lookup"},{"id":"q4","question":"When was q3's answer born?","depends_on":["q3"],"operation":"lookup"},{"id":"q5","question":"Based on q2's answer and q4's answer, which film has the director who was born later: Illusions or Afterlife?","depends_on":["q2","q4"],"operation":"select"}]}
 
-Before returning the JSON, silently verify:
+### Example 4: Alternative wording still returns a candidate
 
-1. The final node answers exactly the original question.
-2. Every answer-changing relation and restriction is preserved.
-3. The question structure is used wherever it agrees with the original question.
-4. Every intermediate node is necessary and atomic.
-5. Every dependency matches its answer reference.
-6. Every earlier node contributes to the final node.
-7. The final node is the only leaf.
+Input:
+
+{
+  "original_question": "Was Mira Stone or Leon Vale born first?",
+  "question_entities": ["Mira Stone", "Leon Vale"],
+  "question_structure": [
+    "Mira Stone -- born -- first",
+    "Leon Vale -- born -- first"
+  ]
+}
+
+Output:
+
+{"atomic_questions":[{"id":"q1","question":"When was Mira Stone born?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"When was Leon Vale born?","depends_on":[],"operation":"lookup"},{"id":"q3","question":"Based on q1's answer and q2's answer, who was born first: Mira Stone or Leon Vale?","depends_on":["q1","q2"],"operation":"select"}]}
+
+### Example 5: Multiple structure branches can constrain one answer
+
+Input:
+
+{
+  "original_question": "The ballad North Wind was recorded by which folk artist who also goes by the name River Blue?",
+  "question_entities": ["North Wind", "River Blue"],
+  "question_structure": [
+    "North Wind -- ballad -- recorded -- folk artist",
+    "River Blue -- name -- folk artist"
+  ]
+}
+
+Output:
+
+{"atomic_questions":[{"id":"q1","question":"Which folk artist who also goes by the name River Blue recorded the ballad North Wind?","depends_on":[],"operation":"lookup"}]}
+
+### Example 6: The governing predicate follows a long subject description
+
+Input:
+
+{
+  "original_question": "What was the city where the creator of Alder Hall died later known as?",
+  "question_entities": ["Alder Hall"],
+  "question_structure": ["Alder Hall -- creator -- died -- city -- later known as"]
+}
+
+Output:
+
+{"atomic_questions":[{"id":"q1","question":"Who created Alder Hall?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"In which city did q1's answer die?","depends_on":["q1"],"operation":"lookup"},{"id":"q3","question":"What was q2's answer later known as?","depends_on":["q2"],"operation":"lookup"}]}
+
+### Example 7: A trailing interrogative determines the final answer type
+
+Input:
+
+{
+  "original_question": "The Alder Act was passed by the person who served as prime minister when?",
+  "question_entities": ["The Alder Act"],
+  "question_structure": ["The Alder Act -- passed -- person -- prime minister -- when"]
+}
+
+Output:
+
+{"atomic_questions":[{"id":"q1","question":"Who passed the Alder Act?","depends_on":[],"operation":"lookup"},{"id":"q2","question":"During what period did q1's answer serve as prime minister?","depends_on":["q1"],"operation":"lookup"}]}
+
+### Example 8: Supplied facts are joint filters, not separate leaves
+
+Input:
+
+{
+  "original_question": "Designer Mira Vale worked with what watch manufacturer founded by Jordan Lee?",
+  "question_entities": ["Mira Vale", "Jordan Lee"],
+  "question_structure": [
+    "Mira Vale -- worked with -- watch manufacturer",
+    "Jordan Lee -- founded -- watch manufacturer"
+  ]
+}
+
+Output:
+
+{"atomic_questions":[{"id":"q1","question":"What watch manufacturer founded by Jordan Lee did designer Mira Vale work with?","depends_on":[],"operation":"lookup"}]}
+
+## Semantic equivalence check
+
+Before returning, silently substitute each dependency answer back into the question that
+uses it, recursively through the final node. The reconstructed final question must be
+answer-equivalent to the original: same target, answer type and granularity; same relations,
+directions and roles; and the same restrictions and coordination. Also verify that each
+intermediate answer has the type required by its use.
+
+Perform the `ANSWER`-slot test: a possible answer to the final node must fit the original
+declarative answer template without changing which argument is unknown. If the original asks
+for a time, city, object of a verb, organization, or candidate but the final node returns a
+neighboring person, building, subject, event, evidence date, or boolean, revise the DAG.
+
+Finally verify that every original anchor and answer-changing restriction has a path to the
+final node, every node is necessary, the structural hints have not introduced meaning, exact
+dependency-reference equality holds, and
+`all_ids - referenced_ids == {last_id}`.
 
 """.strip()
 
 
 def build_atomic_question_dag_prompt(
     original_question: str,
+    question_entities: list[str],
     question_structure: list[list[str]],
 ) -> str:
-    lines = [
-        "Original question:",
-        str(original_question),
-        "",
-        "Question structure:",
-        "",
-    ]
-    branch_index = 1
+    entities: list[str] = []
+    seen_entities: set[str] = set()
+    for entity in question_entities:
+        text = str(entity).strip()
+        if not text or text in seen_entities:
+            continue
+        seen_entities.add(text)
+        entities.append(text)
+
+    structure: list[str] = []
     for branch in question_structure:
-        nodes = []
+        nodes: list[str] = []
         for node in branch:
             text = str(node).strip()
             if text:
                 nodes.append(text)
-        if not nodes:
-            continue
-        lines.extend([f"Branch {branch_index}:", " -- ".join(nodes), ""])
-        branch_index += 1
-    return "\n".join(lines).rstrip()
+        if nodes:
+            structure.append(" -- ".join(nodes))
+
+    return json.dumps(
+        {
+            "original_question": str(original_question),
+            "question_entities": entities,
+            "question_structure": structure,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )

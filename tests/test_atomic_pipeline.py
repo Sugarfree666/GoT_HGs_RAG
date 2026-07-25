@@ -72,13 +72,14 @@ prompts:
         self.assertIn('"answer": "..."', prompt)
         self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
         self.assertIn("`original_question`", prompt)
-        self.assertIn("Use `original_question` only to recover global context", prompt)
-        self.assertIn("Do not answer `original_question` unless `atomic_question` itself asks the same final question.", prompt)
-        self.assertIn("`contexts`: shared chunk contexts referenced by evidence items.", prompt)
-        self.assertIn("`chunk_ids`: context IDs for source chunks associated with the hyperedge.", prompt)
+        self.assertIn("Use `original_question` only to recover necessary global context", prompt)
+        self.assertIn("Answer `atomic_question`, not `original_question`.", prompt)
+        self.assertIn("`evidence_blocks`: source chunks grouped with the retrieved top-k hyperedges", prompt)
+        self.assertIn("`bridge_hyperedge_text`: optional previous-hop fact", prompt)
+        self.assertIn("Use a block's `title` and `text` only with hyperedges inside that same block.", prompt)
         self.assertIn("preserve the supported proper-name spelling", prompt)
-        self.assertIn("nationality, citizenship, ethnicity, birthplace, and country of residence", prompt)
-        self.assertIn('The only allowed key is "answer".', prompt)
+        self.assertIn("nationality, citizenship, ethnicity, birthplace, country of origin, and country of residence", prompt)
+        self.assertIn('The only allowed key is `"answer"`.', prompt)
         self.assertNotIn("answer_type", prompt)
         self.assertNotIn('"confidence"', prompt)
         self.assertNotIn('"reasoning_summary"', prompt)
@@ -107,7 +108,7 @@ prompts:
 
         self.assertEqual(response, {"answer": "Answer"})
 
-    def test_openai_answer_service_sends_contexts_as_top_level_payload(self) -> None:
+    def test_openai_answer_service_sends_evidence_blocks_as_top_level_payload(self) -> None:
         class FakeClient:
             def __init__(self) -> None:
                 self.calls: list[dict[str, object]] = []
@@ -127,19 +128,17 @@ prompts:
         fake_client = FakeClient()
         service = OpenAIAtomicLLMService(fake_client, PromptManager(project_root / "prompts"))  # type: ignore[arg-type]
         evidence_payload = {
-            "evidence": [
-                {
-                    "evidence_id": "E1",
-                    "hyperedge_text": "Subject is linked to Answer.",
-                    "chunk_ids": ["C1"],
-                }
-            ],
-            "contexts": [
+            "evidence_blocks": [
                 {
                     "chunk_id": "C1",
                     "title": "Subject",
                     "text": "Subject is linked to Answer.",
-                    "supports": ["E1"],
+                    "hyperedges": [
+                        {
+                            "hyperedge_id": "H1",
+                            "hyperedge_text": "Subject is linked to Answer.",
+                        }
+                    ],
                 }
             ],
         }
@@ -155,8 +154,9 @@ prompts:
         self.assertEqual(response, {"answer": "Answer"})
         payload = fake_client.calls[0]["payload"]
         self.assertIsInstance(payload, dict)
-        self.assertEqual(payload["evidence"], evidence_payload["evidence"])
-        self.assertEqual(payload["contexts"], evidence_payload["contexts"])
+        self.assertEqual(payload["evidence_blocks"], evidence_payload["evidence_blocks"])
+        self.assertNotIn("evidence", payload)
+        self.assertNotIn("contexts", payload)
 
     def test_atomic_question_analysis_prompt_is_entity_only(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
@@ -168,71 +168,6 @@ prompts:
         self.assertNotIn('"relations"', prompt)
         self.assertNotIn('"relation_query"', prompt)
         self.assertNotIn('"answer_type"', prompt)
-
-    def test_atomic_fact_query_prompt_requires_strict_fact_query_json(self) -> None:
-        project_root = Path(__file__).resolve().parents[1]
-        prompt = (project_root / "prompts" / "atomic_fact_query.md").read_text(encoding="utf-8")
-
-        self.assertIn("Return strict JSON only", prompt)
-        self.assertIn('{"fact_query":"..."}', prompt)
-        self.assertIn("The only allowed key is `fact_query`.", prompt)
-        self.assertIn("typed placeholder", prompt)
-        self.assertIn("Do not answer the question.", prompt)
-        self.assertIn("Do not output a question.", prompt)
-
-    def test_openai_fact_query_rewrite_passes_atomic_question_and_answer_type(self) -> None:
-        class FakeClient:
-            def __init__(self) -> None:
-                self.calls: list[dict[str, object]] = []
-
-            def chat_json(self, stage, prompt, payload, max_tokens=None):
-                self.calls.append(
-                    {
-                        "stage": stage,
-                        "prompt": prompt,
-                        "payload": payload,
-                        "max_tokens": max_tokens,
-                    }
-                )
-                return {"fact_query": "Naked Tango was directed by [PERSON].", "extra": "ignored"}
-
-        project_root = Path(__file__).resolve().parents[1]
-        fake_client = FakeClient()
-        service = OpenAIAtomicLLMService(fake_client, PromptManager(project_root / "prompts"))  # type: ignore[arg-type]
-
-        response = service.rewrite_atomic_fact_query(
-            atomic_question="Who directed Naked Tango?",
-            answer_type="person",
-        )
-
-        self.assertEqual(response, {"fact_query": "Naked Tango was directed by [PERSON]."})
-        self.assertEqual(fake_client.calls[0]["stage"], "atomic_fact_query")
-        self.assertIn("answer-agnostic hyper-relation query", fake_client.calls[0]["prompt"])
-        self.assertEqual(
-            fake_client.calls[0]["payload"],
-            {
-                "atomic_question": "Who directed Naked Tango?",
-                "answer_type": "person",
-            },
-        )
-
-    def test_mock_service_supports_atomic_fact_query_rewrite(self) -> None:
-        llm = MockAtomicLLMService(
-            fact_query_responses=[
-                {"fact_query": "Naked Tango was directed by [PERSON].", "extra": "ignored"},
-            ]
-        )
-
-        response = llm.rewrite_atomic_fact_query(
-            atomic_question="Who directed Naked Tango?",
-            answer_type="person",
-        )
-
-        self.assertEqual(response, {"fact_query": "Naked Tango was directed by [PERSON]."})
-        self.assertEqual(
-            llm.fact_query_calls,
-            [{"atomic_question": "Who directed Naked Tango?", "answer_type": "person"}],
-        )
 
     def test_atomic_question_analyzer_strips_possessive_role_entities(self) -> None:
         class EntityOnlyLLM:
@@ -377,7 +312,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(second_retrieval["candidate_hyperedge_ids"], ["H_PERFORMER", "H_DETAINED"])
         self.assertEqual([item["hyperedge_id"] for item in second_retrieval["top_hyperedges"]], ["H_DETAINED", "H_PERFORMER"])
 
-    def test_executor_uses_fact_query_for_hyperedge_ranking_and_answerer_gets_resolved_question(self) -> None:
+    def test_executor_uses_resolved_question_for_hyperedge_ranking_and_answerer_gets_resolved_question(self) -> None:
         graph = LocalGraph(
             entity_edges={"Subject": ["H_BIRTH"]},
             hyperedge_entities={"H_BIRTH": ["Subject", "Birth City"]},
@@ -389,14 +324,13 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         embedder = CountingEmbedder()
         llm = MockAtomicLLMService(
             answer_responses=[{"answer": "Birth City"}],
-            fact_query_responses=[{"fact_query": "Subject was born in [LOCATION]."}],
         )
         retriever = AtomicHyperedgeRetriever(
             dataset=_dataset(graph, store),
             embedder=embedder,
             config=RetrievalConfig(local_hyperedge_top_k=3),
             llm_service=llm,
-            logger=logging.getLogger("test.fact_query_executor"),
+            logger=logging.getLogger("test.question_query_executor"),
         )
         executor = AtomicDagExecutor(
             analyzer=QuestionAnalyzer(
@@ -409,77 +343,25 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             ),  # type: ignore[arg-type]
             retriever=retriever,
             llm_service=llm,
-            logger=logging.getLogger("test.fact_query_executor"),
+            logger=logging.getLogger("test.question_query_executor"),
         )
 
         result = executor.run("Where was Subject born?")
 
         rank_queries = [texts[0] for texts, stage in embedder.calls if stage == "atomic_local_hyperedge_retrieval"]
-        self.assertEqual(rank_queries, ["Subject was born in [LOCATION]."])
+        self.assertEqual(rank_queries, ["Where was Subject born?"])
         self.assertEqual(llm.answer_calls[0]["atomic_question"], "Where was Subject born?")
-        self.assertEqual(
-            llm.fact_query_calls,
-            [{"atomic_question": "Where was Subject born?", "answer_type": "location"}],
-        )
+        self.assertFalse(hasattr(llm, "rewrite_atomic_fact_query"))
         analysis_artifact = result.artifacts["atomic_question_analyses"][0]
         retrieval_artifact = result.artifacts["atomic_retrieval"][0]
         self.assertEqual(analysis_artifact["resolved_question"], "Where was Subject born?")
-        self.assertEqual(analysis_artifact["fact_query"], "Subject was born in [LOCATION].")
-        self.assertEqual(analysis_artifact["hyperedge_retrieval_query"], "Subject was born in [LOCATION].")
+        self.assertNotIn("fact_query", analysis_artifact)
+        self.assertEqual(analysis_artifact["hyperedge_retrieval_query"], "Where was Subject born?")
         self.assertEqual(retrieval_artifact["resolved_question"], "Where was Subject born?")
-        self.assertEqual(retrieval_artifact["fact_query"], "Subject was born in [LOCATION].")
-        self.assertEqual(retrieval_artifact["hyperedge_retrieval_query"], "Subject was born in [LOCATION].")
+        self.assertNotIn("fact_query", retrieval_artifact)
+        self.assertEqual(retrieval_artifact["hyperedge_retrieval_query"], "Where was Subject born?")
 
-    def test_fact_query_rewrite_falls_back_to_resolved_question_for_empty_or_exception(self) -> None:
-        cases: list[dict[str, Any] | BaseException] = [
-            {"fact_query": ""},
-            RuntimeError("rewrite failed"),
-        ]
-        for response in cases:
-            with self.subTest(response=type(response).__name__):
-                graph = LocalGraph(
-                    entity_edges={"Subject": ["H_BIRTH"]},
-                    hyperedge_entities={"H_BIRTH": ["Subject", "Birth City"]},
-                    hyperedge_texts={"H_BIRTH": "Subject was born in Birth City."},
-                )
-                embedder = CountingEmbedder()
-                llm = MockAtomicLLMService(
-                    answer_responses=[{"answer": "Birth City"}],
-                    fact_query_responses=[response],
-                )
-                retriever = AtomicHyperedgeRetriever(
-                    dataset=_dataset(graph, ScoreHyperedgeStore({"H_BIRTH": 0.9})),
-                    embedder=embedder,
-                    config=RetrievalConfig(local_hyperedge_top_k=3),
-                    llm_service=llm,
-                    logger=logging.getLogger("test.fact_query_fallback"),
-                )
-                executor = AtomicDagExecutor(
-                    analyzer=QuestionAnalyzer(
-                        {
-                            "Where was Subject born?": AtomicQuestionAnalysis(
-                                entities=["Subject"],
-                                answer_type="location",
-                            )
-                        }
-                    ),  # type: ignore[arg-type]
-                    retriever=retriever,
-                    llm_service=llm,
-                    logger=logging.getLogger("test.fact_query_fallback"),
-                )
-
-                result = executor.run("Where was Subject born?")
-
-                rank_queries = [
-                    texts[0] for texts, stage in embedder.calls if stage == "atomic_local_hyperedge_retrieval"
-                ]
-                self.assertEqual(rank_queries, ["Where was Subject born?"])
-                retrieval_artifact = result.artifacts["atomic_retrieval"][0]
-                self.assertEqual(retrieval_artifact["fact_query"], "Where was Subject born?")
-                self.assertEqual(retrieval_artifact["hyperedge_retrieval_query"], "Where was Subject born?")
-                self.assertEqual(llm.answer_calls[0]["atomic_question"], "Where was Subject born?")
-
-    def test_descriptive_fallback_uses_fact_query_for_hyperedge_vector_lookup(self) -> None:
+    def test_descriptive_fallback_uses_question_for_hyperedge_vector_lookup(self) -> None:
         graph = LocalGraph(
             entity_edges={},
             hyperedge_entities={"H_POP": ["Tourist City", "8.005 million"]},
@@ -487,31 +369,26 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         )
         store = QueryHyperedgeStore({"H_POP": 0.97})
         embedder = CountingEmbedder()
-        llm = MockAtomicLLMService(
-            fact_query_responses=[
-                {
-                    "fact_query": "The city popular with tourists had a population of [NUMBER] in 2010.",
-                }
-            ]
-        )
+        llm = MockAtomicLLMService()
         retriever = AtomicHyperedgeRetriever(
             dataset=_dataset(graph, store),
             embedder=embedder,
             config=RetrievalConfig(local_hyperedge_top_k=3, descriptive_fallback_hyperedge_top_k=5),
             llm_service=llm,
-            logger=logging.getLogger("test.fact_query_descriptive_fallback"),
+            logger=logging.getLogger("test.question_query_descriptive_fallback"),
         )
 
+        question = "What is the population in 2010 of the city popular with tourists?"
         result = retriever.retrieve_primary_anchor_local(
-            question="What is the population in 2010 of the city popular with tourists?",
+            question=question,
             analysis=AtomicQuestionAnalysis(entities=[], answer_type="number"),
             primary_anchor_mention="",
         )
 
         calls_by_stage = {(texts[0], stage) for texts, stage in embedder.calls}
-        fact_query = "The city popular with tourists had a population of [NUMBER] in 2010."
-        self.assertIn((fact_query, "atomic_descriptive_hyperedge_fallback"), calls_by_stage)
-        self.assertIn((fact_query, "atomic_local_hyperedge_retrieval"), calls_by_stage)
+        self.assertIn((question, "atomic_descriptive_hyperedge_fallback"), calls_by_stage)
+        self.assertIn((question, "atomic_local_hyperedge_retrieval"), calls_by_stage)
+        self.assertFalse(hasattr(llm, "rewrite_atomic_fact_query"))
         self.assertEqual(result.candidate_hyperedge_ids, ["H_POP"])
         self.assertEqual(result.top_hyperedges[0]["hyperedge_id"], "H_POP")
 
@@ -1023,24 +900,24 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         result = executor.run("Who is linked to Subject?")
 
         self.assertEqual(len(llm.answer_calls), 1)
-        evidence = llm.answer_calls[0]["evidence"]
+        evidence_blocks = llm.answer_calls[0]["evidence_blocks"]
         payload_text = json.dumps(llm.answer_calls[0], ensure_ascii=False)
-        self.assertEqual([item["evidence_id"] for item in evidence], ["E1", "E2", "E3"])
-        self.assertEqual([item["hyperedge_text"] for item in evidence], ["H2", "H3", "H4"])
-        self.assertEqual([item["chunk_ids"] for item in evidence], [["C1"], ["C2"], ["C3"]])
+        self.assertEqual([block["chunk_id"] for block in evidence_blocks], ["C1", "C2", "C3"])
+        self.assertEqual([block["title"] for block in evidence_blocks], ["two", "three", "four"])
         self.assertEqual(
-            llm.answer_calls[0]["contexts"],
-            [
-                {"chunk_id": "C1", "title": "two", "text": "two", "supports": ["E1"]},
-                {"chunk_id": "C2", "title": "three", "text": "three", "supports": ["E2"]},
-                {"chunk_id": "C3", "title": "four", "text": "four", "supports": ["E3"]},
-            ],
+            [[item["hyperedge_id"] for item in block["hyperedges"]] for block in evidence_blocks],
+            [["H1"], ["H2"], ["H3"]],
         )
-        self.assertNotIn("chunk_texts", evidence[0])
-        self.assertNotIn("chunk_title", evidence[0])
-        self.assertNotIn("hyperedge_id", evidence[0])
-        self.assertNotIn("entity_records", evidence[0])
-        self.assertNotIn("score_breakdown", evidence[0])
+        self.assertEqual(
+            [[item["hyperedge_text"] for item in block["hyperedges"]] for block in evidence_blocks],
+            [["H2"], ["H3"], ["H4"]],
+        )
+        self.assertNotIn("evidence", llm.answer_calls[0])
+        self.assertNotIn("contexts", llm.answer_calls[0])
+        self.assertNotIn("chunk_texts", evidence_blocks[0])
+        self.assertNotIn("chunk_title", evidence_blocks[0])
+        self.assertNotIn("entity_records", evidence_blocks[0])
+        self.assertNotIn("score_breakdown", evidence_blocks[0])
         for forbidden in (
             "source_ids",
             "entity_records",
@@ -1074,15 +951,19 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
 
         payload = AtomicDagExecutor._answer_evidence_payload([candidate])
 
-        self.assertEqual(payload["evidence"][0]["chunk_ids"], ["C1"])
         self.assertEqual(
-            payload["contexts"],
+            payload["evidence_blocks"],
             [
                 {
                     "chunk_id": "C1",
                     "title": "Subject Page",
                     "text": "Subject is linked to Answer.",
-                    "supports": ["E1"],
+                    "hyperedges": [
+                        {
+                            "hyperedge_id": "H1",
+                            "hyperedge_text": "Subject is linked to Answer.",
+                        }
+                    ],
                 }
             ],
         )
@@ -1126,20 +1007,75 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
 
         result = executor.run("Who is linked to Subject?")
 
-        evidence = llm.answer_calls[0]["evidence"]
-        contexts = llm.answer_calls[0]["contexts"]
-        self.assertEqual(evidence[0]["chunk_ids"], ["C1"])
-        self.assertEqual(evidence[1]["chunk_ids"], ["C1"])
-        self.assertEqual(evidence[2]["chunk_ids"], ["C2"])
-        self.assertEqual(len(contexts), 2)
-        self.assertEqual(contexts[0]["text"], "The same source chunk mentions Subject and two answers.")
-        self.assertEqual(contexts[0]["supports"], ["E1", "E2"])
-        self.assertEqual(contexts[1]["supports"], ["E3"])
+        evidence_blocks = llm.answer_calls[0]["evidence_blocks"]
+        self.assertEqual(len(evidence_blocks), 2)
+        self.assertEqual(evidence_blocks[0]["text"], "The same source chunk mentions Subject and two answers.")
+        self.assertEqual(
+            [item["hyperedge_text"] for item in evidence_blocks[0]["hyperedges"]],
+            ["Subject is linked to Answer One.", "Subject is also linked to Answer Two."],
+        )
+        self.assertEqual(
+            [item["hyperedge_id"] for item in evidence_blocks[0]["hyperedges"]],
+            ["H1", "H2"],
+        )
+        self.assertEqual(
+            [item["hyperedge_text"] for item in evidence_blocks[1]["hyperedges"]],
+            ["Subject is linked to Answer Three."],
+        )
         artifact_evidence = result.artifacts["atomic_retrieval"][0]["answerer_evidence"]
         self.assertEqual(artifact_evidence[0]["chunk_ids"], ["C_SHARED"])
         self.assertEqual(artifact_evidence[1]["chunk_ids"], ["C_SHARED"])
         self.assertEqual(artifact_evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
         self.assertEqual(artifact_evidence[1]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
+
+    def test_answerer_payload_adds_bridge_hyperedge_text_for_two_hop_evidence_outside_topk(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Illusions": ["H_BRIDGE"],
+                "Zoran Đorđević": ["H_BRIDGE", "H_SECOND"],
+            },
+            hyperedge_entities={
+                "H_BRIDGE": ["Illusions", "Zoran Đorđević"],
+                "H_SECOND": ["Zoran Đorđević", "Serbia"],
+            },
+            hyperedge_texts={
+                "H_BRIDGE": "Illusions was directed by Zoran Đorđević.",
+                "H_SECOND": "Zoran Đorđević was Serbian.",
+            },
+            hyperedge_chunks={
+                "H_BRIDGE": ["C_ILLUSIONS"],
+                "H_SECOND": ["C_ZORAN"],
+            },
+            chunk_texts={
+                "C_ILLUSIONS": "Illusions\nIllusions was directed by Zoran Đorđević.",
+                "C_ZORAN": "Zoran Đorđević\nZoran Đorđević was a Serbian film director.",
+            },
+        )
+        llm = MockAtomicLLMService(answer_responses=[{"answer": "Serbian"}])
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_BRIDGE": 0.1, "H_SECOND": 0.95})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=1),
+            llm_service=llm,
+            logger=logging.getLogger("test.bridge_evidence_blocks"),
+        )
+        executor = AtomicDagExecutor(
+            analyzer=QuestionAnalyzer(
+                {"What nationality was the director of Illusions?": AtomicQuestionAnalysis(entities=["Illusions"])}
+            ),
+            retriever=retriever,
+            llm_service=llm,
+            logger=logging.getLogger("test.bridge_evidence_blocks"),
+        )
+
+        result = executor.run("What nationality was the director of Illusions?")
+
+        retrieval = result.artifacts["atomic_retrieval"][0]
+        self.assertEqual([item["hyperedge_id"] for item in retrieval["top_evidence"]], ["H_SECOND"])
+        hyperedge = llm.answer_calls[0]["evidence_blocks"][0]["hyperedges"][0]
+        self.assertEqual(hyperedge["hyperedge_id"], "H1")
+        self.assertEqual(hyperedge["hyperedge_text"], "Zoran Đorđević was Serbian.")
+        self.assertEqual(hyperedge["bridge_hyperedge_text"], "Illusions was directed by Zoran Đorđević.")
 
     def test_compact_answer_payload_is_much_smaller_than_full_candidate_dicts(self) -> None:
         long_description = "role metadata description " * 200
@@ -1188,8 +1124,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             "atomic_question": "What country is Perry Bhandal from?",
             "answer_contract": AtomicDagExecutor._answer_contract("What country is Perry Bhandal from?"),
             "dependency_answers": AtomicDagExecutor._answer_dependency_context(full_payload["dependency_answers"]),
-            "evidence": compact_evidence["evidence"],
-            "contexts": compact_evidence["contexts"],
+            "evidence_blocks": compact_evidence["evidence_blocks"],
         }
 
         full_size = len(json.dumps(full_payload, ensure_ascii=False))
@@ -1213,8 +1148,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertNotIn("confidence", no_anchor.final_answer)
         self.assertTrue(no_anchor.atomic_results[0].insufficient)
         self.assertEqual(len(no_anchor_llm.answer_calls), 1)
-        self.assertEqual(no_anchor_llm.answer_calls[0]["evidence"], [])
-        self.assertEqual(no_anchor_llm.answer_calls[0]["contexts"], [])
+        self.assertEqual(no_anchor_llm.answer_calls[0]["evidence_blocks"], [])
         self.assertEqual(no_anchor.artifacts["atomic_retrieval"][0]["insufficient_reason"], "missing_primary_anchor")
         self.assertEqual(no_anchor.final_answer["answer"], no_anchor.atomic_results[-1].answer)
         self.assertTrue(no_anchor.final_answer["insufficient"])
@@ -1232,8 +1166,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(no_edges.atomic_results[0].answer, "INSUFFICIENT_EVIDENCE")
         self.assertTrue(no_edges.atomic_results[0].insufficient)
         self.assertEqual(len(no_edges_llm.answer_calls), 1)
-        self.assertEqual(no_edges_llm.answer_calls[0]["evidence"], [])
-        self.assertEqual(no_edges_llm.answer_calls[0]["contexts"], [])
+        self.assertEqual(no_edges_llm.answer_calls[0]["evidence_blocks"], [])
         self.assertEqual(no_edges.artifacts["atomic_retrieval"][0]["insufficient_reason"], "primary_anchor_has_no_adjacent_hyperedges")
         self.assertEqual(no_edges.final_answer["answer"], no_edges.atomic_results[-1].answer)
 
@@ -1305,8 +1238,13 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         result = executor.run("Were Film A and Film B released in the same year?", dag)
 
         self.assertEqual(len(llm.answer_calls), 3)
+        final_hyperedge_texts = [
+            hyperedge["hyperedge_text"]
+            for block in llm.answer_calls[2]["evidence_blocks"]
+            for hyperedge in block["hyperedges"]
+        ]
         self.assertEqual(
-            [item["hyperedge_text"] for item in llm.answer_calls[2]["evidence"]],
+            final_hyperedge_texts,
             ["Film A was released in 1960.", "Film B was released in 1960."],
         )
         self.assertEqual([item["answer"] for item in llm.answer_calls[2]["dependency_answers"]], ["1960", "1960"])
@@ -1406,9 +1344,11 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(retrieval["candidate_hyperedge_ids"], ["H_HOST"])
         self.assertEqual(retrieval["top_hyperedges"][0]["hyperedge_id"], "H_HOST")
         self.assertIn("original_question_shared_pool", retrieval["candidate_sources"][0]["pool_sources"])
-        self.assertEqual(llm.answer_calls[0]["evidence"][0]["hyperedge_text"], "Tournament X was hosted by Host Country.")
-        self.assertEqual(llm.answer_calls[0]["evidence"][0]["chunk_ids"], ["C1"])
-        self.assertEqual(llm.answer_calls[0]["contexts"][0]["supports"], ["E1"])
+        self.assertEqual(
+            llm.answer_calls[0]["evidence_blocks"][0]["hyperedges"][0]["hyperedge_text"],
+            "Tournament X was hosted by Host Country.",
+        )
+        self.assertEqual(llm.answer_calls[0]["evidence_blocks"][0]["chunk_id"], "C1")
         self.assertEqual(result.final_answer["answer"], "Host Country")
 
     def test_executor_reuses_provided_original_question_entities_for_shared_pool(self) -> None:

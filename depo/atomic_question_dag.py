@@ -96,6 +96,7 @@ class QuestionStructureAtomicDAGGenerator:
         self,
         *,
         original_question: str,
+        question_entities: list[str],
         question_structure: list[list[str]],
     ) -> AtomicQuestionDAGResult:
         restored_question_structure = _sanitize_question_structure(question_structure)
@@ -105,6 +106,7 @@ class QuestionStructureAtomicDAGGenerator:
 
         user_prompt = build_atomic_question_dag_prompt(
             original_question=original_question,
+            question_entities=question_entities,
             question_structure=restored_question_structure,
         )
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
@@ -240,6 +242,9 @@ def _parse_atomic_question_nodes(raw_questions: list[Any]) -> tuple[list[AtomicQ
                 continue
             depends_on.append(dependency_id)
 
+        # `output_type` is legacy metadata from older saved runs. The current
+        # Step5 prompt does not ask the LLM to produce it, so missing values
+        # deliberately become `unknown` while old payloads remain readable.
         nodes.append(
             AtomicQuestionNode(
                 id=node_id,
@@ -1108,9 +1113,11 @@ def _invalid_result(errors: list[str], raw_payload: dict[str, Any] | None) -> At
 
 def prompt_input_text(
     original_question: str,
+    question_entities: list[str],
     question_structure: list[list[str]],
 ) -> str:
     return build_atomic_question_dag_prompt(
         original_question=original_question,
+        question_entities=question_entities,
         question_structure=question_structure,
     )

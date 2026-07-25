@@ -20,23 +20,25 @@ question DAG generation. Placeholder assignment, overlap removal, and
 all three HanLP SDP views and emits a compact token graph plus selected
 question-structure branch(es). Ordinary questions keep one path; comparison/candidate
 questions may keep one path per candidate branch. Step 5 directly generates an
-Atomic Question DAG from only:
+Atomic Question DAG from:
 
 1. `original_question`
-2. `question_structure`
+2. `question_entities`
+3. `question_structure`
 
-The `question_structure` value is produced by restoring the Step 4 selected
-path(s) into original entity surface forms. Each structure branch is rendered in
-the Step5 LLM prompt as text using `--`, for example `node1 -- node2 -- node3`.
-The original question provides the authoritative semantics; the question
-structure provides only a rough structural skeleton. It does not encode factual
-direction, subject-object direction, or answer dependency direction. Step5 does
-not receive the Step 2 entity surface list because entity recognition can be
-noisy. Ordinary questions usually pass one structure branch; candidate/comparison
-questions usually pass multiple branches. If Step 4 produces no selected path,
-Step 5 is still called with the original question and an empty Question
-structure section. Step 5 does not output semantic reasoning paths, support
-spans, or DAG edges.
+The Step5 user message is a JSON object. `question_entities` contains the explicit
+entity surface forms produced by Step 2. `question_structure` is produced by
+restoring the Step 4 selected paths into original entity surface forms; each
+branch is rendered as one `node1 -- node2 -- node3` string. The original question
+provides the authoritative semantics. Entity and structure inputs are
+non-authoritative coverage hints because entity recognition and structural paths
+can be incomplete or noisy. The structure does not encode factual direction,
+subject-object direction, or answer dependency direction. Ordinary questions
+usually pass one branch; candidate/comparison questions may pass multiple
+branches. If Step 4 produces no selected path, Step 5 is still called with the
+original question, the detected entity list, and an empty `question_structure`
+list. Step 5 does not output semantic reasoning paths, support spans, or DAG
+edges.
 
 ## Output Shape
 
@@ -50,9 +52,10 @@ The CLI prints:
 6. Atomic Question DAG
 
 Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure. Step 5 does not receive entity surface lists, all anchor paths, raw
-SDP edges, masks, candidate sets, constraints, support spans, semantic edge
-alignment metadata, or path indices.
+structure. Step 5 receives only the original question, explicit entity surface
+list, and restored selected structure branches. It does not receive all anchor
+paths, raw SDP edges, masks, candidate sets, constraints, support spans, semantic
+edge alignment metadata, or path indices.
 
 Step 5 returns JSON atomic questions only:
 
@@ -63,8 +66,7 @@ Step 5 returns JSON atomic questions only:
       "id": "q1",
       "question": "natural-language atomic question?",
       "depends_on": [],
-      "operation": "lookup",
-      "output_type": "person"
+      "operation": "lookup"
     }
   ]
 }
@@ -74,6 +76,9 @@ The program parses `atomic_questions` into `AtomicQuestionDAGResult`. Each
 question becomes one DAG node. Edges and leaf nodes are derived deterministically
 from `depends_on`. Step5 does not ask the LLM to emit semantic reasoning paths,
 support spans, or final DAG edges.
+`output_type` is not part of the current Step5 LLM output contract. The parser
+still accepts it in historical saved payloads and otherwise uses `unknown`
+internally for backward compatibility.
 The parser still rejects hard structural errors such as duplicate ids, unknown
 dependencies, later-node dependencies, cycles, and unresolved ENTITY placeholders.
 Mismatches between `depends_on` and textual `qN's answer` mentions are retained

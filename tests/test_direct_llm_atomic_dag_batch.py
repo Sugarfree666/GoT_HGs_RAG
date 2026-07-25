@@ -21,6 +21,7 @@ from run_direct_llm_atomic_dag_batch import (  # noqa: E402
     build_result_payload,
     decompose_question_direct,
 )
+from prompts import ATOMIC_QUESTION_DAG_SYSTEM  # noqa: E402
 
 
 class DirectLLMAtomicDAGBatchTest(unittest.TestCase):
@@ -61,6 +62,30 @@ class DirectLLMAtomicDAGBatchTest(unittest.TestCase):
         self.assertIn(
             "must equal its `depends_on` set exactly",
             DIRECT_LLM_ATOMIC_DAG_SYSTEM,
+        )
+
+    def test_step5_prompt_retains_the_direct_prompt_behavior_contract(self) -> None:
+        shared_contract_markers = (
+            "exact unknown span as `ANSWER`",
+            "candidate carriers",
+            "given constraints",
+            "faithful span substitution",
+            "Alternative-choice wording",
+            "trailing interrogative",
+            "all_ids - referenced_ids == {last_id}",
+            "ANSWER`-slot test",
+        )
+        for marker in shared_contract_markers:
+            with self.subTest(marker=marker):
+                self.assertIn(marker, DIRECT_LLM_ATOMIC_DAG_SYSTEM)
+                self.assertIn(marker, ATOMIC_QUESTION_DAG_SYSTEM)
+
+        self.assertIn("question_entities", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("question_structure", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn("output_type", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn(
+            "First derive the answer contract and candidate DAG from the original question",
+            ATOMIC_QUESTION_DAG_SYSTEM,
         )
 
     def test_all_prompt_examples_have_one_final_leaf_and_exact_references(self) -> None:

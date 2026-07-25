@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -255,7 +256,15 @@ def build_decomposition_payload(
             "5_step5_action_trace": {
                 "input": {
                     "original_question": item["question"],
-                    "question_structure": [list(branch) for branch in question_structure],
+                    "question_entities": [
+                        entity.text
+                        for entity in preprocess_result.explicit_entities.entities
+                    ],
+                    "question_structure": [
+                        " -- ".join(str(node).strip() for node in branch if str(node).strip())
+                        for branch in question_structure
+                        if any(str(node).strip() for node in branch)
+                    ],
                 },
                 "atomic_questions": _step5_atomic_questions(atomic_question_dag),
             },
@@ -363,7 +372,8 @@ def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) ->
     question_structure = input_payload.get("question_structure") or []
     if question_structure:
         for branch_index, branch in enumerate(question_structure, start=1):
-            lines.append(f"- Branch {branch_index}: {' -- '.join(branch)}")
+            branch_text = branch if isinstance(branch, str) else " -- ".join(branch)
+            lines.append(f"- Branch {branch_index}: {branch_text}")
     else:
         lines.append("(none)")
     lines.append("")
@@ -376,7 +386,6 @@ def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) ->
             lines.append(f"- {question.get('id')}: {question.get('question')}")
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
             lines.append(f"  - operation: {question.get('operation') or ''}")
-            lines.append(f"  - output_type: {question.get('output_type') or ''}")
     else:
         lines.append("(none)")
     lines.append("")
@@ -734,6 +743,35 @@ def _processed_manifest_keys(manifest_path: Path) -> set[tuple[str, int, str | N
 
 def _manifest_key(dataset: str, index: int, qid: str | None) -> tuple[str, int, str | None]:
     return (dataset, index, str(qid) if qid is not None else None)
+
+
+def _question_dir_name(index: int, qid: str | None, question: str) -> str:
+    prefix = f"{index:05d}"
+    if qid:
+        prefix += f"_{_slug(qid, max_len=48)}"
+    return f"{prefix}_{_slug(question, max_len=80)}"
+
+
+def _slug(value: str, max_len: int = 80) -> str:
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", str(value).strip().lower()).strip("-")
+    return (slug[:max_len].strip("-") or "question")
+
+
+def _write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(_jsonable(payload), ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _jsonable(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _jsonable(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_jsonable(item) for item in value]
+    if isinstance(value, tuple):
+        return [_jsonable(item) for item in value]
+    if hasattr(value, "to_dict") and callable(value.to_dict):
+        return _jsonable(value.to_dict())
+    return value
 
 
 def _dag_valid(payload: dict[str, Any]) -> Any:

@@ -247,20 +247,10 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         hyperedge_query: str | None = None,
     ) -> str:
+        del analysis
         if hyperedge_query and hyperedge_query.strip():
             return hyperedge_query
-        if self.llm_service is None or not hasattr(self.llm_service, "rewrite_atomic_fact_query"):
-            return question
-        try:
-            payload = self.llm_service.rewrite_atomic_fact_query(
-                atomic_question=question,
-                answer_type=analysis.answer_type,
-            )
-        except Exception as exc:
-            self.logger.warning("Atomic fact query rewrite failed in retriever; using question: %s", exc)
-            return question
-        fact_query = _clean_fact_query_payload(payload)
-        return fact_query or question
+        return question
 
     def _build_anchor_candidate_pool(
         self,
@@ -1396,12 +1386,6 @@ def _dedupe_strings(values: list[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
-
-
-def _clean_fact_query_payload(value: Any) -> str:
-    if not isinstance(value, dict):
-        return ""
-    return normalize_label(str(value.get("fact_query", "") or "").strip())
 
 
 def _lookup_keys_for_entity(entity_id: str) -> list[str]:

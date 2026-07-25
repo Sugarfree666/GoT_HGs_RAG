@@ -66,10 +66,18 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 2)
 
-        self.assertIn("Original question:\nWho is older, Ryan Tubridy or Mauro Massironi?", llm.step5_user_prompt)
-        self.assertIn("Question structure:", llm.step5_user_prompt)
-        self.assertIn("Branch 1:\nRyan Tubridy -- older -- Who", llm.step5_user_prompt)
-        self.assertIn("Branch 2:\nMauro Massironi -- older -- Who", llm.step5_user_prompt)
+        step5_input = json.loads(llm.step5_user_prompt)
+        self.assertEqual(
+            step5_input,
+            {
+                "original_question": "Who is older, Ryan Tubridy or Mauro Massironi?",
+                "question_entities": ["Ryan Tubridy", "Mauro Massironi"],
+                "question_structure": [
+                    "Ryan Tubridy -- older -- Who",
+                    "Mauro Massironi -- older -- Who",
+                ],
+            },
+        )
         self.assertNotIn("step4_paths", llm.step5_user_prompt)
         self.assertNotIn("global_best_paths", llm.step5_user_prompt)
         self.assertNotIn("topic_entities", llm.step5_user_prompt)
@@ -214,9 +222,14 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(compiled.path_type, "no_entity_branch_path")
         self.assertEqual(compiled.paths, [])
         self.assertEqual(llm.calls, 2)
-        self.assertIn("Original question:\nWhat is the capital of France?", llm.step5_user_prompt)
-        self.assertIn("Question structure:", llm.step5_user_prompt)
-        self.assertNotIn("Branch 1:", llm.step5_user_prompt)
+        self.assertEqual(
+            json.loads(llm.step5_user_prompt),
+            {
+                "original_question": "What is the capital of France?",
+                "question_entities": [],
+                "question_structure": [],
+            },
+        )
         dag = result["atomic_question_dag"]
         self.assertTrue(dag.valid, dag.validation_errors)
 
@@ -239,13 +252,17 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                 ["ENTITYB", "film", "has", "director", "born", "later"],
             ],
         )
-        self.assertIn(
-            "Branch 1:\nIllusions (1982 Film) -- film -- has -- director -- born -- later",
-            llm.step5_user_prompt,
+        step5_input = json.loads(llm.step5_user_prompt)
+        self.assertEqual(
+            step5_input["question_entities"],
+            ["Illusions (1982 Film)", "It'S A Wonderful Afterlife"],
         )
-        self.assertIn(
-            "Branch 2:\nIt'S A Wonderful Afterlife -- film -- has -- director -- born -- later",
-            llm.step5_user_prompt,
+        self.assertEqual(
+            step5_input["question_structure"],
+            [
+                "Illusions (1982 Film) -- film -- has -- director -- born -- later",
+                "It'S A Wonderful Afterlife -- film -- has -- director -- born -- later",
+            ],
         )
         self.assertNotIn("step4_paths", llm.step5_user_prompt)
         self.assertNotIn("global_best_paths", llm.step5_user_prompt)
@@ -1399,7 +1416,6 @@ def _atomic_question(
     question_id: str,
     question: str,
     depends_on: list[str],
-    output_type: str,
     operation: str = "lookup",
 ) -> dict[str, object]:
     return {
@@ -1407,20 +1423,18 @@ def _atomic_question(
         "question": question,
         "depends_on": depends_on,
         "operation": operation,
-        "output_type": output_type,
     }
 
 
 def _older_step5_payload() -> dict[str, object]:
     return {
         "atomic_questions": [
-            _atomic_question("q1", "When was Ryan Tubridy born?", [], "date"),
-            _atomic_question("q2", "When was Mauro Massironi born?", [], "date"),
+            _atomic_question("q1", "When was Ryan Tubridy born?", []),
+            _atomic_question("q2", "When was Mauro Massironi born?", []),
             _atomic_question(
                 "q3",
                 "Based on q1's answer and q2's answer, who is older: Ryan Tubridy or Mauro Massironi?",
                 ["q1", "q2"],
-                "person",
                 "select",
             ),
         ],
@@ -1431,18 +1445,17 @@ def _illusions_step5_payload() -> dict[str, object]:
     return {
         "atomic_questions": [
             _atomic_question(
-                "q1", "Who is the director of Illusions (1982 Film)?", [], "person"
+                "q1", "Who is the director of Illusions (1982 Film)?", []
             ),
-            _atomic_question("q2", "When was q1's answer born?", ["q1"], "date"),
+            _atomic_question("q2", "When was q1's answer born?", ["q1"]),
             _atomic_question(
-                "q3", "Who is the director of It'S A Wonderful Afterlife?", [], "person"
+                "q3", "Who is the director of It'S A Wonderful Afterlife?", []
             ),
-            _atomic_question("q4", "When was q3's answer born?", ["q3"], "date"),
+            _atomic_question("q4", "When was q3's answer born?", ["q3"]),
             _atomic_question(
                 "q5",
                 "Which film has the director born later, Illusions (1982 Film) or It'S A Wonderful Afterlife, based on q2's answer and q4's answer?",
                 ["q2", "q4"],
-                "work",
                 "select",
             ),
         ],
@@ -1462,10 +1475,15 @@ class FakePreprocessLLM:
             or "complex-question decomposition" in system_prompt
         ):
             self.step5_user_prompt = user_prompt
-            assert "Original question:\nWho is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
-            assert "Question structure:" in user_prompt
-            assert "Branch 1:\nRyan Tubridy -- older -- Who" in user_prompt
-            assert "Branch 2:\nMauro Massironi -- older -- Who" in user_prompt
+            prompt_payload = json.loads(user_prompt)
+            assert prompt_payload == {
+                "original_question": "Who is older, Ryan Tubridy or Mauro Massironi?",
+                "question_entities": ["Ryan Tubridy", "Mauro Massironi"],
+                "question_structure": [
+                    "Ryan Tubridy -- older -- Who",
+                    "Mauro Massironi -- older -- Who",
+                ],
+            }
             assert "ENTITYA" not in user_prompt
             assert "ENTITYB" not in user_prompt
             assert "masked_question" not in user_prompt
@@ -1532,14 +1550,15 @@ class IllusionsPipelineLLM:
             or "complex-question decomposition" in system_prompt
         ):
             self.step5_user_prompt = user_prompt
-            assert (
-                "Branch 1:\nIllusions (1982 Film) -- film -- has -- director -- born -- later"
-                in user_prompt
-            )
-            assert (
-                "Branch 2:\nIt'S A Wonderful Afterlife -- film -- has -- director -- born -- later"
-                in user_prompt
-            )
+            prompt_payload = json.loads(user_prompt)
+            assert prompt_payload["question_entities"] == [
+                "Illusions (1982 Film)",
+                "It'S A Wonderful Afterlife",
+            ]
+            assert prompt_payload["question_structure"] == [
+                "Illusions (1982 Film) -- film -- has -- director -- born -- later",
+                "It'S A Wonderful Afterlife -- film -- has -- director -- born -- later",
+            ]
             assert "step4_paths" not in user_prompt
             assert "global_best_paths" not in user_prompt
             assert "topic_entities" not in user_prompt

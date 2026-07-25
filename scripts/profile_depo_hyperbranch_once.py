@@ -175,6 +175,9 @@ def main() -> int:
     with profile.timed("depo.step5_atomic_dag"):
         atomic_question_dag = QuestionStructureAtomicDAGGenerator(llm_client).generate(
             original_question=record.question,
+            question_entities=[
+                entity.text for entity in preprocess_result.explicit_entities.entities
+            ],
             question_structure=question_structure,
         )
 

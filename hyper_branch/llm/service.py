@@ -18,14 +18,6 @@ class AtomicLLMService(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def rewrite_atomic_fact_query(
-        self,
-        atomic_question: str,
-        answer_type: str,
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-    @abstractmethod
     def answer_atomic_question(
         self,
         atomic_question: str,
@@ -69,22 +61,6 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         response.setdefault("entities", [])
         return {"entities": response.get("entities", [])}
 
-    def rewrite_atomic_fact_query(
-        self,
-        atomic_question: str,
-        answer_type: str,
-    ) -> dict[str, Any]:
-        response = self.client.chat_json(
-            "atomic_fact_query",
-            self.prompts.get("atomic_fact_query"),
-            {
-                "atomic_question": atomic_question,
-                "answer_type": answer_type,
-            },
-            max_tokens=200,
-        )
-        return _fact_query_payload(response)
-
     def answer_atomic_question(
         self,
         atomic_question: str,
@@ -93,7 +69,7 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
-        evidence_items, contexts = _answer_evidence_sections(evidence)
+        evidence_blocks = _answer_evidence_blocks(evidence)
         response = self.client.chat_json(
             "atomic_answer",
             self.prompts.get("atomic_answer"),
@@ -102,8 +78,7 @@ class OpenAIAtomicLLMService(AtomicLLMService):
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
-                "evidence": evidence_items,
-                "contexts": contexts,
+                "evidence_blocks": evidence_blocks,
             },
             max_tokens=900,
         )
@@ -141,12 +116,9 @@ class MockAtomicLLMService(AtomicLLMService):
     def __init__(
         self,
         answer_responses: list[dict[str, Any]] | None = None,
-        fact_query_responses: list[dict[str, Any] | BaseException] | None = None,
     ) -> None:
         self.answer_responses = list(answer_responses or [])
-        self.fact_query_responses = list(fact_query_responses or [])
         self.answer_calls: list[dict[str, Any]] = []
-        self.fact_query_calls: list[dict[str, Any]] = []
 
     def analyze_atomic_question(
         self,
@@ -161,24 +133,6 @@ class MockAtomicLLMService(AtomicLLMService):
         ][:4]
         return {"entities": entities}
 
-    def rewrite_atomic_fact_query(
-        self,
-        atomic_question: str,
-        answer_type: str,
-    ) -> dict[str, Any]:
-        self.fact_query_calls.append(
-            {
-                "atomic_question": atomic_question,
-                "answer_type": answer_type,
-            }
-        )
-        if self.fact_query_responses:
-            response = self.fact_query_responses.pop(0)
-            if isinstance(response, BaseException):
-                raise response
-            return _fact_query_payload(response)
-        return {"fact_query": str(atomic_question or "").strip()}
-
     def answer_atomic_question(
         self,
         atomic_question: str,
@@ -187,54 +141,46 @@ class MockAtomicLLMService(AtomicLLMService):
         evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
-        evidence_items, contexts = _answer_evidence_sections(evidence)
+        evidence_blocks = _answer_evidence_blocks(evidence)
         self.answer_calls.append(
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,
                 "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
-                "evidence": evidence_items,
-                "contexts": contexts,
+                "evidence_blocks": evidence_blocks,
             }
         )
         if self.answer_responses:
             response = self.answer_responses.pop(0)
             return {"answer": str(response.get("answer", "") or "")} if isinstance(response, dict) else {"answer": ""}
-        if not evidence_items and not contexts:
+        if not evidence_blocks:
             return {"answer": "INSUFFICIENT_EVIDENCE"}
 
         query_tokens = set(content_tokens(atomic_question))
         answer = ""
-        first = evidence_items[0] if evidence_items else {}
-        context_by_id = {str(item.get("chunk_id", "") or ""): item for item in contexts}
-        for item in evidence_items:
-            context_texts: list[str] = []
-            for chunk_id in ensure_list(item.get("chunk_ids", [])):
-                context = context_by_id.get(str(chunk_id))
-                if not context:
+        first_hyperedge_text = ""
+        for block in evidence_blocks:
+            block_texts = [
+                str(block.get("title", "") or ""),
+                str(block.get("text", "") or ""),
+            ]
+            for hyperedge in ensure_list(block.get("hyperedges", [])):
+                if not isinstance(hyperedge, dict):
                     continue
-                context_texts.extend(
-                    [
-                        str(context.get("title", "") or ""),
-                        str(context.get("text", "") or ""),
-                    ]
-                )
-            text = " ".join(
-                [
-                    str(item.get("hyperedge_text", "") or ""),
-                    *[str(chunk) for chunk in ensure_list(item.get("chunk_texts", []))],
-                    *context_texts,
-                ]
-            )
-            for token in content_tokens(text):
+                hyperedge_text = str(hyperedge.get("hyperedge_text", "") or "")
+                if not first_hyperedge_text:
+                    first_hyperedge_text = hyperedge_text
+                block_texts.append(hyperedge_text)
+                block_texts.append(str(hyperedge.get("bridge_hyperedge_text", "") or ""))
+            for token in content_tokens(" ".join(block_texts)):
                 if token not in query_tokens:
                     answer = normalize_label(token)
                     break
             if answer:
                 break
         if not answer:
-            answer = short_text(str(first.get("hyperedge_text", "")), 160)
+            answer = short_text(first_hyperedge_text, 160)
 
         return {"answer": answer}
 
@@ -308,15 +254,47 @@ def _analysis_payload(analysis: Any) -> dict[str, Any]:
     }
 
 
-def _fact_query_payload(response: Any) -> dict[str, Any]:
-    if not isinstance(response, dict):
-        return {"fact_query": ""}
-    return {"fact_query": str(response.get("fact_query", "") or "").strip()}
-
-
-def _answer_evidence_sections(evidence: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _answer_evidence_blocks(evidence: Any) -> list[dict[str, Any]]:
     if isinstance(evidence, dict):
-        evidence_items = [dict(item) for item in ensure_list(evidence.get("evidence")) if isinstance(item, dict)]
-        contexts = [dict(item) for item in ensure_list(evidence.get("contexts")) if isinstance(item, dict)]
-        return evidence_items, contexts
-    return [dict(item) for item in ensure_list(evidence) if isinstance(item, dict)], []
+        blocks = [dict(item) for item in ensure_list(evidence.get("evidence_blocks")) if isinstance(item, dict)]
+        if blocks:
+            return blocks
+        return _legacy_evidence_sections_to_blocks(
+            [dict(item) for item in ensure_list(evidence.get("evidence")) if isinstance(item, dict)],
+            [dict(item) for item in ensure_list(evidence.get("contexts")) if isinstance(item, dict)],
+        )
+    blocks = [dict(item) for item in ensure_list(evidence) if isinstance(item, dict)]
+    if blocks and any("hyperedges" in item for item in blocks):
+        return blocks
+    return []
+
+
+def _legacy_evidence_sections_to_blocks(
+    evidence_items: list[dict[str, Any]],
+    contexts: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    context_by_id = {str(item.get("chunk_id", "") or ""): item for item in contexts}
+    blocks: list[dict[str, Any]] = []
+    block_by_context_id: dict[str, dict[str, Any]] = {}
+    for index, item in enumerate(evidence_items, start=1):
+        hyperedge = {
+            "hyperedge_id": f"H{index}",
+            "hyperedge_text": str(item.get("hyperedge_text", "") or "").strip(),
+        }
+        chunk_ids = [str(chunk_id or "").strip() for chunk_id in ensure_list(item.get("chunk_ids")) if str(chunk_id or "").strip()]
+        if not chunk_ids:
+            chunk_ids = ["__NO_LINKED_CHUNK__"]
+        for chunk_id in chunk_ids:
+            context = context_by_id.get(chunk_id, {})
+            block = block_by_context_id.get(chunk_id)
+            if block is None:
+                block = {
+                    "chunk_id": f"C{len(blocks) + 1}",
+                    "title": str(context.get("title", "") or ""),
+                    "text": str(context.get("text", "") or ""),
+                    "hyperedges": [],
+                }
+                block_by_context_id[chunk_id] = block
+                blocks.append(block)
+            block["hyperedges"].append(dict(hyperedge))
+    return blocks

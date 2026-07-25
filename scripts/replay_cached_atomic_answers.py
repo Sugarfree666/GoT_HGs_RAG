@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import logging
 import os
 import shutil
 import sys
@@ -32,25 +31,22 @@ from hyper_branch.atomic.models import (  # noqa: E402
     AtomicQuestionNode,
     FusedHyperedgeCandidate,
 )
-from hyper_branch.atomic.retriever import LocalHyperedgeRetrievalResult  # noqa: E402
-from hyper_branch.config import LLMConfig, load_config  # noqa: E402
+from hyper_branch.config import LLMConfig  # noqa: E402
 from hyper_branch.llm.client import OpenAICompatibleClient  # noqa: E402
 from hyper_branch.llm.prompts import PromptManager  # noqa: E402
 from hyper_branch.llm.service import MockAtomicLLMService, OpenAIAtomicLLMService  # noqa: E402
-from hyper_branch.logging_utils import TraceStore, configure_logging  # noqa: E402
-from hyper_branch.pipeline import HyperBranchPipeline  # noqa: E402
-from hyper_branch.utils import ensure_list, pretty_json, short_text  # noqa: E402
+from hyper_branch.logging_utils import TraceStore  # noqa: E402
+from hyper_branch.utils import ensure_list, normalize_label, pretty_json  # noqa: E402
 
 
 METHOD = "depo_hypermemory_cached_atomic_answer_replay"
-FACT_QUERY_METHOD = "depo_hypermemory_fact_query_retrieval_replay"
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Replay atomic answering from a previous DEPO + HyperBranch run. "
-            "It can reuse cached answerer evidence exactly or rerank cached candidate hyperedges with fact_query."
+            "It reuses cached answerer evidence exactly."
         )
     )
     parser.add_argument("source_run", help="Existing run directory containing manifest.jsonl.")
@@ -83,31 +79,13 @@ def parse_args() -> argparse.Namespace:
         "--top-k",
         type=int,
         default=0,
-        help=(
-            "cached mode: limit cached evidence per atomic node, 0 means all; "
-            "fact-query mode: override reranked local_hyperedge_top_k, 0 means config value."
-        ),
+        help="Limit cached evidence per atomic node, 0 means all.",
     )
     parser.add_argument(
         "--retrieval-mode",
-        choices=("cached", "fact-query"),
+        choices=("cached",),
         default="cached",
-        help=(
-            "cached: reuse old answerer evidence exactly; "
-            "fact-query: reuse cached DAG/analysis/candidate pools but rewrite each resolved atomic question "
-            "to fact_query and rerank cached candidate hyperedges."
-        ),
-    )
-    parser.add_argument(
-        "--config",
-        help=(
-            "HyperBranch YAML config used by --retrieval-mode fact-query. "
-            "Defaults to configs/<dataset>.yaml inferred from the source run."
-        ),
-    )
-    parser.add_argument(
-        "--embedding-model",
-        help="Override embedding model used by --retrieval-mode fact-query.",
+        help="Reuse old answerer evidence exactly.",
     )
     parser.add_argument("--resume", action="store_true", help="Skip questions whose replay pipeline.json exists.")
     parser.add_argument(
@@ -148,16 +126,7 @@ def main() -> int:
     summary_path = output_dir / "summary.md"
     manifest_out = output_dir / "manifest.jsonl"
 
-    fact_query_runtime: _FactQueryReplayRuntime | None = None
-    if args.retrieval_mode == "fact-query":
-        fact_query_runtime = _FactQueryReplayRuntime(
-            config_path=_config_path_for_replay(args, source_run, rows),
-            cache_dir=output_dir / "_hyperbranch_pipeline",
-            args=args,
-        )
-        service = fact_query_runtime.service
-    else:
-        service = _make_llm_service(args)
+    service = _make_llm_service(args)
     summary_lines = _summary_header(source_run, output_dir, args, rows)
     eval_records: list[dict[str, Any]] = []
 
@@ -188,7 +157,6 @@ def main() -> int:
                     source_question_dir=source_question_dir,
                     output_question_dir=question_dir,
                     service=service,
-                    fact_query_runtime=fact_query_runtime,
                     args=args,
                 )
                 _write_json(question_dir / "pipeline.json", payload)
@@ -214,8 +182,6 @@ def main() -> int:
                 print(f"[err] #{row.get('index')} {type(exc).__name__}: {exc}")
             summary_path.write_text("\n".join(summary_lines).rstrip() + "\n", encoding="utf-8")
 
-    if fact_query_runtime is not None:
-        fact_query_runtime.close()
     _maybe_print_eval(eval_records, args.eval_every, force=True)
     summary_path.write_text("\n".join(summary_lines).rstrip() + "\n", encoding="utf-8")
     print(f"Summary written to {summary_path}")
@@ -228,7 +194,6 @@ def replay_one_question(
     source_question_dir: Path,
     output_question_dir: Path,
     service: Any,
-    fact_query_runtime: "_FactQueryReplayRuntime | None" = None,
     args: argparse.Namespace,
 ) -> dict[str, Any]:
     source_pipeline = _read_optional_json(source_question_dir / "pipeline.json")
@@ -239,19 +204,6 @@ def replay_one_question(
     _copy_if_exists(source_question_dir / "decomposition.json", output_question_dir / "decomposition.json")
     _copy_if_exists(source_question_dir / "decomposition.md", output_question_dir / "decomposition.md")
     _copy_if_exists(source_question_dir / "hyperbranch_dag.json", output_question_dir / "hyperbranch_dag.json")
-
-    if args.retrieval_mode == "fact-query":
-        if fact_query_runtime is None:
-            raise ValueError("--retrieval-mode fact-query requires an initialized fact-query runtime.")
-        return replay_one_question_with_fact_query_retrieval(
-            row=row,
-            source_pipeline=source_pipeline,
-            source_question_dir=source_question_dir,
-            output_question_dir=output_question_dir,
-            original_question=original_question,
-            runtime=fact_query_runtime,
-            args=args,
-        )
 
     dag_nodes = _load_dag_nodes(source_question_dir, source_pipeline)
     dag_nodes, dag_repair = AtomicDagExecutor.repair_dag_for_execution(dag_nodes)
@@ -301,15 +253,18 @@ def replay_one_question(
         analysis = _analysis_from_cached(analysis_record, old_answer_record)
         evidence = _evidence_from_cached(retrieval_record, old_answer_record, args.top_k)
         answer_contract = AtomicDagExecutor._answer_contract(resolved_question)
-        evidence_payload = AtomicDagExecutor._answer_evidence_payload(evidence)
+        bridge_resolver = _cached_bridge_hyperedge_text_resolver(retrieval_record, old_answer_record)
+        evidence_payload = AtomicDagExecutor._answer_evidence_payload(
+            evidence,
+            bridge_hyperedge_text_resolver=bridge_resolver,
+        )
         answer_input = {
             "node_id": node.node_id,
             "original_question": original_question,
             "atomic_question": resolved_question,
             "answer_contract": answer_contract,
             "dependency_answers": dependency_answers_for_prompt,
-            "evidence": list(evidence_payload.get("evidence", [])),
-            "contexts": list(evidence_payload.get("contexts", [])),
+            "evidence_blocks": list(evidence_payload.get("evidence_blocks", [])),
             "question_mode": args.question_mode,
             "cached_resolved_question": str(
                 retrieval_record.get("resolved_question") or old_answer_record.get("question") or ""
@@ -411,257 +366,6 @@ def replay_one_question(
     return payload
 
 
-def replay_one_question_with_fact_query_retrieval(
-    *,
-    row: dict[str, Any],
-    source_pipeline: dict[str, Any],
-    source_question_dir: Path,
-    output_question_dir: Path,
-    original_question: str,
-    runtime: "_FactQueryReplayRuntime",
-    args: argparse.Namespace,
-) -> dict[str, Any]:
-    dag_nodes = _load_dag_nodes(source_question_dir, source_pipeline)
-    dag_nodes, dag_repair = AtomicDagExecutor.repair_dag_for_execution(dag_nodes)
-    order = AtomicDagExecutor.topological_sort(dag_nodes)
-    AtomicDagExecutor.validate_terminal_leaf(order)
-
-    cached_analysis = _load_cached_analysis(source_question_dir)
-    cached_retrieval = _load_cached_retrieval(source_question_dir)
-    cached_answers = _load_cached_answers(source_question_dir)
-    results_by_id: dict[str, AtomicAnswerResult] = {}
-    replay_analyses: list[dict[str, Any]] = []
-    replay_retrieval: list[dict[str, Any]] = []
-    answer_inputs: list[dict[str, Any]] = []
-
-    run_dir = output_question_dir / "hyperbranch_run"
-    trace_store = runtime.bind_question_run(run_dir)
-
-    for node in order:
-        retrieval_record = cached_retrieval.get(node.node_id, {})
-        analysis_record = cached_analysis.get(node.node_id, {})
-        old_answer_record = cached_answers.get(node.node_id, {})
-        dependency_context = _dependency_context(node.dependencies, results_by_id)
-
-        if args.question_mode == "recompute":
-            rewrite = resolve_dependency_question(node.question, dependency_context)
-            resolved_question = rewrite.retrieval_question
-            rewrite_payload = rewrite.to_dict()
-            dependency_answers_for_prompt = AtomicDagExecutor._answer_dependency_context(dependency_context)
-        else:
-            resolved_question = str(
-                retrieval_record.get("resolved_question")
-                or analysis_record.get("resolved_question")
-                or old_answer_record.get("question")
-                or node.question
-            )
-            rewrite_payload = dict(
-                retrieval_record.get("dependency_question_rewrite")
-                or analysis_record.get("dependency_question_rewrite")
-                or {}
-            )
-            dependency_answers_for_prompt = AtomicDagExecutor._answer_dependency_context(
-                ensure_list(retrieval_record.get("dependency_answers"))
-            )
-
-        analysis = _analysis_from_cached(analysis_record, old_answer_record)
-        fact_query = _fact_query_for_replay(
-            service=runtime.service,
-            node_id=node.node_id,
-            resolved_question=resolved_question,
-            analysis=analysis,
-            retrieval_record=retrieval_record,
-            analysis_record=analysis_record,
-        )
-        candidate_pool = _candidate_pool_from_cached(retrieval_record)
-        retrieval_result = runtime.retriever.rank_candidate_pool(candidate_pool, question=fact_query)
-        evidence = retrieval_result.evidence
-        answer_contract = AtomicDagExecutor._answer_contract(resolved_question)
-        evidence_payload = AtomicDagExecutor._answer_evidence_payload(evidence)
-        answer_input = {
-            "node_id": node.node_id,
-            "original_question": original_question,
-            "atomic_question": resolved_question,
-            "fact_query": fact_query,
-            "hyperedge_retrieval_query": fact_query,
-            "answer_contract": answer_contract,
-            "dependency_answers": dependency_answers_for_prompt,
-            "evidence": list(evidence_payload.get("evidence", [])),
-            "contexts": list(evidence_payload.get("contexts", [])),
-            "question_mode": args.question_mode,
-            "retrieval_mode": args.retrieval_mode,
-            "cached_resolved_question": str(
-                retrieval_record.get("resolved_question") or old_answer_record.get("question") or ""
-            ),
-        }
-        answer_inputs.append(answer_input)
-        raw_payload = runtime.service.answer_atomic_question(
-            atomic_question=resolved_question,
-            answer_contract=answer_contract,
-            dependency_answers=dependency_answers_for_prompt,
-            evidence=evidence_payload,
-            original_question=original_question,
-        )
-        answer_payload = _coerce_answer_payload(raw_payload, evidence)
-        result = AtomicAnswerResult(
-            node_id=node.node_id,
-            question=resolved_question,
-            analysis=analysis,
-            evidence=evidence,
-            answer=str(answer_payload.get("answer", "") or ""),
-            reasoning_summary=str(answer_payload.get("reasoning_summary", "") or ""),
-            used_dependencies=list(node.dependencies),
-            used_hyperedge_ids=list(answer_payload.get("used_hyperedge_ids", [])),
-            insufficient=bool(answer_payload.get("insufficient", False)),
-        )
-        results_by_id[node.node_id] = result
-        replay_analyses.append(
-            {
-                "node_id": node.node_id,
-                "question": resolved_question,
-                "original_question": node.question,
-                "resolved_question": resolved_question,
-                "retrieval_question": resolved_question,
-                "fact_query": fact_query,
-                "hyperedge_retrieval_query": fact_query,
-                "dependency_answers": dependency_answers_for_prompt,
-                "dependency_question_rewrite": rewrite_payload,
-                "analysis": analysis.to_dict(),
-                "replay_source": {
-                    "cached_question": old_answer_record.get("question") or retrieval_record.get("resolved_question"),
-                    "cached_answer": old_answer_record.get("answer"),
-                    "cached_fact_query": retrieval_record.get("fact_query") or analysis_record.get("fact_query"),
-                },
-            }
-        )
-        replay_retrieval.append(
-            _fact_query_retrieval_artifact(
-                retrieval_record=retrieval_record,
-                node=node,
-                resolved_question=resolved_question,
-                fact_query=fact_query,
-                dependency_answers=dependency_answers_for_prompt,
-                rewrite_payload=rewrite_payload,
-                retrieval_result=retrieval_result,
-                answer_payload=answer_payload,
-                store_full_evidence=args.store_full_evidence,
-            )
-        )
-
-    atomic_results = [results_by_id[node.node_id] for node in order]
-    final_answer = AtomicDagExecutor._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
-    artifacts = {
-        "dag_input": [node.to_dict() for node in dag_nodes],
-        "dag_repair": dag_repair,
-        "original_question_analysis": _read_optional_json(
-            source_question_dir / "hyperbranch_run" / "artifacts" / "original_question_analysis.json"
-        ),
-        "atomic_question_analyses": replay_analyses,
-        "atomic_retrieval": replay_retrieval,
-        "atomic_answer_inputs": answer_inputs,
-        "atomic_answers": [
-            _atomic_result_payload(result, store_full_evidence=args.store_full_evidence)
-            for result in atomic_results
-        ],
-        "final_answer": final_answer,
-        "replay": {
-            "method": FACT_QUERY_METHOD,
-            "source_question_dir": str(source_question_dir),
-            "question_mode": args.question_mode,
-            "retrieval_mode": args.retrieval_mode,
-            "top_k": args.top_k,
-            "effective_top_k": runtime.config.retrieval.local_hyperedge_top_k,
-            "store_full_evidence": bool(args.store_full_evidence),
-            "config": str(runtime.config_path),
-            "reused_cached_candidate_pools": True,
-        },
-    }
-    hyperbranch_result = {
-        "original_question": original_question,
-        "atomic_results": artifacts["atomic_answers"],
-        "final_answer": final_answer,
-        "artifacts": artifacts,
-        "run_dir": str(run_dir),
-    }
-    _write_json(output_question_dir / "hyperbranch_result.json", hyperbranch_result)
-    for name, value in artifacts.items():
-        trace_store.save_artifact(f"artifacts/{name}.json", value)
-
-    return _combined_payload(
-        row=row,
-        source_pipeline=source_pipeline,
-        source_question_dir=source_question_dir,
-        output_question_dir=output_question_dir,
-        hyperbranch_result=hyperbranch_result,
-        args=args,
-    )
-
-
-class _FactQueryReplayRuntime:
-    def __init__(self, *, config_path: Path, cache_dir: Path, args: argparse.Namespace) -> None:
-        self.config_path = config_path
-        self.config = _load_fact_query_config(config_path, args)
-        self.cache_dir = cache_dir
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
-        logger = configure_logging(self.cache_dir, self.config.runtime.log_level)
-        trace_store = TraceStore(self.cache_dir)
-        try:
-            self.pipeline = HyperBranchPipeline(
-                config=self.config,
-                run_dir=self.cache_dir,
-                logger=logger,
-                trace_store=trace_store,
-            )
-        finally:
-            _close_logger(logger)
-        self.service = self.pipeline.llm_service
-        self.retriever = self.pipeline.retriever
-        self._logger: Any | None = None
-
-    def bind_question_run(self, run_dir: Path) -> TraceStore:
-        run_dir.mkdir(parents=True, exist_ok=True)
-        if self._logger is not None:
-            _close_logger(self._logger)
-        logger = configure_logging(run_dir, self.config.runtime.log_level)
-        trace_store = TraceStore(run_dir)
-        self._logger = logger
-        self.pipeline.run_dir = run_dir
-        self.pipeline.logger = logger
-        self.pipeline.trace_store = trace_store
-        self.pipeline.executor.logger = logger
-        self.retriever.logger = logger
-        _set_trace_store(self.pipeline.embedder, trace_store)
-        _set_trace_store(self.pipeline.llm_service, trace_store)
-        return trace_store
-
-    def close(self) -> None:
-        if self._logger is not None:
-            _close_logger(self._logger)
-            self._logger = None
-
-
-def _load_fact_query_config(config_path: Path, args: argparse.Namespace) -> Any:
-    config = load_config(config_path, PROJECT_ROOT)
-    if args.mock_llm:
-        config.llm.use_mock = True
-    if args.api_key:
-        os.environ[config.llm.api_key_env] = args.api_key
-    if args.base_url:
-        os.environ[config.llm.base_url_env] = args.base_url
-    if not os.getenv(config.llm.base_url_env) and os.getenv("OPAI_BASE_URL"):
-        os.environ[config.llm.base_url_env] = str(os.getenv("OPAI_BASE_URL"))
-    if args.model:
-        config.llm.model = args.model
-    if args.embedding_model:
-        config.llm.embedding_model = args.embedding_model
-    config.llm.timeout_seconds = args.timeout
-    config.llm.max_retries = args.max_retries
-    config.llm.temperature = args.temperature
-    if args.top_k > 0:
-        config.retrieval.local_hyperedge_top_k = args.top_k
-    return config
-
-
 def _make_llm_service(args: argparse.Namespace) -> Any:
     if args.mock_llm:
         return MockAtomicLLMService()
@@ -740,117 +444,6 @@ def _analysis_from_cached(
     )
 
 
-def _fact_query_for_replay(
-    *,
-    service: Any,
-    node_id: str,
-    resolved_question: str,
-    analysis: AtomicQuestionAnalysis,
-    retrieval_record: dict[str, Any],
-    analysis_record: dict[str, Any],
-) -> str:
-    cached = _clean_fact_query_text(
-        retrieval_record.get("fact_query")
-        or retrieval_record.get("hyperedge_retrieval_query")
-        or analysis_record.get("fact_query")
-        or analysis_record.get("hyperedge_retrieval_query")
-    )
-    if cached:
-        return cached
-    if service is None or not hasattr(service, "rewrite_atomic_fact_query"):
-        return resolved_question
-    try:
-        payload = service.rewrite_atomic_fact_query(
-            atomic_question=resolved_question,
-            answer_type=analysis.answer_type,
-        )
-    except Exception as exc:
-        logging.getLogger("hyper_branch.replay").warning(
-            "Atomic fact query rewrite failed for %s; using resolved question: %s",
-            node_id,
-            exc,
-        )
-        return resolved_question
-    fact_query = _clean_fact_query_payload(payload)
-    return fact_query or resolved_question
-
-
-def _candidate_pool_from_cached(retrieval_record: dict[str, Any]) -> LocalHyperedgeRetrievalResult:
-    candidate_ids = _candidate_hyperedge_ids_from_cached(retrieval_record)
-    candidate_sources = _candidate_sources_from_cached(retrieval_record, candidate_ids)
-    return LocalHyperedgeRetrievalResult(
-        method=str(retrieval_record.get("method") or "cached_candidate_pool_fact_query_rerank"),
-        primary_anchor_mention=str(retrieval_record.get("primary_anchor_mention", "") or ""),
-        linked_entity_id=str(retrieval_record.get("linked_entity_id", "") or ""),
-        anchor_match=dict(retrieval_record.get("anchor_match") or {}),
-        anchor_mentions=[str(item) for item in ensure_list(retrieval_record.get("anchor_mentions"))],
-        linked_entities=[dict(item) for item in ensure_list(retrieval_record.get("linked_entities")) if isinstance(item, dict)],
-        anchor_matches=[dict(item) for item in ensure_list(retrieval_record.get("anchor_matches")) if isinstance(item, dict)],
-        unlinked_anchor_mentions=[
-            str(item) for item in ensure_list(retrieval_record.get("unlinked_anchor_mentions"))
-        ],
-        adjacent_hyperedge_ids=[str(item) for item in ensure_list(retrieval_record.get("adjacent_hyperedge_ids"))],
-        expansion_entity_ids=[str(item) for item in ensure_list(retrieval_record.get("expansion_entity_ids"))],
-        second_hop_hyperedge_ids=[
-            str(item) for item in ensure_list(retrieval_record.get("second_hop_hyperedge_ids"))
-        ],
-        candidate_hyperedge_ids=candidate_ids,
-        shared_candidate_hyperedge_ids=[
-            str(item) for item in ensure_list(retrieval_record.get("shared_candidate_hyperedge_ids"))
-        ],
-        local_candidate_hyperedge_ids=[
-            str(item) for item in ensure_list(retrieval_record.get("local_candidate_hyperedge_ids"))
-        ],
-        candidate_sources=candidate_sources,
-        insufficient_reason=str(retrieval_record.get("insufficient_reason", "") or ""),
-        local_insufficient_reason=str(retrieval_record.get("local_insufficient_reason", "") or ""),
-        shared_insufficient_reason=str(retrieval_record.get("shared_insufficient_reason", "") or ""),
-        fallback_reason=str(retrieval_record.get("fallback_reason", "") or ""),
-    )
-
-
-def _candidate_hyperedge_ids_from_cached(retrieval_record: dict[str, Any]) -> list[str]:
-    raw_ids = ensure_list(retrieval_record.get("candidate_hyperedge_ids"))
-    if not raw_ids:
-        raw_ids = [item.get("hyperedge_id") for item in ensure_list(retrieval_record.get("top_hyperedges")) if isinstance(item, dict)]
-    if not raw_ids:
-        raw_ids = [
-            item.get("hyperedge_id")
-            for item in ensure_list(retrieval_record.get("answerer_evidence") or retrieval_record.get("top_evidence"))
-            if isinstance(item, dict)
-        ]
-    return _dedupe_strings(str(item) for item in raw_ids if str(item or "").strip())
-
-
-def _candidate_sources_from_cached(
-    retrieval_record: dict[str, Any],
-    candidate_ids: list[str],
-) -> list[dict[str, Any]]:
-    sources = [
-        dict(item)
-        for item in ensure_list(retrieval_record.get("candidate_sources"))
-        if isinstance(item, dict) and str(item.get("hyperedge_id", "") or "").strip()
-    ]
-    existing = {str(item.get("hyperedge_id")) for item in sources}
-    top_metadata: dict[str, dict[str, Any]] = {}
-    for item in ensure_list(retrieval_record.get("top_hyperedges")):
-        if isinstance(item, dict) and str(item.get("hyperedge_id", "") or "").strip():
-            top_metadata[str(item["hyperedge_id"])] = item
-    for hyperedge_id in candidate_ids:
-        if hyperedge_id in existing:
-            continue
-        source = dict(top_metadata.get(hyperedge_id) or {})
-        source.update(
-            {
-                "hyperedge_id": hyperedge_id,
-                "hop": int(source.get("hop", 1) or 1),
-                "pool_sources": ensure_list(source.get("pool_sources")) or ["cached_candidate_pool"],
-            }
-        )
-        sources.append(source)
-    return sources
-
-
 def _evidence_from_cached(
     retrieval_record: dict[str, Any],
     old_answer_record: dict[str, Any],
@@ -864,6 +457,43 @@ def _evidence_from_cached(
     if top_k > 0:
         raw_evidence = raw_evidence[:top_k]
     return [_fused_candidate_from_payload(item) for item in raw_evidence if isinstance(item, dict)]
+
+
+def _cached_bridge_hyperedge_text_resolver(
+    retrieval_record: dict[str, Any],
+    old_answer_record: dict[str, Any],
+):
+    raw_evidence = ensure_list(
+        retrieval_record.get("answerer_evidence")
+        or retrieval_record.get("top_evidence")
+        or old_answer_record.get("evidence")
+    )
+    hyperedge_text_by_id: dict[str, str] = {}
+    for item in raw_evidence:
+        if not isinstance(item, dict):
+            continue
+        hyperedge_id = str(item.get("hyperedge_id", "") or "").strip()
+        hyperedge_text = str(item.get("hyperedge_text", "") or "").strip()
+        if hyperedge_id and hyperedge_text:
+            hyperedge_text_by_id.setdefault(hyperedge_id, hyperedge_text)
+
+    def resolve(candidate: FusedHyperedgeCandidate) -> str:
+        for hyperedge_id in ensure_list(candidate.score_breakdown.get("via_first_hyperedge_ids", [])):
+            text = _cached_hyperedge_text(str(hyperedge_id or "").strip(), hyperedge_text_by_id)
+            if text and text != normalize_label(str(candidate.hyperedge_text or "")):
+                return text
+        return ""
+
+    return resolve
+
+
+def _cached_hyperedge_text(hyperedge_id: str, hyperedge_text_by_id: dict[str, str]) -> str:
+    if not hyperedge_id:
+        return ""
+    cached_text = str(hyperedge_text_by_id.get(hyperedge_id, "") or "").strip()
+    if cached_text:
+        return cached_text
+    return normalize_label(hyperedge_id)
 
 
 def _fused_candidate_from_payload(item: dict[str, Any]) -> FusedHyperedgeCandidate:
@@ -1019,66 +649,6 @@ def _replay_retrieval_artifact(
     return artifact
 
 
-def _fact_query_retrieval_artifact(
-    *,
-    retrieval_record: dict[str, Any],
-    node: AtomicQuestionNode,
-    resolved_question: str,
-    fact_query: str,
-    dependency_answers: list[dict[str, Any]],
-    rewrite_payload: dict[str, Any],
-    retrieval_result: LocalHyperedgeRetrievalResult,
-    answer_payload: dict[str, Any],
-    store_full_evidence: bool,
-) -> dict[str, Any]:
-    retrieval_payload = retrieval_result.to_artifact()
-    if store_full_evidence:
-        artifact = dict(retrieval_payload)
-    else:
-        artifact = {
-            "method": retrieval_payload.get("method"),
-            "primary_anchor_mention": retrieval_payload.get("primary_anchor_mention"),
-            "linked_entity_id": retrieval_payload.get("linked_entity_id"),
-            "anchor_match": retrieval_payload.get("anchor_match"),
-            "anchor_mentions": retrieval_payload.get("anchor_mentions", []),
-            "linked_entities": retrieval_payload.get("linked_entities", []),
-            "candidate_hyperedge_count": len(ensure_list(retrieval_payload.get("candidate_hyperedge_ids"))),
-            "candidate_hyperedge_ids_sample": ensure_list(retrieval_payload.get("candidate_hyperedge_ids"))[:50],
-            "shared_candidate_hyperedge_count": len(ensure_list(retrieval_payload.get("shared_candidate_hyperedge_ids"))),
-            "shared_candidate_hyperedge_ids_sample": ensure_list(retrieval_payload.get("shared_candidate_hyperedge_ids"))[:50],
-            "local_candidate_hyperedge_count": len(ensure_list(retrieval_payload.get("local_candidate_hyperedge_ids"))),
-            "local_candidate_hyperedge_ids_sample": ensure_list(retrieval_payload.get("local_candidate_hyperedge_ids"))[:50],
-            "insufficient_reason": retrieval_payload.get("insufficient_reason", ""),
-            "local_insufficient_reason": retrieval_payload.get("local_insufficient_reason", ""),
-            "shared_insufficient_reason": retrieval_payload.get("shared_insufficient_reason", ""),
-            "fallback_reason": retrieval_payload.get("fallback_reason", ""),
-            "cached_candidate_hyperedge_count": len(ensure_list(retrieval_record.get("candidate_hyperedge_ids"))),
-            "cached_top_hyperedge_count": len(ensure_list(retrieval_record.get("top_hyperedges"))),
-        }
-    artifact.update(
-        {
-            "node_id": node.node_id,
-            "original_question": node.question,
-            "resolved_question": resolved_question,
-            "retrieval_question": resolved_question,
-            "fact_query": fact_query,
-            "hyperedge_retrieval_query": fact_query,
-            "dependency_answers": dependency_answers,
-            "dependency_question_rewrite": rewrite_payload,
-            "dependency_replacements": rewrite_payload.get("dependency_replacements", []),
-            "dependency_answers_used": rewrite_payload.get("dependency_answers_used", []),
-            "unresolved_dependency": rewrite_payload.get("unresolved_dependencies", []),
-            "top_hyperedges": retrieval_payload.get("top_hyperedges", []),
-            "answerer_evidence": _evidence_payload_for_artifact(retrieval_result.evidence, store_full_evidence),
-            "top_evidence": _evidence_payload_for_artifact(retrieval_result.evidence, store_full_evidence),
-            "atomic_answer": answer_payload,
-            "replay_reused_cached_candidates": True,
-            "replay_retrieval_mode": "fact-query",
-        }
-    )
-    return artifact
-
-
 def _atomic_result_payload(result: AtomicAnswerResult, *, store_full_evidence: bool) -> dict[str, Any]:
     payload = result.to_dict()
     payload["evidence"] = _evidence_payload_for_artifact(result.evidence, store_full_evidence)
@@ -1149,7 +719,6 @@ def _combined_payload(
                 "top_k": args.top_k,
                 "model": args.model if not args.mock_llm else "mock",
                 "prompt_dir": str(_resolve_path(args.prompt_dir)),
-                "config": _replay_config_text(args, row),
                 "old_em": old_em,
                 "old_f1": old_f1,
                 "em": new_em,
@@ -1258,7 +827,6 @@ def _summary_header(
         f"- Selected questions: `{len(rows)}`",
         f"- Question mode: `{args.question_mode}`",
         f"- Retrieval mode: `{args.retrieval_mode}`",
-        f"- Config: `{_config_path_for_replay(args, source_run, rows) if args.retrieval_mode == 'fact-query' else '(not used)'}`",
         f"- Top-k: `{args.top_k if args.top_k > 0 else 'all cached evidence'}`",
         "",
     ]
@@ -1346,32 +914,8 @@ def _error_markdown(payload: dict[str, Any]) -> str:
 
 
 def _replay_method(args: argparse.Namespace) -> str:
-    return FACT_QUERY_METHOD if args.retrieval_mode == "fact-query" else METHOD
-
-
-def _config_path_for_replay(args: argparse.Namespace, source_run: Path, rows: list[dict[str, Any]]) -> Path:
-    if args.config:
-        return _resolve_path(args.config)
-    dataset = ""
-    if rows:
-        dataset = str(rows[0].get("dataset") or "").strip()
-    if not dataset:
-        dataset = source_run.parent.name
-    config_path = PROJECT_ROOT / "configs" / f"{dataset}.yaml"
-    if not config_path.exists():
-        raise FileNotFoundError(
-            f"Could not infer config path for dataset {dataset!r}; pass --config explicitly."
-        )
-    return config_path.resolve()
-
-
-def _replay_config_text(args: argparse.Namespace, row: dict[str, Any]) -> str:
-    if args.retrieval_mode != "fact-query":
-        return ""
-    if args.config:
-        return str(_resolve_path(args.config))
-    dataset = str(row.get("dataset") or "").strip()
-    return str((PROJECT_ROOT / "configs" / f"{dataset}.yaml").resolve()) if dataset else ""
+    del args
+    return METHOD
 
 
 def _select_rows(rows: list[dict[str, Any]], args: argparse.Namespace) -> list[dict[str, Any]]:
@@ -1479,16 +1023,6 @@ def _resolve_path(value: str | Path) -> Path:
     return (PROJECT_ROOT / path).resolve()
 
 
-def _clean_fact_query_payload(value: Any) -> str:
-    if not isinstance(value, dict):
-        return ""
-    return _clean_fact_query_text(value.get("fact_query"))
-
-
-def _clean_fact_query_text(value: Any) -> str:
-    return " ".join(str(value or "").strip().split())
-
-
 def _dedupe_strings(values: Iterable[str]) -> list[str]:
     result: list[str] = []
     for value in values:
@@ -1496,12 +1030,6 @@ def _dedupe_strings(values: Iterable[str]) -> list[str]:
         if text and text not in result:
             result.append(text)
     return result
-
-
-def _close_logger(logger: Any) -> None:
-    for handler in list(getattr(logger, "handlers", [])):
-        handler.close()
-        logger.removeHandler(handler)
 
 
 if __name__ == "__main__":

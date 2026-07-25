@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -28,38 +30,109 @@ class AtomicQuestionDAGTest(unittest.TestCase):
     def test_prompt_contract_renders_question_structure_text(self) -> None:
         prompt = prompt_input_text(
             original_question="Question?",
+            question_entities=["When The Stars Go Blue"],
             question_structure=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
+        payload = json.loads(prompt)
 
-        self.assertIn("Original question:\nQuestion?", prompt)
-        self.assertIn("Question structure:", prompt)
-        self.assertIn("Branch 1:\nWhen The Stars Go Blue -- song -- performer -- nationality", prompt)
+        self.assertEqual(payload["original_question"], "Question?")
+        self.assertEqual(payload["question_entities"], ["When The Stars Go Blue"])
+        self.assertEqual(
+            payload["question_structure"],
+            ["When The Stars Go Blue -- song -- performer -- nationality"],
+        )
         self.assertNotIn("step4_paths", prompt)
         self.assertNotIn("global_best_paths", prompt)
         self.assertNotIn("topic_entities", prompt)
         self.assertNotIn("semantic_reasoning_paths", prompt)
 
         self.assertIn("question_structure", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("question_entities", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("exact unknown span as `ANSWER`", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("candidate carriers", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("all_ids - referenced_ids == {last_id}", ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertIn("original question is the only source of meaning", ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_reasoning_paths"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_nodes"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_edges"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"semantic_edge_ids"', ATOMIC_QUESTION_DAG_SYSTEM)
         self.assertNotIn('"output_node_id"', ATOMIC_QUESTION_DAG_SYSTEM)
+        self.assertNotIn("output_type", ATOMIC_QUESTION_DAG_SYSTEM)
 
     def test_prompt_renders_multiple_branches_and_ignores_empty_nodes(self) -> None:
         prompt = prompt_input_text(
             original_question="Which film has the younger director, Dangerously They Live or Salad By The Roots?",
+            question_entities=[
+                "Dangerously They Live",
+                "Dangerously They Live",
+                "Salad By The Roots",
+                "",
+            ],
             question_structure=[
                 ["Dangerously They Live", "", "director", "born"],
                 [],
                 ["Salad By The Roots", "director", "born"],
             ],
         )
+        payload = json.loads(prompt)
 
-        self.assertIn("Branch 1:\nDangerously They Live -- director -- born", prompt)
-        self.assertIn("Branch 2:\nSalad By The Roots -- director -- born", prompt)
-        self.assertNotIn("Branch 3", prompt)
-        self.assertNotIn("--  --", prompt)
+        self.assertEqual(
+            payload,
+            {
+                "original_question": "Which film has the younger director, Dangerously They Live or Salad By The Roots?",
+                "question_entities": ["Dangerously They Live", "Salad By The Roots"],
+                "question_structure": [
+                    "Dangerously They Live -- director -- born",
+                    "Salad By The Roots -- director -- born",
+                ],
+            },
+        )
+
+    def test_all_step5_prompt_examples_use_json_input_and_one_final_leaf(self) -> None:
+        input_payloads = [
+            json.loads(raw_input)
+            for raw_input in re.findall(
+                r"Input:\n\n(\{.*?\})\n\nOutput:",
+                ATOMIC_QUESTION_DAG_SYSTEM,
+                flags=re.DOTALL,
+            )
+        ]
+        output_payloads = [
+            json.loads(line)
+            for line in ATOMIC_QUESTION_DAG_SYSTEM.splitlines()
+            if line.startswith('{"atomic_questions":')
+        ]
+
+        self.assertEqual(len(input_payloads), 8)
+        self.assertEqual(len(output_payloads), 8)
+        for payload in input_payloads:
+            self.assertEqual(
+                set(payload),
+                {"original_question", "question_entities", "question_structure"},
+            )
+            self.assertIsInstance(payload["question_entities"], list)
+            self.assertTrue(
+                all(isinstance(branch, str) for branch in payload["question_structure"])
+            )
+
+        for payload in output_payloads:
+            nodes = payload["atomic_questions"]
+            all_ids = {node["id"] for node in nodes}
+            referenced_ids = {
+                dependency
+                for node in nodes
+                for dependency in node["depends_on"]
+            }
+            self.assertEqual(all_ids - referenced_ids, {nodes[-1]["id"]})
+            for node in nodes:
+                self.assertEqual(
+                    set(node),
+                    {"id", "question", "depends_on", "operation"},
+                )
+                literal_references = set(
+                    re.findall(r"\b(q\d+)'s answer\b", node["question"])
+                )
+                self.assertEqual(literal_references, set(node["depends_on"]))
 
     def test_direct_atomic_questions_build_dag(self) -> None:
         result = validate_atomic_question_dag(_bridge_payload())
@@ -162,21 +235,48 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
         self.assertEqual(result.leaf_node_ids, ["q5"])
         self.assertEqual(result.nodes[-1].operation, "select")
-        self.assertEqual(result.nodes[-1].output_type, "work")
+        self.assertEqual(result.nodes[-1].output_type, "unknown")
+
+    def test_legacy_output_type_is_accepted_for_saved_payloads(self) -> None:
+        result = validate_atomic_question_dag(
+            {
+                "atomic_questions": [
+                    {
+                        "id": "q1",
+                        "question": "Who is A?",
+                        "depends_on": [],
+                        "operation": "lookup",
+                        "output_type": "person",
+                    }
+                ]
+            }
+        )
+
+        self.assertTrue(result.valid, result.validation_errors)
+        self.assertEqual(result.nodes[0].output_type, "person")
 
     def test_question_structure_generator_sends_text_prompt_once(self) -> None:
         llm = RecordingStep5LLM(_bridge_payload())
         result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="What nationality is the performer of the song When The Stars Go Blue?",
+            question_entities=["When The Stars Go Blue"],
             question_structure=[["When The Stars Go Blue", "song", "performer", "nationality"]],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(llm.system_prompts, [ATOMIC_QUESTION_DAG_SYSTEM])
         self.assertEqual(len(llm.user_prompts), 1)
-        self.assertIn("Original question:", llm.user_prompts[0])
-        self.assertIn("Question structure:", llm.user_prompts[0])
-        self.assertIn("Branch 1:\nWhen The Stars Go Blue -- song -- performer -- nationality", llm.user_prompts[0])
+        prompt_payload = json.loads(llm.user_prompts[0])
+        self.assertEqual(
+            prompt_payload,
+            {
+                "original_question": "What nationality is the performer of the song When The Stars Go Blue?",
+                "question_entities": ["When The Stars Go Blue"],
+                "question_structure": [
+                    "When The Stars Go Blue -- song -- performer -- nationality"
+                ],
+            },
+        )
         self.assertNotIn("step4_paths", llm.user_prompts[0])
         self.assertNotIn("global_best_paths", llm.user_prompts[0])
         self.assertNotIn("topic_entities", llm.user_prompts[0])
@@ -310,6 +410,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
 
         result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="Who wrote Turn Me On by the singer of Come Away with Me?",
+            question_entities=["Turn Me On", "Come Away with Me"],
             question_structure=[["Come Away with Me", "singer", "Turn Me On", "wrote", "Who"]],
         )
 
@@ -397,14 +498,20 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         llm = RecordingStep5LLM(_bridge_payload())
         result = QuestionStructureAtomicDAGGenerator(llm).generate(
             original_question="Question?",
+            question_entities=[],
             question_structure=[],
         )
 
         self.assertTrue(result.valid, result.validation_errors)
         self.assertEqual(len(llm.user_prompts), 1)
-        self.assertIn("Original question:\nQuestion?", llm.user_prompts[0])
-        self.assertIn("Question structure:", llm.user_prompts[0])
-        self.assertNotIn("Branch 1:", llm.user_prompts[0])
+        self.assertEqual(
+            json.loads(llm.user_prompts[0]),
+            {
+                "original_question": "Question?",
+                "question_entities": [],
+                "question_structure": [],
+            },
+        )
 
     def test_missing_depends_on_reference_is_warning_only(self) -> None:
         result = validate_atomic_question_dag(
@@ -475,14 +582,12 @@ def _bridge_payload() -> dict[str, Any]:
                 "question": "Who performed When The Stars Go Blue?",
                 "depends_on": [],
                 "operation": "lookup",
-                "output_type": "person",
             },
             {
                 "id": "q2",
                 "question": "What is the nationality of q1's answer?",
                 "depends_on": ["q1"],
                 "operation": "lookup",
-                "output_type": "value",
             },
         ]
     }
@@ -496,35 +601,30 @@ def _younger_director_payload() -> dict[str, Any]:
                 "question": "Who directed Dangerously They Live?",
                 "depends_on": [],
                 "operation": "lookup",
-                "output_type": "person",
             },
             {
                 "id": "q2",
                 "question": "When was q1's answer born?",
                 "depends_on": ["q1"],
                 "operation": "lookup",
-                "output_type": "date",
             },
             {
                 "id": "q3",
                 "question": "Who directed Salad By The Roots?",
                 "depends_on": [],
                 "operation": "lookup",
-                "output_type": "person",
             },
             {
                 "id": "q4",
                 "question": "When was q3's answer born?",
                 "depends_on": ["q3"],
                 "operation": "lookup",
-                "output_type": "date",
             },
             {
                 "id": "q5",
                 "question": "Based on q2's answer and q4's answer, which film has the younger director: Dangerously They Live or Salad By The Roots?",
                 "depends_on": ["q2", "q4"],
                 "operation": "select",
-                "output_type": "work",
             },
         ]
     }
