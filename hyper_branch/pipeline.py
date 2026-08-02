@@ -46,7 +46,6 @@ class HyperBranchPipeline:
             dataset=self.dataset,
             embedder=self.embedder,
             config=config.retrieval,
-            llm_service=self.llm_service,
             logger=logger,
         )
         self.retriever = retriever
@@ -77,14 +76,147 @@ class HyperBranchPipeline:
         self.trace_store.save_artifact("artifacts/dag_input.json", artifacts["dag_input"])
         self.trace_store.save_artifact("artifacts/dag_repair.json", artifacts["dag_repair"])
         self.trace_store.save_artifact("artifacts/original_question_analysis.json", artifacts["original_question_analysis"])
-        self.trace_store.save_artifact("artifacts/shared_candidate_pool_initial.json", artifacts["shared_candidate_pool_initial"])
-        self.trace_store.save_artifact("artifacts/shared_candidate_pool_final.json", artifacts["shared_candidate_pool_final"])
         self.trace_store.save_artifact("artifacts/atomic_question_analyses.json", artifacts["atomic_question_analyses"])
-        self.trace_store.save_artifact("artifacts/atomic_retrieval.json", artifacts["atomic_retrieval"])
-        self.trace_store.save_artifact("artifacts/atomic_answers.json", artifacts["atomic_answers"])
         self.trace_store.save_artifact("artifacts/final_answer.json", result.final_answer)
 
-        payload = result.to_dict()
+        compact_shared_pool = _compact_candidate_pool(artifacts["shared_candidate_pool_final"])
+        compact_retrieval = [
+            _compact_retrieval_record(item)
+            for item in artifacts["atomic_retrieval"]
+            if isinstance(item, dict)
+        ]
+        compact_answers = [
+            _compact_atomic_answer(item)
+            for item in artifacts["atomic_answers"]
+            if isinstance(item, dict)
+        ]
+        self.trace_store.save_artifact("artifacts/shared_candidate_pool.json", compact_shared_pool)
+        self.trace_store.save_artifact("artifacts/atomic_retrieval.json", compact_retrieval)
+        self.trace_store.save_artifact("artifacts/atomic_answers.json", compact_answers)
+        payload = {
+            "original_question": result.original_question,
+            "atomic_results": compact_answers,
+            "final_answer": dict(result.final_answer),
+            "artifacts": {
+                "dag_input": artifacts["dag_input"],
+                "atomic_answers": compact_answers,
+                "final_answer": dict(result.final_answer),
+            },
+        }
         payload["run_dir"] = str(self.run_dir)
         self.logger.info("Pipeline finished. Artifacts saved under %s", self.run_dir)
         return payload
+
+
+def _compact_candidate_pool(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "method": payload.get("method"),
+        "primary_anchor_mention": payload.get("primary_anchor_mention"),
+        "linked_entity_id": payload.get("linked_entity_id"),
+        "anchor_match": payload.get("anchor_match") or {},
+        "anchor_mentions": list(payload.get("anchor_mentions") or []),
+        "linked_entities": list(payload.get("linked_entities") or []),
+        "anchor_matches": list(payload.get("anchor_matches") or []),
+        "unlinked_anchor_mentions": list(payload.get("unlinked_anchor_mentions") or []),
+        "adjacent_hyperedge_count": len(payload.get("adjacent_hyperedge_ids") or []),
+        "expansion_entity_count": len(payload.get("expansion_entity_ids") or []),
+        "second_hop_hyperedge_count": len(payload.get("second_hop_hyperedge_ids") or []),
+        "candidate_hyperedge_count": len(payload.get("candidate_hyperedge_ids") or []),
+        "insufficient_reason": payload.get("insufficient_reason", ""),
+        "fallback_reason": payload.get("fallback_reason", ""),
+    }
+
+
+def _compact_retrieval_record(payload: dict[str, Any]) -> dict[str, Any]:
+    answerer_evidence = payload.get("answerer_evidence") or payload.get("top_evidence") or []
+    return {
+        "method": payload.get("method"),
+        "node_id": payload.get("node_id"),
+        "original_question": payload.get("original_question"),
+        "resolved_question": payload.get("resolved_question"),
+        "retrieval_question": payload.get("retrieval_question"),
+        "hyperedge_retrieval_query": payload.get("hyperedge_retrieval_query"),
+        "dependency_question_rewrite": payload.get("dependency_question_rewrite") or {},
+        "dependency_replacements": list(payload.get("dependency_replacements") or []),
+        "dependency_answers_used": list(payload.get("dependency_answers_used") or []),
+        "unresolved_dependency": list(payload.get("unresolved_dependency") or []),
+        "active_ancestor_node_ids": list(payload.get("active_ancestor_node_ids") or []),
+        "primary_anchor_mention": payload.get("primary_anchor_mention"),
+        "linked_entity_id": payload.get("linked_entity_id"),
+        "anchor_match": payload.get("anchor_match") or {},
+        "anchor_mentions": list(payload.get("anchor_mentions") or []),
+        "linked_entities": list(payload.get("linked_entities") or []),
+        "anchor_matches": list(payload.get("anchor_matches") or []),
+        "unlinked_anchor_mentions": list(payload.get("unlinked_anchor_mentions") or []),
+        "adjacent_hyperedge_count": len(payload.get("adjacent_hyperedge_ids") or []),
+        "expansion_entity_count": len(payload.get("expansion_entity_ids") or []),
+        "second_hop_hyperedge_count": len(payload.get("second_hop_hyperedge_ids") or []),
+        "candidate_hyperedge_count": len(payload.get("candidate_hyperedge_ids") or []),
+        "shared_candidate_hyperedge_count": len(payload.get("shared_candidate_hyperedge_ids") or []),
+        "local_candidate_hyperedge_count": len(payload.get("local_candidate_hyperedge_ids") or []),
+        "top_hyperedges": [dict(item) for item in payload.get("top_hyperedges") or [] if isinstance(item, dict)],
+        "answerer_evidence": [
+            _compact_evidence(item)
+            for item in answerer_evidence
+            if isinstance(item, dict)
+        ],
+        "insufficient_reason": payload.get("insufficient_reason", ""),
+        "local_insufficient_reason": payload.get("local_insufficient_reason", ""),
+        "shared_insufficient_reason": payload.get("shared_insufficient_reason", ""),
+        "fallback_reason": payload.get("fallback_reason", ""),
+        "atomic_answer": _compact_atomic_answer(payload.get("atomic_answer") or {}),
+    }
+
+
+def _compact_atomic_answer(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "node_id": payload.get("node_id"),
+        "question": payload.get("question"),
+        "analysis": payload.get("analysis") or {},
+        "answer": payload.get("answer", ""),
+        "reasoning_summary": payload.get("reasoning_summary", ""),
+        "used_dependencies": list(payload.get("used_dependencies") or []),
+        "used_hyperedge_ids": list(payload.get("used_hyperedge_ids") or []),
+        "insufficient": bool(payload.get("insufficient", False)),
+    }
+
+
+def _compact_evidence(payload: dict[str, Any]) -> dict[str, Any]:
+    score_breakdown = payload.get("score_breakdown") or {}
+    compact_score_breakdown = {
+        key: score_breakdown.get(key)
+        for key in (
+            "selection_source",
+            "semantic_rank",
+            "primary_anchor_mention",
+            "via_first_hyperedge_ids",
+        )
+        if key in score_breakdown
+    }
+    entity_records = []
+    for raw_record in payload.get("entity_records") or []:
+        if not isinstance(raw_record, dict):
+            continue
+        entity_records.append(
+            {
+                "entity_id": raw_record.get("entity_id"),
+                "label": raw_record.get("label"),
+                "entity_type": raw_record.get("entity_type"),
+                "description": raw_record.get("description", ""),
+            }
+        )
+    return {
+        "hyperedge_id": payload.get("hyperedge_id"),
+        "hyperedge_text": payload.get("hyperedge_text", ""),
+        "branch_support": list(payload.get("branch_support") or []),
+        "anchor_score": payload.get("anchor_score", 0.0),
+        "relation_score": payload.get("relation_score", 0.0),
+        "semantic_score": payload.get("semantic_score", 0.0),
+        "fusion_score": payload.get("fusion_score", 0.0),
+        "entity_ids": list(payload.get("entity_ids") or []),
+        "entity_records": entity_records,
+        "chunk_ids": list(payload.get("chunk_ids") or []),
+        "chunk_texts": list(payload.get("chunk_texts") or []),
+        "rank": payload.get("rank"),
+        "score_breakdown": compact_score_breakdown,
+    }

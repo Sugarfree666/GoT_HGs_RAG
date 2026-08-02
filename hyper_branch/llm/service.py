@@ -28,17 +28,6 @@ class AtomicLLMService(ABC):
     ) -> dict[str, Any]:
         raise NotImplementedError
 
-    @abstractmethod
-    def select_anchor_entity(
-        self,
-        question: str,
-        mention: str,
-        analysis: Any,
-        candidates: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-
 class OpenAIAtomicLLMService(AtomicLLMService):
     def __init__(self, client: OpenAICompatibleClient, prompts: PromptManager) -> None:
         self.client = client
@@ -87,30 +76,6 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         payload = dict(response)
         payload["answer"] = str(response.get("answer", "") or "")
         return payload
-
-    def select_anchor_entity(
-        self,
-        question: str,
-        mention: str,
-        analysis: Any,
-        candidates: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        response = self.client.chat_json(
-            "anchor_entity_selection",
-            self.prompts.get("anchor_entity_selection"),
-            {
-                "question": question,
-                "mention": mention,
-                "analysis": _analysis_payload(analysis),
-                "candidate_entities": candidates,
-            },
-            max_tokens=300,
-        )
-        response.setdefault("selected_entity_id", "NONE")
-        response.setdefault("confidence", 0.0)
-        response.setdefault("reason", "")
-        return response
-
 
 class MockAtomicLLMService(AtomicLLMService):
     def __init__(
@@ -171,8 +136,8 @@ class MockAtomicLLMService(AtomicLLMService):
                 hyperedge_text = str(hyperedge.get("hyperedge_text", "") or "")
                 if not first_hyperedge_text:
                     first_hyperedge_text = hyperedge_text
+                block_texts.append(str(hyperedge.get("first_hop_hyperedge_text", "") or ""))
                 block_texts.append(hyperedge_text)
-                block_texts.append(str(hyperedge.get("bridge_hyperedge_text", "") or ""))
             for token in content_tokens(" ".join(block_texts)):
                 if token not in query_tokens:
                     answer = normalize_label(token)
@@ -183,28 +148,6 @@ class MockAtomicLLMService(AtomicLLMService):
             answer = short_text(first_hyperedge_text, 160)
 
         return {"answer": answer}
-
-    def select_anchor_entity(
-        self,
-        question: str,
-        mention: str,
-        analysis: Any,
-        candidates: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        del question, mention, analysis
-        if not candidates:
-            return {
-                "selected_entity_id": "NONE",
-                "confidence": 0.0,
-                "reason": "No candidates were provided.",
-            }
-        selected = str(candidates[0].get("entity_id", "")).strip()
-        return {
-            "selected_entity_id": selected or "NONE",
-            "confidence": 1.0 if selected else 0.0,
-            "reason": "Deterministic mock selects the first candidate.",
-        }
-
 
 def _extract_topic_phrases(question: str) -> list[str]:
     cleaned = question.replace("?", " ").replace(",", " ").replace(";", " ")
@@ -238,20 +181,6 @@ def _dedupe_texts(values: list[str]) -> list[str]:
         if text and text not in deduped:
             deduped.append(text)
     return deduped
-
-
-def _analysis_payload(analysis: Any) -> dict[str, Any]:
-    if hasattr(analysis, "to_dict") and callable(analysis.to_dict):
-        payload = dict(analysis.to_dict())
-    elif isinstance(analysis, dict):
-        payload = dict(analysis)
-    else:
-        payload = {
-            "entities": getattr(analysis, "entities", []),
-        }
-    return {
-        "entities": [str(item) for item in ensure_list(payload.get("entities", []))],
-    }
 
 
 def _answer_evidence_blocks(evidence: Any) -> list[dict[str, Any]]:

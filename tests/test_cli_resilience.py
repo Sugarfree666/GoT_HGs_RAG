@@ -44,7 +44,7 @@ class IncompleteHTTPResponse:
 
 class LLMClientRetryTest(unittest.TestCase):
     def test_transport_timeout_is_retried(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp_dir, patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
+        with tempfile.TemporaryDirectory(), patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
             config = LLMConfig(timeout_seconds=1, max_retries=2, retry_backoff_seconds=0.0)
             client = OpenAICompatibleClient(config=config)
 

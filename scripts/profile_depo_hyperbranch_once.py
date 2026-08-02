@@ -7,7 +7,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

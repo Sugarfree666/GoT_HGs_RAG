@@ -176,8 +176,7 @@ def main() -> int:
                 )
                 combined_path = question_dir / "pipeline.json"
                 decomposition_path = question_dir / "decomposition.json"
-                hyperbranch_result_path = question_dir / "hyperbranch_result.json"
-                if args.resume and combined_path.exists() and hyperbranch_result_path.exists():
+                if args.resume and combined_path.exists():
                     print(f"[skip] {dataset} #{item['index']} {record.question}")
                     if args.live_eval:
                         try:
@@ -248,7 +247,6 @@ def main() -> int:
                         original_question_entities=_depo_explicit_entity_texts(decomposition_payload),
                         question_dir=question_dir,
                     )
-                    _write_json(hyperbranch_result_path, hyperbranch_result)
 
                     combined_payload = _combined_payload(
                         dataset=dataset,
@@ -354,7 +352,6 @@ class _ReusableHyperBranchRunner:
         trace_store = TraceStore(run_dir)
         self._bind_question_context(run_dir=run_dir, logger=logger, trace_store=trace_store)
         try:
-            trace_store.save_artifact("dataset_summary.json", self.pipeline.dataset.summary)
             return self.pipeline.run(
                 question,
                 dag_payload=dag_payload,
@@ -458,14 +455,15 @@ def _combined_payload(
         "index": item["index"],
         "qid": item.get("qid"),
         "question": item["question"],
-        "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "output_dir": str(question_dir),
         "depo_decomposition_path": str(question_dir / "decomposition.json"),
         "hyperbranch_dag_path": str(dag_path),
         "hyperbranch_run_dir": hyperbranch_result.get("run_dir"),
         "stages": {
-            "depo": decomposition_payload.get("stages"),
+            "depo": {
+                "6_atomic_question_dag": ((decomposition_payload.get("stages") or {}).get("6_atomic_question_dag")),
+            },
             "hyperbranch": {
                 "dag_input": hyperbranch_result.get("artifacts", {}).get("dag_input"),
                 "atomic_answers": hyperbranch_result.get("artifacts", {}).get("atomic_answers"),
@@ -562,7 +560,6 @@ def _error_payload(
         "index": item["index"],
         "qid": item.get("qid"),
         "question": item["question"],
-        "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "output_dir": str(question_dir),
         "error_type": type(exc).__name__,
@@ -646,7 +643,7 @@ def _summary_error_lines(payload: dict[str, Any]) -> list[str]:
         f"## {payload['index']}. {payload['question']}",
         "",
         f"- Output: `{payload['output_dir']}`",
-        f"- Status: sample",
+        "- Status: sample",
         f"- Error: `{payload['error_type']}: {payload['sample']}`",
         "",
     ]

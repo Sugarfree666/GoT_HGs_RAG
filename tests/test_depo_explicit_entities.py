@@ -3,7 +3,6 @@ from __future__ import annotations
 import sys
 import unittest
 from pathlib import Path
-from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -271,7 +270,7 @@ class ExplicitEntityPromptTest(unittest.TestCase):
         self.assertNotIn("verified_entities", prompt)
 
     def test_prompt_has_entity_boundary_rules_for_observed_failures(self) -> None:
-        prompt = build_explicit_entity_extraction_prompt(
+        build_explicit_entity_extraction_prompt(
             "What nationality is Beatrice I, Countess Of Burgundy's husband?"
         )
         system_prompt = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
@@ -339,7 +338,7 @@ class ExplicitEntityPromptTest(unittest.TestCase):
         self.assertIn("generic path nodes", prompt)
 
     def test_prompt_excludes_possessive_relations_and_requires_global_non_overlap(self) -> None:
-        prompt = build_explicit_entity_extraction_prompt(
+        build_explicit_entity_extraction_prompt(
             "Who is the father of Empress Wang's husband?"
         )
 

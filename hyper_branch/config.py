@@ -14,7 +14,6 @@ class DatasetConfig:
     text_chunk_file: str = "kv_store_text_chunks.json"
     hyperedge_vdb_file: str = "vdb_hyperedges.json"
     entity_vdb_file: str = "vdb_entity_names.json"
-    entity_vdb_fallback_file: str = "vdb_entities.json"
     chunk_vdb_file: str = "vdb_chunks.json"
 
 
@@ -28,7 +27,6 @@ class RuntimeConfig:
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
     local_hyperedge_hops: int = 2
-    entity_link_top_k: int = 30
     descriptive_fallback_hyperedge_top_k: int = 80
     descriptive_fallback_chunk_top_k: int = 20
 
@@ -76,7 +74,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         text_chunk_file=dataset.get("text_chunk_file", "kv_store_text_chunks.json"),
         hyperedge_vdb_file=dataset.get("hyperedge_vdb_file", "vdb_hyperedges.json"),
         entity_vdb_file=dataset.get("entity_vdb_file", "vdb_entity_names.json"),
-        entity_vdb_fallback_file=dataset.get("entity_vdb_fallback_file", "vdb_entities.json"),
         chunk_vdb_file=dataset.get("chunk_vdb_file", "vdb_chunks.json"),
     )
     runtime_cfg = RuntimeConfig(
@@ -86,7 +83,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
         local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
-        entity_link_top_k=int(retrieval.get("entity_link_top_k", 30)),
         descriptive_fallback_hyperedge_top_k=int(retrieval.get("descriptive_fallback_hyperedge_top_k", 80)),
         descriptive_fallback_chunk_top_k=int(retrieval.get("descriptive_fallback_chunk_top_k", 20)),
     )

@@ -1,80 +1,47 @@
-You identify concrete topic entities in one resolved atomic question.
+You identify entities in one resolved atomic question for hypergraph retrieval.
 
-You will receive a JSON payload with:
-- atomic_question: the current resolved atomic question.
-- dependency_answers: optional answers from prerequisite atomic questions.
+The input is JSON containing:
+- `atomic_question`: the current question.
+- `dependency_answers`: optional answers from prerequisite questions.
 
-Return strict JSON only:
-{
-  "entities": ["..."]
-}
+Your only job is entity recognition. Do not answer the question or infer an entity that is not explicitly mentioned.
 
-Your only job is entity recognition for graph anchoring. Do not answer the question. Do not build relation queries. Do not infer answer types. Do not explain.
+Extract the concrete entities that can be used to look up the question in the hypergraph, such as named people, places, organizations, works, events, products, dates, years, and numeric values used as factual constraints.
 
-Entity rules, aligned with DEPO explicit entity extraction:
-- Extract only concrete named things useful as retrieval anchors: people, places, organizations, institutions, creative works/titles, events, awards, treaties, wars, products, games, etc.
-- A returned entity should be the exact natural surface form from atomic_question or a resolved dependency answer when the question explicitly refers to that answer.
-- Do not invent entities or add facts.
-- Do not include roles, common nouns, answer slots, relation words, wh-phrases, operators, inferred entities, bare dates, bare years, ordinals, quantities, or measurements.
-- Do not include generic answer types such as "university", "film", "country", "date", "person", "father", "mother", "director", "composer", or "performer" unless the word is part of a specific official name.
-- Do not return vague bridge nouns such as "the tournament", "the city", "the team", "the country", "the championship series", "the house of representatives", or "economic growth" as entities.
-- Do not include possessive suffixes or role tails. For "Coulson Wallop's father", return "Coulson Wallop", not "Coulson Wallop's father".
-- For role-of-entity phrases such as "the director of Interview With A Hitman", return only the concrete named work "Interview With A Hitman".
-- For "place of death of the performer of Song A", return only the concrete named work "Song A" unless a dependency answer supplies the performer.
-- Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Keep the full official-looking title as one entity.
-- Person, place, and organization mentions may include disambiguating parentheticals or appositive titles when they identify the entity, such as "Christopher Newton (Criminal)" or "John Ernest, Duke Of Saxe-Eisenach".
-- Preserve appositive noble/official titles when they identify the entity, such as "John Wallop, 2nd Earl of Portsmouth".
-- Some official titles begin with words that look like question words, such as When, What, Who, Where, or Which. If that word is part of a capitalized official-looking title, keep it inside the entity.
-- Split independent coordinated entities, e.g. "Ryan Tubridy or Mauro Massironi".
-- Deduplicate entities while preserving order.
-
-Dependency answer rules:
-- Use dependency_answers only when atomic_question contains a placeholder, variable, pronoun, or reference that clearly points to a dependency answer.
-- If dependency answer text is a concrete entity, include that answer as an entity anchor.
-- Do not copy previous evidence, confidence, answer type, or reasoning into entities.
+Keep each entity exactly as it appears in the input and preserve its complete identifying name, including titles, subtitles, punctuation, and disambiguating parentheses. Do not return generic roles, types, relations, or answer slots such as `the director`, `which country`, `film`, or `the city`. Use a dependency answer only when the current question clearly refers to it. Deduplicate entities while preserving their order.
 
 Examples:
 
-Input atomic_question:
-Where did Coulson Wallop's father study?
-Output:
-{
-  "entities": ["Coulson Wallop"]
-}
+`Where did Coulson Wallop's father study?`
+```json
+{"entities": ["Coulson Wallop"]}
+```
 
-Input atomic_question:
-What country is the director of Interview With A Hitman from?
-Output:
-{
-  "entities": ["Interview With A Hitman"]
-}
+`What nationality is Arabia (Daughter of Justin II)'s mother?`
+```json
+{"entities": ["Arabia (Daughter of Justin II)"]}
+```
 
-Input atomic_question:
-Who performed I Love Life, Thank You?
-Output:
-{
-  "entities": ["I Love Life, Thank You"]
-}
+`Who was president on April 25, 1898?`
+```json
+{"entities": ["April 25, 1898"]}
+```
 
-Input atomic_question:
-When did the mother of Lothair II die?
-Output:
-{
-  "entities": ["Lothair II"]
-}
+`Which city had a population of 800,000 in 2010?`
+```json
+{"entities": ["800,000", "2010"]}
+```
 
-Input atomic_question:
-Which film was released first, Aas Ka Panchhi or Phoolwari?
-Output:
-{
-  "entities": ["Aas Ka Panchhi", "Phoolwari"]
-}
+`In what 2016 Punjabi film directed by Smeep Kang did Sunil Grover also star?`
+```json
+{"entities": ["2016", "Smeep Kang", "Sunil Grover"]}
+```
 
-Input atomic_question:
-Which country hosted the tournament?
-Output:
-{
-  "entities": []
-}
+The unnamed film is the requested answer, so do not guess it or return the generic phrase `2016 Punjabi film` as an entity.
 
-Return valid JSON only. If no concrete named entity is present, return {"entities": []}.
+Return strict JSON only:
+```json
+{"entities": ["..."]}
+```
+
+If there is no usable entity, return `{"entities": []}`. Do not include explanations or additional fields.

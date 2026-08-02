@@ -253,10 +253,10 @@ def replay_one_question(
         analysis = _analysis_from_cached(analysis_record, old_answer_record)
         evidence = _evidence_from_cached(retrieval_record, old_answer_record, args.top_k)
         answer_contract = AtomicDagExecutor._answer_contract(resolved_question)
-        bridge_resolver = _cached_bridge_hyperedge_text_resolver(retrieval_record, old_answer_record)
+        first_hop_resolver = _cached_first_hop_hyperedge_text_resolver(retrieval_record, old_answer_record)
         evidence_payload = AtomicDagExecutor._answer_evidence_payload(
             evidence,
-            bridge_hyperedge_text_resolver=bridge_resolver,
+            first_hop_hyperedge_text_resolver=first_hop_resolver,
         )
         answer_input = {
             "node_id": node.node_id,
@@ -459,7 +459,7 @@ def _evidence_from_cached(
     return [_fused_candidate_from_payload(item) for item in raw_evidence if isinstance(item, dict)]
 
 
-def _cached_bridge_hyperedge_text_resolver(
+def _cached_first_hop_hyperedge_text_resolver(
     retrieval_record: dict[str, Any],
     old_answer_record: dict[str, Any],
 ):
@@ -853,7 +853,7 @@ def _summary_error_lines(payload: dict[str, Any]) -> list[str]:
         f"## {payload.get('index')}. {payload.get('question')}",
         "",
         f"- Output: `{payload.get('output_dir')}`",
-        f"- Status: sample",
+        "- Status: sample",
         f"- Error: `{payload.get('error_type')}: {payload.get('sample')}`",
         "",
     ]

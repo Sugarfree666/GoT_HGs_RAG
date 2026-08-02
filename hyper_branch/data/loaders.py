@@ -44,10 +44,14 @@ class HypergraphDatasetLoader:
         text_chunks = self._load_json(root / self.config.text_chunk_file)
         full_docs = self._load_json(root / self.config.full_doc_file)
         entity_vdb_path = root / self.config.entity_vdb_file
-        if not entity_vdb_path.exists():
-            entity_vdb_path = root / self.config.entity_vdb_fallback_file
+        if not entity_vdb_path.is_file():
+            raise FileNotFoundError(
+                f"Entity-name vector store does not exist: {entity_vdb_path}. "
+                "Build or copy vdb_entity_names.json before running retrieval."
+            )
+        self.logger.info("Using entity-name vector store %s", entity_vdb_path.name)
         graph = KnowledgeHypergraph.from_graphml(graph_path)
-        entity_store = VectorStore.from_json(entity_vdb_path, name="entities", label_fields=("entity_name",))
+        entity_store = VectorStore.from_json(entity_vdb_path, name="entity_names", label_fields=("entity_name",))
         hyperedge_store = VectorStore.from_json(
             root / self.config.hyperedge_vdb_file,
             name="hyperedges",
@@ -60,6 +64,7 @@ class HypergraphDatasetLoader:
             "graphml_file": graph_path.name,
             "doc_count": len(full_docs),
             "chunk_count": len(text_chunks),
+            "entity_vector_file": entity_vdb_path.name,
             "entity_vector_count": len(entity_store.rows),
             "hyperedge_vector_count": len(hyperedge_store.rows),
             "chunk_vector_count": len(chunk_store.rows),

@@ -1,11 +1,13 @@
 ﻿from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
 from hyper_branch.config import load_config
 from hyper_branch.logging_utils import TraceStore, configure_logging, create_run_dir
 from hyper_branch.pipeline import HyperBranchPipeline
+from scripts.replay_cached_atomic_answers import _evidence_from_cached
 from tests.agriculture_fixture import ensure_agriculture_fixture
 
 
@@ -28,12 +30,33 @@ class PipelineSmokeTest(unittest.TestCase):
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
         self.assertTrue((run_dir / "artifacts" / "dag_input.json").exists())
         self.assertTrue((run_dir / "artifacts" / "original_question_analysis.json").exists())
-        self.assertTrue((run_dir / "artifacts" / "shared_candidate_pool_initial.json").exists())
-        self.assertTrue((run_dir / "artifacts" / "shared_candidate_pool_final.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "shared_candidate_pool.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "shared_candidate_pool_initial.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "shared_candidate_pool_final.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_question_analyses.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_retrieval.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_answers.json").exists())
         self.assertTrue((run_dir / "run.log").exists())
+
+        retrieval = json.loads(
+            (run_dir / "artifacts" / "atomic_retrieval.json").read_text(encoding="utf-8")
+        )[0]
+        self.assertIn("candidate_hyperedge_count", retrieval)
+        self.assertIn("answerer_evidence", retrieval)
+        self.assertNotIn("candidate_hyperedge_ids", retrieval)
+        self.assertNotIn("candidate_sources", retrieval)
+        self.assertNotIn("top_evidence", retrieval)
+        self.assertNotIn("evidence", retrieval["atomic_answer"])
+
+        answers = json.loads(
+            (run_dir / "artifacts" / "atomic_answers.json").read_text(encoding="utf-8")
+        )
+        self.assertNotIn("evidence", answers[0])
+
+        replay_evidence = _evidence_from_cached(retrieval, answers[0], top_k=50)
+        self.assertEqual(len(replay_evidence), len(retrieval["answerer_evidence"]))
+        self.assertEqual(replay_evidence[0].hyperedge_id, retrieval["answerer_evidence"][0]["hyperedge_id"])
+        self.assertEqual(replay_evidence[0].chunk_ids, retrieval["answerer_evidence"][0]["chunk_ids"])
 
 
 if __name__ == "__main__":

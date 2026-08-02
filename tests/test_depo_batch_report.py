@@ -19,6 +19,7 @@ from scripts.run_depo_decomposition_batch import (  # noqa: E402
     _write_json,
     build_markdown_report,
 )
+from scripts.run_depo_hyperbranch_batch import _combined_payload  # noqa: E402
 
 
 class DEPOBatchReportTest(unittest.TestCase):
@@ -158,6 +159,46 @@ class DEPOBatchReportTest(unittest.TestCase):
                 '{\n  "node": {\n    "id": "q1"\n  },\n  "deps": [\n    "q1"\n  ]\n}',
             )
             self.assertEqual(_jsonable(payload), {"node": {"id": "q1"}, "deps": ["q1"]})
+
+    def test_combined_hyperbranch_payload_keeps_only_atomic_dag_from_depo_stages(self) -> None:
+        decomposition = {
+            "stages": {
+                "1_explicit_entities": {"large_debug_payload": "not copied"},
+                "6_atomic_question_dag": {"valid": True, "nodes": [{"id": "q1"}]},
+            }
+        }
+        hyperbranch_result = {
+            "run_dir": "run/hyperbranch_run",
+            "artifacts": {
+                "dag_input": [{"node_id": "q1"}],
+                "atomic_answers": [{"node_id": "q1", "answer": "answer"}],
+            },
+            "final_answer": {"answer": "answer"},
+        }
+
+        payload = _combined_payload(
+            dataset="musique",
+            questions_file=Path("questions/musique/questions.json"),
+            item={
+                "index": 3,
+                "qid": "q3",
+                "question": "question",
+                "answer": "answer",
+                "raw": {"large": True},
+            },
+            config_path=Path("configs/musique.yaml"),
+            question_dir=Path("runs/musique/test/00003"),
+            decomposition_payload=decomposition,
+            dag_path=Path("runs/musique/test/00003/hyperbranch_dag.json"),
+            hyperbranch_result=hyperbranch_result,
+        )
+
+        self.assertEqual(
+            payload["stages"]["depo"],
+            {"6_atomic_question_dag": decomposition["stages"]["6_atomic_question_dag"]},
+        )
+        self.assertNotIn("raw_question_item", payload)
+        self.assertNotIn("1_explicit_entities", payload["stages"]["depo"])
 
 
 if __name__ == "__main__":

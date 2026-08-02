@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import io
+import json
 import tempfile
 import unittest
 from contextlib import redirect_stderr
 from pathlib import Path
 
-from hyper_branch.logging_utils import configure_logging
+from hyper_branch.logging_utils import TraceStore, configure_logging
 
 
 class LoggingUtilsTest(unittest.TestCase):
@@ -40,6 +41,32 @@ class LoggingUtilsTest(unittest.TestCase):
                 self._close_logger(logger)
 
             self.assertIn("Loading dataset from D:/dataset", stderr.getvalue())
+
+    def test_llm_trace_stores_sizes_without_prompt_or_response_text(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            run_dir = Path(tmp_dir)
+            trace_store = TraceStore(run_dir)
+            trace_store.log_llm_call(
+                "atomic_answer",
+                {
+                    "model": "test-model",
+                    "messages": [
+                        {"role": "system", "content": "secret prompt"},
+                        {"role": "user", "content": "large evidence payload"},
+                    ],
+                    "max_tokens": 900,
+                },
+                {"content": "model answer", "cached": False},
+            )
+
+            record = json.loads((run_dir / "llm_calls.jsonl").read_text(encoding="utf-8"))
+
+        self.assertEqual(record["request"]["model"], "test-model")
+        self.assertEqual(record["request"]["message_count"], 2)
+        self.assertEqual(record["request"]["input_chars"], 35)
+        self.assertEqual(record["response"]["output_chars"], 12)
+        self.assertNotIn("messages", record["request"])
+        self.assertNotIn("content", record["response"])
 
     def _close_logger(self, logger) -> None:
         for handler in list(logger.handlers):

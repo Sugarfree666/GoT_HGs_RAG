@@ -160,7 +160,7 @@ class OpenAICompatibleClient:
             time.sleep(delay_seconds)
 
     def _should_retry_http(self, status_code: int) -> bool:
-        return status_code in {408, 409, 425, 429, 500, 502, 503, 504}
+        return status_code in {408, 409, 425, 429, 500, 502, 503, 504, 522}
 
     def _should_retry_transport(self, reason: object) -> bool:
         if isinstance(

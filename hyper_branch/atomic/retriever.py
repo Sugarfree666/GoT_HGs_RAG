@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any
@@ -10,16 +11,13 @@ import numpy as np
 
 from ..config import RetrievalConfig
 from ..data.loaders import DatasetBundle
-from ..llm.service import AtomicLLMService
 from ..models import VectorMatch
 from ..utils import normalize_label, short_text
 from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
 
 
-_ANCHOR_ENTITY_TOP_K = 30
-_ANCHOR_ENTITY_LLM_MIN_CONFIDENCE = 0.6
-_ANCHOR_ENTITY_AUTO_ACCEPT_SCORE = 0.98
-_ANCHOR_ENTITY_CANDIDATE_LIMIT = 40
+_ANCHOR_ENTITY_VECTOR_TOP_K = 1
+_ANCHOR_ENTITY_VECTOR_MIN_SCORE = 0.6
 _CHUNK_MENTION_ENTITY_LIMIT = 20
 _LOCAL_RETRIEVAL_METHOD = "two_hop_multi_anchor_topk"
 _SHARED_RETRIEVAL_METHOD = "shared_original_question_augmented_topk"
@@ -27,8 +25,6 @@ _CHUNK_ENTITY_EXCLUDED_TYPES = {
     "CATEGORY",
     "CONCEPT",
     "CONDITION",
-    "DATE",
-    "NUMBER",
     "RELATION",
     "ROLE",
     "TITLE",
@@ -70,6 +66,88 @@ _CHUNK_ENTITY_GENERIC_LABELS = {
     "WORK",
     "WRITER",
 }
+_GENERIC_MENTION_TYPE_WORDS = {
+    "album",
+    "band",
+    "book",
+    "city",
+    "college",
+    "company",
+    "country",
+    "film",
+    "magazine",
+    "movie",
+    "organization",
+    "person",
+    "place",
+    "school",
+    "song",
+    "university",
+    "work",
+}
+_MONTH_NAMES = {
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+}
+_QUALIFIER_STOPWORDS = {"a", "an", "of", "the"}
+_PARENTHETICAL_ENTITY_TYPE_HINTS = {
+    "film": {"FILM", "MOVIE", "WORK"},
+    "journal": {"JOURNAL", "MAGAZINE", "PUBLICATION", "WORK"},
+    "magazine": {"JOURNAL", "MAGAZINE", "PUBLICATION", "WORK"},
+    "noble": {"PERSON", "TITLE"},
+    "song": {"MUSIC", "SONG", "TRACK", "WORK"},
+}
+_QUESTION_ENTITY_TYPE_HINTS = {
+    "album": {"ALBUM", "MUSIC", "WORK"},
+    "book": {"BOOK", "NOVEL", "PUBLICATION", "TEXT", "WORK"},
+    "film": {"FILM", "MOVIE", "WORK"},
+    "journal": {"JOURNAL", "MAGAZINE", "PUBLICATION", "WORK"},
+    "magazine": {"JOURNAL", "MAGAZINE", "PUBLICATION", "WORK"},
+    "movie": {"FILM", "MOVIE", "WORK"},
+    "novel": {"BOOK", "NOVEL", "TEXT", "WORK"},
+    "song": {"MUSIC", "SONG", "TRACK", "WORK"},
+}
+_QUESTION_WORK_TYPE_CONFLICT_TYPES = {
+    "CITY",
+    "COUNTRY",
+    "LOCATION",
+    "ORGANIZATION",
+    "PERSON",
+    "PLACE",
+    "REGION",
+}
+_PERSON_TITLE_WORDS = {"baron", "count", "duke", "earl", "emperor", "empress", "king", "lama", "prince", "queen"}
+_LOCATION_ENTITY_TYPES = {"CITY", "COUNTRY", "LOCATION", "PLACE", "REGION"}
+_INSTITUTION_HEAD_WORDS = {"academy", "college", "institute", "institution", "museum", "school", "university"}
+_UNICODE_ASCII_EQUIVALENTS = str.maketrans(
+    {
+        "Đ": "D",
+        "đ": "d",
+        "Ł": "L",
+        "ł": "l",
+        "Ø": "O",
+        "ø": "o",
+        "Æ": "AE",
+        "æ": "ae",
+        "Œ": "OE",
+        "œ": "oe",
+        "Þ": "Th",
+        "þ": "th",
+        "Ð": "D",
+        "ð": "d",
+        "ß": "ss",
+    }
+)
 
 
 @dataclass(slots=True)
@@ -80,7 +158,6 @@ class AnchorEntityMatch:
     match_type: str
     link_score: float
     vector_score: float | None = None
-    llm_confidence: float | None = None
     candidate_rank: int | None = None
 
     def to_metadata(self) -> dict[str, Any]:
@@ -92,7 +169,6 @@ class AnchorEntityMatch:
             "match_type": self.match_type,
             "link_score": self.link_score,
             "vector_score": self.vector_score,
-            "llm_confidence": self.llm_confidence,
             "candidate_rank": self.candidate_rank,
         }
 
@@ -157,18 +233,20 @@ class AtomicHyperedgeRetriever:
         dataset: DatasetBundle,
         embedder: Any,
         config: RetrievalConfig,
-        llm_service: AtomicLLMService | None = None,
+        llm_service: Any | None = None,
         logger: logging.Logger | None = None,
     ) -> None:
+        # Kept only so older callers do not break; entity linking never calls an LLM.
+        del llm_service
         self.dataset = dataset
         self.embedder = embedder
         self.config = config
-        self.llm_service = llm_service
         self.logger = logger or logging.getLogger(__name__)
         self._entity_ids = [
             node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "entity"
         ]
         self._entity_lookup = self._build_entity_lookup(self._entity_ids)
+        self._entity_base_lookup = self._build_entity_base_lookup(self._entity_ids)
         self._hyperedge_ids = [
             node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "hyperedge"
         ]
@@ -299,7 +377,16 @@ class AtomicHyperedgeRetriever:
             seen_linked_entity_ids.add(match.entity_id)
             linked_matches.append(match)
 
+        mention_seed_pool = self._mention_seed_candidate_pool(result.unlinked_anchor_mentions)
         if not linked_matches:
+            if mention_seed_pool["candidate_hyperedge_ids"]:
+                result.expansion_entity_ids = list(mention_seed_pool["expansion_entity_ids"])
+                result.second_hop_hyperedge_ids = list(mention_seed_pool["second_hop_hyperedge_ids"])
+                result.candidate_hyperedge_ids = list(mention_seed_pool["candidate_hyperedge_ids"])
+                result.candidate_sources = [dict(item) for item in mention_seed_pool["candidate_sources"]]
+                self._tag_candidate_pool_sources(result, pool_source)
+                return result
+
             result.insufficient_reason = "unlinked_primary_anchor"
             if use_descriptive_fallback:
                 return self._try_descriptive_fallback_candidates(
@@ -310,8 +397,10 @@ class AtomicHyperedgeRetriever:
                 )
             return result
 
-        result.linked_entity_id = linked_matches[0].entity_id
-        result.anchor_match = linked_matches[0].to_metadata()
+        expansion_matches = self._expansion_anchor_matches(linked_matches)
+        expansion_entity_ids = {match.entity_id for match in expansion_matches}
+        result.linked_entity_id = expansion_matches[0].entity_id
+        result.anchor_match = expansion_matches[0].to_metadata()
         result.anchor_matches = [match.to_metadata() for match in linked_matches]
         result.linked_entities = [
             {
@@ -319,30 +408,26 @@ class AtomicHyperedgeRetriever:
                 "entity_id": match.entity_id,
                 "match_type": match.match_type,
                 "link_score": match.link_score,
+                "used_for_expansion": match.entity_id in expansion_entity_ids,
             }
             for match in linked_matches
         ]
 
-        candidate_pool = self._multi_anchor_candidate_pool(linked_matches)
+        candidate_pool = self._multi_anchor_candidate_pool(expansion_matches)
+        if mention_seed_pool["candidate_hyperedge_ids"]:
+            candidate_pool = self._merge_local_candidate_payloads(candidate_pool, mention_seed_pool)
         result.adjacent_hyperedge_ids = list(candidate_pool["adjacent_hyperedge_ids"])
-        if not result.adjacent_hyperedge_ids:
-            result.insufficient_reason = "primary_anchor_has_no_adjacent_hyperedges"
-            if use_descriptive_fallback:
-                return self._try_descriptive_fallback_candidates(
-                    result,
-                    question=question,
-                    hyperedge_query=retrieval_query,
-                    pool_source=pool_source,
-                )
-            return result
-
         result.expansion_entity_ids = list(candidate_pool["expansion_entity_ids"])
         result.second_hop_hyperedge_ids = list(candidate_pool["second_hop_hyperedge_ids"])
         result.candidate_hyperedge_ids = list(candidate_pool["candidate_hyperedge_ids"])
         result.candidate_sources = [dict(item) for item in candidate_pool["candidate_sources"]]
         self._tag_candidate_pool_sources(result, pool_source)
         if not result.candidate_hyperedge_ids:
-            result.insufficient_reason = "no_local_candidate_hyperedges"
+            result.insufficient_reason = (
+                "primary_anchor_has_no_adjacent_hyperedges"
+                if not result.adjacent_hyperedge_ids
+                else "no_local_candidate_hyperedges"
+            )
             if use_descriptive_fallback:
                 return self._try_descriptive_fallback_candidates(
                     result,
@@ -620,6 +705,15 @@ class AtomicHyperedgeRetriever:
             return []
         return _dedupe_strings([str(item) for item in self.dataset.graph.entity_hyperedge_ids(entity_id)])
 
+    def _expansion_anchor_matches(self, matches: list[AnchorEntityMatch]) -> list[AnchorEntityMatch]:
+        named_matches = [match for match in matches if not self._is_date_or_number_match(match)]
+        return named_matches or list(matches)
+
+    def _is_date_or_number_match(self, match: AnchorEntityMatch) -> bool:
+        node = getattr(self.dataset.graph, "nodes", {}).get(match.entity_id)
+        entity_type = normalize_label(str(getattr(node, "entity_type", "") or "")).upper()
+        return entity_type in {"DATE", "NUMBER"} or _is_date_or_number_label(match.query_entity)
+
     def _multi_anchor_candidate_pool(self, matches: list[AnchorEntityMatch]) -> dict[str, Any]:
         adjacent_ids: list[str] = []
         expansion_entity_ids: list[str] = []
@@ -628,7 +722,7 @@ class AtomicHyperedgeRetriever:
         source_by_id: dict[str, dict[str, Any]] = {}
 
         for match in matches:
-            first_hop_ids = self._adjacent_hyperedge_ids(match.entity_id)
+            first_hop_ids = self._qualified_adjacent_hyperedge_ids(match)
             adjacent_ids.extend(hyperedge_id for hyperedge_id in first_hop_ids if hyperedge_id not in adjacent_ids)
             candidate_pool = self._local_candidate_pool(match.entity_id, first_hop_ids)
             expansion_entity_ids.extend(
@@ -655,6 +749,115 @@ class AtomicHyperedgeRetriever:
             "adjacent_hyperedge_ids": adjacent_ids,
             "expansion_entity_ids": expansion_entity_ids,
             "second_hop_hyperedge_ids": second_hop_ids,
+            "candidate_hyperedge_ids": candidate_ids,
+            "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
+        }
+
+    def _qualified_adjacent_hyperedge_ids(self, match: AnchorEntityMatch) -> list[str]:
+        adjacent_ids = self._adjacent_hyperedge_ids(match.entity_id)
+        qualifiers = _parenthetical_qualifier_tokens(match.query_entity)
+        if not qualifiers or not adjacent_ids:
+            return adjacent_ids
+
+        qualified_ids = [
+            hyperedge_id
+            for hyperedge_id in adjacent_ids
+            if _text_contains_qualifiers(self._hyperedge_context_text(hyperedge_id), qualifiers)
+        ]
+        return qualified_ids or adjacent_ids
+
+    def _hyperedge_context_text(self, hyperedge_id: str) -> str:
+        texts: list[str] = []
+        if hasattr(self.dataset.graph, "describe_hyperedge"):
+            description = self.dataset.graph.describe_hyperedge(hyperedge_id)
+            texts.append(str(description.get("hyperedge_text", "") or ""))
+        for chunk_id in self._hyperedge_chunk_ids(hyperedge_id):
+            texts.append(self.dataset.get_chunk_text(chunk_id))
+        return " ".join(text for text in texts if text)
+
+    def _mention_seed_candidate_pool(self, mentions: list[str]) -> dict[str, Any]:
+        expansion_entity_ids: list[str] = []
+        second_hop_ids: list[str] = []
+        candidate_ids: list[str] = []
+        source_by_id: dict[str, dict[str, Any]] = {}
+
+        for mention in mentions:
+            for rank, chunk_id in enumerate(self._literal_mention_chunk_ids(mention), start=1):
+                for hyperedge_id in self._hyperedge_ids_for_chunk(chunk_id):
+                    self._add_descriptive_hyperedge_source(
+                        hyperedge_id=hyperedge_id,
+                        candidate_ids=candidate_ids,
+                        source_by_id=source_by_id,
+                        expansion_source="mention_chunk_hyperedge_seed",
+                        rank=rank,
+                        via_chunk_ids=[chunk_id],
+                    )
+                for entity_id in self._chunk_entity_ids(chunk_id):
+                    if entity_id not in expansion_entity_ids:
+                        expansion_entity_ids.append(entity_id)
+                    for hyperedge_id in self._adjacent_hyperedge_ids(entity_id):
+                        if hyperedge_id not in second_hop_ids:
+                            second_hop_ids.append(hyperedge_id)
+                        self._add_descriptive_hyperedge_source(
+                            hyperedge_id=hyperedge_id,
+                            candidate_ids=candidate_ids,
+                            source_by_id=source_by_id,
+                            expansion_source="mention_chunk_entity_seed",
+                            rank=rank,
+                            via_entity_ids=[entity_id],
+                            via_chunk_ids=[chunk_id],
+                        )
+
+        return {
+            "adjacent_hyperedge_ids": [],
+            "expansion_entity_ids": expansion_entity_ids,
+            "second_hop_hyperedge_ids": second_hop_ids,
+            "candidate_hyperedge_ids": candidate_ids,
+            "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
+        }
+
+    def _literal_mention_chunk_ids(self, mention: str) -> list[str]:
+        if not _is_specific_mention_seed(mention):
+            return []
+        mention_key = _canonical_entity_key(mention)
+        if not mention_key:
+            return []
+        text_chunks = getattr(self.dataset, "text_chunks", {})
+        if not isinstance(text_chunks, dict):
+            return []
+
+        chunk_ids: list[str] = []
+        for chunk_id, record in text_chunks.items():
+            if not isinstance(record, dict):
+                continue
+            content = str(record.get("content", "") or "")
+            if _text_contains_entity_key(content, mention_key):
+                chunk_ids.append(str(chunk_id))
+            if len(chunk_ids) >= _CHUNK_MENTION_ENTITY_LIMIT:
+                break
+        return chunk_ids
+
+    def _merge_local_candidate_payloads(
+        self,
+        primary: dict[str, Any],
+        additional: dict[str, Any],
+    ) -> dict[str, Any]:
+        candidate_ids = _dedupe_strings(
+            [*primary.get("candidate_hyperedge_ids", []), *additional.get("candidate_hyperedge_ids", [])]
+        )
+        source_by_id: dict[str, dict[str, Any]] = {}
+        for source in [*primary.get("candidate_sources", []), *additional.get("candidate_sources", [])]:
+            self._merge_candidate_source(source_by_id, dict(source))
+        return {
+            "adjacent_hyperedge_ids": _dedupe_strings(
+                [*primary.get("adjacent_hyperedge_ids", []), *additional.get("adjacent_hyperedge_ids", [])]
+            ),
+            "expansion_entity_ids": _dedupe_strings(
+                [*primary.get("expansion_entity_ids", []), *additional.get("expansion_entity_ids", [])]
+            ),
+            "second_hop_hyperedge_ids": _dedupe_strings(
+                [*primary.get("second_hop_hyperedge_ids", []), *additional.get("second_hop_hyperedge_ids", [])]
+            ),
             "candidate_hyperedge_ids": candidate_ids,
             "candidate_sources": [source_by_id[hyperedge_id] for hyperedge_id in candidate_ids],
         }
@@ -1050,51 +1253,86 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         query_index: int,
     ) -> list[AnchorEntityMatch]:
-        exact_candidates = self._entity_lookup_candidates(entity)
+        del analysis
+        exact_candidates = self._entity_lookup_candidates(entity, question=question)
         if len(exact_candidates) == 1:
             return [self._anchor_match_from_candidate(exact_candidates[0], query_index=query_index, query_entity=entity)]
-        if len(exact_candidates) > 1:
-            selected_exact = self._select_or_auto_anchor_candidate(
-                question=question,
-                entity=entity,
-                analysis=analysis,
-                candidates=exact_candidates,
+        vector_candidates = self._anchor_entity_vector_candidates(entity, question=question)
+        if not vector_candidates:
+            return []
+        return [self._anchor_match_from_candidate(vector_candidates[0], query_index=query_index, query_entity=entity)]
+
+    def _entity_lookup_candidates(self, entity: str, *, question: str = "") -> list[dict[str, Any]]:
+        direct_candidates = [
+            candidate
+            for candidate in self._entity_lookup_candidates_for_label(entity)
+            if not _question_entity_type_conflict(
+                question,
+                entity,
+                str(candidate["entity_id"]),
+                self.dataset.graph,
             )
-            if selected_exact is not None:
-                return [self._anchor_match_from_candidate(selected_exact, query_index=query_index, query_entity=entity)]
-            return [
-                self._anchor_match_from_candidate(candidate, query_index=query_index, query_entity=entity)
-                for candidate in exact_candidates
-            ]
+        ]
+        if direct_candidates:
+            return direct_candidates
 
-        candidates = self._merge_anchor_candidates(
-            [
-                *self._anchor_entity_vector_candidates(entity),
-                *self._chunk_mention_entity_candidates(entity),
-            ]
-        )
-        if not candidates:
-            return []
-
-        selected = self._select_or_auto_anchor_candidate(
-            question=question,
-            entity=entity,
-            analysis=analysis,
-            candidates=candidates,
-        )
-        if selected is None:
-            return []
-
-        return [self._anchor_match_from_candidate(selected, query_index=query_index, query_entity=entity)]
-
-    def _resolve_entity_ids(self, entity: str) -> list[str]:
-        return [candidate["entity_id"] for candidate in self._entity_lookup_candidates(entity)]
-
-    def _entity_lookup_candidates(self, entity: str) -> list[dict[str, Any]]:
+        # The analysis prompt often preserves a disambiguating suffix such as
+        # ``(1948 Film)`` or ``(91.5 FM)``, while construction stores the same
+        # entity under its base title.  Treat that as an exact-name fallback,
+        # but keep the suffix as a hard identity constraint so a same-title
+        # entity from another year/type is never accepted.
+        base_label = _without_trailing_parenthetical(entity)
+        fallback_candidates = [
+            *(
+                self._entity_lookup_candidates_for_label(base_label)
+                if base_label
+                else []
+            ),
+            *self._entity_base_alias_candidates(base_label or entity),
+        ]
         candidates: list[dict[str, Any]] = []
         seen: set[str] = set()
-        for rank, (key, match_type, score) in enumerate(_lookup_keys_for_mention(entity), start=1):
+        for candidate in fallback_candidates:
+            entity_id = str(candidate["entity_id"])
+            if entity_id in seen:
+                continue
+            seen.add(entity_id)
+            if _vector_candidate_constraint_conflict(
+                entity,
+                entity_id,
+                self.dataset.graph,
+                question=question,
+            ):
+                continue
+            candidates.append(candidate)
+        return candidates
+
+    def _entity_lookup_candidates_for_label(self, label: str) -> list[dict[str, Any]]:
+        candidates: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for key in _lookup_keys_from_variants([label]):
             for entity_id in self._entity_lookup.get(key, []):
+                if entity_id in seen:
+                    continue
+                seen.add(entity_id)
+                candidate = {
+                    "entity_id": entity_id,
+                    "label": normalize_label(entity_id),
+                    "link_score": 1.0,
+                    "vector_score": 1.0,
+                    "candidate_rank": 1,
+                    "source_label": normalize_label(entity_id),
+                    "source_item_id": entity_id,
+                    "match_type": "exact",
+                }
+                candidates.append(candidate)
+        return candidates
+
+    def _entity_base_alias_candidates(self, label: str) -> list[dict[str, Any]]:
+        candidates: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for key in _lookup_keys_from_variants([label]):
+            for entity_id in self._entity_base_lookup.get(key, []):
                 if entity_id in seen:
                     continue
                 seen.add(entity_id)
@@ -1102,161 +1340,41 @@ class AtomicHyperedgeRetriever:
                     {
                         "entity_id": entity_id,
                         "label": normalize_label(entity_id),
-                        "link_score": float(score),
-                        "vector_score": float(score),
-                        "candidate_rank": rank,
+                        "link_score": 1.0,
+                        "vector_score": 1.0,
+                        "candidate_rank": 1,
                         "source_label": normalize_label(entity_id),
                         "source_item_id": entity_id,
-                        "match_type": match_type,
+                        "match_type": "exact",
                     }
                 )
         return candidates
 
-    def _anchor_entity_vector_candidates(self, entity: str) -> list[dict[str, Any]]:
-        top_k = int(getattr(self.config, "entity_link_top_k", _ANCHOR_ENTITY_TOP_K))
-        matches = self._query_entity_store(entity, max(top_k, _ANCHOR_ENTITY_TOP_K))
-        candidates: list[dict[str, Any]] = []
-        seen: set[str] = set()
-        for rank, match in enumerate(matches, start=1):
-            entity_id = self._resolve_entity_id_from_vector_match(match)
-            if not entity_id or entity_id in seen:
-                continue
-            seen.add(entity_id)
-            candidates.append(
-                {
-                    "entity_id": entity_id,
-                    "label": normalize_label(entity_id),
-                    "link_score": float(match.score),
-                    "vector_score": float(match.score),
-                    "candidate_rank": rank,
-                    "source_label": normalize_label(match.label),
-                    "source_item_id": match.item_id,
-                    "match_type": "vector",
-                }
-            )
-        return candidates
-
-    def _chunk_mention_entity_candidates(self, entity: str) -> list[dict[str, Any]]:
-        mention_key = _canonical_entity_key(entity)
-        if not mention_key:
+    def _anchor_entity_vector_candidates(self, entity: str, *, question: str = "") -> list[dict[str, Any]]:
+        matches = self._query_entity_store(entity, _ANCHOR_ENTITY_VECTOR_TOP_K)
+        if not matches:
             return []
-        source_to_nodes = getattr(self.dataset.graph, "source_to_nodes", None)
-        if source_to_nodes is None or not hasattr(source_to_nodes, "get"):
+        match = matches[0]
+        score = float(match.score)
+        if score < _ANCHOR_ENTITY_VECTOR_MIN_SCORE:
             return []
-        text_chunks = getattr(self.dataset, "text_chunks", {})
-        if not isinstance(text_chunks, dict):
+        entity_id = self._resolve_entity_id_from_vector_match(match)
+        if not entity_id:
             return []
-
-        candidate_by_id: dict[str, dict[str, Any]] = {}
-        for chunk_id, record in text_chunks.items():
-            if not isinstance(record, dict):
-                continue
-            content = str(record.get("content", "") or "")
-            if not _text_contains_entity_key(content, mention_key):
-                continue
-            source_title = _chunk_source_title(content)
-            for node_id in source_to_nodes.get(str(chunk_id), []):
-                entity_id = str(node_id)
-                node = self.dataset.graph.nodes.get(entity_id)
-                if node is None or getattr(node, "role", "") != "entity":
-                    continue
-                if not self._is_concrete_chunk_entity(entity_id):
-                    continue
-                label_key = _canonical_entity_key(entity_id)
-                source_title_key = _canonical_entity_key(source_title)
-                score = 0.82
-                if label_key == mention_key:
-                    score = 0.99
-                elif source_title_key == mention_key:
-                    score = 0.97
-                elif mention_key in label_key or label_key in mention_key:
-                    score = 0.9
-                existing = candidate_by_id.get(entity_id)
-                if existing is not None and float(existing["link_score"]) >= score:
-                    continue
-                snippet = short_text(content, 240)
-                candidate_by_id[entity_id] = {
-                    "entity_id": entity_id,
-                    "label": normalize_label(entity_id),
-                    "link_score": float(score),
-                    "vector_score": float(score),
-                    "candidate_rank": 0,
-                    "source_label": source_title or normalize_label(entity_id),
-                    "source_item_id": str(chunk_id),
-                    "match_type": "chunk_mention",
-                    "source_title": source_title,
-                    "chunk_snippet": snippet,
-                    "adjacent_hyperedge_count": len(self._adjacent_hyperedge_ids(entity_id)),
-                }
-
-        candidates = list(candidate_by_id.values())
-        candidates.sort(
-            key=lambda item: (
-                -float(item.get("link_score", 0.0)),
-                -int(item.get("adjacent_hyperedge_count", 0) or 0),
-                str(item.get("entity_id", "")),
-            )
-        )
-        for rank, candidate in enumerate(candidates[:_CHUNK_MENTION_ENTITY_LIMIT], start=1):
-            candidate["candidate_rank"] = rank
-        return candidates[:_CHUNK_MENTION_ENTITY_LIMIT]
-
-    def _merge_anchor_candidates(self, candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        merged: dict[str, dict[str, Any]] = {}
-        for candidate in candidates:
-            entity_id = str(candidate.get("entity_id", "") or "")
-            if not entity_id:
-                continue
-            existing = merged.get(entity_id)
-            if existing is None or float(candidate.get("link_score", 0.0)) > float(existing.get("link_score", 0.0)):
-                merged[entity_id] = dict(candidate)
-        result = list(merged.values())
-        result.sort(
-            key=lambda item: (
-                -float(item.get("link_score", item.get("vector_score", 0.0))),
-                int(item.get("candidate_rank", 0) or 0),
-                str(item.get("entity_id", "")),
-            )
-        )
-        for rank, candidate in enumerate(result[:_ANCHOR_ENTITY_CANDIDATE_LIMIT], start=1):
-            candidate["candidate_rank"] = rank
-        return result[:_ANCHOR_ENTITY_CANDIDATE_LIMIT]
-
-    def _select_or_auto_anchor_candidate(
-        self,
-        *,
-        question: str,
-        entity: str,
-        analysis: AtomicQuestionAnalysis,
-        candidates: list[dict[str, Any]],
-    ) -> dict[str, Any] | None:
-        selected = self._select_anchor_entity_with_llm(
-            question=question,
-            entity=entity,
-            analysis=analysis,
-            candidates=candidates,
-        )
-        if selected is not None:
-            return selected
-        return self._auto_select_anchor_candidate(entity, candidates)
-
-    def _auto_select_anchor_candidate(self, entity: str, candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
-        if not candidates:
-            return None
-        mention_key = _canonical_entity_key(entity)
-        for candidate in candidates:
-            label_key = _canonical_entity_key(str(candidate.get("label", "") or candidate.get("entity_id", "")))
-            source_label_key = _canonical_entity_key(str(candidate.get("source_label", "") or ""))
-            score = float(candidate.get("link_score", candidate.get("vector_score", 0.0)) or 0.0)
-            if mention_key and mention_key in {label_key, source_label_key}:
-                selected = dict(candidate)
-                selected["llm_confidence"] = 0.0
-                return selected
-            if score >= _ANCHOR_ENTITY_AUTO_ACCEPT_SCORE and str(candidate.get("match_type", "")).startswith("alias"):
-                selected = dict(candidate)
-                selected["llm_confidence"] = 0.0
-                return selected
-        return None
+        if _vector_candidate_constraint_conflict(entity, entity_id, self.dataset.graph, question=question):
+            return []
+        return [
+            {
+                "entity_id": entity_id,
+                "label": normalize_label(entity_id),
+                "link_score": score,
+                "vector_score": score,
+                "candidate_rank": 1,
+                "source_label": normalize_label(match.label),
+                "source_item_id": match.item_id,
+                "match_type": "vector",
+            }
+        ]
 
     @staticmethod
     def _anchor_match_from_candidate(
@@ -1273,7 +1391,6 @@ class AtomicHyperedgeRetriever:
             match_type=str(candidate.get("match_type", "entity_link")),
             link_score=link_score,
             vector_score=float(candidate.get("vector_score", link_score) or link_score),
-            llm_confidence=float(candidate.get("llm_confidence", 0.0) or 0.0),
             candidate_rank=int(candidate.get("candidate_rank", 0) or 0),
         )
 
@@ -1319,52 +1436,23 @@ class AtomicHyperedgeRetriever:
                 return mapped[0]
         return None
 
-    def _select_anchor_entity_with_llm(
-        self,
-        question: str,
-        entity: str,
-        analysis: AtomicQuestionAnalysis,
-        candidates: list[dict[str, Any]],
-    ) -> dict[str, Any] | None:
-        if self.llm_service is None or not hasattr(self.llm_service, "select_anchor_entity"):
-            return None
-        try:
-            response = self.llm_service.select_anchor_entity(question, entity, analysis, candidates)
-        except Exception as exc:  # pragma: no cover - defensive guard for external LLM failures
-            self.logger.warning("Anchor entity selector failed for %s: %s", short_text(entity, 80), exc)
-            return None
-
-        if not isinstance(response, dict):
-            return None
-        selected_entity_id = str(response.get("selected_entity_id", "NONE")).strip()
-        if not selected_entity_id or selected_entity_id.upper() == "NONE":
-            return None
-
-        try:
-            confidence = float(response.get("confidence", 0.0) or 0.0)
-        except (TypeError, ValueError):
-            return None
-        if confidence < _ANCHOR_ENTITY_LLM_MIN_CONFIDENCE:
-            return None
-
-        candidates_by_id = {str(candidate["entity_id"]): candidate for candidate in candidates}
-        selected = candidates_by_id.get(selected_entity_id)
-        if selected is None:
-            return None
-
-        payload = dict(selected)
-        payload["llm_confidence"] = confidence
-        payload["link_score"] = float(payload.get("link_score", payload.get("vector_score", 0.0)) or 0.0)
-        payload["vector_score"] = float(payload.get("vector_score", payload["link_score"]) or payload["link_score"])
-        payload["candidate_rank"] = int(payload.get("candidate_rank", 0) or 0)
-        payload.setdefault("match_type", "vector_llm")
-        return payload
-
     @staticmethod
     def _build_entity_lookup(values: list[str]) -> dict[str, list[str]]:
         lookup: dict[str, list[str]] = defaultdict(list)
         for value in values:
-            for key in _lookup_keys_for_entity(value):
+            for key in _lookup_keys_from_variants([value]):
+                if key and value not in lookup[key]:
+                    lookup[key].append(value)
+        return lookup
+
+    @staticmethod
+    def _build_entity_base_lookup(values: list[str]) -> dict[str, list[str]]:
+        lookup: dict[str, list[str]] = defaultdict(list)
+        for value in values:
+            base_label = _without_trailing_parenthetical(value)
+            if not base_label:
+                continue
+            for key in _lookup_keys_from_variants([base_label]):
                 if key and value not in lookup[key]:
                     lookup[key].append(value)
         return lookup
@@ -1388,44 +1476,6 @@ def _dedupe_strings(values: list[str]) -> list[str]:
     return result
 
 
-def _lookup_keys_for_entity(entity_id: str) -> list[str]:
-    label = normalize_label(entity_id)
-    variants = [label]
-    without_parenthetical = re.sub(r"\s*\([^)]*\)\s*", " ", label).strip()
-    if without_parenthetical and without_parenthetical != label:
-        variants.append(without_parenthetical)
-    if "," in label:
-        before_comma = label.split(",", 1)[0].strip()
-        if before_comma:
-            variants.append(before_comma)
-    return _lookup_keys_from_variants(variants)
-
-
-def _lookup_keys_for_mention(mention: str) -> list[tuple[str, str, float]]:
-    label = normalize_label(mention)
-    keys: list[tuple[str, str, float]] = []
-    for key in _lookup_keys_from_variants([label]):
-        keys.append((key, "exact", 1.0))
-    without_article = re.sub(r"^(the|a|an)\s+", "", label, flags=re.IGNORECASE).strip()
-    for key in _lookup_keys_from_variants([without_article]):
-        keys.append((key, "alias_article", 0.99))
-    without_parenthetical = re.sub(r"\s*\([^)]*\)\s*", " ", label).strip()
-    for key in _lookup_keys_from_variants([without_parenthetical]):
-        keys.append((key, "alias_parenthetical", 0.97))
-    if "," in label:
-        before_comma = label.split(",", 1)[0].strip()
-        for key in _lookup_keys_from_variants([before_comma]):
-            keys.append((key, "alias_comma", 0.95))
-
-    deduped: list[tuple[str, str, float]] = []
-    seen: set[str] = set()
-    for key, match_type, score in keys:
-        if key and key not in seen:
-            seen.add(key)
-            deduped.append((key, match_type, score))
-    return deduped
-
-
 def _lookup_keys_from_variants(variants: list[str]) -> list[str]:
     keys: list[str] = []
     for variant in variants:
@@ -1440,12 +1490,167 @@ def _lookup_keys_from_variants(variants: list[str]) -> list[str]:
 def _canonical_entity_key(text: str) -> str:
     normalized = normalize_label(str(text or ""))
     normalized = normalized.replace("&", " and ")
+    normalized = normalized.translate(_UNICODE_ASCII_EQUIVALENTS)
+    for apostrophe in ("‘", "’", "ʼ", "`", "´"):
+        normalized = normalized.replace(apostrophe, "'")
     normalized = normalized.replace("’", "'")
     normalized = re.sub(r"'s\b", "s", normalized, flags=re.IGNORECASE)
     normalized = normalized.replace("'", "")
+    normalized = unicodedata.normalize("NFKD", normalized).encode("ascii", "ignore").decode("ascii")
     normalized = re.sub(r"[^0-9A-Za-z]+", " ", normalized)
     normalized = re.sub(r"\s+", " ", normalized).strip().lower()
     return normalized
+
+
+def _without_trailing_parenthetical(text: str) -> str:
+    label = normalize_label(str(text or "")).strip()
+    base = re.sub(r"(?:\s*\([^()]*\)\s*)+$", "", label).strip()
+    if not base or base == label:
+        return ""
+    return base
+
+
+def _vector_candidate_constraint_conflict(
+    mention: str,
+    entity_id: str,
+    graph: Any,
+    *,
+    question: str = "",
+) -> str:
+    """Return a general mention-constraint conflict that should veto vector Top-1.
+
+    Vector similarity is still the only ranking signal. These checks only reject a
+    candidate that contradicts explicit identity constraints already present in
+    the mention; they never promote a lower-ranked candidate.
+    """
+
+    node = getattr(graph, "nodes", {}).get(entity_id)
+    entity_type = normalize_label(str(getattr(node, "entity_type", "") or "")).upper().strip('"')
+    candidate_text = " ".join(
+        [
+            normalize_label(entity_id),
+            normalize_label(str(getattr(node, "description", "") or "")),
+        ]
+    )
+    candidate_key = _canonical_entity_key(candidate_text)
+
+    if _question_entity_type_conflict(question, mention, entity_id, graph):
+        return "question_entity_type_mismatch"
+
+    parenthetical_parts = re.findall(r"\(([^)]*)\)", normalize_label(mention))
+    for part in parenthetical_parts:
+        part_key = _canonical_entity_key(part)
+        numeric_constraints = re.findall(r"(?<!\d)\d+(?:\.\d+)?(?!\d)", part)
+        for number in numeric_constraints:
+            if re.search(rf"(?<!\d){re.escape(number)}(?!\d)", candidate_text, flags=re.IGNORECASE) is None:
+                return "parenthetical_number_mismatch"
+
+        part_tokens = set(part_key.split())
+        for type_hint, allowed_types in _PARENTHETICAL_ENTITY_TYPE_HINTS.items():
+            if type_hint in part_tokens and entity_type not in allowed_types:
+                return f"parenthetical_{type_hint}_type_mismatch"
+        if "serial" in part_tokens and "serial" not in candidate_key.split():
+            return "parenthetical_serial_mismatch"
+
+    mention_tokens = set(_canonical_entity_key(mention).split())
+    if mention_tokens & _PERSON_TITLE_WORDS and entity_type in _LOCATION_ENTITY_TYPES:
+        return "person_title_location_mismatch"
+
+    institution_location = _institution_location_qualifier(mention)
+    if institution_location:
+        location_tokens = _canonical_entity_key(institution_location).split()
+        candidate_tokens = set(candidate_key.split())
+        if location_tokens and not all(token in candidate_tokens for token in location_tokens):
+            return "institution_location_mismatch"
+
+    return ""
+
+
+def _question_entity_type_conflict(question: str, mention: str, entity_id: str, graph: Any) -> bool:
+    allowed_types = _question_entity_type_hints(question, mention)
+    if not allowed_types:
+        return False
+    node = getattr(graph, "nodes", {}).get(entity_id)
+    entity_type = normalize_label(str(getattr(node, "entity_type", "") or "")).upper().strip('"')
+    # Graph construction may assign a broad or conflated work type (for
+    # example PROJECT or SONG to a node that also carries film facts).  The
+    # question hint is therefore only strong enough to reject an unmistakable
+    # cross-category entity such as a place or person, not to enforce strict
+    # type equality.
+    return bool(entity_type) and entity_type not in allowed_types and entity_type in _QUESTION_WORK_TYPE_CONFLICT_TYPES
+
+
+def _question_entity_type_hints(question: str, mention: str) -> set[str]:
+    question_key = _canonical_entity_key(question)
+    mention_key = _canonical_entity_key(mention)
+    if not question_key or not mention_key:
+        return set()
+    escaped_mention = re.escape(mention_key)
+    for type_hint, allowed_types in _QUESTION_ENTITY_TYPE_HINTS.items():
+        pattern = rf"\b{type_hint}(?:\s+(?:named|called|titled)(?:\s+after)?)?\s+{escaped_mention}\b"
+        if re.search(pattern, question_key):
+            return set(allowed_types)
+    return set()
+
+
+def _institution_location_qualifier(mention: str) -> str:
+    label = normalize_label(mention)
+    before_in, separator, after_in = label.rpartition(" in ")
+    if not separator or not after_in.strip():
+        return ""
+    head_tokens = set(_canonical_entity_key(before_in).split())
+    if not head_tokens.intersection(_INSTITUTION_HEAD_WORDS):
+        return ""
+    return after_in.strip()
+
+
+def _is_date_or_number_label(text: str) -> bool:
+    label = normalize_label(str(text or "")).strip('"').strip().lower()
+    if not label:
+        return False
+    tokens = set(re.findall(r"[a-z]+", label))
+    if tokens & _MONTH_NAMES and re.search(r"\d", label):
+        return True
+    numeric_pattern = (
+        r"[+-]?\d[\d\s,.:/%\-–—]*"
+        r"(?:st|nd|rd|th)?"
+        r"(?:\s+(?:hundred|thousand|million|billion|trillion|percent|percentage|years?|months?|days?))?"
+    )
+    return re.fullmatch(numeric_pattern, label, flags=re.IGNORECASE) is not None
+
+
+def _is_generic_descriptive_mention(text: str) -> bool:
+    label = normalize_label(str(text or "")).strip()
+    if not label or "(" in label:
+        return False
+    words = re.findall(r"[A-Za-z]+", label)
+    if not words:
+        return False
+    if len(words) == 1:
+        return words[0].lower() in _GENERIC_MENTION_TYPE_WORDS
+    last_word = words[-1]
+    return last_word.islower() and last_word in _GENERIC_MENTION_TYPE_WORDS
+
+
+def _is_specific_mention_seed(text: str) -> bool:
+    if _is_date_or_number_label(text) or _is_generic_descriptive_mention(text):
+        return False
+    tokens = _canonical_entity_key(text).split()
+    return bool(tokens) and (len(tokens) > 1 or len(tokens[0]) >= 3)
+
+
+def _parenthetical_qualifier_tokens(text: str) -> list[str]:
+    qualifiers: list[str] = []
+    for content in re.findall(r"\(([^)]*)\)", normalize_label(str(text or ""))):
+        for token in _canonical_entity_key(content).split():
+            if token not in _QUALIFIER_STOPWORDS and token not in qualifiers:
+                qualifiers.append(token)
+    return qualifiers
+
+
+def _text_contains_qualifiers(text: str, qualifiers: list[str]) -> bool:
+    text_tokens = set(_canonical_entity_key(text).split())
+    return bool(text_tokens) and all(token in text_tokens for token in qualifiers)
 
 
 def _text_contains_entity_key(text: str, entity_key: str) -> bool:
@@ -1453,14 +1658,6 @@ def _text_contains_entity_key(text: str, entity_key: str) -> bool:
         return False
     canonical_text = f" {_canonical_entity_key(text)} "
     return f" {entity_key} " in canonical_text
-
-
-def _chunk_source_title(text: str) -> str:
-    for line in str(text or "").splitlines():
-        title = normalize_label(line)
-        if title:
-            return title
-    return ""
 
 
 def _has_unresolved_dependency_reference(text: str) -> bool:

@@ -6,7 +6,6 @@ import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any
 
 import numpy as np
 
@@ -39,7 +38,6 @@ runtime:
 retrieval:
   local_hyperedge_top_k: 4
   local_hyperedge_hops: 2
-  entity_link_top_k: 12
   descriptive_fallback_hyperedge_top_k: 9
   descriptive_fallback_chunk_top_k: 5
 llm:
@@ -54,32 +52,26 @@ prompts:
 
         self.assertEqual(config.retrieval.local_hyperedge_top_k, 4)
         self.assertEqual(config.retrieval.local_hyperedge_hops, 2)
-        self.assertEqual(config.retrieval.entity_link_top_k, 12)
         self.assertEqual(config.retrieval.descriptive_fallback_hyperedge_top_k, 9)
         self.assertEqual(config.retrieval.descriptive_fallback_chunk_top_k, 5)
+        self.assertEqual(config.dataset.entity_vdb_file, "vdb_entity_names.json")
 
     def test_retrieval_config_defaults_to_top3_two_hop(self) -> None:
         self.assertEqual(RetrievalConfig().local_hyperedge_top_k, 3)
         self.assertEqual(RetrievalConfig().local_hyperedge_hops, 2)
-        self.assertEqual(RetrievalConfig().entity_link_top_k, 30)
         self.assertEqual(RetrievalConfig().descriptive_fallback_hyperedge_top_k, 80)
         self.assertEqual(RetrievalConfig().descriptive_fallback_chunk_top_k, 20)
 
-    def test_atomic_answer_prompt_allows_only_answer_key(self) -> None:
+    def test_atomic_answer_prompt_uses_original_question_for_disambiguation(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
         prompt = (project_root / "prompts" / "atomic_answer.md").read_text(encoding="utf-8")
 
         self.assertIn('"answer": "..."', prompt)
-        self.assertIn('"answer": "INSUFFICIENT_EVIDENCE"', prompt)
+        self.assertIn("`atomic_question`", prompt)
+        self.assertIn("`dependency_answers`", prompt)
+        self.assertIn("`evidence_blocks`", prompt)
         self.assertIn("`original_question`", prompt)
-        self.assertIn("Use `original_question` only to recover necessary global context", prompt)
-        self.assertIn("Answer `atomic_question`, not `original_question`.", prompt)
-        self.assertIn("`evidence_blocks`: source chunks grouped with the retrieved top-k hyperedges", prompt)
-        self.assertIn("`bridge_hyperedge_text`: optional previous-hop fact", prompt)
-        self.assertIn("Use a block's `title` and `text` only with hyperedges inside that same block.", prompt)
-        self.assertIn("preserve the supported proper-name spelling", prompt)
-        self.assertIn("nationality, citizenship, ethnicity, birthplace, country of origin, and country of residence", prompt)
-        self.assertIn('The only allowed key is `"answer"`.', prompt)
+        self.assertIn("Use `original_question` only to preserve the intended answer target", prompt)
         self.assertNotIn("answer_type", prompt)
         self.assertNotIn('"confidence"', prompt)
         self.assertNotIn('"reasoning_summary"', prompt)
@@ -155,6 +147,7 @@ prompts:
         payload = fake_client.calls[0]["payload"]
         self.assertIsInstance(payload, dict)
         self.assertEqual(payload["evidence_blocks"], evidence_payload["evidence_blocks"])
+        self.assertEqual(payload["original_question"], "Who is linked to Subject?")
         self.assertNotIn("evidence", payload)
         self.assertNotIn("contexts", payload)
 
@@ -678,6 +671,59 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(answer_source["expansion_sources"], ["chunk_entity"])
         self.assertEqual(answer_source["via_chunk_ids"], ["C_BRIDGE"])
 
+    def test_retrieval_expands_from_date_and_number_entities_in_first_hop_chunks(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Anchor": ["H_BRIDGE"],
+                "19 May 1319": ["H_DATE_FACT"],
+                "2,741": ["H_NUMBER_FACT"],
+            },
+            hyperedge_entities={
+                "H_BRIDGE": ["Anchor"],
+                "H_DATE_FACT": ["19 May 1319", "Historical Event"],
+                "H_NUMBER_FACT": ["2,741", "Radisele"],
+            },
+            hyperedge_texts={
+                "H_BRIDGE": "The source mentions a date and a population value.",
+                "H_DATE_FACT": "The historical event occurred on 19 May 1319.",
+                "H_NUMBER_FACT": "The population of Radisele was 2,741.",
+            },
+            hyperedge_chunks={"H_BRIDGE": ["C_BRIDGE"]},
+            chunk_texts={"C_BRIDGE": "Anchor is associated with 19 May 1319 and the value 2,741."},
+            chunk_entities={"C_BRIDGE": ["Anchor", "19 May 1319", "2,741"]},
+            entity_types={
+                "Anchor": "PERSON",
+                "19 May 1319": "DATE",
+                "2,741": "NUMBER",
+            },
+        )
+        store = ScoreHyperedgeStore(
+            {
+                "H_BRIDGE": 0.1,
+                "H_DATE_FACT": 0.9,
+                "H_NUMBER_FACT": 0.8,
+            }
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, store),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=3),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        result = retriever.retrieve_primary_anchor_local(
+            question="Which date and population value are associated with Anchor?",
+            analysis=AtomicQuestionAnalysis(entities=["Anchor", "19 May 1319", "2,741"]),
+            primary_anchor_mention="Anchor",
+        )
+
+        self.assertEqual(result.expansion_entity_ids, ["19 May 1319", "2,741"])
+        self.assertEqual(result.second_hop_hyperedge_ids, ["H_DATE_FACT", "H_NUMBER_FACT"])
+        self.assertEqual(result.candidate_hyperedge_ids, ["H_BRIDGE", "H_DATE_FACT", "H_NUMBER_FACT"])
+        sources = {item["hyperedge_id"]: item for item in result.candidate_sources}
+        self.assertEqual(sources["H_DATE_FACT"]["expansion_sources"], ["chunk_entity"])
+        self.assertEqual(sources["H_NUMBER_FACT"]["expansion_sources"], ["chunk_entity"])
+
     def test_entity_linking_uses_alias_lookup_for_appositive_entity_names(self) -> None:
         graph = LocalGraph(
             entity_edges={
@@ -694,8 +740,11 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
                 "C_EDU": "John Wallop, 2nd Earl of Portsmouth\nJohn Wallop was created a DCL of Oxford.",
             },
         )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_EDU": 0.9}))
+        entity_store = QueryHyperedgeStore({"John Wallop, 2nd Earl of Portsmouth": 0.9})
+        dataset.entity_store = entity_store
         retriever = AtomicHyperedgeRetriever(
-            dataset=_dataset(graph, ScoreHyperedgeStore({"H_EDU": 0.9})),
+            dataset=dataset,
             embedder=CountingEmbedder(),
             config=RetrievalConfig(local_hyperedge_top_k=3),
             llm_service=MockAtomicLLMService(),
@@ -709,10 +758,12 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         )
 
         self.assertEqual(result.linked_entity_id, "John Wallop, 2nd Earl of Portsmouth")
+        self.assertEqual(result.anchor_match["match_type"], "vector")
+        self.assertEqual(entity_store.query_calls, [1])
         self.assertEqual(result.adjacent_hyperedge_ids, ["H_EDU"])
         self.assertEqual(result.insufficient_reason, "")
 
-    def test_entity_linking_uses_chunk_mention_fallback_when_anchor_is_not_a_node(self) -> None:
+    def test_unlinked_chunk_mention_is_used_as_evidence_seed_not_identity_link(self) -> None:
         graph = LocalGraph(
             entity_edges={
                 "Bridge Person": ["H_FACT"],
@@ -753,10 +804,414 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             primary_anchor_mention="Missing Alias",
         )
 
-        self.assertEqual(result.linked_entity_id, "Bridge Person")
-        self.assertEqual(result.anchor_match["match_type"], "chunk_mention")
-        self.assertEqual(result.adjacent_hyperedge_ids, ["H_FACT"])
+        self.assertEqual(result.linked_entity_id, "")
+        self.assertEqual(result.anchor_match, {})
+        self.assertEqual(result.unlinked_anchor_mentions, ["Missing Alias"])
+        self.assertEqual(result.adjacent_hyperedge_ids, [])
+        self.assertEqual(result.candidate_hyperedge_ids, ["H_FACT"])
+        self.assertIn("mention_chunk_entity_seed", result.candidate_sources[0]["expansion_sources"])
         self.assertEqual(result.insufficient_reason, "")
+
+    def test_entity_linking_does_not_truncate_dates_at_comma(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"August 17, 1787": ["H_WRONG"]},
+            hyperedge_entities={"H_WRONG": ["August 17, 1787", "New Spain"]},
+            entity_types={"August 17, 1787": "DATE"},
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_WRONG": 1.0})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who was born on August 17, 1917?",
+            mention="August 17, 1917",
+            analysis=AtomicQuestionAnalysis(entities=["August 17, 1917"]),
+        )
+
+        self.assertIsNone(match)
+
+    def test_entity_linking_does_not_match_number_to_comma_formatted_value(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"2,450": ["H_WRONG"]},
+            hyperedge_entities={"H_WRONG": ["2,450", "Vassar College"]},
+            entity_types={"2,450": "NUMBER"},
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_WRONG": 1.0})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Which option is numbered 2?",
+            mention="2",
+            analysis=AtomicQuestionAnalysis(entities=["2"]),
+        )
+
+        self.assertIsNone(match)
+
+    def test_entity_linking_does_not_drop_appositive_from_full_person_name(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Robert III": ["H_WRONG"]},
+            hyperedge_entities={"H_WRONG": ["Robert III", "Flanders"]},
+            hyperedge_texts={"H_WRONG": "Robert III was Count of Flanders."},
+            entity_types={"Robert III": "PERSON"},
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_WRONG": 1.0})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who was the father of Robert III, Count of Dreux?",
+            mention="Robert III, Count of Dreux",
+            analysis=AtomicQuestionAnalysis(entities=["Robert III, Count of Dreux"]),
+        )
+
+        self.assertIsNone(match)
+
+    def test_vector_linking_uses_top1_and_accepts_score_equal_to_threshold(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Target Entity": ["H_TARGET"],
+                "Distractor Entity": ["H_DISTRACTOR"],
+            },
+            hyperedge_entities={
+                "H_TARGET": ["Target Entity"],
+                "H_DISTRACTOR": ["Distractor Entity"],
+            },
+            entity_types={"Target Entity": "PERSON", "Distractor Entity": "PERSON"},
+        )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_TARGET": 1.0, "H_DISTRACTOR": 0.9}))
+        entity_store = QueryHyperedgeStore({"Target Entity": 0.6, "Distractor Entity": 0.59})
+        dataset.entity_store = entity_store
+        embedder = CountingEmbedder()
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=embedder,
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who is the target alias?",
+            mention="Target alias",
+            analysis=AtomicQuestionAnalysis(entities=["Target alias"]),
+        )
+
+        self.assertIsNotNone(match)
+        self.assertEqual(match.entity_id, "Target Entity")
+        self.assertEqual(match.match_type, "vector")
+        self.assertEqual(match.vector_score, 0.6)
+        self.assertEqual(entity_store.query_calls, [1])
+        self.assertEqual(embedder.calls, [(["Target alias"], "atomic_anchor_entity_retrieval")])
+
+    def test_exact_match_is_used_without_vector_query(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Robert III": ["H_ONE"],
+                "Robert III, Count of Flanders": ["H_TWO"],
+            },
+            hyperedge_entities={
+                "H_ONE": ["Robert III"],
+                "H_TWO": ["Robert III, Count of Flanders"],
+            },
+            entity_types={"Robert III": "PERSON", "Robert III, Count of Flanders": "PERSON"},
+        )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_ONE": 1.0, "H_TWO": 0.9}))
+        entity_store = QueryHyperedgeStore({"Robert III, Count of Flanders": 1.0})
+        dataset.entity_store = entity_store
+        embedder = CountingEmbedder()
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=embedder,
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who was Robert III?",
+            mention="Robert III",
+            analysis=AtomicQuestionAnalysis(entities=["Robert III"]),
+        )
+
+        self.assertIsNotNone(match)
+        self.assertEqual(match.entity_id, "Robert III")
+        self.assertEqual(match.match_type, "exact")
+        self.assertEqual(entity_store.query_calls, [])
+        self.assertEqual(embedder.calls, [])
+
+    def test_explicit_question_type_disambiguates_same_name_exact_entity(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "Belgrade": ["H_CITY"],
+                "Belgrade (film)": ["H_FILM"],
+            },
+            hyperedge_entities={
+                "H_CITY": ["Belgrade"],
+                "H_FILM": ["Belgrade (film)"],
+            },
+            entity_types={"Belgrade": "LOCATION", "Belgrade (film)": "FILM"},
+        )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_CITY": 1.0, "H_FILM": 0.9}))
+        entity_store = QueryHyperedgeStore({"Belgrade": 0.9})
+        dataset.entity_store = entity_store
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="What is the language of the film named after Belgrade?",
+            mention="Belgrade",
+            analysis=AtomicQuestionAnalysis(entities=["Belgrade"]),
+        )
+
+        self.assertIsNotNone(match)
+        self.assertEqual(match.entity_id, "Belgrade (film)")
+        self.assertEqual(match.match_type, "exact")
+        self.assertEqual(entity_store.query_calls, [])
+
+    def test_vector_top1_below_threshold_is_rejected(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "It's a Very Merry Muppet Christmas Movie": ["H_MOVIE"],
+                "School": ["H_SCHOOL"],
+            },
+            hyperedge_entities={
+                "H_MOVIE": ["It's a Very Merry Muppet Christmas Movie"],
+                "H_SCHOOL": ["School", "Canada"],
+            },
+            entity_types={"It's a Very Merry Muppet Christmas Movie": "FILM", "School": "ORGANIZATION"},
+        )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_MOVIE": 1.0}))
+        entity_store = QueryHyperedgeStore({"It's a Very Merry Muppet Christmas Movie": 0.5999})
+        dataset.entity_store = entity_store
+        embedder = CountingEmbedder()
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=embedder,
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Which Christmas movie is connected to the attraction?",
+            mention="Christmas movie",
+            analysis=AtomicQuestionAnalysis(entities=["Christmas movie"]),
+        )
+        exact_generic_match = retriever.link_primary_anchor(
+            question="Which country is the school in?",
+            mention="School",
+            analysis=AtomicQuestionAnalysis(entities=["School"]),
+        )
+
+        self.assertIsNone(match)
+        self.assertIsNotNone(exact_generic_match)
+        self.assertEqual(exact_generic_match.entity_id, "School")
+        self.assertEqual(exact_generic_match.match_type, "exact")
+        self.assertEqual(entity_store.query_calls, [1])
+        self.assertEqual(embedder.calls, [(["Christmas movie"], "atomic_anchor_entity_retrieval")])
+
+    def test_parenthetical_suffix_uses_constraint_checked_base_title_exact_match(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Iron Man": ["H_MOVIE"], "The Iron Man": ["H_SERIAL"]},
+            hyperedge_entities={"H_MOVIE": ["Iron Man"], "H_SERIAL": ["The Iron Man"]},
+            entity_types={"Iron Man": "FILM", "The Iron Man": "FILM"},
+        )
+        graph.nodes["Iron Man"].description = "Iron Man is a 2008 Marvel superhero film."
+        graph.nodes["The Iron Man"].description = "The Iron Man is a 1924 American film serial."
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_MOVIE": 1.0, "H_SERIAL": 0.9}))
+        entity_store = QueryHyperedgeStore({"Iron Man": 0.9, "The Iron Man": 0.8})
+        dataset.entity_store = entity_store
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who directed The Iron Man serial?",
+            mention="The Iron Man (Serial)",
+            analysis=AtomicQuestionAnalysis(entities=["The Iron Man (Serial)"]),
+        )
+
+        self.assertIsNotNone(match)
+        self.assertEqual(match.entity_id, "The Iron Man")
+        self.assertEqual(match.match_type, "exact")
+        self.assertEqual(entity_store.query_calls, [])
+
+    def test_parenthetical_base_title_exact_match_rejects_wrong_year(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"One Sunday Afternoon": ["H_1933"]},
+            hyperedge_entities={"H_1933": ["One Sunday Afternoon"]},
+            entity_types={"One Sunday Afternoon": "FILM"},
+        )
+        graph.nodes["One Sunday Afternoon"].description = "A 1933 American romantic comedy film."
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_1933": 1.0}))
+        entity_store = QueryHyperedgeStore({"One Sunday Afternoon": 0.9})
+        dataset.entity_store = entity_store
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Who directed One Sunday Afternoon (1948 Film)?",
+            mention="One Sunday Afternoon (1948 Film)",
+            analysis=AtomicQuestionAnalysis(entities=["One Sunday Afternoon (1948 Film)"]),
+        )
+
+        self.assertIsNone(match)
+        self.assertEqual(entity_store.query_calls, [1])
+
+    def test_vector_top1_is_rejected_when_institution_location_conflicts(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Academy of Fine Arts Vienna": ["H_VIENNA"]},
+            hyperedge_entities={"H_VIENNA": ["Academy of Fine Arts Vienna"]},
+            entity_types={"Academy of Fine Arts Vienna": "INSTITUTION"},
+        )
+        graph.nodes["Academy of Fine Arts Vienna"].description = "An art academy in Vienna."
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_VIENNA": 1.0}))
+        dataset.entity_store = QueryHyperedgeStore({"Academy of Fine Arts Vienna": 0.8})
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="Why did he leave the Academy of Fine Arts in Venice?",
+            mention="Academy of Fine Arts in Venice",
+            analysis=AtomicQuestionAnalysis(entities=["Academy of Fine Arts in Venice"]),
+        )
+
+        self.assertIsNone(match)
+
+    def test_vector_top1_is_rejected_when_person_title_maps_to_location(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Bismarck": ["H_CITY"]},
+            hyperedge_entities={"H_CITY": ["Bismarck"]},
+            entity_types={"Bismarck": "LOCATION"},
+        )
+        graph.nodes["Bismarck"].description = "Bismarck is the capital city of North Dakota."
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_CITY": 1.0}))
+        dataset.entity_store = QueryHyperedgeStore({"Bismarck": 0.8})
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="What dispatch came from the Prince of Bismarck?",
+            mention="Prince of Bismarck",
+            analysis=AtomicQuestionAnalysis(entities=["Prince of Bismarck"]),
+        )
+
+        self.assertIsNone(match)
+
+    def test_entity_linking_folds_latin_diacritics_and_stroked_letters(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Zoran Đorđević": ["H_NATIONALITY"]},
+            hyperedge_entities={"H_NATIONALITY": ["Zoran Đorđević", "Serbia"]},
+            entity_types={"Zoran Đorđević": "PERSON"},
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_NATIONALITY": 1.0})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        match = retriever.link_primary_anchor(
+            question="What nationality is Zoran Dordevic?",
+            mention="Zoran Dordevic",
+            analysis=AtomicQuestionAnalysis(entities=["Zoran Dordevic"]),
+        )
+
+        self.assertIsNotNone(match)
+        self.assertEqual(match.entity_id, "Zoran Đorđević")
+
+    def test_parenthetical_year_filters_conflated_entity_branches(self) -> None:
+        graph = LocalGraph(
+            entity_edges={"Seven Women": ["H_1944", "H_1953"]},
+            hyperedge_entities={
+                "H_1944": ["Seven Women", "Benito Perojo"],
+                "H_1953": ["Seven Women", "Juan Bustillo Oro"],
+            },
+            hyperedge_texts={
+                "H_1944": "Seven Women (1944 film) was directed by Benito Perojo.",
+                "H_1953": "Seven Women (1953 film) was directed by Juan Bustillo Oro.",
+            },
+            entity_types={"Seven Women": "FILM"},
+        )
+        graph.nodes["Seven Women"].description = (
+            "Seven Women may refer to a 1944 Argentine film or a 1953 Mexican film."
+        )
+        dataset = _dataset(graph, ScoreHyperedgeStore({"H_1944": 0.9, "H_1953": 1.0}))
+        dataset.entity_store = QueryHyperedgeStore({"Seven Women": 0.8})
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=3),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        result = retriever.retrieve_primary_anchor_local(
+            question="Who directed Seven Women (1944 Film)?",
+            analysis=AtomicQuestionAnalysis(entities=["Seven Women (1944 Film)"]),
+            primary_anchor_mention="Seven Women (1944 Film)",
+        )
+
+        self.assertEqual(result.linked_entity_id, "Seven Women")
+        self.assertEqual(result.anchor_match["match_type"], "exact")
+        self.assertEqual(dataset.entity_store.query_calls, [])
+        self.assertEqual(result.adjacent_hyperedge_ids, ["H_1944"])
+        self.assertEqual(result.candidate_hyperedge_ids, ["H_1944"])
+
+    def test_exact_numeric_anchor_is_not_expanded_when_named_anchor_exists(self) -> None:
+        graph = LocalGraph(
+            entity_edges={
+                "2010": ["H_DATE_NOISE"],
+                "Tourist City": ["H_POPULATION"],
+            },
+            hyperedge_entities={
+                "H_DATE_NOISE": ["2010", "Unrelated Event"],
+                "H_POPULATION": ["Tourist City", "8.005 million"],
+            },
+            hyperedge_texts={
+                "H_DATE_NOISE": "An unrelated event took place in 2010.",
+                "H_POPULATION": "Tourist City had a population of 8.005 million in 2010.",
+            },
+            entity_types={"2010": "DATE", "Tourist City": "PLACE"},
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=_dataset(graph, ScoreHyperedgeStore({"H_DATE_NOISE": 1.0, "H_POPULATION": 0.9})),
+            embedder=CountingEmbedder(),
+            config=RetrievalConfig(local_hyperedge_top_k=3),
+            llm_service=MockAtomicLLMService(),
+        )
+
+        result = retriever.retrieve_primary_anchor_local(
+            question="What was Tourist City's population in 2010?",
+            analysis=AtomicQuestionAnalysis(entities=["2010", "Tourist City"]),
+            primary_anchor_mention="2010",
+        )
+
+        self.assertEqual(result.linked_entity_id, "Tourist City")
+        self.assertEqual(result.candidate_hyperedge_ids, ["H_POPULATION"])
+        linked_by_mention = {item["mention"]: item for item in result.linked_entities}
+        self.assertFalse(linked_by_mention["2010"]["used_for_expansion"])
+        self.assertTrue(linked_by_mention["Tourist City"]["used_for_expansion"])
 
     def test_descriptive_fallback_retrieves_evidence_when_question_has_no_anchor(self) -> None:
         graph = LocalGraph(
@@ -878,6 +1333,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             },
             hyperedge_chunks={"H1": ["C1"], "H2": ["C2"], "H3": ["C3"], "H4": ["C4"]},
             chunk_texts={"C1": "one", "C2": "two", "C3": "three", "C4": "four"},
+            chunk_entities={"C2": ["Chunk Only Entity"]},
         )
         llm = MockAtomicLLMService(
             answer_responses=[
@@ -912,6 +1368,8 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             [[item["hyperedge_text"] for item in block["hyperedges"]] for block in evidence_blocks],
             [["H2"], ["H3"], ["H4"]],
         )
+        self.assertTrue(all("entities" not in block for block in evidence_blocks))
+        self.assertNotIn("description", payload_text)
         self.assertNotIn("evidence", llm.answer_calls[0])
         self.assertNotIn("contexts", llm.answer_calls[0])
         self.assertNotIn("chunk_texts", evidence_blocks[0])
@@ -968,7 +1426,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             ],
         )
 
-    def test_answerer_payload_deduplicates_repeated_chunk_texts_without_changing_artifact(self) -> None:
+    def test_answerer_payload_groups_hyperedges_by_shared_chunk_id_without_changing_artifact(self) -> None:
         graph = LocalGraph(
             entity_edges={"Subject": ["H1", "H2", "H3"]},
             hyperedge_entities={
@@ -1018,6 +1476,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
             [item["hyperedge_id"] for item in evidence_blocks[0]["hyperedges"]],
             ["H1", "H2"],
         )
+        self.assertTrue(all("entities" not in block for block in evidence_blocks))
         self.assertEqual(
             [item["hyperedge_text"] for item in evidence_blocks[1]["hyperedges"]],
             ["Subject is linked to Answer Three."],
@@ -1028,7 +1487,34 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual(artifact_evidence[0]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
         self.assertEqual(artifact_evidence[1]["chunk_texts"], ["The same source chunk mentions Subject and two answers."])
 
-    def test_answerer_payload_adds_bridge_hyperedge_text_for_two_hop_evidence_outside_topk(self) -> None:
+    def test_answerer_payload_keeps_identical_text_from_different_chunk_ids_separate(self) -> None:
+        shared_text = "Identical source text stored in two different chunks."
+        evidence = [
+            FusedHyperedgeCandidate(
+                hyperedge_id="H_SHARED",
+                hyperedge_text="Shared fact.",
+                chunk_ids=["SOURCE_CHUNK_ONE", "SOURCE_CHUNK_TWO"],
+                chunk_texts=[shared_text, shared_text],
+            ),
+        ]
+
+        payload = AtomicDagExecutor._answer_evidence_payload(evidence)
+
+        self.assertEqual(len(payload["evidence_blocks"]), 2)
+        self.assertEqual(
+            [block["chunk_id"] for block in payload["evidence_blocks"]],
+            ["C1", "C2"],
+        )
+        self.assertEqual(
+            [block["text"] for block in payload["evidence_blocks"]],
+            [shared_text, shared_text],
+        )
+        self.assertEqual(
+            [block["hyperedges"][0]["hyperedge_text"] for block in payload["evidence_blocks"]],
+            ["Shared fact.", "Shared fact."],
+        )
+
+    def test_answerer_payload_adds_first_hop_hyperedge_text_before_current_hyperedge(self) -> None:
         graph = LocalGraph(
             entity_edges={
                 "Illusions": ["H_BRIDGE"],
@@ -1074,8 +1560,13 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
         self.assertEqual([item["hyperedge_id"] for item in retrieval["top_evidence"]], ["H_SECOND"])
         hyperedge = llm.answer_calls[0]["evidence_blocks"][0]["hyperedges"][0]
         self.assertEqual(hyperedge["hyperedge_id"], "H1")
+        self.assertEqual(hyperedge["first_hop_hyperedge_text"], "Illusions was directed by Zoran Đorđević.")
         self.assertEqual(hyperedge["hyperedge_text"], "Zoran Đorđević was Serbian.")
-        self.assertEqual(hyperedge["bridge_hyperedge_text"], "Illusions was directed by Zoran Đorđević.")
+        self.assertLess(
+            list(hyperedge).index("first_hop_hyperedge_text"),
+            list(hyperedge).index("hyperedge_text"),
+        )
+        self.assertNotIn("bridge_hyperedge_text", hyperedge)
 
     def test_compact_answer_payload_is_much_smaller_than_full_candidate_dicts(self) -> None:
         long_description = "role metadata description " * 200
@@ -1096,7 +1587,7 @@ class LocalTwoHopAtomicExecutorTest(unittest.TestCase):
                         "metadata": {"description": long_description, "source_ids": ["S1"]},
                     }
                 ],
-                chunk_ids=[f"C{i}"],
+                chunk_ids=["C_SHARED"],
                 chunk_texts=[chunk_text],
                 evidence_texts=[f"Hyperedge {i}: Perry Bhandal is British.", chunk_text, long_description],
                 rank=i + 1,

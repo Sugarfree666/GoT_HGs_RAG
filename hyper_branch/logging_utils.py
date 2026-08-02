@@ -36,10 +36,40 @@ class TraceStore:
         record = {
             "timestamp": datetime.now().isoformat(timespec="seconds"),
             "stage": stage,
-            "request": request_payload,
-            "response": response_payload,
+            "request": self._llm_request_summary(request_payload),
+            "response": self._llm_response_summary(response_payload),
         }
         self._append_jsonl(self._llm_path, record)
+
+    @staticmethod
+    def _llm_request_summary(payload: dict[str, Any]) -> dict[str, Any]:
+        messages = payload.get("messages")
+        message_items = messages if isinstance(messages, list) else []
+        input_chars = sum(
+            len(str(item.get("content", "") or ""))
+            for item in message_items
+            if isinstance(item, dict)
+        )
+        summary = {
+            key: payload.get(key)
+            for key in ("model", "max_tokens", "temperature", "count")
+            if key in payload
+        }
+        if message_items:
+            summary["message_count"] = len(message_items)
+            summary["input_chars"] = input_chars
+        return summary
+
+    @staticmethod
+    def _llm_response_summary(payload: dict[str, Any]) -> dict[str, Any]:
+        summary = {
+            key: payload.get(key)
+            for key in ("cached", "count")
+            if key in payload
+        }
+        if "content" in payload:
+            summary["output_chars"] = len(str(payload.get("content", "") or ""))
+        return summary
 
     def save_artifact(self, relative_path: str, payload: Any) -> Path:
         target = self.run_dir / relative_path

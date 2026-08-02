@@ -475,7 +475,7 @@ class AtomicDagExecutor:
         answer_dependency_answers = self._answer_dependency_context(dependency_answers)
         evidence_payload = self._answer_evidence_payload(
             evidence,
-            bridge_hyperedge_text_resolver=self._bridge_hyperedge_text,
+            first_hop_hyperedge_text_resolver=self._first_hop_hyperedge_text,
         )
         if self.llm_service is not None:
             payload = self.llm_service.answer_atomic_question(
@@ -532,31 +532,36 @@ class AtomicDagExecutor:
     @staticmethod
     def _answer_evidence_payload(
         evidence: list[FusedHyperedgeCandidate],
-        bridge_hyperedge_text_resolver: Any | None = None,
+        first_hop_hyperedge_text_resolver: Any | None = None,
     ) -> dict[str, list[dict[str, Any]]]:
         evidence_blocks: list[dict[str, Any]] = []
-        block_by_chunk_text: dict[str, dict[str, Any]] = {}
+        block_by_source_chunk_id: dict[str, dict[str, Any]] = {}
         hyperedge_ids_by_block_key: dict[str, set[str]] = {}
 
         for index, item in enumerate(evidence, start=1):
             answerer_hyperedge_id = f"H{index}"
             hyperedge = {
                 "hyperedge_id": answerer_hyperedge_id,
-                "hyperedge_text": str(item.hyperedge_text or "").strip(),
             }
-            bridge_text = ""
-            if bridge_hyperedge_text_resolver is not None:
-                bridge_text = str(bridge_hyperedge_text_resolver(item) or "").strip()
-            if bridge_text:
-                hyperedge["bridge_hyperedge_text"] = bridge_text
+            first_hop_text = ""
+            if first_hop_hyperedge_text_resolver is not None:
+                first_hop_text = str(first_hop_hyperedge_text_resolver(item) or "").strip()
+            if first_hop_text:
+                hyperedge["first_hop_hyperedge_text"] = first_hop_text
+            hyperedge["hyperedge_text"] = str(item.hyperedge_text or "").strip()
 
-            chunk_texts = _candidate_chunk_texts(item)
-            if not chunk_texts:
-                chunk_texts = [""]
+            chunks = _candidate_chunks(item)
+            if not chunks:
+                chunks = [("", "")]
 
-            for raw_text in chunk_texts:
-                block_key = raw_text if raw_text else "__NO_LINKED_CHUNK__"
-                block = block_by_chunk_text.get(block_key)
+            for chunk_index, (source_chunk_id, raw_text) in enumerate(chunks, start=1):
+                if source_chunk_id:
+                    block_key = source_chunk_id
+                elif raw_text:
+                    block_key = f"__NO_LINKED_CHUNK__:{index}:{chunk_index}"
+                else:
+                    block_key = "__NO_LINKED_CHUNK__"
+                block = block_by_source_chunk_id.get(block_key)
                 if block is None:
                     title, context_text = AtomicDagExecutor._chunk_context(raw_text)
                     block = {
@@ -565,20 +570,24 @@ class AtomicDagExecutor:
                         "text": context_text,
                         "hyperedges": [],
                     }
-                    block_by_chunk_text[block_key] = block
+                    block_by_source_chunk_id[block_key] = block
                     hyperedge_ids_by_block_key[block_key] = set()
                     evidence_blocks.append(block)
+                elif raw_text and not block["text"]:
+                    title, context_text = AtomicDagExecutor._chunk_context(raw_text)
+                    block["title"] = title
+                    block["text"] = context_text
                 if answerer_hyperedge_id in hyperedge_ids_by_block_key[block_key]:
                     continue
                 block["hyperedges"].append(dict(hyperedge))
                 hyperedge_ids_by_block_key[block_key].add(answerer_hyperedge_id)
         return {"evidence_blocks": evidence_blocks}
 
-    def _bridge_hyperedge_text(self, candidate: FusedHyperedgeCandidate) -> str:
+    def _first_hop_hyperedge_text(self, candidate: FusedHyperedgeCandidate) -> str:
         for hyperedge_id in ensure_list(candidate.score_breakdown.get("via_first_hyperedge_ids", [])):
-            bridge_text = self._describe_hyperedge_text(str(hyperedge_id or "").strip())
-            if bridge_text and bridge_text != normalize_label(str(candidate.hyperedge_text or "")):
-                return bridge_text
+            first_hop_text = self._describe_hyperedge_text(str(hyperedge_id or "").strip())
+            if first_hop_text and first_hop_text != normalize_label(str(candidate.hyperedge_text or "")):
+                return first_hop_text
         return ""
 
     def _describe_hyperedge_text(self, hyperedge_id: str) -> str:
@@ -870,16 +879,30 @@ def _primary_anchor_mention(primary_anchor_entities: Iterable[str], analysis: At
     return ""
 
 
-def _candidate_chunk_texts(candidate: FusedHyperedgeCandidate) -> list[str]:
-    chunk_texts: list[str] = []
-    seen: set[str] = set()
-    for raw_text in ensure_list(candidate.chunk_texts):
-        text = str(raw_text or "").strip()
-        if not text or text in seen:
+def _candidate_chunks(candidate: FusedHyperedgeCandidate) -> list[tuple[str, str]]:
+    chunk_ids = [str(raw_id or "").strip() for raw_id in ensure_list(candidate.chunk_ids)]
+    chunk_texts = [str(raw_text or "").strip() for raw_text in ensure_list(candidate.chunk_texts)]
+    chunks: list[tuple[str, str]] = []
+    index_by_chunk_id: dict[str, int] = {}
+
+    for index in range(max(len(chunk_ids), len(chunk_texts))):
+        chunk_id = chunk_ids[index] if index < len(chunk_ids) else ""
+        chunk_text = chunk_texts[index] if index < len(chunk_texts) else ""
+        if not chunk_id and not chunk_text:
             continue
-        seen.add(text)
-        chunk_texts.append(text)
-    return chunk_texts
+        if not chunk_id:
+            chunks.append(("", chunk_text))
+            continue
+
+        existing_index = index_by_chunk_id.get(chunk_id)
+        if existing_index is None:
+            index_by_chunk_id[chunk_id] = len(chunks)
+            chunks.append((chunk_id, chunk_text))
+            continue
+        if chunk_text and not chunks[existing_index][1]:
+            chunks[existing_index] = (chunk_id, chunk_text)
+
+    return chunks
 
 
 def _original_question_entities_from_payload(payload: Any | None) -> list[str]:
