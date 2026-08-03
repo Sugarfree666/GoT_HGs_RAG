@@ -62,6 +62,20 @@ prompts:
         self.assertEqual(RetrievalConfig().descriptive_fallback_hyperedge_top_k, 80)
         self.assertEqual(RetrievalConfig().descriptive_fallback_chunk_top_k, 20)
 
+    def test_count_and_nationality_questions_use_default_short_answer_contract(self) -> None:
+        self.assertEqual(
+            AtomicDagExecutor._answer_contract("How many episodes were produced?"),
+            {"output_format": "short answer only"},
+        )
+        self.assertEqual(
+            AtomicDagExecutor._answer_contract("Who is Louis, Count of Évreux?"),
+            {"output_format": "short answer only"},
+        )
+        self.assertEqual(
+            AtomicDagExecutor._answer_contract("What nationality was Aimé Césaire?"),
+            {"output_format": "short answer only"},
+        )
+
     def test_atomic_answer_prompt_uses_original_question_for_disambiguation(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
         prompt = (project_root / "prompts" / "atomic_answer.md").read_text(encoding="utf-8")

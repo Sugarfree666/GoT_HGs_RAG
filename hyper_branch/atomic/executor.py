@@ -1242,14 +1242,10 @@ def _answer_output_format(question: str) -> str:
         return "exact candidate surface from the question"
     if lowered.startswith(("is ", "are ", "was ", "were ", "do ", "does ", "did ")):
         return "yes or no"
-    if "how many" in lowered or lowered.startswith("number of ") or " count " in f" {lowered} ":
-        return "number only"
     if lowered.startswith("what year"):
         return "year only"
     if lowered.startswith("when") or "date of" in lowered or "birthday" in lowered:
         return "supported date granularity"
-    if "nationality" in lowered:
-        return "full supported nationality expression"
     return "short answer only"
 
 
