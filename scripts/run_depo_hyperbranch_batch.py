@@ -9,12 +9,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+#避免Windows终端输出中文或者特殊字符报错
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-
+#定位关键目录，加入sys.path中，保证后续正常导入模块
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEPO_ROOT = PROJECT_ROOT / "depo"
 SCRIPTS_ROOT = PROJECT_ROOT / "scripts"
@@ -23,18 +24,19 @@ for path in (DEPO_ROOT, PROJECT_ROOT, SCRIPTS_ROOT, EVAL_ROOT):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-
-import get_score as eval_score  # noqa: E402
-import run_depo_decomposition_batch as depo_batch  # noqa: E402
-from hyper_branch.config import load_config  # noqa: E402
-from hyper_branch.logging_utils import TraceStore, configure_logging  # noqa: E402
-from hyper_branch.pipeline import HyperBranchPipeline  # noqa: E402
+import get_score as eval_score  
+import run_depo_decomposition_batch as depo_batch 
+from hyperbranch_adapter import build_hyperbranch_dag_payload, explicit_entity_texts  
+from hyper_branch.config import load_config  
+from hyper_branch.logging_utils import TraceStore, configure_logging  
+from hyper_branch.pipeline import HyperBranchPipeline  
 
 
 METHOD = "depo_hanlp_sdp_atomic_dag_plus_hyperbranch"
 
-
+#解析命令行参数。
 def parse_args() -> argparse.Namespace:
+    # 创建一个“命令行参数解析器”对象
     parser = argparse.ArgumentParser(
         description="Run DEPO Step1-5 atomic DAG generation and execute that DAG with HyperBranch."
     )
@@ -105,11 +107,13 @@ def main() -> int:
     if not api_key:
         print("Missing API key. Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
         return 2
+    #重新写入环境变量
     os.environ["OPENAI_API_KEY"] = api_key
     if base_url:
         os.environ["OPENAI_BASE_URL"] = base_url
 
     try:
+        #调用scripts/run_depo_decomposition_batch.py中的_resolve_question_files()，检查文件是否存在
         question_files = depo_batch._resolve_question_files(args)
     except (FileNotFoundError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
@@ -117,7 +121,7 @@ def main() -> int:
     if not question_files:
         print("No questions files found.", file=sys.stderr)
         return 2
-
+    #导入算法的核心类和函数
     try:
         from atomic_question_dag import restore_global_best_paths
         from entity_masking_preprocessor import EntityMaskingPreprocessor
@@ -133,24 +137,31 @@ def main() -> int:
     output_root = _repo_path(args.output_root)
     debug_dir = str(_repo_path(args.debug_dir))
 
+    #创建一个LLM客户端
     llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
+    #创建一个实体预处理器
     preprocessor = EntityMaskingPreprocessor(llm_client)
+    #创建一个解析器
     parser = HanLPSDPParser(args.hanlp_model)
-
+    #开始遍历问题数据集
     for questions_file in question_files:
         dataset = depo_batch._dataset_name(questions_file)
+        #找到数据集对应的配置文件。
         config_path = _config_path_for_dataset(args, dataset)
+        #创建当前数据集的输出目录
         dataset_output_dir = output_root / dataset / run_id
         dataset_output_dir.mkdir(parents=True, exist_ok=True)
         manifest_path = dataset_output_dir / "manifest.jsonl"
         summary_path = dataset_output_dir / "summary.md"
 
+        #获取需要处理的问题范围
         items = depo_batch._slice_items(
             depo_batch._read_question_items(questions_file),
             start=args.start,
             end=args.end,
             limit=args.limit,
         )
+        #打印本次运行信息
         print(
             f"Running DEPO + HyperBranch: dataset={dataset}, questions={len(items)}, "
             f"config={config_path}, output={dataset_output_dir}"
@@ -170,12 +181,16 @@ def main() -> int:
 
         with manifest_path.open("a", encoding="utf-8") as manifest:
             for offset, item in enumerate(items, start=1):
+
                 record = QuestionRecord(question=item["question"], qid=item.get("qid"))
+                # 给每一个文件创建独立的输出目录
                 question_dir = dataset_output_dir / depo_batch._question_dir_name(
                     item["index"], record.qid, record.question
                 )
+                #定义两个文件，分析运行结果
                 combined_path = question_dir / "pipeline.json"
                 decomposition_path = question_dir / "decomposition.json"
+                #判断当前这个题目是否完整完成
                 if args.resume and combined_path.exists():
                     print(f"[skip] {dataset} #{item['index']} {record.question}")
                     if args.live_eval:
@@ -198,13 +213,15 @@ def main() -> int:
                     manifest.write(json.dumps(manifest_item, ensure_ascii=False) + "\n")
                     manifest.flush()
                     continue
-
+                #如果没有被跳过就运行当前问题
                 question_dir.mkdir(parents=True, exist_ok=True)
                 print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {record.question}")
                 try:
+                    #resum参数的情况下复用DEPO算法。
                     if args.resume and decomposition_path.exists():
                         decomposition_payload = json.loads(decomposition_path.read_text(encoding="utf-8"))
                     else:
+                        #调用depo算法
                         result = run_hanlp_sdp_pipeline(
                             record=record,
                             index=item["index"],
@@ -214,6 +231,7 @@ def main() -> int:
                             debug_dir=debug_dir,
                             llm_client=llm_client,
                         )
+                        #将掩码替换成原来的实体，restore_global_best_paths用来恢复原来的实体名称
                         question_structure = restore_global_best_paths(
                             result["token_reasoning_structure"].paths,
                             result["preprocess_result"].mask_mappings,
@@ -231,7 +249,7 @@ def main() -> int:
                             encoding="utf-8",
                         )
 
-                    dag_payload = _hyperbranch_dag_payload(decomposition_payload)
+                    dag_payload = build_hyperbranch_dag_payload(decomposition_payload)
                     dag_path = question_dir / "hyperbranch_dag.json"
                     _write_json(dag_path, dag_payload)
 
@@ -244,7 +262,7 @@ def main() -> int:
                     hyperbranch_result = hyperbranch_runner.run(
                         question=record.question,
                         dag_payload=dag_payload,
-                        original_question_entities=_depo_explicit_entity_texts(decomposition_payload),
+                        original_question_entities=explicit_entity_texts(decomposition_payload),
                         question_dir=question_dir,
                     )
 
@@ -395,44 +413,6 @@ def _load_hyperbranch_config(config_path: Path, args: argparse.Namespace) -> Any
 def _set_trace_store(client: Any, trace_store: TraceStore) -> None:
     if client is not None and hasattr(client, "trace_store"):
         client.trace_store = trace_store
-
-
-def _hyperbranch_dag_payload(decomposition_payload: dict[str, Any]) -> dict[str, Any]:
-    dag = (((decomposition_payload.get("stages") or {}).get("6_atomic_question_dag")) or {})
-    if not isinstance(dag, dict):
-        raise ValueError("DEPO decomposition does not contain stages.6_atomic_question_dag.")
-    if not dag.get("valid"):
-        errors = dag.get("validation_errors") or []
-        raise ValueError(f"DEPO atomic DAG is invalid: {errors}")
-    nodes = dag.get("nodes")
-    if not isinstance(nodes, list) or not nodes:
-        raise ValueError("DEPO atomic DAG does not contain any nodes.")
-    topic_entities = _depo_explicit_entity_texts(decomposition_payload)
-    return {
-        "question": decomposition_payload.get("question", ""),
-        "topic_entities": topic_entities,
-        "original_question_entities": topic_entities,
-        "nodes": nodes,
-        "edges": dag.get("edges") or [],
-        "leaf_node_ids": dag.get("leaf_node_ids") or [],
-        "source": "depo_stages.6_atomic_question_dag",
-    }
-
-
-def _depo_explicit_entity_texts(decomposition_payload: dict[str, Any]) -> list[str]:
-    explicit = (((decomposition_payload.get("stages") or {}).get("1_explicit_entities")) or {})
-    entities = explicit.get("entities") if isinstance(explicit, dict) else []
-    entity_items = entities if isinstance(entities, list) else []
-    texts: list[str] = []
-    seen: set[str] = set()
-    for item in entity_items:
-        raw_text = item.get("text") if isinstance(item, dict) else item
-        text = str(raw_text or "").strip()
-        key = text.lower()
-        if text and key not in seen:
-            seen.add(key)
-            texts.append(text)
-    return texts
 
 
 def _combined_payload(
