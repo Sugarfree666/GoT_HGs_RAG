@@ -11,8 +11,8 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
-from mask_span_extractor import MaskSpanExtractor, _heuristic_mask_spans  # noqa: E402
-from placeholder import selective_entity_masking  # noqa: E402
+from mask_span_extractor import MaskSpanExtractor  # noqa: E402
+from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 
 
 class EmptyEntityLLM:
@@ -22,13 +22,13 @@ class EmptyEntityLLM:
 
 
 class MaskSpanExtractorTest(unittest.TestCase):
-    def test_multi_token_capitalized_region_name_is_detected_generically(self) -> None:
+    def test_no_llm_returns_no_guessed_capitalized_entity(self) -> None:
         question = "When was the region around Blue Valley created?"
 
-        spans = _heuristic_mask_spans(question)
+        result = MaskSpanExtractor().extract(question)
 
-        self.assertEqual([span.text for span in spans], ["Blue Valley"])
-        self.assertEqual(spans[0].semantic_type_hint, "Region")
+        self.assertEqual(result.mask_spans, [])
+        self.assertTrue(any("no LLM client" in warning for warning in result.warnings))
 
     def test_llm_empty_result_does_not_fall_back_to_deterministic_entities(self) -> None:
         question = (
@@ -39,9 +39,9 @@ class MaskSpanExtractorTest(unittest.TestCase):
         result = MaskSpanExtractor(EmptyEntityLLM()).extract(question)
 
         self.assertEqual(result.mask_spans, [])
-        replacement = selective_entity_masking(question=question, mask_spans=result)
-        self.assertEqual(replacement.mask_mappings, [])
-        self.assertEqual(replacement.masked_question, question)
+        preprocess_result = EntityMaskingPreprocessor(EmptyEntityLLM()).preprocess(question)
+        self.assertEqual(preprocess_result.mask_mappings, [])
+        self.assertEqual(preprocess_result.masked_question, question)
 
 
 if __name__ == "__main__":

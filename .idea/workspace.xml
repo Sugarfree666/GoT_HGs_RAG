@@ -6,23 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/atomic_question_dag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q1_tri_sdp_reasoning.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q2_tri_sdp_reasoning.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q3_tri_sdp_reasoning.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q4_tri_sdp_reasoning.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q5_tri_sdp_reasoning.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/executor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/atomic/retriever.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/atomic_answer.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/atomic_answer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/atomic_fact_query.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/placeholder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/probe_hanlp_sdp_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/probe_hanlp_sdp_local.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/replay_cached_atomic_answers.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/replay_cached_atomic_answers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_question_dag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_depo_batch_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_batch_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_direct_llm_atomic_dag_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_direct_llm_atomic_dag_batch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_mask_span_extractor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="146329" />
+    <option name="cachedIndexableFilesCount" value="79588" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,23 +49,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0802148668959526" />
-      <entry key="MS500" value="1.6773202488630985" />
-      <entry key="S2" value="3.291772932363483" />
-      <entry key="S5" value="5.708700449910501" />
-      <entry key="S10" value="8.912107947803165" />
-      <entry key="S30" value="17.596834489104097" />
-      <entry key="S60" value="23.347979724682954" />
-      <entry key="M2" value="27.5292931215618" />
-      <entry key="M5" value="30.63048068075442" />
-      <entry key="M10" value="31.782484227494376" />
-      <entry key="M15" value="32.18084112541282" />
-      <entry key="M30" value="32.58751428927876" />
-      <entry key="H1" value="32.89361886170413" />
-      <entry key="H2" value="34.30302185451414" />
-      <entry key="H4" value="40.85012783557739" />
-      <entry key="D1" value="326.9747206166879" />
-      <entry key="W1" value="3916.805559927739" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000020958981461" />
+      <entry key="S2" value="1.0385368809997175" />
+      <entry key="S5" value="1.3178341693187121" />
+      <entry key="S10" value="1.7377025462148397" />
+      <entry key="S30" value="2.5911752069194227" />
+      <entry key="S60" value="5.373719628220596" />
+      <entry key="M2" value="14.023530146085273" />
+      <entry key="M5" value="29.90559351645242" />
+      <entry key="M10" value="39.28389925986308" />
+      <entry key="M15" value="43.09917223965814" />
+      <entry key="M30" value="47.32373699139407" />
+      <entry key="H1" value="49.69833103681344" />
+      <entry key="H2" value="52.159335108118476" />
+      <entry key="H4" value="59.196934257040915" />
+      <entry key="D1" value="345.2939600987401" />
+      <entry key="W1" value="3934.6832601431734" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -89,23 +87,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0428835775665801" />
-      <entry key="MS500" value="1.6648563474154212" />
-      <entry key="S2" value="3.284929037704638" />
-      <entry key="S5" value="5.703571618850884" />
-      <entry key="S10" value="8.90746943079109" />
-      <entry key="S30" value="17.592567022741335" />
-      <entry key="S60" value="23.344858252581577" />
-      <entry key="M2" value="27.52737001606456" />
-      <entry key="M5" value="30.629603893129588" />
-      <entry key="M10" value="31.782025876665127" />
-      <entry key="M15" value="32.180530959691666" />
-      <entry key="M30" value="32.58735686190758" />
-      <entry key="H1" value="32.89353938548542" />
-      <entry key="H2" value="34.302980870965314" />
-      <entry key="H4" value="40.85010454251217" />
-      <entry key="D1" value="326.9746967429131" />
-      <entry key="W1" value="3916.805523456731" />
+      <entry key="MS100" value="0.8467453123625271" />
+      <entry key="MS500" value="0.9672783457158877" />
+      <entry key="S2" value="1.029848627086972" />
+      <entry key="S5" value="1.311972339033715" />
+      <entry key="S10" value="1.7315754527100857" />
+      <entry key="S30" value="2.5868432592931714" />
+      <entry key="S60" value="5.370610828166296" />
+      <entry key="M2" value="14.021027311284268" />
+      <entry key="M5" value="29.903945973646213" />
+      <entry key="M10" value="39.282887628987616" />
+      <entry key="M15" value="43.09844705581028" />
+      <entry key="M30" value="47.323346342978944" />
+      <entry key="H1" value="49.69812799172855" />
+      <entry key="H2" value="52.15923055108958" />
+      <entry key="H4" value="59.19687874074879" />
+      <entry key="D1" value="345.29393082376146" />
+      <entry key="W1" value="3934.683222903375" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -146,7 +144,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -293,6 +291,9 @@
       <workItem from="1784880803195" duration="155000" />
       <workItem from="1784882335035" duration="106000" />
       <workItem from="1784886286279" duration="2178000" />
+      <workItem from="1786948860171" duration="96000" />
+      <workItem from="1786949076588" duration="757000" />
+      <workItem from="1787039225190" duration="1000" />
     </task>
     <servers />
   </component>

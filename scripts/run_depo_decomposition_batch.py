@@ -456,7 +456,7 @@ def _format_repaired_edge_metadata(edge: dict[str, Any]) -> str:
         return "cost=blocked"
     return f"cost={edge_cost}"
 
-
+# 
 def _resolve_question_files(args: argparse.Namespace) -> list[Path]:
     if args.questions_file:
         return [_repo_path(args.questions_file)]

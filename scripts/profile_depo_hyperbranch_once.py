@@ -19,6 +19,7 @@ for path in (DEPO_ROOT, PROJECT_ROOT, SCRIPTS_ROOT):
 
 
 import run_depo_decomposition_batch as depo_batch  # noqa: E402
+from hyperbranch_adapter import build_hyperbranch_dag_payload, explicit_entity_texts  # noqa: E402
 from hyper_branch.config import load_config  # noqa: E402
 from hyper_branch.logging_utils import TraceStore, configure_logging  # noqa: E402
 from hyper_branch.pipeline import HyperBranchPipeline  # noqa: E402
@@ -205,7 +206,7 @@ def main() -> int:
             result=result,
             question_structure=question_structure,
         )
-        dag_payload = _hyperbranch_dag_payload(decomposition_payload)
+        dag_payload = build_hyperbranch_dag_payload(decomposition_payload)
 
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = _repo_path(args.output_dir) / dataset / run_id
@@ -240,7 +241,7 @@ def main() -> int:
             hyperbranch_result = pipeline.run(
                 record.question,
                 dag_payload=dag_payload,
-                original_question_entities=_depo_explicit_entity_texts(decomposition_payload),
+                original_question_entities=explicit_entity_texts(decomposition_payload),
             )
     finally:
         for handler in list(logger.handlers):
@@ -329,44 +330,6 @@ def _wrap_method(obj: Any, method_name: str, event_name: str, profile: Profile) 
             profile.add(event_name, time.perf_counter() - started)
 
     setattr(obj, method_name, wrapped)
-
-
-def _hyperbranch_dag_payload(decomposition_payload: dict[str, Any]) -> dict[str, Any]:
-    dag = (((decomposition_payload.get("stages") or {}).get("6_atomic_question_dag")) or {})
-    if not isinstance(dag, dict):
-        raise ValueError("DEPO decomposition does not contain stages.6_atomic_question_dag.")
-    if not dag.get("valid"):
-        errors = dag.get("validation_errors") or []
-        raise ValueError(f"DEPO atomic DAG is invalid: {errors}")
-    nodes = dag.get("nodes")
-    if not isinstance(nodes, list) or not nodes:
-        raise ValueError("DEPO atomic DAG does not contain any nodes.")
-    topic_entities = _depo_explicit_entity_texts(decomposition_payload)
-    return {
-        "question": decomposition_payload.get("question", ""),
-        "topic_entities": topic_entities,
-        "original_question_entities": topic_entities,
-        "nodes": nodes,
-        "edges": dag.get("edges") or [],
-        "leaf_node_ids": dag.get("leaf_node_ids") or [],
-        "source": "depo_stages.6_atomic_question_dag",
-    }
-
-
-def _depo_explicit_entity_texts(decomposition_payload: dict[str, Any]) -> list[str]:
-    explicit = (((decomposition_payload.get("stages") or {}).get("1_explicit_entities")) or {})
-    entities = explicit.get("entities") if isinstance(explicit, dict) else []
-    entity_items = entities if isinstance(entities, list) else []
-    texts: list[str] = []
-    seen: set[str] = set()
-    for item in entity_items:
-        raw_text = item.get("text") if isinstance(item, dict) else item
-        text = str(raw_text or "").strip()
-        key = text.lower()
-        if text and key not in seen:
-            seen.add(key)
-            texts.append(text)
-    return texts
 
 
 def _repo_path(path: str | Path) -> Path:
