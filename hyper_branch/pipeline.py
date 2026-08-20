@@ -1,3 +1,5 @@
+"""HyperBranch 顶层编排：加载数据、组装服务、执行 DAG 并保存产物。"""
+
 from __future__ import annotations
 
 import logging
@@ -16,6 +18,8 @@ from .logging_utils import TraceStore
 
 
 class HyperBranchPipeline:
+    """面向一个数据集、配置和运行目录的可复用应用门面。"""
+
     def __init__(
         self,
         config: Config,
@@ -28,11 +32,13 @@ class HyperBranchPipeline:
         self.logger = logger
         self.trace_store = trace_store
 
+        # 数据集只加载一次，确保所有原子节点使用同一份图快照。
         loader = HypergraphDatasetLoader(config.dataset, logger)
         self.dataset = loader.load()
         self.trace_store.save_artifact("dataset_summary.json", self.dataset.summary)
 
         prompts = PromptManager(config.prompts.directory)
+        # Mock 模式让测试和本地结构调试不依赖外部服务。
         if config.llm.use_mock:
             self.embedder = LocalHashEmbeddingClient()
             self.llm_service = MockAtomicLLMService()
@@ -41,6 +47,7 @@ class HyperBranchPipeline:
             self.embedder = client
             self.llm_service = OpenAIAtomicLLMService(client=client, prompts=prompts)
 
+        # 节点执行顺序由执行器负责；这些协作组件在单题内不保存状态。
         analyzer = AtomicQuestionAnalyzer(llm_service=self.llm_service)
         retriever = AtomicHyperedgeRetriever(
             dataset=self.dataset,
@@ -62,6 +69,8 @@ class HyperBranchPipeline:
         dag_payload: Any | None = None,
         original_question_entities: list[str] | None = None,
     ) -> dict[str, Any]:
+        """执行一份 DEPO 提供的 DAG，并持久化精简且可检查的运行产物。"""
+
         self.logger.info("Starting HyperBranch pipeline for question: %s", question)
         if dag_payload is None:
             self.logger.info(
@@ -79,6 +88,7 @@ class HyperBranchPipeline:
         self.trace_store.save_artifact("artifacts/atomic_question_analyses.json", artifacts["atomic_question_analyses"])
         self.trace_store.save_artifact("artifacts/final_answer.json", result.final_answer)
 
+        # 完整调用和图细节保留在 trace 中；面向复核的产物保持精简。
         compact_shared_pool = _compact_candidate_pool(artifacts["shared_candidate_pool_final"])
         compact_retrieval = [
             _compact_retrieval_record(item)
@@ -109,6 +119,8 @@ class HyperBranchPipeline:
 
 
 def _compact_candidate_pool(payload: dict[str, Any]) -> dict[str, Any]:
+    """保留候选池来源，同时从摘要中省略过大的标识符列表。"""
+
     return {
         "method": payload.get("method"),
         "primary_anchor_mention": payload.get("primary_anchor_mention"),
@@ -128,6 +140,8 @@ def _compact_candidate_pool(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _compact_retrieval_record(payload: dict[str, Any]) -> dict[str, Any]:
+    """生成逐节点检索产物，用于审计答案证据。"""
+
     answerer_evidence = payload.get("answerer_evidence") or payload.get("top_evidence") or []
     return {
         "method": payload.get("method"),
@@ -169,6 +183,8 @@ def _compact_retrieval_record(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _compact_atomic_answer(payload: dict[str, Any]) -> dict[str, Any]:
+    """保留连接 DAG 节点、证据和依赖项的答案字段。"""
+
     return {
         "node_id": payload.get("node_id"),
         "question": payload.get("question"),
@@ -182,6 +198,8 @@ def _compact_atomic_answer(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _compact_evidence(payload: dict[str, Any]) -> dict[str, Any]:
+    """将证据记录精简为答案相关文本、实体、分数和来源。"""
+
     score_breakdown = payload.get("score_breakdown") or {}
     compact_score_breakdown = {
         key: score_breakdown.get(key)

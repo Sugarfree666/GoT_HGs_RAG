@@ -1,3 +1,5 @@
+"""在检索依赖节点前，将已回答的 DAG 引用替换为具体值。"""
+
 from __future__ import annotations
 
 import re
@@ -120,6 +122,7 @@ def resolve_dependency_question(
     dependency_answers_used: list[dict[str, Any]] = []
 
     for dependency in dependency_answers:
+        # 显式 qN_answer 引用没有歧义，因此优先处理。
         dependency_node_id = str(dependency.get("node_id", "") or "").strip()
         if not dependency_node_id:
             continue
@@ -170,6 +173,7 @@ def resolve_dependency_question(
             dependency_answers_used=dependency_answers_used,
         )
 
+    # 旧版 DAG 没有 qN_answer 引用时，才使用保守的短语匹配回退。
     for dependency in dependency_answers:
         answer = str(dependency.get("answer", "") or "").strip()
         if not answer or normalize_label(answer).lower() in _INSUFFICIENT_ANSWERS:
@@ -210,6 +214,8 @@ def resolve_dependency_question(
 
 
 def _find_dependency_reference_match(question: str, dependency_question: str) -> re.Match[str] | None:
+    """在旧式下游问题中定位可被依赖答案替换的描述短语。"""
+
     for span in _dependency_reference_spans(dependency_question):
         match = _find_span_match(question, span)
         if match is not None:
@@ -247,6 +253,8 @@ def _dependency_answer_summary(dependency: dict[str, Any]) -> dict[str, Any]:
 
 
 def is_entity_like_answer(answer: str, answer_type: Any = None) -> bool:
+    """判断一个依赖答案是否适合作为后续问题的实体锚点。"""
+
     text = normalize_label(answer).strip()
     lowered = text.lower()
     if lowered in _INSUFFICIENT_ANSWERS:

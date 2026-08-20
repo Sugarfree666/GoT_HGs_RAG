@@ -1,4 +1,5 @@
-from __future__ import annotations
+"""读取问题 JSON 文件，并转换为 DEPO 所需的最小 ``QuestionRecord`` 表示。"""
+
 
 import json
 from pathlib import Path
@@ -8,6 +9,8 @@ from models import QuestionRecord
 
 
 def read_questions(path: str | Path) -> list[QuestionRecord]:
+    """读取字符串或对象形式的问题列表，并统一校验为 ``QuestionRecord``。"""
+
     file_path = Path(path)
     if not file_path.exists():
         raise FileNotFoundError(f"Questions file not found: {file_path}")
@@ -31,4 +34,3 @@ def read_questions(path: str | Path) -> list[QuestionRecord]:
             raise ValueError(f"Question at index {index} is empty.")
         records.append(QuestionRecord(question=question, qid=qid))
     return records
-

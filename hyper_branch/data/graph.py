@@ -1,3 +1,5 @@
+"""内存 GraphML 超图：为检索建立邻接表和 source 到记录的索引。"""
+
 from __future__ import annotations
 
 from collections import Counter, defaultdict
@@ -10,6 +12,8 @@ from ..utils import split_source_ids
 
 
 class KnowledgeHypergraph:
+    """提供图邻居、超边和来源关系，避免查询时重复解析 GraphML。"""
+
     def __init__(self, nodes: dict[str, GraphNode], edges: dict[str, GraphEdge]) -> None:
         self.nodes = nodes
         self.edges = edges
@@ -17,6 +21,7 @@ class KnowledgeHypergraph:
         self.source_to_nodes: dict[str, list[str]] = defaultdict(list)
         self.source_to_edges: dict[str, list[str]] = defaultdict(list)
 
+        # 一次性构建双向可查的索引；检索阶段只需字典查询。
         for edge_id, edge in edges.items():
             self.adjacency[edge.source].append(edge_id)
             self.adjacency[edge.target].append(edge_id)
@@ -29,6 +34,8 @@ class KnowledgeHypergraph:
 
     @classmethod
     def from_graphml(cls, path: Path) -> "KnowledgeHypergraph":
+        """将数据集 GraphML 解析为类型化节点和边，并保留 source ID。"""
+
         namespace = {"g": "http://graphml.graphdrawing.org/xmlns"}
         tree = ET.parse(path)
         root = tree.getroot()
@@ -129,6 +136,8 @@ class KnowledgeHypergraph:
         return self.node_chunk_ids(hyperedge_id)
 
     def expand_from_entities(self, entity_ids: list[str]) -> list[str]:
+        """返回与输入实体相邻的去重一跳超边。"""
+
         seen: set[str] = set()
         expanded: list[str] = []
         for entity_id in entity_ids:

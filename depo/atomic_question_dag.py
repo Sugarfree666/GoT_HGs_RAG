@@ -1,3 +1,5 @@
+"""Step5：将 DEPO 恢复后的 token 路径转换为经过校验的原子问题 DAG。"""
+
 from __future__ import annotations
 
 import re
@@ -87,7 +89,7 @@ class AtomicQuestionDAGResult:
 
 
 class QuestionStructureAtomicDAGGenerator:
-    """Generate an atomic question DAG from the original question and question structure."""
+    """根据原问题和问题结构生成原子问题 DAG。"""
 
     def __init__(self, llm_client: "LLMClient") -> None:
         self.llm_client = llm_client
@@ -99,6 +101,9 @@ class QuestionStructureAtomicDAGGenerator:
         question_entities: list[str],
         question_structure: list[list[str]],
     ) -> AtomicQuestionDAGResult:
+        """校验 Step4 输入、请求 LLM 生成 DAG，再强制检查稳定输出结构。"""
+
+        # 先拒绝格式错误的解析路径，避免为不可用的 DAG 提示词消耗 LLM 请求。
         restored_question_structure = _sanitize_question_structure(question_structure)
         preflight_errors = _preflight_errors(question_structure=restored_question_structure)
         if preflight_errors:
@@ -109,6 +114,7 @@ class QuestionStructureAtomicDAGGenerator:
             question_entities=question_entities,
             question_structure=restored_question_structure,
         )
+        # LLM 只提供分解内容；图结构完整性由确定性校验负责。
         raw_payload = self.llm_client.chat_json(ATOMIC_QUESTION_DAG_SYSTEM, user_prompt)
         return validate_atomic_question_dag(
             raw_payload,
@@ -136,6 +142,8 @@ def restore_entity_paths(step4_paths: Any, mask_mappings: Any) -> list[RestoredT
 
 
 def restore_global_best_path(step4_global_selection: Any, mask_mappings: Any) -> list[str]:
+    """恢复一种旧版 Step4 路径表示中的实体文本。"""
+
     if isinstance(step4_global_selection, dict):
         raw_nodes = step4_global_selection.get("nodes") or []
     elif isinstance(step4_global_selection, (list, tuple)):
@@ -146,6 +154,8 @@ def restore_global_best_path(step4_global_selection: Any, mask_mappings: Any) ->
 
 
 def restore_global_best_paths(step4_paths: Any, mask_mappings: Any) -> list[list[str]]:
+    """恢复所有入选 Step4 分支中的占位符，供 Step5 构造提示词。"""
+
     restored_paths: list[list[str]] = []
     for path in step4_paths or []:
         if isinstance(path, dict):
@@ -164,6 +174,8 @@ def validate_atomic_question_dag(
     original_question: str | None = None,
     question_structure: list[list[str]] | None = None,
 ) -> AtomicQuestionDAGResult:
+    """校验 DAG 结构、依赖引用、环路和终止节点不变量。"""
+
     del original_question, question_structure
     if not isinstance(raw_payload, dict):
         return _invalid_result(["raw_payload must be an object."], raw_payload=None)
@@ -174,6 +186,7 @@ def validate_atomic_question_dag(
     if not raw_questions:
         return _invalid_result(["atomic_questions must be a non-empty list."], raw_payload=raw_payload)
 
+    # 先将宽松 JSON 转为类型化节点，再检查全图不变量。
     parsed_nodes, errors = _parse_atomic_question_nodes(raw_questions)
     if errors:
         return _invalid_result(errors, raw_payload=raw_payload)
@@ -182,6 +195,7 @@ def validate_atomic_question_dag(
     if errors:
         return _invalid_result(errors, raw_payload=raw_payload)
 
+    # 依赖字段指向上游节点；物化边的方向为“上游 → 依赖者”。
     edges = _edges_from_nodes(parsed_nodes)
     leaf_node_ids = _leaf_node_ids(parsed_nodes, edges)
     return AtomicQuestionDAGResult(
@@ -200,7 +214,7 @@ def _extract_atomic_questions(raw_payload: dict[str, Any]) -> Any:
 
 
 def _parse_atomic_question_nodes(raw_questions: list[Any]) -> tuple[list[AtomicQuestionNode], list[str]]:
-    """Parse only the stable output schema; semantic adequacy belongs to the LLM prompt."""
+    """只解析稳定输出结构；语义充分性由 LLM 提示词负责。"""
 
     nodes: list[AtomicQuestionNode] = []
     errors: list[str] = []
@@ -261,6 +275,8 @@ def _parse_atomic_question_nodes(raw_questions: list[Any]) -> tuple[list[AtomicQ
 
 
 def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> tuple[list[str], list[str]]:
+    """检查节点编号、依赖引用、环路和唯一叶节点等结构规则。"""
+
     node_positions = {node.id: index for index, node in enumerate(nodes)}
     errors: list[str] = []
     warnings: list[str] = []
@@ -299,6 +315,8 @@ def _validate_atomic_question_dag_structure(nodes: list[AtomicQuestionNode]) -> 
 
 
 def _has_dependency_cycle(nodes: list[AtomicQuestionNode]) -> bool:
+    """使用深度优先访问标记检测 DAG 依赖环。"""
+
     dependencies_by_node = {node.id: node.depends_on for node in nodes}
     visiting: set[str] = set()
     visited: set[str] = set()
@@ -333,6 +351,8 @@ def _atomic_question_dag_quality_warnings(
     *,
     original_question: str | None,
 ) -> list[str]:
+    """生成不会阻断执行、但值得人工复核的 DAG 质量警告。"""
+
     warnings: list[str] = []
     question_text = original_question or ""
     question_lc = question_text.casefold()
@@ -347,6 +367,8 @@ def _atomic_question_dag_quality_warnings(
 
 
 def _dependency_binding_warnings(nodes: list[AtomicQuestionNode]) -> list[str]:
+    """提示依赖节点答案未在下游问题中被显式绑定的情况。"""
+
     warnings: list[str] = []
     previous_ids: set[str] = set()
     node_ids = {node.id for node in nodes}

@@ -1,3 +1,5 @@
+"""带缓存、追踪和有限重试的 OpenAI 兼容对话/嵌入客户端。"""
+
 from __future__ import annotations
 
 import http.client
@@ -17,6 +19,8 @@ from ..utils import extract_json_payload
 
 
 class OpenAICompatibleClient:
+    """在 HyperBranch 各阶段共享鉴权、响应缓存和调用追踪。"""
+
     def __init__(self, config: LLMConfig, trace_store: TraceStore | None = None) -> None:
         self.config = config
         self.trace_store = trace_store
@@ -30,6 +34,8 @@ class OpenAICompatibleClient:
             )
 
     def chat_json(self, stage: str, system_prompt: str, user_payload: dict[str, Any], max_tokens: int = 1400) -> dict[str, Any]:
+        """请求文本补全，并要求提取出的 payload 是 JSON 对象。"""
+
         response_text = self.chat_text(stage=stage, system_prompt=system_prompt, user_payload=user_payload, max_tokens=max_tokens)
         parsed = extract_json_payload(response_text)
         if not isinstance(parsed, dict):
@@ -44,6 +50,8 @@ class OpenAICompatibleClient:
         max_tokens: int = 1400,
         temperature: float | None = None,
     ) -> str:
+        """提交一次对话请求；同次运行中复用完全相同请求的缓存响应。"""
+
         payload = {
             "model": self.config.model,
             "messages": [
@@ -64,11 +72,14 @@ class OpenAICompatibleClient:
                 content = "".join(part.get("text", "") if isinstance(part, dict) else str(part) for part in content)
             content = str(content)
             self.response_cache[cache_key] = content
+        # 无论真实调用还是缓存命中，都记录 trace 以解释下游答案来源。
         if self.trace_store is not None:
             self.trace_store.log_llm_call(stage, payload, {"content": content, "cached": cached})
         return str(content)
 
     def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
+        """只嵌入未缓存文本，并按调用方原始顺序返回向量。"""
+
         unique_texts = [text for text in texts if text not in self.embedding_cache]
         if unique_texts:
             payload = {
@@ -88,6 +99,8 @@ class OpenAICompatibleClient:
         return [self.embedding_cache[text] for text in texts]
 
     def _post_json(self, endpoint: str, payload: dict[str, Any]) -> dict[str, Any]:
+        """发送 JSON POST；只对暂时性传输或服务端失败进行重试。"""
+
         url = f"{self.base_url}{endpoint}"
         raw_payload = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         headers = {
@@ -145,6 +158,8 @@ class OpenAICompatibleClient:
         )
 
     def _before_retry(self, endpoint: str, attempt: int, attempts: int, reason: object) -> None:
+        """记录重试事件，并在下一次合规尝试前执行指数退避。"""
+
         if self.trace_store is not None:
             self.trace_store.log_event(
                 "llm_request_retry",
@@ -191,6 +206,8 @@ class OpenAICompatibleClient:
 
 
 class LocalHashEmbeddingClient:
+    """用于测试和 Mock 管线的确定性离线嵌入替代实现。"""
+
     def __init__(self, dimension: int = 1536) -> None:
         self.dimension = dimension
         self.cache: dict[str, np.ndarray] = {}

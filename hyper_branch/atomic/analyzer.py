@@ -1,3 +1,5 @@
+"""从原子问题提取轻量检索提示；可用时调用 LLM。"""
+
 from __future__ import annotations
 
 import re
@@ -93,6 +95,8 @@ POSSESSIVE_ROLE_TERMS = {
 
 
 class AtomicQuestionAnalyzer:
+    """将 LLM 或启发式分析统一为实体提及和预期答案类型。"""
+
     def __init__(self, llm_service: AtomicLLMService | None = None) -> None:
         self.llm_service = llm_service
 
@@ -101,6 +105,8 @@ class AtomicQuestionAnalyzer:
         atomic_question: str,
         dependency_answers: list[dict[str, Any]] | None = None,
     ) -> AtomicQuestionAnalysis:
+        """优先通过服务分析问题；不可用时使用透明启发式方法。"""
+
         dependency_answers = dependency_answers or []
         if self.llm_service is not None:
             payload = self.llm_service.analyze_atomic_question(
@@ -112,6 +118,8 @@ class AtomicQuestionAnalyzer:
         return self._coerce_payload(payload, atomic_question)
 
     def _coerce_payload(self, payload: Any, atomic_question: str) -> AtomicQuestionAnalysis:
+        """清洗服务 payload，并在字段缺失时回退到可解释的本地分析。"""
+
         if not isinstance(payload, dict):
             payload = self._heuristic_analysis(atomic_question)
         entities = self._clean_entity_mentions(payload.get("entities", []))
@@ -122,6 +130,8 @@ class AtomicQuestionAnalyzer:
         )
 
     def _heuristic_analysis(self, atomic_question: str) -> dict[str, Any]:
+        """在没有 LLM 服务时，从文本中提取保守的实体和答案类型。"""
+
         entities = _extract_capitalized_entities(atomic_question)
         return {
             "entities": entities,

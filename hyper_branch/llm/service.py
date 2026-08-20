@@ -1,3 +1,5 @@
+"""原子问题分析与受证据约束作答的 LLM 服务边界。"""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
@@ -9,6 +11,8 @@ from .prompts import PromptManager
 
 
 class AtomicLLMService(ABC):
+    """让执行器可切换真实服务与确定性 Mock 服务的统一接口。"""
+
     @abstractmethod
     def analyze_atomic_question(
         self,
@@ -29,6 +33,8 @@ class AtomicLLMService(ABC):
         raise NotImplementedError
 
 class OpenAIAtomicLLMService(AtomicLLMService):
+    """基于提示词的实现，将 JSON 请求委托给共享 API 客户端。"""
+
     def __init__(self, client: OpenAICompatibleClient, prompts: PromptManager) -> None:
         self.client = client
         self.prompts = prompts
@@ -58,6 +64,8 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
+        """为已解析的原子问题提取面向检索的实体提及。"""
+
         evidence_blocks = _answer_evidence_blocks(evidence)
         response = self.client.chat_json(
             "atomic_answer",
@@ -106,6 +114,8 @@ class MockAtomicLLMService(AtomicLLMService):
         evidence: Any,
         original_question: str = "",
     ) -> dict[str, Any]:
+        """仅利用规范化证据块和依赖答案生成一个答案。"""
+
         evidence_blocks = _answer_evidence_blocks(evidence)
         self.answer_calls.append(
             {
@@ -184,6 +194,8 @@ def _dedupe_texts(values: list[str]) -> list[str]:
 
 
 def _answer_evidence_blocks(evidence: Any) -> list[dict[str, Any]]:
+    """将当前和旧版证据 payload 统一为作答提示词使用的块结构。"""
+
     if isinstance(evidence, dict):
         blocks = [dict(item) for item in ensure_list(evidence.get("evidence_blocks")) if isinstance(item, dict)]
         if blocks:

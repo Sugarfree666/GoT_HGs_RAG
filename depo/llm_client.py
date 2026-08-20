@@ -1,3 +1,5 @@
+"""供 DEPO 实体识别和 Step5 共用的轻量 OpenAI 兼容 JSON 客户端。"""
+
 from __future__ import annotations
 
 import json
@@ -8,6 +10,8 @@ from openai import OpenAI
 
 
 class LLMClient:
+    """请求符合结构的 JSON，并对暂时性 API 或解析失败进行有限重试。"""
+
     def __init__(
         self,
         api_key: str,
@@ -23,6 +27,8 @@ class LLMClient:
         user_prompt: str,
         max_retries: int = 3,
     ) -> dict[str, Any]:
+        """发送一次确定性对话请求；JSON 无效时带纠错反馈重试。"""
+
         messages: list[dict[str, str]] = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
@@ -43,6 +49,7 @@ class LLMClient:
                 last_error = exc
                 if attempt == max_retries - 1:
                     break
+                # 向下一次尝试提供具体失败原因，而不是静默重复请求。
                 messages.append(
                     {
                         "role": "user",
@@ -57,6 +64,8 @@ class LLMClient:
 
     @staticmethod
     def _parse_json(content: str) -> dict[str, Any]:
+        """接受模型返回的 Markdown JSON 围栏，但顶层必须是对象。"""
+
         stripped = content.strip()
         if stripped.startswith("```"):
             stripped = re.sub(r"^```(?:json)?\s*", "", stripped)
@@ -71,4 +80,3 @@ class LLMClient:
         if not isinstance(value, dict):
             raise ValueError("Expected a JSON object at the top level.")
         return value
-

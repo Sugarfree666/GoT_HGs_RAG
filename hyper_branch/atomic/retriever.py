@@ -1,3 +1,5 @@
+"""围绕实体锚点、结合向量检索，为原子问题获取局部超图证据。"""
+
 from __future__ import annotations
 
 import logging
@@ -152,6 +154,8 @@ _UNICODE_ASCII_EQUIVALENTS = str.maketrans(
 
 @dataclass(slots=True)
 class AnchorEntityMatch:
+    """一条查询提及与图实体的链接结果及其匹配证据。"""
+
     query_index: int
     query_entity: str
     entity_id: str
@@ -175,6 +179,8 @@ class AnchorEntityMatch:
 
 @dataclass(slots=True)
 class LocalHyperedgeRetrievalResult:
+    """候选池及其来源、不足原因、排序结果和作答证据。"""
+
     method: str = _LOCAL_RETRIEVAL_METHOD
     primary_anchor_mention: str = ""
     linked_entity_id: str = ""
@@ -228,6 +234,8 @@ class LocalHyperedgeRetrievalResult:
 
 
 class AtomicHyperedgeRetriever:
+    """围绕实体锚点构建局部候选，再按问题相似度排序超边。"""
+
     def __init__(
         self,
         dataset: DatasetBundle,
@@ -260,6 +268,8 @@ class AtomicHyperedgeRetriever:
         primary_anchor_mention: str,
         hyperedge_query: str | None = None,
     ) -> LocalHyperedgeRetrievalResult:
+        """以单个锚点为中心执行一次局部检索的兼容入口。"""
+
         retrieval_query = self._atomic_hyperedge_query(
             question=question,
             analysis=analysis,
@@ -280,6 +290,8 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         primary_anchor_mention: str = "",
     ) -> LocalHyperedgeRetrievalResult:
+        """在执行 DAG 前，从原问题构建共享检索上下文。"""
+
         result = self._build_anchor_candidate_pool(
             question=question,
             analysis=analysis,
@@ -300,6 +312,8 @@ class AtomicHyperedgeRetriever:
         primary_anchor_mention: str,
         hyperedge_query: str | None = None,
     ) -> LocalHyperedgeRetrievalResult:
+        """根据节点已解析的问题和主锚点构建局部候选。"""
+
         retrieval_query = self._atomic_hyperedge_query(
             question=question,
             analysis=analysis,
@@ -341,6 +355,8 @@ class AtomicHyperedgeRetriever:
         pool_source: str,
         use_descriptive_fallback: bool,
     ) -> LocalHyperedgeRetrievalResult:
+        """链接锚点提及、扩展图邻域，并记录每个候选的来源。"""
+
         retrieval_query = hyperedge_query if hyperedge_query and hyperedge_query.strip() else question
         anchor_mentions = self._anchor_mentions(primary_anchor_mention, analysis)
         primary_mention = anchor_mentions[0] if anchor_mentions else ""
@@ -363,6 +379,7 @@ class AtomicHyperedgeRetriever:
         linked_matches: list[AnchorEntityMatch] = []
         seen_linked_entity_ids: set[str] = set()
         for query_index, mention in enumerate(anchor_mentions):
+            # 保留每个未链接提及，后续可作为文本回退检索的种子。
             match = self.link_anchor_entity(
                 question=question,
                 mention=mention,
@@ -377,6 +394,7 @@ class AtomicHyperedgeRetriever:
             seen_linked_entity_ids.add(match.entity_id)
             linked_matches.append(match)
 
+        # 实体链接失败时，字面提及匹配仍可提供有用候选。
         mention_seed_pool = self._mention_seed_candidate_pool(result.unlinked_anchor_mentions)
         if not linked_matches:
             if mention_seed_pool["candidate_hyperedge_ids"]:
@@ -473,6 +491,8 @@ class AtomicHyperedgeRetriever:
         shared_pool: LocalHyperedgeRetrievalResult,
         local_pool: LocalHyperedgeRetrievalResult,
     ) -> LocalHyperedgeRetrievalResult:
+        """融合原问题和节点局部候选，同时不丢失其来源。"""
+
         result = LocalHyperedgeRetrievalResult(
             method=_SHARED_RETRIEVAL_METHOD,
             primary_anchor_mention=local_pool.primary_anchor_mention,
@@ -498,6 +518,7 @@ class AtomicHyperedgeRetriever:
         candidate_ids: list[str] = []
         source_by_id: dict[str, dict[str, Any]] = {}
         for pool in (shared_pool, local_pool):
+            # 保持首次出现顺序，使排序并列时仍可复现。
             for hyperedge_id in pool.candidate_hyperedge_ids:
                 if hyperedge_id not in candidate_ids:
                     candidate_ids.append(hyperedge_id)
@@ -516,9 +537,12 @@ class AtomicHyperedgeRetriever:
         *,
         question: str,
     ) -> LocalHyperedgeRetrievalResult:
+        """对融合候选池进行向量排序，并将 Top 超边转换为可作答证据。"""
+
         source_by_id: dict[str, dict[str, Any]] = {}
         for source in result.candidate_sources:
             self._merge_candidate_source(source_by_id, dict(source))
+        # 相似度只对已被局部图检索接纳的候选排序。
         scores = self._hyperedge_similarity_scores(question, result.candidate_hyperedge_ids)
         ranked = [
             {
@@ -673,6 +697,8 @@ class AtomicHyperedgeRetriever:
         mention: str,
         analysis: AtomicQuestionAnalysis,
     ) -> AnchorEntityMatch | None:
+        """为主提及解析最合适的图实体；无法可靠链接时返回空。"""
+
         return self.link_anchor_entity(question=question, mention=mention, analysis=analysis, query_index=0)
 
     def link_anchor_entity(
@@ -683,6 +709,8 @@ class AtomicHyperedgeRetriever:
         analysis: AtomicQuestionAnalysis,
         query_index: int,
     ) -> AnchorEntityMatch | None:
+        """先用精确别名解析单条提及，再尝试受约束的向量候选。"""
+
         matches = self._resolve_anchor_entity_matches(
             question=question,
             entity=mention,

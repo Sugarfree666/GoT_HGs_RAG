@@ -1,3 +1,5 @@
+"""加载 HanLP SDP 模型，并将不同版本的输出统一为 DEPO 稳定图结构。"""
+
 from __future__ import annotations
 
 import importlib
@@ -17,6 +19,8 @@ DEFAULT_MODEL_CANDIDATES = [
 
 
 class HanLPSDPParser:
+    """按需加载一个 HanLP 管线，并以 ``HanLPSDPResult`` 暴露 PAS 边。"""
+
     def __init__(self, model_name_or_path: str | None = None) -> None:
         self.model_name_or_path = (model_name_or_path or "").strip() or None
         self.model_label = ""
@@ -24,8 +28,11 @@ class HanLPSDPParser:
         self._pipeline: Any | None = None
 
     def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
+        """解析一条掩码问题，同时保留 PAS 证据和分词诊断结果。"""
+
         pipeline = self._load_pipeline()
         document = pipeline(text)
+        # HanLP 版本可能返回映射或文档对象；先统一为映射，后续逻辑不依赖版本。
         payload = _document_to_mapping(document)
         token_sentences = _extract_token_sentences(payload, text)
         tokens = [token for sentence in token_sentences for token in sentence]
@@ -36,6 +43,7 @@ class HanLPSDPParser:
         if not sdp_graphs:
             parse_warnings.append("HanLP result did not contain an sdp/pas field.")
 
+        # 将句内索引展平为全局索引，供 Step4 在单一 token 图上推理。
         edges = _collect_sdp_edges(sdp_graphs, token_sentences)
         result = HanLPSDPResult(
             text=text,
@@ -49,10 +57,13 @@ class HanLPSDPParser:
             syntax_heads=syntax_heads,
             syntax_head_source=syntax_head_source,
         )
+        # 若 ENTITY 占位符被拆分，实体掩码阶段的前提不再成立。
         check_mask_tokens(result, placeholders or [])
         return result
 
     def _load_pipeline(self) -> Any:
+        """只加载一次指定模型；未指定时按顺序尝试兼容的 PAS 默认模型。"""
+
         if self._pipeline is not None:
             return self._pipeline
 
@@ -95,6 +106,8 @@ class HanLPSDPParser:
 
 
 def check_mask_tokens(result: HanLPSDPResult, placeholders: list[str]) -> dict[str, str]:
+    """记录每个 DEPO 占位符是否被 HanLP 保持为单个 token。"""
+
     token_set = set(result.tokens)
     checks: dict[str, str] = {}
     for placeholder in placeholders:
@@ -148,6 +161,8 @@ def _resolve_model_reference(hanlp: Any, model_name_or_path: str) -> tuple[Any, 
 
 
 def _document_to_mapping(document: Any) -> dict[str, Any]:
+    """将随 HanLP 版本变化的文档对象转换为普通映射。"""
+
     if isinstance(document, dict):
         return dict(document)
     if hasattr(document, "to_dict"):
@@ -164,6 +179,8 @@ def _document_to_mapping(document: Any) -> dict[str, Any]:
 
 
 def _extract_token_sentences(payload: dict[str, Any], fallback_text: str) -> list[list[str]]:
+    """读取 HanLP token；缺失时才使用透明的正则分词回退。"""
+
     token_key = _find_token_key(payload)
     if token_key:
         normalized = _normalize_token_value(payload[token_key])
@@ -197,6 +214,8 @@ def _collect_sdp_edges(
     sdp_graphs: dict[str, Any],
     token_sentences: list[list[str]],
 ) -> list[HanLPSDPEdge]:
+    """将句内 SDP 弧转换为全局索引、可展示的边记录。"""
+
     edges: list[HanLPSDPEdge] = []
     sentence_offsets: list[int] = []
     offset = 0

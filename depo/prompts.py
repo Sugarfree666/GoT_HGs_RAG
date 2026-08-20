@@ -1,3 +1,5 @@
+"""集中维护 DEPO 的实体提取、问题规范化和原子 DAG 生成提示词。"""
+
 from __future__ import annotations
 
 import json
@@ -137,6 +139,8 @@ Return JSON only.
 
 
 def build_explicit_entity_extraction_prompt(question: str) -> str:
+    """将原问题嵌入 Step2 输出结构，并重申实体边界约束。"""
+
 
     schema = {
         "explicit_entities": [
@@ -192,6 +196,8 @@ MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 
 
 def build_mask_span_extraction_prompt(question: str) -> str:
+    """保留旧接口名称，实际复用显式实体提取提示词。"""
+
     return build_explicit_entity_extraction_prompt(question)
 
 
@@ -588,6 +594,8 @@ def build_atomic_question_dag_prompt(
     question_entities: list[str],
     question_structure: list[list[str]],
 ) -> str:
+    """将原问题、实体和 Step4 路径组织为 Step5 DAG 生成输入。"""
+
     entities: list[str] = []
     seen_entities: set[str] = set()
     for entity in question_entities:

@@ -1,3 +1,5 @@
+"""数据加载和检索模块共用的小型图、向量和证据值对象。"""
+
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field

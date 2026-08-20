@@ -1,3 +1,5 @@
+"""加载 YAML 配置，并转换为 HyperBranch 使用的类型化路径和运行参数。"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -60,6 +62,8 @@ class Config:
 
 
 def load_config(config_path: Path, project_root: Path) -> Config:
+    """读取一份 YAML、补齐默认值，并从项目根目录解析相对路径。"""
+
     raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     dataset = raw.get("dataset", {})
     runtime = raw.get("runtime", {})
@@ -67,6 +71,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     llm = raw.get("llm", {})
     prompts = raw.get("prompts", {})
 
+    # 原始 YAML 只在这里处理；其余模块只消费类型化配置。
     dataset_cfg = DatasetConfig(
         root=_resolve_path(project_root, dataset.get("root", "datasets/agriculture")),
         graphml_file=dataset.get("graphml_file"),
@@ -109,6 +114,8 @@ def load_config(config_path: Path, project_root: Path) -> Config:
 
 
 def _resolve_path(project_root: Path, value: str | Path) -> Path:
+    """稳定地解析配置路径，同时保留显式的绝对路径。"""
+
     candidate = Path(value)
     if candidate.is_absolute():
         return candidate

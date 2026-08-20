@@ -1,3 +1,5 @@
+"""读取归一化嵌入矩阵，并执行可复现的余弦相似度查询。"""
+
 from __future__ import annotations
 
 import base64
@@ -12,6 +14,8 @@ from ..utils import normalize_label
 
 
 class VectorStore:
+    """带行 ID 和归一化标签索引的预计算向量库。"""
+
     def __init__(self, name: str, rows: list[dict[str, Any]], matrix: np.ndarray, label_fields: tuple[str, ...]) -> None:
         self.name = name
         self.rows = rows
@@ -28,6 +32,8 @@ class VectorStore:
         name: str,
         label_fields: tuple[str, ...],
     ) -> "VectorStore":
+        """从数据集向量文件加载 base64 压缩或 JSON 列表形式的嵌入。"""
+
         payload = json.loads(path.read_text(encoding="utf-8"))
         rows = list(payload.get("data", []))
         dim = int(payload.get("embedding_dim", 0))
@@ -63,6 +69,8 @@ class VectorStore:
         top_k: int,
         allowed_ids: set[str] | None = None,
     ) -> list[VectorMatch]:
+        """返回 Top 余弦匹配；可限制在图检索已接纳的候选 ID 中。"""
+
         if top_k <= 0:
             return []
         query = np.asarray(query_vector, dtype=np.float32)
@@ -73,6 +81,7 @@ class VectorStore:
         scores = self.matrix @ query
 
         if allowed_ids is not None:
+            # 先完整评分再筛选，确保局部候选使用原始存储向量的精确分数。
             allowed_indices = np.array(
                 [self.id_to_index[row_id] for row_id in allowed_ids if row_id in self.id_to_index],
                 dtype=np.int32,
@@ -100,6 +109,8 @@ class VectorStore:
         return matches
 
     def similarity(self, query_vector: np.ndarray, row_id: str) -> float:
+        """计算查询向量与已知行 ID 的相似度；行不存在时返回零。"""
+
         index = self.id_to_index.get(row_id)
         if index is None:
             return 0.0
@@ -111,10 +122,9 @@ class VectorStore:
         return float(np.dot(self.matrix[index], query))
 
     def similarities(self, query_vector: np.ndarray, row_ids: list[str]) -> dict[str, float]:
-        """Score candidate IDs against a query vector using stored row vectors only.
+        """仅使用已存行向量计算候选 ID 与查询向量的相似度。
 
-        The query vector may come from online embedding, but candidate vectors are
-        always reused from the precomputed vector-store matrix.
+        查询向量可来自在线嵌入，但候选向量始终复用预计算的向量库矩阵。
         """
         if not row_ids:
             return {}

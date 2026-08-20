@@ -1,4 +1,5 @@
-from __future__ import annotations
+"""DEPO 预处理、HanLP 解析和 Step4/Step5 之间传递的类型化记录。"""
+
 
 from dataclasses import asdict, dataclass, field
 from typing import Any

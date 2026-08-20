@@ -1,3 +1,5 @@
+"""按依赖顺序执行原子问题 DAG，并组装有证据支持的答案。"""
+
 from __future__ import annotations
 
 import logging
@@ -20,10 +22,14 @@ from .retriever import AtomicHyperedgeRetriever, LocalHyperedgeRetrievalResult
 
 
 class DagCycleError(ValueError):
+    """当输入 DAG 含有依赖环、无法排序时抛出。"""
+
     pass
 
 
 class AtomicDagExecutor:
+    """协调依赖改写、局部检索、节点作答和最终答案选择。"""
+
     def __init__(
         self,
         analyzer: AtomicQuestionAnalyzer,
@@ -42,6 +48,9 @@ class AtomicDagExecutor:
         dag_payload: Any | None = None,
         original_question_entities: list[str] | None = None,
     ) -> DagExecutionResult:
+        """从独立叶节点执行规范化 DAG，直至唯一的已校验终止节点。"""
+
+        # 先统一外部输入结构；只修复可确定的兼容性问题。
         nodes = self.normalize_dag_payload(dag_payload, original_question=original_question)
         nodes, dag_repair = self.repair_dag_for_execution(nodes)
         order = self.topological_sort(nodes)
@@ -55,6 +64,7 @@ class AtomicDagExecutor:
             dag_payload=dag_payload,
             original_question_entities=original_question_entities,
         )
+        # 原问题提供共享证据；每个节点随后补充自己的局部证据。
         original_question_candidate_pool = self.retriever.build_original_question_candidate_pool(
             question=original_question,
             analysis=original_question_analysis,
@@ -67,6 +77,7 @@ class AtomicDagExecutor:
 
         self.logger.info("Executing atomic DAG with %s node(s)", len(order))
         for node in order:
+            # 在分析前替换依赖答案，让检索看到具体锚点。
             dependency_answers = self._dependency_context(node.dependencies, results_by_id)
             dependency_rewrite = resolve_dependency_question(node.question, dependency_answers)
             resolved_question = dependency_rewrite.retrieval_question
@@ -87,6 +98,7 @@ class AtomicDagExecutor:
                 dependency_rewrite.primary_anchor_entities,
                 analysis,
             )
+            # 先从改写后的原子问题构建局部候选，再融合有效祖先节点上下文。
             local_candidate_pool = self.retriever.build_atomic_candidate_pool(
                 question=resolved_question,
                 analysis=analysis,
@@ -109,6 +121,7 @@ class AtomicDagExecutor:
             )
             retrieval_result = self.retriever.rank_candidate_pool(retrieval_result, question=hyperedge_retrieval_query)
             evidence = retrieval_result.evidence
+            # 作答器只接收排序后的证据，不能直接搜索完整图。
             answer_payload = self._answer_atomic_question(
                 original_question=original_question,
                 atomic_question=resolved_question,
@@ -165,6 +178,7 @@ class AtomicDagExecutor:
             local_candidate_pools_by_node[node.node_id] = local_candidate_pool
 
         atomic_results = [results_by_id[node.node_id] for node in order]
+        # 已在上方校验唯一终止节点，因此其答案是唯一的最终答案来源。
         final_answer = self._final_answer_from_terminal_node(atomic_results[-1], atomic_results)
         artifacts = {
             "dag_input": [node.to_dict() for node in nodes],
@@ -199,6 +213,8 @@ class AtomicDagExecutor:
         dag_payload: Any | None,
         original_question_entities: list[str] | None,
     ) -> tuple[AtomicQuestionAnalysis, str]:
+        """全局检索优先使用 DEPO 提供的实体，缺失时再回退到问题分析。"""
+
         entities = _clean_entity_mentions(original_question_entities)
         if not entities:
             entities = _clean_entity_mentions(_original_question_entities_from_payload(dag_payload))
@@ -208,6 +224,8 @@ class AtomicDagExecutor:
 
     @classmethod
     def normalize_dag_payload(cls, payload: Any | None, original_question: str | None = None) -> list[AtomicQuestionNode]:
+        """将支持的多种 DAG 输入结构统一为内部节点结构。"""
+
         if payload is None:
             if original_question:
                 return [AtomicQuestionNode(node_id="q1", question=original_question, metadata={"source": "single_node"})]
@@ -243,6 +261,8 @@ class AtomicDagExecutor:
 
     @staticmethod
     def topological_sort(nodes: list[AtomicQuestionNode]) -> list[AtomicQuestionNode]:
+        """返回依赖先于依赖者的顺序；若有环则抛出异常。"""
+
         by_id = {node.node_id: node for node in nodes}
         if len(by_id) != len(nodes):
             raise ValueError("Atomic DAG contains duplicate node IDs.")
@@ -281,6 +301,8 @@ class AtomicDagExecutor:
 
     @staticmethod
     def repair_dag_for_execution(nodes: list[AtomicQuestionNode]) -> tuple[list[AtomicQuestionNode], dict[str, Any]]:
+        """应用确定性的依赖修复，并记录每次改动以供审计。"""
+
         if not nodes:
             return nodes, {"applied": False, "reason": "empty_dag"}
 
@@ -332,6 +354,8 @@ class AtomicDagExecutor:
 
     @staticmethod
     def validate_terminal_leaf(nodes: list[AtomicQuestionNode]) -> None:
+        """要求恰有一个终止节点，确保最终答案没有歧义。"""
+
         if not nodes:
             raise ValueError("Atomic DAG did not contain any executable nodes.")
 
@@ -437,6 +461,8 @@ class AtomicDagExecutor:
         dependency_ids: list[str],
         results_by_id: dict[str, AtomicAnswerResult],
     ) -> list[dict[str, Any]]:
+        """按声明依赖顺序收集已完成节点的最小答案上下文。"""
+
         context: list[dict[str, Any]] = []
         for dependency_id in dependency_ids:
             result = results_by_id[dependency_id]
@@ -471,6 +497,8 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
+        """通过配置的 LLM 服务回答一个节点，并提供确定性回退。"""
+
         answer_contract = self._answer_contract(atomic_question)
         answer_dependency_answers = self._answer_dependency_context(dependency_answers)
         evidence_payload = self._answer_evidence_payload(
@@ -534,6 +562,8 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         first_hop_hyperedge_text_resolver: Any | None = None,
     ) -> dict[str, list[dict[str, Any]]]:
+        """将排序超边转换为 LLM 作答所需的分块证据结构。"""
+
         evidence_blocks: list[dict[str, Any]] = []
         block_by_source_chunk_id: dict[str, dict[str, Any]] = {}
         hyperedge_ids_by_block_key: dict[str, set[str]] = {}
@@ -614,6 +644,8 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
+        """在 LLM 不可用或证据不足时生成显式的保守答案。"""
+
         if not evidence:
             dependency_payload = self._answer_from_dependencies(question, dependency_answers)
             if dependency_payload is not None:
@@ -686,6 +718,8 @@ class AtomicDagExecutor:
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
     ) -> dict[str, Any]:
+        """规范化服务返回值，并过滤未在候选证据中的超边引用。"""
+
         if not isinstance(payload, dict):
             payload = self._fallback_answer(question, analysis, evidence, dependency_answers)
         answer = str(payload.get("answer", "") or "").strip()
@@ -739,6 +773,8 @@ class AtomicDagExecutor:
         active_ancestor_node_ids: list[str],
         local_candidate_pools_by_node: dict[str, LocalHyperedgeRetrievalResult],
     ) -> LocalHyperedgeRetrievalResult:
+        """为当前节点汇集原问题和有效祖先节点可共享的候选池。"""
+
         active_pool = original_question_candidate_pool
         for ancestor_node_id in active_ancestor_node_ids:
             ancestor_pool = local_candidate_pools_by_node.get(ancestor_node_id)
@@ -830,6 +866,8 @@ class AtomicDagExecutor:
         terminal: AtomicAnswerResult,
         atomic_results: list[AtomicAnswerResult],
     ) -> dict[str, Any]:
+        """将终止节点结果封装为最终答案，并附带可追溯的执行摘要。"""
+
         answer = terminal.answer
         postprocess = _compound_country_comparison_override(terminal, atomic_results)
         if postprocess is not None:

@@ -1,4 +1,5 @@
-from __future__ import annotations
+"""原子执行器内部使用的类型化 DAG、分析、候选和答案记录。"""
+
 
 from dataclasses import dataclass, field
 from typing import Any

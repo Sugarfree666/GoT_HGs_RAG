@@ -1,3 +1,5 @@
+"""Step4：修复 HanLP PAS 证据，并为每个显式实体选择一条语义路径。"""
+
 from __future__ import annotations
 
 import json
@@ -278,27 +280,30 @@ def compile_token_reasoning_structure(
     debug: bool = False,
     debug_dir: str | Path | None = None,
 ) -> TokenReasoningStructureResult:
-    """Compile HanLP PAS SDP evidence into entity-branch token paths.
+    """将 HanLP PAS SDP 证据编译为以实体为起点的 token 路径。
 
-    Step 4 no longer searches over answer-anchor candidates.  Explicit masked
-    entities are fixed branch starts; each branch keeps the reachable boundary
-    path with the highest Semantic Path Score (SP).
+    Step4 不再搜索答案锚点候选。显式掩码实体是固定分支起点；
+    每个分支保留可达边界中语义路径分数（SP）最高的一条。
     """
 
+    # 原始 PAS 证据与修复边分开保存，确保调试输出可追溯。
     state = build_evidence_graph(hanlp_sdp_result)
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
     _mark_anchors(state.nodes, explicit_entity_ids)
 
+    # PAS 常经由功能词表达关系；补充带来源记录的可审计捷径边。
     add_pas_preposition_contraction_edges(state)
     add_pas_possessive_contraction_edges(state)
     add_pas_coordination_candidate_attachment_edges(state, explicit_entity_ids)
 
+    # 每个显式实体独立选择可达的最佳语义边界路径。
     branch_selection = _select_entity_branch_best_paths(state, explicit_entity_ids)
     paths = branch_selection["paths"]
     path_type = "entity_branch_best_paths" if paths else "no_entity_branch_path"
     constraints: list[dict[str, Any]] = []
     candidate_sets: list[list[str]] = []
 
+    # 只返回入选路径所用证据，避免暴露完整且噪声较多的 PAS 图。
     final_node_ids, final_pairs = _graph_from_selected_paths(paths)
     final_nodes = _final_nodes(state.nodes, final_node_ids)
     active_entity_ids = _active_entity_ids(state.nodes, paths)
@@ -379,6 +384,8 @@ def compile_token_reasoning_structure(
 
 
 def classify_label(relation: str) -> str:
+    """将原始 PAS 关系归为影响路径搜索的少量语义边类别。"""
+
     normalized = _normalize_relation(relation)
     compact = normalized.replace("-", "_").replace(".", "_")
     if any(
@@ -424,6 +431,8 @@ def classify_label(relation: str) -> str:
 
 
 def classify_node(text: str, index: int) -> str:
+    """按占位符、约束、功能词和内容词划分 token 的推理角色。"""
+
     stripped = str(text or "").strip()
     lower = stripped.lower()
     if index <= 0 or lower == "root":
@@ -440,6 +449,8 @@ def classify_node(text: str, index: int) -> str:
 
 
 def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
+    """构建仅含 PAS 的 token 图，并保存每条原始边的标准化来源。"""
+
     nodes = _build_token_nodes(hanlp_sdp_result)
     raw_edges: dict[tuple[str, str], TokenReasoningEdge] = {}
     normalized_edges: list[dict[str, Any]] = []
@@ -449,6 +460,7 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     )
 
     for raw_edge in hanlp_sdp_result.edges:
+        # Step4 不混用语义不同的 PAS 与 DM/PSD 关系。
         if not _is_pas_formalism(raw_edge.formalism):
             warning = f"Step4 PAS-only graph ignored non-PAS edge from {raw_edge.formalism}: {raw_edge.display()}"
             if warning not in warnings:
@@ -477,6 +489,7 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
             "support": support,
         }
         normalized_edges.append(provenance)
+        # 多条解析弧可以共同支持同一条无向推理连接。
         _merge_edge(
             raw_edges,
             nodes,
@@ -540,6 +553,8 @@ def _select_entity_branch_best_paths(
     state: _WorkingState,
     explicit_entity_ids: list[str],
 ) -> dict[str, Any]:
+    """对实体到边界的可达路径评分，并保留最佳且不重复的分支。"""
+
     boundary_degree_graph = _semantic_boundary_degree_graph(state.nodes, state.edges)
     boundary_ids = _semantic_boundary_node_ids(state.nodes, boundary_degree_graph)
     semantic_node_ids = _semantic_degree_node_ids(state.nodes, boundary_degree_graph)
@@ -567,6 +582,7 @@ def _select_entity_branch_best_paths(
         blocked_internal_ids = set(explicit_entity_ids) - {entity_id}
         candidates: list[dict[str, Any]] = []
         for boundary_id in boundary_ids:
+            # 其他实体锚点可作为端点，但不能作为当前分支的隐藏中间节点。
             if boundary_id == entity_id:
                 continue
             path_ids, dijkstra_cost = _shortest_semantic_boundary_path(
@@ -600,6 +616,7 @@ def _select_entity_branch_best_paths(
             )
 
         branch_semantic_ids: set[str] = set()
+        # 只有获得全部候选语义节点后，SP 分数才可公平比较路径。
         for candidate in candidates:
             for node_id in candidate["node_ids"]:
                 if node_id != entity_id and node_id in semantic_node_id_set:
@@ -678,6 +695,8 @@ def _semantic_boundary_degree_graph(
     nodes: dict[str, TokenReasoningNode],
     edges: dict[tuple[str, str], TokenReasoningEdge],
 ) -> dict[str, set[str]]:
+    """构建用于识别语义边界节点的低噪声无向图。"""
+
     graph: dict[str, set[str]] = {}
     for key in _sorted_edge_keys(edges, nodes):
         source_id, target_id = key
@@ -701,6 +720,8 @@ def _semantic_path_search_graph(
     nodes: dict[str, TokenReasoningNode],
     edges: dict[tuple[str, str], TokenReasoningEdge],
 ) -> dict[str, list[tuple[str, int, tuple[str, str]]]]:
+    """构建带边代价的路径搜索图，排除不可搜索的 PAS 关系。"""
+
     graph: dict[str, list[tuple[str, int, tuple[str, str]]]] = {}
     for key in _sorted_edge_keys(edges, nodes):
         source_id, target_id = key
@@ -812,6 +833,8 @@ def _shortest_semantic_boundary_path(
     *,
     blocked_internal_ids: set[str],
 ) -> tuple[list[str], int | float]:
+    """在禁止穿过其他实体锚点的条件下，求两节点间最短语义路径。"""
+
     if source_id == target_id:
         return [], math.inf
     if source_id not in graph or target_id not in graph:
@@ -859,6 +882,8 @@ def _semantic_path_score(
     path_ids: list[str],
     branch_semantic_ids: set[str],
 ) -> tuple[float, dict[str, Any]]:
+    """综合路径代价、语义覆盖和边质量，为候选路径计算 SP 分数。"""
+
     path_node_ids_without_entity = [
         node_id
         for node_id in path_ids
@@ -908,6 +933,8 @@ def _path_cost_details(
     state: _WorkingState,
     path_ids: list[str],
 ) -> tuple[int | None, list[dict[str, Any]]]:
+    """读取一条节点路径的每段边代价及其总和。"""
+
     total = 0
     details: list[dict[str, Any]] = []
     for left, right in zip(path_ids, path_ids[1:]):
@@ -1030,6 +1057,8 @@ def _entity_branch_global_selection_payload(
 
 
 def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
+    """连接重要的 PAS 介词论元，并保留被折叠路径的证据。"""
+
     touched: set[tuple[str, str]] = set()
     for preposition in _sorted_nodes(state.nodes.values()):
         if preposition.text.lower() not in PREPOSITIONS:
@@ -1086,8 +1115,9 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
 
 
 def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
-    """Collapse explicit PAS possessive markers without treating all "s" as possessive."""
+    """折叠明确的 PAS 所有格标记，但不将所有 ``s`` 都误判为所有格。"""
 
+    # 只折叠经过上下文验证的所有格标记，避免把普通字母 s 误连为语义边。
     touched: set[tuple[str, str]] = set()
     contracted_marker_ids: set[str] = set()
     for marker in _sorted_nodes(state.nodes.values()):
@@ -1247,6 +1277,8 @@ def _pas_preposition_role_edges(
 def _remove_contracted_possessive_marker_edges(
     state: _WorkingState, marker_ids: set[str]
 ) -> None:
+    """在句法证据充分时，将并列实体候选连接到其共享目标。"""
+
     if not marker_ids:
         return
     for key in list(state.edges):
@@ -1523,6 +1555,8 @@ def _active_entity_ids(
 def write_debug_json(
     payload: dict[str, Any], *, question_id: str | None, debug_dir: str | Path | None
 ) -> str:
+    """持久化完整的 Step4 审计轨迹，不修改内存中的计算结果。"""
+
     directory = (
         Path(debug_dir) if debug_dir is not None else Path("debug") / "hanlp_sdp"
     )
@@ -1997,6 +2031,8 @@ def _add_split_pas_possessive_contraction_edges(
     touched: set[tuple[str, str]],
     contracted_marker_ids: set[str],
 ) -> None:
+    """合并同一无向节点对的证据，并保留最强质量与完整来源。"""
+
     for apostrophe in _sorted_nodes(state.nodes.values()):
         if apostrophe.text not in {"'", "’"}:
             continue
@@ -2335,6 +2371,8 @@ def _node_ids_from_pairs(pairs: set[tuple[str, str]], terminals: list[str]) -> s
 def _final_nodes(
     nodes: dict[str, TokenReasoningNode], node_ids: Iterable[str]
 ) -> list[TokenReasoningNode]:
+    """按原 token 顺序返回所有入选路径使用的节点。"""
+
     return [
         TokenReasoningNode(
             id=node.id,
@@ -2358,6 +2396,8 @@ def _final_edges(
     paths: list[TokenReasoningPath],
     entity_ids: list[str],
 ) -> list[TokenReasoningEdge]:
+    """仅保留入选路径中的边，并补充必要的实体连接边。"""
+
     orientations: dict[tuple[str, str], tuple[str, str]] = {}
     for path in paths:
         for index in range(len(path.node_ids) - 1):

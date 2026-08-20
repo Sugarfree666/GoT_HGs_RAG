@@ -1,3 +1,5 @@
+"""加载一份 HyperBranch 数据集：GraphML、来源文本和预计算向量库。"""
+
 from __future__ import annotations
 
 import json
@@ -13,6 +15,8 @@ from .vector_store import VectorStore
 
 @dataclass(slots=True)
 class DatasetBundle:
+    """一次运行内由所有原子问题共享的数据集资源。"""
+
     root: Path
     graph_path: Path
     graph: KnowledgeHypergraph
@@ -31,16 +35,21 @@ class DatasetBundle:
 
 
 class HypergraphDatasetLoader:
+    """校验并加载检索器所需的全部磁盘资源。"""
+
     def __init__(self, config: DatasetConfig, logger: logging.Logger) -> None:
         self.config = config
         self.logger = logger
 
     def load(self) -> DatasetBundle:
+        """一次加载图和向量索引，并返回用于记录产物的数据集摘要。"""
+
         root = self.config.root
         graph_path = self._resolve_graph_path(root)
         self.logger.info("Loading dataset from %s", root)
         self.logger.info("Using GraphML file %s", graph_path.name)
 
+        # 文本记录和全部向量库必须对应同一份图快照。
         text_chunks = self._load_json(root / self.config.text_chunk_file)
         full_docs = self._load_json(root / self.config.full_doc_file)
         entity_vdb_path = root / self.config.entity_vdb_file
@@ -83,6 +92,8 @@ class HypergraphDatasetLoader:
         )
 
     def _resolve_graph_path(self, root: Path) -> Path:
+        """优先使用显式 GraphML 文件，否则选标准文件名或最新文件。"""
+
         if self.config.graphml_file:
             explicit = root / self.config.graphml_file
             if explicit.exists():

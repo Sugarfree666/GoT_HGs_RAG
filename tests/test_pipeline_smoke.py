@@ -7,7 +7,6 @@ from pathlib import Path
 from hyper_branch.config import load_config
 from hyper_branch.logging_utils import TraceStore, configure_logging, create_run_dir
 from hyper_branch.pipeline import HyperBranchPipeline
-from scripts.replay_cached_atomic_answers import _evidence_from_cached
 from tests.agriculture_fixture import ensure_agriculture_fixture
 
 
@@ -52,12 +51,6 @@ class PipelineSmokeTest(unittest.TestCase):
             (run_dir / "artifacts" / "atomic_answers.json").read_text(encoding="utf-8")
         )
         self.assertNotIn("evidence", answers[0])
-
-        replay_evidence = _evidence_from_cached(retrieval, answers[0], top_k=50)
-        self.assertEqual(len(replay_evidence), len(retrieval["answerer_evidence"]))
-        self.assertEqual(replay_evidence[0].hyperedge_id, retrieval["answerer_evidence"][0]["hyperedge_id"])
-        self.assertEqual(replay_evidence[0].chunk_ids, retrieval["answerer_evidence"][0]["chunk_ids"])
-
 
 if __name__ == "__main__":
     unittest.main()

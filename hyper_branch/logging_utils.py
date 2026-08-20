@@ -1,3 +1,5 @@
+"""创建运行目录，并写入紧凑 JSONL 追踪和产物，避免在终端暴露大提示词。"""
+
 from __future__ import annotations
 
 import json
@@ -18,6 +20,8 @@ CONSOLE_SUMMARY_PREFIXES = (
 
 
 class TraceStore:
+    """将事件、LLM 调用摘要和 JSON 产物写入一个运行目录。"""
+
     def __init__(self, run_dir: Path) -> None:
         self.run_dir = run_dir
         self._event_path = run_dir / "events.jsonl"
@@ -25,6 +29,8 @@ class TraceStore:
         self._lock = Lock()
 
     def log_event(self, event: str, payload: dict[str, Any]) -> None:
+        """追加一条结构化运行事件。"""
+
         record = {
             "timestamp": datetime.now().isoformat(timespec="seconds"),
             "event": event,
@@ -33,6 +39,8 @@ class TraceStore:
         self._append_jsonl(self._event_path, record)
 
     def log_llm_call(self, stage: str, request_payload: dict[str, Any], response_payload: dict[str, Any]) -> None:
+        """追加经过摘要化处理的 LLM 调用记录，避免保存大正文。"""
+
         record = {
             "timestamp": datetime.now().isoformat(timespec="seconds"),
             "stage": stage,
@@ -72,6 +80,8 @@ class TraceStore:
         return summary
 
     def save_artifact(self, relative_path: str, payload: Any) -> Path:
+        """以 UTF-8 文本或格式化 JSON 写入一个相对运行目录的产物。"""
+
         target = self.run_dir / relative_path
         target.parent.mkdir(parents=True, exist_ok=True)
         if isinstance(payload, str):
@@ -87,6 +97,8 @@ class TraceStore:
 
 
 def create_run_dir(base_dir: Path, question: str) -> Path:
+    """按时间戳和问题摘要创建不会覆盖已有结果的运行目录。"""
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_dir = base_dir / f"{timestamp}_{slugify(question, 48)}"
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -94,6 +106,8 @@ def create_run_dir(base_dir: Path, question: str) -> Path:
 
 
 class ConsoleSummaryFilter(logging.Filter):
+    """默认仅输出高层阶段日志；详细模式保留全部控制台日志。"""
+
     def __init__(self, *, verbose: bool = False) -> None:
         super().__init__()
         self.verbose = verbose
@@ -106,6 +120,8 @@ class ConsoleSummaryFilter(logging.Filter):
 
 
 def configure_logging(run_dir: Path, log_level: str = "INFO", *, verbose_console: bool = False) -> logging.Logger:
+    """配置文件全量日志和可选精简控制台日志。"""
+
     logger = logging.getLogger("hyper_branch")
     logger.setLevel(getattr(logging, log_level.upper(), logging.INFO))
     for handler in list(logger.handlers):
