@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 import sys
 import time
@@ -21,7 +22,6 @@ for path in (DEPO_ROOT, PROJECT_ROOT, SCRIPTS_ROOT):
 import run_depo_decomposition_batch as depo_batch  # noqa: E402
 from hyperbranch_adapter import build_hyperbranch_dag_payload, explicit_entity_texts  # noqa: E402
 from hyper_branch.config import load_config  # noqa: E402
-from hyper_branch.logging_utils import TraceStore, configure_logging  # noqa: E402
 from hyper_branch.pipeline import HyperBranchPipeline  # noqa: E402
 
 
@@ -38,8 +38,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--llm-model", default="gpt-4o-mini", help="Model for DEPO and HyperBranch chat calls.")
     parser.add_argument("--embedding-model", help="Override HyperBranch embedding model.")
     parser.add_argument("--hanlp-model", help="HanLP pretrained constant name or local model path.")
-    parser.add_argument("--hyperbranch-mock-llm", action="store_true", help="Profile DEPO online, then use HyperBranch mock LLM/local embeddings.")
-    parser.add_argument("--verbose", action="store_true", help="Enable verbose HyperBranch console logs.")
     return parser.parse_args()
 
 
@@ -80,10 +78,10 @@ class TimedDepoLLMClient:
         self.phase = "depo_llm"
         self.model = getattr(base_client, "model", "")
 
-    def chat_json(self, system_prompt: str, user_prompt: str, max_retries: int = 3) -> dict[str, Any]:
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, Any]:
         started = time.perf_counter()
         try:
-            return self._base_client.chat_json(system_prompt, user_prompt, max_retries=max_retries)
+            return self._base_client.chat_json(system_prompt, user_prompt)
         finally:
             self._profile.add(
                 "llm.depo.chat_json",
@@ -98,9 +96,6 @@ def main() -> int:
     args = parse_args()
     api_key = args.api_key or os.getenv("OPENAI_API_KEY")
     base_url = args.base_url or os.getenv("OPENAI_BASE_URL")
-    if not api_key:
-        print("Missing API key. Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
-        return 2
     os.environ["OPENAI_API_KEY"] = api_key
     if base_url:
         os.environ["OPENAI_BASE_URL"] = base_url
@@ -215,38 +210,20 @@ def main() -> int:
 
     with profile.timed("hyperbranch.load_config"):
         config = load_config(config_path, PROJECT_ROOT)
-        if args.hyperbranch_mock_llm:
-            config.llm.use_mock = True
         config.llm.model = args.llm_model
         if args.embedding_model:
             config.llm.embedding_model = args.embedding_model
 
-    hyperbranch_run_dir = output_dir / "hyperbranch_run"
-    hyperbranch_run_dir.mkdir(parents=True, exist_ok=True)
-    with profile.timed("hyperbranch.configure_logging"):
-        logger = configure_logging(hyperbranch_run_dir, config.runtime.log_level, verbose_console=args.verbose)
-        trace_store = TraceStore(hyperbranch_run_dir)
+    with profile.timed("hyperbranch.init_pipeline_dataset_and_clients"):
+        pipeline = HyperBranchPipeline(config, logging.getLogger("hyper_branch.profile"))
+        _wrap_executor_methods(pipeline, profile)
 
-    try:
-        with profile.timed("hyperbranch.init_pipeline_dataset_and_clients"):
-            pipeline = HyperBranchPipeline(
-                config=config,
-                run_dir=hyperbranch_run_dir,
-                logger=logger,
-                trace_store=trace_store,
-            )
-            _wrap_executor_methods(pipeline, profile)
-
-        with profile.timed("hyperbranch.pipeline_run"):
-            hyperbranch_result = pipeline.run(
-                record.question,
-                dag_payload=dag_payload,
-                original_question_entities=explicit_entity_texts(decomposition_payload),
-            )
-    finally:
-        for handler in list(logger.handlers):
-            handler.close()
-            logger.removeHandler(handler)
+    with profile.timed("hyperbranch.pipeline_run"):
+        hyperbranch_result = pipeline.run(
+            record.question,
+            dag_payload,
+            explicit_entity_texts(decomposition_payload),
+        )
 
     payload = {
         "dataset": dataset,
@@ -313,10 +290,9 @@ def _patch_hyperbranch_client_timing(profile: Profile) -> None:
 def _wrap_executor_methods(pipeline: HyperBranchPipeline, profile: Profile) -> None:
     executor = pipeline.executor
     _wrap_method(executor.analyzer, "analyze", "hyperbranch.node.analyze_atomic_question", profile)
-    _wrap_method(executor.retriever, "retrieve", "hyperbranch.node.retrieve", profile)
-    _wrap_method(executor.fusion, "fuse", "hyperbranch.node.fuse", profile)
+    _wrap_method(executor.retriever, "build_atomic_candidate_pool", "hyperbranch.node.build_candidate_pool", profile)
+    _wrap_method(executor.retriever, "rank_candidate_pool", "hyperbranch.node.rank_candidate_pool", profile)
     _wrap_method(executor, "_answer_atomic_question", "hyperbranch.node.answer_atomic_question", profile)
-    _wrap_method(executor.composer, "compose", "hyperbranch.compose_final_answer", profile)
 
 
 def _wrap_method(obj: Any, method_name: str, event_name: str, profile: Profile) -> None:

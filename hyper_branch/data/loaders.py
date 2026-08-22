@@ -94,17 +94,7 @@ class HypergraphDatasetLoader:
     def _resolve_graph_path(self, root: Path) -> Path:
         """优先使用显式 GraphML 文件，否则选标准文件名或最新文件。"""
 
-        if self.config.graphml_file:
-            explicit = root / self.config.graphml_file
-            if explicit.exists():
-                return explicit
-        preferred = root / "graph_chunk_entity_relation.graphml"
-        if preferred.exists():
-            return preferred
-        graphml_files = sorted(root.glob("*.graphml"), key=lambda path: path.stat().st_mtime, reverse=True)
-        if not graphml_files:
-            raise FileNotFoundError(f"No GraphML file found under {root}")
-        return graphml_files[0]
+        return root / self.config.graphml_file
 
     @staticmethod
     def _load_json(path: Path) -> dict[str, Any]:

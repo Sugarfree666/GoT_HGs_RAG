@@ -24,7 +24,7 @@ class EntityMaskingPreprocessor:
     LLM 只用于显式实体提取；占位符分配和掩码问题构造保持确定性。
     """
 
-    def __init__(self, llm_client: "LLMClient | None" = None) -> None:
+    def __init__(self, llm_client: "LLMClient") -> None:
         # 创建显式实体提取器，LLM 主要在实体识别阶段使用
         self.explicit_extractor = ExplicitEntityExtractor(llm_client)
 
@@ -33,15 +33,11 @@ class EntityMaskingPreprocessor:
 
         # Step1：识别问题中的显式实体
         explicit_entities = self.explicit_extractor.extract(question)
-        # 保存实体提取阶段产生的警告
-        warnings = list(explicit_entities.warnings)
-
         # 若实体提取器给出了规范化问题，则优先使用规范化版本
         normalized_question = _normalized_question_from_entities(question, explicit_entities)
         # 安全检查：规范化后不能把原来的显式实体弄丢
         if normalized_question != question and any(entity.text not in normalized_question for entity in explicit_entities.entities):
-            warnings.append("Normalized question did not preserve every explicit entity surface; using original question.")
-            normalized_question = question
+            raise ValueError("Normalized question must preserve every explicit entity surface.")
         # 记录问题是否真的发生了规范化修改
         normalization_changed = explicit_entities.normalization_changed or normalized_question != question
         if normalized_question == question:
@@ -51,23 +47,14 @@ class EntityMaskingPreprocessor:
         masked_question = _masked_question_from_entities(
             normalized_question,
             explicit_entities.entities,
-            warnings=warnings,
         )
         # 建立占位符与原实体之间的对应关系
         mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities)
-        # 对掩码后的结果做基本一致性检查
-        _validate_preprocess_result(
-            question=question,
-            masked_question=masked_question,
-            mask_mappings=mask_mappings,
-            warnings=warnings,
-        )
         # 将所有预处理结果统一封装，交给 main.py 后续 HanLP/Step4 使用
         return HanLPSDPPreprocessResult(
             original_question=question,
             explicit_entities=ExplicitEntityResult(
                 entities=list(explicit_entities.entities),
-                warnings=list(warnings),
                 raw_payload=explicit_entities.raw_payload,
                 normalized_question=normalized_question,
                 normalization_changed=normalization_changed,
@@ -76,7 +63,6 @@ class EntityMaskingPreprocessor:
             masked_question=masked_question,
             sdp_input_sentence=masked_question,
             mask_mappings=mask_mappings,
-            warnings=list(warnings),
             raw_payload=explicit_entities.raw_payload,
             normalized_question=normalized_question,
             normalization_changed=normalization_changed,
@@ -95,8 +81,6 @@ def _normalized_question_from_entities(question: str, explicit_entities: Explici
 def _masked_question_from_entities(
     question: str,
     entities: list[ExplicitEntity],
-    *,
-    warnings: list[str] | None = None,
 ) -> str:
     """把问题中的显式实体替换成 ENTITYA、ENTITYB 等占位符。"""
 
@@ -106,12 +90,6 @@ def _masked_question_from_entities(
     for index, entity in enumerate(entities):
         # 在问题中查找当前实体的所有出现位置
         matches = list(re.finditer(re.escape(entity.text), question))
-        if not matches:
-            if warnings is not None:
-                warnings.append(
-                    f"Could not find explicit entity surface in normalized question; left unmasked: {entity.text!r}."
-                )
-            continue
         # 第一个实体 -> ENTITYA，第二个 -> ENTITYB，以此类推
         placeholder = f"ENTITY{_letter_suffix(index)}"
         for match in matches:
@@ -144,26 +122,6 @@ def _mask_mappings_from_entities(masked_question: str, entities: list[ExplicitEn
             )
         )
     return mappings
-
-
-def _validate_preprocess_result(
-    question: str,
-    masked_question: str,
-    mask_mappings: list[MaskMapping],
-    warnings: list[str],
-) -> None:
-    """检查实体掩码结果是否合理。"""
-
-    for mapping in mask_mappings:
-        # 每个占位符都必须真正出现在 masked_question 中
-        if mapping.placeholder not in masked_question:
-            raise ValueError(f"masked_question is missing placeholder {mapping.placeholder}.")
-        # 多词实体若仍残留在 masked_question 中，说明掩码不完整
-        if len(mapping.original_text.split()) > 1 and mapping.original_text in masked_question:
-            raise ValueError(f"masked_question still contains unmasked multi-word entity {mapping.original_text!r}.")
-        # 映射中的原实体如果原问题里不存在，则记录警告
-        if mapping.original_text not in question:
-            warnings.append(f"Mask mapping original_text was not found in original question: {mapping.original_text!r}.")
 
 
 def _find_placeholder_span(text: str, placeholder: str) -> tuple[int, int] | None:

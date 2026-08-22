@@ -6,7 +6,7 @@ from typing import Any
 
 
 def ensure_agriculture_fixture(project_root: Path) -> None:
-    """Create the minimal dataset used by mock end-to-end smoke tests."""
+    """Create the minimal dataset used by pipeline smoke tests."""
 
     config_path = project_root / "configs" / "agriculture.yaml"
     config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -29,10 +29,7 @@ llm:
   model: gpt-4o-mini
   embedding_model: text-embedding-3-small
   timeout_seconds: 120
-  max_retries: 3
-  retry_backoff_seconds: 2.0
   temperature: 0.1
-  use_mock: false
 
 prompts:
   dir: prompts

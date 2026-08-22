@@ -10,12 +10,7 @@ from typing import Any
 from models import HanLPSDPEdge, HanLPSDPResult
 
 
-DEFAULT_MODEL_CANDIDATES = [
-    "EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE",
-    "EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_BASE",
-    "UD_ONTONOTES_TOK_POS_LEM_FEA_NER_SRL_DEP_SDP_CON_XLMR_BASE",
-    "UD_ONTONOTES_TOK_POS_LEM_FEA_NER_SRL_DEP_SDP_CON_MMINILMV2L6",
-]
+DEFAULT_MODEL = "EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE"
 
 
 class HanLPSDPParser:
@@ -37,13 +32,15 @@ class HanLPSDPParser:
         token_sentences = _extract_token_sentences(payload, text)
         tokens = [token for sentence in token_sentences for token in sentence]
         available_keys = list(payload.keys())
+        #提取PAS图
         sdp_graphs = {key: payload[key] for key in available_keys if _is_pas_sdp_key(key)}
+        #提取句法依存图
         syntax_heads, syntax_head_source = _extract_syntax_heads(payload, token_sentences)
         parse_warnings: list[str] = []
         if not sdp_graphs:
             parse_warnings.append("HanLP result did not contain an sdp/pas field.")
 
-        # 将句内索引展平为全局索引，供 Step4 在单一 token 图上推理。
+        # 把 HanLP 原始 SDP 图转换成统一的 Edge
         edges = _collect_sdp_edges(sdp_graphs, token_sentences)
         result = HanLPSDPResult(
             text=text,
@@ -63,46 +60,21 @@ class HanLPSDPParser:
 
     def _load_pipeline(self) -> Any:
         """只加载一次指定模型；未指定时按顺序尝试兼容的 PAS 默认模型。"""
-
+        #先检查之前是否已经加载过，直接复用
         if self._pipeline is not None:
             return self._pipeline
 
         _quiet_dependency_warnings()
+        #导包
         hanlp = _import_hanlp()
         self._hanlp = hanlp
-        attempts: list[str] = []
-
-        if self.model_name_or_path:
-            model_ref, label = _resolve_model_reference(hanlp, self.model_name_or_path)
-            try:
-                self._pipeline = hanlp.load(model_ref)
-            except Exception as exc:
-                raise RuntimeError(
-                    f"Failed to load HanLP model {self.model_name_or_path!r} resolved as {label!r}: {exc}"
-                ) from exc
-            self.model_label = label
-            return self._pipeline
-
-        for model_name in DEFAULT_MODEL_CANDIDATES:
-            try:
-                model_ref, label = _resolve_model_reference(hanlp, model_name)
-            except AttributeError as exc:
-                attempts.append(f"{model_name}: unavailable ({exc})")
-                continue
-            try:
-                self._pipeline = hanlp.load(model_ref)
-            except Exception as exc:
-                attempts.append(f"{label}: load failed ({exc})")
-                continue
-            self.model_label = label
-            return self._pipeline
-
-        detail = "; ".join(attempts) if attempts else "no model candidates were tried"
-        raise RuntimeError(
-            "Failed to load a default HanLP SDP model. "
-            "Confirm that the network can download the model, or pass a local model path with --hanlp-model. "
-            f"Attempts: {detail}"
+        model_ref, label = _resolve_model_reference(
+            hanlp,
+            self.model_name_or_path or DEFAULT_MODEL,
         )
+        self._pipeline = hanlp.load(model_ref)
+        self.model_label = label
+        return self._pipeline
 
 
 def check_mask_tokens(result: HanLPSDPResult, placeholders: list[str]) -> dict[str, str]:
@@ -139,10 +111,8 @@ def _quiet_dependency_warnings() -> None:
 
 
 def _import_hanlp() -> Any:
-    try:
-        import hanlp
-    except ModuleNotFoundError as exc:
-        raise ModuleNotFoundError("Missing dependency: hanlp. Run: pip install hanlp") from exc
+    import hanlp
+
     return hanlp
 
 

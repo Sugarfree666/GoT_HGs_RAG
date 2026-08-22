@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import io
 import json
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -18,7 +16,7 @@ if str(DEPO_ROOT) not in sys.path:
 from atomic_question_dag import restore_global_best_paths  # noqa: E402
 from hanlp_sdp_parser import HanLPSDPParser  # noqa: E402
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
-from main import print_hanlp_sdp_result, run_hanlp_sdp_pipeline  # noqa: E402
+from main import run_hanlp_sdp_pipeline  # noqa: E402
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
 from tri_sdp_reasoning_compiler import (  # noqa: E402
     _edge_cost,
@@ -46,6 +44,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=parser,
+            llm_client=llm,
         )
 
         preprocess_result = result["preprocess_result"]
@@ -82,32 +81,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("global_best_paths", llm.step5_user_prompt)
         self.assertNotIn("topic_entities", llm.step5_user_prompt)
 
-        stream = io.StringIO()
-        with redirect_stdout(stream):
-            print_hanlp_sdp_result(1, record, result)
-        output = stream.getvalue()
-
-        self.assertIn("[Original Question]", output)
-        self.assertIn("[1. Explicit Entities]", output)
-        self.assertIn(" - Ryan Tubridy", output)
-        self.assertIn("[2. Entity Masking]", output)
-        self.assertIn(" - ENTITYA -> Ryan Tubridy", output)
-        self.assertIn("[3. HanLP SDP Parsing]", output)
-        self.assertIn("[Raw SDP Edges]", output)
-        self.assertIn("[4. Token Reasoning Structure]", output)
-        self.assertIn("[Repaired Evidence Graph]", output)
-        self.assertIn("Who[1] -- older[3]", output)
-        self.assertIn("cost=1", output)
-        self.assertNotIn("[Anchor Paths]", output)
-        self.assertIn("[Entity Branch Best Paths]", output)
-        self.assertIn("P1: ENTITYA ---- older ---- Who", output)
-        self.assertIn("P2: ENTITYB ---- older ---- Who", output)
-        self.assertIn("Branch SP:", output)
-        self.assertNotIn("typed_wh_slot", output)
-        self.assertIn("[5. Atomic Question DAG]", output)
-        self.assertIn("q1: When was Ryan Tubridy born?", output)
-        self.assertIn("q2: When was Mauro Massironi born?", output)
-
     def test_pipeline_normalizes_wh_order_before_masking_and_parsing(self) -> None:
         question = "Which country the composer of film Thunder On The Hill is from?"
         normalized = "Which country is the composer of film Thunder On The Hill from?"
@@ -134,16 +107,16 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                 index=1,
                 preprocessor=EntityMaskingPreprocessor(llm),
                 parser=parser,
+                llm_client=llm,
                 debug=True,
                 debug_dir=tmpdir,
-                skip_step5=True,
             )
             debug_file = Path(result["token_reasoning_structure"].debug_file or "")
             self.assertTrue(debug_file.exists())
             debug_payload = json.loads(debug_file.read_text(encoding="utf-8"))
 
         preprocess_result = result["preprocess_result"]
-        self.assertEqual(llm.calls, 1)
+        self.assertEqual(llm.calls, 2)
         self.assertEqual(preprocess_result.masked_question, masked)
         self.assertEqual(preprocess_result.sdp_input_sentence, masked)
         self.assertEqual(parser.text, masked)
@@ -175,7 +148,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=parser,
-            skip_step5=True,
+            llm_client=llm,
         )
 
         self.assertEqual(result["preprocess_result"].masked_question, masked)
@@ -184,28 +157,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             [list(path.nodes) for path in result["token_reasoning_structure"].paths],
             [["ENTITYA", "father", "nationality"]],
         )
-
-    def test_hanlp_sdp_pipeline_can_skip_step5(self) -> None:
-        record = QuestionRecord(
-            question="Who is older, Ryan Tubridy or Mauro Massironi?"
-        )
-        parser = FakeHanLPSDPParser()
-        llm = FakePreprocessLLM()
-
-        result = run_hanlp_sdp_pipeline(
-            record=record,
-            index=1,
-            preprocessor=EntityMaskingPreprocessor(llm),
-            parser=parser,
-            skip_step5=True,
-        )
-
-        self.assertEqual(llm.calls, 1)
-        self.assertIsNone(result["atomic_question_dag"])
-        stream = io.StringIO()
-        with redirect_stdout(stream):
-            print_hanlp_sdp_result(1, record, result)
-        self.assertIn("(skipped: Step5 disabled)", stream.getvalue())
 
     def test_pipeline_still_calls_step5_when_step4_has_no_paths(self) -> None:
         question = "What is the capital of France?"
@@ -216,6 +167,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=EmptyPathHanLPSDPParser(),
+            llm_client=llm,
         )
 
         compiled = result["token_reasoning_structure"]
@@ -241,6 +193,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             index=1,
             preprocessor=EntityMaskingPreprocessor(llm),
             parser=FakeIllusionsBornLaterParser(),
+            llm_client=llm,
         )
 
         compiled = result["token_reasoning_structure"]
@@ -1224,61 +1177,6 @@ class TriSDPEntityBranchCompilerTest(unittest.TestCase):
             )
         )
 
-    def test_console_prints_repaired_graph_with_pas_repair_edges(self) -> None:
-        hanlp_result = _hanlp_result(
-            "Which film, ENTITYA or ENTITYB, ENTITYC's mother of director?",
-            [
-                "Which",
-                "film",
-                "ENTITYA",
-                "or",
-                "ENTITYB",
-                "ENTITYC",
-                "'",
-                "mother",
-                "of",
-                "director",
-                "?",
-            ],
-            [
-                _pas("film", "noun_ARG1", "Which", 2, 1),
-                _pas("or", "coord_ARG1", "ENTITYA", 4, 3),
-                _pas("or", "coord_ARG2", "ENTITYB", 4, 5),
-                _pas("'", "poss_ARG2", "ENTITYC", 7, 6),
-                _pas("'", "poss_ARG1", "mother", 7, 8),
-                _pas("of", "prep_ARG1", "mother", 9, 8),
-                _pas("of", "prep_ARG2", "director", 9, 10),
-            ],
-            syntax_heads={"3": 2, "4": 5, "5": 3},
-            syntax_head_source="test/udep",
-        )
-        compiled = compile_token_reasoning_structure(
-            hanlp_result, ["ENTITYA", "ENTITYB", "ENTITYC"]
-        )
-        result = _printable_pipeline_result(
-            hanlp_result, compiled, ["ENTITYA", "ENTITYB", "ENTITYC"]
-        )
-        stream = io.StringIO()
-
-        with redirect_stdout(stream):
-            print_hanlp_sdp_result(
-                1, QuestionRecord(question=hanlp_result.text), result
-            )
-        output = stream.getvalue()
-
-        self.assertIn("[Repaired Evidence Graph]", output)
-        self.assertIn("film[2] -- ENTITYA[3]", output)
-        self.assertIn("film[2] -- ENTITYB[5]", output)
-        self.assertIn("ENTITYC[6] -- mother[8]", output)
-        self.assertIn("mother[8] -- director[10]", output)
-        self.assertIn("film[2] -- ENTITYA[3] (cost=2)", output)
-        self.assertIn("ENTITYC[6] -- mother[8] (cost=1)", output)
-        self.assertIn("mother[8] -- director[10] (cost=1)", output)
-        self.assertIn("ENTITYA[3] -- or[4] (cost=3)", output)
-        self.assertNotIn("; rule=", output)
-        self.assertNotIn("; rel=", output)
-        self.assertNotIn("; derived", output)
-
     def test_each_entity_keeps_only_one_top1_candidate(self) -> None:
         compiled = compile_token_reasoning_structure(
             _which_film_born_later_result(), ["ENTITYA", "ENTITYB"]
@@ -1797,33 +1695,6 @@ def _has_search_edge(
     return any(
         neighbor_id == right_id for neighbor_id, _cost, _key in graph.get(left_id, [])
     )
-
-
-def _printable_pipeline_result(
-    hanlp_result: HanLPSDPResult, compiled: object, explicit_entities: list[str]
-) -> dict[str, object]:
-    mappings = [
-        SimpleNamespace(placeholder=placeholder, original_text=placeholder)
-        for placeholder in explicit_entities
-    ]
-    preprocess_result = SimpleNamespace(
-        explicit_entities=SimpleNamespace(
-            entities=[
-                SimpleNamespace(text=placeholder) for placeholder in explicit_entities
-            ]
-        ),
-        mask_mappings=mappings,
-        normalized_question=hanlp_result.text,
-        warnings=[],
-        masked_question=hanlp_result.text,
-    )
-    return {
-        "preprocess_result": preprocess_result,
-        "hanlp_sdp_result": hanlp_result,
-        "token_reasoning_structure": compiled,
-        "hanlp_input_sentence": hanlp_result.text,
-        "atomic_question_dag": None,
-    }
 
 
 def _hanlp_result(

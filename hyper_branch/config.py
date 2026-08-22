@@ -11,7 +11,7 @@ import yaml
 @dataclass(slots=True)
 class DatasetConfig:
     root: Path
-    graphml_file: str | None = None
+    graphml_file: str = "graph_chunk_entity_relation.graphml"
     full_doc_file: str = "kv_store_full_docs.json"
     text_chunk_file: str = "kv_store_text_chunks.json"
     hyperedge_vdb_file: str = "vdb_hyperedges.json"
@@ -29,8 +29,8 @@ class RuntimeConfig:
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
     local_hyperedge_hops: int = 2
-    descriptive_fallback_hyperedge_top_k: int = 80
-    descriptive_fallback_chunk_top_k: int = 20
+    entity_link_vector_top_k: int = 1
+    entity_link_vector_min_score: float = 0.6
 
 
 @dataclass(slots=True)
@@ -40,10 +40,7 @@ class LLMConfig:
     model: str = "gpt-4o-mini"
     embedding_model: str = "text-embedding-3-small"
     timeout_seconds: int = 120
-    max_retries: int = 3
-    retry_backoff_seconds: float = 2.0
     temperature: float = 0.2
-    use_mock: bool = False
 
 
 @dataclass(slots=True)
@@ -74,7 +71,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     # 原始 YAML 只在这里处理；其余模块只消费类型化配置。
     dataset_cfg = DatasetConfig(
         root=_resolve_path(project_root, dataset.get("root", "datasets/agriculture")),
-        graphml_file=dataset.get("graphml_file"),
+        graphml_file=str(dataset.get("graphml_file", "graph_chunk_entity_relation.graphml")),
         full_doc_file=dataset.get("full_doc_file", "kv_store_full_docs.json"),
         text_chunk_file=dataset.get("text_chunk_file", "kv_store_text_chunks.json"),
         hyperedge_vdb_file=dataset.get("hyperedge_vdb_file", "vdb_hyperedges.json"),
@@ -88,8 +85,8 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
         local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
-        descriptive_fallback_hyperedge_top_k=int(retrieval.get("descriptive_fallback_hyperedge_top_k", 80)),
-        descriptive_fallback_chunk_top_k=int(retrieval.get("descriptive_fallback_chunk_top_k", 20)),
+        entity_link_vector_top_k=int(retrieval.get("entity_link_vector_top_k", 1)),
+        entity_link_vector_min_score=float(retrieval.get("entity_link_vector_min_score", 0.6)),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
@@ -97,10 +94,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         model=str(llm.get("model", "gpt-4o-mini")),
         embedding_model=str(llm.get("embedding_model", "text-embedding-3-small")),
         timeout_seconds=int(llm.get("timeout_seconds", 120)),
-        max_retries=int(llm.get("max_retries", 3)),
-        retry_backoff_seconds=float(llm.get("retry_backoff_seconds", 2.0)),
         temperature=float(llm.get("temperature", 0.2)),
-        use_mock=bool(llm.get("use_mock", False)),
     )
     prompt_cfg = PromptConfig(directory=_resolve_path(project_root, prompts.get("dir", "prompts")))
     return Config(

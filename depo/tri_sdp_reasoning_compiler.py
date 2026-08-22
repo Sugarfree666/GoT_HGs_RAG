@@ -152,7 +152,7 @@ BLOCKED_PAS_RELATION_MARKERS = {
     "bracket",
 }
 
-
+#表示问题中的一个token节点
 @dataclass
 class TokenReasoningNode:
     id: str
@@ -170,7 +170,7 @@ class TokenReasoningNode:
             "is_anchor": self.is_anchor,
         }
 
-
+#两个token之间的边连接
 @dataclass
 class TokenReasoningEdge:
     source: str
@@ -180,6 +180,7 @@ class TokenReasoningEdge:
     support: float = 0.0
     edge_quality: str = "WEAK"
     consensus_count: int = 0
+    #表示这个边是否原生
     derived: bool = False
     rule: str = ""
     provenance: list[dict[str, Any]] = field(default_factory=list)
@@ -202,7 +203,7 @@ class TokenReasoningEdge:
             "edge_cost": _edge_cost(self),
         }
 
-
+#推理路径
 @dataclass
 class TokenReasoningPath:
     path_id: str
@@ -216,7 +217,7 @@ class TokenReasoningPath:
             "node_ids": list(self.node_ids),
         }
 
-
+#最终返回的对象
 @dataclass
 class TokenReasoningStructureResult:
     nodes: list[TokenReasoningNode]
@@ -268,7 +269,9 @@ class _WorkingState:
 
 
 def compile_token_reasoning_structure(
+    #上一阶段parser.parse()返回的结果
     hanlp_sdp_result: HanLPSDPResult,
+    #显示实体
     explicit_entities: list[str],
     *,
     masked_question: str | None = None,
@@ -288,12 +291,17 @@ def compile_token_reasoning_structure(
 
     # 原始 PAS 证据与修复边分开保存，确保调试输出可追溯。
     state = build_evidence_graph(hanlp_sdp_result)
+    # 找到显示实体id
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
+    #将实体节点的is_anchor设置为true
     _mark_anchors(state.nodes, explicit_entity_ids)
 
-    # PAS 常经由功能词表达关系；补充带来源记录的可审计捷径边。
+    # PAS修复
+    #介词折叠
     add_pas_preposition_contraction_edges(state)
+    #所有格折叠
     add_pas_possessive_contraction_edges(state)
+    #并列候选修复
     add_pas_coordination_candidate_attachment_edges(state, explicit_entity_ids)
 
     # 每个显式实体独立选择可达的最佳语义边界路径。
@@ -303,7 +311,7 @@ def compile_token_reasoning_structure(
     constraints: list[dict[str, Any]] = []
     candidate_sets: list[list[str]] = []
 
-    # 只返回入选路径所用证据，避免暴露完整且噪声较多的 PAS 图。
+    # 只返回最终路径出现的节点和边
     final_node_ids, final_pairs = _graph_from_selected_paths(paths)
     final_nodes = _final_nodes(state.nodes, final_node_ids)
     active_entity_ids = _active_entity_ids(state.nodes, paths)
@@ -450,7 +458,7 @@ def classify_node(text: str, index: int) -> str:
 
 def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     """构建仅含 PAS 的 token 图，并保存每条原始边的标准化来源。"""
-
+    #每一个变成TokenReasoningNode
     nodes = _build_token_nodes(hanlp_sdp_result)
     raw_edges: dict[tuple[str, str], TokenReasoningEdge] = {}
     normalized_edges: list[dict[str, Any]] = []
@@ -469,8 +477,11 @@ def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
         _ensure_edge_nodes(nodes, raw_edge)
         source_id = str(raw_edge.head_idx)
         target_id = str(raw_edge.dep_idx)
+        #根据关系给每个边打标签
         label_class = classify_label(raw_edge.relation)
+        #得到每个边的语义强度
         edge_quality = LABEL_CLASS_EDGE_QUALITY[label_class]
+        #给每个边赋值
         support = EDGE_QUALITY_SCORES[edge_quality]
         provenance = {
             "formalism": raw_edge.formalism,
@@ -554,11 +565,14 @@ def _select_entity_branch_best_paths(
     explicit_entity_ids: list[str],
 ) -> dict[str, Any]:
     """对实体到边界的可达路径评分，并保留最佳且不重复的分支。"""
-
+    #去掉一些低语义价值的节点
     boundary_degree_graph = _semantic_boundary_degree_graph(state.nodes, state.edges)
+    #找到非实体的度数为1的节点
     boundary_ids = _semantic_boundary_node_ids(state.nodes, boundary_degree_graph)
     semantic_node_ids = _semantic_degree_node_ids(state.nodes, boundary_degree_graph)
+    #构造一个用于路径搜索的图
     search_graph = _semantic_path_search_graph(state.nodes, state.edges)
+
     unsearchable_edges = _unsearchable_pas_edges(state)
 
     if not explicit_entity_ids:
@@ -581,10 +595,12 @@ def _select_entity_branch_best_paths(
             continue
         blocked_internal_ids = set(explicit_entity_ids) - {entity_id}
         candidates: list[dict[str, Any]] = []
+        #对每一个实体都找一次路径
         for boundary_id in boundary_ids:
             # 其他实体锚点可作为端点，但不能作为当前分支的隐藏中间节点。
             if boundary_id == entity_id:
                 continue
+            #使用Dijkstra寻找最短路径
             path_ids, dijkstra_cost = _shortest_semantic_boundary_path(
                 search_graph,
                 state.nodes,
@@ -631,7 +647,7 @@ def _select_entity_branch_best_paths(
             )
             candidate["sp_score"] = sp_score
             candidate["sp_components"] = sp_components
-
+        #每个实体选择最大的SP
         selected = (
             dict(max(candidates, key=lambda item: item["sp_score"]))
             if candidates
@@ -734,6 +750,7 @@ def _semantic_path_search_graph(
         ) or not _semantic_search_node_allowed(target):
             continue
         edge = edges[key]
+        #给每条边一个cost
         cost = _edge_cost(edge)
         if cost is None:
             continue
@@ -840,6 +857,7 @@ def _shortest_semantic_boundary_path(
     if source_id not in graph or target_id not in graph:
         return [], math.inf
 
+    #dijkstra
     import heapq
 
     start_key = _path_index_tuple([source_id], nodes)
@@ -883,7 +901,7 @@ def _semantic_path_score(
     branch_semantic_ids: set[str],
 ) -> tuple[float, dict[str, Any]]:
     """综合路径代价、语义覆盖和边质量，为候选路径计算 SP 分数。"""
-
+    #计算C_m(P)
     path_node_ids_without_entity = [
         node_id
         for node_id in path_ids
@@ -901,8 +919,10 @@ def _semantic_path_score(
         [node_id for node_id in branch_semantic_ids if node_id in state.nodes],
         state.nodes,
     )
+    #SP计算公式
     denominator = len(branch_semantic_node_ids) + len(path_node_ids_without_entity)
     sp_score = 2.0 * len(covered_semantic_ids) / denominator if denominator > 0 else 0.0
+
     components: dict[str, Any] = {
         "branch_semantic_node_ids": branch_semantic_node_ids,
         "branch_semantic_nodes": [
@@ -1060,6 +1080,7 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
     """连接重要的 PAS 介词论元，并保留被折叠路径的证据。"""
 
     touched: set[tuple[str, str]] = set()
+    #PREPOSITIONS记录介词
     for preposition in _sorted_nodes(state.nodes.values()):
         if preposition.text.lower() not in PREPOSITIONS:
             continue
@@ -1099,6 +1120,7 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
                     "source_edges": _edge_provenance_summaries([arg1_edge, arg2_edge]),
                     "support": support,
                 }
+                #合并边
                 _merge_edge(
                     state.edges,
                     state.nodes,
@@ -1121,6 +1143,7 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
     touched: set[tuple[str, str]] = set()
     contracted_marker_ids: set[str] = set()
     for marker in _sorted_nodes(state.nodes.values()):
+        #确认真的是所有格
         if not _is_contextual_possessive_marker(
             marker.id, state.nodes, state.raw_edges
         ):
@@ -1161,6 +1184,7 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
                     ),
                     "support": support,
                 }
+                #合并
                 _merge_edge(
                     state.edges,
                     state.nodes,
@@ -1191,6 +1215,7 @@ def add_pas_coordination_candidate_attachment_edges(
     touched: set[tuple[str, str]] = set()
     for group in _pas_coordination_candidate_groups(state, explicit):
         member_ids = group["member_ids"]
+        #找共享连接节点
         attachment = _find_syntactic_coordination_attachment(
             state,
             member_ids,

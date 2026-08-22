@@ -105,27 +105,15 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             "What nationality is ENTITYB, ENTITYA's husband?",
         )
 
-    def test_duplicate_llm_surface_is_invalid_instead_of_deduplicated(self) -> None:
-        result = ExplicitEntityExtractor(
-            DirectEntityLLM(
-                _payload([_entity("Shrek 2", "Work"), _entity("Shrek 2", "Work")])
-            )
-        ).extract("Who produced Shrek 2?")
+    def test_duplicate_llm_surface_is_reported(self) -> None:
+        with self.assertRaisesRegex(ValueError, "Duplicate explicit entity surface"):
+            ExplicitEntityExtractor(
+                DirectEntityLLM(
+                    _payload([_entity("Shrek 2", "Work"), _entity("Shrek 2", "Work")])
+                )
+            ).extract("Who produced Shrek 2?")
 
-        self.assertEqual(result.entities, [])
-        self.assertTrue(any("duplicate explicit entity surface" in warning for warning in result.warnings))
-
-    def test_case_insensitive_duplicate_surface_is_invalid(self) -> None:
-        result = ExplicitEntityExtractor(
-            DirectEntityLLM(
-                _payload([_entity("Shrek 2", "Work"), _entity("shrek 2", "Work")])
-            )
-        ).extract("Who produced Shrek 2?")
-
-        self.assertEqual(result.entities, [])
-        self.assertTrue(any("duplicate explicit entity surface='Shrek 2'" in warning for warning in result.warnings))
-
-    def test_case_insensitive_surface_match_uses_original_question_casing(self) -> None:
+    def test_entity_surface_preserves_original_question_casing(self) -> None:
         question = (
             "An Indy car race was held in the capital of the state where the performer of "
             "Mingus Plays Piano was born. Who won the race?"
@@ -134,7 +122,7 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             DirectEntityLLM(
                 _payload(
                     [
-                        _entity("Indy Car Race", "Event"),
+                        _entity("Indy car race", "Event"),
                         _entity("Mingus Plays Piano", "Work"),
                     ]
                 )
@@ -149,33 +137,26 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             result.masked_question,
             "An ENTITYA was held in the capital of the state where the performer of ENTITYB was born. Who won the race?",
         )
-        self.assertEqual(result.warnings, [])
 
-    def test_missing_surface_with_spacing_or_punctuation_difference_is_invalid(self) -> None:
-        result = ExplicitEntityExtractor(
-            DirectEntityLLM(_payload([_entity("Shrek-2", "Work")]))
-        ).extract("Who produced Shrek 2?")
+    def test_missing_surface_is_reported(self) -> None:
+        with self.assertRaisesRegex(ValueError, "not in the original question"):
+            ExplicitEntityExtractor(
+                DirectEntityLLM(_payload([_entity("Shrek-2", "Work")]))
+            ).extract("Who produced Shrek 2?")
 
-        self.assertEqual(result.entities, [])
-        self.assertTrue(
-            any("was not found in the original question" in warning for warning in result.warnings)
-        )
-
-    def test_overlapping_llm_surfaces_are_invalid_instead_of_resolved(self) -> None:
+    def test_overlapping_llm_surfaces_are_reported(self) -> None:
         question = "What nationality is Beatrice I, Countess Of Burgundy's husband?"
-        result = ExplicitEntityExtractor(
-            DirectEntityLLM(
-                _payload(
-                    [
-                        _entity("Beatrice I", "Person"),
-                        _entity("Beatrice I, Countess Of Burgundy", "Person"),
-                    ]
+        with self.assertRaisesRegex(ValueError, "Overlapping explicit entity span"):
+            ExplicitEntityExtractor(
+                DirectEntityLLM(
+                    _payload(
+                        [
+                            _entity("Beatrice I", "Person"),
+                            _entity("Beatrice I, Countess Of Burgundy", "Person"),
+                        ]
+                    )
                 )
-            )
-        ).extract(question)
-
-        self.assertEqual(result.entities, [])
-        self.assertTrue(any("overlapping explicit entity span" in warning for warning in result.warnings))
+            ).extract(question)
 
     def test_repeated_surface_reuses_one_placeholder_and_mapping(self) -> None:
         question = "Did Shrek 2 influence Shrek 2's sequel?"

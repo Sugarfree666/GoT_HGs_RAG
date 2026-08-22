@@ -152,7 +152,6 @@ def build_explicit_entity_extraction_prompt(question: str) -> str:
         "normalized_question": "the original question, or a strictly equivalent allowed structural rewrite",
         "normalization_changed": True,
         "normalization_note": "brief description of the structural rewrite, or empty string if unchanged",
-        "warnings": [],
     }
 
     return f"""
@@ -190,15 +189,6 @@ Final entity check: remove every output that is only a generic noun phrase or th
 Output JSON only, with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
-
-
-MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
-
-
-def build_mask_span_extraction_prompt(question: str) -> str:
-    """保留旧接口名称，实际复用显式实体提取提示词。"""
-
-    return build_explicit_entity_extraction_prompt(question)
 
 
 ATOMIC_QUESTION_DAG_SYSTEM = r"""

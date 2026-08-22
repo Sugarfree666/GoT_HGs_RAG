@@ -59,10 +59,6 @@ def main() -> int:
     args = parse_args()
     api_key = os.getenv("OPENAI_API_KEY") or args.api_key
     base_url = os.getenv("OPENAI_BASE_URL") or args.base_url
-    if not api_key:
-        print("Missing API key. Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
-        return 2
-
     try:
         question_files = _resolve_question_files(args)
     except (FileNotFoundError, ValueError) as exc:
@@ -241,7 +237,6 @@ def build_decomposition_payload(
                 "masked_question": preprocess_result.masked_question,
                 "hanlp_input_sentence": result.get("hanlp_input_sentence") or preprocess_result.masked_question,
                 "mask_mappings": [mapping.to_dict() for mapping in preprocess_result.mask_mappings],
-                "warnings": list(preprocess_result.warnings),
             },
             "3_hanlp_sdp_parsing": {
                 "model": result["hanlp_sdp_result"].model,
@@ -402,12 +397,6 @@ def build_markdown_report(payload: dict[str, Any], *, heading_level: int = 1) ->
             lines.append(f"- {node.get('id')}: {node.get('question')}")
             depends_on = node.get("depends_on") or []
             lines.append(f"  - depends_on: {', '.join(depends_on) if depends_on else '(none)'}")
-        dag_warnings = dag.get("warnings") or []
-        if dag_warnings:
-            lines.append("")
-            lines.append("Warnings:")
-            for warning in dag_warnings:
-                lines.append(f"- {warning}")
     lines.append("")
     return "\n".join(lines)
 
