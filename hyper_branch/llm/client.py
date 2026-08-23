@@ -61,7 +61,7 @@ class OpenAICompatibleClient:
             self.response_cache[cache_key] = content
         return content
 
-    def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
+    def embed_texts(self, texts: list[str]) -> list[np.ndarray]:
         missing = [text for text in texts if text not in self.embedding_cache]
         if missing:
             response = self._post_json(

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import logging
 import os
 import sys
 from datetime import datetime
@@ -19,7 +18,6 @@ for path in (DEPO_ROOT, PROJECT_ROOT, SCRIPTS_ROOT):
 
 
 import run_depo_decomposition_batch as depo_batch
-from hyperbranch_adapter import build_hyperbranch_dag_payload, explicit_entity_texts
 from hyper_branch.config import load_config
 from hyper_branch.pipeline import HyperBranchPipeline
 
@@ -44,7 +42,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--llm-model", default="gpt-4o-mini")
     parser.add_argument("--hyperbranch-llm-model")
     parser.add_argument("--embedding-model")
-    parser.add_argument("--hanlp-model")
     return parser.parse_args()
 
 
@@ -56,7 +53,6 @@ def main() -> int:
     if base_url:
         os.environ["OPENAI_BASE_URL"] = base_url
 
-    from atomic_question_dag import restore_global_best_paths
     from entity_masking_preprocessor import EntityMaskingPreprocessor
     from hanlp_sdp_parser import HanLPSDPParser
     from llm_client import LLMClient
@@ -65,7 +61,7 @@ def main() -> int:
 
     llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
     preprocessor = EntityMaskingPreprocessor(llm_client)
-    parser = HanLPSDPParser(args.hanlp_model)
+    parser = HanLPSDPParser()
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_root = _repo_path(args.output_root)
 
@@ -96,31 +92,21 @@ def main() -> int:
             print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {record.question}")
             decomposition = run_hanlp_sdp_pipeline(
                 record=record,
-                index=item["index"],
                 preprocessor=preprocessor,
                 parser=parser,
-                debug=False,
-                debug_dir=None,
                 llm_client=llm_client,
             )
-            question_structure = restore_global_best_paths(
-                decomposition["token_reasoning_structure"].paths,
-                decomposition["preprocess_result"].mask_mappings,
-            )
-            decomposition_payload = depo_batch.build_decomposition_payload(
-                dataset=dataset,
-                questions_file=questions_file,
-                item=item,
-                result=decomposition,
-                question_structure=question_structure,
-            )
-            dag = build_hyperbranch_dag_payload(decomposition_payload)
+            dag = decomposition["atomic_question_dag"].to_dict()
             if hyperbranch_runner is None:
                 hyperbranch_runner = _ReusableHyperBranchRunner(config_path, args)
+            #将depo算法生成的DAG给传给检索侧
             hyperbranch_result = hyperbranch_runner.run(
                 question=record.question,
                 dag=dag,
-                original_question_entities=explicit_entity_texts(decomposition_payload),
+                original_question_entities=[
+                    entity.text
+                    for entity in decomposition["preprocess_result"].explicit_entities.entities
+                ],
             )
             result = _result_payload(item, dag, hyperbranch_result)
             _write_json(result_path, result)
@@ -141,7 +127,7 @@ class _ReusableHyperBranchRunner:
             config.llm.model = args.llm_model
         if args.embedding_model:
             config.llm.embedding_model = args.embedding_model
-        self.pipeline = HyperBranchPipeline(config, logging.getLogger("hyper_branch"))
+        self.pipeline = HyperBranchPipeline(config)
 
     def run(
         self,

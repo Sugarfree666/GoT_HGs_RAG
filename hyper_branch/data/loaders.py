@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -17,48 +16,35 @@ from .vector_store import VectorStore
 class DatasetBundle:
     """一次运行内由所有原子问题共享的数据集资源。"""
 
-    root: Path
-    graph_path: Path
     graph: KnowledgeHypergraph
     text_chunks: dict[str, dict[str, Any]]
-    full_docs: dict[str, dict[str, Any]]
     entity_store: VectorStore
     hyperedge_store: VectorStore
-    chunk_store: VectorStore
-    summary: dict[str, Any]
 
     def get_chunk_text(self, chunk_id: str) -> str:
         return str(self.text_chunks.get(chunk_id, {}).get("content", ""))
-
-    def get_chunk_record(self, chunk_id: str) -> dict[str, Any]:
-        return dict(self.text_chunks.get(chunk_id, {}))
 
 
 class HypergraphDatasetLoader:
     """校验并加载检索器所需的全部磁盘资源。"""
 
-    def __init__(self, config: DatasetConfig, logger: logging.Logger) -> None:
+    def __init__(self, config: DatasetConfig) -> None:
         self.config = config
-        self.logger = logger
 
     def load(self) -> DatasetBundle:
         """一次加载图和向量索引，并返回用于记录产物的数据集摘要。"""
 
         root = self.config.root
         graph_path = self._resolve_graph_path(root)
-        self.logger.info("Loading dataset from %s", root)
-        self.logger.info("Using GraphML file %s", graph_path.name)
 
         # 文本记录和全部向量库必须对应同一份图快照。
         text_chunks = self._load_json(root / self.config.text_chunk_file)
-        full_docs = self._load_json(root / self.config.full_doc_file)
         entity_vdb_path = root / self.config.entity_vdb_file
         if not entity_vdb_path.is_file():
             raise FileNotFoundError(
                 f"Entity-name vector store does not exist: {entity_vdb_path}. "
                 "Build or copy vdb_entity_names.json before running retrieval."
             )
-        self.logger.info("Using entity-name vector store %s", entity_vdb_path.name)
         graph = KnowledgeHypergraph.from_graphml(graph_path)
         entity_store = VectorStore.from_json(entity_vdb_path, name="entity_names", label_fields=("entity_name",))
         hyperedge_store = VectorStore.from_json(
@@ -66,29 +52,11 @@ class HypergraphDatasetLoader:
             name="hyperedges",
             label_fields=("hyperedge_name",),
         )
-        chunk_store = VectorStore.from_json(root / self.config.chunk_vdb_file, name="chunks", label_fields=("__id__",))
-
-        summary = {
-            "dataset_root": str(root),
-            "graphml_file": graph_path.name,
-            "doc_count": len(full_docs),
-            "chunk_count": len(text_chunks),
-            "entity_vector_file": entity_vdb_path.name,
-            "entity_vector_count": len(entity_store.rows),
-            "hyperedge_vector_count": len(hyperedge_store.rows),
-            "chunk_vector_count": len(chunk_store.rows),
-            "graph": graph.summarize(),
-        }
         return DatasetBundle(
-            root=root,
-            graph_path=graph_path,
             graph=graph,
             text_chunks=text_chunks,
-            full_docs=full_docs,
             entity_store=entity_store,
             hyperedge_store=hyperedge_store,
-            chunk_store=chunk_store,
-            summary=summary,
         )
 
     def _resolve_graph_path(self, root: Path) -> Path:

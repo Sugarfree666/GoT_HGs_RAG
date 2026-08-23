@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import logging
 import tempfile
 import unittest
 from pathlib import Path
@@ -19,7 +18,7 @@ class HypergraphDatasetLoaderTest(unittest.TestCase):
             (root / "kv_store_full_docs.json").write_text(json.dumps({}), encoding="utf-8")
             (root / "vdb_entities.json").write_text(json.dumps({}), encoding="utf-8")
 
-            loader = HypergraphDatasetLoader(DatasetConfig(root=root), logging.getLogger(__name__))
+            loader = HypergraphDatasetLoader(DatasetConfig(root=root))
 
             with self.assertRaisesRegex(FileNotFoundError, "vdb_entity_names.json"):
                 loader.load()

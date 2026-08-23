@@ -5,8 +5,8 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from hyper_branch.atomic.executor import AtomicDagExecutor, DagCycleError
-from hyper_branch.atomic.models import AtomicQuestionAnalysis, AtomicQuestionNode
+from hyper_branch.atomic.executor import AtomicDagExecutor
+from hyper_branch.atomic.models import AtomicQuestionAnalysis
 from hyper_branch.atomic.retriever import AtomicHyperedgeRetriever
 from hyper_branch.config import RetrievalConfig
 from hyper_branch.models import GraphNode, VectorMatch
@@ -22,15 +22,11 @@ class AtomicPipelineTest(unittest.TestCase):
             scores={"H1": 0.2, "H2": 0.9},
         )
 
-        pool = retriever.build_atomic_candidate_pool(
-            question="What is connected to A?",
+        pool = retriever.build_candidate_pool(
             analysis=AtomicQuestionAnalysis(entities=["A"]),
-            primary_anchor_mention="A",
         )
         ranked = retriever.rank_candidate_pool(pool, question="What is connected to A?")
 
-        self.assertEqual(pool.adjacent_hyperedge_ids, ["H1"])
-        self.assertEqual(pool.second_hop_hyperedge_ids, ["H2"])
         self.assertEqual([item.hyperedge_id for item in ranked.evidence], ["H2", "H1"])
 
     def test_vector_entity_linking_is_used_when_no_exact_name_exists(self) -> None:
@@ -41,14 +37,11 @@ class AtomicPipelineTest(unittest.TestCase):
             entity_store=store,
         )
 
-        pool = retriever.build_atomic_candidate_pool(
-            question="Question about alias",
+        pool = retriever.build_candidate_pool(
             analysis=AtomicQuestionAnalysis(entities=["alias"]),
-            primary_anchor_mention="alias",
         )
 
-        self.assertEqual(pool.linked_entity_id, "A")
-        self.assertEqual(pool.anchor_match["match_type"], "vector")
+        self.assertEqual(pool.candidate_hyperedge_ids, ["H1"])
         self.assertEqual(store.calls, 1)
 
     def test_missing_anchor_reports_insufficient_evidence_without_global_fallback(self) -> None:
@@ -57,16 +50,13 @@ class AtomicPipelineTest(unittest.TestCase):
             scores={"H1": 1.0},
         )
 
-        pool = retriever.build_atomic_candidate_pool(
-            question="No named entity",
+        pool = retriever.build_candidate_pool(
             analysis=AtomicQuestionAnalysis(),
-            primary_anchor_mention="",
         )
 
-        self.assertEqual(pool.insufficient_reason, "missing_primary_anchor")
         self.assertEqual(pool.candidate_hyperedge_ids, [])
 
-    def test_executor_uses_validated_dag_dependency_rewrite_and_shared_pool(self) -> None:
+    def test_executor_uses_dependency_rewrite_and_shared_pool(self) -> None:
         graph = LocalGraph(
             entity_edges={"A": ["H1"], "B": ["H2"]},
             hyperedge_entities={"H1": ["A", "B"], "H2": ["B"]},
@@ -94,36 +84,7 @@ class AtomicPipelineTest(unittest.TestCase):
         self.assertEqual([item.answer for item in result.atomic_results], ["B", "Place"])
         self.assertEqual(result.atomic_results[1].question, "Where was B recorded?")
         self.assertEqual(result.final_answer["answer"], "Place")
-        self.assertEqual(result.atomic_results[1].used_hyperedge_ids, ["H2"])
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "B")
-
-    def test_executor_rejects_invalid_dag_instead_of_repairing_it(self) -> None:
-        executor = AtomicDagExecutor(
-            analyzer=QuestionAnalyzer({}),
-            retriever=_retriever(
-                graph=LocalGraph(entity_edges={"A": ["H1"]}, hyperedge_entities={"H1": ["A"]}),
-                scores={"H1": 1.0},
-            ),
-            llm_service=RecordingLLMService(),
-        )
-        dag = {
-            "nodes": [
-                {"id": "q1", "question": "First", "depends_on": [], "operation": "lookup"},
-                {"id": "q2", "question": "Second", "depends_on": [], "operation": "lookup"},
-            ]
-        }
-
-        with self.assertRaisesRegex(ValueError, "one final terminal leaf"):
-            executor.run("Question", dag)
-
-    def test_topological_sort_rejects_cycles(self) -> None:
-        nodes = [
-            AtomicQuestionNode("q1", "one", ["q2"]),
-            AtomicQuestionNode("q2", "two", ["q1"]),
-        ]
-        with self.assertRaises(DagCycleError):
-            AtomicDagExecutor.topological_sort(nodes)
-
 
 class QuestionAnalyzer:
     def __init__(self, entities_by_question: dict[str, list[str]]) -> None:
@@ -141,7 +102,6 @@ class RecordingLLMService:
     def answer_atomic_question(
         self,
         atomic_question: str,
-        answer_contract: dict[str, object],
         dependency_answers: list[dict[str, object]],
         evidence: dict[str, list[dict[str, object]]],
         original_question: str = "",
@@ -149,7 +109,6 @@ class RecordingLLMService:
         self.answer_calls.append(
             {
                 "atomic_question": atomic_question,
-                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
                 "evidence": evidence,
                 "original_question": original_question,
@@ -174,7 +133,7 @@ class LocalGraph:
         entity_ids = set(entity_edges)
         entity_ids.update(entity for values in hyperedge_entities.values() for entity in values)
         self.nodes = {
-            entity_id: GraphNode(entity_id, "entity", description=f"{entity_id} description")
+            entity_id: GraphNode(entity_id, "entity")
             for entity_id in entity_ids
         }
         self.nodes.update(
@@ -226,7 +185,7 @@ class EntityStore:
 
 
 class Embedder:
-    def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
+    def embed_texts(self, texts: list[str]) -> list[np.ndarray]:
         return [np.ones(3, dtype=np.float32) for _ in texts]
 
 

@@ -1,13 +1,12 @@
-"""Execute a validated DEPO atomic-question DAG over local hypergraph evidence."""
+"""Execute a DEPO atomic-question DAG over HyperBranch evidence."""
 
 from __future__ import annotations
 
-from typing import Any, Iterable
+import re
+from typing import Any
 
-from ..llm.service import AtomicLLMService
-from ..utils import normalize_label
+from ..llm.service import OpenAIAtomicLLMService
 from .analyzer import AtomicQuestionAnalyzer
-from .dependency_rewrite import resolve_dependency_question
 from .models import (
     AtomicAnswerResult,
     AtomicQuestionAnalysis,
@@ -18,16 +17,14 @@ from .models import (
 from .retriever import AtomicHyperedgeRetriever, LocalHyperedgeRetrievalResult
 
 
-class DagCycleError(ValueError):
-    pass
-
-
 class AtomicDagExecutor:
+    """Execute DEPO's atomic questions in dependency order."""
+
     def __init__(
         self,
         analyzer: AtomicQuestionAnalyzer,
         retriever: AtomicHyperedgeRetriever,
-        llm_service: AtomicLLMService,
+        llm_service: OpenAIAtomicLLMService,
     ) -> None:
         self.analyzer = analyzer
         self.retriever = retriever
@@ -37,229 +34,156 @@ class AtomicDagExecutor:
         self,
         original_question: str,
         dag_payload: dict[str, Any],
-        original_question_entities: list[str] | None = None,
+        original_question_entities: list[str],
     ) -> DagExecutionResult:
-        nodes = self.normalize_dag_payload(dag_payload)
+        #将字典对象转换成原子问题节点对象
+        nodes = [
+            AtomicQuestionNode(item["id"], item["question"], item["depends_on"])
+            for item in dag_payload["nodes"]
+        ]
+        #进行拓扑排序
         order = self.topological_sort(nodes)
-        self.validate_terminal_leaf(order)
-
-        original_analysis = self._original_question_analysis(
-            original_question,
-            original_question_entities,
-        )
-        shared_pool = self.retriever.build_original_question_candidate_pool(
-            question=original_question,
+        #分析原问题
+        original_analysis = AtomicQuestionAnalysis(entities=original_question_entities)
+        #对原问题建立一个共享候选池
+        shared_pool = self.retriever.build_candidate_pool(
             analysis=original_analysis,
-            primary_anchor_mention=_primary_anchor_mention([], original_analysis),
         )
+        #保存执行状态
         results_by_id: dict[str, AtomicAnswerResult] = {}
+        #保存每个节点自己的检索结果
         local_pools: dict[str, LocalHyperedgeRetrievalResult] = {}
-
+        
         dependencies_by_id = {node.node_id: node.dependencies for node in order}
-        ordered_ids = [node.node_id for node in order]
+        positions = {node.node_id: index for index, node in enumerate(order)}
+
         for node in order:
-            dependency_answers = self._dependency_context(node.dependencies, results_by_id)
-            rewrite = resolve_dependency_question(node.question, dependency_answers)
-            question = rewrite.retrieval_question
-            analysis = self.analyzer.analyze(question, self._compact_dependencies(dependency_answers))
-            local_pool = self.retriever.build_atomic_candidate_pool(
-                question=question,
+            dependency_answers = [
+                {
+                    "node_id": results_by_id[dependency_id].node_id,
+                    "question": results_by_id[dependency_id].question,
+                    "answer": results_by_id[dependency_id].answer,
+                }
+                for dependency_id in node.dependencies
+            ]
+            #重写问题
+            question, dependency_entities = self._rewrite_dependency_question(
+                node.question,
+                dependency_answers,
+            )
+            #识别原子问题的实体
+            analysis = self.analyzer.analyze(question, dependency_answers)
+            analysis.entities = dependency_entities[:1] + analysis.entities
+            #得到原子问题的超边候选池
+            local_pool = self.retriever.build_candidate_pool(
                 analysis=analysis,
-                primary_anchor_mention=_primary_anchor_mention(rewrite.primary_anchor_entities, analysis),
             )
-            ancestor_ids = self._transitive_ancestor_node_ids(
-                node.node_id,
-                dependencies_by_id=dependencies_by_id,
-                topological_node_ids=ordered_ids,
+            #合并祖先问题和原问题候选池
+            shared_pool_for_node = self._active_shared_candidate_pool(
+                shared_pool,
+                self._ancestor_ids(node.node_id, dependencies_by_id, positions),
+                local_pools,
             )
-            active_shared_pool = self._active_shared_candidate_pool(shared_pool, ancestor_ids, local_pools)
+            #合并全部候选池
             retrieval = self.retriever.merge_candidate_pools(
-                shared_pool=active_shared_pool,
+                shared_pool=shared_pool_for_node,
                 local_pool=local_pool,
             )
+            #排序
             retrieval = self.retriever.rank_candidate_pool(retrieval, question=question)
-            answer_payload = self._answer_atomic_question(
-                original_question=original_question,
+            answer = self.llm_service.answer_atomic_question(
                 atomic_question=question,
-                evidence=retrieval.evidence,
                 dependency_answers=dependency_answers,
-            )
-            result = AtomicAnswerResult(
+                evidence=self._evidence_payload(retrieval.evidence),
+                original_question=original_question,
+            )["answer"]
+            results_by_id[node.node_id] = AtomicAnswerResult(
                 node_id=node.node_id,
                 question=question,
-                answer=answer_payload["answer"],
-                used_dependencies=list(node.dependencies),
-                used_hyperedge_ids=self._used_hyperedge_ids(answer_payload, retrieval.evidence),
-                insufficient=answer_payload["insufficient"],
+                answer=answer,
             )
-            results_by_id[node.node_id] = result
+            #供后续节点集成
             local_pools[node.node_id] = local_pool
 
         atomic_results = [results_by_id[node.node_id] for node in order]
-        final_answer = self._final_answer(atomic_results[-1], atomic_results)
         return DagExecutionResult(
             atomic_results=atomic_results,
-            final_answer=final_answer,
+            final_answer={"answer": atomic_results[-1].answer},
         )
-
-    @staticmethod
-    def normalize_dag_payload(payload: dict[str, Any]) -> list[AtomicQuestionNode]:
-        raw_nodes = payload["nodes"]
-        if not isinstance(raw_nodes, list) or not raw_nodes:
-            raise ValueError("Atomic DAG requires a non-empty nodes list.")
-        nodes: list[AtomicQuestionNode] = []
-        for item in raw_nodes:
-            node_id = str(item["id"]).strip()
-            question = str(item["question"]).strip()
-            dependencies = [str(dependency).strip() for dependency in item["depends_on"]]
-            if not node_id or not question:
-                raise ValueError("Atomic DAG nodes require non-empty id and question fields.")
-            nodes.append(
-                AtomicQuestionNode(
-                    node_id=node_id,
-                    question=question,
-                    dependencies=dependencies,
-                    metadata={"operation": str(item["operation"])},
-                )
-            )
-        return nodes
 
     @staticmethod
     def topological_sort(nodes: list[AtomicQuestionNode]) -> list[AtomicQuestionNode]:
+        """Order atomic questions so that every dependency is answered first."""
+        #得到by_id={"q1": AtomicQuestionNode(q1)}
         by_id = {node.node_id: node for node in nodes}
-        if len(by_id) != len(nodes):
-            raise ValueError("Atomic DAG contains duplicate node IDs.")
-        unknown = sorted(
-            dependency
-            for node in nodes
-            for dependency in node.dependencies
-            if dependency not in by_id
-        )
-        if unknown:
-            raise ValueError(f"Atomic DAG contains unknown dependencies: {unknown}")
-
+        #建立依赖图，一个空字典
         dependents = {node.node_id: [] for node in nodes}
+        #计算入度
         indegree = {node.node_id: len(node.dependencies) for node in nodes}
+        #建立依赖关系
         for node in nodes:
-            for dependency in node.dependencies:
-                dependents[dependency].append(node.node_id)
+            for dependency_id in node.dependencies:
+                dependents[dependency_id].append(node.node_id)
+        #找到没有依赖的节点
         ready = [node.node_id for node in nodes if not indegree[node.node_id]]
+        #创建拓扑排序结果列表
         order: list[AtomicQuestionNode] = []
+        #只要还存在入度为0的节点
         while ready:
             node_id = ready.pop(0)
             order.append(by_id[node_id])
+            #更新度数
             for dependent_id in dependents[node_id]:
                 indegree[dependent_id] -= 1
+                #如果依赖全部解决
                 if not indegree[dependent_id]:
                     ready.append(dependent_id)
-        if len(order) != len(nodes):
-            raise DagCycleError("Atomic DAG contains a cycle.")
         return order
 
     @staticmethod
-    def validate_terminal_leaf(nodes: list[AtomicQuestionNode]) -> None:
-        dependents = {node.node_id: [] for node in nodes}
-        for node in nodes:
-            for dependency in node.dependencies:
-                dependents[dependency].append(node.node_id)
-        leaves = [node.node_id for node in nodes if not dependents[node.node_id]]
-        if len(leaves) != 1 or leaves[0] != nodes[-1].node_id:
-            raise ValueError("Atomic DAG must have one final terminal leaf.")
-        terminal_id = leaves[0]
-        disconnected = [
-            node.node_id
-            for node in nodes
-            if node.node_id != terminal_id and not _can_reach_terminal(node.node_id, terminal_id, dependents)
-        ]
-        if disconnected:
-            raise ValueError(f"Atomic DAG nodes must reach the terminal node: {disconnected}")
-
-    def _original_question_analysis(
-        self,
+    def _rewrite_dependency_question(
         question: str,
-        original_question_entities: list[str] | None,
-    ) -> AtomicQuestionAnalysis:
-        entities = _clean_entity_mentions(original_question_entities or [])
-        if entities:
-            return AtomicQuestionAnalysis(entities=entities)
-        return self.analyzer.analyze(question, [])
-
-    @staticmethod
-    def _dependency_context(
-        dependency_ids: list[str],
-        results_by_id: dict[str, AtomicAnswerResult],
-    ) -> list[dict[str, Any]]:
-        return [
-            {
-                "node_id": result.node_id,
-                "question": result.question,
-                "answer": result.answer,
-                "insufficient": result.insufficient,
-            }
-            for dependency_id in dependency_ids
-            for result in [results_by_id[dependency_id]]
-        ]
-
-    @staticmethod
-    def _compact_dependencies(dependencies: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        return [
-            {
-                "node_id": item["node_id"],
-                "question": item["question"],
-                "answer": item["answer"],
-                "insufficient": item["insufficient"],
-            }
-            for item in dependencies
-        ]
-
-    def _answer_atomic_question(
-        self,
-        *,
-        original_question: str,
-        atomic_question: str,
-        evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        payload = self.llm_service.answer_atomic_question(
-            atomic_question=atomic_question,
-            answer_contract=self._answer_contract(atomic_question),
-            dependency_answers=self._compact_dependencies(dependency_answers),
-            evidence=self._answer_evidence_payload(evidence),
-            original_question=original_question,
-        )
-        answer = str(payload["answer"]).strip()
-        return {
-            "answer": answer or "INSUFFICIENT_EVIDENCE",
-            "insufficient": answer.upper() == "INSUFFICIENT_EVIDENCE" or not answer,
-        }
+    ) -> tuple[str, list[str]]:
+        """Replace qN answer references with already computed answers."""
+        rewritten = question
+        #保存替换进去的答案实体
+        anchors: list[str] = []
+        for dependency in dependency_answers:
+            #获取答案
+            answer = str(dependency["answer"]).strip()
+            pattern = rf"\b{re.escape(dependency['node_id'])}(?:\s+answer|['\u2019]s\s+answer)\b"
+            #查找位置
+            matches = list(re.finditer(pattern, rewritten, flags=re.IGNORECASE))
+            #倒序替换
+            for match in reversed(matches):
+                rewritten = f"{rewritten[:match.start()]}{answer}{rewritten[match.end():]}"
+            if matches and answer not in anchors:
+                anchors.append(answer)
+        return rewritten, anchors
 
-    @staticmethod
-    def _answer_contract(question: str) -> dict[str, str]:
-        lowered = question.strip().lower()
-        if lowered.startswith(("is ", "are ", "was ", "were ", "do ", "does ", "did ")):
-            return {"output_format": "yes or no"}
-        if lowered.startswith("what year"):
-            return {"output_format": "year only"}
-        if lowered.startswith(("when ", "date of")):
-            return {"output_format": "supported date"}
-        return {"output_format": "short answer"}
-
-    def _answer_evidence_payload(
+    #用于整理结构化证据给LLM
+    def _evidence_payload(
         self,
         evidence: list[FusedHyperedgeCandidate],
     ) -> dict[str, list[dict[str, Any]]]:
+        """Merge retrieved hyperedges into the evidence blocks given to the LLM."""
+
         blocks: list[dict[str, Any]] = []
-        by_chunk_id: dict[str, dict[str, Any]] = {}
+        blocks_by_chunk_id: dict[str, dict[str, Any]] = {}
         for rank, candidate in enumerate(evidence, start=1):
-            hyperedge = {"hyperedge_id": f"H{rank}", "hyperedge_text": candidate.hyperedge_text}
-            first_hop_ids = candidate.score_breakdown.get("via_first_hyperedge_ids", [])
-            if first_hop_ids:
-                hyperedge["first_hop_hyperedge_text"] = self.retriever.dataset.graph.describe_hyperedge(
-                    first_hop_ids[0]
-                )["hyperedge_text"]
-            chunks = _candidate_chunks(candidate) or [(f"__{rank}", "")]
-            for chunk_id, text in chunks:
-                block = by_chunk_id.get(chunk_id)
+            hyperedge = {
+                "hyperedge_id": f"H{rank}",
+                "hyperedge_text": candidate.hyperedge_text,
+            }
+            if candidate.first_hop_hyperedge_ids:
+                hyperedge["first_hop_hyperedge_text"] = (
+                    self.retriever.dataset.graph.describe_hyperedge(
+                        candidate.first_hop_hyperedge_ids[0]
+                    )["hyperedge_text"]
+                )
+            for chunk_id, text in _candidate_chunks(candidate) or [(f"__{rank}", "")]:
+                block = blocks_by_chunk_id.get(chunk_id)
                 if block is None:
                     title, _, body = text.partition("\n")
                     block = {
@@ -268,19 +192,10 @@ class AtomicDagExecutor:
                         "text": body.strip() or title.strip(),
                         "hyperedges": [],
                     }
-                    by_chunk_id[chunk_id] = block
+                    blocks_by_chunk_id[chunk_id] = block
                     blocks.append(block)
                 block["hyperedges"].append(hyperedge)
         return {"evidence_blocks": blocks}
-
-    @staticmethod
-    def _used_hyperedge_ids(
-        answer_payload: dict[str, Any],
-        evidence: list[FusedHyperedgeCandidate],
-    ) -> list[str]:
-        if answer_payload["insufficient"] or not evidence:
-            return []
-        return [evidence[0].hyperedge_id]
 
     def _active_shared_candidate_pool(
         self,
@@ -289,6 +204,7 @@ class AtomicDagExecutor:
         local_pools: dict[str, LocalHyperedgeRetrievalResult],
     ) -> LocalHyperedgeRetrievalResult:
         pool = original_pool
+        #合并祖先节点证据
         for node_id in ancestor_ids:
             pool = self.retriever.merge_candidate_pools(
                 shared_pool=pool,
@@ -297,80 +213,24 @@ class AtomicDagExecutor:
         return pool
 
     @staticmethod
-    def _transitive_ancestor_node_ids(
+    #找到DAG 中某个节点的所有祖先节点，并按照执行顺序排序。
+    def _ancestor_ids(
         node_id: str,
-        *,
         dependencies_by_id: dict[str, list[str]],
-        topological_node_ids: list[str],
+        #拓扑排序后的位置
+        positions: dict[str, int],
     ) -> list[str]:
         ancestors: set[str] = set()
-
+        #深度优先搜索
         def visit(current_id: str) -> None:
-            for dependency in dependencies_by_id[current_id]:
-                if dependency not in ancestors:
-                    ancestors.add(dependency)
-                    visit(dependency)
+            for dependency_id in dependencies_by_id[current_id]:
+                if dependency_id not in ancestors:
+                    ancestors.add(dependency_id)
+                    visit(dependency_id)
 
         visit(node_id)
-        positions = {node_id: index for index, node_id in enumerate(topological_node_ids)}
         return sorted(ancestors, key=positions.__getitem__)
-
-    @staticmethod
-    def _final_answer(
-        terminal: AtomicAnswerResult,
-        results: list[AtomicAnswerResult],
-    ) -> dict[str, Any]:
-        return {
-            "answer": terminal.answer,
-            "source_node_id": terminal.node_id,
-            "used_hyperedge_ids": terminal.used_hyperedge_ids,
-            "insufficient": terminal.insufficient,
-            "atomic_answer_trace": [
-                {
-                    "node_id": result.node_id,
-                    "answer": result.answer,
-                    "used_hyperedge_ids": result.used_hyperedge_ids,
-                    "insufficient": result.insufficient,
-                }
-                for result in results
-            ],
-        }
-
-
-def _primary_anchor_mention(primary_entities: Iterable[str], analysis: AtomicQuestionAnalysis) -> str:
-    for entity in [*primary_entities, *analysis.entities]:
-        text = normalize_label(str(entity).strip())
-        if text:
-            return text
-    return ""
 
 
 def _candidate_chunks(candidate: FusedHyperedgeCandidate) -> list[tuple[str, str]]:
-    chunks: list[tuple[str, str]] = []
-    for index, chunk_id in enumerate(candidate.chunk_ids):
-        text = candidate.chunk_texts[index] if index < len(candidate.chunk_texts) else ""
-        if chunk_id not in [item[0] for item in chunks]:
-            chunks.append((chunk_id, text))
-    return chunks
-
-
-def _clean_entity_mentions(values: Iterable[str]) -> list[str]:
-    entities: list[str] = []
-    for value in values:
-        entity = normalize_label(str(value).strip())
-        if entity and entity.lower() not in {item.lower() for item in entities}:
-            entities.append(entity)
-    return entities
-
-
-def _can_reach_terminal(start_id: str, terminal_id: str, dependents: dict[str, list[str]]) -> bool:
-    pending = list(dependents[start_id])
-    seen: set[str] = set()
-    while pending:
-        node_id = pending.pop()
-        if node_id == terminal_id:
-            return True
-        if node_id not in seen:
-            seen.add(node_id)
-            pending.extend(dependents[node_id])
-    return False
+    return list(dict.fromkeys(zip(candidate.chunk_ids, candidate.chunk_texts)))

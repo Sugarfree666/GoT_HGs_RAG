@@ -2,35 +2,13 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
 from typing import Any
 
 from .client import OpenAICompatibleClient
 from .prompts import PromptManager
 
 
-class AtomicLLMService(ABC):
-    @abstractmethod
-    def analyze_atomic_question(
-        self,
-        atomic_question: str,
-        dependency_answers: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-    @abstractmethod
-    def answer_atomic_question(
-        self,
-        atomic_question: str,
-        answer_contract: dict[str, Any],
-        dependency_answers: list[dict[str, Any]],
-        evidence: dict[str, list[dict[str, Any]]],
-        original_question: str = "",
-    ) -> dict[str, Any]:
-        raise NotImplementedError
-
-
-class OpenAIAtomicLLMService(AtomicLLMService):
+class OpenAIAtomicLLMService:
     def __init__(self, client: OpenAICompatibleClient, prompts: PromptManager) -> None:
         self.client = client
         self.prompts = prompts
@@ -51,7 +29,6 @@ class OpenAIAtomicLLMService(AtomicLLMService):
     def answer_atomic_question(
         self,
         atomic_question: str,
-        answer_contract: dict[str, Any],
         dependency_answers: list[dict[str, Any]],
         evidence: dict[str, list[dict[str, Any]]],
         original_question: str = "",
@@ -62,7 +39,6 @@ class OpenAIAtomicLLMService(AtomicLLMService):
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,
-                "answer_contract": answer_contract,
                 "dependency_answers": dependency_answers,
                 "evidence_blocks": _answer_evidence_blocks(evidence),
             },

@@ -23,7 +23,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         result = ExplicitEntityExtractor(llm).extract(question)
 
         self.assertEqual([entity.text for entity in result.entities], ["Shrek 2"])
-        self.assertEqual(result.entities[0].start_char, question.index("Shrek 2"))
         self.assertNotIn("Candidate spans", llm.user_prompt)
         self.assertNotIn("candidate_id", llm.user_prompt)
         self.assertNotIn("verified_entities", llm.user_prompt)
@@ -42,10 +41,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
                 ).extract(question)
 
                 self.assertEqual([entity.text for entity in result.entities], [title])
-                self.assertEqual(
-                    (result.entities[0].start_char, result.entities[0].end_char),
-                    (question.index(title), question.index(title) + len(title)),
-                )
 
     def test_independent_coordinated_entities_are_masked_separately(self) -> None:
         question = "Are Marufabad and Nasamkhrali both located in the same country?"
@@ -105,14 +100,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             "What nationality is ENTITYB, ENTITYA's husband?",
         )
 
-    def test_duplicate_llm_surface_is_reported(self) -> None:
-        with self.assertRaisesRegex(ValueError, "Duplicate explicit entity surface"):
-            ExplicitEntityExtractor(
-                DirectEntityLLM(
-                    _payload([_entity("Shrek 2", "Work"), _entity("Shrek 2", "Work")])
-                )
-            ).extract("Who produced Shrek 2?")
-
     def test_entity_surface_preserves_original_question_casing(self) -> None:
         question = (
             "An Indy car race was held in the capital of the state where the performer of "
@@ -137,26 +124,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             result.masked_question,
             "An ENTITYA was held in the capital of the state where the performer of ENTITYB was born. Who won the race?",
         )
-
-    def test_missing_surface_is_reported(self) -> None:
-        with self.assertRaisesRegex(ValueError, "not in the original question"):
-            ExplicitEntityExtractor(
-                DirectEntityLLM(_payload([_entity("Shrek-2", "Work")]))
-            ).extract("Who produced Shrek 2?")
-
-    def test_overlapping_llm_surfaces_are_reported(self) -> None:
-        question = "What nationality is Beatrice I, Countess Of Burgundy's husband?"
-        with self.assertRaisesRegex(ValueError, "Overlapping explicit entity span"):
-            ExplicitEntityExtractor(
-                DirectEntityLLM(
-                    _payload(
-                        [
-                            _entity("Beatrice I", "Person"),
-                            _entity("Beatrice I, Countess Of Burgundy", "Person"),
-                        ]
-                    )
-                )
-            ).extract(question)
 
     def test_repeated_surface_reuses_one_placeholder_and_mapping(self) -> None:
         question = "Did Shrek 2 influence Shrek 2's sequel?"
@@ -193,15 +160,11 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
                 _payload(
                     [_entity("An Event", "Work")],
                     normalized_question=normalized,
-                    normalization_changed=True,
-                    normalization_note="Expanded the nested relation.",
                 )
             )
         ).extract(question)
 
         self.assertEqual(result.normalized_question, normalized)
-        self.assertTrue(result.normalization_changed)
-        self.assertEqual(result.normalization_note, "Expanded the nested relation.")
 
     def test_implicit_attribute_ownership_normalization_payload_is_preserved(self) -> None:
         question = "What nationality is Lamprocles's father?"
@@ -211,14 +174,11 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
                 _payload(
                     [_entity("Lamprocles", "Person")],
                     normalized_question=normalized,
-                    normalization_changed=True,
-                    normalization_note="Made the attribute ownership explicit.",
                 )
             )
         ).extract(question)
 
         self.assertEqual(result.normalized_question, normalized)
-        self.assertTrue(result.normalization_changed)
         self.assertIn(result.entities[0].text, result.normalized_question)
 
     def test_explicit_attribute_relation_normalization_payload_remains_unchanged(self) -> None:
@@ -230,7 +190,6 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         ).extract(question)
 
         self.assertEqual(result.normalized_question, question)
-        self.assertFalse(result.normalization_changed)
 
 
 class ExplicitEntityPromptTest(unittest.TestCase):
@@ -384,16 +343,11 @@ def _entity(surface: str, entity_type: str) -> dict[str, str]:
 def _payload(
     entities: list[dict[str, str]],
     *,
-    normalized_question: str | None = None,
-    normalization_changed: bool = False,
-    normalization_note: str = "",
+    normalized_question: str = "",
 ) -> dict[str, object]:
     return {
         "explicit_entities": entities,
         "normalized_question": normalized_question,
-        "normalization_changed": normalization_changed,
-        "normalization_note": normalization_note,
-        "warnings": [],
     }
 
 

@@ -16,6 +16,7 @@ class PromptManager:
         """读取并缓存指定名称的 Markdown 提示词。"""
 
         if name not in self._cache:
+            #构造文件路径
             path = self.prompt_dir / f"{name}.md"
             self._cache[name] = path.read_text(encoding="utf-8")
         return self._cache[name]

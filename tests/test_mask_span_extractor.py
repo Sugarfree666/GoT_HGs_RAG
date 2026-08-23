@@ -16,7 +16,10 @@ from mask_span_extractor import ExplicitEntityExtractor  # noqa: E402
 
 class EmptyEntityLLM:
     def chat_json(self, _system_prompt: str, _prompt: str) -> dict[str, Any]:
-        return {"explicit_entities": []}
+        return {
+            "explicit_entities": [],
+            "normalized_question": "When was the region around Blue Valley created?",
+        }
 
 
 class ExplicitEntityExtractorTest(unittest.TestCase):

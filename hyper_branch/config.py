@@ -12,17 +12,9 @@ import yaml
 class DatasetConfig:
     root: Path
     graphml_file: str = "graph_chunk_entity_relation.graphml"
-    full_doc_file: str = "kv_store_full_docs.json"
     text_chunk_file: str = "kv_store_text_chunks.json"
     hyperedge_vdb_file: str = "vdb_hyperedges.json"
     entity_vdb_file: str = "vdb_entity_names.json"
-    chunk_vdb_file: str = "vdb_chunks.json"
-
-
-@dataclass(slots=True)
-class RuntimeConfig:
-    base_run_dir: Path
-    log_level: str = "INFO"
 
 
 @dataclass(slots=True)
@@ -50,9 +42,7 @@ class PromptConfig:
 
 @dataclass(slots=True)
 class Config:
-    project_root: Path
     dataset: DatasetConfig
-    runtime: RuntimeConfig
     retrieval: RetrievalConfig
     llm: LLMConfig
     prompts: PromptConfig
@@ -63,7 +53,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
 
     raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     dataset = raw.get("dataset", {})
-    runtime = raw.get("runtime", {})
     retrieval = raw.get("retrieval", {})
     llm = raw.get("llm", {})
     prompts = raw.get("prompts", {})
@@ -72,15 +61,9 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     dataset_cfg = DatasetConfig(
         root=_resolve_path(project_root, dataset.get("root", "datasets/agriculture")),
         graphml_file=str(dataset.get("graphml_file", "graph_chunk_entity_relation.graphml")),
-        full_doc_file=dataset.get("full_doc_file", "kv_store_full_docs.json"),
         text_chunk_file=dataset.get("text_chunk_file", "kv_store_text_chunks.json"),
         hyperedge_vdb_file=dataset.get("hyperedge_vdb_file", "vdb_hyperedges.json"),
         entity_vdb_file=dataset.get("entity_vdb_file", "vdb_entity_names.json"),
-        chunk_vdb_file=dataset.get("chunk_vdb_file", "vdb_chunks.json"),
-    )
-    runtime_cfg = RuntimeConfig(
-        base_run_dir=_resolve_path(project_root, runtime.get("base_run_dir", "runs")),
-        log_level=str(runtime.get("log_level", "INFO")).upper(),
     )
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
@@ -98,9 +81,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     )
     prompt_cfg = PromptConfig(directory=_resolve_path(project_root, prompts.get("dir", "prompts")))
     return Config(
-        project_root=project_root,
         dataset=dataset_cfg,
-        runtime=runtime_cfg,
         retrieval=retrieval_cfg,
         llm=llm_cfg,
         prompts=prompt_cfg,

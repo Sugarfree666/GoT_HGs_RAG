@@ -1,6 +1,5 @@
 ﻿from __future__ import annotations
 
-import logging
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -23,7 +22,7 @@ class PipelineSmokeTest(unittest.TestCase):
             patch("hyper_branch.pipeline.OpenAICompatibleClient", PipelineTestClient),
             patch("hyper_branch.pipeline.OpenAIAtomicLLMService", PipelineTestLLMService),
         ):
-            pipeline = HyperBranchPipeline(config, logging.getLogger("hyper_branch.test"))
+            pipeline = HyperBranchPipeline(config)
             result = pipeline.run(
                 question,
                 {
@@ -36,6 +35,7 @@ class PipelineSmokeTest(unittest.TestCase):
                         }
                     ]
                 },
+                ["urban farms"],
             )
 
         self.assertEqual(
@@ -50,7 +50,7 @@ class PipelineTestClient:
     def __init__(self, config: object) -> None:
         pass
 
-    def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
+    def embed_texts(self, texts: list[str]) -> list[np.ndarray]:
         vector = np.zeros(1536, dtype=np.float32)
         vector[0] = 1.0
         return [vector for _ in texts]
@@ -70,7 +70,6 @@ class PipelineTestLLMService:
     def answer_atomic_question(
         self,
         atomic_question: str,
-        answer_contract: dict[str, object],
         dependency_answers: list[dict[str, object]],
         evidence: dict[str, list[dict[str, object]]],
         original_question: str = "",

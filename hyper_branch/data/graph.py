@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 import xml.etree.ElementTree as ET
@@ -19,14 +19,11 @@ class KnowledgeHypergraph:
         self.edges = edges
         self.adjacency: dict[str, list[str]] = defaultdict(list)
         self.source_to_nodes: dict[str, list[str]] = defaultdict(list)
-        self.source_to_edges: dict[str, list[str]] = defaultdict(list)
 
         # 一次性构建双向可查的索引；检索阶段只需字典查询。
         for edge_id, edge in edges.items():
             self.adjacency[edge.source].append(edge_id)
             self.adjacency[edge.target].append(edge_id)
-            for source_id in edge.source_ids:
-                self.source_to_edges[source_id].append(edge_id)
 
         for node_id, node in nodes.items():
             for source_id in node.source_ids:
@@ -54,10 +51,7 @@ class KnowledgeHypergraph:
             nodes[node_id] = GraphNode(
                 node_id=node_id,
                 role=data.get("role", ""),
-                weight=float(data.get("weight", 0.0) or 0.0),
                 source_ids=split_source_ids(data.get("source_id", "")),
-                entity_type=data.get("entity_type"),
-                description=data.get("description"),
             )
 
         edges: dict[str, GraphEdge] = {}
@@ -68,24 +62,11 @@ class KnowledgeHypergraph:
             if weight is None:
                 weight = data.get("weight_float")
             edges[edge_id] = GraphEdge(
-                edge_id=edge_id,
                 source=edge_elem.attrib["source"],
                 target=edge_elem.attrib["target"],
                 role=data.get("role", ""),
-                weight=float(weight or 0.0),
-                source_ids=split_source_ids(data.get("source_id", "")),
             )
         return cls(nodes=nodes, edges=edges)
-
-    def summarize(self) -> dict[str, Any]:
-        role_counts = Counter(node.role for node in self.nodes.values())
-        edge_role_counts = Counter(edge.role for edge in self.edges.values())
-        return {
-            "node_count": len(self.nodes),
-            "edge_count": len(self.edges),
-            "node_roles": dict(role_counts),
-            "edge_roles": dict(edge_role_counts),
-        }
 
     def get_neighbors(
         self,
@@ -123,9 +104,6 @@ class KnowledgeHypergraph:
     def hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
         return self.get_neighbor_ids(hyperedge_id, role="entity", edge_role="link")
 
-    def synonym_entity_ids(self, synonym_id: str) -> list[str]:
-        return self.get_neighbor_ids(synonym_id, role="entity", edge_role="synonym")
-
     def node_chunk_ids(self, node_id: str) -> list[str]:
         node = self.nodes.get(node_id)
         if node is None:
@@ -162,8 +140,6 @@ class KnowledgeHypergraph:
             "hyperedge_text": hyperedge.node_id,
             "entity_ids": self.hyperedge_entity_ids(hyperedge_id),
             "chunk_ids": self.hyperedge_chunk_ids(hyperedge_id),
-            "source_ids": list(hyperedge.source_ids),
-            "weight": hyperedge.weight,
         }
 
 

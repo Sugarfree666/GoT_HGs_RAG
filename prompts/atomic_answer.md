@@ -4,7 +4,6 @@ The input contains:
 
 - `original_question`: global context for disambiguation.
 - `atomic_question`: the question you must answer.
-- `answer_contract`: the desired answer format.
 - `dependency_answers`: answers to prerequisite questions.
 - `evidence_blocks`: retrieved evidence blocks ordered by relevance, containing hyperedges and their source text.
 

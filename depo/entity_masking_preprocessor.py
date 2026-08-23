@@ -11,21 +11,18 @@ from typing import TYPE_CHECKING
 # ExplicitEntityExtractor：调用 LLM 识别显式实体
 # models 中的数据类用于保存实体、映射和最终预处理结果
 from mask_span_extractor import ExplicitEntityExtractor
+#导入数据结构
 from models import ExplicitEntity, ExplicitEntityResult, HanLPSDPPreprocessResult, MaskMapping
 
-# 仅用于类型检查，程序运行时不会在这里真正导入
+# 为了避免循环导入
 if TYPE_CHECKING:
     from llm_client import LLMClient
 
 
 class EntityMaskingPreprocessor:
-    """DEPO 解析管线的通用 Step2 实体掩码器。
-
-    LLM 只用于显式实体提取；占位符分配和掩码问题构造保持确定性。
-    """
 
     def __init__(self, llm_client: "LLMClient") -> None:
-        # 创建显式实体提取器，LLM 主要在实体识别阶段使用
+        # 创建显式实体提取器
         self.explicit_extractor = ExplicitEntityExtractor(llm_client)
 
     def preprocess(self, question: str) -> HanLPSDPPreprocessResult:
@@ -35,44 +32,30 @@ class EntityMaskingPreprocessor:
         explicit_entities = self.explicit_extractor.extract(question)
         # 若实体提取器给出了规范化问题，则优先使用规范化版本
         normalized_question = _normalized_question_from_entities(question, explicit_entities)
-        # 安全检查：规范化后不能把原来的显式实体弄丢
+        # 问题修改了，但是其中没有原问题中的实体
         if normalized_question != question and any(entity.text not in normalized_question for entity in explicit_entities.entities):
             raise ValueError("Normalized question must preserve every explicit entity surface.")
-        # 记录问题是否真的发生了规范化修改
-        normalization_changed = explicit_entities.normalization_changed or normalized_question != question
-        if normalized_question == question:
-            normalization_changed = False
-        normalization_note = explicit_entities.normalization_note if normalization_changed else ""
         # Step2：把真实实体替换为 ENTITYA、ENTITYB 等占位符
         masked_question = _masked_question_from_entities(
             normalized_question,
             explicit_entities.entities,
         )
         # 建立占位符与原实体之间的对应关系
-        mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities)
+        mask_mappings = _mask_mappings_from_entities(explicit_entities.entities)
         # 将所有预处理结果统一封装，交给 main.py 后续 HanLP/Step4 使用
         return HanLPSDPPreprocessResult(
-            original_question=question,
             explicit_entities=ExplicitEntityResult(
                 entities=list(explicit_entities.entities),
-                raw_payload=explicit_entities.raw_payload,
-                normalized_question=normalized_question,
-                normalization_changed=normalization_changed,
-                normalization_note=normalization_note,
             ),
             masked_question=masked_question,
-            sdp_input_sentence=masked_question,
             mask_mappings=mask_mappings,
-            raw_payload=explicit_entities.raw_payload,
-            normalized_question=normalized_question,
-            normalization_changed=normalization_changed,
-            normalization_note=normalization_note,
         )
 
 
 def _normalized_question_from_entities(question: str, explicit_entities: ExplicitEntityResult) -> str:
     """取得实体提取器返回的规范化问题；若没有，则使用原问题。"""
     normalized_question = explicit_entities.normalized_question
+    #检查是否非空字符串并且去除首尾空格
     if isinstance(normalized_question, str) and normalized_question.strip():
         return normalized_question.strip()
     return question
@@ -83,10 +66,11 @@ def _masked_question_from_entities(
     entities: list[ExplicitEntity],
 ) -> str:
     """把问题中的显式实体替换成 ENTITYA、ENTITYB 等占位符。"""
-
+    #先复制一份原问题
     masked = question
-    # 保存每一次替换的位置：(开始位置, 结束位置, 占位符)
+    # 创建一个空列表，保存每一次替换的位置：(开始位置, 结束位置, 占位符)
     replacements: list[tuple[int, int, str]] = []
+    # 遍历每一个实体得到实体和编号。
     for index, entity in enumerate(entities):
         # 在问题中查找当前实体的所有出现位置
         matches = list(re.finditer(re.escape(entity.text), question))
@@ -100,36 +84,19 @@ def _masked_question_from_entities(
     return masked
 
 
-def _mask_mappings_from_entities(masked_question: str, entities: list[ExplicitEntity]) -> list[MaskMapping]:
+def _mask_mappings_from_entities(entities: list[ExplicitEntity]) -> list[MaskMapping]:
     """生成 ENTITYA -> 原实体 的映射信息。"""
     mappings: list[MaskMapping] = []
     for index, entity in enumerate(entities):
         placeholder = f"ENTITY{_letter_suffix(index)}"
-        # 查找占位符在掩码后问题中的字符位置
-        masked_span = _find_placeholder_span(masked_question, placeholder)
-
-        # 保存原实体、占位符、语义类型和字符位置
         mappings.append(
             MaskMapping(
                 placeholder=placeholder,
                 original_text=entity.text,
-                kind_hint="entity",
-                #实体类型
-                semantic_type_hint=entity.semantic_type_hint or "Entity",
-                original_char_span=[entity.start_char, entity.end_char],
-                #记录掩码在掩码问题中的位置
-                masked_char_span=list(masked_span) if masked_span else [],
             )
         )
     return mappings
 
-
-def _find_placeholder_span(text: str, placeholder: str) -> tuple[int, int] | None:
-    """查找占位符在文本中的字符区间。"""
-    match = re.search(rf"\b{re.escape(placeholder)}\b", text)
-    if not match:
-        return None
-    return match.start(), match.end()
 
 #将数字编号变成字母编号
 def _letter_suffix(index: int) -> str:
