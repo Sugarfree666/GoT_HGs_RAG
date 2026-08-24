@@ -1,35 +1,23 @@
-"""DEPO 预处理、HanLP 解析和 Step4/Step5 之间传递的类型化记录。"""
+"""DEPO 阶段之间传递的最小数据对象。"""
 
+from __future__ import annotations
 
 from dataclasses import dataclass, field
 
 
 @dataclass
-class QuestionRecord:
-    #问题文本
-    question: str
-    #问题ID
-    qid: str | None = None
+class PreprocessedQuestion:
+    """实体掩码后的 HanLP 输入，以及占位符恢复映射。"""
 
-@dataclass
-class ExplicitEntity:
-    text: str
+    entities: list[str]
+    masked_question: str
+    mask_mapping: dict[str, str]
 
 
-@dataclass
-class ExplicitEntityResult:
-    entities: list[ExplicitEntity] = field(default_factory=list)
-    normalized_question: str = ""
-
-
-@dataclass
-class MaskMapping:
-    placeholder: str
-    original_text: str
-
-
-@dataclass
+@dataclass(frozen=True)
 class HanLPSDPEdge:
+    """一条 HanLP PAS 边：head --relation--> dependent。"""
+
     head_idx: int
     relation: str
     dep_idx: int
@@ -37,13 +25,8 @@ class HanLPSDPEdge:
 
 @dataclass
 class HanLPSDPResult:
+    """Step3 所需的分词、PAS 边和句法头节点。"""
+
     tokens: list[str]
     edges: list[HanLPSDPEdge]
     syntax_heads: dict[str, int] = field(default_factory=dict)
-
-
-@dataclass
-class HanLPSDPPreprocessResult:
-    explicit_entities: ExplicitEntityResult
-    masked_question: str
-    mask_mappings: list[MaskMapping]

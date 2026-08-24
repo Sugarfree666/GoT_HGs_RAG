@@ -50,6 +50,7 @@ class OpenAICompatibleClient:
             ],
             "temperature": self.config.temperature if temperature is None else temperature,
             "max_tokens": max_tokens,
+            "response_format": {"type": "json_object"},
         }
         cache_key = self._cache_key("/chat/completions", payload)
         cached = cache_key in self.response_cache

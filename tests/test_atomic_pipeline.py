@@ -204,5 +204,5 @@ def _retriever(
     return AtomicHyperedgeRetriever(
         dataset=dataset,
         embedder=Embedder(),
-        config=RetrievalConfig(local_hyperedge_top_k=3, local_hyperedge_hops=2),
+        config=RetrievalConfig(local_hyperedge_top_k=3),
     )

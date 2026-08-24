@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Iterable
 
-from models import HanLPSDPResult
+from models import HanLPSDPEdge, HanLPSDPResult
 
 # ============================================================
 # 1. 节点分类与语义图过滤
@@ -98,32 +98,11 @@ class TokenReasoningEdge:
     rules: set[str] = field(default_factory=set)
 
 
-@dataclass(frozen=True)
-class RawPasEdge:
-    head_id: str
-    relation: str
-    dep_id: str
-
-
 @dataclass
-#一条实体推理路径
-class TokenReasoningPath:
-    nodes: list[str]
-
-
-@dataclass
-#记录多个path
-class TokenReasoningStructureResult:
-    paths: list[TokenReasoningPath]
-
-
-@dataclass
-#记录四个状态
+#Step4 构图和增强共享的内部状态
 class _WorkingState:
     nodes: dict[str, TokenReasoningNode]
-    #原始PAS边
-    raw_edges: list[RawPasEdge]
-    #三类增强后的边
+    pas_edges: list[HanLPSDPEdge]
     edges: dict[tuple[str, str], TokenReasoningEdge]
     syntax_heads: dict[str, int]
 
@@ -131,8 +110,8 @@ class _WorkingState:
 def compile_token_reasoning_structure(
     hanlp_sdp_result: HanLPSDPResult,
     explicit_entities: list[str],
-) -> TokenReasoningStructureResult:
-    """Run Step 4 and return the selected token paths for Step 5."""
+) -> list[list[str]]:
+    """执行 Step4，返回供 Step5 使用的实体语义路径。"""
     #建立初始PAS图，将句法语义关系转化成图结构
     state = build_evidence_graph(hanlp_sdp_result)
     #获得显示实体id
@@ -142,12 +121,12 @@ def compile_token_reasoning_structure(
     #所有格搜索增强
     add_pas_possessive_contraction_edges(state)
     #并列关系增强
+    #根据关系找并列组合
     add_pas_coordination_candidate_attachment_edges(state, entity_ids)
     #生成最终的带权无向图
+    #删除结构
     graph = _semantic_graph(state.nodes, state.edges)
-    return TokenReasoningStructureResult(
-        paths=_select_entity_best_paths(state.nodes, graph, entity_ids)
-    )
+    return _select_entity_best_paths(state.nodes, graph, entity_ids)
 
 
 def classify_node(text: str, index: int) -> str:
@@ -166,35 +145,23 @@ def classify_node(text: str, index: int) -> str:
 
 def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
     """Construct the undirected PAS evidence graph before augmentation."""
-    #HanLP token列表中的节点封装成TokenReasoningNode形式
     nodes = _build_token_nodes(hanlp_sdp_result)
-    #构造原始PAS边
-    raw_edges = [
-        RawPasEdge(
-            head_id=str(edge.head_idx),
-            relation=edge.relation,
-            dep_id=str(edge.dep_idx),
-        )
-        for edge in hanlp_sdp_result.edges
-    ]
     edges: dict[tuple[str, str], TokenReasoningEdge] = {}
-    #遍历所有PAS边加入图
-    for edge in raw_edges:
-        _add_edge(edges, edge.head_id, edge.dep_id, relation=edge.relation)
-    #标记所有格节点，将"'s"标记成function
-    _mark_possessive_markers(nodes, raw_edges)
-    #返回状态
-    return _WorkingState(
+    for edge in hanlp_sdp_result.edges:
+        _add_edge(edges, str(edge.head_idx), str(edge.dep_idx), relation=edge.relation)
+
+    state = _WorkingState(
         nodes=nodes,
-        raw_edges=raw_edges,
+        pas_edges=hanlp_sdp_result.edges,
         edges=edges,
-        #把key为0的root节点删去
         syntax_heads={
             key: value
             for key, value in hanlp_sdp_result.syntax_heads.items()
             if key != "0"
         },
     )
+    _mark_possessive_markers(state)
+    return state
 
 #
 def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
@@ -306,7 +273,7 @@ def _select_entity_best_paths(
     nodes: dict[str, TokenReasoningNode],
     graph: dict[str, list[tuple[str, int]]],
     entity_ids: list[str],
-) -> list[TokenReasoningPath]:
+) -> list[list[str]]:
     #找到语义节点
     semantic_ids = {
         node_id
@@ -318,7 +285,7 @@ def _select_entity_best_paths(
     boundary_ids = _ordered_ids(
         (node_id for node_id in semantic_ids if len(graph[node_id]) == 1), nodes
     )
-    selected: list[TokenReasoningPath] = []
+    selected: list[list[str]] = []
 
     for entity_id in _ordered_ids(entity_ids, nodes):
         candidates = [
@@ -350,10 +317,10 @@ def _select_entity_best_paths(
             candidates,
             key=lambda path: _sp_score(entity_id, path, branch_ids),
         )
-        selected.append(_path_from_ids(nodes, best_path))
+        selected.append([nodes[node_id].text for node_id in best_path])
     return selected
 
-#Djistra代码实现
+#Djistra代码实现，核对
 def _shortest_path(
     graph: dict[str, list[tuple[str, int]]],
     nodes: dict[str, TokenReasoningNode],
@@ -407,23 +374,23 @@ def _sp_score(entity_id: str, path: list[str], branch_ids: set[str]) -> float:
         else 0.0
     )
 
-
+#根据PAS关系识别介词节点
 def _preposition_arguments(
     preposition_id: str,
     state: _WorkingState,
 ) -> tuple[list[str], list[str]]:
     arg1 = {
-        edge.dep_id
-        for edge in state.raw_edges
-        if edge.head_id == preposition_id
-        and edge.dep_id in state.nodes
+        str(edge.dep_idx)
+        for edge in state.pas_edges
+        if str(edge.head_idx) == preposition_id
+        and str(edge.dep_idx) in state.nodes
         and edge.relation == "prep_ARG1"
     }
     arg2 = {
-        edge.dep_id
-        for edge in state.raw_edges
-        if edge.head_id == preposition_id
-        and edge.dep_id in state.nodes
+        str(edge.dep_idx)
+        for edge in state.pas_edges
+        if str(edge.head_idx) == preposition_id
+        and str(edge.dep_idx) in state.nodes
         and edge.relation == "prep_ARG2"
     }
     return _ordered_ids(arg1, state.nodes), _ordered_ids(arg2, state.nodes)
@@ -435,10 +402,11 @@ def _possessive_arguments(
 ) -> tuple[list[str], list[str]]:
     owners: set[str] = set()
     possessed: set[str] = set()
-    for edge in state.raw_edges:
-        if marker_id not in {edge.head_id, edge.dep_id}:
+    for edge in state.pas_edges:
+        head_id, dep_id = str(edge.head_idx), str(edge.dep_idx)
+        if marker_id not in {head_id, dep_id}:
             continue
-        related_id = edge.dep_id if edge.head_id == marker_id else edge.head_id
+        related_id = dep_id if head_id == marker_id else head_id
         if related_id not in state.nodes:
             continue
         if edge.relation in POSSESSIVE_OWNER_RELATIONS:
@@ -453,21 +421,22 @@ def _coordination_groups(
     entity_ids: set[str],
 ) -> list[tuple[str, list[str]]]:
     groups: dict[str, set[str]] = {}
-    for edge in state.raw_edges:
+    for edge in state.pas_edges:
         if not _is_coordination_group_relation(edge.relation):
             continue
+        head_id, dep_id = str(edge.head_idx), str(edge.dep_idx)
         if (
-            edge.head_id in state.nodes
-            and _is_connector(state.nodes[edge.head_id])
-            and edge.dep_id in entity_ids
+            head_id in state.nodes
+            and _is_connector(state.nodes[head_id])
+            and dep_id in entity_ids
         ):
-            groups.setdefault(edge.head_id, set()).add(edge.dep_id)
+            groups.setdefault(head_id, set()).add(dep_id)
         elif (
-            edge.dep_id in state.nodes
-            and _is_connector(state.nodes[edge.dep_id])
-            and edge.head_id in entity_ids
+            dep_id in state.nodes
+            and _is_connector(state.nodes[dep_id])
+            and head_id in entity_ids
         ):
-            groups.setdefault(edge.dep_id, set()).add(edge.head_id)
+            groups.setdefault(dep_id, set()).add(head_id)
 
     return sorted(
         (
@@ -543,6 +512,7 @@ def _semantic_node_allowed(node: TokenReasoningNode) -> bool:
 def _is_semantic_node(node: TokenReasoningNode) -> bool:
     if node.kind == "entity" or ENTITY_RE.fullmatch(node.text):
         return False
+    #为什么需要how和why
     return node.text.lower() in WH_ANCHORS or (
         _semantic_node_allowed(node) and node.kind in {"content", "constraint"}
     )
@@ -588,16 +558,11 @@ def _build_token_nodes(result: HanLPSDPResult) -> dict[str, TokenReasoningNode]:
 
 
 def _mark_possessive_markers(
-    nodes: dict[str, TokenReasoningNode],
-    raw_edges: list[RawPasEdge],
+    state: _WorkingState,
 ) -> None:
-    #先创建一个空state
-    state = _WorkingState(nodes, raw_edges, {}, {})
-    for node in nodes.values():
-        #遍历每个节点，找是否存在's
+    for node in state.nodes.values():
         if node.text.lower() not in POSSESSIVE_MARKERS:
             continue
-        #找到这个所有格的对象
         owners, possessed = _possessive_arguments(node.id, state)
         if owners or possessed:
             node.kind = "function"
@@ -654,12 +619,6 @@ def _ordered_ids(
 
 def _path_key(path: list[str]) -> tuple[int, ...]:
     return tuple(int(node_id) for node_id in path)
-
-
-def _path_from_ids(
-    nodes: dict[str, TokenReasoningNode], node_ids: list[str]
-) -> TokenReasoningPath:
-    return TokenReasoningPath([nodes[node_id].text for node_id in node_ids])
 
 
 def _is_punctuation(text: str) -> bool:

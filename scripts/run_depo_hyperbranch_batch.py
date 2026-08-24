@@ -53,14 +53,11 @@ def main() -> int:
     if base_url:
         os.environ["OPENAI_BASE_URL"] = base_url
 
-    from entity_masking_preprocessor import EntityMaskingPreprocessor
     from hanlp_sdp_parser import HanLPSDPParser
     from llm_client import LLMClient
-    from main import run_hanlp_sdp_pipeline
-    from models import QuestionRecord
+    from pipeline import run_depo
 
     llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
-    preprocessor = EntityMaskingPreprocessor(llm_client)
     parser = HanLPSDPParser()
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_root = _repo_path(args.output_root)
@@ -79,34 +76,24 @@ def main() -> int:
         hyperbranch_runner: _ReusableHyperBranchRunner | None = None
 
         for offset, item in enumerate(items, start=1):
-            record = QuestionRecord(question=item["question"], qid=item.get("qid"))
             question_dir = output_dir / depo_batch._question_dir_name(
-                item["index"], record.qid, record.question
+                item["index"], item.get("qid"), item["question"]
             )
             result_path = question_dir / "result.json"
             if args.resume and result_path.exists():
-                print(f"[skip] {dataset} #{item['index']} {record.question}")
+                print(f"[skip] {dataset} #{item['index']} {item['question']}")
                 continue
 
             question_dir.mkdir(parents=True, exist_ok=True)
-            print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {record.question}")
-            decomposition = run_hanlp_sdp_pipeline(
-                record=record,
-                preprocessor=preprocessor,
-                parser=parser,
-                llm_client=llm_client,
-            )
-            dag = decomposition["atomic_question_dag"].to_dict()
+            print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {item['question']}")
+            decomposition = run_depo(item["question"], parser, llm_client)
+            dag = decomposition["atomic_question_dag"]
             if hyperbranch_runner is None:
                 hyperbranch_runner = _ReusableHyperBranchRunner(config_path, args)
-            #将depo算法生成的DAG给传给检索侧
             hyperbranch_result = hyperbranch_runner.run(
-                question=record.question,
+                question=item["question"],
                 dag=dag,
-                original_question_entities=[
-                    entity.text
-                    for entity in decomposition["preprocess_result"].explicit_entities.entities
-                ],
+                original_question_entities=decomposition["preprocess_result"].entities,
             )
             result = _result_payload(item, dag, hyperbranch_result)
             _write_json(result_path, result)

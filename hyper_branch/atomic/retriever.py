@@ -179,37 +179,36 @@ class AtomicHyperedgeRetriever:
         candidate_ids = list(first_hop_ids)
         first_hops_by_candidate = {hyperedge_id: [] for hyperedge_id in first_hop_ids}
 
-        if self.config.local_hyperedge_hops >= 2:
-            #遍历每一个一跳超边
-            for first_hop_id in first_hop_ids:
-                #获取超边实体
-                bridge_entity_ids = list(
-                    self.dataset.graph.hyperedge_entity_ids(first_hop_id)
+        #遍历每一个一跳超边
+        for first_hop_id in first_hop_ids:
+            #获取超边实体
+            bridge_entity_ids = list(
+                self.dataset.graph.hyperedge_entity_ids(first_hop_id)
+            )
+            #从chunk中补充实体
+            for chunk_id in self.dataset.graph.hyperedge_chunk_ids(first_hop_id):
+                bridge_entity_ids.extend(
+                    node_id
+                    for node_id in self.dataset.graph.source_to_nodes[chunk_id]
+                    if self.dataset.graph.nodes[node_id].role == "entity"
                 )
-                #从chunk中补充实体
-                for chunk_id in self.dataset.graph.hyperedge_chunk_ids(first_hop_id):
-                    bridge_entity_ids.extend(
-                        node_id
-                        for node_id in self.dataset.graph.source_to_nodes[chunk_id]
-                        if self.dataset.graph.nodes[node_id].role == "entity"
-                    )
 
-                for bridge_entity_id in dict.fromkeys(bridge_entity_ids):
-                    #跳过自己
-                    if bridge_entity_id == anchor_entity_id:
+            for bridge_entity_id in dict.fromkeys(bridge_entity_ids):
+                #跳过自己
+                if bridge_entity_id == anchor_entity_id:
+                    continue
+                #继续每个实体获取一跳超边
+                for second_hop_id in self.dataset.graph.entity_hyperedge_ids(
+                    bridge_entity_id
+                ):
+                    #去重，如果存在则不加入
+                    if second_hop_id in first_hop_ids:
                         continue
-                    #继续每个实体获取一跳超边
-                    for second_hop_id in self.dataset.graph.entity_hyperedge_ids(
-                        bridge_entity_id
-                    ):
-                        #去重，如果存在则不加入
-                        if second_hop_id in first_hop_ids:
-                            continue
-                        if second_hop_id not in candidate_ids:
-                            candidate_ids.append(second_hop_id)
-                        paths = first_hops_by_candidate.setdefault(second_hop_id, [])
-                        if first_hop_id not in paths:
-                            paths.append(first_hop_id)
+                    if second_hop_id not in candidate_ids:
+                        candidate_ids.append(second_hop_id)
+                    paths = first_hops_by_candidate.setdefault(second_hop_id, [])
+                    if first_hop_id not in paths:
+                        paths.append(first_hop_id)
 
         return candidate_ids, first_hops_by_candidate
 

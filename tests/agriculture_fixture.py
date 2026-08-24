@@ -21,7 +21,6 @@ runtime:
 
 retrieval:
   local_hyperedge_top_k: 3
-  local_hyperedge_hops: 2
 
 llm:
   api_key_env: OPENAI_API_KEY

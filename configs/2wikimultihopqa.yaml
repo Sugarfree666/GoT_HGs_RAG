@@ -8,8 +8,6 @@ runtime:
 retrieval:
   local_hyperedge_top_k: 50
 
-  local_hyperedge_hops: 2
-
 llm:
   api_key_env: OPENAI_API_KEY
   base_url_env: OPENAI_BASE_URL

@@ -10,10 +10,9 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
-from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from hanlp_sdp_parser import HanLPSDPParser  # noqa: E402
-from main import run_hanlp_sdp_pipeline  # noqa: E402
-from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
+from pipeline import run_depo  # noqa: E402
+from models import HanLPSDPEdge, HanLPSDPResult  # noqa: E402
 from tri_sdp_reasoning_compiler import (  # noqa: E402
     TokenReasoningEdge,
     _edge_cost,
@@ -60,7 +59,6 @@ class HanLPSDPPipelineTest(unittest.TestCase):
         parser = HanLPSDPParser()
         parser._pipeline = lambda _text: {  # type: ignore[assignment]
             "tok": ["ENTITYA", "target"],
-            "sdp/dm": [[(2, "ARG1")], [(0, "root")]],
             "sdp/pas": [[(2, "ARG1")], [(0, "root")]],
             "dep": [(2, "nsubj"), (0, "root")],
         }
@@ -68,7 +66,10 @@ class HanLPSDPPipelineTest(unittest.TestCase):
         result = parser.parse("ENTITYA target")
 
         self.assertEqual(result.tokens, ["ENTITYA", "target"])
-        self.assertEqual([(edge.head_idx, edge.relation, edge.dep_idx) for edge in result.edges], [(2, "ARG1", 1), (0, "root", 2)])
+        self.assertEqual(
+            [(edge.head_idx, edge.relation, edge.dep_idx) for edge in result.edges],
+            [(2, "ARG1", 1), (0, "root", 2)],
+        )
         self.assertEqual(result.syntax_heads, {"1": 2, "2": 0})
 
     def test_compiler_returns_entity_paths_only(self) -> None:
@@ -80,14 +81,16 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             ],
         )
 
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
-        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "older", "Who"]])
+        self.assertEqual(
+            compile_token_reasoning_structure(result, ["ENTITYA"]),
+            [["ENTITYA", "older", "Who"]],
+        )
 
     def test_edge_costs_match_the_method(self) -> None:
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"act_ARG2"})), 1)
         self.assertEqual(
-            _edge_cost(TokenReasoningEdge(rules={"pas_possessive_contraction"})), 1
+            _edge_cost(TokenReasoningEdge(rules={"pas_possessive_contraction"})),
+            1,
         )
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"relative_ARG1"})), 2)
         self.assertEqual(
@@ -109,10 +112,8 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             ],
         )
 
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
         self.assertEqual(
-            [path.nodes for path in compiled.paths],
+            compile_token_reasoning_structure(result, ["ENTITYA"]),
             [["ENTITYA", "capital", "Who"]],
         )
 
@@ -128,10 +129,8 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             ],
         )
 
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA"])
-
         self.assertEqual(
-            [path.nodes for path in compiled.paths],
+            compile_token_reasoning_structure(result, ["ENTITYA"]),
             [["ENTITYA", "capital", "Who"]],
         )
 
@@ -146,27 +145,22 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             syntax_heads={"1": 4, "2": 4, "3": 4, "4": 0, "5": 4},
         )
 
-        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
-
         self.assertEqual(
-            [path.nodes for path in compiled.paths],
+            compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"]),
             [["ENTITYA", "won", "Who"], ["ENTITYB", "won", "Who"]],
         )
 
     def test_pipeline_uses_masked_question_and_generates_dag(self) -> None:
         llm = _LLM()
         parser = _Parser()
-        result = run_hanlp_sdp_pipeline(
-            record=QuestionRecord(
-                question="Who is older, Ryan Tubridy or Mauro Massironi?"
-            ),
-            preprocessor=EntityMaskingPreprocessor(llm),
-            parser=parser,
-            llm_client=llm,
+        result = run_depo(
+            "Who is older, Ryan Tubridy or Mauro Massironi?",
+            parser,
+            llm,
         )
 
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(result["atomic_question_dag"].nodes[0].question, "Who is older?")
+        self.assertEqual(result["atomic_question_dag"]["nodes"][0]["question"], "Who is older?")
 
 
 if __name__ == "__main__":

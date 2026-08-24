@@ -20,7 +20,6 @@ class DatasetConfig:
 @dataclass(slots=True)
 class RetrievalConfig:
     local_hyperedge_top_k: int = 3
-    local_hyperedge_hops: int = 2
     entity_link_vector_top_k: int = 1
     entity_link_vector_min_score: float = 0.6
 
@@ -67,7 +66,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     )
     retrieval_cfg = RetrievalConfig(
         local_hyperedge_top_k=int(retrieval.get("local_hyperedge_top_k", 3)),
-        local_hyperedge_hops=int(retrieval.get("local_hyperedge_hops", 2)),
         entity_link_vector_top_k=int(retrieval.get("entity_link_vector_top_k", 1)),
         entity_link_vector_min_score=float(retrieval.get("entity_link_vector_min_score", 0.6)),
     )
