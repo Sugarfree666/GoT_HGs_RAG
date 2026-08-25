@@ -1,14 +1,12 @@
-You identify entities in one resolved atomic question for hypergraph retrieval.
+You identify explicit retrieval entities in one question.
 
-The input is JSON containing:
-- `atomic_question`: the current question.
-- `dependency_answers`: optional answers from prerequisite questions.
+The input is JSON containing `question`.
 
 Your only job is entity recognition. Do not answer the question or infer an entity that is not explicitly mentioned.
 
 Extract the concrete entities that can be used to look up the question in the hypergraph, such as named people, places, organizations, works, events, products, dates, years, and numeric values used as factual constraints.
 
-Keep each entity exactly as it appears in the input and preserve its complete identifying name, including titles, subtitles, punctuation, and disambiguating parentheses. Do not return generic roles, types, relations, or answer slots such as `the director`, `which country`, `film`, or `the city`. Use a dependency answer only when the current question clearly refers to it. Deduplicate entities while preserving their order.
+Keep each entity exactly as it appears in the question and preserve its complete identifying name, including titles, subtitles, punctuation, and disambiguating parentheses. Do not return generic roles, types, relations, or answer slots such as `the director`, `which country`, `film`, or `the city`. Deduplicate entities while preserving their order.
 
 Examples:
 

@@ -2,11 +2,17 @@
 
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any
 
 from llm_client import LLMClient
-from prompts import ATOMIC_QUESTION_DAG_SYSTEM, build_atomic_question_dag_prompt
+
+
+ATOMIC_QUESTION_DAG_PROMPT = (
+    Path(__file__).resolve().parents[1] / "prompts" / "depo_atomic_question_dag.md"
+).read_text(encoding="utf-8").strip()
 
 
 def generate_atomic_question_dag(
@@ -17,12 +23,25 @@ def generate_atomic_question_dag(
 ) -> dict[str, Any]:
     """调用 Step5，并将依赖关系展开为 DAG 边。"""
 
+    entities: list[str] = []
+    for entity in question_entities:
+        text = str(entity).strip()
+        if text and text not in entities:
+            entities.append(text)
+    structure = [
+        " -- ".join(node.strip() for node in branch if node.strip())
+        for branch in question_structure
+    ]
     payload = llm_client.chat_json(
-        ATOMIC_QUESTION_DAG_SYSTEM,
-        build_atomic_question_dag_prompt(
-            original_question,
-            question_entities,
-            question_structure,
+        ATOMIC_QUESTION_DAG_PROMPT,
+        json.dumps(
+            {
+                "original_question": original_question,
+                "question_entities": entities,
+                "question_structure": [branch for branch in structure if branch],
+            },
+            ensure_ascii=False,
+            indent=2,
         ),
     )
     nodes = [

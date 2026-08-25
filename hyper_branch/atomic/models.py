@@ -12,11 +12,6 @@ class AtomicQuestionNode:
     dependencies: list[str] = field(default_factory=list)
 
 @dataclass(slots=True)
-class AtomicQuestionAnalysis:
-    #实体列表
-    entities: list[str] = field(default_factory=list)
-
-@dataclass(slots=True)
 class FusedHyperedgeCandidate:
     hyperedge_id: str
     hyperedge_text: str

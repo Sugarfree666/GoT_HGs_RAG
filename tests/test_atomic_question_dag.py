@@ -12,32 +12,16 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from atomic_question_dag import generate_atomic_question_dag, restore_paths  # noqa: E402
-from prompts import ATOMIC_QUESTION_DAG_SYSTEM, build_atomic_question_dag_prompt  # noqa: E402
 
 
 class AtomicQuestionDAGTest(unittest.TestCase):
     def test_prompt_keeps_the_dag_execution_contract(self) -> None:
-        self.assertIn("exactly one final leaf", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("last node", ATOMIC_QUESTION_DAG_SYSTEM)
-        self.assertIn("qN's answer", ATOMIC_QUESTION_DAG_SYSTEM)
-
-    def test_prompt_contains_only_step5_inputs(self) -> None:
-        payload = json.loads(
-            build_atomic_question_dag_prompt(
-                original_question="Question?",
-                question_entities=["An Event"],
-                question_structure=[["An Event", "director"]],
-            )
+        prompt = (PROJECT_ROOT / "prompts" / "depo_atomic_question_dag.md").read_text(
+            encoding="utf-8"
         )
-
-        self.assertEqual(
-            payload,
-            {
-                "original_question": "Question?",
-                "question_entities": ["An Event"],
-                "question_structure": ["An Event -- director"],
-            },
-        )
+        self.assertIn("exactly one final leaf", prompt)
+        self.assertIn("last node", prompt)
+        self.assertIn("qN's answer", prompt)
 
     def test_generator_builds_dag_edges(self) -> None:
         llm = RecordingLLM(_payload())
@@ -49,6 +33,14 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         )
 
         self.assertEqual(len(llm.prompts), 1)
+        self.assertEqual(
+            json.loads(llm.prompts[0]),
+            {
+                "original_question": "Who directed An Event?",
+                "question_entities": ["An Event"],
+                "question_structure": ["An Event -- director"],
+            },
+        )
         self.assertEqual(result["nodes"][0]["id"], "q1")
         self.assertEqual(result["edges"], [{"source": "q1", "target": "q2"}])
         self.assertEqual(result["leaf_node_ids"], ["q2"])

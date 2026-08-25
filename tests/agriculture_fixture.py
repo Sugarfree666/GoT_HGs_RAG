@@ -30,8 +30,6 @@ llm:
   timeout_seconds: 120
   temperature: 0.1
 
-prompts:
-  dir: prompts
 """,
             encoding="utf-8",
         )

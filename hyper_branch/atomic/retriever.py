@@ -12,7 +12,7 @@ import numpy as np
 from ..config import RetrievalConfig
 from ..data.loaders import DatasetBundle
 from ..utils import normalize_label
-from .models import AtomicQuestionAnalysis, FusedHyperedgeCandidate
+from .models import FusedHyperedgeCandidate
 
 
 @dataclass(slots=True)
@@ -29,7 +29,6 @@ class LocalHyperedgeRetrievalResult:
 
 class AtomicHyperedgeRetriever:
     """实体链接、两跳超图扩展及候选超边排序。"""
-
     def __init__(
         self,
         dataset: DatasetBundle,
@@ -51,13 +50,12 @@ class AtomicHyperedgeRetriever:
     def build_candidate_pool(
         self,
         *,
-        #实体结果
-        analysis: AtomicQuestionAnalysis,
+        entities: list[str],
     ) -> LocalHyperedgeRetrievalResult:
         """从问题实体出发，收集一跳和二跳超边。"""
         #保存已经链接到超图中的实体 ID。
         anchor_ids: list[str] = []
-        for mention in analysis.entities:
+        for mention in entities:
             #实体链接，获得实体id
             entity_id = self.link_anchor_entity(mention=mention)
             #如果链接成功并且之前没有连接

@@ -3,7 +3,7 @@ from __future__ import annotations
 import heapq
 import re
 from dataclasses import dataclass, field
-from typing import Iterable
+from math import inf, isinf
 
 from models import HanLPSDPEdge, HanLPSDPResult
 
@@ -18,9 +18,11 @@ NUMERIC_RE = re.compile(r"^[+-]?(?:\d[\d,]*(?:\.\d+)?|\d{1,4}(?:[-/]\d{1,2}){1,2
 
 # 下列词在 classify_node() 中归为 function。
 DETERMINERS = {"a", "an", "the"}
-WH_WORDS = {"what", "which", "who", "whom", "whose", "where", "when"}
+WH_WORDS = {
+    "what", "which", "who", "whom", "whose", "where", "when", "why", "how",
+}
 # 疑问词虽然是 function，但允许作为语义路径的终点。
-WH_ANCHORS = WH_WORDS | {"why", "how"}
+WH_ANCHORS = WH_WORDS
 RELATIVE_PRONOUNS = {"that"}
 LIGHT_VERBS = {
     "is", "am", "are", "was", "were", "be", "been", "being",
@@ -103,7 +105,7 @@ class TokenReasoningEdge:
 class _WorkingState:
     nodes: dict[str, TokenReasoningNode]
     pas_edges: list[HanLPSDPEdge]
-    edges: dict[tuple[str, str], TokenReasoningEdge]
+    graph: dict[str, dict[str, TokenReasoningEdge]]
     syntax_heads: dict[str, int]
 
 
@@ -114,8 +116,14 @@ def compile_token_reasoning_structure(
     """执行 Step4，返回供 Step5 使用的实体语义路径。"""
     #建立初始PAS图，将句法语义关系转化成图结构
     state = build_evidence_graph(hanlp_sdp_result)
-    #获得显示实体id
-    entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
+    #按实体占位符顺序取得其在句中的全部 token 节点
+    #记录实体id是哪些
+    entity_ids = [
+        node.id
+        for entity in explicit_entities
+        for node in state.nodes.values()
+        if node.text == entity
+    ]
     #介词收缩增强
     add_pas_preposition_contraction_edges(state)
     #所有格搜索增强
@@ -123,17 +131,16 @@ def compile_token_reasoning_structure(
     #并列关系增强
     #根据关系找并列组合
     add_pas_coordination_candidate_attachment_edges(state, entity_ids)
-    #生成最终的带权无向图
-    #删除结构
-    graph = _semantic_graph(state.nodes, state.edges)
-    return _select_entity_best_paths(state.nodes, graph, entity_ids)
+    #在增强后的唯一图上，按节点类型和边代价直接进行最短路径搜索。
+    return _select_entity_best_paths(state.nodes, state.graph, entity_ids)
 
 
 def classify_node(text: str, index: int) -> str:
     """Classify one PAS token as entity, content, constraint, or function."""
-
+    #对token进行一个处理
     token = text.strip()
     lower = token.lower()
+    #对节点进行分类
     if index == 0 or lower == "root" or not token or _is_punctuation(token):
         return "function"
     if ENTITY_RE.fullmatch(token):
@@ -144,28 +151,32 @@ def classify_node(text: str, index: int) -> str:
 
 
 def build_evidence_graph(hanlp_sdp_result: HanLPSDPResult) -> _WorkingState:
-    """Construct the undirected PAS evidence graph before augmentation."""
+    """Construct the single undirected graph from HanLP PAS edges."""
+    #把每一个token转成一个图节点
     nodes = _build_token_nodes(hanlp_sdp_result)
-    edges: dict[tuple[str, str], TokenReasoningEdge] = {}
+    #初始化唯一的无向邻接图
+    graph: dict[str, dict[str, TokenReasoningEdge]] = {}
     for edge in hanlp_sdp_result.edges:
-        _add_edge(edges, str(edge.head_idx), str(edge.dep_idx), relation=edge.relation)
+        _add_edge(graph, str(edge.head_idx), str(edge.dep_idx), relation=edge.relation)
 
     state = _WorkingState(
         nodes=nodes,
         pas_edges=hanlp_sdp_result.edges,
-        edges=edges,
+        graph=graph,
         syntax_heads={
             key: value
             for key, value in hanlp_sdp_result.syntax_heads.items()
             if key != "0"
         },
     )
+    #把所有格标记符号 ' 和 s 标为 function 节点，避免它们被当作有语义内容的路径节点。
     _mark_possessive_markers(state)
     return state
 
-#
+
 def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
     """Contract preposition ARG1--preposition--ARG2 into an augmented core edge."""
+    contracted_prepositions: set[str] = set()
     #为了保持运行结果一致，先排序再遍历，否则同一个问题运行结果不一致
     for preposition in sorted(state.nodes.values(), key=lambda node: int(node.id)):
         #判断当前节点是不是介词
@@ -174,18 +185,27 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
         #获取介词的两侧参数
         arg1_ids, arg2_ids = _preposition_arguments(preposition.id, state)
         for arg1_id in arg1_ids:
-            if not _is_salient(state.nodes[arg1_id]):
+            if state.nodes[arg1_id].kind not in {"entity", "content"}:
                 continue
             for arg2_id in arg2_ids:
-                if arg1_id == arg2_id or not _is_salient(state.nodes[arg2_id]):
+                if (
+                    arg1_id == arg2_id
+                    or state.nodes[arg2_id].kind not in {"entity", "content"}
+                ):
                     continue
                 #只允许entity、content参与收缩
                 _add_edge(
-                    state.edges,
+                    state.graph,
                     arg1_id,
                     arg2_id,
                     rule="pas_preposition_contraction",
                 )
+                contracted_prepositions.add(preposition.id)
+
+    for preposition_id in contracted_prepositions:
+        for neighbor_id in list(state.graph[preposition_id]):
+            del state.graph[neighbor_id][preposition_id]
+        del state.graph[preposition_id]
 
 
 def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
@@ -202,11 +222,11 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
         owners_a, possessed_a = _possessive_arguments(marker.id, state)
         owners_b, possessed_b = _possessive_arguments(suffix.id, state)
         #合并去重
-        for owner_id in set(owners_a) | set(owners_b):
-            for possessed_id in set(possessed_a) | set(possessed_b):
+        for owner_id in owners_a | owners_b:
+            for possessed_id in possessed_a | possessed_b:
                 #合并去重后直接添加语义边
                 _add_edge(
-                    state.edges,
+                    state.graph,
                     owner_id,
                     possessed_id,
                     rule="pas_possessive_contraction",
@@ -214,9 +234,10 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
                 #记录 ' 和 s，表示它们已经被直接边替代。
                 contracted_markers.update({marker.id, suffix.id})
 
-    for key in list(state.edges):
-        if contracted_markers.intersection(key):
-            del state.edges[key]
+    for marker_id in contracted_markers:
+        for neighbor_id in list(state.graph[marker_id]):
+            del state.graph[neighbor_id][marker_id]
+        del state.graph[marker_id]
 
 
 def add_pas_coordination_candidate_attachment_edges(
@@ -231,63 +252,36 @@ def add_pas_coordination_candidate_attachment_edges(
     for connector_id, member_ids in _coordination_groups(state, set(entity_ids)):
         #寻找共同链接的中心词
         attachment_id = _shared_syntactic_attachment(state, connector_id, member_ids)
-        if attachment_id is None:
-            continue
         #给每个并列实体添加连接
         for member_id in member_ids:
-            if _edge_key(member_id, attachment_id) not in state.edges:
+            #若实体已经与中心词相连，就不重复加边，保留原始 PAS 边及其代价；否则补一条结构边
+            if attachment_id not in state.graph.get(member_id, {}):
                 _add_edge(
-                    state.edges,
+                    state.graph,
                     member_id,
                     attachment_id,
                     rule="pas_coordination_candidate_attachment",
                 )
 
 
-def _semantic_graph(
-    nodes: dict[str, TokenReasoningNode],
-    edges: dict[tuple[str, str], TokenReasoningEdge],
-) -> dict[str, list[tuple[str, int]]]:
-    """Build the paper's weighted undirected semantic graph G_q^u."""
-
-    graph: dict[str, list[tuple[str, int]]] = {}
-    for (source_id, target_id), edge in edges.items():
-        if not _semantic_node_allowed(nodes[source_id]) or not _semantic_node_allowed(
-            nodes[target_id]
-        ):
-            continue
-        if _is_pure_coordination(edge):
-            continue
-        cost = _edge_cost(edge)
-        if cost is None:
-            continue
-        graph.setdefault(source_id, []).append((target_id, cost))
-        graph.setdefault(target_id, []).append((source_id, cost))
-
-    for neighbors in graph.values():
-        neighbors.sort(key=lambda item: (item[1], int(item[0])))
-    return graph
-
-
 def _select_entity_best_paths(
     nodes: dict[str, TokenReasoningNode],
-    graph: dict[str, list[tuple[str, int]]],
+    graph: dict[str, dict[str, TokenReasoningEdge]],
     entity_ids: list[str],
 ) -> list[list[str]]:
-    #找到语义节点
+    #找到所有非实体语义节点。
     semantic_ids = {
         node_id
-        for node_id, neighbors in graph.items()
-        #两个条件，至少有一个相邻节点且是语义节点
-        if neighbors and _is_semantic_node(nodes[node_id])
+        for node_id in graph
+        if _is_semantic_node(nodes[node_id])
     }
-    #找边界节点
-    boundary_ids = _ordered_ids(
-        (node_id for node_id in semantic_ids if len(graph[node_id]) == 1), nodes
-    )
+    #语义节点中度数为 1 的节点是边界节点。
+    boundary_ids = [
+        node_id for node_id in semantic_ids if len(graph[node_id]) == 1
+    ]
     selected: list[list[str]] = []
 
-    for entity_id in _ordered_ids(entity_ids, nodes):
+    for entity_id in entity_ids:
         candidates = [
             path
             for boundary_id in boundary_ids
@@ -322,7 +316,7 @@ def _select_entity_best_paths(
 
 #Djistra代码实现，核对
 def _shortest_path(
-    graph: dict[str, list[tuple[str, int]]],
+    graph: dict[str, dict[str, TokenReasoningEdge]],
     nodes: dict[str, TokenReasoningNode],
     source_id: str,
     target_id: str,
@@ -347,7 +341,16 @@ def _shortest_path(
             continue
         if node_id == target_id:
             return path
-        for neighbor_id, edge_cost in graph[node_id]:
+        traversable_neighbors = [
+            (neighbor_id, _edge_cost(edge))
+            for neighbor_id, edge in graph[node_id].items()
+            if _semantic_node_allowed(nodes[neighbor_id])
+            and not isinf(_edge_cost(edge))
+        ]
+        for neighbor_id, edge_cost in sorted(
+            traversable_neighbors,
+            key=lambda item: (item[1], int(item[0])),
+        ):
             if neighbor_id in path or neighbor_id in blocked_ids:
                 continue
             next_path = [*path, neighbor_id]
@@ -378,7 +381,7 @@ def _sp_score(entity_id: str, path: list[str], branch_ids: set[str]) -> float:
 def _preposition_arguments(
     preposition_id: str,
     state: _WorkingState,
-) -> tuple[list[str], list[str]]:
+) -> tuple[set[str], set[str]]:
     arg1 = {
         str(edge.dep_idx)
         for edge in state.pas_edges
@@ -393,13 +396,13 @@ def _preposition_arguments(
         and str(edge.dep_idx) in state.nodes
         and edge.relation == "prep_ARG2"
     }
-    return _ordered_ids(arg1, state.nodes), _ordered_ids(arg2, state.nodes)
+    return arg1, arg2
 
 
 def _possessive_arguments(
     marker_id: str,
     state: _WorkingState,
-) -> tuple[list[str], list[str]]:
+) -> tuple[set[str], set[str]]:
     owners: set[str] = set()
     possessed: set[str] = set()
     for edge in state.pas_edges:
@@ -413,39 +416,46 @@ def _possessive_arguments(
             owners.add(related_id)
         elif edge.relation in POSSESSIVE_POSSESSED_RELATIONS:
             possessed.add(related_id)
-    return _ordered_ids(owners, state.nodes), _ordered_ids(possessed, state.nodes)
+    return owners, possessed
 
 
 def _coordination_groups(
     state: _WorkingState,
     entity_ids: set[str],
 ) -> list[tuple[str, list[str]]]:
-    groups: dict[str, set[str]] = {}
+    groups: dict[str, list[str]] = {}
     for edge in state.pas_edges:
+        #判断是否是并列关系
         if not _is_coordination_group_relation(edge.relation):
             continue
+        #找到该边的首尾节点
         head_id, dep_id = str(edge.head_idx), str(edge.dep_idx)
         if (
             head_id in state.nodes
+            #判断是不是连接词
             and _is_connector(state.nodes[head_id])
+            #依赖节点是不是实体
             and dep_id in entity_ids
         ):
-            groups.setdefault(head_id, set()).add(dep_id)
+            #给连接词增加一个实体
+            """{
+                "5":{
+                     "3"
+                     }  
+                }"""
+            groups.setdefault(head_id, []).append(dep_id)
         elif (
             dep_id in state.nodes
             and _is_connector(state.nodes[dep_id])
             and head_id in entity_ids
         ):
-            groups.setdefault(dep_id, set()).add(head_id)
+            groups.setdefault(dep_id, []).append(head_id)
 
-    return sorted(
-        (
-            (connector_id, _ordered_ids(member_ids, state.nodes))
-            for connector_id, member_ids in groups.items()
-            if len(member_ids) >= 2
-        ),
-        key=lambda group: int(group[0]),
-    )
+    return [
+        (connector_id, member_ids)
+        for connector_id, member_ids in groups.items()
+        if len(member_ids) >= 2
+    ]
 
 #判断一组并列实体是否共享同一个外部语法中心，如果共享就返回那个语法中心节点
 def _shared_syntactic_attachment(
@@ -518,20 +528,23 @@ def _is_semantic_node(node: TokenReasoningNode) -> bool:
     )
 
 
-def _edge_cost(edge: TokenReasoningEdge) -> int | None:
-    """Return the Equation (2) cost; ``None`` represents an invalid edge."""
+def _edge_cost(edge: TokenReasoningEdge) -> int | float:
+    """Return the Equation (2) cost; ``inf`` represents an invalid edge."""
 
+    if _is_pure_coordination(edge):
+        return inf
     if edge.rules & AUGMENTED_CORE_RULES:
         return 1
     if edge.rules & STRUCTURAL_RULES:
         return 2
     costs = [_pas_relation_cost(relation) for relation in edge.relations]
-    return min((cost for cost in costs if cost is not None), default=None)
+    return min(costs, default=inf)
 
 
-def _pas_relation_cost(relation: str) -> int | None:
+def _pas_relation_cost(relation: str) -> int | float:
     if any(marker in relation for marker in INVALID_RELATION_MARKERS):
-        return None
+        return inf
+    #核心语义边
     if relation in CORE_RELATIONS or relation.startswith(CORE_RELATION_PREFIXES):
         return 1
     if (
@@ -542,21 +555,18 @@ def _pas_relation_cost(relation: str) -> int | None:
         return 2
     return 3
 
-#判断节点是否是重要节点
-def _is_salient(node: TokenReasoningNode) -> bool:
-    return node.kind in {"entity", "content"}
-
-
+#构建图节点
 def _build_token_nodes(result: HanLPSDPResult) -> dict[str, TokenReasoningNode]:
     nodes = {"0": TokenReasoningNode("0", "ROOT", "function")}
     for index, token in enumerate(result.tokens, start=1):
         text = str(token)
         nodes[str(index)] = TokenReasoningNode(
+            #给节点分类
             id=str(index), text=text, kind=classify_node(text, index)
         )
     return nodes
 
-
+#将‘ s节点设置类型
 def _mark_possessive_markers(
     state: _WorkingState,
 ) -> None:
@@ -568,54 +578,27 @@ def _mark_possessive_markers(
             node.kind = "function"
 
 
-def _resolve_explicit_entity_ids(
-    nodes: dict[str, TokenReasoningNode],
-    explicit_entities: list[str],
-) -> list[str]:
-    order = {entity: index for index, entity in enumerate(explicit_entities)}
-    return sorted(
-        {
-            node.id
-            for node in nodes.values()
-            if node.text in order and ENTITY_RE.fullmatch(node.text)
-        },
-        key=lambda node_id: (order[nodes[node_id].text], int(node_id)),
-    )
-
 #向当前的推理图中加入一条无向边；如果这条边已经存在，就把新的 relation 或 rule 信息合并进去，而不是重复创建边。
 def _add_edge(
-    edges: dict[tuple[str, str], TokenReasoningEdge],
+    graph: dict[str, dict[str, TokenReasoningEdge]],
     source_id: str,
     target_id: str,
     *,
     relation: str | None = None,
     rule: str | None = None,
 ) -> None:
-    #统一边的表示，对于A-B,B-A两条边视为一条边
-    key = _edge_key(source_id, target_id)
-    #如果这个 key 已经存在，就返回它对应的 value；如果 key 不存在，就先把默认值放进去，再返回这个默认值。
-    edge = edges.setdefault(key, TokenReasoningEdge())
+    #同一条边对象同时挂在两个端点的邻接表中，表示无向连接。
+    edge = graph.setdefault(source_id, {}).get(target_id)
+    if edge is None:
+        edge = TokenReasoningEdge()
+        graph[source_id][target_id] = edge
+        graph.setdefault(target_id, {})[source_id] = edge
     #添加关系
     if relation:
         edge.relations.add(relation)
     #添加增强规则pas_preposition_contraction等等
     if rule:
         edge.rules.add(rule)
-
-#判断是否存在重复边
-def _edge_key(source_id: str, target_id: str) -> tuple[str, str]:
-    source, target = str(source_id), str(target_id)
-    return (source, target) if int(source) <= int(target) else (target, source)
-
-#按 token 在句子中的位置，对节点 id 排序。
-def _ordered_ids(
-    node_ids: Iterable[str], nodes: dict[str, TokenReasoningNode]
-) -> list[str]:
-    return sorted(
-        {str(node_id) for node_id in node_ids if str(node_id) in nodes},
-        key=int,
-    )
-
 
 def _path_key(path: list[str]) -> tuple[int, ...]:
     return tuple(int(node_id) for node_id in path)

@@ -40,13 +40,11 @@ class HypergraphDatasetLoader:
         # 文本记录和全部向量库必须对应同一份图快照。
         text_chunks = self._load_json(root / self.config.text_chunk_file)
         entity_vdb_path = root / self.config.entity_vdb_file
-        if not entity_vdb_path.is_file():
-            raise FileNotFoundError(
-                f"Entity-name vector store does not exist: {entity_vdb_path}. "
-                "Build or copy vdb_entity_names.json before running retrieval."
-            )
+        #加载超图
         graph = KnowledgeHypergraph.from_graphml(graph_path)
+        #加载实体向量库
         entity_store = VectorStore.from_json(entity_vdb_path, name="entity_names", label_fields=("entity_name",))
+        #加载超边向量库
         hyperedge_store = VectorStore.from_json(
             root / self.config.hyperedge_vdb_file,
             name="hyperedges",

@@ -50,8 +50,8 @@ def main() -> int:
     api_key = args.api_key or os.environ["OPENAI_API_KEY"]
     base_url = args.base_url or os.getenv("OPENAI_BASE_URL")
     os.environ["OPENAI_API_KEY"] = api_key
-    if base_url:
-        os.environ["OPENAI_BASE_URL"] = base_url
+   
+    os.environ["OPENAI_BASE_URL"] = base_url
 
     from hanlp_sdp_parser import HanLPSDPParser
     from llm_client import LLMClient
@@ -73,7 +73,7 @@ def main() -> int:
             limit=args.limit,
         )
         print(f"Running {dataset}: {len(items)} question(s), output={output_dir}")
-        hyperbranch_runner: _ReusableHyperBranchRunner | None = None
+        hyperbranch_pipeline: HyperBranchPipeline | None = None
 
         for offset, item in enumerate(items, start=1):
             question_dir = output_dir / depo_batch._question_dir_name(
@@ -88,12 +88,16 @@ def main() -> int:
             print(f"[run {offset}/{len(items)}] {dataset} #{item['index']} {item['question']}")
             decomposition = run_depo(item["question"], parser, llm_client)
             dag = decomposition["atomic_question_dag"]
-            if hyperbranch_runner is None:
-                hyperbranch_runner = _ReusableHyperBranchRunner(config_path, args)
-            hyperbranch_result = hyperbranch_runner.run(
-                question=item["question"],
-                dag=dag,
-                original_question_entities=decomposition["preprocess_result"].entities,
+            if hyperbranch_pipeline is None:
+                config = load_config(config_path, PROJECT_ROOT)
+                config.llm.model = args.hyperbranch_llm_model or args.llm_model
+                if args.embedding_model:
+                    config.llm.embedding_model = args.embedding_model
+                hyperbranch_pipeline = HyperBranchPipeline(config)
+            hyperbranch_result = hyperbranch_pipeline.run(
+                item["question"],
+                dag,
+                decomposition["entities"],
             )
             result = _result_payload(item, dag, hyperbranch_result)
             _write_json(result_path, result)
@@ -103,28 +107,6 @@ def main() -> int:
             )
 
     return 0
-
-
-class _ReusableHyperBranchRunner:
-    def __init__(self, config_path: Path, args: argparse.Namespace) -> None:
-        config = load_config(config_path, PROJECT_ROOT)
-        if args.hyperbranch_llm_model:
-            config.llm.model = args.hyperbranch_llm_model
-        else:
-            config.llm.model = args.llm_model
-        if args.embedding_model:
-            config.llm.embedding_model = args.embedding_model
-        self.pipeline = HyperBranchPipeline(config)
-
-    def run(
-        self,
-        *,
-        question: str,
-        dag: dict[str, Any],
-        original_question_entities: list[str],
-    ) -> dict[str, Any]:
-        return self.pipeline.run(question, dag, original_question_entities)
-
 
 def _result_payload(
     item: dict[str, Any],

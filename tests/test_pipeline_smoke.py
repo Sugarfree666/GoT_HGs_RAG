@@ -57,15 +57,8 @@ class PipelineTestClient:
 
 
 class PipelineTestLLMService:
-    def __init__(self, client: object, prompts: object) -> None:
+    def __init__(self, client: object) -> None:
         pass
-
-    def analyze_atomic_question(
-        self,
-        atomic_question: str,
-        dependency_answers: list[dict[str, object]],
-    ) -> dict[str, list[str]]:
-        return {"entities": ["urban farms"]}
 
     def answer_atomic_question(
         self,

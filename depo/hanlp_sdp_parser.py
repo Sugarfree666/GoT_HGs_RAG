@@ -12,14 +12,17 @@ class HanLPSDPParser:
         self._pipeline: Any | None = None
 
     def parse(self, text: str) -> HanLPSDPResult:
-        payload = _as_mapping(self._load_pipeline()(text))
+        #调用模型
+        payload = self._load_pipeline()(text)
         return HanLPSDPResult(
             tokens=payload["tok"],
+            #转成三元组
             edges=[
                 HanLPSDPEdge(head_idx, relation, dep_idx)
                 for dep_idx, dependencies in enumerate(payload["sdp/pas"], start=1)
                 for head_idx, relation in dependencies
             ],
+            #保存输出的依存句法树，用于后面处理并列结构
             syntax_heads={
                 str(dep_idx): head_idx
                 for dep_idx, (head_idx, _) in enumerate(payload["dep"], start=1)
@@ -36,7 +39,3 @@ class HanLPSDPParser:
                 EN_TOK_LEM_POS_NER_SRL_UDEP_SDP_CON_MODERNBERT_LARGE
             )
         return self._pipeline
-
-
-def _as_mapping(document: Any) -> dict[str, Any]:
-    return document if isinstance(document, dict) else document.to_dict()

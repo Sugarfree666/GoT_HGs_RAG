@@ -35,16 +35,10 @@ class LLMConfig:
 
 
 @dataclass(slots=True)
-class PromptConfig:
-    directory: Path
-
-
-@dataclass(slots=True)
 class Config:
     dataset: DatasetConfig
     retrieval: RetrievalConfig
     llm: LLMConfig
-    prompts: PromptConfig
 
 
 def load_config(config_path: Path, project_root: Path) -> Config:
@@ -54,7 +48,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     dataset = raw.get("dataset", {})
     retrieval = raw.get("retrieval", {})
     llm = raw.get("llm", {})
-    prompts = raw.get("prompts", {})
 
     # 原始 YAML 只在这里处理；其余模块只消费类型化配置。
     dataset_cfg = DatasetConfig(
@@ -77,12 +70,10 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         timeout_seconds=int(llm.get("timeout_seconds", 120)),
         temperature=float(llm.get("temperature", 0.2)),
     )
-    prompt_cfg = PromptConfig(directory=_resolve_path(project_root, prompts.get("dir", "prompts")))
     return Config(
         dataset=dataset_cfg,
         retrieval=retrieval_cfg,
         llm=llm_cfg,
-        prompts=prompt_cfg,
     )
 
 

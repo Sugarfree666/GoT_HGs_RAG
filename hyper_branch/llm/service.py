@@ -1,30 +1,20 @@
-"""LLM boundary for atomic analysis and evidence-grounded answers."""
+"""LLM boundary for evidence-grounded atomic answers."""
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 from .client import OpenAICompatibleClient
-from .prompts import PromptManager
+
+ATOMIC_ANSWER_PROMPT = (
+    Path(__file__).resolve().parents[2] / "prompts" / "atomic_answer.md"
+).read_text(encoding="utf-8").strip()
 
 
 class OpenAIAtomicLLMService:
-    def __init__(self, client: OpenAICompatibleClient, prompts: PromptManager) -> None:
+    def __init__(self, client: OpenAICompatibleClient) -> None:
         self.client = client
-        self.prompts = prompts
-
-    def analyze_atomic_question(
-        self,
-        atomic_question: str,
-        dependency_answers: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        response = self.client.chat_json(
-            "atomic_question_analysis",
-            self.prompts.get("atomic_question_analysis"),
-            {"atomic_question": atomic_question, "dependency_answers": dependency_answers},
-            max_tokens=300,
-        )
-        return {"entities": response["entities"]}
 
     def answer_atomic_question(
         self,
@@ -34,8 +24,7 @@ class OpenAIAtomicLLMService:
         original_question: str = "",
     ) -> dict[str, Any]:
         response = self.client.chat_json(
-            "atomic_answer",
-            self.prompts.get("atomic_answer"),
+            ATOMIC_ANSWER_PROMPT,
             {
                 "original_question": original_question,
                 "atomic_question": atomic_question,

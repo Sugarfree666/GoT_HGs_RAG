@@ -22,21 +22,19 @@ class OpenAICompatibleClient:
 
     def chat_json(
         self,
-        stage: str,
         system_prompt: str,
         user_payload: dict[str, Any],
         max_tokens: int = 1400,
     ) -> dict[str, Any]:
         response = json.loads(
-            self.chat_text(stage, system_prompt, user_payload, max_tokens=max_tokens)
+            self.chat_text(system_prompt, user_payload, max_tokens=max_tokens)
         )
         if not isinstance(response, dict):
-            raise ValueError(f"Expected a JSON object from {stage}.")
+            raise ValueError("Expected a JSON object.")
         return response
 
     def chat_text(
         self,
-        stage: str,
         system_prompt: str,
         user_payload: dict[str, Any],
         max_tokens: int = 1400,

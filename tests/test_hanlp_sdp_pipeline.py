@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import unittest
+from math import inf
 from pathlib import Path
 
 
@@ -16,6 +17,9 @@ from models import HanLPSDPEdge, HanLPSDPResult  # noqa: E402
 from tri_sdp_reasoning_compiler import (  # noqa: E402
     TokenReasoningEdge,
     _edge_cost,
+    add_pas_preposition_contraction_edges,
+    build_evidence_graph,
+    classify_node,
     compile_token_reasoning_structure,
 )
 
@@ -28,11 +32,7 @@ class _LLM:
         self.calls += 1
         if self.calls == 1:
             return {
-                "explicit_entities": [
-                    {"surface": "Ryan Tubridy"},
-                    {"surface": "Mauro Massironi"},
-                ],
-                "normalized_question": "Who is older, Ryan Tubridy or Mauro Massironi?",
+                "entities": ["Ryan Tubridy", "Mauro Massironi"],
             }
         return {
             "atomic_questions": [
@@ -100,7 +100,11 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             2,
         )
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"unknown_ARG"})), 3)
-        self.assertIsNone(_edge_cost(TokenReasoningEdge(relations={"punct"})))
+        self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"punct"})), inf)
+
+    def test_all_question_words_are_function_nodes(self) -> None:
+        self.assertEqual(classify_node("why", 1), "function")
+        self.assertEqual(classify_node("how", 1), "function")
 
     def test_preposition_contraction_keeps_the_entity_path(self) -> None:
         result = HanLPSDPResult(
@@ -115,6 +119,26 @@ class HanLPSDPPipelineTest(unittest.TestCase):
         self.assertEqual(
             compile_token_reasoning_structure(result, ["ENTITYA"]),
             [["ENTITYA", "capital", "Who"]],
+        )
+
+    def test_preposition_contraction_updates_the_single_graph(self) -> None:
+        result = HanLPSDPResult(
+            tokens=["ENTITYA", "of", "capital"],
+            edges=[
+                HanLPSDPEdge(2, "prep_ARG1", 1),
+                HanLPSDPEdge(2, "prep_ARG2", 3),
+            ],
+        )
+
+        state = build_evidence_graph(result)
+        add_pas_preposition_contraction_edges(state)
+
+        self.assertNotIn("2", state.graph)
+        self.assertIn("3", state.graph["1"])
+        self.assertIs(state.graph["1"]["3"], state.graph["3"]["1"])
+        self.assertEqual(
+            state.graph["1"]["3"].rules,
+            {"pas_preposition_contraction"},
         )
 
     def test_possessive_contraction_keeps_the_entity_path(self) -> None:

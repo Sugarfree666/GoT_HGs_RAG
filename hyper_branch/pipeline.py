@@ -4,13 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from .atomic import AtomicDagExecutor, AtomicHyperedgeRetriever, AtomicQuestionAnalyzer
+from .atomic import AtomicDagExecutor, AtomicHyperedgeRetriever
 from .config import Config
 from .data.loaders import HypergraphDatasetLoader
 from .llm import (
     OpenAIAtomicLLMService,
     OpenAICompatibleClient,
-    PromptManager,
 )
 
 
@@ -23,11 +22,11 @@ class HyperBranchPipeline:
         #保存嵌入服务
         self.embedder = client
         #用于回答原子问题
-        self.llm_service = OpenAIAtomicLLMService(client, PromptManager(config.prompts.directory))
+        self.llm_service = OpenAIAtomicLLMService(client)
         #创建超边检索器
         retriever = AtomicHyperedgeRetriever(self.dataset, self.embedder, config.retrieval)
-        #创建原子问题DAG执行器，AtomicQuestionAnalyzer解析问题，retriever检索证据，self.llm_service用于回答问题
-        self.executor = AtomicDagExecutor(AtomicQuestionAnalyzer(self.llm_service), retriever, self.llm_service)
+        #创建原子问题 DAG 执行器：retriever 检索证据，self.llm_service 回答问题
+        self.executor = AtomicDagExecutor(retriever, self.llm_service)
 
     def run(
         self,

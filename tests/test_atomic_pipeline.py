@@ -6,7 +6,6 @@ from types import SimpleNamespace
 import numpy as np
 
 from hyper_branch.atomic.executor import AtomicDagExecutor
-from hyper_branch.atomic.models import AtomicQuestionAnalysis
 from hyper_branch.atomic.retriever import AtomicHyperedgeRetriever
 from hyper_branch.config import RetrievalConfig
 from hyper_branch.models import GraphNode, VectorMatch
@@ -23,7 +22,7 @@ class AtomicPipelineTest(unittest.TestCase):
         )
 
         pool = retriever.build_candidate_pool(
-            analysis=AtomicQuestionAnalysis(entities=["A"]),
+            entities=["A"],
         )
         ranked = retriever.rank_candidate_pool(pool, question="What is connected to A?")
 
@@ -38,7 +37,7 @@ class AtomicPipelineTest(unittest.TestCase):
         )
 
         pool = retriever.build_candidate_pool(
-            analysis=AtomicQuestionAnalysis(entities=["alias"]),
+            entities=["alias"],
         )
 
         self.assertEqual(pool.candidate_hyperedge_ids, ["H1"])
@@ -51,7 +50,7 @@ class AtomicPipelineTest(unittest.TestCase):
         )
 
         pool = retriever.build_candidate_pool(
-            analysis=AtomicQuestionAnalysis(),
+            entities=[],
         )
 
         self.assertEqual(pool.candidate_hyperedge_ids, [])
@@ -65,10 +64,6 @@ class AtomicPipelineTest(unittest.TestCase):
         )
         llm = RecordingLLMService(["B", "Place"])
         executor = AtomicDagExecutor(
-            analyzer=QuestionAnalyzer({
-                "Who is linked to A?": ["A"],
-                "Where was B recorded?": ["B"],
-            }),
             retriever=_retriever(graph=graph, scores={"H1": 0.8, "H2": 0.9}),
             llm_service=llm,
         )
@@ -85,14 +80,12 @@ class AtomicPipelineTest(unittest.TestCase):
         self.assertEqual(result.atomic_results[1].question, "Where was B recorded?")
         self.assertEqual(result.final_answer["answer"], "Place")
         self.assertEqual(llm.answer_calls[1]["dependency_answers"][0]["answer"], "B")
-
-class QuestionAnalyzer:
-    def __init__(self, entities_by_question: dict[str, list[str]]) -> None:
-        self.entities_by_question = entities_by_question
-
-    def analyze(self, question: str, dependency_answers: list[dict[str, object]]) -> AtomicQuestionAnalysis:
-        return AtomicQuestionAnalysis(entities=self.entities_by_question.get(question, []))
-
+        second_hyperedges = [
+            hyperedge["hyperedge_text"]
+            for block in llm.answer_calls[1]["evidence"]["evidence_blocks"]
+            for hyperedge in block["hyperedges"]
+        ]
+        self.assertIn("H2", second_hyperedges)
 
 class RecordingLLMService:
     def __init__(self, answers: list[str] | None = None) -> None:

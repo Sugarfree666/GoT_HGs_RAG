@@ -6,10 +6,8 @@ import re
 from typing import Any
 
 from ..llm.service import OpenAIAtomicLLMService
-from .analyzer import AtomicQuestionAnalyzer
 from .models import (
     AtomicAnswerResult,
-    AtomicQuestionAnalysis,
     AtomicQuestionNode,
     DagExecutionResult,
     FusedHyperedgeCandidate,
@@ -22,11 +20,9 @@ class AtomicDagExecutor:
 
     def __init__(
         self,
-        analyzer: AtomicQuestionAnalyzer,
         retriever: AtomicHyperedgeRetriever,
         llm_service: OpenAIAtomicLLMService,
     ) -> None:
-        self.analyzer = analyzer
         self.retriever = retriever
         self.llm_service = llm_service
 
@@ -43,18 +39,17 @@ class AtomicDagExecutor:
         ]
         #进行拓扑排序
         order = self.topological_sort(nodes)
-        #分析原问题
-        original_analysis = AtomicQuestionAnalysis(entities=original_question_entities)
         #对原问题建立一个共享候选池
         shared_pool = self.retriever.build_candidate_pool(
-            analysis=original_analysis,
+            entities=original_question_entities,
         )
-        #保存执行状态
+        #保存已回答原子问题的结果
         results_by_id: dict[str, AtomicAnswerResult] = {}
-        #保存每个节点自己的检索结果
+        #保存每个原子问题检索到的局部候选超边池
         local_pools: dict[str, LocalHyperedgeRetrievalResult] = {}
-        
+        #整理查找表记录依赖哪些节点
         dependencies_by_id = {node.node_id: node.dependencies for node in order}
+        #记录节点在拓扑排序中的位置
         positions = {node.node_id: index for index, node in enumerate(order)}
 
         for node in order:
@@ -71,12 +66,18 @@ class AtomicDagExecutor:
                 node.question,
                 dependency_answers,
             )
-            #识别原子问题的实体
-            analysis = self.analyzer.analyze(question, dependency_answers)
-            analysis.entities = dependency_entities[:1] + analysis.entities
+            #复用原问题中仍出现在当前问题里的实体，并加入实际替换的依赖答案
+            entities = [
+                entity
+                for entity in original_question_entities
+                if entity in question
+            ]
+            entities.extend(
+                answer for answer in dependency_entities if answer not in entities
+            )
             #得到原子问题的超边候选池
             local_pool = self.retriever.build_candidate_pool(
-                analysis=analysis,
+                entities=entities,
             )
             #合并祖先问题和原问题候选池
             shared_pool_for_node = self._active_shared_candidate_pool(
@@ -104,7 +105,7 @@ class AtomicDagExecutor:
             )
             #供后续节点集成
             local_pools[node.node_id] = local_pool
-
+        #按照拓扑排序来组织格式
         atomic_results = [results_by_id[node.node_id] for node in order]
         return DagExecutionResult(
             atomic_results=atomic_results,
