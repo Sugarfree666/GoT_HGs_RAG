@@ -1,18 +1,6 @@
-dataset:
-  root: datasets/musique
-
-runtime:
-  base_run_dir: runs/depo_hyperbranch/musique
-  log_level: INFO
-
-retrieval:
-  local_hyperedge_top_k: 50
-
-llm:
-  api_key_env: OPENAI_API_KEY
-  base_url_env: OPENAI_BASE_URL
-  model: gpt-4o-mini
-  embedding_model: text-embedding-3-small
-
-  timeout_seconds: 120
-  temperature: 0
+dataset_root: datasets/musique
+top_k: 50
+model: gpt-4o-mini
+embedding_model: text-embedding-3-small
+timeout_seconds: 120
+temperature: 0

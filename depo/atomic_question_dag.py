@@ -22,28 +22,26 @@ def generate_atomic_question_dag(
     question_structure: list[list[str]],
 ) -> dict[str, Any]:
     """调用 Step5，并将依赖关系展开为 DAG 边。"""
-
-    entities: list[str] = []
-    for entity in question_entities:
-        text = str(entity).strip()
-        if text and text not in entities:
-            entities.append(text)
+    
+    #转成"ENTITYA -- born -- where"
     structure = [
         " -- ".join(node.strip() for node in branch if node.strip())
         for branch in question_structure
     ]
+
     payload = llm_client.chat_json(
         ATOMIC_QUESTION_DAG_PROMPT,
         json.dumps(
             {
                 "original_question": original_question,
-                "question_entities": entities,
+                "question_entities": question_entities,
                 "question_structure": [branch for branch in structure if branch],
             },
             ensure_ascii=False,
             indent=2,
         ),
     )
+    #从返回的结果中保留三个字段
     nodes = [
         {
             "id": item["id"],
@@ -52,20 +50,7 @@ def generate_atomic_question_dag(
         }
         for item in payload["atomic_questions"]
     ]
-    parent_ids = {
-        dependency
-        for node in nodes
-        for dependency in node["depends_on"]
-    }
-    return {
-        "nodes": nodes,
-        "edges": [
-            {"source": dependency, "target": node["id"]}
-            for node in nodes
-            for dependency in node["depends_on"]
-        ],
-        "leaf_node_ids": [node["id"] for node in nodes if node["id"] not in parent_ids],
-    }
+    return {"nodes": nodes}
 
 
 def restore_paths(paths: list[list[str]], mask_mapping: dict[str, str]) -> list[list[str]]:

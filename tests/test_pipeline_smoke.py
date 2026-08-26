@@ -6,7 +6,6 @@ from unittest.mock import patch
 
 import numpy as np
 
-from hyper_branch.config import load_config
 from hyper_branch.pipeline import HyperBranchPipeline
 from tests.agriculture_fixture import ensure_agriculture_fixture
 
@@ -15,14 +14,17 @@ class PipelineSmokeTest(unittest.TestCase):
     def test_pipeline_runs_end_to_end(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
         ensure_agriculture_fixture(project_root)
-        config = load_config(project_root / "configs" / "agriculture.yaml", project_root)
-
         question = "How can urban farms build community support while dealing with lead contamination in soil?"
-        with (
-            patch("hyper_branch.pipeline.OpenAICompatibleClient", PipelineTestClient),
-            patch("hyper_branch.pipeline.OpenAIAtomicLLMService", PipelineTestLLMService),
-        ):
-            pipeline = HyperBranchPipeline(config)
+        with patch("hyper_branch.pipeline.OpenAIClient", PipelineTestClient):
+            pipeline = HyperBranchPipeline(
+                project_root / "datasets" / "agriculture",
+                top_k=3,
+                model="test-model",
+                embedding_model="test-embedding-model",
+                timeout_seconds=120,
+                temperature=0.2,
+                api_key="test-key",
+            )
             result = pipeline.run(
                 question,
                 {
@@ -47,27 +49,17 @@ class PipelineSmokeTest(unittest.TestCase):
 
 
 class PipelineTestClient:
-    def __init__(self, config: object) -> None:
+    def __init__(self, **_kwargs: object) -> None:
         pass
 
-    def embed_texts(self, texts: list[str]) -> list[np.ndarray]:
+    def embed_text(self, text: str) -> np.ndarray:
         vector = np.zeros(1536, dtype=np.float32)
         vector[0] = 1.0
-        return [vector for _ in texts]
+        return vector
 
+    def answer_atomic_question(self, **payload: object) -> str:
+        return "community support"
 
-class PipelineTestLLMService:
-    def __init__(self, client: object) -> None:
-        pass
-
-    def answer_atomic_question(
-        self,
-        atomic_question: str,
-        dependency_answers: list[dict[str, object]],
-        evidence: dict[str, list[dict[str, object]]],
-        original_question: str = "",
-    ) -> dict[str, str]:
-        return {"answer": "community support"}
 
 if __name__ == "__main__":
     unittest.main()

@@ -12,24 +12,12 @@ def ensure_agriculture_fixture(project_root: Path) -> None:
     config_path.parent.mkdir(parents=True, exist_ok=True)
     if not config_path.exists():
         config_path.write_text(
-            """dataset:
-  root: datasets/agriculture
-
-runtime:
-  base_run_dir: runs/test_agriculture
-  log_level: INFO
-
-retrieval:
-  local_hyperedge_top_k: 3
-
-llm:
-  api_key_env: OPENAI_API_KEY
-  base_url_env: OPENAI_BASE_URL
-  model: gpt-4o-mini
-  embedding_model: text-embedding-3-small
-  timeout_seconds: 120
-  temperature: 0.1
-
+            """dataset_root: datasets/agriculture
+top_k: 3
+model: gpt-4o-mini
+embedding_model: text-embedding-3-small
+timeout_seconds: 120
+temperature: 0.1
 """,
             encoding="utf-8",
         )

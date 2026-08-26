@@ -12,7 +12,6 @@ from construct.build_entity_name_vdb import (
     build_entity_name_vdb,
     iter_graphml_entity_names,
 )
-from hyper_branch.data.vector_store import VectorStore
 
 
 GRAPHML_FIXTURE = """<?xml version="1.0" encoding="UTF-8"?>
@@ -83,7 +82,6 @@ class BuildEntityNameVDBTest(unittest.TestCase):
             first = build_entity_name_vdb(config, embedding_func=embedding)
             output_path = dataset_dir / "vdb_entity_names.json"
             payload = json.loads(output_path.read_text(encoding="utf-8"))
-            store = VectorStore.from_json(output_path, name="entity_names", label_fields=("entity_name",))
             self.assertFalse((dataset_dir / ".entity_name_vdb_build").exists())
             calls_after_first_build = list(embedding.calls)
             second = build_entity_name_vdb(config, embedding_func=embedding)
@@ -100,7 +98,7 @@ class BuildEntityNameVDBTest(unittest.TestCase):
         self.assertNotIn("content", payload["data"][0])
         self.assertNotIn("description", payload["data"][0])
         self.assertEqual(calls_after_first_build, [['"ALPHA ENTITY"', '"BÉTA ENTITY"']])
-        self.assertEqual(store.matrix.shape, (2, 3))
+        self.assertEqual(len(payload["data"]), 2)
         self.assertEqual(second["embedded_count"], 0)
         self.assertEqual(second["existing_count"], 2)
         self.assertEqual(embedding.calls, calls_after_first_build)

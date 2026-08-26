@@ -23,7 +23,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         self.assertIn("last node", prompt)
         self.assertIn("qN's answer", prompt)
 
-    def test_generator_builds_dag_edges(self) -> None:
+    def test_generator_builds_dag_nodes(self) -> None:
         llm = RecordingLLM(_payload())
         result = generate_atomic_question_dag(
             llm,
@@ -42,8 +42,6 @@ class AtomicQuestionDAGTest(unittest.TestCase):
             },
         )
         self.assertEqual(result["nodes"][0]["id"], "q1")
-        self.assertEqual(result["edges"], [{"source": "q1", "target": "q2"}])
-        self.assertEqual(result["leaf_node_ids"], ["q2"])
 
     def test_restores_selected_paths(self) -> None:
         self.assertEqual(

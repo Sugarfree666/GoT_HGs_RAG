@@ -102,9 +102,9 @@ class HanLPSDPPipelineTest(unittest.TestCase):
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"unknown_ARG"})), 3)
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"punct"})), inf)
 
-    def test_all_question_words_are_function_nodes(self) -> None:
-        self.assertEqual(classify_node("why", 1), "function")
-        self.assertEqual(classify_node("how", 1), "function")
+    def test_question_words_are_content_nodes(self) -> None:
+        self.assertEqual(classify_node("why", 1), "content")
+        self.assertEqual(classify_node("how", 1), "content")
 
     def test_preposition_contraction_keeps_the_entity_path(self) -> None:
         result = HanLPSDPResult(

@@ -2,13 +2,13 @@
 
 import unittest
 
-from hyper_branch.utils import normalize_label
+from hyper_branch.database import _display_text
 
 
-class UtilsTest(unittest.TestCase):
+class DatabaseTextTest(unittest.TestCase):
     def test_normalize_label(self) -> None:
         self.assertEqual(
-            normalize_label('<hyperedge>"Urban farms build trust through transparency."'),
+            _display_text('<hyperedge>"Urban farms build trust through transparency."'),
             "Urban farms build trust through transparency.",
         )
 

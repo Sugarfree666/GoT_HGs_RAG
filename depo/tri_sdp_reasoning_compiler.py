@@ -18,11 +18,6 @@ NUMERIC_RE = re.compile(r"^[+-]?(?:\d[\d,]*(?:\.\d+)?|\d{1,4}(?:[-/]\d{1,2}){1,2
 
 # 下列词在 classify_node() 中归为 function。
 DETERMINERS = {"a", "an", "the"}
-WH_WORDS = {
-    "what", "which", "who", "whom", "whose", "where", "when", "why", "how",
-}
-# 疑问词虽然是 function，但允许作为语义路径的终点。
-WH_ANCHORS = WH_WORDS
 RELATIVE_PRONOUNS = {"that"}
 LIGHT_VERBS = {
     "is", "am", "are", "was", "were", "be", "been", "being",
@@ -39,7 +34,6 @@ SCOPE_WORDS = {"and", "or", "among", "between", "than"}
 SEMANTIC_SCOPE_WORDS = SCOPE_WORDS | {"both", "either", "neither"}
 FUNCTION_WORDS = (
     DETERMINERS
-    | WH_WORDS
     | RELATIVE_PRONOUNS
     | LIGHT_VERBS
     | PREPOSITIONS
@@ -178,7 +172,7 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
     """Contract preposition ARG1--preposition--ARG2 into an augmented core edge."""
     contracted_prepositions: set[str] = set()
     #为了保持运行结果一致，先排序再遍历，否则同一个问题运行结果不一致
-    for preposition in sorted(state.nodes.values(), key=lambda node: int(node.id)):
+    for preposition in state.nodes.values():
         #判断当前节点是不是介词
         if preposition.text.lower() not in PREPOSITIONS:
             continue
@@ -201,7 +195,7 @@ def add_pas_preposition_contraction_edges(state: _WorkingState) -> None:
                     rule="pas_preposition_contraction",
                 )
                 contracted_prepositions.add(preposition.id)
-
+    #删除介词原来连接节点的边
     for preposition_id in contracted_prepositions:
         for neighbor_id in list(state.graph[preposition_id]):
             del state.graph[neighbor_id][preposition_id]
@@ -212,9 +206,9 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
     """Contract HanLP's split possessive path: owner -- ' s -- possessed."""
     #记录已处理的 ' 和 s 节点 id
     contracted_markers: set[str] = set()
-    #按照原始token顺序排序
-    tokens = sorted(state.nodes.values(), key=lambda node: int(node.id))
-
+   #获取当前token节点id
+    tokens = list(state.nodes.values())
+    #将相邻元素配对
     for marker, suffix in zip(tokens, tokens[1:]):
         if marker.text != "'" or suffix.text.lower() != "s":
             continue
@@ -269,7 +263,7 @@ def _select_entity_best_paths(
     graph: dict[str, dict[str, TokenReasoningEdge]],
     entity_ids: list[str],
 ) -> list[list[str]]:
-    #找到所有非实体语义节点。
+    #找到所有非实体语义节点。后面算SP分数
     semantic_ids = {
         node_id
         for node_id in graph
@@ -280,7 +274,7 @@ def _select_entity_best_paths(
         node_id for node_id in semantic_ids if len(graph[node_id]) == 1
     ]
     selected: list[list[str]] = []
-
+    #遍历处理每个实体
     for entity_id in entity_ids:
         candidates = [
             path
@@ -314,7 +308,7 @@ def _select_entity_best_paths(
         selected.append([nodes[node_id].text for node_id in best_path])
     return selected
 
-#Djistra代码实现，核对
+# 使用 Dijkstra 在语义图中寻找从实体到边界语义节点的最短路径。
 def _shortest_path(
     graph: dict[str, dict[str, TokenReasoningEdge]],
     nodes: dict[str, TokenReasoningNode],
@@ -323,11 +317,14 @@ def _shortest_path(
     *,
     blocked_ids: set[str],
 ) -> list[str]:
-    """Dijkstra with deterministic ties: cost, edge count, then token order."""
+    """按边代价搜索最短路径；代价相同时依次比较边数和 token 位置。"""
 
+    # 起点或终点不在图中时，没有可搜索的路径。
     if source_id not in graph or target_id not in graph:
         return []
 
+    # 堆元素依次为：总代价、边数、路径 token 序列、当前节点、完整路径。
+    # path_key 使相同代价的结果始终按 token 位置稳定选择。
     start_key = _path_key([source_id])
     heap: list[tuple[int, int, tuple[int, ...], str, list[str]]] = [
         (0, 0, start_key, source_id, [source_id])
@@ -336,11 +333,15 @@ def _shortest_path(
         source_id: (0, 0, start_key)
     }
     while heap:
+        # 每次取出当前代价最小的候选路径。
         cost, edge_count, path_key, node_id, path = heapq.heappop(heap)
+        # 若该候选已被更优路径替代，则跳过。
         if best[node_id] != (cost, edge_count, path_key):
             continue
+        # Dijkstra 首次到达终点时，该路径就是最优路径。
         if node_id == target_id:
             return path
+        # 只保留允许进入语义路径、且边代价不是无穷大的相邻节点。
         traversable_neighbors = [
             (neighbor_id, _edge_cost(edge))
             for neighbor_id, edge in graph[node_id].items()
@@ -351,17 +352,21 @@ def _shortest_path(
             traversable_neighbors,
             key=lambda item: (item[1], int(item[0])),
         ):
+            # 不重复经过节点，也不经过其他实体节点。
             if neighbor_id in path or neighbor_id in blocked_ids:
                 continue
+            # 扩展一条边，并构造用于比较优劣的新路径信息。
             next_path = [*path, neighbor_id]
             candidate = (
                 cost + edge_cost,
                 edge_count + 1,
                 _path_key(next_path),
             )
+            # 仅在首次到达或找到更优路径时，才加入待搜索堆。
             if neighbor_id not in best or candidate < best[neighbor_id]:
                 best[neighbor_id] = candidate
                 heapq.heappush(heap, (*candidate, neighbor_id, next_path))
+    # 所有候选路径都无法到达终点。
     return []
 
 
@@ -426,14 +431,17 @@ def _coordination_groups(
     groups: dict[str, list[str]] = {}
     for edge in state.pas_edges:
         #判断是否是并列关系
-        if not _is_coordination_group_relation(edge.relation):
+        if not (
+            "coord" in edge.relation
+            or edge.relation in {"conj_member", "disj_member"}
+        ):
             continue
         #找到该边的首尾节点
         head_id, dep_id = str(edge.head_idx), str(edge.dep_idx)
         if (
             head_id in state.nodes
             #判断是不是连接词
-            and _is_connector(state.nodes[head_id])
+            and state.nodes[head_id].text.lower() in {"and", "or"}
             #依赖节点是不是实体
             and dep_id in entity_ids
         ):
@@ -444,9 +452,10 @@ def _coordination_groups(
                      }  
                 }"""
             groups.setdefault(head_id, []).append(dep_id)
+            #同理，判断尾节点是不是实体或
         elif (
             dep_id in state.nodes
-            and _is_connector(state.nodes[dep_id])
+            and state.nodes[dep_id].text.lower() in {"and", "or"}
             and head_id in entity_ids
         ):
             groups.setdefault(dep_id, []).append(head_id)
@@ -470,6 +479,7 @@ def _shared_syntactic_attachment(
         _external_syntax_head(member_id, group_ids, state.syntax_heads)
         for member_id in member_ids
     }
+    #attachments去重，如果句法头节点不是一个
     if len(attachments) != 1:
         return None
     #获取唯一head，next取下一个元素，iter迭代器
@@ -482,6 +492,7 @@ def _external_syntax_head(
     group_ids: set[str],
     syntax_heads: dict[str, int],
 ) -> str | None:
+    #实体节点
     current = member_id
     seen: set[str] = set()
     while current in syntax_heads and current not in seen:
@@ -495,19 +506,11 @@ def _external_syntax_head(
     return None
 
 
-def _is_coordination_group_relation(relation: str) -> bool:
-    return "coord" in relation or relation in {"conj_member", "disj_member"}
-
-
 def _is_pure_coordination(edge: TokenReasoningEdge) -> bool:
     markers = ("coord", "conj_member", "disj_member", "_and_c", "_or_c")
     return bool(edge.relations) and all(
         any(marker in relation for marker in markers) for relation in edge.relations
     )
-
-
-def _is_connector(node: TokenReasoningNode) -> bool:
-    return node.text.lower() in {"and", "or"}
 
 
 def _semantic_node_allowed(node: TokenReasoningNode) -> bool:
@@ -516,16 +519,13 @@ def _semantic_node_allowed(node: TokenReasoningNode) -> bool:
         return False
     if lower in SEMANTIC_SCOPE_WORDS | DETERMINERS | PREPOSITIONS | LIGHT_VERBS | RELATIVE_PRONOUNS:
         return False
-    return node.kind != "function" or lower in WH_ANCHORS
+    return node.kind != "function"
 
 
 def _is_semantic_node(node: TokenReasoningNode) -> bool:
     if node.kind == "entity" or ENTITY_RE.fullmatch(node.text):
         return False
-    #为什么需要how和why
-    return node.text.lower() in WH_ANCHORS or (
-        _semantic_node_allowed(node) and node.kind in {"content", "constraint"}
-    )
+    return _semantic_node_allowed(node) and node.kind in {"content", "constraint"}
 
 
 def _edge_cost(edge: TokenReasoningEdge) -> int | float:
