@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from llm_client import LLMClient
+from hyper_branch.client import OpenAIClient
 
 
 ATOMIC_QUESTION_DAG_PROMPT = (
@@ -16,7 +16,7 @@ ATOMIC_QUESTION_DAG_PROMPT = (
 
 
 def generate_atomic_question_dag(
-    llm_client: LLMClient,
+    llm_client: OpenAIClient,
     original_question: str,
     question_entities: list[str],
     question_structure: list[list[str]],

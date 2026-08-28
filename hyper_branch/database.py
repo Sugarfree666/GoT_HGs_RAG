@@ -15,6 +15,7 @@ import numpy as np
 CandidatePool = dict[str, set[str]]
 
 
+
 class Embedder(Protocol):
     def embed_text(self, text: str) -> np.ndarray: ...
 

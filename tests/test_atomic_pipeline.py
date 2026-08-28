@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 from typing import Any
@@ -54,7 +55,7 @@ class AtomicPipelineTest(unittest.TestCase):
             set(database.rank_calls[-1]["candidates"]),
             {"H-original", "H-q1", "H-q2", "H-q3"},
         )
-        self.assertEqual(client.answer_calls[1]["dependency_answers"][0]["answer"], "B")
+        self.assertEqual(client.chat_calls[1]["dependency_context"][0]["answer"], "B")
 
 class RecordingDatabase:
     def __init__(self, pools: list[dict[str, set[str]]]) -> None:
@@ -88,13 +89,18 @@ class RecordingDatabase:
 class RecordingClient:
     def __init__(self, answers: list[str]) -> None:
         self.answers = answers
-        self.answer_calls: list[dict[str, Any]] = []
+        self.chat_calls: list[dict[str, Any]] = []
 
     def embed_text(self, text: str) -> np.ndarray:
         return np.ones(3, dtype=np.float32)
 
-    def answer_atomic_question(self, **payload: Any) -> str:
-        self.answer_calls.append(payload)
-        return self.answers.pop(0)
+    def chat_json(self, _system_prompt: str, user_prompt: str, *, max_tokens: int) -> dict[str, str]:
+        self.chat_calls.append(json.loads(user_prompt))
+        self.assert_max_tokens(max_tokens)
+        return {"answer": self.answers.pop(0)}
+
+    @staticmethod
+    def assert_max_tokens(max_tokens: int) -> None:
+        assert max_tokens == 900
 if __name__ == "__main__":
     unittest.main()

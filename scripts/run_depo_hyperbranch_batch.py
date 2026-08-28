@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import sys
+import traceback
 from datetime import datetime
 from pathlib import Path
 
@@ -15,6 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(PROJECT_ROOT / "depo"), str(PROJECT_ROOT)]
 
 from hyper_branch.pipeline import HyperBranchPipeline
+from hyper_branch.client import OpenAIClient
 
 
 def main() -> int:
@@ -41,13 +43,19 @@ def main() -> int:
         questions = questions[: args.limit]
 
     from hanlp_sdp_parser import HanLPSDPParser
-    from llm_client import LLMClient
     from pipeline import run_depo
     #创建llm客户端
-    llm = LLMClient(api_key=api_key, base_url=base_url, model=args.llm_model)
     #读取yaml配置文件，转成字典格式
     config = yaml.safe_load(
         (PROJECT_ROOT / "configs" / f"{args.dataset}.yaml").read_text(encoding="utf-8")
+    )
+    llm = OpenAIClient(
+        api_key=api_key,
+        model=args.llm_model,
+        embedding_model=config["embedding_model"],
+        timeout_seconds=config["timeout_seconds"],
+        temperature=config["temperature"],
+        base_url=base_url,
     )
 
     #创建一个检索器对象，并完成初始化
@@ -62,12 +70,14 @@ def main() -> int:
         temperature=config["temperature"],
         api_key=api_key,
         base_url=base_url,
+        client=llm,
     )
     #创建解析器对象
     sdp_parser = HanLPSDPParser()
     #输出目录路径
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = PROJECT_ROOT / "runs" / "depo_hyperbranch" / args.dataset / run_id
+    failure_count = 0
     #读取问题列表
     for offset, item in enumerate(questions, start=1):
         #计算真实问题编号
@@ -76,36 +86,69 @@ def main() -> int:
         question = item["question"].strip()
         #输出文件位置
         result_file = output_dir / f"{index:05d}" / "result.json"
+        error_file = result_file.with_name("error.json")
         #判断是否运行过，断点续跑
         if args.resume and result_file.exists():
             continue
-        #跑问题分解算法，返回实体列表和原子问题DAG
-        decomposition = run_depo(question, sdp_parser, llm)
-        #跑当前原子问题DAG的检索和回答
-        result = hyperbranch.run(
-            question,
-            decomposition["atomic_question_dag"],
-            decomposition["entities"],
+
+        decomposition = None
+        try:
+            #跑问题分解算法，返回实体列表和原子问题DAG
+            decomposition = run_depo(question, sdp_parser, llm)
+            #跑当前原子问题DAG的检索和回答
+            result = hyperbranch.run(
+                question,
+                decomposition["atomic_question_dag"],
+                decomposition["entities"],
+            )
+            #创建结果目录
+            result_file.parent.mkdir(parents=True, exist_ok=True)
+            #把结果写入result.json
+            result_file.write_text(
+                json.dumps(
+                    {
+                        "question": question,
+                        "gold_answer": item["answer"],
+                        "dag": result["dag"],
+                        "atomic_answers": result["atomic_answers"],
+                        "final_answer": result["final_answer"],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                #指定编码
+                encoding="utf-8",
+            )
+            error_file.unlink(missing_ok=True)
+            print(f"{args.dataset} #{index}: {result['final_answer']['answer']}")
+        except Exception as exc:
+            failure_count += 1
+            error_file.parent.mkdir(parents=True, exist_ok=True)
+            error_payload = {
+                "question": question,
+                "gold_answer": item["answer"],
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+                "traceback": traceback.format_exc(),
+            }
+            if decomposition is not None:
+                error_payload["decomposition"] = decomposition
+            error_file.write_text(
+                json.dumps(error_payload, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            print(
+                f"{args.dataset} #{index} failed: {type(exc).__name__}: {exc}",
+                file=sys.stderr,
+            )
+
+    if failure_count:
+        print(
+            f"{args.dataset}: completed with {failure_count} failed question(s); "
+            "see error.json files for details.",
+            file=sys.stderr,
         )
-        #创建结果目录
-        result_file.parent.mkdir(parents=True, exist_ok=True)
-        #把结果写入result.json
-        result_file.write_text(
-            json.dumps(
-                {
-                    "question": question,
-                    "gold_answer": item["answer"],
-                    "dag": result["dag"],
-                    "atomic_answers": result["atomic_answers"],
-                    "final_answer": result["final_answer"],
-                },
-                ensure_ascii=False,
-                indent=2,
-            ),
-            #指定编码
-            encoding="utf-8",
-        )
-        print(f"{args.dataset} #{index}: {result['final_answer']['answer']}")
+        return 1
     return 0
 
 

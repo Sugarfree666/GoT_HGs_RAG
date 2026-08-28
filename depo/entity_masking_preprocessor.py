@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-from llm_client import LLMClient
+from hyper_branch.client import OpenAIClient
 from models import PreprocessedQuestion
 
 #找到提示词文件，以UTF-8 读完整个 Markdown 文件，去掉头尾空白。
@@ -15,7 +15,7 @@ ENTITY_RECOGNITION_PROMPT = (
 ).read_text(encoding="utf-8").strip()
 
 
-def preprocess_question(question: str, llm_client: LLMClient) -> PreprocessedQuestion:
+def preprocess_question(question: str, llm_client: OpenAIClient) -> PreprocessedQuestion:
     """将问题中的显式实体替换为 ENTITYA、ENTITYB 等占位符。"""
 
     payload = llm_client.chat_json(

@@ -19,7 +19,7 @@ class AtomicQuestionDAGTest(unittest.TestCase):
         prompt = (PROJECT_ROOT / "prompts" / "depo_atomic_question_dag.md").read_text(
             encoding="utf-8"
         )
-        self.assertIn("exactly one final leaf", prompt)
+        self.assertIn("only leaf node", prompt)
         self.assertIn("last node", prompt)
         self.assertIn("qN's answer", prompt)
 
@@ -67,13 +67,11 @@ def _payload() -> dict[str, object]:
                 "id": "q1",
                 "question": "Who directed An Event?",
                 "depends_on": [],
-                "operation": "lookup",
             },
             {
                 "id": "q2",
                 "question": "Where was q1's answer born?",
                 "depends_on": ["q1"],
-                "operation": "lookup",
             },
         ]
     }

@@ -229,6 +229,8 @@ def add_pas_possessive_contraction_edges(state: _WorkingState) -> None:
                 contracted_markers.update({marker.id, suffix.id})
 
     for marker_id in contracted_markers:
+        if marker_id not in state.graph:
+            continue
         for neighbor_id in list(state.graph[marker_id]):
             del state.graph[neighbor_id][marker_id]
         del state.graph[marker_id]

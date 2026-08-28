@@ -57,8 +57,15 @@ class PipelineTestClient:
         vector[0] = 1.0
         return vector
 
-    def answer_atomic_question(self, **payload: object) -> str:
-        return "community support"
+    def chat_json(
+        self,
+        _system_prompt: str,
+        _user_prompt: str,
+        *,
+        max_tokens: int,
+    ) -> dict[str, str]:
+        assert max_tokens == 900
+        return {"answer": "community support"}
 
 
 if __name__ == "__main__":

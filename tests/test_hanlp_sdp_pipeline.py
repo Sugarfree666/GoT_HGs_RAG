@@ -158,6 +158,21 @@ class HanLPSDPPipelineTest(unittest.TestCase):
             [["ENTITYA", "capital", "Who"]],
         )
 
+    def test_possessive_contraction_allows_an_isolated_suffix_marker(self) -> None:
+        result = HanLPSDPResult(
+            tokens=["ENTITYA", "'", "s", "capital", "Who"],
+            edges=[
+                HanLPSDPEdge(2, "poss_ARG2", 1),
+                HanLPSDPEdge(2, "poss_ARG1", 4),
+                HanLPSDPEdge(4, "adj_ARG1", 5),
+            ],
+        )
+
+        self.assertEqual(
+            compile_token_reasoning_structure(result, ["ENTITYA"]),
+            [["ENTITYA", "capital", "Who"]],
+        )
+
     def test_coordination_uses_the_shared_syntactic_attachment(self) -> None:
         result = HanLPSDPResult(
             tokens=["ENTITYA", "and", "ENTITYB", "won", "Who"],

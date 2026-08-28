@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -29,12 +30,13 @@ class HyperBranchPipeline:
         temperature: float,
         api_key: str,
         base_url: str | None = None,
+        client: OpenAIClient | None = None,
     ) -> None:
         self.top_k = top_k
         #创建超图数据库
         self.database = HypergraphDatabase(dataset_root)
         #创建LLM客户端
-        self.client = OpenAIClient(
+        self.client = client or OpenAIClient(
             api_key=api_key,
             model=model,
             embedding_model=embedding_model,
@@ -68,11 +70,11 @@ class HyperBranchPipeline:
             #取当前节点的依赖节点id
             dependency_ids = node.get("depends_on", [])
             #取出依赖问题的答案
-            dependency_answers = [answers[dependency_id] for dependency_id in dependency_ids]
+            dependency_context = [answers[dependency_id] for dependency_id in dependency_ids]
             #重写问题
             rewritten_question, inserted_answers = _rewrite_question(
                 node["question"],
-                dependency_answers,
+                dependency_context,
             )
             #原始问题实体
             anchors = [
@@ -116,13 +118,21 @@ class HyperBranchPipeline:
                 self.client,
                 self.top_k,
             )
-            answer = self.client.answer_atomic_question(
-                system_prompt=ANSWER_PROMPT,
-                original_question=question,
-                atomic_question=rewritten_question,
-                dependency_answers=dependency_answers,
-                evidence_blocks=_evidence_blocks(top_hyperedges),
+            response = self.client.chat_json(
+                ANSWER_PROMPT,
+                json.dumps(
+                    {
+                        "original_question": question,
+                        "atomic_question": rewritten_question,
+                        "dependency_context": dependency_context,
+                        "evidence_blocks": _evidence_blocks(top_hyperedges),
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                max_tokens=900,
             )
+            answer = str(response["answer"]).strip()
             answers[node_id] = {
                 "node_id": node_id,
                 "question": rewritten_question,
@@ -172,12 +182,12 @@ def _topological_order(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _rewrite_question(
     question: str,
     #所有依赖答案
-    dependency_answers: list[dict[str, str]],
+    dependency_context: list[dict[str, str]],
 ) -> tuple[str, list[str]]:
     rewritten = question
     #记录哪些依赖答案替换进了当前问题
     inserted_answers: list[str] = []
-    for dependency in dependency_answers:
+    for dependency in dependency_context:
         answer = dependency["answer"].strip()
         reference = re.compile(
             rf"\b{re.escape(dependency['node_id'])}(?:\s+answer|['\u2019]s\s+answer)\b",
