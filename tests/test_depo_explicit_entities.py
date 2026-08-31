@@ -51,7 +51,7 @@ class ExplicitEntityPromptTest(unittest.TestCase):
         question = "Who directed Shrek 2?"
         llm = DirectEntityLLM(_payload([]))
         preprocess_question(question, llm)
-        prompt = (PROJECT_ROOT / "prompts" / "entity_recognition.md").read_text(
+        prompt = (PROJECT_ROOT / "prompts" / "topic_entity_recognition.md").read_text(
             encoding="utf-8"
         )
 
@@ -61,8 +61,8 @@ class ExplicitEntityPromptTest(unittest.TestCase):
         )
         self.assertEqual(llm.system_prompt, prompt.strip())
         self.assertIn('"entities"', prompt)
-        self.assertIn("dates, years, and numeric values", prompt)
-        self.assertIn("exactly as it appears in the question", prompt)
+        self.assertIn("topic anchors", prompt)
+        self.assertIn("Copy every entity exactly from the question", prompt)
 
 
 class DirectEntityLLM:

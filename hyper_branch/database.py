@@ -134,7 +134,7 @@ class HypergraphDatabase:
             embedder.embed_text(mention),
             1,
         )[0]
-        return label if score >= 0.6 else None
+        return label if score >= 0.5 else None
 
     #用 XML 解析器读取 GraphML，然后把 XML 描述的超图结构转换成 Python 字典索引。
     def _load_graph(self, path: Path) -> None:

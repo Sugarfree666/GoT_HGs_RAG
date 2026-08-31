@@ -129,13 +129,13 @@ def compile_token_reasoning_structure(
     return _select_entity_best_paths(state.nodes, state.graph, entity_ids)
 
 
-def classify_node(text: str, index: int) -> str:
+def classify_node(text: str) -> str:
     """Classify one PAS token as entity, content, constraint, or function."""
     #对token进行一个处理
     token = text.strip()
     lower = token.lower()
     #对节点进行分类
-    if index == 0 or lower == "root" or not token or _is_punctuation(token):
+    if not token or _is_punctuation(token):
         return "function"
     if ENTITY_RE.fullmatch(token):
         return "entity"
@@ -517,7 +517,7 @@ def _is_pure_coordination(edge: TokenReasoningEdge) -> bool:
 
 def _semantic_node_allowed(node: TokenReasoningNode) -> bool:
     lower = node.text.lower()
-    if node.id == "0" or lower == "root" or _is_punctuation(node.text):
+    if node.id == "0" or _is_punctuation(node.text):
         return False
     if lower in SEMANTIC_SCOPE_WORDS | DETERMINERS | PREPOSITIONS | LIGHT_VERBS | RELATIVE_PRONOUNS:
         return False
@@ -564,7 +564,7 @@ def _build_token_nodes(result: HanLPSDPResult) -> dict[str, TokenReasoningNode]:
         text = str(token)
         nodes[str(index)] = TokenReasoningNode(
             #给节点分类
-            id=str(index), text=text, kind=classify_node(text, index)
+            id=str(index), text=text, kind=classify_node(text)
         )
     return nodes
 

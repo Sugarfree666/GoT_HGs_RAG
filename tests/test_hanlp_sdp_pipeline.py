@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from math import inf
@@ -12,7 +13,7 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from hanlp_sdp_parser import HanLPSDPParser  # noqa: E402
-from pipeline import run_depo  # noqa: E402
+from pipeline import extract_question_structure, run_depo  # noqa: E402
 from models import HanLPSDPEdge, HanLPSDPResult  # noqa: E402
 from tri_sdp_reasoning_compiler import (  # noqa: E402
     TokenReasoningEdge,
@@ -27,9 +28,11 @@ from tri_sdp_reasoning_compiler import (  # noqa: E402
 class _LLM:
     def __init__(self) -> None:
         self.calls = 0
+        self.prompts: list[str] = []
 
     def chat_json(self, _system: str, _prompt: str) -> dict[str, object]:
         self.calls += 1
+        self.prompts.append(_prompt)
         if self.calls == 1:
             return {
                 "entities": ["Ryan Tubridy", "Mauro Massironi"],
@@ -103,8 +106,11 @@ class HanLPSDPPipelineTest(unittest.TestCase):
         self.assertEqual(_edge_cost(TokenReasoningEdge(relations={"punct"})), inf)
 
     def test_question_words_are_content_nodes(self) -> None:
-        self.assertEqual(classify_node("why", 1), "content")
-        self.assertEqual(classify_node("how", 1), "content")
+        self.assertEqual(classify_node("why"), "content")
+        self.assertEqual(classify_node("how"), "content")
+
+    def test_root_word_is_not_treated_as_the_virtual_root_node(self) -> None:
+        self.assertEqual(classify_node("root"), "content")
 
     def test_preposition_contraction_keeps_the_entity_path(self) -> None:
         result = HanLPSDPResult(
@@ -200,6 +206,40 @@ class HanLPSDPPipelineTest(unittest.TestCase):
 
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(result["atomic_question_dag"]["nodes"][0]["question"], "Who is older?")
+
+    def test_pipeline_can_extract_question_structure_without_generating_dag(self) -> None:
+        llm = _LLM()
+        parser = _Parser()
+
+        result = extract_question_structure(
+            "Who is older, Ryan Tubridy or Mauro Massironi?",
+            parser,
+            llm,
+        )
+
+        self.assertEqual(llm.calls, 1)
+        self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(
+            result["question_structure"],
+            [
+                ["Ryan Tubridy", "older", "Who"],
+                ["Mauro Massironi", "older", "Who"],
+            ],
+        )
+
+    def test_pipeline_can_override_question_structure(self) -> None:
+        llm = _LLM()
+        parser = _Parser()
+
+        run_depo(
+            "Who is older, Ryan Tubridy or Mauro Massironi?",
+            parser,
+            llm,
+            question_structure_override=[],
+        )
+
+        dag_request = json.loads(llm.prompts[1])
+        self.assertEqual(dag_request["question_structure"], [])
 
 
 if __name__ == "__main__":

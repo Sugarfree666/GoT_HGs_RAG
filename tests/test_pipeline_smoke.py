@@ -62,8 +62,10 @@ class PipelineTestClient:
         _system_prompt: str,
         _user_prompt: str,
         *,
-        max_tokens: int,
-    ) -> dict[str, str]:
+        max_tokens: int | None = None,
+    ) -> dict[str, object]:
+        if max_tokens is None:
+            return {"entities": ["urban farms", "community support"]}
         assert max_tokens == 900
         return {"answer": "community support"}
 

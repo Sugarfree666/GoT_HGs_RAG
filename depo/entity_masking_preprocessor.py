@@ -10,8 +10,8 @@ from hyper_branch.client import OpenAIClient
 from models import PreprocessedQuestion
 
 #找到提示词文件，以UTF-8 读完整个 Markdown 文件，去掉头尾空白。
-ENTITY_RECOGNITION_PROMPT = (
-    Path(__file__).resolve().parents[1] / "prompts" / "entity_recognition.md"
+TOPIC_ENTITY_RECOGNITION_PROMPT = (
+    Path(__file__).resolve().parents[1] / "prompts" / "topic_entity_recognition.md"
 ).read_text(encoding="utf-8").strip()
 
 
@@ -20,7 +20,7 @@ def preprocess_question(question: str, llm_client: OpenAIClient) -> Preprocessed
 
     payload = llm_client.chat_json(
         #System：
-        ENTITY_RECOGNITION_PROMPT,
+        TOPIC_ENTITY_RECOGNITION_PROMPT,
         #User：
         #将问题转换成json格式输入LLM
         json.dumps({"question": question}, ensure_ascii=False, indent=2),

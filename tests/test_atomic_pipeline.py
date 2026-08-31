@@ -21,7 +21,7 @@ class AtomicPipelineTest(unittest.TestCase):
                 {"H-q3": {"H-q2"}},
             ]
         )
-        client = RecordingClient(["B", "C", "Done"])
+        client = RecordingClient([["A"], ["B"], ["C"]], ["B", "C", "Done"])
         dag = {
             "nodes": [
                 {"id": "q3", "question": "What follows q2's answer?", "depends_on": ["q2"]},
@@ -50,10 +50,16 @@ class AtomicPipelineTest(unittest.TestCase):
             ["Who is linked to A?", "Where was B recorded?", "What follows C?"],
         )
         self.assertEqual(result["final_answer"], {"answer": "Done"})
+        self.assertEqual(result["atomic_answers"][0]["entities"], ["A"])
+        self.assertTrue(result["atomic_answers"][0]["evidence_blocks"])
         self.assertEqual(database.anchor_calls, [["A"], ["A"], ["B"], ["C"]])
         self.assertEqual(
             set(database.rank_calls[-1]["candidates"]),
             {"H-original", "H-q1", "H-q2", "H-q3"},
+        )
+        self.assertEqual(
+            client.entity_questions,
+            ["Who is linked to A?", "Where was B recorded?", "What follows C?"],
         )
         self.assertEqual(client.chat_calls[1]["dependency_context"][0]["answer"], "B")
 
@@ -87,14 +93,21 @@ class RecordingDatabase:
 
 
 class RecordingClient:
-    def __init__(self, answers: list[str]) -> None:
+    def __init__(self, entities: list[list[str]], answers: list[str]) -> None:
+        self.entities = entities
         self.answers = answers
         self.chat_calls: list[dict[str, Any]] = []
+        self.entity_questions: list[str] = []
 
     def embed_text(self, text: str) -> np.ndarray:
         return np.ones(3, dtype=np.float32)
 
-    def chat_json(self, _system_prompt: str, user_prompt: str, *, max_tokens: int) -> dict[str, str]:
+    def chat_json(
+        self, _system_prompt: str, user_prompt: str, *, max_tokens: int | None = None
+    ) -> dict[str, object]:
+        if max_tokens is None:
+            self.entity_questions.append(json.loads(user_prompt)["question"])
+            return {"entities": self.entities.pop(0)}
         self.chat_calls.append(json.loads(user_prompt))
         self.assert_max_tokens(max_tokens)
         return {"answer": self.answers.pop(0)}

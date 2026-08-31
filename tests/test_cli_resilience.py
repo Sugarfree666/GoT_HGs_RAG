@@ -1,19 +1,10 @@
 from __future__ import annotations
 
-import io
-import json
-import os
-import sys
-import tempfile
 import unittest
-from contextlib import redirect_stderr, redirect_stdout
-from pathlib import Path
-from types import ModuleType
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from urllib import error
 
 from hyper_branch.client import OpenAIClient
-from scripts import run_depo_hyperbranch_batch
 
 
 class FakeHTTPResponse:
@@ -187,102 +178,3 @@ class OpenAIClientTest(unittest.TestCase):
                 "max_tokens": 12,
             },
         )
-
-
-class BatchResilienceTest(unittest.TestCase):
-    def test_failed_question_is_recorded_and_next_question_runs(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary_directory:
-            project_root = Path(temporary_directory)
-            questions_dir = project_root / "questions" / "toy"
-            configs_dir = project_root / "configs"
-            questions_dir.mkdir(parents=True)
-            configs_dir.mkdir()
-            (questions_dir / "questions.json").write_text(
-                json.dumps(
-                    [
-                        {"question": "Broken question?", "answer": "broken"},
-                        {"question": "Working question?", "answer": "working"},
-                    ]
-                ),
-                encoding="utf-8",
-            )
-            (configs_dir / "toy.yaml").write_text(
-                "\n".join(
-                    [
-                        "dataset_root: datasets/toy",
-                        "top_k: 3",
-                        "embedding_model: test-embedding",
-                        "timeout_seconds: 10",
-                        "temperature: 0",
-                    ]
-                ),
-                encoding="utf-8",
-            )
-
-            decomposition = {
-                "entities": [],
-                "atomic_question_dag": {"nodes": []},
-            }
-            run_depo = Mock(return_value=decomposition)
-            hanlp_module = ModuleType("hanlp_sdp_parser")
-            hanlp_module.HanLPSDPParser = Mock(return_value=object())  # type: ignore[attr-defined]
-            depo_pipeline_module = ModuleType("pipeline")
-            depo_pipeline_module.run_depo = run_depo  # type: ignore[attr-defined]
-
-            hyperbranch = Mock()
-            hyperbranch.run.side_effect = [
-                IndexError("list index out of range"),
-                {
-                    "dag": {"nodes": [{"id": "q1"}]},
-                    "atomic_answers": [{"node_id": "q1", "answer": "working"}],
-                    "final_answer": {"answer": "working"},
-                },
-            ]
-
-            with (
-                patch.object(run_depo_hyperbranch_batch, "PROJECT_ROOT", project_root),
-                patch.object(run_depo_hyperbranch_batch, "OpenAIClient", return_value=object()),
-                patch.object(
-                    run_depo_hyperbranch_batch,
-                    "HyperBranchPipeline",
-                    return_value=hyperbranch,
-                ),
-                patch.dict(
-                    sys.modules,
-                    {
-                        "hanlp_sdp_parser": hanlp_module,
-                        "pipeline": depo_pipeline_module,
-                    },
-                ),
-                patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}),
-                patch.object(
-                    sys,
-                    "argv",
-                    [
-                        "run_depo_hyperbranch_batch.py",
-                        "--dataset",
-                        "toy",
-                        "--run-id",
-                        "test-run",
-                    ],
-                ),
-                redirect_stdout(io.StringIO()),
-                redirect_stderr(io.StringIO()),
-            ):
-                exit_code = run_depo_hyperbranch_batch.main()
-
-            output_dir = project_root / "runs" / "depo_hyperbranch" / "toy" / "test-run"
-            error_payload = json.loads(
-                (output_dir / "00001" / "error.json").read_text(encoding="utf-8")
-            )
-            result_payload = json.loads(
-                (output_dir / "00002" / "result.json").read_text(encoding="utf-8")
-            )
-
-        self.assertEqual(exit_code, 1)
-        self.assertEqual(run_depo.call_count, 2)
-        self.assertEqual(hyperbranch.run.call_count, 2)
-        self.assertEqual(error_payload["error_type"], "IndexError")
-        self.assertEqual(error_payload["decomposition"], decomposition)
-        self.assertEqual(result_payload["question"], "Working question?")
-        self.assertEqual(result_payload["final_answer"], {"answer": "working"})

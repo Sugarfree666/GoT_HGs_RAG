@@ -14,6 +14,9 @@ from .database import CandidatePool, HypergraphDatabase
 ANSWER_PROMPT = (
     Path(__file__).resolve().parents[1] / "prompts" / "atomic_answer.md"
 ).read_text(encoding="utf-8").strip()
+ENTITY_RECOGNITION_PROMPT = (
+    Path(__file__).resolve().parents[1] / "prompts" / "entity_recognition.md"
+).read_text(encoding="utf-8").strip()
 
 
 class HyperBranchPipeline:
@@ -59,7 +62,7 @@ class HyperBranchPipeline:
             self.client,
         )
         #保存每个原子问题的答案
-        answers: dict[str, dict[str, str]] = {}
+        answers: dict[str, dict[str, Any]] = {}
         #每个原子问题自己的局部搜索空间
         local_pools: dict[str, CandidatePool] = {}
         #保存每个原子问题的祖先节点
@@ -72,18 +75,14 @@ class HyperBranchPipeline:
             #取出依赖问题的答案
             dependency_context = [answers[dependency_id] for dependency_id in dependency_ids]
             #重写问题
-            rewritten_question, inserted_answers = _rewrite_question(
+            rewritten_question, _ = _rewrite_question(
                 node["question"],
                 dependency_context,
             )
-            #原始问题实体
-            anchors = [
-                entity
-                for entity in original_question_entities
-                if entity in rewritten_question
-            ]
-            #依赖答案实体
-            anchors.extend(answer for answer in inserted_answers if answer not in anchors)
+            anchors = self.client.chat_json(
+                ENTITY_RECOGNITION_PROMPT,
+                json.dumps({"question": rewritten_question}, ensure_ascii=False),
+            )["entities"]
             #建立当前原子问题搜索空间
             local_pool = self.database.candidate_pool(anchors, self.client)
             #记录当前节点的候选池
@@ -118,6 +117,7 @@ class HyperBranchPipeline:
                 self.client,
                 self.top_k,
             )
+            evidence_blocks = _evidence_blocks(top_hyperedges)
             response = self.client.chat_json(
                 ANSWER_PROMPT,
                 json.dumps(
@@ -125,7 +125,7 @@ class HyperBranchPipeline:
                         "original_question": question,
                         "atomic_question": rewritten_question,
                         "dependency_context": dependency_context,
-                        "evidence_blocks": _evidence_blocks(top_hyperedges),
+                        "evidence_blocks": evidence_blocks,
                     },
                     ensure_ascii=False,
                     indent=2,
@@ -136,6 +136,8 @@ class HyperBranchPipeline:
             answers[node_id] = {
                 "node_id": node_id,
                 "question": rewritten_question,
+                "entities": anchors,
+                "evidence_blocks": evidence_blocks,
                 "answer": answer,
             }
 
@@ -182,7 +184,7 @@ def _topological_order(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _rewrite_question(
     question: str,
     #所有依赖答案
-    dependency_context: list[dict[str, str]],
+    dependency_context: list[dict[str, Any]],
 ) -> tuple[str, list[str]]:
     rewritten = question
     #记录哪些依赖答案替换进了当前问题
