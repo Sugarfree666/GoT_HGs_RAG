@@ -26,21 +26,61 @@ def preprocess_question(question: str, llm_client: OpenAIClient) -> Preprocessed
         json.dumps({"question": question}, ensure_ascii=False, indent=2),
     )
     #获取实体
-    entities = payload["entities"]
-    mask_mapping = {
-        f"ENTITY{_letter_suffix(index)}": entity
-        for index, entity in enumerate(entities)
-    }
     masked_question = question
-    #实体mask
-    for placeholder, entity in mask_mapping.items():
-        masked_question = re.sub(re.escape(entity), placeholder, masked_question)
+    entities: list[str] = []
+    mask_mapping: dict[str, str] = {}
+    for entity in payload["entities"]:
+        if not isinstance(entity, str) or not entity.strip():
+            continue
+        placeholder = f"ENTITY{_letter_suffix(len(mask_mapping))}"
+        masked_question, matched_text = _mask_entity(
+            masked_question, entity.strip(), placeholder
+        )
+        if matched_text is None:
+            continue
+        entities.append(matched_text)
+        mask_mapping[placeholder] = matched_text
 
     return PreprocessedQuestion(
         entities=entities,
         masked_question=masked_question,
         mask_mapping=mask_mapping,
     )
+
+
+def _mask_entity(
+    question: str,
+    entity: str,
+    placeholder: str,
+) -> tuple[str, str | None]:
+    """Mask one surface while keeping the placeholder a standalone token."""
+    pattern = _entity_pattern(entity)
+    matched_text: str | None = None
+
+    def replace(match: re.Match[str]) -> str:
+        nonlocal matched_text
+        matched_text = matched_text or match.group(0)
+        return placeholder
+
+    masked_question, count = pattern.subn(replace, question)
+    if count:
+        return masked_question, matched_text
+    return question, None
+
+
+def _entity_pattern(entity: str) -> re.Pattern[str]:
+    return re.compile(
+        rf"{_left_boundary(entity)}{re.escape(entity)}{_right_boundary(entity)}",
+        flags=re.IGNORECASE,
+    )
+
+
+def _left_boundary(entity: str) -> str:
+    return r"(?<!\w)" if entity[0].isalnum() else ""
+
+
+def _right_boundary(entity: str) -> str:
+    return r"(?!\w)" if entity[-1].isalnum() else ""
 
 
 def _letter_suffix(index: int) -> str:
