@@ -13,6 +13,8 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 #加入paython的搜索路径
 sys.path[:0] = [str(PROJECT_ROOT / "depo"), str(PROJECT_ROOT)]
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from hyper_branch.pipeline import HyperBranchPipeline
 from hyper_branch.client import OpenAIClient
@@ -99,11 +101,14 @@ def main() -> int:
                 json.dumps(
                     {
                         "topic_entities": decomposition["entities"],
+                        "atomic_question_dag": decomposition["atomic_question_dag"],
+                        "topic_entity_ids": result["topic_entity_ids"],
                         "nodes": [
                             {
                                 "id": node["node_id"],
                                 "rewritten_question": node["question"],
                                 "entities": node["entities"],
+                                "entity_ids": node["entity_ids"],
                                 "evidence_blocks": node["evidence_blocks"],
                                 "answer": node["answer"],
                             }

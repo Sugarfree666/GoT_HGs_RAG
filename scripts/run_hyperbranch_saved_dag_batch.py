@@ -21,7 +21,7 @@ from hyper_branch.pipeline import HyperBranchPipeline
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run HyperBranch with saved atomic-question DAGs.")
     parser.add_argument("--dataset", required=True)
-    parser.add_argument("--source-run", default="730_1000", help="Run containing <index>_*/hyperbranch_dag.json.")
+    parser.add_argument("--source-run", default="730_1000", help="Run containing saved DAGs.")
     parser.add_argument("--entities-run", required=True, help="Run containing current topic_entities in <index>/result.json.")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--start", type=int, required=True)
@@ -31,11 +31,17 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def saved_dag_path(source_dir: Path, index: int) -> Path:
+def load_saved_dag(source_dir: Path, index: int) -> tuple[dict[str, object], Path]:
     matches = list(source_dir.glob(f"{index:05d}_*/hyperbranch_dag.json"))
-    if len(matches) != 1:
-        raise FileNotFoundError(f"Expected one saved DAG for #{index}, found {len(matches)}")
-    return matches[0]
+    if len(matches) == 1:
+        path = matches[0]
+        return json.loads(path.read_text(encoding="utf-8")), path
+    path = source_dir / f"{index:05d}" / "result.json"
+    if path.exists():
+        dag = json.loads(path.read_text(encoding="utf-8")).get("atomic_question_dag")
+        if isinstance(dag, dict):
+            return dag, path
+    raise FileNotFoundError(f"No saved DAG found for #{index}")
 
 
 def main() -> int:
@@ -71,8 +77,7 @@ def main() -> int:
             continue
         try:
             question = questions[index - 1]["question"].strip()
-            dag_path = saved_dag_path(source_dir, index)
-            dag = json.loads(dag_path.read_text(encoding="utf-8"))
+            dag, dag_path = load_saved_dag(source_dir, index)
             entity_path = entities_dir / f"{index:05d}" / "result.json"
             entities = json.loads(entity_path.read_text(encoding="utf-8"))["topic_entities"]
             result = hyperbranch.run(question, dag, entities)

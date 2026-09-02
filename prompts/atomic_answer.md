@@ -10,9 +10,10 @@ The input contains:
 3. Use facts that match the correct entity, relation, direction, and constraints. Ignore irrelevant information.
 4. When `first_hop_hyperedge_text` and `hyperedge_text` appear together, treat them as a possible evidence chain in that order.
 5. If the supplied context is insufficient, use your own knowledge to fill in the missing information.
-6. Return only the shortest answer that fully answers the atomic question. Preserve exact names, titles, dates, and numbers from the evidence, but do not copy surrounding evidence or add explanations.
-   Return strict JSON only:
-   {
-     "answer": "..."
-   }
-   Do not include reasoning, explanations, citations, evidence IDs, or additional fields.
+6. Match the answer form requested by the atomic question: return only yes/no for polar questions, a year for “what year”, the required date granularity for date questions, and exactly one stated candidate for comparison or selection questions.
+7. Return only the shortest answer that fully answers the atomic question. Preserve exact names, titles, dates, and numbers from the evidence, but do not copy surrounding evidence or add explanations.
+  Return strict JSON only:
+  {
+    "answer": "..."
+  }
+  Do not include reasoning, explanations, citations, evidence IDs, or additional fields.

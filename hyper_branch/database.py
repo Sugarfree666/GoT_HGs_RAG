@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import json
+import re
 import unicodedata
 import xml.etree.ElementTree as ET
 from collections import defaultdict
@@ -13,7 +14,12 @@ from typing import Any, Protocol
 import numpy as np
 
 CandidatePool = dict[str, set[str]]
+EntityLinks = dict[str, list[str]]
 
+_APOSTROPHE_VARIANTS = str.maketrans("’‘`´", "''''")
+_CHUNK_ENTITY_EXCLUDED_TYPES = {
+    "CATEGORY", "CONCEPT", "CONDITION", "RELATION", "ROLE", "TITLE", "TYPE"
+}
 
 
 class Embedder(Protocol):
@@ -56,38 +62,39 @@ class HypergraphDatabase:
             if role == "entity":
                 self._entity_ids_by_name[_lookup_key(node_id)].append(node_id)
 
-    #将输入的实体锚点链接到超图，并收集这些锚点周围的一跳、二跳候选超边。
-    def candidate_pool(self, mentions: list[str], embedder: Embedder) -> CandidatePool:
+    def link_entity_ids(self, mentions: list[str], embedder: Embedder) -> EntityLinks:
+        return {
+            mention: self._link_entities(mention, embedder)
+            for mention in dict.fromkeys(mention.strip() for mention in mentions if mention.strip())
+        }
+
+    def candidate_pool(
+        self,
+        mentions: list[str],
+        embedder: Embedder,
+        *,
+        entity_ids: EntityLinks | None = None,
+    ) -> CandidatePool:
         """Link anchors and collect their one-hop and source-enriched two-hop hyperedges."""
-        #保存成功链接到超图的实体节点 ID
-        anchor_ids: list[str] = []
-        #遍历实体列表
-        for mention in dict.fromkeys(mention.strip() for mention in mentions if mention.strip()):
-            #链接超图中的实体
-            entity_id = self._link_entity(mention, embedder)
-            #保存已链接，尚未加入的实体节点
-            if entity_id is not None and entity_id not in anchor_ids:
-                anchor_ids.append(entity_id)
-        #初始化候选超边池
+        linked = entity_ids if entity_ids is not None else self.link_entity_ids(mentions, embedder)
+        anchor_ids = list(
+            dict.fromkeys(entity_id for ids in linked.values() for entity_id in ids)
+        )
         candidates: CandidatePool = {}
 
         for anchor_id in anchor_ids:
-            #去entity_to_hyperedges找一跳超边
             first_hops = list(dict.fromkeys(self.entity_to_hyperedges.get(anchor_id, [])))
             for hyperedge_id in first_hops:
                 candidates.setdefault(hyperedge_id, set())
 
             for first_hop_id in first_hops:
-                #先找超边里的桥接实体
                 bridge_entities = list(self.hyperedge_to_entities.get(first_hop_id, []))
                 for chunk_id in self.sources.get(first_hop_id, []):
-                    #再找chunk里的桥接实体
                     bridge_entities.extend(self.chunk_to_entities.get(chunk_id, []))
 
                 for entity_id in dict.fromkeys(bridge_entities):
                     if entity_id == anchor_id:
                         continue
-                    #根据桥接实体找二跳超边
                     for second_hop_id in self.entity_to_hyperedges.get(entity_id, []):
                         if second_hop_id not in first_hops:
                             candidates.setdefault(second_hop_id, set()).add(first_hop_id)
@@ -124,17 +131,17 @@ class HypergraphDatabase:
             for hyperedge_id in ranked_ids
         ]
 
-    def _link_entity(self, mention: str, embedder: Embedder) -> str | None:
-        #先精确匹配
+    def _link_entities(self, mention: str, embedder: Embedder) -> list[str]:
         exact_ids = self._entity_ids_by_name.get(_lookup_key(mention), [])
-        if len(exact_ids) == 1:
-            return exact_ids[0]
-        #精确匹配失败时，使用实体向量相似度匹配。
-        label, score = self.entity_vectors.query(
-            embedder.embed_text(mention),
-            1,
-        )[0]
-        return label if score >= 0.5 else None
+        if exact_ids:
+            return exact_ids
+        label = _display_text(mention)
+        base_label = re.sub(r"(?:\s*\([^()]*\)\s*)+$", "", label).strip()
+        base_ids = self._entity_ids_by_name.get(_lookup_key(base_label), [])
+        if base_label != label and len(base_ids) == 1:
+            return base_ids
+        label, score = self.entity_vectors.query(embedder.embed_text(mention), 1)[0]
+        return [label] if score >= 0.5 else []
 
     #用 XML 解析器读取 GraphML，然后把 XML 描述的超图结构转换成 Python 字典索引。
     def _load_graph(self, path: Path) -> None:
@@ -167,7 +174,10 @@ class HypergraphDatabase:
             self.roles[node_id] = role
             self.sources[node_id] = sources
             #如果是实体节点，记录实体和来源chunk的映射
-            if role == "entity":
+            if role == "entity" and (
+                _display_text(data.get("entity_type", "")).upper()
+                not in _CHUNK_ENTITY_EXCLUDED_TYPES
+            ):
                 for chunk_id in sources:
                     self.chunk_to_entities[chunk_id].append(node_id)
         ##在<graph></graph>中寻找所有的<edge>
@@ -267,8 +277,15 @@ def _display_text(text: str) -> str:
 
 
 def _lookup_key(text: str) -> str:
-    #统一unicode表达，忽略大小写
-    return unicodedata.normalize("NFKC", _display_text(text)).casefold()
+    value = unicodedata.normalize(
+        "NFKD", _display_text(text).translate(_APOSTROPHE_VARIANTS)
+    )
+    return "".join(
+        char
+        for char in value
+        if not unicodedata.combining(char)
+        and not unicodedata.category(char).startswith("P")
+    ).casefold()
 
 
 #获取attr.name：value

@@ -42,7 +42,7 @@ class PipelineSmokeTest(unittest.TestCase):
 
         self.assertEqual(
             set(result),
-            {"question", "dag", "atomic_answers", "final_answer"},
+            {"question", "dag", "topic_entity_ids", "atomic_answers", "final_answer"},
         )
         self.assertTrue(result["final_answer"]["answer"])
         self.assertEqual(len(result["atomic_answers"]), 1)

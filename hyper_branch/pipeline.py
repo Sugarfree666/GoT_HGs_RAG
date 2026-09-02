@@ -57,9 +57,11 @@ class HyperBranchPipeline:
         #拓扑排序
         nodes = _topological_order(dag.get("nodes", []))
         #创建原始问题的搜索空间
+        topic_entity_ids = self.database.link_entity_ids(original_question_entities, self.client)
         original_pool = self.database.candidate_pool(
             original_question_entities,
             self.client,
+            entity_ids=topic_entity_ids,
         )
         #保存每个原子问题的答案
         answers: dict[str, dict[str, Any]] = {}
@@ -84,7 +86,12 @@ class HyperBranchPipeline:
                 json.dumps({"question": rewritten_question}, ensure_ascii=False),
             )["entities"]
             #建立当前原子问题搜索空间
-            local_pool = self.database.candidate_pool(anchors, self.client)
+            entity_ids = self.database.link_entity_ids(anchors, self.client)
+            local_pool = self.database.candidate_pool(
+                anchors,
+                self.client,
+                entity_ids=entity_ids,
+            )
             #记录当前节点的候选池
             local_pools[node_id] = local_pool
             #先将当前的依赖节点加入祖先节点集合
@@ -137,6 +144,7 @@ class HyperBranchPipeline:
                 "node_id": node_id,
                 "question": rewritten_question,
                 "entities": anchors,
+                "entity_ids": entity_ids,
                 "evidence_blocks": evidence_blocks,
                 "answer": answer,
             }
@@ -145,6 +153,7 @@ class HyperBranchPipeline:
         return {
             "question": question,
             "dag": dag,
+            "topic_entity_ids": topic_entity_ids,
             "atomic_answers": atomic_answers,
             "final_answer": {"answer": atomic_answers[-1]["answer"]},
         }
@@ -212,7 +221,6 @@ def _evidence_blocks(hyperedges: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "hyperedge_id": f"H{rank}",
             "hyperedge_text": candidate["text"],
         }
-        #如果该超边是二跳扩展得到的，则记录它经由的第一条一跳超边文本
         if candidate["first_hop_texts"]:
             hyperedge["first_hop_hyperedge_text"] = candidate["first_hop_texts"][0]
         #取该超边关联的 source chunks。

@@ -50,7 +50,9 @@ class AtomicPipelineTest(unittest.TestCase):
             ["Who is linked to A?", "Where was B recorded?", "What follows C?"],
         )
         self.assertEqual(result["final_answer"], {"answer": "Done"})
+        self.assertEqual(result["topic_entity_ids"], {"A": ["A-id"]})
         self.assertEqual(result["atomic_answers"][0]["entities"], ["A"])
+        self.assertEqual(result["atomic_answers"][0]["entity_ids"], {"A": ["A-id"]})
         self.assertTrue(result["atomic_answers"][0]["evidence_blocks"])
         self.assertEqual(database.anchor_calls, [["A"], ["A"], ["B"], ["C"]])
         self.assertEqual(
@@ -62,6 +64,13 @@ class AtomicPipelineTest(unittest.TestCase):
             ["Who is linked to A?", "Where was B recorded?", "What follows C?"],
         )
         self.assertEqual(client.chat_calls[1]["dependency_context"][0]["answer"], "B")
+        two_hop = next(
+            hyperedge
+            for block in client.chat_calls[1]["evidence_blocks"]
+            for hyperedge in block["hyperedges"]
+            if hyperedge["hyperedge_text"] == "H-q2"
+        )
+        self.assertEqual(two_hop["first_hop_hyperedge_text"], "H-q1")
 
 class RecordingDatabase:
     def __init__(self, pools: list[dict[str, set[str]]]) -> None:
@@ -69,7 +78,17 @@ class RecordingDatabase:
         self.anchor_calls: list[list[str]] = []
         self.rank_calls: list[dict[str, Any]] = []
 
-    def candidate_pool(self, mentions: list[str], embedder: object) -> dict[str, set[str]]:
+    def link_entity_ids(self, mentions: list[str], _embedder: object) -> dict[str, list[str]]:
+        return {mention: [f"{mention}-id"] for mention in dict.fromkeys(mentions)}
+
+    def candidate_pool(
+        self,
+        mentions: list[str],
+        embedder: object,
+        *,
+        entity_ids: dict[str, list[str]] | None = None,
+    ) -> dict[str, set[str]]:
+        assert entity_ids == {mention: [f"{mention}-id"] for mention in dict.fromkeys(mentions)}
         self.anchor_calls.append(list(mentions))
         return self.pools.pop(0)
 
