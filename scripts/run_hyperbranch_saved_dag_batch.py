@@ -16,6 +16,7 @@ sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from hyper_branch.client import OpenAIClient
 from hyper_branch.pipeline import HyperBranchPipeline
+from run_depo_hyperbranch_batch import save_scores
 
 
 def parse_args() -> argparse.Namespace:
@@ -71,12 +72,13 @@ def main() -> int:
         client=client,
     )
 
-    for index in range(args.start, args.end):
+    indexed_questions = [(index, questions[index - 1]) for index in range(args.start, args.end)]
+    for index, item in indexed_questions:
         result_path = output_dir / f"{index:05d}" / "result.json"
         if args.resume and result_path.exists():
             continue
         try:
-            question = questions[index - 1]["question"].strip()
+            question = item["question"].strip()
             dag, dag_path = load_saved_dag(source_dir, index)
             entity_path = entities_dir / f"{index:05d}" / "result.json"
             entities = json.loads(entity_path.read_text(encoding="utf-8"))["topic_entities"]
@@ -107,6 +109,11 @@ def main() -> int:
             print(f"{args.dataset} #{index}: {result['final_answer']['answer']}", flush=True)
         except Exception as exc:
             print(f"{args.dataset} #{index} failed: {exc}", file=sys.stderr, flush=True)
+    score_file = save_scores(args.dataset, args.run_id, output_dir, indexed_questions)
+    score = json.loads(score_file.read_text(encoding="utf-8"))
+    print(f"saved_scores={score_file}")
+    print(f"EM={score['overall']['em']:.4f}")
+    print(f"F1={score['overall']['f1']:.4f}")
     return 0
 
 

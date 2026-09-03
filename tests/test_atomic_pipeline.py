@@ -8,10 +8,61 @@ from unittest.mock import patch
 
 import numpy as np
 
-from hyper_branch.pipeline import HyperBranchPipeline
+from hyper_branch.pipeline import HyperBranchPipeline, _evidence_blocks
 
 
 class AtomicPipelineTest(unittest.TestCase):
+    def test_evidence_blocks_keep_all_first_hop_hyperedges(self) -> None:
+        blocks = _evidence_blocks(
+            [
+                {
+                    "text": "H2",
+                    "chunks": [("source", "Evidence for H2")],
+                    "first_hop_texts": ["H1", "H3"],
+                }
+            ]
+        )
+
+        self.assertEqual(
+            blocks[0]["hyperedges"][0]["first_hop_hyperedge_text"],
+            ["H1", "H3"],
+        )
+
+    def test_evidence_blocks_limit_distinct_source_chunks_after_ranking(self) -> None:
+        hyperedges = [
+            {
+                "text": f"H{index}",
+                "chunks": [(f"source-{index}", f"Evidence for H{index}")],
+                "first_hop_texts": [],
+            }
+            for index in range(1, 11)
+        ]
+        hyperedges.extend(
+            [
+                {
+                    "text": "late-existing-source",
+                    "chunks": [("source-1", "Evidence for H1")],
+                    "first_hop_texts": [],
+                },
+                {
+                    "text": "eleventh-source",
+                    "chunks": [("source-11", "Evidence for H11")],
+                    "first_hop_texts": [],
+                },
+            ]
+        )
+
+        blocks = _evidence_blocks(hyperedges)
+
+        self.assertEqual(
+            [block["chunk_id"] for block in blocks],
+            [f"C{index}" for index in range(1, 11)],
+        )
+        self.assertEqual(
+            [edge["hyperedge_text"] for edge in blocks[0]["hyperedges"]],
+            ["H1", "late-existing-source"],
+        )
+
     def test_pipeline_rewrites_dependencies_and_merges_all_ancestor_pools(self) -> None:
         database = RecordingDatabase(
             pools=[
@@ -70,7 +121,7 @@ class AtomicPipelineTest(unittest.TestCase):
             for hyperedge in block["hyperedges"]
             if hyperedge["hyperedge_text"] == "H-q2"
         )
-        self.assertEqual(two_hop["first_hop_hyperedge_text"], "H-q1")
+        self.assertEqual(two_hop["first_hop_hyperedge_text"], ["H-q1"])
 
 class RecordingDatabase:
     def __init__(self, pools: list[dict[str, set[str]]]) -> None:

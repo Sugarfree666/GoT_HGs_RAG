@@ -14,6 +14,7 @@ from .database import CandidatePool, HypergraphDatabase
 ANSWER_PROMPT = (
     Path(__file__).resolve().parents[1] / "prompts" / "atomic_answer.md"
 ).read_text(encoding="utf-8").strip()
+MAX_EVIDENCE_BLOCKS = 10
 ENTITY_RECOGNITION_PROMPT = (
     Path(__file__).resolve().parents[1] / "prompts" / "entity_recognition.md"
 ).read_text(encoding="utf-8").strip()
@@ -211,7 +212,9 @@ def _rewrite_question(
     return rewritten, inserted_answers
 
 
-def _evidence_blocks(hyperedges: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _evidence_blocks(
+    hyperedges: list[dict[str, Any]], max_blocks: int = MAX_EVIDENCE_BLOCKS
+) -> list[dict[str, Any]]:
     #证据块
     blocks: list[dict[str, Any]] = []
     #原始chunkid-》证据块
@@ -222,7 +225,7 @@ def _evidence_blocks(hyperedges: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "hyperedge_text": candidate["text"],
         }
         if candidate["first_hop_texts"]:
-            hyperedge["first_hop_hyperedge_text"] = candidate["first_hop_texts"][0]
+            hyperedge["first_hop_hyperedge_text"] = candidate["first_hop_texts"]
         #取该超边关联的 source chunks。
         chunks = candidate["chunks"] or [(f"__missing_{rank}", "")]
         #逐个处理该超边的每个 source chunk。
@@ -230,6 +233,8 @@ def _evidence_blocks(hyperedges: list[dict[str, Any]]) -> list[dict[str, Any]]:
             #检查这个 chunk 是否已经被其他超边写入证据块。
             block = by_chunk_id.get(chunk_id)
             if block is None:
+                if len(blocks) >= max_blocks:
+                    continue
                 #按第一个换行符拆分 chunk 文本。
                 title, separator, body = text.partition("\n")
                 block = {

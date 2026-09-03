@@ -6,6 +6,7 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -18,6 +19,72 @@ sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from hyper_branch.pipeline import HyperBranchPipeline
 from hyper_branch.client import OpenAIClient
+from eval.eval import cal_em, cal_f1
+
+
+def _gold_answers(question: dict[str, Any]) -> list[str]:
+    for key in ("golden_answers", "answers", "answer"):
+        value = question.get(key)
+        if isinstance(value, list):
+            return [str(answer).strip() for answer in value if str(answer).strip()]
+        if isinstance(value, str) and value.strip():
+            return [value.strip()]
+    return []
+
+
+def _result_answer(result_file: Path) -> str:
+    if not result_file.exists():
+        return ""
+    nodes = json.loads(result_file.read_text(encoding="utf-8")).get("nodes", [])
+    if not nodes or not isinstance(nodes[-1], dict):
+        return ""
+    return str(nodes[-1].get("answer", "") or "").strip()
+
+
+def save_scores(
+    dataset: str, run_id: str, output_dir: Path, indexed_questions: list[tuple[int, dict[str, Any]]]
+) -> Path:
+    records = []
+    for index, question in indexed_questions:
+        gold_answers = _gold_answers(question)
+        answer = _result_answer(output_dir / f"{index:05d}" / "result.json")
+        records.append(
+            {
+                "index": index,
+                "question": question["question"],
+                "golden_answers": gold_answers,
+                "answer": answer,
+                "em": float(cal_em([gold_answers], [answer])) if gold_answers else 0.0,
+                "f1": float(cal_f1([gold_answers], [answer])) if gold_answers else 0.0,
+            }
+        )
+
+    score_dir = PROJECT_ROOT / "eval" / "results" / "depo_hyperbranch" / dataset / run_id
+    score_dir.mkdir(parents=True, exist_ok=True)
+    completed = sum(
+        (output_dir / f"{index:05d}" / "result.json").exists()
+        for index, _ in indexed_questions
+    )
+    score = {
+        "meta": {
+            "question_file": str((PROJECT_ROOT / "questions" / dataset / "questions.json").resolve()),
+            "runs_dir": str(output_dir.resolve()),
+            "indices": [index for index, _ in indexed_questions],
+            "metrics": ["em", "f1"],
+        },
+        "counts": {"total": len(records), "completed": completed, "missing": len(records) - completed},
+        "overall": {
+            "em": sum(record["em"] for record in records) / len(records) if records else 0.0,
+            "f1": sum(record["f1"] for record in records) / len(records) if records else 0.0,
+        },
+    }
+    (score_dir / "test_result.json").write_text(
+        json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    (score_dir / "test_score.json").write_text(
+        json.dumps(score, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return score_dir / "test_score.json"
 
 
 def main() -> int:
@@ -42,6 +109,9 @@ def main() -> int:
     #需要运行的题目数量
     if args.limit is not None:
         questions = questions[: args.limit]
+    indexed_questions = [
+        (args.start + offset, question) for offset, question in enumerate(questions)
+    ]
 
     from hanlp_sdp_parser import HanLPSDPParser
     from pipeline import run_depo
@@ -79,9 +149,8 @@ def main() -> int:
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = PROJECT_ROOT / "runs" / "depo_hyperbranch" / args.dataset / run_id
     #读取问题列表
-    for offset, item in enumerate(questions, start=1):
+    for index, item in indexed_questions:
         #计算真实问题编号
-        index = args.start + offset - 1
         #获取问题文本，
         question = item["question"].strip()
         #输出文件位置
@@ -123,6 +192,12 @@ def main() -> int:
             print(f"{args.dataset} #{index}: {result['final_answer']['answer']}")
         except Exception as exc:
             print(f"{args.dataset} #{index} failed: {exc}", file=sys.stderr)
+
+    score_file = save_scores(args.dataset, run_id, output_dir, indexed_questions)
+    score = json.loads(score_file.read_text(encoding="utf-8"))
+    print(f"saved_scores={score_file}")
+    print(f"EM={score['overall']['em']:.4f}")
+    print(f"F1={score['overall']['f1']:.4f}")
     return 0
 
 

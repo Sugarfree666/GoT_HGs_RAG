@@ -1,10 +1,48 @@
 from __future__ import annotations
 
+import importlib.util
+import json
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 from urllib import error
 
 from hyper_branch.client import OpenAIClient
+
+
+def _load_depo_hyperbranch_batch_module():
+    module_path = Path(__file__).resolve().parents[1] / "scripts" / "run_depo_hyperbranch_batch.py"
+    spec = importlib.util.spec_from_file_location("depo_hyperbranch_batch", module_path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_batch_scoring_reads_final_node_answer_from_result_json() -> None:
+    module = _load_depo_hyperbranch_batch_module()
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        root = Path(tmp_dir)
+        runs_dir = root / "runs"
+        result_path = runs_dir / "00300" / "result.json"
+        result_path.parent.mkdir(parents=True)
+        result_path.write_text(json.dumps({"nodes": [{"answer": "The Hoboken!"}]}), encoding="utf-8")
+        questions = [
+            (300, {"question": "Where?", "answer": "Hoboken"}),
+            (301, {"question": "When?", "answer": "1979"}),
+        ]
+
+        with patch.object(module, "PROJECT_ROOT", root):
+            score_path = module.save_scores("fixture", "test_run", runs_dir, questions)
+
+        score = json.loads(score_path.read_text(encoding="utf-8"))
+        records = json.loads((score_path.parent / "test_result.json").read_text(encoding="utf-8"))
+        assert score["counts"] == {"total": 2, "completed": 1, "missing": 1}
+        assert score["overall"] == {"em": 0.5, "f1": 0.5}
+        assert records[0]["answer"] == "The Hoboken!"
+        assert records[1]["answer"] == ""
 
 
 class FakeHTTPResponse:

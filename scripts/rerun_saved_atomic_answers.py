@@ -1,4 +1,4 @@
-"""Re-answer saved HyperBranch leaf nodes without changing their DAG or evidence."""
+"""Re-answer a saved DAG while reusing every node's retrieved evidence."""
 
 from __future__ import annotations
 
@@ -17,16 +17,30 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 from hyper_branch.client import OpenAIClient
+from hyper_branch.pipeline import _rewrite_question, _topological_order
+
+
+def _saved_dag(source: dict[str, object]) -> dict[str, object]:
+    dag = source.get("atomic_question_dag")
+    if isinstance(dag, dict):
+        return dag
+    dag_path = source.get("source_dag")
+    if isinstance(dag_path, str):
+        payload = json.loads(Path(dag_path).read_text(encoding="utf-8"))
+        dag = payload.get("atomic_question_dag")
+        if isinstance(dag, dict):
+            return dag
+    raise ValueError("Saved result does not contain an atomic_question_dag")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", required=True)
-    parser.add_argument("--source-run", default="full_test1")
+    parser.add_argument("--source-run", required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--start", type=int)
     parser.add_argument("--end", type=int, help="Exclusive index.")
-    parser.add_argument("--indices", type=int, nargs="+", help="Explicit 1-based question indices.")
+    parser.add_argument("--indices", type=int, nargs="+")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--llm-model", default="gpt-4o-mini")
     args = parser.parse_args()
@@ -46,8 +60,8 @@ def main() -> int:
     )
     source_dir = PROJECT_ROOT / "runs" / "depo_hyperbranch" / args.dataset / args.source_run
     output_dir = PROJECT_ROOT / "runs" / "depo_hyperbranch" / args.dataset / args.run_id
-
     indices = args.indices or range(args.start, args.end)
+
     for index in indices:
         output_path = output_dir / f"{index:05d}" / "result.json"
         if args.resume and output_path.exists():
@@ -55,42 +69,55 @@ def main() -> int:
         try:
             source_path = source_dir / f"{index:05d}" / "result.json"
             source = json.loads(source_path.read_text(encoding="utf-8"))
-            leaf = source["nodes"][-1]
-            question = questions[index - 1]["question"].strip()
-            response = client.chat_json(
-                prompt,
-                json.dumps(
+            dag = _saved_dag(source)
+            saved_nodes = {node["id"]: node for node in source["nodes"]}
+            answers: dict[str, dict[str, str]] = {}
+            output_nodes = []
+            for node in _topological_order(dag["nodes"]):
+                dependencies = [answers[node_id] for node_id in node.get("depends_on", [])]
+                atomic_question, _ = _rewrite_question(node["question"], dependencies)
+                saved = saved_nodes[node["id"]]
+                response = client.chat_json(
+                    prompt,
+                    json.dumps(
+                        {
+                            "original_question": questions[index - 1]["question"],
+                            "atomic_question": atomic_question,
+                            "dependency_context": dependencies,
+                            "evidence_blocks": saved["evidence_blocks"],
+                        },
+                        ensure_ascii=False,
+                        indent=2,
+                    ),
+                    max_tokens=900,
+                )
+                answer = str(response["answer"]).strip()
+                answers[node["id"]] = {"node_id": node["id"], "answer": answer}
+                output_nodes.append(
                     {
-                        "original_question": question,
-                        "atomic_question": leaf["rewritten_question"],
-                        # The saved leaf question has dependency placeholders substituted already.
-                        "dependency_context": [],
-                        "evidence_blocks": leaf["evidence_blocks"],
-                    },
-                    ensure_ascii=False,
-                    indent=2,
-                ),
-                max_tokens=900,
-            )
-            answer = str(response["answer"]).strip()
+                        "id": node["id"],
+                        "rewritten_question": atomic_question,
+                        "entities": saved["entities"],
+                        "entity_ids": saved.get("entity_ids", {}),
+                        "evidence_blocks": saved["evidence_blocks"],
+                        "answer": answer,
+                    }
+                )
             output_path.parent.mkdir(parents=True, exist_ok=True)
             output_path.write_text(
                 json.dumps(
                     {
                         "source_result": str(source_path),
-                        "question": question,
-                        "gold_answer": questions[index - 1].get("answer"),
-                        "leaf_node_id": leaf["id"],
-                        "atomic_question": leaf["rewritten_question"],
-                        "previous_answer": leaf["answer"],
-                        "answer": answer,
+                        "topic_entities": source["topic_entities"],
+                        "atomic_question_dag": dag,
+                        "nodes": output_nodes,
                     },
                     ensure_ascii=False,
                     indent=2,
                 ),
                 encoding="utf-8",
             )
-            print(f"{args.dataset} #{index}: {leaf['answer']} -> {answer}", flush=True)
+            print(f"{args.dataset} #{index}: {output_nodes[-1]['answer']}", flush=True)
         except Exception as exc:
             print(f"{args.dataset} #{index} failed: {exc}", file=sys.stderr, flush=True)
     return 0
