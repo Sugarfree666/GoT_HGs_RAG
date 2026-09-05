@@ -1,3 +1,11 @@
+"""Run the original-question-only retrieval ablation for HyperBranch.
+
+This script does not invoke DEPO.  It builds a one-node DAG containing the
+original question, so all retrieval-side queries and the final answer use that
+same question.  It is therefore an end-to-end ablation of DEPO decomposition
+and its multi-node DAG.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -10,19 +18,43 @@ from typing import Any
 
 import yaml
 
-#项目根目录
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-#加入paython的搜索路径
-sys.path[:0] = [str(PROJECT_ROOT / "depo"), str(PROJECT_ROOT)]
+sys.path[:0] = [str(PROJECT_ROOT)]
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-from hyper_branch.pipeline import HyperBranchPipeline
-from hyper_branch.client import OpenAIClient
-from eval.eval import cal_em, cal_f1
+from eval.eval import cal_em, cal_f1  # noqa: E402
+from hyper_branch.client import OpenAIClient  # noqa: E402
+from hyper_branch.pipeline import ENTITY_RECOGNITION_PROMPT, HyperBranchPipeline  # noqa: E402
 
 
-def _gold_answers(question: dict[str, Any]) -> list[str]:
+def build_original_question_dag(question: str) -> dict[str, list[dict[str, Any]]]:
+    """Return the one-node DAG used to remove DEPO decomposition."""
+    return {
+        "nodes": [
+            {
+                "id": "q1",
+                "question": question,
+                "depends_on": [],
+            }
+        ]
+    }
+
+
+def extract_original_question_entities(question: str, client: OpenAIClient) -> list[str]:
+    """Extract retrieval anchors directly from the original question."""
+    payload = client.chat_json(
+        ENTITY_RECOGNITION_PROMPT,
+        json.dumps({"question": question}, ensure_ascii=False),
+    )
+    entities = payload.get("entities")
+    if not isinstance(entities, list) or not all(isinstance(item, str) for item in entities):
+        raise ValueError("Entity recognition must return an 'entities' list of strings")
+    return list(dict.fromkeys(entity.strip() for entity in entities if entity.strip()))
+
+
+def gold_answers(question: dict[str, Any]) -> list[str]:
     for key in ("golden_answers", "answers", "answer"):
         value = question.get(key)
         if isinstance(value, list):
@@ -32,8 +64,8 @@ def _gold_answers(question: dict[str, Any]) -> list[str]:
     return []
 
 
-def _result_answer(result_file: Path) -> str:
-    if not result_file.exists():
+def result_answer(result_file: Path) -> str:
+    if not result_file.is_file():
         return ""
     nodes = json.loads(result_file.read_text(encoding="utf-8")).get("nodes", [])
     if not nodes or not isinstance(nodes[-1], dict):
@@ -46,40 +78,38 @@ def save_scores(
     run_id: str,
     output_dir: Path,
     indexed_questions: list[tuple[int, dict[str, Any]]],
-    question_file: Path | None = None,
-    question_structure_override: list[list[str]] | None = None,
+    question_file: Path,
 ) -> Path:
-    records = []
+    records: list[dict[str, Any]] = []
     for index, question in indexed_questions:
-        gold_answers = _gold_answers(question)
-        answer = _result_answer(output_dir / f"{index:05d}" / "result.json")
+        answers = gold_answers(question)
+        answer = result_answer(output_dir / f"{index:05d}" / "result.json")
         records.append(
             {
                 "index": index,
                 "question": question["question"],
-                "golden_answers": gold_answers,
+                "golden_answers": answers,
                 "answer": answer,
-                "em": float(cal_em([gold_answers], [answer])) if gold_answers else 0.0,
-                "f1": float(cal_f1([gold_answers], [answer])) if gold_answers else 0.0,
+                "em": float(cal_em([answers], [answer])) if answers else 0.0,
+                "f1": float(cal_f1([answers], [answer])) if answers else 0.0,
             }
         )
 
     score_dir = PROJECT_ROOT / "eval" / "results" / "depo_hyperbranch" / dataset / run_id
     score_dir.mkdir(parents=True, exist_ok=True)
     completed = sum(
-        (output_dir / f"{index:05d}" / "result.json").exists()
+        (output_dir / f"{index:05d}" / "result.json").is_file()
         for index, _ in indexed_questions
-    )
-    resolved_question_file = question_file or (
-        PROJECT_ROOT / "questions" / dataset / "questions.json"
     )
     score = {
         "meta": {
-            "question_file": str(resolved_question_file.resolve()),
+            "question_file": str(question_file.resolve()),
             "runs_dir": str(output_dir.resolve()),
             "indices": [index for index, _ in indexed_questions],
             "metrics": ["em", "f1"],
-            "question_structure_override": question_structure_override,
+            "dag_mode": "single_original_question",
+            "depo_used": False,
+            "entity_source": "original_question",
         },
         "counts": {"total": len(records), "completed": completed, "missing": len(records) - completed},
         "overall": {
@@ -88,16 +118,18 @@ def save_scores(
         },
     }
     (score_dir / "test_result.json").write_text(
-        json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     (score_dir / "test_score.json").write_text(
-        json.dumps(score, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps(score, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     return score_dir / "test_score.json"
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run DEPO and HyperBranch for one dataset.")
+    parser = argparse.ArgumentParser(
+        description="Run HyperBranch with a one-node DAG containing only the original question."
+    )
     parser.add_argument("--dataset", required=True)
     parser.add_argument(
         "--question-file",
@@ -111,19 +143,15 @@ def main() -> int:
     parser.add_argument("--api-key")
     parser.add_argument("--base-url")
     parser.add_argument("--llm-model", default="gpt-4o-mini")
-    parser.add_argument(
-        "--empty-question-structure",
-        action="store_true",
-        help=(
-            "Pass an empty question_structure to atomic-question DAG generation "
-            "while preserving all other DEPO stages."
-        ),
-    )
     args = parser.parse_args()
 
-    api_key = args.api_key or os.environ["OPENAI_API_KEY"]
-    base_url = args.base_url or os.getenv("OPENAI_BASE_URL")
-    #读取指定数据集的问题文件，然后根据参数截取运行的问题数量
+    if args.start < 1:
+        parser.error("--start must be >= 1")
+    if args.end is not None and args.end < args.start:
+        parser.error("--end must be >= --start")
+    if args.limit is not None and args.limit < 1:
+        parser.error("--limit must be >= 1")
+
     question_file = (
         Path(args.question_file)
         if args.question_file
@@ -133,22 +161,18 @@ def main() -> int:
         parser.error(f"question file not found: {question_file}")
     question_file = question_file.resolve()
     questions = json.loads(question_file.read_text(encoding="utf-8"))[args.start - 1 : args.end]
-    #需要运行的题目数量
     if args.limit is not None:
         questions = questions[: args.limit]
     indexed_questions = [
         (args.start + offset, question) for offset, question in enumerate(questions)
     ]
-    question_structure_override = [] if args.empty_question_structure else None
 
-    from hanlp_sdp_parser import HanLPSDPParser
-    from pipeline import run_depo
-    #创建llm客户端
-    #读取yaml配置文件，转成字典格式
     config = yaml.safe_load(
         (PROJECT_ROOT / "configs" / f"{args.dataset}.yaml").read_text(encoding="utf-8")
     )
-    llm = OpenAIClient(
+    api_key = args.api_key or os.environ["OPENAI_API_KEY"]
+    base_url = args.base_url or os.getenv("OPENAI_BASE_URL")
+    client = OpenAIClient(
         api_key=api_key,
         model=args.llm_model,
         embedding_model=config["embedding_model"],
@@ -156,53 +180,36 @@ def main() -> int:
         temperature=config["temperature"],
         base_url=base_url,
     )
-
-    #创建一个检索器对象，并完成初始化
     hyperbranch = HyperBranchPipeline(
-        #超图数据库路径
         PROJECT_ROOT / config["dataset_root"],
         model=args.llm_model,
-        #嵌入模型
         embedding_model=config["embedding_model"],
         timeout_seconds=config["timeout_seconds"],
         temperature=config["temperature"],
         api_key=api_key,
         base_url=base_url,
-        client=llm,
+        client=client,
     )
-    #创建解析器对象
-    sdp_parser = HanLPSDPParser()
-    #输出目录路径
-    run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    run_id = args.run_id or f"ablation_original_question_{datetime.now():%Y%m%d_%H%M%S}"
     output_dir = PROJECT_ROOT / "runs" / "depo_hyperbranch" / args.dataset / run_id
-    #读取问题列表
     for index, item in indexed_questions:
-        #计算真实问题编号
-        #获取问题文本，
-        question = item["question"].strip()
-        #输出文件位置
         result_file = output_dir / f"{index:05d}" / "result.json"
-        #判断是否运行过，断点续跑
-        if args.resume and result_file.exists():
+        if args.resume and result_file.is_file():
             continue
+
+        question = str(item["question"]).strip()
         try:
-            decomposition = run_depo(
-                question,
-                sdp_parser,
-                llm,
-                question_structure_override=question_structure_override,
-            )
-            result = hyperbranch.run(
-                question,
-                decomposition["atomic_question_dag"],
-                decomposition["entities"],
-            )
+            topic_entities = extract_original_question_entities(question, client)
+            original_question_dag = build_original_question_dag(question)
+            result = hyperbranch.run(question, original_question_dag, topic_entities)
             result_file.parent.mkdir(parents=True, exist_ok=True)
             result_file.write_text(
                 json.dumps(
                     {
-                        "topic_entities": decomposition["entities"],
-                        "atomic_question_dag": decomposition["atomic_question_dag"],
+                        "topic_entities": topic_entities,
+                        "atomic_question_dag": original_question_dag,
+                        "dag_mode": "single_original_question",
                         "topic_entity_ids": result["topic_entity_ids"],
                         "nodes": [
                             {
@@ -218,21 +225,15 @@ def main() -> int:
                     },
                     ensure_ascii=False,
                     indent=2,
-                ),
+                )
+                + "\n",
                 encoding="utf-8",
             )
             print(f"{args.dataset} #{index}: {result['final_answer']['answer']}")
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             print(f"{args.dataset} #{index} failed: {exc}", file=sys.stderr)
 
-    score_file = save_scores(
-        args.dataset,
-        run_id,
-        output_dir,
-        indexed_questions,
-        question_file,
-        question_structure_override,
-    )
+    score_file = save_scores(args.dataset, run_id, output_dir, indexed_questions, question_file)
     score = json.loads(score_file.read_text(encoding="utf-8"))
     print(f"saved_scores={score_file}")
     print(f"EM={score['overall']['em']:.4f}")

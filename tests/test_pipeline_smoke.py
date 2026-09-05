@@ -18,7 +18,6 @@ class PipelineSmokeTest(unittest.TestCase):
         with patch("hyper_branch.pipeline.OpenAIClient", PipelineTestClient):
             pipeline = HyperBranchPipeline(
                 project_root / "datasets" / "agriculture",
-                top_k=3,
                 model="test-model",
                 embedding_model="test-embedding-model",
                 timeout_seconds=120,

@@ -62,7 +62,6 @@ def main() -> int:
     )
     hyperbranch = HyperBranchPipeline(
         PROJECT_ROOT / config["dataset_root"],
-        top_k=config["top_k"],
         model=args.llm_model,
         embedding_model=config["embedding_model"],
         timeout_seconds=config["timeout_seconds"],

@@ -54,6 +54,11 @@ class HypergraphDatabaseTest(unittest.TestCase):
                 "hyperedge_name",
                 [("H1", [1.0, 0.0]), ("H2", [0.0, 1.0]), ("H3", [0.0, 1.0])],
             )
+            _write_vectors(
+                root / "vdb_chunks.json",
+                "__id__",
+                [("C1", [1.0, 0.0]), ("C2", [0.0, 1.0])],
+            )
 
             database = HypergraphDatabase(root)
             candidates = database.candidate_pool(["A"], FixedEmbedder([0.0, 1.0]))
@@ -65,7 +70,6 @@ class HypergraphDatabaseTest(unittest.TestCase):
                 "Which relation is relevant?",
                 candidates,
                 FixedEmbedder([0.0, 1.0]),
-                top_k=3,
             )
 
         self.assertEqual(candidates, {"H1": set(), "H2": {"H1"}})

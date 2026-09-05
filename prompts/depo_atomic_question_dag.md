@@ -25,17 +25,25 @@ The user message is one JSON object with exactly these semantic inputs:
 wins if they conflict. Never infer meaning, split, merge, or discard an original anchor because
 of this list.
 
-Each `question_structure` branch is an approximate topology skeleton, not a directed relation:
-`--` does not determine factual direction, roles, grammatical attachment, answer dependency, or
-surface order. Coherent branches are the mandatory topology scaffold: retain every
-target-relevant adjacency and keep distinct branches separate until their required merge. The
-original question determines direction, roles, attachment, and final target; discard a structure
-fragment only when it conflicts with it. Do not make a node merely to consume a spurious token.
-When structure is empty or unusably noisy, derive the minimum topology from the original alone.
+Each `question_structure` branch is an approximate, potentially noisy topology hint, not a
+directed relation. `--` does not determine factual direction, roles, grammatical attachment,
+answer dependency, or surface order. It is not an independent source of meaning and is never a
+mandatory topology scaffold. The original question determines direction, roles, attachment, and
+the final target. Use a structure branch only to audit whether a DAG derived from the original
+may have omitted an original-question-supported connection or restriction. Ignore a branch that
+is unsupported, incomplete, spurious, or conflicts with the original question. Never make a
+node merely to consume a structure token.
 
-## Silent semantic contract
+## Internal Three-Phase Procedure
 
-Before writing JSON, reason silently:
+Complete all three phases silently in this one response. Do not output the draft DAG, the audit,
+labels, explanations, or any other intermediate content; output only the final DAG in the Output
+Schema.
+
+### Phase 1: Draft from the original question
+
+First create a minimal draft DAG using `original_question` as the only semantic and topology
+authority. Do not use `question_structure` to choose the draft's nodes or dependencies.
 
 1. Establish the **answer contract**: mark the governing wh/choice unknown as `ANSWER` and
    replace only that span in a declarative template. The final leaf must fill that exact slot
@@ -44,7 +52,24 @@ Before writing JSON, reason silently:
 2. Resolve named anchors, descriptive spans, restrictive modifiers, direction, roles,
    coordination, and pronouns from the original.
 3. Work backward from `ANSWER`, adding only the intermediate referents or values required by
-   its evidence plan. Use Structure for topology coverage, not as a replacement for meaning.
+   its evidence plan.
+
+### Phase 2: Audit the draft with question structure
+
+Then compare the draft DAG against each `question_structure` branch. Treat a branch solely as a
+diagnostic hint. First check whether its relevant adjacency is actually supported by the wording
+and grammar of `original_question`. Only when it is supported may it identify one of these draft
+defects: a missing answer-changing restriction, a missing required intermediate lookup, a missing
+dependency path, or an incorrect merge of distinct original constraints. Ignore every other
+branch, including one that suggests a fact, entity, relation, direction, or split not warranted
+by the original question.
+
+### Phase 3: Produce the final DAG
+
+Revise the draft only to correct a defect validated in Phase 2. If no validated defect exists,
+retain the draft. The final DAG must still be the smallest semantic-preserving DAG derived from
+the original question; `question_structure` may help detect an omission, but must never create
+new meaning or force additional nodes.
 
 Every named anchor and answer-changing restriction must occur in the lookup it constrains or in
 a later question that uses it, with a dependency path to the final node.

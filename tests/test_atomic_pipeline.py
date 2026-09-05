@@ -12,23 +12,7 @@ from hyper_branch.pipeline import HyperBranchPipeline, _evidence_blocks
 
 
 class AtomicPipelineTest(unittest.TestCase):
-    def test_evidence_blocks_keep_all_first_hop_hyperedges(self) -> None:
-        blocks = _evidence_blocks(
-            [
-                {
-                    "text": "H2",
-                    "chunks": [("source", "Evidence for H2")],
-                    "first_hop_texts": ["H1", "H3"],
-                }
-            ]
-        )
-
-        self.assertEqual(
-            blocks[0]["hyperedges"][0]["first_hop_hyperedge_text"],
-            ["H1", "H3"],
-        )
-
-    def test_evidence_blocks_limit_distinct_source_chunks_after_ranking(self) -> None:
+    def test_evidence_blocks_keep_top_ranked_unique_source_chunks_only(self) -> None:
         hyperedges = [
             {
                 "text": f"H{index}",
@@ -42,7 +26,7 @@ class AtomicPipelineTest(unittest.TestCase):
                 {
                     "text": "late-existing-source",
                     "chunks": [("source-1", "Evidence for H1")],
-                    "first_hop_texts": [],
+                    "first_hop_texts": ["unused-first-hop"],
                 },
                 {
                     "text": "eleventh-source",
@@ -58,10 +42,8 @@ class AtomicPipelineTest(unittest.TestCase):
             [block["chunk_id"] for block in blocks],
             [f"C{index}" for index in range(1, 11)],
         )
-        self.assertEqual(
-            [edge["hyperedge_text"] for edge in blocks[0]["hyperedges"]],
-            ["H1", "late-existing-source"],
-        )
+        self.assertEqual(blocks[0], {"chunk_id": "C1", "title": "", "text": "Evidence for H1"})
+        self.assertTrue(all(set(block) == {"chunk_id", "title", "text"} for block in blocks))
 
     def test_pipeline_rewrites_dependencies_and_merges_all_ancestor_pools(self) -> None:
         database = RecordingDatabase(
@@ -87,7 +69,6 @@ class AtomicPipelineTest(unittest.TestCase):
         ):
             pipeline = HyperBranchPipeline(
                 Path("unused"),
-                top_k=10,
                 model="test-model",
                 embedding_model="test-embedding-model",
                 timeout_seconds=120,
@@ -105,7 +86,8 @@ class AtomicPipelineTest(unittest.TestCase):
         self.assertEqual(result["atomic_answers"][0]["entities"], ["A"])
         self.assertEqual(result["atomic_answers"][0]["entity_ids"], {"A": ["A-id"]})
         self.assertTrue(result["atomic_answers"][0]["evidence_blocks"])
-        self.assertEqual(database.anchor_calls, [["A"], ["A"], ["B"], ["C"]])
+        self.assertEqual(database.original_chunk_calls, [("What eventually follows A?", 5)])
+        self.assertEqual(database.anchor_calls, [["A"], ["B"], ["C"]])
         self.assertEqual(
             set(database.rank_calls[-1]["candidates"]),
             {"H-original", "H-q1", "H-q2", "H-q3"},
@@ -115,18 +97,19 @@ class AtomicPipelineTest(unittest.TestCase):
             ["Who is linked to A?", "Where was B recorded?", "What follows C?"],
         )
         self.assertEqual(client.chat_calls[1]["dependency_context"][0]["answer"], "B")
-        two_hop = next(
-            hyperedge
-            for block in client.chat_calls[1]["evidence_blocks"]
-            for hyperedge in block["hyperedges"]
-            if hyperedge["hyperedge_text"] == "H-q2"
+        self.assertTrue(client.chat_calls[1]["evidence_blocks"])
+        self.assertTrue(
+            all(
+                set(block) == {"chunk_id", "title", "text"}
+                for block in client.chat_calls[1]["evidence_blocks"]
+            )
         )
-        self.assertEqual(two_hop["first_hop_hyperedge_text"], ["H-q1"])
 
 class RecordingDatabase:
     def __init__(self, pools: list[dict[str, set[str]]]) -> None:
         self.pools = pools
         self.anchor_calls: list[list[str]] = []
+        self.original_chunk_calls: list[tuple[str, int]] = []
         self.rank_calls: list[dict[str, Any]] = []
 
     def link_entity_ids(self, mentions: list[str], _embedder: object) -> dict[str, list[str]]:
@@ -143,14 +126,23 @@ class RecordingDatabase:
         self.anchor_calls.append(list(mentions))
         return self.pools.pop(0)
 
+    def original_question_candidate_pool(
+        self,
+        question: str,
+        _embedder: object,
+        *,
+        chunk_top_k: int,
+    ) -> dict[str, set[str]]:
+        self.original_chunk_calls.append((question, chunk_top_k))
+        return self.pools.pop(0)
+
     def rank(
         self,
         question: str,
         candidates: dict[str, set[str]],
         embedder: object,
-        top_k: int,
     ) -> list[dict[str, Any]]:
-        self.rank_calls.append({"question": question, "candidates": candidates, "top_k": top_k})
+        self.rank_calls.append({"question": question, "candidates": candidates})
         return [
             {
                 "id": hyperedge_id,
@@ -158,7 +150,7 @@ class RecordingDatabase:
                 "chunks": [(hyperedge_id, f"Evidence for {hyperedge_id}")],
                 "first_hop_texts": sorted(candidates[hyperedge_id]),
             }
-            for hyperedge_id in list(candidates)[:top_k]
+            for hyperedge_id in candidates
         ]
 
 

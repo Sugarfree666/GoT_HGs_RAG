@@ -14,7 +14,8 @@ from .database import CandidatePool, HypergraphDatabase
 ANSWER_PROMPT = (
     Path(__file__).resolve().parents[1] / "prompts" / "atomic_answer.md"
 ).read_text(encoding="utf-8").strip()
-MAX_EVIDENCE_BLOCKS = 10
+ORIGINAL_QUESTION_CHUNK_TOP_K = 5
+ANSWER_CHUNK_TOP_K = 10
 ENTITY_RECOGNITION_PROMPT = (
     Path(__file__).resolve().parents[1] / "prompts" / "entity_recognition.md"
 ).read_text(encoding="utf-8").strip()
@@ -27,7 +28,6 @@ class HyperBranchPipeline:
         self,
         dataset_root: Path,
         *,
-        top_k: int,
         model: str,
         embedding_model: str,
         timeout_seconds: int,
@@ -35,8 +35,9 @@ class HyperBranchPipeline:
         api_key: str,
         base_url: str | None = None,
         client: OpenAIClient | None = None,
+        original_question_chunk_top_k: int = ORIGINAL_QUESTION_CHUNK_TOP_K,
     ) -> None:
-        self.top_k = top_k
+        self.original_question_chunk_top_k = original_question_chunk_top_k
         #创建超图数据库
         self.database = HypergraphDatabase(dataset_root)
         #创建LLM客户端
@@ -59,10 +60,10 @@ class HyperBranchPipeline:
         nodes = _topological_order(dag.get("nodes", []))
         #创建原始问题的搜索空间
         topic_entity_ids = self.database.link_entity_ids(original_question_entities, self.client)
-        original_pool = self.database.candidate_pool(
-            original_question_entities,
+        original_pool = self.database.original_question_candidate_pool(
+            question,
             self.client,
-            entity_ids=topic_entity_ids,
+            chunk_top_k=self.original_question_chunk_top_k,
         )
         #保存每个原子问题的答案
         answers: dict[str, dict[str, Any]] = {}
@@ -119,13 +120,12 @@ class HyperBranchPipeline:
                     merged_pool.setdefault(hyperedge_id, set()).update(first_hops)
             
             #返回top-k超边
-            top_hyperedges = self.database.rank(
+            ranked_hyperedges = self.database.rank(
                 rewritten_question,
                 merged_pool,
                 self.client,
-                self.top_k,
             )
-            evidence_blocks = _evidence_blocks(top_hyperedges)
+            evidence_blocks = _evidence_blocks(ranked_hyperedges)
             response = self.client.chat_json(
                 ANSWER_PROMPT,
                 json.dumps(
@@ -213,38 +213,27 @@ def _rewrite_question(
 
 
 def _evidence_blocks(
-    hyperedges: list[dict[str, Any]], max_blocks: int = MAX_EVIDENCE_BLOCKS
+    hyperedges: list[dict[str, Any]], max_chunks: int = ANSWER_CHUNK_TOP_K
 ) -> list[dict[str, Any]]:
-    #证据块
+    """Return the top ranked source chunks, deduplicated by chunk ID."""
+    if max_chunks < 1:
+        raise ValueError("max_chunks must be at least 1")
+
     blocks: list[dict[str, Any]] = []
-    #原始chunkid-》证据块
     by_chunk_id: dict[str, dict[str, Any]] = {}
-    for rank, candidate in enumerate(hyperedges, start=1):
-        hyperedge = {
-            "hyperedge_id": f"H{rank}",
-            "hyperedge_text": candidate["text"],
-        }
-        if candidate["first_hop_texts"]:
-            hyperedge["first_hop_hyperedge_text"] = candidate["first_hop_texts"]
-        #取该超边关联的 source chunks。
-        chunks = candidate["chunks"] or [(f"__missing_{rank}", "")]
-        #逐个处理该超边的每个 source chunk。
-        for chunk_id, text in chunks:
-            #检查这个 chunk 是否已经被其他超边写入证据块。
-            block = by_chunk_id.get(chunk_id)
-            if block is None:
-                if len(blocks) >= max_blocks:
-                    continue
-                #按第一个换行符拆分 chunk 文本。
-                title, separator, body = text.partition("\n")
-                block = {
-                    "chunk_id": f"C{len(blocks) + 1}",
-                    "title": title.strip() if separator else "",
-                    "text": body.strip() if separator else title.strip(),
-                    "hyperedges": [],
-                }
-                #更新映射
-                by_chunk_id[chunk_id] = block
-                blocks.append(block)
-            block["hyperedges"].append(hyperedge)
+    for candidate in hyperedges:
+        for chunk_id, text in candidate["chunks"]:
+            if chunk_id in by_chunk_id:
+                continue
+            if len(blocks) >= max_chunks:
+                return blocks
+
+            title, separator, body = text.partition("\n")
+            block = {
+                "chunk_id": f"C{len(blocks) + 1}",
+                "title": title.strip() if separator else "",
+                "text": body.strip() if separator else title.strip(),
+            }
+            by_chunk_id[chunk_id] = block
+            blocks.append(block)
     return blocks

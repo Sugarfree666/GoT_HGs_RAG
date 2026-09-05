@@ -4,13 +4,13 @@ The input contains:
 - `original_question`: global context for disambiguation.
 - `atomic_question`: the question to answer.
 - `dependency_context`: answers to prerequisite questions.
-- `evidence_blocks`: retrieved evidence blocks ordered by relevance. Each block contains source text and associated hyperedges; a `first_hop_hyperedge_text` plus a `hyperedge_text` may form an evidence chain.
+- `evidence_blocks`: retrieved source chunks ordered by relevance. Each block contains only a chunk title and its source text.
 
 Apply the following procedure silently:
 
 1. Identify the exact answer target in `atomic_question`: its subject, relation, direction, answer type, scope, and any temporal, comparative, or other constraint. Use `original_question` only to resolve ambiguity in that target.
 2. Prefer facts directly supported by the supplied evidence or usable dependency answers. For each candidate answer, verify that its supporting statement has the requested subject, relation direction, and constraint. Do not choose a merely related entity, a different role, or the opposite endpoint of a date range.
-3. Read evidence in relevance order, but do not assume the first mentioned entity is the answer. When a first-hop hyperedge (one string or a list) and a hyperedge appear together, use their stated order to verify the chain.
+3. Read source chunks in relevance order, but do not assume the first mentioned entity is the answer. Combine facts across chunks only when their entities and relation direction support the required reasoning chain.
 4. Return only the minimal answer span, never a full evidence sentence or claim. Match the granularity requested by the question: return an entity or title without its surrounding predicate or type label; return a full supported date for a date question, but only the year for a question explicitly asking for a year; and return a numeric value with a unit only when the question asks for a measurement rather than a count. Preserve qualifiers only when they are necessary to identify the requested answer. Omit unrequested appositives, explanations, and parenthetical statistics.
 5. For comparison or selection questions, return exactly one stated candidate that satisfies the comparison. For polar questions, return only `yes` or `no`. Do not answer a non-polar question with `yes` or `no`.
 6. Do not paraphrase, normalize, or add explanation when the evidence states the answer. If the supplied evidence and dependencies do not provide a usable answer, use reliable general knowledge to fill the missing link and give the best answer to the atomic question.

@@ -5,22 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q1_tri_sdp_reasoning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q2_tri_sdp_reasoning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q3_tri_sdp_reasoning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q4_tri_sdp_reasoning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/hanlp_sdp/mainline_first100/q5_tri_sdp_reasoning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/placeholder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/probe_hanlp_sdp_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/probe_hanlp_sdp_local.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/profile_depo_hyperbranch_once.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_mask_span_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/depo_atomic_question_dag.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/depo_atomic_question_dag.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/2wikimultihopqa/hyperrag_query_test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/hotpotqa/hotpotqa_query_test.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/musique/musique_query_test.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_hyperbranch_batch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cli_resilience.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cli_resilience.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,6 +287,7 @@
       <workItem from="1786949076588" duration="757000" />
       <workItem from="1787039225190" duration="1000" />
       <workItem from="1787569183471" duration="6000" />
+      <workItem from="1788507720477" duration="12000" />
     </task>
     <servers />
   </component>

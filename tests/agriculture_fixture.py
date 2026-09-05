@@ -13,7 +13,6 @@ def ensure_agriculture_fixture(project_root: Path) -> None:
     if not config_path.exists():
         config_path.write_text(
             """dataset_root: datasets/agriculture
-top_k: 3
 model: gpt-4o-mini
 embedding_model: text-embedding-3-small
 timeout_seconds: 120

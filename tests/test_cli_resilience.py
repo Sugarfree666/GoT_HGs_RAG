@@ -20,6 +20,19 @@ def _load_depo_hyperbranch_batch_module():
     return module
 
 
+def _load_original_question_batch_module():
+    module_path = (
+        Path(__file__).resolve().parents[1]
+        / "scripts"
+        / "run_hyperbranch_original_question_batch.py"
+    )
+    spec = importlib.util.spec_from_file_location("original_question_batch", module_path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_batch_scoring_reads_final_node_answer_from_result_json() -> None:
     module = _load_depo_hyperbranch_batch_module()
 
@@ -43,6 +56,20 @@ def test_batch_scoring_reads_final_node_answer_from_result_json() -> None:
         assert score["overall"] == {"em": 0.5, "f1": 0.5}
         assert records[0]["answer"] == "The Hoboken!"
         assert records[1]["answer"] == ""
+
+
+def test_original_question_ablation_builds_a_single_original_question_node() -> None:
+    module = _load_original_question_batch_module()
+
+    assert module.build_original_question_dag("Where is Oxford?") == {
+        "nodes": [
+            {
+                "id": "q1",
+                "question": "Where is Oxford?",
+                "depends_on": [],
+            }
+        ]
+    }
 
 
 class FakeHTTPResponse:

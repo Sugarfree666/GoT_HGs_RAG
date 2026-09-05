@@ -1,4 +1,4 @@
-"""In-memory knowledge hypergraph and its two vector indexes."""
+"""In-memory knowledge hypergraph and its vector indexes."""
 
 from __future__ import annotations
 
@@ -44,6 +44,10 @@ class HypergraphDatabase:
             root / "vdb_hyperedges.json",
             label_field="hyperedge_name",
         )
+        self.chunk_vectors = _VectorIndex.load(
+            root / "vdb_chunks.json",
+            label_field="__id__",
+        )
         #用来保存节点类型
         self.roles: dict[str, str] = {}
         #保存超边来源chunk
@@ -54,6 +58,7 @@ class HypergraphDatabase:
         self.hyperedge_to_entities: dict[str, list[str]] = defaultdict(list)
         #保存chunk包含哪些实体
         self.chunk_to_entities: dict[str, list[str]] = defaultdict(list)
+        self.chunk_to_hyperedges: dict[str, list[str]] = defaultdict(list)
         #加载 GraphML 超图
         self._load_graph(root / "graph_chunk_entity_relation.graphml")
         #以规范化后的实体名为键，记录对应的图节点 ID，方便精确匹配实体
@@ -100,20 +105,36 @@ class HypergraphDatabase:
                             candidates.setdefault(second_hop_id, set()).add(first_hop_id)
         return candidates
 
+    def original_question_candidate_pool(
+        self,
+        question: str,
+        embedder: Embedder,
+        *,
+        chunk_top_k: int,
+    ) -> CandidatePool:
+        """Collect every hyperedge sourced from the question's top chunks."""
+        if chunk_top_k < 1:
+            raise ValueError("chunk_top_k must be at least 1")
+
+        top_chunks = self.chunk_vectors.query(embedder.embed_text(question), chunk_top_k)
+        candidates: CandidatePool = {}
+        for chunk_id, _score in top_chunks:
+            for hyperedge_id in self.chunk_to_hyperedges.get(chunk_id, []):
+                candidates.setdefault(hyperedge_id, set())
+        return candidates
+
     def rank(
         self,
         question: str,
         candidates: CandidatePool,
         embedder: Embedder,
-        top_k: int,
     ) -> list[dict[str, Any]]:
         """Rank only the supplied candidate hyperedges and attach their source chunks."""
         #将当前问题编码为向量
         question_vector = embedder.embed_text(question)
 
         scores = self.hyperedge_vectors.similarities(question_vector, list(candidates))
-        #排序后取top-k
-        ranked_ids = sorted(candidates, key=lambda item: (-scores.get(item, 0.0), item))[:top_k]
+        ranked_ids = sorted(candidates, key=lambda item: (-scores.get(item, 0.0), item))
 
         return [
             {
@@ -173,6 +194,9 @@ class HypergraphDatabase:
             #保存节点类型和chunk来源
             self.roles[node_id] = role
             self.sources[node_id] = sources
+            if role == "hyperedge":
+                for chunk_id in sources:
+                    self.chunk_to_hyperedges[chunk_id].append(node_id)
             #如果是实体节点，记录实体和来源chunk的映射
             if role == "entity" and (
                 _display_text(data.get("entity_type", "")).upper()

@@ -16,11 +16,11 @@ from atomic_question_dag import generate_atomic_question_dag, restore_paths  # n
 
 class AtomicQuestionDAGTest(unittest.TestCase):
     def test_prompt_keeps_the_dag_execution_contract(self) -> None:
-        prompt = (PROJECT_ROOT / "prompts" / "depo_atomic_question_dag.md").read_text(
+        prompt = (PROJECT_ROOT / "prompts" / "depo_atomic_question_dag_research.md").read_text(
             encoding="utf-8"
         )
-        self.assertIn("only leaf node", prompt)
-        self.assertIn("last node", prompt)
+        self.assertIn("only leaf", prompt)
+        self.assertIn("`ANSWER`-slot test", prompt)
         self.assertIn("qN's answer", prompt)
 
     def test_generator_builds_dag_nodes(self) -> None:
