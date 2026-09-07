@@ -13,7 +13,7 @@ from hyper_branch.client import OpenAIClient
 ATOMIC_QUESTION_DAG_PROMPT = (
     Path(__file__).resolve().parents[1]
     / "prompts"
-    / "depo_atomic_question_dag_research.md"
+    / "depo_atomic_question_dag.md"
 ).read_text(encoding="utf-8").strip()
 
 
